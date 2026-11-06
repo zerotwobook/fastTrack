@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | G0/A00/B00 and corrected G1 foundation accepted. B approved PR #50 at 6a5de5f and merged it as ff5975c; A verified the approved/tested tree. #49/#51 are closed Done/PASSED/ACCEPTED. A01 was accepted through B review/merge of #54 as 0b99a28; #5 is closed. B approved current #56 head 2d3576e and merged it as 78d0cca; #6/#55 are closed Done/PASSED/ACCEPTED. The user delegated the remaining G2 UI check/acceptance to A/AI using the actual byte-identical-source evidence; G2 is ACCEPTED. A02/B02 may proceed on separate task branches; G3 and a full S1 release remain pending. |
+| Gate record | G0/G1 and A01/B01/A02 accepted. B approved #57 at f6c4988 and merged staging as 3365a36; #7 is closed Done/PASSED/ACCEPTED. G2 was accepted under the recorded task-specific user delegation. A prepared R1-A03 in #59 for peer review while B owns F-04 separately. G3/G4/G5 and the main release remain pending. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -230,13 +230,15 @@ Technical verification at 1bf8d63 passes 111 ordinary, 48 A02, 33 B01, 28 auth, 
 
 Owner A; reviewer B. Issue #10, branch docs/s1-a-d1-evidence from accepted staging 3365a36. [Package scope/assembly handoff](handoffs/R1-A03_D1_A_PACKAGE.md). This independent documentation task may proceed while B owns F-04; it does not accept G3 or release main.
 
-- [ ] Prepare English D1 A context/requirements/rules/exclusions, B full-product inventory/traceability and D three-sprint plan with real dependencies.
-- [ ] Package actual F-01/F-03 normal, deadline, auth/logout, build/test and genuine RED/GREEN evidence with exact tested sources.
-- [ ] Map AC -> actual file/name -> result -> commit; preserve NOT RUN/PARTIAL and release limitations.
-- [ ] Select the substantive domain-rule Issue/PR chain and real B peer review; record contract/test/implementation chronology.
-- [ ] Review current B C/E source and accepted clean-setup results; identify remaining assembly updates instead of claiming unreviewed final content is accepted.
-- [ ] Give B ready-to-use owned sections/captions/source images/results; B owns final C/E updates and PDF assembly.
-- [ ] Complete actual B peer review/merge of this package; final G3/G4/G5 and submission remain separate.
+- [x] Prepare English D1 A context/requirements/rules/exclusions, B full-product inventory/traceability and D three-sprint plan with real dependencies.
+- [x] Package actual F-01/F-03 normal, deadline, auth/logout, build/test and genuine RED/GREEN evidence with exact tested sources.
+- [x] Map AC -> actual file/name -> result -> commit; preserve NOT RUN/PARTIAL and release limitations.
+- [x] Select the substantive domain-rule Issue/PR chain and real B peer review; record contract/test/implementation chronology.
+- [x] Review current B C/E source and accepted clean-setup results; identify remaining assembly updates instead of claiming unreviewed final content is accepted.
+- [x] Give B ready-to-use owned sections/captions/source images/results; B owns final C/E updates and PDF assembly.
+- [ ] Complete actual B peer review/merge of this package in PR #59; final G3/G4/G5 and submission remain separate.
+
+Document checks pass: full FR/BR/NFR/F coverage, 13 AC rows with 27 exact reported-case references, four byte-identical source images/hashes, local links, English, no secret-like values and exact test-excerpt/source match. Application code is unchanged from accepted staging; existing actual clean-clone results are reused. B reviews this package before acceptance; no final PDF or full S1 release is claimed.
 
 ## 8. รายละเอียดงาน B — เพื่อน
 

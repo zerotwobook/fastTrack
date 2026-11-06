@@ -68,3 +68,7 @@ Limits: local Chromium/HTTP only; no public TLS/deployment, load/full screen-rea
 ## Peer handoff
 
 B reviews the current A-authored PR #57 head, scoped lock/clock/unique/error logic and actual assertions, reproduces student submit/reload/supervisor read plus denied scope/retry, and records real acceptance before staging merge. G2 delegation is specific to the prior checkpoint. Until the actual peer acceptance/merge, #7 stays open and Acceptance PENDING; verify native PR Done and reconcile Issue closure separately. Do not release main or claim G3 from this increment alone.
+
+## Assembly coverage clarification - 7 November 2026
+
+The actual compiled process-restart test verifies saved API/session retrieval and the SPA route response; the separate real browser run verifies saved UI GET/reload. A combined browser UI assertion immediately after an actual process restart is not separately recorded. The owner A report marks that part of AC-03.6/T-16 as PARTIAL and tracks the combined check with accepted feedback in Issue #9/G4. This does not invent a product failure, alter the historical 48 passing cases or reopen the accepted peer merge; final-release verification remains distinct.

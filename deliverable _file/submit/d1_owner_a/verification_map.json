@@ -1,0 +1,181 @@
+{
+  "acceptedBaseline": "3365a36e4cd1fcdd7410cca2086447ec4ae5dc33",
+  "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+  "rows": [
+    {
+      "ac": "AC-01.1",
+      "plannedTestIds": "T-01",
+      "file": "Project_code/server/src/testing/sessions.auth.ts",
+      "reportedCases": [
+        "F-01 real PostgreSQL session and team contracts T-01 authenticates stu-a1@test.local with real seed-compatible hash and allowlisted DTO",
+        "F-01 real PostgreSQL session and team contracts T-01 authenticates sup-a@test.local with real seed-compatible hash and allowlisted DTO"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-01.2",
+      "plannedTestIds": "T-02",
+      "file": "Project_code/server/src/testing/sessions.auth.ts",
+      "reportedCases": [
+        "F-01 real PostgreSQL session and team contracts T-02 conceals unknown email versus bad password and creates no session"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-01.3",
+      "plannedTestIds": "T-03",
+      "file": "Project_code/server/src/testing/sessions.auth.ts",
+      "reportedCases": [
+        "F-01 real PostgreSQL session and team contracts T-03 expires at equality, rejects revocation and rejects ambiguous duplicate cookies"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-01.4",
+      "plannedTestIds": "T-04",
+      "file": "Project_code/server/src/testing/sessions.auth.ts",
+      "reportedCases": [
+        "F-01 real PostgreSQL session and team contracts T-04 rejects wrong/missing CSRF without revocation then logout prevents replay and preserves another device"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-01.5",
+      "plannedTestIds": "T-05",
+      "file": "Project_code/server/src/testing/sessions.auth.ts",
+      "reportedCases": [
+        "F-01 real PostgreSQL session and team contracts T-05 scopes list/detail for stu-a1@test.local and conceals missing versus foreign team",
+        "F-01 real PostgreSQL session and team contracts T-05 handles no-team students and multiple assigned teams in stable order"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-03.1",
+      "plannedTestIds": "T-09",
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "reportedCases": [
+        "F-03 first-submission deadline TDD and persistence T-09/T-16 creates version 1 and reads the exact saved DTO after app recreation",
+        "F-03 authorization, validation and immutable submission contracts T-14/T-25 permits teammate/supervisor reads and conceals foreign/missing list and detail identically"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-03.2",
+      "plannedTestIds": "T-10/T-11/T-12/T-26",
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "reportedCases": [
+        "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset -1 ms and persists that same instant",
+        "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset 0 ms and persists that same instant",
+        "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset 1 ms and persists that same instant",
+        "F-03 first-submission deadline TDD and persistence T-11 rejects a first submission after the actual database deadline without writing",
+        "F-03 authorization, validation and immutable submission contracts T-12 uses equivalent offset instants and stores the once-read millisecond boundary"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-03.3",
+      "plannedTestIds": "T-13",
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "reportedCases": [
+        "F-03 first-submission deadline TDD and persistence T-13 serializes two different students to one immutable version 1",
+        "F-03 first-submission deadline TDD and persistence T-13/T-26 preserves the first submission and duplicate precedence after the deadline"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-03.4",
+      "plannedTestIds": "T-15",
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "reportedCases": [
+        "F-03 authorization, validation and immutable submission contracts T-15 accepts exact Unicode/title/description/URL maxima and trims persisted values",
+        "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 10 without partial writes"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-03.5",
+      "plannedTestIds": "T-14",
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "reportedCases": [
+        "F-03 authorization, validation and immutable submission contracts T-14 checks session, role and source/CSRF before parsing JSON; rejects unsupported content types",
+        "F-03 authorization, validation and immutable submission contracts T-14 denies foreign/absent milestone writes equally and checks input before scope",
+        "F-03 authorization, validation and immutable submission contracts T-14/T-25 permits teammate/supervisor reads and conceals foreign/missing list and detail identically"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-03.6",
+      "plannedTestIds": "T-16/T-31 local",
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "reportedCases": [
+        "F-03 real lock barriers and bounded technical recovery T-16/T-31 creates through compiled HTTP and retains the exact submission/session after an actual process restart"
+      ],
+      "result": "PARTIAL",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": "API/DB process restart passes; combined UI-after-process-restart is a separate G4 follow-up."
+    },
+    {
+      "ac": "S1-AC-EXT-01",
+      "plannedTestIds": "T-23",
+      "file": "Project_code/server/src/testing/sessions.auth.ts",
+      "reportedCases": [
+        "F-01 real PostgreSQL session and team contracts T-23 shared protection is fail-closed before JSON parsing and supplies immutable DB-derived identity",
+        "F-01 real PostgreSQL session and team contracts T-23 rejects a foreign source even with a valid session and CSRF without writing"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    },
+    {
+      "ac": "S1-AC-EXT-04",
+      "plannedTestIds": "T-26",
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "reportedCases": [
+        "F-03 real lock barriers and bounded technical recovery T-26 rejects a real DB-clock deadline crossed while waiting for the team lock",
+        "F-03 real lock barriers and bounded technical recovery T-26 rejects a real DB-clock deadline crossed while waiting for the milestone lock",
+        "F-03 first-submission deadline TDD and persistence T-13/T-26 preserves the first submission and duplicate precedence after the deadline"
+      ],
+      "result": "PASSED",
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "report": "Project_code/docs/evidence/R1-A02-results.json",
+      "scopeNote": ""
+    }
+  ],
+  "gaps": [
+    "Full F-04 and T-21 journey pending at this accepted baseline",
+    "Combined browser UI immediately after an actual process restart not separately recorded",
+    "Final main release tests, PDF and receipt pending"
+  ]
+}
