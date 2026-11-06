@@ -17,7 +17,7 @@
 | รายงาน D1 และ S1 feature contracts | [D1 draft](deliverable%20_file/submit/project_deliverable_1.md) |
 | ต้นฉบับเกณฑ์งานส่ง | [Group specs](deliverable%20_file/group_work_specs_v1.pdf), [D1](deliverable%20_file/project_deliverable_1_v1.pdf), [D2](deliverable%20_file/project_deliverable_2_v1.pdf), [Final](deliverable%20_file/project_final_delivery_v1.pdf) |
 
-การรับงานผ่าน GitHub ใช้ [CONTRIBUTING.md](CONTRIBUTING.md) ซึ่งมีลิงก์ Issues/Milestones, ชื่อ A/B จริง และกติกา PR ที่ตั้งไว้
+เปิด [Project board ของทีม](https://github.com/users/zerotwobook/projects/3) เพื่อดูงาน A/B และ Sprint 1–3 การรับงานผ่าน GitHub ใช้ [CONTRIBUTING.md](CONTRIBUTING.md) ซึ่งมีลิงก์ Issues/Milestones, ชื่อ A/B จริง และกติกา PR ที่ตั้งไว้
 
 ## วันแรกของคุณและเพื่อน
 

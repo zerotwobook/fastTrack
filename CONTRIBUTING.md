@@ -2,6 +2,17 @@
 
 A = [zerotwobook](https://github.com/zerotwobook) / B = [Atip-Infa](https://github.com/Atip-Infa) ทั้งคู่พัฒนา feature และ review งานของกันและกัน อ่าน [SKILL_Project](skill/SKILL_Project.md), [Git skill](skill/SKILL_Github.md) และ [workflow](workflow/README.md) ก่อนเริ่ม
 
+## ใช้ Project board
+
+เปิด [fastTrack — Team Delivery](https://github.com/users/zerotwobook/projects/3) ซึ่งเชื่อมกับ repository และให้ Atip-Infa สิทธิ์ WRITER แล้ว มีมุมมอง All work, Sprint 1–3, A, B และ Blocked / Dependencies
+
+- เลือกมุมมอง A/B เพื่อดูงานของตนรวมงานร่วม เลือก Sprint เพื่อจำกัดรอบ
+- Task ID เชื่อมกลับแผน; Owner A/B/SHARED เป็นบทบาท ส่วน Assignees คือบัญชีจริง
+- Status ใช้ PLANNED → IN PROGRESS → REVIEW → MERGED; Verification และ Acceptance เป็นคนละฟิลด์และเปลี่ยนเมื่อมีผลจริง
+- Issues เริ่ม PLANNED / NOT RUN / PENDING; PR ตั้งค่า GitHub อยู่ REVIEW และยังรอ peer approval
+- `blocked` และ native dependencies แสดงสิ่งที่ต้องรอ; ต้องตรวจ gate ไม่ถือแค่ Issue ปิดว่า acceptance ผ่านแล้ว
+- เมื่อเปิด task/defect/PR ใหม่ให้เพิ่มเข้า Project นี้และกรอก Sprint/Owner/Task ID ไม่ถือว่าระบบเพิ่มหรือย้ายสถานะให้อัตโนมัติ
+
 ## เริ่มจากงานที่มีอยู่
 
 - [Issues ทั้งหมด](https://github.com/zerotwobook/fastTrack/issues): สร้างจาก Task IDs ทั้ง 3 รอบแล้ว ใช้ Issue เดิมของ task ไม่เปิดซ้ำ
