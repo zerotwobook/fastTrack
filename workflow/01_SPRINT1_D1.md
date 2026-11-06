@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | G0 accepted; A00 merged in PR #45; B00 candidate merged in PR #48 as 5f2ac0b. [G1 audit](../Project_code/docs/evidence/R1-G1-A-foundation.md): 38/38 database checks, 7/7 migration scenarios and 51/51 unit tests pass on A's remediation branch. B peer review, accepted integration and joint G1 acceptance remain PENDING before A01/B01. |
+| Gate record | G0/A00/B00 and corrected G1 foundation accepted. B approved PR #50 at 6a5de5f and merged it as ff5975c; A verified the approved/tested tree. #49/#51 are closed Done/PASSED/ACCEPTED. A01 is in PR #54 for peer review; B owns milestone PR #52. G2 and a full S1 release remain pending. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -192,22 +192,22 @@ A's original audit reproduced eight foundation failures. B's PR #53 candidate fi
 
 The combined executable source at `6f3601ec1af3f0b7039bce175251642d1920c40c` passes a clean-clone install, generation, fresh/repeat migrations, typecheck, 51 unit tests, production build, 38 G1 tests and seven upgrade/rejection scenarios. See [the audit evidence](../Project_code/docs/evidence/R1-G1-A-foundation.md) and [migration adoption note](../Project_code/docs/decisions/0002-g1-migration-adoption.md).
 
-Corrective [Issue #51](https://github.com/zerotwobook/fastTrack/issues/51) now has owner A by explicit authorization; B reviews PR #50. At verified handoff, move #49/#50 Started -> PR Review and #51 Fixing -> PR Review, set Verification PASSED and keep Acceptance PENDING. B must review the current head and reproduce the checks before accepted integration into staging/sprint-1. Keep #49/#51 open and A01/B01 blocked until actual review, merge and joint G1 acceptance are recorded. PR #53's old candidate is superseded by the combined review; do not approve that old head as if it contained A's fixes. No main release is included.
+Corrective [Issue #51](https://github.com/zerotwobook/fastTrack/issues/51) transferred to A by explicit authorization. The actual handoff moved #49/#50 Started -> PR Review and #51 Fixing -> PR Review. B approved the current PR #50 head 6a5de5f and merged it into staging as ff5975c. A verified that merge tree against the tested source and accepted G1; #49/#51 are closed Done/PASSED/ACCEPTED. B's earlier scaffold reproduction remains the recorded B command evidence; do not invent a new B run. PR #53 is closed unmerged/archived as superseded. A01/B01's G1 dependency is removed; G2 and main release remain separate.
 
-### R1-A01: F-01 identity และทีมที่มีสิทธิ์
+### R1-A01: F-01 identity and authorized team context
 
-อ้างอิง project detail §3, §7.5, §9.1–9.4; D1 E.1; AC-01.1–01.5, T-01–T-05, T-23/T-27
+References: project detail 3/7.5/8/9.1-9.4; D1 E.1; AC-01.1-01.5, T-01-T-05/T-23/T-27. Owner A; reviewer B. Issue #5, PR #54, branch feature/s1-a-auth from accepted staging ff5975c. Implementation/tested source: 2899d1b. [Contract](../Project_code/docs/contracts/sprint-1-auth.md); [evidence](../Project_code/docs/evidence/R1-A01-auth.md).
 
-- [ ] Implement `/auth/login`, `/auth/me`, `/auth/logout` และ scoped `/teams`, `/teams/:id`
-- [ ] Password hash; opaque session token เก็บ hash ใน DB; HttpOnly cookie, secure เมื่อ HTTPS, SameSite และ absolute TTL 8 ชั่วโมงตามแบบ
-- [ ] Login protection: JSON/custom header + source origin; mutations ใช้ CSRF; me คืน CSRF สำหรับ reload; no-store; ล้าง cache เมื่อ logout/เปลี่ยน account
-- [ ] Invalid/expired/revoked session ถูกปฏิเสธ; logout revoke cookie เดิม; returnTo จำกัด internal route
-- [ ] Middleware/queries ตรวจ role และ team ownership จาก DB ไม่มี dev user switch/spoofed user IDs
-- [ ] สร้าง login, role-aware shell, dashboard/team context และ empty/error/loading states ใช้ UI skill/§8
-- [ ] B1/Supervisor-B อ่านข้อมูล A ไม่ได้; Student ไม่มีทีมเห็น empty state ที่ถูกต้อง
-- [ ] Test credentials/origin/CSRF, expiry/replay, cross-team list/detail และ browser account-switch cache; asserts ทั้ง response และ DB/session effects
+- [x] Implement login/me/logout and scoped team list/detail with allowlisted DTOs.
+- [x] Verify existing scrypt hashes; store only opaque token hashes; use HttpOnly/SameSite host-only cookies, Secure for HTTPS and absolute eight-hour expiration.
+- [x] Enforce JSON/custom-header/source login protection, source/CSRF mutation protection, me bootstrap and no-store responses.
+- [x] Reject invalid/expired/revoked sessions; revoke the current browser session on re-login/logout; constrain return-to and clear account/private state including stale requests/history restoration.
+- [x] Derive immutable identity/role/team scope from DB sessions, with reusable fail-closed middleware and explicit transaction-client scope helpers. No identity-header bypass.
+- [x] Implement the established monochrome login, role-aware shell, team list/detail and loading/empty/error/retry/mobile/keyboard states; do not expose unintegrated milestone actions.
+- [x] Verify no-team students, foreign-team denial, session effects and browser account switch/replay/history/expiry/recovery. Clean-clone checks pass 67 ordinary tests, 28 auth/DB tests, 38 G1 tests and seven migration scenarios.
+- [ ] B reviews/reproduces the current PR head and records actual acceptance/merge into staging. Do not self-approve or start A02 before G2.
 
-Reviewer B ต้องลอง login ทั้งสอง role, logout/replay และแก้ URL ไปทีมอื่น ไม่รับเฉพาะ screenshot หน้า login
+Reviewer B must exercise both roles, logout/replay and cross-team URL tampering, inspect the token/session/CSRF/scope implementation and coordinate the real auth seam with B's milestone module. A's passing checks are not B's acceptance or G2. Native merged-PR Done and Issue closure/Acceptance remain separate.
 
 ### R1-A02: F-03 ส่งงานครั้งแรก
 
