@@ -6,7 +6,7 @@ import { AppError } from '../../http/errors.js';
 import { database } from '../auth/security.js';
 import { requireUuid, scopedTeamWhere } from '../teams/index.js';
 import type { TeamActor } from '../teams/index.js';
-import { validateFeedbackContent, validateClientRequestId } from '../../../../shared/feedback.mjs';
+import { parseFeedbackInput, FeedbackInputError } from '../../../../shared/feedback.mjs';
 import type { FeedbackDto } from './dto.js';
 
 export type FeedbackAuthContext = TeamActor;
@@ -80,28 +80,15 @@ export class FeedbackService {
       throw new AppError(403, 'FORBIDDEN', 'This action is not allowed for your role.');
     }
 
-    if (!body || typeof body !== 'object' || Array.isArray(body)) {
-      throw new AppError(400, 'INVALID_INPUT', 'Provide valid feedback input.');
+    let input: { content: string; clientRequestId: string };
+    try {
+      input = parseFeedbackInput(body);
+    } catch (error) {
+      if (error instanceof FeedbackInputError) {
+        throw new AppError(400, 'INVALID_INPUT', error.message, error.fields);
+      }
+      throw error;
     }
-
-    const payload = body as Record<string, unknown>;
-    const contentCheck = validateFeedbackContent(payload.content);
-    const keyCheck = validateClientRequestId(payload.clientRequestId);
-
-    const fieldErrors: Record<string, string> = {};
-    if (!contentCheck.valid) {
-      fieldErrors.content = contentCheck.error!;
-    }
-    if (!keyCheck.valid) {
-      fieldErrors.clientRequestId = keyCheck.error!;
-    }
-
-    if (Object.keys(fieldErrors).length > 0) {
-      throw new AppError(400, 'INVALID_INPUT', 'Provide valid feedback input.', fieldErrors);
-    }
-
-    const validContent = contentCheck.value!;
-    const validKey = keyCheck.value!;
 
     // Enforce scope BEFORE idempotency lookup (§9.5) to avoid cross-tenant probing
     const submission = await this.requireSubmissionAccess(submissionId, auth);
@@ -112,7 +99,7 @@ export class FeedbackService {
         where: {
           supervisorId_clientRequestId: {
             supervisorId: auth.userId,
-            clientRequestId: validKey,
+            clientRequestId: input.clientRequestId,
           },
         },
         include: { supervisor: { select: { id: true, name: true } } },
@@ -120,7 +107,7 @@ export class FeedbackService {
     );
 
     if (existing) {
-      if (existing.submissionId === submission.id && existing.content === validContent) {
+      if (existing.submissionId === submission.id && existing.content === input.content) {
         // Same request replay (§9.5: returns existing record with 200)
         return { status: 200, data: toFeedbackDto(existing) };
       }
@@ -139,8 +126,8 @@ export class FeedbackService {
           data: {
             submissionId: submission.id,
             supervisorId: auth.userId,
-            content: validContent,
-            clientRequestId: validKey,
+            content: input.content,
+            clientRequestId: input.clientRequestId,
           },
           include: { supervisor: { select: { id: true, name: true } } },
         }),
@@ -154,13 +141,13 @@ export class FeedbackService {
             where: {
               supervisorId_clientRequestId: {
                 supervisorId: auth.userId,
-                clientRequestId: validKey,
+                clientRequestId: input.clientRequestId,
               },
             },
             include: { supervisor: { select: { id: true, name: true } } },
           }),
         );
-        if (raced && raced.submissionId === submission.id && raced.content === validContent) {
+        if (raced && raced.submissionId === submission.id && raced.content === input.content) {
           return { status: 200, data: toFeedbackDto(raced) };
         }
         throw new AppError(

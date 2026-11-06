@@ -22,37 +22,37 @@ export interface FeedbackRouterDependencies {
   /**
    * Session guard — requires a valid, unexpired, unrevoked DB session.
    */
-  requireSession?: RequestHandler;
+  requireSession: RequestHandler;
   /**
    * Role guard — requires caller role === 'supervisor'.
    */
-  requireSupervisor?: RequestHandler;
+  requireSupervisor: RequestHandler;
   /**
    * Mutation guard — validates request source (Origin/Referer) and CSRF token.
    */
-  requireMutation?: RequestHandler;
+  requireMutation: RequestHandler;
   /**
    * Optional clock seam for deterministic serverTime in tests.
    */
-  now?: () => Date;
+  now?: (() => Date) | undefined;
 }
 
 export function createFeedbackRouter(deps: FeedbackRouterDependencies): Router {
+  for (const name of ['getAuthContext', 'requireSession', 'requireSupervisor', 'requireMutation'] as const) {
+    if (typeof deps[name] !== 'function') throw new TypeError(`Feedback protection dependency ${name} is required.`);
+  }
+
   const router = Router();
   const service = new FeedbackService(deps.prisma);
   const now = deps.now ?? (() => new Date());
-
-  const sessionGuard: RequestHandler[] = deps.requireSession ? [deps.requireSession] : [];
-  const supervisorGuard: RequestHandler[] = deps.requireSupervisor ? [deps.requireSupervisor] : [];
-  const mutationGuard: RequestHandler[] = deps.requireMutation ? [deps.requireMutation] : [];
 
   // POST /submissions/:id/feedback
   // Order: requireSession → requireSupervisor → requireMutation → requireJsonBody → parseJsonBody → controller
   router.post(
     '/submissions/:id/feedback',
-    ...sessionGuard,
-    ...supervisorGuard,
-    ...mutationGuard,
+    deps.requireSession,
+    deps.requireSupervisor,
+    deps.requireMutation,
     requireJsonBody,
     parseJsonBody,
     async (req: Request, res: Response, next: NextFunction) => {
@@ -71,7 +71,7 @@ export function createFeedbackRouter(deps: FeedbackRouterDependencies): Router {
   // Order: requireSession → controller (scope check inside FeedbackService)
   router.get(
     '/submissions/:id/feedback',
-    ...sessionGuard,
+    deps.requireSession,
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const auth = await deps.getAuthContext(req);

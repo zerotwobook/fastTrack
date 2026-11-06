@@ -4,6 +4,8 @@ import {
   validateClientRequestId,
   validateSubmissionId,
   countCodePoints,
+  parseFeedbackInput,
+  FeedbackInputError,
 } from '../../../../shared/feedback.mjs';
 
 describe('Shared Feedback Input Validation', () => {
@@ -42,5 +44,33 @@ describe('Shared Feedback Input Validation', () => {
   it('validates submissionId as UUID', () => {
     expect(validateSubmissionId('123e4567-e89b-12d3-a456-426614174000').valid).toBe(true);
     expect(validateSubmissionId('invalid-id').valid).toBe(false);
+  });
+
+  it('parseFeedbackInput validates valid objects and rejects unknown keys or bad shapes', () => {
+    // Valid input
+    const valid = parseFeedbackInput({
+      content: '  Great work on this version.  ',
+      clientRequestId: '123e4567-e89b-12d3-a456-426614174000',
+    });
+    expect(valid.content).toBe('Great work on this version.');
+    expect(valid.clientRequestId).toBe('123e4567-e89b-12d3-a456-426614174000');
+
+    // Non-object
+    expect(() => parseFeedbackInput('string')).toThrow(FeedbackInputError);
+    expect(() => parseFeedbackInput(null)).toThrow(FeedbackInputError);
+    expect(() => parseFeedbackInput([1, 2, 3])).toThrow(FeedbackInputError);
+
+    // Unknown keys
+    try {
+      parseFeedbackInput({
+        content: 'Valid content',
+        clientRequestId: '123e4567-e89b-12d3-a456-426614174000',
+        extraField: true,
+      });
+      expect.fail('Should have thrown');
+    } catch (err) {
+      expect(err).toBeInstanceOf(FeedbackInputError);
+      expect((err as FeedbackInputError).fields.form).toBe('Use only content and clientRequestId.');
+    }
   });
 });

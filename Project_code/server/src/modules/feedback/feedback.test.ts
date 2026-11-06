@@ -60,15 +60,30 @@ describe('Feedback Module (T-17, T-18, T-19, T-20, T-24)', () => {
       RELEASE_SHA: 'test-release',
     });
 
+    const passThrough = (_req: unknown, _res: unknown, next: () => void) => next();
+
     const feedbackRouter = createFeedbackRouter({
       prisma,
       getAuthContext: () => auth,
+      requireSession: passThrough,
+      requireSupervisor: passThrough,
+      requireMutation: passThrough,
     });
 
     return createApp(config, {
       routers: { feedback: feedbackRouter },
     });
   }
+
+  it('construction requires all mandatory protection dependencies', () => {
+    expect(() => createFeedbackRouter({ prisma } as any)).toThrow(TypeError);
+    expect(() =>
+      createFeedbackRouter({
+        prisma,
+        getAuthContext: () => ({ userId: 'u', role: 'supervisor' }),
+      } as any),
+    ).toThrow(TypeError);
+  });
 
   it('T-17: assigned supervisor can create feedback for a team submission (201 Created)', async () => {
     const app = buildApp({ userId: fixtures.users.supA.id, role: 'supervisor' });
@@ -234,6 +249,23 @@ describe('Feedback Module (T-17, T-18, T-19, T-20, T-24)', () => {
       .send({ content: 'First target submission content.', clientRequestId });
     expect(res2.status).toBe(409);
     expect(res2.body.error.code).toBe('REQUEST_KEY_REUSED');
+  });
+
+  it('rejects unknown payload keys (400 Bad Request)', async () => {
+    const app = buildApp({ userId: fixtures.users.supA.id, role: 'supervisor' });
+
+    const res = await request(app)
+      .post(`/api/submissions/${submissionA.id}/feedback`)
+      .set('content-type', 'application/json')
+      .send({
+        content: 'Valid content.',
+        clientRequestId: randomUUID(),
+        extraUnauthorizedField: 'malicious',
+      });
+
+    expect(res.status).toBe(400);
+    expect(res.body.error.code).toBe('INVALID_INPUT');
+    expect(res.body.error.fields.form).toBeDefined();
   });
 
   it('rejects empty or whitespace-only feedback content (400 Bad Request)', async () => {
