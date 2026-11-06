@@ -2,7 +2,11 @@
 
 Date: 7 November 2026, Asia/Bangkok. Owner A / zerotwobook; reviewer B / Atip-Infa. [Issue #7](https://github.com/zerotwobook/fastTrack/issues/7), [PR #57](https://github.com/zerotwobook/fastTrack/pull/57), branch `feature/s1-a-submissions`, target `staging/sprint-1` from accepted `78d0cca`.
 
-**Verification PASSED; peer Acceptance PENDING.** Tested executable source: `1bf8d632a4520cb8b2dd495c51b43d73a5e8a561`. Subsequent handoff changes are documentation/evidence only. [Delegated G2 acceptance](R1-G2-acceptance.md) permits this task; it does not waive B review of the A-authored increment or accept G3/main release.
+**Current status: Verification PASSED; peer Acceptance ACCEPTED in staging.** Tested executable source: `1bf8d632a4520cb8b2dd495c51b43d73a5e8a561`. Subsequent handoff changes are documentation/evidence only. [Delegated G2 acceptance](R1-G2-acceptance.md) permits this task; it does not waive B review of the A-authored increment or accept G3/main release.
+
+## Accepted integration update
+
+B approved exact head f6c4988d48e6e92310332f1e110007b93945bf03 at 2026-11-06T18:48:37Z and merged PR #57 into staging as 3365a36e4cd1fcdd7410cca2086447ec4ae5dc33 at 18:50:50Z. B reports running test:a02:isolated and review:a02, all 48 F-03 cases plus existing regressions passing, and accepts the locking/deadline/no-duplicate, teammate recovery and feedback-slot design. A verified MERGED, merger/target, current-head approval and identical approved/merge trees; executable files equal tested 1bf8d63. #7/#57 are Done/PASSED/ACCEPTED and #7 is closed. Earlier pending statements/results below preserve the pre-acceptance snapshot. G3 and the main release are separate.
 
 ## Implemented behavior
 

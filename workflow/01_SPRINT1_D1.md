@@ -222,17 +222,21 @@ Owner A; reviewer B. Issue #7, branch feature/s1-a-submissions from accepted sta
 - [x] Retain meaningful deadline RED -> GREEN/regression history; no disabled tests or false acceptance.
 - [x] Verify exact before/equal/after 1ms, offsets/precision, real DB lock wait across dueAt, role/scope/CSRF, spoofing, validation, duplicates/precedence, no-write failures, app restart and browser persistence.
 - [x] Publish the scoped-submission helper/DTO and version-specific FeedbackPanel slot for B; preserve B schema/fixtures/shared primitives/feedback branch.
-- [ ] Complete current-head B peer review/accepted staging merge of PR #57; G3 and main release remain separate.
+- [x] B approved/reproduced current #57 head f6c4988 and merged as 3365a36; #7 closed Done/PASSED/ACCEPTED. G3/main release remain separate.
 
-Technical verification at 1bf8d63 passes 111 ordinary, 48 A02, 33 B01, 28 auth, 38 G1 and seven upgrade cases from a fresh clone. Actual Chromium checks include persisted submit/reload, safe external links, host-zone-independent Bangkok time, supervisor/foreign denial, own/teammate uncertain-result recovery, explicit checked retry and a real deadline crossed in the open form. See [actual evidence](../Project_code/docs/evidence/R1-A02-submissions.md). Acceptance remains PENDING.
+Technical verification at 1bf8d63 passes 111 ordinary, 48 A02, 33 B01, 28 auth, 38 G1 and seven upgrade cases from a fresh clone. Actual Chromium checks include persisted submit/reload, safe external links, host-zone-independent Bangkok time, supervisor/foreign denial, own/teammate uncertain-result recovery, explicit checked retry and a real deadline crossed in the open form. See [actual evidence](../Project_code/docs/evidence/R1-A02-submissions.md). B peer acceptance is recorded at merge 3365a36; earlier JSON snapshots remain historical.
 
-### R1-A03: เอกสาร/หลักฐานที่ A เป็นเจ้าของ
+### R1-A03: Owner A documentation and evidence
 
-- [ ] D1 A: requirements/business rules/out-of-scope ตรง app; B: inventory/traceability; D: three-sprint plan และ dependencies
-- [ ] หลักฐาน F-01/F-03: normal flow, deadline rejection, auth/logout, commands/results และ TDD RED/GREEN
-- [ ] จับคู่ AC → actual test file/name → result → tested commit; NOT RUN ยังเป็น NOT RUN
-- [ ] เลือก Issue/PR chain ฝั่ง domain rule ที่มี teammate review จริง
-- [ ] Review เอกสาร C/E ของ B และลองทำ setup README บนสภาพแวดล้อมสะอาด
+Owner A; reviewer B. Issue #10, branch docs/s1-a-d1-evidence from accepted staging 3365a36. [Package scope/assembly handoff](handoffs/R1-A03_D1_A_PACKAGE.md). This independent documentation task may proceed while B owns F-04; it does not accept G3 or release main.
+
+- [ ] Prepare English D1 A context/requirements/rules/exclusions, B full-product inventory/traceability and D three-sprint plan with real dependencies.
+- [ ] Package actual F-01/F-03 normal, deadline, auth/logout, build/test and genuine RED/GREEN evidence with exact tested sources.
+- [ ] Map AC -> actual file/name -> result -> commit; preserve NOT RUN/PARTIAL and release limitations.
+- [ ] Select the substantive domain-rule Issue/PR chain and real B peer review; record contract/test/implementation chronology.
+- [ ] Review current B C/E source and accepted clean-setup results; identify remaining assembly updates instead of claiming unreviewed final content is accepted.
+- [ ] Give B ready-to-use owned sections/captions/source images/results; B owns final C/E updates and PDF assembly.
+- [ ] Complete actual B peer review/merge of this package; final G3/G4/G5 and submission remain separate.
 
 ## 8. รายละเอียดงาน B — เพื่อน
 
