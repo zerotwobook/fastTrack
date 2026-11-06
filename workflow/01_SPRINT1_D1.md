@@ -1,6 +1,8 @@
 ﻿# รอบ 1 — Sprint 1: ระบบหลักที่ใช้งานจริง และ Deliverable 1
 
-> แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: PLANNED
+> Language policy: conversation may be Thai; all newly authored or revised project content must be English. Read [SKILL_Project](../skill/SKILL_Project.md) and [AGENTS.md](../AGENTS.md). Translate legacy sections when editing them; unrelated existing sources are outside this change.
+
+> แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: Backlog
 > A = คุณผู้ใช้, B = เพื่อนร่วมทีม ทั้งสองเป็นนักพัฒนาและ reviewer สลับกัน
 > วันส่ง D1: 8 พฤศจิกายน 2026 เวลา 23:59 น. (Asia/Bangkok)
 > ไฟล์นี้เป็นคำสั่งทำงานและเกณฑ์ตรวจ ไม่ใช่หลักฐานว่าทำเสร็จแล้ว
@@ -46,8 +48,8 @@
 
 | รายการ | ค่า |
 |---|---|
-| A: ชื่อ / รหัส / GitHub | TBD — ผู้ใช้เจ้าของคำขอนี้ |
-| B: ชื่อ / รหัส / GitHub | TBD — เพื่อนร่วมทีม |
+| A: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `zerotwobook` |
+| B: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `Atip-Infa` |
 | Repository / access | ตรวจ remote จริง; ต้อง public ตามข้อกำหนด Lab 5 และคงไว้จนตรวจเสร็จ |
 | Sprint staging | `staging/sprint-1` |
 | Contract baseline commit | TBD หลัง commit/review จริง |
@@ -335,7 +337,7 @@ AI ช่วยเตรียม artifact ได้ แต่ไม่ upload �
 Task / owner:
 Branch / commit / PR:
 Contract baseline / affected requirements:
-Implementation status: PLANNED | IN PROGRESS | REVIEW | MERGED
+Implementation status: Backlog | Specified | Started | PR Review | Fixing | Done
 Verification: NOT RUN | FAILED | PASSED (command + output link)
 Human check: PENDING | A checked ... | B checked ...
 Gate / finding / follow-up:

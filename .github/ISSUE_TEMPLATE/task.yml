@@ -1,0 +1,46 @@
+name: Development task
+description: A planned workflow task or an agreed subtask
+body:
+  - type: markdown
+    attributes:
+      value: Write all Issue content in English. Read SKILL_Project and the current workflow; reuse an existing Task ID instead of opening a duplicate.
+  - type: input
+    id: task
+    attributes:
+      label: Task ID / Sprint / Feature
+      placeholder: R1-A01 / Sprint 1 / F-01
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Owner and reviewer
+      description: A is zerotwobook; B is Atip-Infa. The other member reviews. For shared work, identify each contribution.
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope and source contracts
+      description: Describe the intended behavior and reference the relevant project-detail/workflow sections.
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies / Gate / Shared files
+      description: List prerequisite Issues, actual gate decisions and affected schema/router/DTO/lockfile owners.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance and verification
+      description: State required behavior and meaningful checks. Do not prefill invented PASS results.
+    validations:
+      required: true
+  - type: textarea
+    id: branch
+    attributes:
+      label: Branch / Base / Handoff
+      description: New tasks use a branch from current sprint staging; app code belongs in Project_code/. Provide actual results for peer review.
