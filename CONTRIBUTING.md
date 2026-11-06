@@ -2,6 +2,10 @@
 
 A = [zerotwobook](https://github.com/zerotwobook); B = [Atip-Infa](https://github.com/Atip-Infa). Both implement features and review each other's work. Read [SKILL_Project](skill/SKILL_Project.md), the [Git skill](skill/SKILL_Github.md) and the [workflow](workflow/README.md) first.
 
+## Documentation entry points
+
+Use [README.md](README.md) for the application overview and [Project_code/README.md](Project_code/README.md) for verified technical instructions. Team onboarding, task allocation, AI prompts and sprint/branch coordination belong in [DEVELOPMENT_README.md](DEVELOPMENT_README.md).
+
 ## Language policy
 
 Conversation with the user may be Thai. **All newly authored or revised project content must be English**, including code comments/docstrings, UI text, documentation, tests, commits, Issues, PRs, reviews and Project metadata. Translate the legacy section being edited; do not rewrite unrelated legacy files or instructor source artifacts automatically. Follow [SKILL_Project section 1](skill/SKILL_Project.md) for details.

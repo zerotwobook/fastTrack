@@ -32,6 +32,7 @@ Reuse already-read guidance until it changes or the context requires a refresh. 
 - Inspect the existing tree before scaffolding; extend one application across all three sprints.
 - Do not implement the app in the repository root, workflow, project-design/report folders or the Lab 5 starter kit.
 - Keep plans in `workflow/`, product design in `Project_doc/`, and deliverables at their specified paths.
+- Use [README.md](../README.md) for the actual application overview and [Project_code/README.md](../Project_code/README.md) for verified code/setup details. Keep team coordination, AI prompts, task allocation and branch procedures in [DEVELOPMENT_README.md](../DEVELOPMENT_README.md), CONTRIBUTING and workflow. Before code exists, leave technical details explicitly pending rather than inventing features or commands.
 - Preserve required repository-level paths such as `.github/workflows/`, `.gitignore`, `skill/` and `docs/labs/lab-05/deployment.md`. GitHub Actions do not belong inside Project_code.
 - Use real working directories/build contexts for install/build/test/Docker/CI; do not create duplicate root packages or lockfiles unnecessarily.
 

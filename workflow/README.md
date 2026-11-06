@@ -8,7 +8,7 @@
 
 ก่อนพัฒนาหรือแก้แอป ให้อ่าน [SKILL_Project — กติกากลางของโปรเจกต์](../skill/SKILL_Project.md) ซึ่งเชื่อมกติกา Project_code, workflow, Git และ UI เข้าด้วยกัน
 
-สำหรับเพื่อนที่เพิ่ง clone ให้เริ่มจาก [README หน้าแรกของ repository](../README.md) ซึ่งมีลำดับวันแรกและ prompt แยก A/B ก่อนอ่านรายละเอียดด้านล่าง
+New teammates should start with [DEVELOPMENT_README.md](../DEVELOPMENT_README.md) for first-day allocation and A/B AI requests. The repository [README.md](../README.md) describes the application; [Project_code/README.md](../Project_code/README.md) holds verified technical instructions.
 
 [Project board ของทีม](https://github.com/users/zerotwobook/projects/3) เชื่อม Issues และมีมุมมอง A/B/Sprint แล้ว GitHub setup และลิงก์รับงานจริงดู [CONTRIBUTING.md](../CONTRIBUTING.md); A = `zerotwobook`, B = `Atip-Infa` ใช้ Issues เดิมตาม Task ID ไม่สร้างซ้ำ
 
@@ -220,14 +220,14 @@ Lab 6/7 ตรวจจาก Group specs หน้า 14–15; ยังไม�
 
 ขอบเขตนี้คือ planning handoff ก่อน code; ไม่ใช่การส่ง D1 หรือการรับรอง working app
 
-- [ ] หน้าแรก `README.md` และ `Project_code/README.md` อยู่ใน commit เพื่อให้เพื่อนรู้จุดเริ่มและเห็นพื้นที่โค้ด; Git ไม่เก็บ empty directory เปล่า ๆ
+- [ ] Include `README.md` for the application, `Project_code/README.md` for verified technical details, and `DEVELOPMENT_README.md` for team onboarding. Git does not preserve an empty source directory by itself.
 - [ ] `workflow/README.md` และแผน `01`, `02`, `03` ครบ พร้อม `skill/SKILL_Project.md`, `skill/SKILL_Github.md`, `skill/SKILL_UI.md`
 - [ ] `Project_doc/project_detail.md`, `deliverable _file/submit/project_deliverable_1.md`, summary และ `lab_file/lab5/LAB5_SUMMARY.md` เป็นชุดเดียวกับที่ workflow อ้าง พร้อม PDF/kit ต้นฉบับที่มีใน repository
 - [ ] ตรวจ diff ของการย้าย `Project/project_detail.md` → `Project_doc/project_detail.md` และการแทนที่ `skill/SKILL.md` เดิมด้วย skills ที่ตั้งชื่อใหม่; stage ทั้งด้านเก่า/ใหม่เฉพาะที่ตรวจแล้ว ไม่ปล่อยเอกสารเก่าเป็น current source สองชุด
 - [ ] ตรวจลิงก์แบบ relative จากไฟล์ในชุดที่จะ commit จริง ไม่ใช้เพียงไฟล์ untracked ในเครื่องเป็นหลักฐานว่า fresh clone ครบ; ไม่มีลิงก์เอกสารที่ต้องเปิดผ่านบัญชี ChatGPT ส่วนตัว
 - [ ] ตรวจไฟล์ที่จะ commit ว่าไม่มี secrets, `.env` จริง หรือ runtime outputs และไม่ใช้ `git add .` เหมารวมงานอื่น
 - [ ] PR ระบุชัดว่า docs/planning only, app ยังไม่เริ่ม, G0/ชื่อ/เวลาว่าง/สิทธิ์เพื่อนใดยังค้าง และผลตรวจที่ทำจริง ให้ reviewer อ่านชุดสุดท้ายก่อน merge
-- [ ] หลัง merge ตรวจ merged PR/main SHA และให้เพื่อน clone/fetch main แล้วเปิด README → skill → workflow → project detail/D1/PDF ได้ครบ
+- [ ] After merge, verify the PR/main SHA and have the teammate clone/fetch the same baseline. Check DEVELOPMENT_README → skill → workflow → project detail/D1/PDF, with application/code guides available separately.
 - [ ] A/B บันทึก G0 จริงและ A publish staging จาก baseline; B เข้าถึง repo/สร้าง branch/push/เปิด PR ไป staging ได้ตามสิทธิ์ที่ให้ ก่อนแยก implementation
 
 การมีแผนที่ตรวจได้ครบถือว่าพร้อมส่งให้เพื่อนทบทวนและเริ่ม kickoff ส่วนชื่อบัญชี/เวลาว่าง/eligibility/approval และผล setup ต้องเกิดจริงในขั้นตอนข้างต้น ไม่เติมสถานะ PASSED แทนการตรวจ
