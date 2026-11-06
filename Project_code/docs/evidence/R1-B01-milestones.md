@@ -16,10 +16,19 @@
   - `MilestoneService.createMilestone`: Scoped team authorization (assigned supervisor only), valid UUID verification, title bounds (1–120 chars per canonical schema), description bound (<= 2000 chars), future `dueAt` check with mandatory ISO 8601 timezone offset format.
   - `MilestoneService.listMilestones`: Scoped team authorization, batch join for `latestSubmission` and `feedbackCount` (preventing N+1 queries), ordered by `dueAt` ascending then `id` ascending.
   - `MilestoneService.getMilestone`: Scoped single milestone detail with latest submission projection.
-- `router.ts`: Router factory `createMilestoneRouter(deps)` exposing:
-  - `POST /teams/:teamId/milestones`
-  - `GET /teams/:teamId/milestones`
-  - `GET /milestones/:id`
+- `router.ts`: Router factory `createMilestoneRouter(deps)` aligned with A's security contract (`docs/contracts/sprint-1-auth.md`):
+  - Completely removed header-based authentication fallback (`x-user-id`, `x-user-role`).
+  - Injected `getAuthContext: (req) => MilestoneAuthContext | Promise<MilestoneAuthContext>` dependency directly into `MilestoneRouterDependencies`.
+  - Supports guards from A's `createSessionProtection({ prisma, config })`:
+    - `requireSession` (valid, unrevoked, unexpired DB session)
+    - `requireSupervisor` (`requireRole('supervisor')`)
+    - `requireMutation` (request source origin + CSRF token check)
+  - Strict middleware pipeline for mutations:
+    `requireSession → requireSupervisor → requireMutation → requireJsonBody → parseJsonBody → controller`
+  - Routes exposed:
+    - `POST /teams/:teamId/milestones`
+    - `GET /teams/:teamId/milestones`
+    - `GET /milestones/:id`
 
 ### Frontend (`client/src/features/milestones/`)
 - `MilestoneTrack.tsx` and `milestones.module.css`:
@@ -59,5 +68,6 @@ Results:
 
 ## 3. Status
 
-- **Verification:** PASSED (58/58 tests passing on PostgreSQL test database)
+- **Verification:** PASSED (58/58 tests passing on PostgreSQL test database, 0 type errors, production build verified)
+- **Seam Alignment:** Ready for G2 composition with A's `feature/s1-a-auth` (PR #54)
 - **Acceptance:** PENDING (Awaiting G2 teammate review)
