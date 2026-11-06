@@ -3,9 +3,6 @@
 // Prisma 7.10.1 with postgresql-adapter; use the generated client from db/client.ts.
 // All timestamps stored as timestamptz (UTC) and surfaced in Asia/Bangkok where shown.
 
-// Prisma 7: connection URL and adapter are configured in prisma.config.ts, not here.
-// See Project_code/prisma.config.ts for the database connection setup.
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/db/generated/client"
@@ -19,20 +16,21 @@ datasource db {
 // users — shared identity table for both roles
 // ---------------------------------------------------------------------------
 model User {
-  id           String   @id @default(uuid())
-  email        String   @unique
-  passwordHash String   @map("password_hash")
-  name         String
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique @db.VarChar(255)
+  passwordHash String   @map("password_hash") @db.VarChar(255)
+  name         String   @db.VarChar(100)
   role         UserRole
-  studentId    String?  @unique @map("student_id") // null for supervisors
+  studentId    String?  @unique @map("student_id") @db.VarChar(50)
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
   updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
   // Relations
   sessions       Session[]
-  supervisedTeam Team?         @relation("TeamSupervisor")
+  supervisedTeams Team[]        @relation("TeamSupervisor")
   teamMembership TeamMember?
   milestones     Milestone[]   @relation("MilestoneCreatedBy")
+  submissions    Submission[]  @relation("SubmissionAuthor")
   feedback       Feedback[]    @relation("FeedbackAuthor")
 
   @@map("users")
@@ -49,12 +47,13 @@ enum UserRole {
 // sessions — server-side DB-backed session (8-hour absolute TTL)
 // ---------------------------------------------------------------------------
 model Session {
-  id         String   @id @default(uuid())
-  userId     String   @map("user_id")
-  tokenHash  String   @unique @map("token_hash") // bcrypt hash of the opaque token
-  csrfToken  String   @map("csrf_token")          // CSRF double-submit value
-  expiresAt  DateTime @map("expires_at") @db.Timestamptz
-  createdAt  DateTime @default(now()) @map("created_at") @db.Timestamptz
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  tokenHash String    @unique @map("token_hash") @db.VarChar(255)
+  csrfToken String    @map("csrf_token") @db.VarChar(255)
+  expiresAt DateTime  @map("expires_at") @db.Timestamptz
+  revokedAt DateTime? @map("revoked_at") @db.Timestamptz
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
 
   user User @relation(fields: [userId], references: [id])
 
@@ -64,19 +63,20 @@ model Session {
 }
 
 // ---------------------------------------------------------------------------
-// teams — one team per student group; one supervisor per team in Sprint 1
+// teams — one team per student group; multiple teams per supervisor permitted (G1-01)
 // ---------------------------------------------------------------------------
 model Team {
-  id           String   @id @default(uuid())
-  name         String
-  supervisorId String   @unique @map("supervisor_id")
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @db.VarChar(100)
+  supervisorId String   @map("supervisor_id") @db.Uuid
   createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
   updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz
 
-  supervisor  User         @relation("TeamSupervisor", fields: [supervisorId], references: [id])
-  members     TeamMember[]
-  milestones  Milestone[]
+  supervisor User         @relation("TeamSupervisor", fields: [supervisorId], references: [id])
+  members    TeamMember[]
+  milestones Milestone[]
 
+  @@index([supervisorId])
   @@map("teams")
 }
 
@@ -84,8 +84,8 @@ model Team {
 // team_members — locked after first submission exists for the team
 // ---------------------------------------------------------------------------
 model TeamMember {
-  teamId    String   @map("team_id")
-  studentId String   @unique @map("student_id") // one team per student
+  teamId    String   @map("team_id") @db.Uuid
+  studentId String   @unique @map("student_id") @db.Uuid
   joinedAt  DateTime @default(now()) @map("joined_at") @db.Timestamptz
 
   team    Team @relation(fields: [teamId], references: [id])
@@ -99,14 +99,15 @@ model TeamMember {
 // milestones — created by assigned supervisor only; dueAt must be future
 // ---------------------------------------------------------------------------
 model Milestone {
-  id          String   @id @default(uuid())
-  teamId      String   @map("team_id")
-  title       String
-  description String   @default("")
-  dueAt       DateTime @map("due_at") @db.Timestamptz
-  createdById String   @map("created_by_id")
-  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
-  updatedAt   DateTime @updatedAt @map("updated_at") @db.Timestamptz
+  id          String    @id @default(uuid()) @db.Uuid
+  teamId      String    @map("team_id") @db.Uuid
+  title       String    @db.VarChar(120)
+  description String    @default("") @db.VarChar(2000)
+  dueAt       DateTime  @map("due_at") @db.Timestamptz
+  cancelledAt DateTime? @map("cancelled_at") @db.Timestamptz
+  createdById String    @map("created_by_id") @db.Uuid
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz
 
   team        Team         @relation(fields: [teamId], references: [id])
   createdBy   User         @relation("MilestoneCreatedBy", fields: [createdById], references: [id])
@@ -117,26 +118,23 @@ model Milestone {
 }
 
 // ---------------------------------------------------------------------------
-// submissions — version starts at 1; Sprint 1 allows exactly one submission
-// per milestone (version = 1). Sprint 2 adds revision flow.
-// DB unique constraint prevents duplicate versions; transaction + row lock
-// prevents duplicate first submissions (see project_detail §5.2).
+// submissions — version starts at 1
 // ---------------------------------------------------------------------------
 model Submission {
-  id          String   @id @default(uuid())
-  milestoneId String   @map("milestone_id")
-  submittedById String @map("submitted_by_id")
-  version     Int      @default(1)
-  title       String
-  description String   @default("")
-  url         String
-  submittedAt DateTime @map("submitted_at") @db.Timestamptz // set to DB clock_timestamp() after lock
-  createdAt   DateTime @default(now()) @map("created_at") @db.Timestamptz
+  id            String   @id @default(uuid()) @db.Uuid
+  milestoneId   String   @map("milestone_id") @db.Uuid
+  submittedById String   @map("submitted_by_id") @db.Uuid
+  version       Int      @default(1)
+  title         String   @db.VarChar(200)
+  description   String   @default("") @db.VarChar(2000)
+  url           String   @db.VarChar(2048)
+  submittedAt   DateTime @map("submitted_at") @db.Timestamptz
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   milestone   Milestone  @relation(fields: [milestoneId], references: [id])
+  submittedBy User       @relation("SubmissionAuthor", fields: [submittedById], references: [id])
   feedback    Feedback[]
 
-  /// version >= 1 enforced at application layer and by DB check constraint added in migration
   @@unique([milestoneId, version])
   @@index([milestoneId])
   @@map("submissions")
@@ -144,22 +142,18 @@ model Submission {
 
 // ---------------------------------------------------------------------------
 // feedback — append-only; supervisor only writes; teams/members read their own.
-// client_request_id provides idempotent retry: same supervisorId + clientRequestId
-// returns the existing record (200); different clientRequestId with a conflicting
-// intent returns 409 REQUEST_KEY_REUSED per project_detail §9.5.
 // ---------------------------------------------------------------------------
 model Feedback {
-  id              String   @id @default(uuid())
-  submissionId    String   @map("submission_id")
-  supervisorId    String   @map("supervisor_id")
-  content         String
+  id              String   @id @default(uuid()) @db.Uuid
+  submissionId    String   @map("submission_id") @db.Uuid
+  supervisorId    String   @map("supervisor_id") @db.Uuid
+  content         String   @db.VarChar(4000)
   clientRequestId String   @map("client_request_id") @db.Uuid
   createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
 
   submission Submission @relation(fields: [submissionId], references: [id])
   supervisor User       @relation("FeedbackAuthor", fields: [supervisorId], references: [id])
 
-  /// Retry safety: same supervisor + same client_request_id must map to one record only.
   @@unique([supervisorId, clientRequestId])
   @@index([submissionId])
   @@map("feedback")

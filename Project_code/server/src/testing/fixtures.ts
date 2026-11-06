@@ -1,7 +1,6 @@
-// Test fixture helpers — B owns (R1-B00).
+// Test fixture helpers — B owns (R1-B00 / R1-B00-FIX-01).
 // Provides reusable setup/teardown for integration tests.
-// MUST call requireTestDatabase() before any destructive operation.
-// Guards are enforced at import time AND at fixture-creation time.
+// MUST call requireTestDatabase() before any destructive operation and at client creation (G1-07).
 
 import { PrismaClient, UserRole } from '../db/generated/client/index.js';
 import { PrismaPg } from '@prisma/adapter-pg';
@@ -23,8 +22,11 @@ function hashPassword(plain: string): string {
 export const TEST_PASSWORD = 'test-password-fixture';
 export const TEST_PASSWORD_HASH = hashPassword(TEST_PASSWORD);
 
-/** Create an isolated Prisma client for integration tests using TEST_DATABASE_URL. */
+/** Create an isolated Prisma client for integration tests using TEST_DATABASE_URL.
+ * Rechecks requireTestDatabase on every invocation (G1-07).
+ */
 export function createTestPrisma(): PrismaClient {
+  requireTestDatabase(process.env, [process.env['DATABASE_URL'] ?? '']);
   const connectionString = process.env['TEST_DATABASE_URL'];
   if (!connectionString) {
     throw new Error('TEST_DATABASE_URL is required for test fixtures.');
@@ -33,18 +35,26 @@ export function createTestPrisma(): PrismaClient {
   return new PrismaClient({ adapter });
 }
 
-/** Full fixture set: two supervisors, three students, two teams, two milestones.
- *
- * Returns all created records so tests can reference IDs directly.
- * Milestones include boundary cases: 1 ms before/at/after a reference date.
- *
- * @param prisma - test Prisma client (from createTestPrisma())
- * @param refDate - reference datetime for deadline boundary fixtures (defaults to now + 1 day)
- */
+/** Clean test database tables in reverse foreign key order. */
+export async function cleanTestDatabase(prisma: PrismaClient) {
+  requireTestDatabase(process.env, [process.env['DATABASE_URL'] ?? '']);
+  await prisma.feedback.deleteMany();
+  await prisma.submission.deleteMany();
+  await prisma.milestone.deleteMany();
+  await prisma.teamMember.deleteMany();
+  await prisma.team.deleteMany();
+  await prisma.session.deleteMany();
+  await prisma.user.deleteMany();
+}
+
+/** Full fixture set: two supervisors, three students, two teams, milestones with exact boundary fixtures. */
 export async function createBaseFixtures(
   prisma: PrismaClient,
   refDate?: Date,
 ) {
+  requireTestDatabase(process.env, [process.env['DATABASE_URL'] ?? '']);
+  await cleanTestDatabase(prisma);
+
   const ref = refDate ?? new Date(Date.now() + 24 * 60 * 60 * 1000);
 
   // Supervisors
@@ -121,8 +131,7 @@ export async function createBaseFixtures(
     },
   });
 
-  // Milestones with deadline boundary fixtures.
-  // dueAt values: ref - 1ms (past), ref (exact boundary), ref + 1 hour (future).
+  // Milestones with exact deadline boundary fixtures (G1-06: -1ms, equal 0ms, +1ms, plus general future)
   const milestonePast = await prisma.milestone.create({
     data: {
       teamId: teamA.id,
@@ -137,6 +146,15 @@ export async function createBaseFixtures(
       teamId: teamA.id,
       title: 'Exact boundary milestone',
       dueAt: ref,
+      createdById: supA.id,
+    },
+  });
+
+  const milestoneBoundaryPlus1ms = await prisma.milestone.create({
+    data: {
+      teamId: teamA.id,
+      title: 'Boundary plus one ms milestone',
+      dueAt: new Date(ref.getTime() + 1),
       createdById: supA.id,
     },
   });
@@ -162,6 +180,6 @@ export async function createBaseFixtures(
   return {
     users: { supA, supB, stuA1, stuA2, stuB1 },
     teams: { teamA, teamB },
-    milestones: { milestonePast, milestoneExact, milestoneFuture, milestoneBTeam },
+    milestones: { milestonePast, milestoneExact, milestoneBoundaryPlus1ms, milestoneFuture, milestoneBTeam },
   };
 }
