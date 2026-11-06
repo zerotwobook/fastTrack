@@ -1,0 +1,64 @@
+/* fastTrack global CSS — inject at app root (main.tsx).
+ * Sets CSS custom properties and base typographic resets.
+ * Owner: B (R1-B00).
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Noto+Sans+Thai:wght@400;500;600&display=swap');
+
+:root {
+  --color-paper: #ffffff;
+  --color-ink: #000000;
+  --color-wash: #f5f5f5;
+  --color-divider: #e5e5e5;
+  --color-muted: #595959;
+  --color-control: #8a8a8a;
+
+  --font-family: Inter, "Noto Sans Thai", Tahoma, sans-serif;
+  --font-weight-heading: 500;
+  --font-weight-body: 400;
+
+  --radius-sm: 4px;
+  --radius-md: 6px;
+
+  font-family: var(--font-family);
+  font-weight: var(--font-weight-body);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--color-ink);
+  background-color: var(--color-paper);
+  -webkit-font-smoothing: antialiased;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  min-height: 100dvh;
+  background-color: var(--color-paper);
+}
+
+/* Focus ring — visible and accessible */
+:focus-visible {
+  outline: 2px solid var(--color-ink);
+  outline-offset: 2px;
+}
+
+/* Skip duplicate outline on mouse click */
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
