@@ -31,7 +31,9 @@ export function parseSubmissionInput(value) {
       continue;
     }
     const text = value[key].trim();
-    if (codePointLength(text) < 1 || codePointLength(text) > maximum) {
+    if (/[\u0000\uD800-\uDFFF]/u.test(text)) {
+      fields[key] = 'Use valid Unicode text without a null character.';
+    } else if (codePointLength(text) < 1 || codePointLength(text) > maximum) {
       fields[key] = `Enter between 1 and ${maximum.toLocaleString('en-US')} characters.`;
     }
     result[key] = text;

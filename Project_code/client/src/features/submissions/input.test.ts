@@ -13,7 +13,7 @@ describe('Shared first-submission input contracts', () => {
   });
   it.each([null, [], {}, { ...valid, title: false }, { ...valid, title: ' ' }, { ...valid, description: '\u00a0\ufeff' },
     { ...valid, title: 't'.repeat(121) }, { ...valid, description: 'd'.repeat(4001) }, { ...valid, submittedAt: '2030-01-01T00:00:00Z' },
-    { ...valid, role: 'student' }, { ...valid, version: 1 }])('rejects malformed, empty, oversized or authoritative input %j', value => {
+    { ...valid, role: 'student' }, { ...valid, version: 1 }, { ...valid, title: '\ud800' }, { ...valid, description: 'bad\u0000value' }])('rejects malformed, empty, oversized or authoritative input %j', value => {
     expect(() => parseSubmissionInput(value)).toThrow(SubmissionInputError);
   });
   it.each(['javascript:alert(1)', '//example.edu/work', 'https:example.edu', 'ftp://example.edu', 'https://u:p@example.edu',

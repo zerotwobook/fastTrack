@@ -1,0 +1,22 @@
+.breadcrumb, .context { color: var(--color-muted); line-height: 1.7; overflow-wrap: anywhere; margin-bottom: 12px; }
+.form { display: grid; gap: 24px; max-width: 680px; margin-top: 32px; }
+.form > div { gap: 8px; }
+.form input, .form textarea { font-size: 16px; line-height: 1.65; border-color: var(--color-control); border-radius: 8px; min-height: 48px; }
+.form input:focus-visible, .form textarea:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; border-color: var(--color-ink); }
+.form input[aria-invalid="true"], .form textarea[aria-invalid="true"] { border: 2px solid var(--color-ink); }
+.form label { font-size: 16px; }
+.form [id$="-hint"], .form [id$="-error"] { font-size: 14px; line-height: 1.6; }
+.actions { display: flex; gap: 24px; align-items: center; flex-wrap: wrap; }
+.notice { padding: 16px; border: 1px solid var(--color-control); line-height: 1.7; margin: 24px 0; overflow-wrap: anywhere; }
+.notice > * + * { margin-top: 12px; }
+.notice a { display: inline-block; margin: 12px; }
+.content, .withFeedback { margin-top: 32px; min-width: 0; }
+.content { max-width: 75ch; }
+.withFeedback { display: grid; grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr); gap: 48px; }
+.withFeedback > aside { padding-left: 24px; border-left: 1px solid var(--color-divider); }
+.content h2, .withFeedback h2 { margin: 24px 0 16px; }
+.description { white-space: pre-wrap; line-height: 1.75; overflow-wrap: anywhere; }
+.workLink { display: inline-flex; min-height: 48px; padding: 8px 16px; align-items: center; color: var(--color-paper); background: var(--color-ink); border: 1px solid var(--color-ink); border-radius: 8px; text-decoration: none; }
+.url { margin-top: 12px; color: var(--color-muted); line-height: 1.6; overflow-wrap: anywhere; }
+@media(max-width:1199px) { .withFeedback { grid-template-columns: minmax(0, 1fr); } .withFeedback > aside { padding: 24px 0 0; border-left: 0; border-top: 1px solid var(--color-divider); } }
+@media(max-width:767px) { .form button[type=submit] { width: 100%; justify-content: center; } }
