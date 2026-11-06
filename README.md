@@ -21,6 +21,8 @@ These documents define work and acceptance, not a verified working application. 
 | D1 report and S1 contracts | [D1 draft](deliverable%20_file/submit/project_deliverable_1.md) |
 | Original assessment criteria | [Group specs](deliverable%20_file/group_work_specs_v1.pdf), [D1](deliverable%20_file/project_deliverable_1_v1.pdf), [D2](deliverable%20_file/project_deliverable_2_v1.pdf), [Final](deliverable%20_file/project_final_delivery_v1.pdf) |
 
+For tracked PRs, the enabled native Project workflow moves the card to Done after merge. Follow [Project merge automation](workflow/GITHUB_PROJECT_AUTOMATION.md) when opening/reviewing PRs.
+
 ## First-day allocation
 
 A is `zerotwobook`; B is `Atip-Infa`. Each member uses a separate clone/worktree and records real names/student IDs, availability, topic eligibility and baseline acceptance in [R1-J00 / G0, Issue #2](https://github.com/zerotwobook/fastTrack/issues/2).
