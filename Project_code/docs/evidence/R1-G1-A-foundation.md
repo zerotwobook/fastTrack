@@ -1,6 +1,12 @@
 # G1 foundation verification and remediation
 
-## Current result: technical checks pass; peer acceptance pending
+## Current result: accepted foundation integration
+
+Atip-Infa approved PR #50 at actual head `6a5de5fef5d7400c3e7cc12ac9d18632766924b9` on 2026-11-06T14:50:03Z and merged it into `staging/sprint-1` as `ff5975c9ed96ec7cc528897a5437c9722105048b` at 14:50:20Z. A verified the merge tree equals that approved head and executable files equal tested source `6f3601e`. A's real reproduction and B's current-head acceptance, together with B's earlier A00 reproduction in PR #45, satisfy G1. Issues #49/#51 are closed Done/PASSED/ACCEPTED; native automation had already moved the merged PR to Done, and Acceptance was reconciled separately.
+
+No new B command execution or adoption of an existing persistent database is claimed. The migration adoption limitation still applies. A01/B01 may proceed on their separate branches; feature acceptance/G2 and a main release are separate. The evidence below preserves its pre-acceptance state rather than rewriting historical results.
+
+## Historical remediation handoff: technical checks passed; peer acceptance was pending
 
 Date: 6 November 2026 (Asia/Bangkok). Owner A / zerotwobook. [Issue #49](https://github.com/zerotwobook/fastTrack/issues/49) tracks the audit, [Issue #51](https://github.com/zerotwobook/fastTrack/issues/51) tracks the correction, and [PR #50](https://github.com/zerotwobook/fastTrack/pull/50) contains the combined source for B / Atip-Infa to review. The integration target remains `staging/sprint-1`.
 

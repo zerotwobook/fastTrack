@@ -1,6 +1,6 @@
 # R1-A01 authentication contract and verification plan
 
-Owner A; reviewer B. Issue #5, branch `feature/s1-a-auth`, based on accepted Sprint 1 merge `ff5975c9ed96ec7cc528897a5437c9722105048b`. This document specifies the implementation under development, not completed feature acceptance.
+Owner A; reviewer B. Issue #5 / PR #54, branch `feature/s1-a-auth`, based on accepted Sprint 1 merge `ff5975c9ed96ec7cc528897a5437c9722105048b`. The exports and behavior below are implemented and verified at `2899d1b3a91e54b52a759e3f12ecd9f5fcf7b8d4`; peer acceptance remains pending. See [actual evidence](../evidence/R1-A01-auth.md).
 
 ## Accepted prerequisite
 
@@ -20,11 +20,13 @@ Implement project detail 7.5/9 and D1 E.1 without changing schema or B's milesto
 
 ## Module seam for B
 
-`createSessionProtection({prisma,config})` will provide `requireSession`, `requireRole(role)`, `requireMutation` and asynchronous `getAuthContext(req)` returning an immutable `{userId,role,sessionId}`. No header/body/query identity fallback is permitted. Missing/invalid sessions fail closed.
+`server/src/modules/auth/index.ts` exports `createAuthRouter` and `createSessionProtection({prisma,config})`. Protection provides `requireSession`, `requireRole(role)`, `requireMutation` and asynchronous `getAuthContext(req)` returning an immutable `{userId,role,sessionId}`. Pass `requireRole('supervisor')` for B's `requireSupervisor` dependency. No header/body/query identity fallback is permitted. Missing/invalid sessions fail closed.
 
 B must mount protection before JSON parsing: session -> role -> source/CSRF -> JSON type/parser -> input -> scoped service. The current unmerged milestone router's `x-user-id` / `x-user-role` fallback is not an integration contract and must be removed before production composition/G2. A will not mount that candidate unchanged or edit B's active branch. A owns real auth/teams and composition; B owns adapting the milestone router to required protection dependencies.
 
-Shared team helpers will expose a scoped Prisma filter and a scope-check function accepting an explicit Prisma/transaction client. Mutations must recheck within their transaction; a prior route check is not sufficient for later mutations.
+`server/src/modules/teams/index.ts` exports `createTeamsRouter`, `scopedTeamWhere(auth)`, `requireUuid(value)` and `requireTeamAccess(db,auth,id)`. Pass the explicit Prisma/transaction client into the scope check. Mutations must recheck within their transaction; a prior route check is not sufficient for later mutations. A composes only real auth/teams in `server/src/modules/index.ts`; milestone integration still requires reviewed B code and G2.
+
+B reported removing the old header fallback and adapting its middleware pipeline in PR #52 at `043af8d` on 6 November. That report is coordination evidence, not A's independent review or G2 acceptance.
 
 ## UI and state
 
