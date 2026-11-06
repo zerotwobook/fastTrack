@@ -7,6 +7,23 @@ const denied = () => new Response(JSON.stringify({ error: { message: 'Sign in to
 function deferred<T>() { let resolve!: (value: T) => void; const promise = new Promise<T>(done => { resolve = done; }); return { promise, resolve }; }
 
 describe('F-01 account isolation and recovery', () => {
+  it('sends the current session CSRF for protected mutations and retains domain serverTime', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockResolvedValueOnce(json({ id: 'saved' }))
+      .mockResolvedValueOnce(new Response(JSON.stringify({ data: [], meta: { serverTime: '2030-01-01T00:00:00.000Z' } }), { status: 200 }));
+    const store = new SessionStore(fetcher); await store.login('a', 'synthetic');
+    expect(await store.mutate('/teams/team/milestones', { title: 'Work' })).toEqual({ id: 'saved' });
+    expect(fetcher.mock.calls[1]?.[1]).toMatchObject({ method: 'POST', credentials: 'same-origin', cache: 'no-store', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': 'a'.repeat(43) } });
+    expect(await store.readDomain('/teams/team/milestones')).toEqual({ data: [], meta: { serverTime: '2030-01-01T00:00:00.000Z' } });
+  });
+  it('drops a late mutation result after account change', async () => {
+    const pending = deferred<Response>();
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(pending.promise).mockResolvedValueOnce(json(auth('b')));
+    const store = new SessionStore(fetcher); await store.login('a', 'synthetic');
+    const mutation = store.mutate('/teams/team/milestones', { title: 'Work' });
+    const rejected = expect(mutation).rejects.toBeInstanceOf(StaleSessionError);
+    await store.login('b', 'synthetic'); pending.resolve(json({ id: 'private' })); await rejected;
+    expect(store.getSnapshot().auth?.user.id).toBe('b');
+  });
   it('uses the global receiver required by the browser Fetch API', async () => {
     vi.spyOn(globalThis, 'fetch').mockImplementation(function (this: unknown) {
       expect(this).toBe(globalThis);
@@ -72,6 +89,9 @@ describe('F-01 account isolation and recovery', () => {
   });
 });
 describe('F-01 internal return-to destinations', () => {
+  it.each(['/milestones/11111111-1111-1111-1111-111111111111', '/teams/11111111-1111-1111-1111-111111111111/milestones/new'])('permits implemented milestone destination %s with server-side scope still required', path => {
+    expect(safeReturnTo(path)).toBe(path);
+  });
   it.each(['https://foreign.example', '//foreign.example', '/\\foreign.example', '/%2f%2fforeign.example', '/login', '/teams/invalid', '/\n/foreign.example', null])('T-27 rejects unsafe/unimplemented destination %j', value => {
     expect(safeReturnTo(value)).toBe('/');
   });

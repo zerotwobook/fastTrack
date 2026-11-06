@@ -1,236 +1,111 @@
-import { useState, useEffect } from 'react';
-import { Button, Field, Input, Textarea, StatusBadge, EmptyState, ErrorMessage } from '../../design/components';
+import { useEffect, useRef, useState } from 'react';
+import type { FormEvent } from 'react';
+import { Button, EmptyState, Field, Input, StatusBadge, Textarea } from '../../design/components';
+import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
+import type { Team } from '../auth/session';
+import { bangkokInputToIso, codePointLength, MilestoneInputError, parseMilestoneInput } from '../../../../shared/milestones.mjs';
 import styles from './milestones.module.css';
 
 export interface MilestoneItem {
-  id: string;
-  teamId: string;
-  title: string;
-  description: string;
-  dueAt: string;
-  cancelledAt: string | null;
-  createdAt: string;
-  latestSubmission: {
-    id: string;
-    version: number;
-    submittedAt: string;
-    feedbackCount: number;
-  } | null;
+  id: string; teamId: string; title: string; description: string; dueAt: string;
+  cancelledAt: string | null; createdAt: string;
+  latestSubmission: { id: string; version: number; submittedAt: string; feedbackCount: number } | null;
 }
-
-interface MilestoneTrackProps {
-  teamId: string;
-  userRole: 'student' | 'supervisor';
-  currentUserId: string;
+export const formatBangkok = (value: string) => new Intl.DateTimeFormat('en-GB', {
+  timeZone: 'Asia/Bangkok', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
+}).format(new Date(value)) + ' (Asia/Bangkok)';
+function State({ item, serverTime }: { item: MilestoneItem; serverTime: string }) {
+  if (item.cancelledAt) return <span className={styles.cancelled}>Cancelled</span>;
+  return <StatusBadge status={item.latestSubmission ? item.latestSubmission.feedbackCount ? 'feedback' : 'submitted'
+    : new Date(item.dueAt).getTime() < new Date(serverTime).getTime() ? 'overdue' : 'pending'} />;
 }
-
-export function MilestoneTrack({ teamId, userRole }: MilestoneTrackProps) {
-  const [milestones, setMilestones] = useState<MilestoneItem[]>([]);
-  const [loading, setLoading] = useState(true);
+function Failure({ message, retry }: { message: string; retry: () => void }) {
+  return <div className={styles.error} role="alert"><p>{message}</p><Button variant="secondary" onClick={retry}>Try again</Button></div>;
+}
+export function MilestoneTrack({ teamId, userRole }: { teamId: string; userRole: 'student' | 'supervisor' }) {
+  const [result, setResult] = useState<{ teamId: string; items: MilestoneItem[]; serverTime: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
-
-  // Form state for Supervisor creation
-  const [showCreateForm, setShowCreateForm] = useState(false);
-  const [title, setTitle] = useState('');
-  const [description, setDescription] = useState('');
-  const [dueAt, setDueAt] = useState('');
-  const [submitting, setSubmitting] = useState(false);
-  const [formError, setFormError] = useState<string | null>(null);
-
-  const fetchMilestones = async () => {
-    setLoading(true);
-    setError(null);
-    try {
-      const res = await fetch(`/api/teams/${teamId}/milestones`);
-      if (!res.ok) {
-        throw new Error('Failed to load milestones');
-      }
-      const data = await res.json();
-      setMilestones(data.data || []);
-    } catch (err: unknown) {
-      setError(err instanceof Error ? err.message : 'Error loading milestones');
-    } finally {
-      setLoading(false);
-    }
-  };
-
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
-    fetchMilestones();
-  }, [teamId]);
-
-  const handleCreate = async (e: React.FormEvent) => {
-    e.preventDefault();
-    setFormError(null);
-    setSubmitting(true);
-
+    let active = true; setResult(null); setError(null);
+    void sessionStore.readDomain<MilestoneItem[]>(`/teams/${teamId}/milestones`).then(response => {
+      if (active) setResult({ teamId, items: response.data, serverTime: response.meta.serverTime });
+    }).catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
+    return () => { active = false; };
+  }, [teamId, attempt]);
+  return <section className={styles.container} aria-label="Milestones">
+    <header className={styles.header}><h2>Milestones</h2>{userRole === 'supervisor' && <a className={styles.primaryLink} href={`/teams/${teamId}/milestones/new`}>Create milestone</a>}</header>
+    {error ? <Failure message={error} retry={() => setAttempt(value => value + 1)} />
+      : !result || result.teamId !== teamId ? <p role="status">Loading milestones?</p>
+      : <>{result.items.length === 0 ? <EmptyState title="No milestones yet" description={userRole === 'supervisor' ? 'Create a milestone to set the next deadline for your team.' : 'Your supervisor has not scheduled a milestone yet.'} />
+        : <ol className={styles.track}>{result.items.map(item => <li key={item.id} className={styles.row}>
+          <time dateTime={item.dueAt} className={styles.date}>{formatBangkok(item.dueAt)}</time><span className={styles.marker} aria-hidden="true" />
+          <div className={styles.item}><h3><a href={`/milestones/${item.id}`}>{item.title}</a></h3><State item={item} serverTime={result.serverTime} />
+            <p>{item.description}</p>{item.latestSubmission && <p className={styles.meta}>Version {item.latestSubmission.version} ? {item.latestSubmission.feedbackCount} feedback messages</p>}
+            <a href={`/milestones/${item.id}`}>View milestone</a></div>
+        </li>)}</ol>}
+        <div className={styles.refresh}><p className={styles.meta}>Status as of {formatBangkok(result.serverTime)}.</p><Button variant="ghost" onClick={() => setAttempt(value => value + 1)}>Refresh milestones</Button></div>
+      </>}
+  </section>;
+}
+export function MilestoneCreate({ teamId, userRole }: { teamId: string; userRole: 'student' | 'supervisor' }) {
+  const [title, setTitle] = useState(''); const [description, setDescription] = useState(''); const [dueAt, setDueAt] = useState('');
+  const [saving, setSaving] = useState(false); const [error, setError] = useState<string | null>(null);
+  const [fields, setFields] = useState<Readonly<Record<string, string>>>({}); const [uncertain, setUncertain] = useState(false);
+  const summary = useRef<HTMLDivElement>(null); const busy = useRef(false); const alive = useRef(true);
+  useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
+  useEffect(() => { if (error) summary.current?.focus(); }, [error]);
+  if (userRole !== 'supervisor') return <div role="alert" className={styles.error}><p>Only the assigned supervisor can create milestones.</p><a href={`/teams/${teamId}`}>Back to team</a></div>;
+  const submit = async (event: FormEvent) => {
+    event.preventDefault(); if (busy.current || uncertain) return;
+    setError(null); setFields({});
+    let input;
+    try { input = parseMilestoneInput({ title, description, dueAt: bangkokInputToIso(dueAt) }); }
+    catch (reason) { if (reason instanceof MilestoneInputError) { setFields(reason.fields); setError(reason.message); } return; }
+    busy.current = true; setSaving(true);
     try {
-      const formattedDueAt = new Date(dueAt).toISOString();
-      const res = await fetch(`/api/teams/${teamId}/milestones`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({
-          title,
-          description,
-          dueAt: formattedDueAt,
-        }),
-      });
-
-      const result = await res.json();
-      if (!res.ok) {
-        throw new Error(result.error?.message || 'Failed to create milestone');
-      }
-
-      setTitle('');
-      setDescription('');
-      setDueAt('');
-      setShowCreateForm(false);
-      await fetchMilestones();
-    } catch (err: unknown) {
-      setFormError(err instanceof Error ? err.message : 'Failed to create milestone');
-    } finally {
-      setSubmitting(false);
-    }
+      const result = await sessionStore.mutate<MilestoneItem>(`/teams/${teamId}/milestones`, input);
+      if (alive.current) location.assign(`/milestones/${result.id}`);
+    } catch (reason) {
+      if (!alive.current || reason instanceof StaleSessionError) return;
+      const unknown = reason instanceof ApiError && (reason.status === 0 || reason.status >= 500);
+      if (reason instanceof ApiError) setFields(reason.fields);
+      setUncertain(unknown); setError(unknown ? 'The result could not be confirmed. Check the milestone list before creating another milestone.' : (reason as Error).message);
+    } finally { busy.current = false; if (alive.current) setSaving(false); }
   };
-
-  const formatAsiaBangkok = (isoString: string) => {
-    try {
-      const date = new Date(isoString);
-      return new Intl.DateTimeFormat('en-GB', {
-        timeZone: 'Asia/Bangkok',
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit',
-        hour12: false,
-      }).format(date) + ' (Asia/Bangkok)';
-    } catch {
-      return isoString;
-    }
-  };
-
-  if (loading) {
-    return <div className={styles.loadingState}>Loading milestones…</div>;
-  }
-
-  if (error) {
-    return (
-      <div className={styles.errorContainer}>
-        <ErrorMessage message={error} />
-        <Button variant="secondary" onClick={fetchMilestones}>Retry</Button>
-      </div>
-    );
-  }
-
-  return (
-    <div className={styles.container}>
-      <header className={styles.header}>
-        <h2 className={styles.heading}>Milestones</h2>
-        {userRole === 'supervisor' && !showCreateForm && (
-          <Button variant="primary" onClick={() => setShowCreateForm(true)}>
-            Add Milestone
-          </Button>
-        )}
-      </header>
-
-      {showCreateForm && (
-        <form onSubmit={handleCreate} className={styles.createForm}>
-          <h3>New Milestone</h3>
-          {formError && <ErrorMessage message={formError} />}
-
-          <Field id="title" label="Title">
-            <Input
-              id="title"
-              value={title}
-              onChange={(e) => setTitle(e.target.value)}
-              placeholder="e.g. Deliverable 1 Submission"
-              maxLength={120}
-              required
-            />
-          </Field>
-
-          <Field id="description" label="Description">
-            <Textarea
-              id="description"
-              value={description}
-              onChange={(e) => setDescription(e.target.value)}
-              placeholder="Requirements and expected artifacts"
-              maxLength={2000}
-            />
-          </Field>
-
-          <Field id="dueAt" label="Due Date (Asia/Bangkok)">
-            <Input
-              id="dueAt"
-              type="datetime-local"
-              value={dueAt}
-              onChange={(e) => setDueAt(e.target.value)}
-              required
-            />
-          </Field>
-
-          <div className={styles.formActions}>
-            <Button variant="primary" type="submit" loading={submitting}>
-              Create Milestone
-            </Button>
-            <Button variant="ghost" type="button" onClick={() => setShowCreateForm(false)}>
-              Cancel
-            </Button>
-          </div>
-        </form>
-      )}
-
-      {milestones.length === 0 ? (
-        <EmptyState
-          title="No milestones yet"
-          description={
-            userRole === 'supervisor'
-              ? 'Create the first milestone to schedule submissions for this team.'
-              : 'Your supervisor has not scheduled any milestones yet.'
-          }
-        />
-      ) : (
-        <div className={styles.milestoneList}>
-          {milestones.map((m) => {
-            const isSubmitted = !!m.latestSubmission;
-            const isOverdue = !isSubmitted && new Date(m.dueAt).getTime() < Date.now();
-
-            return (
-              <div key={m.id} className={styles.milestoneCard}>
-                <div className={styles.cardMain}>
-                  <div className={styles.dateBadge}>{formatAsiaBangkok(m.dueAt)}</div>
-                  <h4 className={styles.cardTitle}>{m.title}</h4>
-                  {m.description && <p className={styles.cardDesc}>{m.description}</p>}
-                </div>
-
-                <div className={styles.cardSide}>
-                  <StatusBadge
-                    status={
-                      isSubmitted
-                        ? (m.latestSubmission?.feedbackCount ?? 0) > 0
-                          ? 'feedback'
-                          : 'submitted'
-                        : isOverdue
-                          ? 'overdue'
-                          : 'pending'
-                    }
-                  />
-
-                  {userRole === 'student' && !isSubmitted && !isOverdue && (
-                    <Button variant="primary">Submit</Button>
-                  )}
-                  {isSubmitted && (
-                    <Button variant="secondary">View Submission</Button>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
-    </div>
-  );
+  const described = (id: string) => `${id}-${fields[id] ? 'error' : 'hint'}`;
+  return <section className={styles.container}><h2>Create milestone</h2><p className={styles.meta}>Set the work and deadline for this team.</p>
+    {error && <div ref={summary} tabIndex={-1} role="alert" className={styles.error}><p>{error}</p>{uncertain && <a href={`/teams/${teamId}`}>Check milestone list</a>}</div>}
+    <form className={styles.form} onSubmit={event => { void submit(event); }}>
+      <Field id="title" label="Title" hint={`${codePointLength(title.trim())}/120 characters`} {...(fields.title ? { error: fields.title } : {})}>
+        <Input id="title" name="title" required value={title} onChange={event => setTitle(event.target.value)} disabled={saving} aria-invalid={!!fields.title} aria-describedby={described('title')} />
+      </Field>
+      <Field id="description" label="Description" hint={`${codePointLength(description.trim())}/4,000 characters`} {...(fields.description ? { error: fields.description } : {})}>
+        <Textarea id="description" name="description" required value={description} onChange={event => setDescription(event.target.value)} disabled={saving} aria-invalid={!!fields.description} aria-describedby={described('description')} />
+      </Field>
+      <Field id="dueAt" label="Deadline in Asia/Bangkok" hint="A time entered as HH:mm uses seconds 00, not the end of that minute." {...(fields.dueAt ? { error: fields.dueAt } : {})}>
+        <Input id="dueAt" name="dueAt" type="datetime-local" step="60" required value={dueAt} onChange={event => setDueAt(event.target.value)} disabled={saving} aria-invalid={!!fields.dueAt} aria-describedby={described('dueAt')} />
+      </Field>
+      <div className={styles.actions}><Button type="submit" loading={saving} disabled={saving || uncertain}>{saving ? 'Creating milestone?' : 'Create milestone'}</Button><a href={`/teams/${teamId}`}>Back to team</a></div>
+    </form>
+  </section>;
+}
+export function MilestoneDetail({ id }: { id: string }) {
+  const [result, setResult] = useState<{ id: string; item: MilestoneItem; team: Team; serverTime: string } | null>(null);
+  const [error, setError] = useState<string | null>(null); const [attempt, setAttempt] = useState(0);
+  useEffect(() => {
+    let active = true; setResult(null); setError(null);
+    void (async () => { const response = await sessionStore.readDomain<MilestoneItem>(`/milestones/${id}`);
+      const team = await sessionStore.read<Team>(`/teams/${response.data.teamId}`);
+      if (active) setResult({ id, item: response.data, team, serverTime: response.meta.serverTime });
+    })().catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
+    return () => { active = false; };
+  }, [id, attempt]);
+  if (error) return <><h1>Milestone unavailable</h1><Failure message={error} retry={() => setAttempt(value => value + 1)} /><a href="/">Back to overview</a></>;
+  if (!result || result.id !== id) return <p role="status">Loading milestone?</p>;
+  return <><p className={styles.meta}><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
+    <div className={styles.detail}><section><h2>Description</h2><p className={styles.description}>{result.item.description}</p></section>
+      <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><State item={result.item} serverTime={result.serverTime} />
+        {result.item.latestSubmission && <p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p>}</aside>
+    </div></>;
 }

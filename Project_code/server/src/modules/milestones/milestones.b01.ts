@@ -31,8 +31,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
       PORT: '3000',
       APP_ORIGIN: 'http://127.0.0.1:5173',
       DATABASE_URL:
-        process.env.TEST_DATABASE_URL ??
-        'postgresql://fasttrack_test:fasttrack_test_local@127.0.0.1:5433/fasttrack_test',
+        process.env.TEST_DATABASE_URL,
       SESSION_TTL_HOURS: '8',
       RELEASE_SHA: 'test-release',
     });
@@ -41,6 +40,11 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
       prisma,
       // Inject auth context directly — no session cookie, no header fallback.
       getAuthContext: () => authContext,
+      // Explicit test-only guards retain B's original service-level cases.
+      // Real session/source/CSRF coverage is in milestones-review.b01.ts.
+      requireSession: (_req, _res, next) => next(),
+      requireSupervisor: (_req, _res, next) => next(),
+      requireMutation: (_req, _res, next) => next(),
     });
 
     return createApp(config, {
@@ -48,7 +52,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
     });
   }
 
-  it('T-05: assigned supervisor can create a milestone with future dueAt', async () => {
+  it('T-06: assigned supervisor can create a milestone with future dueAt', async () => {
     const app = buildApp({ userId: fixtures.users.supA.id, role: 'supervisor' });
     const futureDue = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
 
@@ -67,7 +71,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
     expect(res.body.data.latestSubmission).toBeNull();
   });
 
-  it('T-06: student cannot create a milestone (403 Forbidden)', async () => {
+  it('T-07: student cannot create a milestone (403 Forbidden)', async () => {
     const app = buildApp({ userId: fixtures.users.stuA1.id, role: 'student' });
     const futureDue = new Date(Date.now() + 7 * 24 * 60 * 60 * 1000).toISOString();
 
@@ -131,7 +135,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
     expect(res.body.error.code).toBe('INVALID_INPUT');
   });
 
-  it('T-08: student can list milestones for their assigned team', async () => {
+  it('T-25: student can list milestones for their assigned team', async () => {
     const app = buildApp({ userId: fixtures.users.stuA1.id, role: 'student' });
 
     const res = await request(app)

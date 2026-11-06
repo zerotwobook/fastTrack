@@ -22,6 +22,6 @@ export interface MilestoneDto {
 
 export interface CreateMilestoneInput {
   title: string;
-  description?: string;
+  description: string;
   dueAt: string; // ISO 8601 with timezone
 }

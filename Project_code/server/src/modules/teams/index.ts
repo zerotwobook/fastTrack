@@ -4,7 +4,8 @@ import { AppError } from '../../http/errors.js';
 import { database } from '../auth/security.js';
 import type { AuthContext, AuthDependencies, SessionProtection } from '../auth/index.js';
 
-export function scopedTeamWhere(auth: AuthContext): Prisma.TeamWhereInput {
+export type TeamActor = Pick<AuthContext, 'userId' | 'role'>;
+export function scopedTeamWhere(auth: TeamActor): Prisma.TeamWhereInput {
   return auth.role === 'supervisor' ? { supervisorId: auth.userId } : { members: { some: { studentId: auth.userId } } };
 }
 export function requireUuid(value: string): void {
@@ -13,7 +14,7 @@ export function requireUuid(value: string): void {
   }
 }
 /** Pass the operation's transaction client when rechecking mutation scope. */
-export async function requireTeamAccess(db: Pick<PrismaClient, 'team'>, auth: AuthContext, id: string) {
+export async function requireTeamAccess(db: Pick<PrismaClient, 'team'>, auth: TeamActor, id: string) {
   requireUuid(id);
   const team = await database(() => db.team.findFirst({ where: { id, ...scopedTeamWhere(auth) }, select: { id: true } }));
   if (!team) throw new AppError(404, 'NOT_FOUND', 'The requested resource was not found.');
