@@ -33,6 +33,9 @@ export function validateFeedbackContent(content) {
     return { valid: false, error: 'Feedback content must be text.' };
   }
   const trimmed = content.trim();
+  if (/[\u0000\uD800-\uDFFF]/u.test(trimmed)) {
+    return { valid: false, error: 'Use valid Unicode text without a null character.' };
+  }
   const count = countCodePoints(trimmed);
   if (count < FEEDBACK_LIMITS.CONTENT_MIN_CHARS) {
     return { valid: false, error: 'Feedback content cannot be empty.' };
@@ -50,7 +53,7 @@ export function validateClientRequestId(id) {
   if (typeof id !== 'string' || !UUID_REGEX.test(id)) {
     return { valid: false, error: 'The client request ID must be a valid UUID.' };
   }
-  return { valid: true, value: id };
+  return { valid: true, value: id.toLowerCase() };
 }
 
 /**
@@ -60,7 +63,7 @@ export function validateSubmissionId(id) {
   if (typeof id !== 'string' || !UUID_REGEX.test(id)) {
     return { valid: false, error: 'The submission ID must be a valid UUID.' };
   }
-  return { valid: true, value: id };
+  return { valid: true, value: id.toLowerCase() };
 }
 
 /**

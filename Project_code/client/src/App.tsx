@@ -5,6 +5,7 @@ import { safeReturnTo, sessionStore, StaleSessionError } from './features/auth/s
 import type { SessionSnapshot, Team } from './features/auth/session';
 import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/milestones';
 import { SubmissionCreate, SubmissionDetail } from './features/submissions';
+import { FeedbackPanel } from './features/feedback';
 import './app.css';
 
 function Login({ state }: { state: SessionSnapshot }) {
@@ -72,7 +73,7 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
       <p><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
       <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
     </header><main id="main-content" className="workspace-content">
-      {submissionId ? <SubmissionDetail id={submissionId} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
+      {submissionId ? <SubmissionDetail id={submissionId} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
       <h1>{detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
       <p className="intro">{detailId ? 'The people working on this project.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
       {error ? <section className="notice" role="alert"><p>{error}</p><div className="recovery-actions"><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}>Try again</Button><a href="/">Back to overview</a></div></section>

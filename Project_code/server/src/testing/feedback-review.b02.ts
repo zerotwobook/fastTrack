@@ -4,7 +4,9 @@ import request from 'supertest';
 import { createApp } from '../app.js';
 import { loadConfig } from '../config.js';
 import { createApplicationRouters } from '../modules/index.js';
-import { FeedbackService } from '../modules/feedback/service.js';
+import { Prisma } from '../db/generated/client/index.js';
+import type { PrismaClient } from '../db/generated/client/index.js';
+import { FeedbackService, isFeedbackUniqueConflict } from '../modules/feedback/service.js';
 import { createBaseFixtures, createTestPrisma, cleanTestDatabase, TEST_PASSWORD } from './fixtures.js';
 
 const prisma = createTestPrisma();
@@ -122,5 +124,73 @@ describe('F-04 real sessions, immutable versions and idempotent retries', () => 
     expect(res.status).toBe(503); expect(res.body.error.code).toBe('TEMPORARILY_UNAVAILABLE');
     expect(JSON.stringify(res.body)).not.toContain('secret SQL');
     expect(await prisma.feedback.count()).toBe(0);
+  });
+});
+
+
+describe('F-04 transaction boundaries and actual driver conflicts', () => {
+  it('handles a forced supervisor-wide key race across two authorized teams after actual PostgreSQL rollback', async () => {
+    await prisma.team.update({ where: { id: fixtures.teams.teamB.id }, data: { supervisorId: fixtures.users.supA.id } });
+    const other = await prisma.submission.create({ data: { milestoneId: fixtures.milestones.milestoneBTeam.id, version: 1,
+      submittedById: fixtures.users.stuB1.id, submittedAt: new Date(), title: 'Other team work', description: 'Race fixture.', url: 'https://example.com/other' } });
+    let count = 0; let release!: () => void; const gate = new Promise<void>(resolve => { release = resolve; });
+    const wrapped = new Proxy(prisma, { get(target, name) {
+      if (name !== '$transaction') return Reflect.get(target, name);
+      return (work: (tx: Prisma.TransactionClient) => Promise<unknown>, options: object) => target.$transaction(async tx => {
+        const guarded = new Proxy(tx, { get(client, field) {
+          if (field !== 'feedback') return Reflect.get(client, field);
+          return new Proxy(client.feedback, { get(delegate, method) {
+            if (method !== 'findUnique') return Reflect.get(delegate, method);
+            return async (...args: Parameters<typeof delegate.findUnique>) => {
+              const result = await delegate.findUnique(...args);
+              if (++count <= 2) { if (count === 2) release(); await gate; }
+              return result;
+            };
+          } });
+        } });
+        return work(guarded);
+      }, options);
+    } }) as PrismaClient;
+    const service = new FeedbackService(wrapped); const body = input(); const actor = { userId: fixtures.users.supA.id, role: 'supervisor' as const };
+    const results = await Promise.allSettled([service.createFeedback(id,body,actor),service.createFeedback(other.id,body,actor)]);
+    expect(results.map(r => r.status === 'fulfilled' ? r.value.status : r.reason.status).sort()).toEqual([201,409]);
+    expect(await prisma.feedback.count()).toBe(1);
+  });
+  it('recognizes the real feedback UUID constraint and excludes primary-key or plain-object errors', async () => {
+    const created = await post(input()).expect(201); const row = await prisma.feedback.findUniqueOrThrow({ where: { id: created.body.data.id } });
+    const { id: ignored, ...data } = row;
+    try { await prisma.feedback.create({ data }); throw new Error('Expected a real key conflict.'); }
+    catch (error) { expect(isFeedbackUniqueConflict(error)).toBe(true); }
+    try { await prisma.feedback.create({ data: { ...data, id: row.id, clientRequestId: randomUUID() } }); throw new Error('Expected a primary-key conflict.'); }
+    catch (error) { expect(isFeedbackUniqueConflict(error)).toBe(false); }
+    expect(isFeedbackUniqueConflict({ code: 'P2002', meta: { target: ['supervisor_id','client_request_id'] } })).toBe(false);
+    expect(await prisma.feedback.count()).toBe(1);
+  });
+  it.each(['P2034','P2028','UNKNOWN'])('bounds or avoids retry for technical condition %s', async code => {
+    const error = code === 'UNKNOWN' ? new Error('private database detail') : new Prisma.PrismaClientKnownRequestError('private database detail', { code, clientVersion: '7.10.1' });
+    const spy = vi.spyOn(prisma,'$transaction').mockRejectedValue(error);
+    const result = await post(input()); const calls = spy.mock.calls.length; spy.mockRestore();
+    expect(result.status).toBe(503); expect(JSON.stringify(result.body)).not.toContain('private database');
+    expect(calls).toBe(code === 'P2034' ? 3 : 1); expect(await prisma.feedback.count()).toBe(0);
+  });
+  it('rechecks assignment after an actual team lock wait before any feedback write', async () => {
+    let release!: () => void; let acquired!: () => void;
+    const gate = new Promise<void>(r => { release = r; }); const held = new Promise<void>(r => { acquired = r; });
+    const blocker = prisma.$transaction(async tx => {
+      await tx.$queryRaw`SELECT id FROM teams WHERE id=${fixtures.teams.teamA.id}::uuid FOR UPDATE`;
+      acquired(); await gate;
+      await tx.team.update({ where: { id: fixtures.teams.teamA.id }, data: { supervisorId: fixtures.users.supB.id } });
+    }, { timeout: 10000 });
+    await held; const pending = post(input()).then(r => r);
+    try {
+      let waiting = false;
+      for (let attempt = 0; attempt < 100; attempt++) {
+        const rows = await prisma.$queryRaw<{ waiting: boolean }[]>`SELECT EXISTS(SELECT 1 FROM pg_stat_activity WHERE datname=current_database() AND wait_event_type='Lock') AS waiting`;
+        if (rows[0]!.waiting) { waiting = true; break; }
+        await new Promise(r => setTimeout(r,20));
+      }
+      expect(waiting).toBe(true);
+    } finally { release(); await blocker; }
+    expect((await pending).status).toBe(404); expect(await prisma.feedback.count()).toBe(0);
   });
 });
