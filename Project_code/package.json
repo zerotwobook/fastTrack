@@ -24,7 +24,10 @@
     "test:auth": "vitest run --config vitest.auth.config.ts",
     "test:auth:isolated": "node scripts/run-auth.mjs",
     "review:auth": "node scripts/run-auth.mjs --review",
-    "review:auth:stop": "node scripts/stop-auth-review.mjs"
+    "review:auth:stop": "node scripts/stop-auth-review.mjs",
+    "test:b01": "vitest run --config vitest.b01.config.ts",
+    "test:b01:isolated": "node scripts/run-b01.mjs",
+    "review:b01": "node scripts/run-b01.mjs --review"
   },
   "devDependencies": {
     "@types/node": "26.6.6",
