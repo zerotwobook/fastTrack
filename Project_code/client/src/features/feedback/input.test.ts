@@ -11,8 +11,8 @@ import {
 describe('Shared Feedback Input Validation', () => {
   it('counts Unicode code points accurately without surrogate pair splitting', () => {
     expect(countCodePoints('hello')).toBe(5);
-    expect(countCodePoints('👍🎉')).toBe(2);
-    expect(countCodePoints('ทดสอบ')).toBe(5);
+    expect(countCodePoints('\u{1F44D}\u{1F389}')).toBe(2);
+    expect(countCodePoints('\u0e17\u0e14\u0e2a\u0e2d\u0e1a')).toBe(5);
   });
 
   it('validates feedback content within 1 to 4000 code points', () => {
@@ -72,5 +72,16 @@ describe('Shared Feedback Input Validation', () => {
       expect(err).toBeInstanceOf(FeedbackInputError);
       expect((err as FeedbackInputError).fields.form).toBe('Use only content and clientRequestId.');
     }
+  });
+});
+
+
+describe('Feedback PostgreSQL text boundaries', () => {
+  it.each(['bad\u0000text', 'bad\ud800text', 'bad\udffftext'])('rejects invalid Unicode or null content %#', value => {
+    expect(validateFeedbackContent(value).valid).toBe(false);
+  });
+  it('accepts four thousand astral characters as four thousand code points', () => {
+    expect(validateFeedbackContent('\u{1F680}'.repeat(4000)).valid).toBe(true);
+    expect(validateFeedbackContent('\u{1F680}'.repeat(4001)).valid).toBe(false);
   });
 });
