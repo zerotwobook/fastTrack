@@ -25,7 +25,7 @@
 | คุณค่าต่อนักศึกษา | ดูงานที่ต้องทำ ส่งงานแทนทีม และอ่านคำแนะนำที่ผูกกับงานรุ่นนั้นได้ |
 | คุณค่าต่อ supervisor | จัด milestone ตรวจงานของทีมที่ดูแล และเห็นความคืบหน้าจากข้อมูลจริง |
 | ผลลัพธ์สุดท้าย | Full-stack application ที่มี UI, backend, persistent database, automated tests และ deployment |
-| ทีมพัฒนา | นักศึกษา 2 คน; ชื่อและรหัสยังต้องเติม |
+| Development team | A: Supapanya Yathip (67070503443), zerotwobook; B: Atip Infa-udom (67070503446), Atip-Infa. Current availability/eligibility/gate decisions: [G0 record](../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md). |
 
 ### 1.1 ข้อกำหนดต้นทางและขอบเขตของเอกสารนี้
 

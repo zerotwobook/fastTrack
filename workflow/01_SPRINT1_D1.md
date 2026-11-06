@@ -46,15 +46,16 @@
 
 เติมข้อมูลจริงใน Issue หรือ PR แรกของรอบ:
 
-| รายการ | ค่า |
+| Item | Current information |
 |---|---|
-| A: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `zerotwobook` |
-| B: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `Atip-Infa` |
-| Repository / access | ตรวจ remote จริง; ต้อง public ตามข้อกำหนด Lab 5 และคงไว้จนตรวจเสร็จ |
-| Sprint staging | `staging/sprint-1` |
-| Contract baseline commit | TBD หลัง commit/review จริง |
-| เวลาว่าง A/B | TBD; ใช้ตรวจ feasibility ของกำหนดภายใน |
-| Theme 6 eligibility | ตรวจเลขท้ายรหัสของสมาชิกอย่างน้อยหนึ่งคนตรง Theme 6 หรือมีหลักฐานอนุมัติจากผู้สอน ตาม Group specs §6 หน้า 4; ห้ามถือว่าเลือกชื่อแอปแล้วคืออนุมัติหัวข้อ |
+| A / GitHub | Supapanya Yathip / 67070503443 / zerotwobook |
+| B / GitHub | Atip Infa-udom / 67070503446 / Atip-Infa |
+| Availability | A reports both members are available full days on 6-7 November 2026; exact net hours are not measured |
+| Repository | zerotwobook/fastTrack; public; both accounts have verified access |
+| Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
+| Source baseline | c049d69b0ed8801ed5f30a5dfd3a77869b2d890b; new G0 acceptance remains PENDING |
+| Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
+| Gate record | [G0 baseline review](../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md); B approval is still required before A00 |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
