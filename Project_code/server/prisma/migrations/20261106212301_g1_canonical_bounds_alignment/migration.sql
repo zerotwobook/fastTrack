@@ -1,6 +1,9 @@
+-- One SQL statement provides atomicity and returns the original failure to Prisma.
+-- Avoid an explicitly open transaction that masks the cause during advisory unlock.
+DO $g1_atomic_migration$
+BEGIN
 -- Forward alignment for an already-exercised, unmerged G1 candidate.
 -- No row rewrites, resets, checksum updates or edits to the accepted B00 migrations.
-BEGIN;
 
 -- Reject invalid existing content before changing schema; never truncate or replace it.
 DO $bounds_preflight$
@@ -97,4 +100,7 @@ BEGIN
 END;
 $required_bound$;
 
-COMMIT;
+
+
+END;
+$g1_atomic_migration$;

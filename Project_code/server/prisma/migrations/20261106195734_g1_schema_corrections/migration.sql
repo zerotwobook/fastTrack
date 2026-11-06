@@ -1,7 +1,10 @@
+-- One SQL statement provides atomicity and returns the original failure to Prisma.
+-- Avoid an explicitly open transaction that masks the cause during advisory unlock.
+DO $g1_atomic_migration$
+BEGIN
 -- Corrected, still-unmerged G1 proposal. The two accepted B00 migrations are unchanged.
 -- Original 633a9fe SQL is retained as a test fixture; existing ledgers are never rewritten.
 -- A later forward alignment migration also supports databases that exercised that candidate.
-BEGIN;
 
 -- Validate every legacy UUID cast before dropping any foreign key.
 DO $uuid_preflight$
@@ -206,4 +209,7 @@ BEGIN
 END;
 $required_bound$;
 
-COMMIT;
+
+
+END;
+$g1_atomic_migration$;

@@ -88,17 +88,22 @@ try {
       await insertLegacy(db, variant);
       const before = await snapshot(db); const schemaBefore = await fingerprint(db); const ledgerBefore = await history(db);
       const applied = migration(url.href, 'prisma.config.ts');
+      const cleanLog = String(applied.stdout + applied.stderr).replace(/\x1b\[[0-9;]*m/g, '').replace(/postgres(?:ql)?:\/\/[^\s'"<>]+/g, '[database URL]').replaceAll(runtime.password, '[redacted]');
+      const errorCode = /Database error code:\s*(\w+)/.exec(cleanLog)?.[1] ?? null;
       const after = await snapshot(db); const schemaAfter = await fingerprint(db); const ledgerAfter = await history(db);
       const recordsPreserved = JSON.stringify(before) === JSON.stringify(after);
       const schemaPreserved = JSON.stringify(schemaBefore) === JSON.stringify(schemaAfter);
       const matchesFreshSchema = JSON.stringify(expectedSchema) === JSON.stringify(schemaAfter);
       const appliedHistoryPreserved = ledgerBefore.every(old => ledgerAfter.some(current => current.migration_name === old.migration_name && current.checksum === old.checksum));
       const shouldReject = variant.startsWith('invalid_');
-      const passed = shouldReject ? applied.status !== 0 && recordsPreserved && schemaPreserved && appliedHistoryPreserved
+      const expectedError = variant === 'invalid_uuid' ? '22P02' : variant === 'invalid_author' ? '23503' : '23514';
+      const rejectionCauseVerified = !shouldReject || errorCode === expectedError;
+      const passed = shouldReject ? applied.status !== 0 && recordsPreserved && schemaPreserved && appliedHistoryPreserved && rejectionCauseVerified
         : applied.status === 0 && recordsPreserved && matchesFreshSchema && appliedHistoryPreserved;
       report.cases.push({ variant, passed, migrationExit: applied.status,
-        databaseErrorCode: /Database error code:\s*(\w+)/.exec(applied.stderr)?.[1] ?? null,
-        recordsPreserved, schemaPreserved, matchesFreshSchema, appliedHistoryPreserved,
+        databaseErrorCode: errorCode,
+        rejectionDiagnostic: applied.status === 0 ? null : cleanLog.split('\n').filter(line => /Error:|ERROR:|preflight/.test(line)).slice(0, 3).join(' ').slice(0, 600),
+        recordsPreserved, schemaPreserved, matchesFreshSchema, appliedHistoryPreserved, rejectionCauseVerified,
         foreignKeysBefore: schemaBefore.foreignKeys, foreignKeysAfter: schemaAfter.foreignKeys });
       process.stdout.write(`${passed ? 'PASS' : 'FAIL'} upgrade: ${variant}; records=${recordsPreserved}; FKs=${schemaBefore.foreignKeys}->${schemaAfter.foreignKeys}\n`);
     } finally { await db.$disconnect(); }
