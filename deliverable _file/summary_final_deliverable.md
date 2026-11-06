@@ -1,5 +1,7 @@
 # CPE 334 — Summary & Codex Handoff: Theme 6, Course Project Management System
 
+> สำหรับ fastTrack: เอกสารนี้สรุปเกณฑ์รายวิชาและมีตัวอย่างแผนเก่า บางส่วนใช้ F-01–F-13; ให้ใช้ **F-01–F-08 และแบบผลิตภัณฑ์ปัจจุบันจาก [project detail](../Project_doc/project_detail.md)** และใช้ [workflow](../workflow/README.md) สำหรับเจ้าของ/ลำดับงาน ไม่ผสมเลข feature จากตัวอย่างเก่ากับ contracts จริง
+
 > เอกสารรวมข้อกำหนดสำหรับโปรเจกต์หัวข้อ 6 จาก PDF ที่ผู้ใช้แนบทั้ง 4 ไฟล์ พร้อมแผนงานเสนอ กำหนดส่ง Rubrics หลักฐาน และเช็กลิสต์ เพื่อให้ Codex อ่านต่อได้โดยไม่ต้องพึ่งบทสนทนาเดิม
 >
 > จัดทำ: 29 ตุลาคม 2026 (พ.ศ. 2569) | ภาคเรียน 1/2026
@@ -34,10 +36,10 @@ Source references use physical PDF page numbers, beginning at 1. File names are 
 | F | `project_final_delivery_v1.pdf` | 6 | Detailed final product, QA, PDF and demo video requirements |
 
 Original source links:
-- [G — Group specification](https://chatgpt.com/library?file_id=libfile_23d8b6769d108191ae7cb3e5007ccad1&account_id=personal)
-- [D1 — Deliverable 1](https://chatgpt.com/library?file_id=libfile_8e939fdebf8c8191bd498edaae7e2657&account_id=personal)
-- [D2 — Deliverable 2](https://chatgpt.com/library?file_id=libfile_5199473de38c8191b669fea4ebe632d8&account_id=personal)
-- [F — Final delivery](https://chatgpt.com/library?file_id=libfile_89a40728e6c08191a832df70e28930e4&account_id=personal)
+- [G — Group specification](group_work_specs_v1.pdf)
+- [D1 — Deliverable 1](project_deliverable_1_v1.pdf)
+- [D2 — Deliverable 2](project_deliverable_2_v1.pdf)
+- [F — Final delivery](project_final_delivery_v1.pdf)
 
 Navigation by section:
 - §2 project/team scope; §3 conflicts and open decisions; §4 dates/weights.
