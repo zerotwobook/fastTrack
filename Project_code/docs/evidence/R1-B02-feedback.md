@@ -1,4 +1,6 @@
-# R1-B02 Verification Evidence
+# R1-B02 original author-reported snapshot
+
+This is B's historical handoff, not the accepted result. A requested changes on PR #58 at `687c568`: application composition was missing, concurrent retries could return 503, and ordinary tests required an external test database. The UI also used red error colors despite the monochrome claim below. Follow [A correction review/results](R1-B02-A-review.md) and #60 / PR #61 for current verification. Original results below are attributed to B; they do not establish G3 or independent acceptance.
 
 **Task:** R1-B02 — Implement F-04 version-specific feedback and retry safety
 **Branch:** `feature/s1-b-b02-feedback` (branched from accepted `staging/sprint-1` head `78d0cca`)

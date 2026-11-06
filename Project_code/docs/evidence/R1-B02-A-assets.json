@@ -1,0 +1,29 @@
+[
+  {
+    "path": "assets/b02-feedback/b02-supervisor-1440.png",
+    "sha256": "097c3ddba78741e6fff53e023584600469c06ee9ac5a4f23fc7b57d272f55114",
+    "width": 1425,
+    "height": 1377,
+    "original": "output/playwright/b02-supervisor-1440.png",
+    "visuallyInspected": true,
+    "codeCommit": "7b755ce1e0f20271a66bdec0102827d0f4ca0d8f"
+  },
+  {
+    "path": "assets/b02-feedback/b02-supervisor-320.png",
+    "sha256": "1607488730f505a9b8ccfd98d84eea6da09c459f3077f14716546288304b4131",
+    "width": 305,
+    "height": 2169,
+    "original": "output/playwright/b02-supervisor-320.png",
+    "visuallyInspected": true,
+    "codeCommit": "7b755ce1e0f20271a66bdec0102827d0f4ca0d8f"
+  },
+  {
+    "path": "assets/b02-feedback/b02-student-after-restart-1440.png",
+    "sha256": "374728643848680aabb08bca8c2315de3f1f2da3e9d4d9dba705e6622115794c",
+    "width": 1425,
+    "height": 1265,
+    "original": "output/playwright/b02-student-after-restart-1440.png",
+    "visuallyInspected": true,
+    "codeCommit": "7b755ce1e0f20271a66bdec0102827d0f4ca0d8f"
+  }
+]
