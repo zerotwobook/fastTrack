@@ -81,7 +81,7 @@ try {
   stage('repeat migration deploy', 'db:migrate', { ...env, DATABASE_URL: testUrl }, true);
   stage('typecheck', 'typecheck', env);
   stage('ordinary unit/API tests', 'test', env);
-  stage('production build', 'build', env);
+  stage('production build', 'build', { ...env, NODE_ENV: 'production' });
   stage('G1 database, seed and compiled-client checks', 'test:g1', env);
 } catch (error) {
   failed = true;
