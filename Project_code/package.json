@@ -18,7 +18,8 @@
     "typecheck": "npm run typecheck --workspaces",
     "test": "vitest run",
     "test:watch": "vitest",
-    "start": "npm run start --workspace @fasttrack/server"
+    "start": "npm run start --workspace @fasttrack/server",
+    "test:g1": "vitest run --config vitest.g1.config.ts"
   },
   "devDependencies": {
     "@types/node": "26.6.6",
