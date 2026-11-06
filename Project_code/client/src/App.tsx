@@ -4,6 +4,7 @@ import { Button, EmptyState, Field, Input } from './design/components';
 import { safeReturnTo, sessionStore, StaleSessionError } from './features/auth/session';
 import type { SessionSnapshot, Team } from './features/auth/session';
 import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/milestones';
+import { SubmissionCreate, SubmissionDetail } from './features/submissions';
 import './app.css';
 
 function Login({ state }: { state: SessionSnapshot }) {
@@ -46,18 +47,20 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   const dialog = useRef<HTMLDialogElement>(null);
   const menu = useRef<HTMLButtonElement>(null);
   const detailId = /^\/teams\/([a-f0-9-]{36})(?:\/milestones\/new)?$/i.exec(path)?.[1];
-  const milestoneId = /^\/milestones\/([a-f0-9-]{36})$/i.exec(path)?.[1];
+  const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/submissions\/new)?$/i.exec(path)?.[1];
+  const submissionId = /^\/submissions\/([a-f0-9-]{36})$/i.exec(path)?.[1];
+  const submitting = path.endsWith('/submissions/new');
   const creating = path.endsWith('/milestones/new');
-  const validPath = path === '/' || detailId !== undefined || milestoneId !== undefined;
+  const validPath = path === '/' || detailId !== undefined || milestoneId !== undefined || submissionId !== undefined;
   useEffect(() => {
     let active = true; setError(null); setResult(null);
-    if (milestoneId) return;
+    if (milestoneId || submissionId) return;
     if (!validPath) { setError('This page could not be found. Return to your overview.'); return; }
     void sessionStore.read<Team | Team[]>(detailId ? `/teams/${detailId}` : '/teams').then(data => {
       if (active) setResult({ revision: state.revision, path, teams: Array.isArray(data) ? data : [data] });
     }).catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
-  }, [state.revision, path, attempt, detailId, milestoneId, validPath]);
+  }, [state.revision, path, attempt, detailId, milestoneId, submissionId, validPath]);
   const teams = result?.revision === state.revision && result.path === path ? result.teams : null;
   return <div className="application-shell">
     <aside className="sidebar"><a className="wordmark" href="/">fastTrack</a><Navigation role={user.role} /></aside>
@@ -69,7 +72,7 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
       <p><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
       <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
     </header><main id="main-content" className="workspace-content">
-      {milestoneId ? <MilestoneDetail id={milestoneId} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
+      {submissionId ? <SubmissionDetail id={submissionId} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
       <h1>{detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
       <p className="intro">{detailId ? 'The people working on this project.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
       {error ? <section className="notice" role="alert"><p>{error}</p><div className="recovery-actions"><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}>Try again</Button><a href="/">Back to overview</a></div></section>

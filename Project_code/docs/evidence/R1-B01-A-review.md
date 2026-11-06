@@ -2,7 +2,7 @@
 
 Review began 6 November; verification continued 7 November 2026, Asia/Bangkok. Original owner B / Atip-Infa; reviewer and authorized correction author A / zerotwobook. Original [Issue #6](https://github.com/zerotwobook/fastTrack/issues/6) / [PR #52](https://github.com/zerotwobook/fastTrack/pull/52). A's correction is [Issue #55](https://github.com/zerotwobook/fastTrack/issues/55) / [PR #56](https://github.com/zerotwobook/fastTrack/pull/56), branch `fix/s1-a-b01-review`, targeting `staging/sprint-1`.
 
-**Technical verification PASSED; B's peer acceptance/integration and G2 remain PENDING.** A does not approve A-authored corrections. Accepted A01 is merge `0b99a285deb0c6a40aede22e816a578ffa0b62d5`, approved by B at actual head 70dd0ce. The correction branch preserves B's 043af8d history through merge 8ce70e0 and synchronizes the accepted A01 merge. It does not change main.
+**Current status: Verification PASSED; B peer integration and delegated G2 ACCEPTED.** See [the actual acceptance update](R1-G2-acceptance.md). The sections below preserve the original pre-acceptance verification/handoff snapshot. A does not approve A-authored corrections. Accepted A01 is merge `0b99a285deb0c6a40aede22e816a578ffa0b62d5`, approved by B at actual head 70dd0ce. The correction branch preserves B's 043af8d history through merge 8ce70e0 and synchronizes the accepted A01 merge. It does not change main.
 
 ## Findings and corrections
 

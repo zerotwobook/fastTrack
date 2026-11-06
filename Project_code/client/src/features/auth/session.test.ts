@@ -89,7 +89,8 @@ describe('F-01 account isolation and recovery', () => {
   });
 });
 describe('F-01 internal return-to destinations', () => {
-  it.each(['/milestones/11111111-1111-1111-1111-111111111111', '/teams/11111111-1111-1111-1111-111111111111/milestones/new'])('permits implemented milestone destination %s with server-side scope still required', path => {
+  it.each(['/milestones/11111111-1111-1111-1111-111111111111', '/teams/11111111-1111-1111-1111-111111111111/milestones/new',
+    '/milestones/11111111-1111-1111-1111-111111111111/submissions/new', '/submissions/11111111-1111-1111-1111-111111111111'])('permits implemented milestone/submission destination %s with server-side scope still required', path => {
     expect(safeReturnTo(path)).toBe(path);
   });
   it.each(['https://foreign.example', '//foreign.example', '/\\foreign.example', '/%2f%2fforeign.example', '/login', '/teams/invalid', '/\n/foreign.example', null])('T-27 rejects unsafe/unimplemented destination %j', value => {
@@ -97,5 +98,16 @@ describe('F-01 internal return-to destinations', () => {
   });
   it('T-27 preserves an implemented internal path, whose API still rechecks scope', () => {
     const path = '/teams/11111111-1111-1111-1111-111111111111?view=team#members'; expect(safeReturnTo(path)).toBe(path);
+  });
+});
+
+describe('F-03 private mutation recovery information', () => {
+  it('retains the actual business code and field errors for truthful duplicate/deadline recovery',async () => {
+    const fetcher=vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockResolvedValueOnce(new Response(JSON.stringify({
+      error:{code:'ALREADY_SUBMITTED',message:'Your team already submitted.',fields:{url:'Check this link.'}},
+    }),{status:409,headers:{'Content-Type':'application/json'}}));
+    const store=new SessionStore(fetcher);await store.restore();
+    await expect(store.mutate('/milestones/id/submissions',{})).rejects.toMatchObject({status:409,code:'ALREADY_SUBMITTED',fields:{url:'Check this link.'}});
+    expect(store.getSnapshot().phase).toBe('ready');
   });
 });
