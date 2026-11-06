@@ -1,6 +1,6 @@
 # Milestone integration contract
 
-Owner B for original implementation; A authorized to correct review findings in #55 / PR #56. Reviewer B for A's corrections. This extends accepted A01 (PR #54 / merge 0b99a28); candidate verification is PASSED and joint G2 acceptance remains pending.
+Owner B for original implementation; A authorized to correct review findings in #55 / PR #56. Reviewer B for A's corrections. This extends accepted A01 (PR #54 / merge 0b99a28); B approved head 2d3576e and merged staging as 78d0cca. Verification PASSED / Acceptance ACCEPTED; [G2 is accepted under the recorded user delegation](../evidence/R1-G2-acceptance.md).
 
 - `createMilestoneRouter` requires Prisma, `getAuthContext`, `requireSession`, `requireSupervisor` and `requireMutation`. No protection is optional; construction rejects missing functions. Production composition binds the real session resolver/guards, with `requireRole('supervisor')` supplying the role guard. Order: session -> role -> source/CSRF -> JSON -> payload -> scope -> write.
 - `MilestoneService` uses the explicit session-derived userId/role. Creation validates unknown input through `shared/milestones.mjs`, locks only the assigned supervisor's team, rechecks scope and compares dueAt to the DB wall clock after locking. Every mutation query uses one transaction client. Errors expose safe 400/401/403/404/415/503 envelopes; foreign/missing detail responses match.

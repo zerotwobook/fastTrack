@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | G0/A00/B00 and corrected G1 foundation accepted. B approved PR #50 at 6a5de5f and merged it as ff5975c; A verified the approved/tested tree. #49/#51 are closed Done/PASSED/ACCEPTED. A01 was accepted through B review/merge of #54 as 0b99a28; #5 is closed. B01 corrections are in A-authored #56 / #55 after review of original #52. Candidate checks pass; B review, accepted integration, G2 and a full S1 release remain pending. |
+| Gate record | G0/A00/B00 and corrected G1 foundation accepted. B approved PR #50 at 6a5de5f and merged it as ff5975c; A verified the approved/tested tree. #49/#51 are closed Done/PASSED/ACCEPTED. A01 was accepted through B review/merge of #54 as 0b99a28; #5 is closed. B approved current #56 head 2d3576e and merged it as 78d0cca; #6/#55 are closed Done/PASSED/ACCEPTED. The user delegated the remaining G2 UI check/acceptance to A/AI using the actual byte-identical-source evidence; G2 is ACCEPTED. A02/B02 may proceed on separate task branches; G3 and a full S1 release remain pending. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -205,27 +205,24 @@ References: project detail 3/7.5/8/9.1-9.4; D1 E.1; AC-01.1-01.5, T-01-T-05/T-23
 - [x] Derive immutable identity/role/team scope from DB sessions, with reusable fail-closed middleware and explicit transaction-client scope helpers. No identity-header bypass.
 - [x] Implement the established monochrome login, role-aware shell, team list/detail and loading/empty/error/retry/mobile/keyboard states; do not expose unintegrated milestone actions.
 - [x] Verify no-team students, foreign-team denial, session effects and browser account switch/replay/history/expiry/recovery. Clean-clone checks pass 67 ordinary tests, 28 auth/DB tests, 38 G1 tests and seven migration scenarios.
-- [x] B approved/reproduced A01 head 70dd0ce and merged #54 as 0b99a28. #5/#54 are Done/PASSED/ACCEPTED; #5 closed. A02 remains gated by actual G2.
+- [x] B approved/reproduced A01 head 70dd0ce and merged #54 as 0b99a28. #5/#54 are Done/PASSED/ACCEPTED; #5 closed. G2 was subsequently accepted under the recorded user delegation; A02 may proceed.
 
-B's recorded A01 review covers both roles, logout/replay, session/CSRF and role isolation at the approved head. That increment is accepted. G2 additionally requires B to exercise the real combined milestone flow and review A's authorized B01 corrections in PR #56. Native merged-PR Done and Issue closure/Acceptance remain separate.
+B's recorded A01 review covers both roles, logout/replay, session/CSRF and role isolation at the approved head. That increment is accepted. B subsequently approved/merged A's B01 correction in #56; the remaining G2 UI check/acceptance was explicitly delegated by the user to A/AI and accepted using the actual recorded results. Native merged-PR Done and Issue closure/Acceptance remain separate.
 
-### R1-A02: F-03 ส่งงานครั้งแรก
+### R1-A02: F-03 first submission
 
-อ้างอิง §4.1–4.2, §5 BR-04/05/08, §7.4, §9; D1 E.3; AC-03.1–03.6, T-09–T-16/T-26
+Owner A; reviewer B. Issue #7, branch feature/s1-a-submissions from accepted staging 78d0cca. References: project detail 4/5/7.4/8/9; D1 E.3; AC-03.1-03.6; T-09-T-16/T-25/T-26/T-31 local. [G2 acceptance](../Project_code/docs/evidence/R1-G2-acceptance.md); [concrete contract/test plan](../Project_code/docs/contracts/sprint-1-submissions.md).
 
-- [ ] ทำ POST/GET `/milestones/:id/submissions` และ GET `/submissions/:id`; server กำหนด author/version/time
-- [ ] สร้าง form title/description/URL และ saved detail; หลังสำเร็จอ่านกลับด้วย GET ไม่ใช้ form state แทน persistence
-- [ ] Transaction ใช้ team → milestone locks; ตรวจ membership/rules ซ้ำภายใน; ใช้ transaction client เดียวกัน
-- [ ] อ่าน DB clock หลังได้ lock truncate millisecond ครั้งเดียว; acceptedAt <= dueAt รับได้; เก็บเวลาเดียวกันลง submittedAt
-- [ ] S1 บังคับ version=1 และ unique constraint; parallel/duplicate ไม่สร้างเกินหนึ่ง row
-- [ ] Error precedence หลัง auth/input/scope: cancelled → duplicate → deadline; ไม่เผยกฎของทีมอื่น
-- [ ] Validate Unicode code points/trim/URL ตาม §5; URL http/https ไม่มี credential; backend ไม่ fetch URL
-- [ ] จัดการ timeout ด้วย GET เช็กผลก่อน retry ไม่โชว์ success ของตนเมื่อเพื่อนเป็นผู้ส่ง
-- [ ] Meaningful TDD deadline: บันทึก RED ก่อน implement rule → GREEN หลัง implement → regression; เก็บ commit/command/output จริง ไม่ปิด tests เพื่อให้ green
-- [ ] Tests ก่อน/ตรง/หลัง deadline 1 ms, offset/precision, รอ lock ข้าม due, spoofing/role/scope, invalid payload, duplicate-after-deadline และ no-write assertions
-- [ ] Exact boundary tests ใช้ internal test clock; ไม่มี production clock override ใน API; มี integration case DB clock/lock barrier จริง
-
-ส่งให้ B ตรวจ: submission DTO/schema IDs, test assertions, rejection UI, GET persistence และ hooks สำหรับ FeedbackPanel
+- [ ] Implement protected POST/GET milestone submissions and GET saved submission detail with server-derived author/version/time.
+- [ ] Reuse shared strict code-point/URL validation, real session guards and safe scoped DTOs; no client authority or clock override.
+- [ ] Use one transaction client with team -> milestone locks and membership/rule rechecks. Enforce cancelled -> duplicate -> deadline before insert.
+- [ ] Read the DB wall clock once after locks, truncated to milliseconds. Accept acceptedAt <= dueAt and persist the same submittedAt.
+- [ ] Enforce S1 version 1 and unique concurrency protection; map only known conflicts and retry confirmed rolled-back technical contention at most three attempts.
+- [ ] Implement form and persisted GET-backed detail, Bangkok times, safe external link, preserved values/error focus and truthful uncertain-result/teammate recovery. Add real milestone actions only where allowed.
+- [ ] Retain meaningful deadline RED -> GREEN/regression history; no disabled tests or false acceptance.
+- [ ] Verify exact before/equal/after 1ms, offsets/precision, real DB lock wait across dueAt, role/scope/CSRF, spoofing, validation, duplicates/precedence, no-write failures, app restart and browser persistence.
+- [ ] Publish the scoped-submission helper/DTO and version-specific FeedbackPanel slot for B; preserve B schema/fixtures/shared primitives/feedback branch.
+- [ ] Complete current-head B peer review/accepted staging merge; G3 and main release remain separate.
 
 ### R1-A03: เอกสาร/หลักฐานที่ A เป็นเจ้าของ
 
@@ -256,7 +253,7 @@ References: project detail 8.6 B-E/9.2/9.4; D1 E.2; AC-02.1-02.3; T-06-T-08/T-25
 - [x] Return identical scoped list/detail DTOs with batch latestSubmission/feedbackCount, serverTime and deterministic dueAt/id order; foreign/missing records share a generic 404.
 - [x] Integrate the real milestone track, dedicated create form and persisted detail into A01's authenticated shell. Use explicit Bangkok input conversion and second-level display; hide unreleased actions.
 - [x] Verify actual candidate API/DB/browser flows: supervisor create/read/reload, student read with 403/no-write create denial, foreign-supervisor privacy, host-zone independence and 320px layout. Clean clone: 83 ordinary, 33 milestone DB, 28 auth, 38 G1 and seven upgrade cases pass.
-- [ ] B reviews/reproduces PR #56's current head, records acceptance and integrates into staging. Keep #6/#55 open until the actual accepted merge; reconcile G2 separately. Do not start A02/B02 or release main before the required gates.
+- [x] B approved/reproduced current PR #56 head 2d3576e and merged staging as 78d0cca. #6/#55 are closed Done/PASSED/ACCEPTED. The user explicitly delegated the remaining G2 UI check/acceptance to A/AI; [actual accepted evidence](../Project_code/docs/evidence/R1-G2-acceptance.md) clears A02/B02. G3/main release remain separate.
 
 Original #52's reviewed head is superseded by the corrected candidate, not approved/merged as if fixed. Preserve B's history/branch, close/archive superseded work without a false Done claim and keep Verification separate from peer Acceptance. A01 is now accepted; fixture-only tests do not establish G2.
 

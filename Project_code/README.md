@@ -4,7 +4,7 @@
 
 The React client and API implement login/me/logout, DB-backed eight-hour sessions, source/CSRF protection and authorized team list/detail and milestone create/list/detail. The interface includes login, role-aware navigation, mobile menu, team members/supervisor and loading/empty/error/retry states. PostgreSQL/Prisma schema/migrations/seed/fixtures, shared UI primitives, `/api/health`, safe errors/request correlation, validated configuration and TypeScript builds are present.
 
-The latest clean-clone checks pass **83 ordinary tests, 33 milestone DB cases, 28 auth/API/database tests, 38 G1 cases and seven migration scenarios**. G1 was accepted through PR #50's real peer approval/merge. F-01 was accepted through B approval/merge of PR #54. The F-02 correction awaits B review in PR #56; see [F-01 evidence](docs/evidence/R1-A01-auth.md) and [G1 history](docs/evidence/R1-G1-A-foundation.md). Submission/feedback integration, joint G2 acceptance and a complete Sprint 1 release remain pending.
+The latest clean-clone checks pass **83 ordinary tests, 33 milestone DB cases, 28 auth/API/database tests, 38 G1 cases and seven migration scenarios**. G1 was accepted through PR #50's real peer approval/merge. F-01 was accepted through B approval/merge of PR #54. The F-02 correction was accepted through B review/merge of PR #56; see [F-01 evidence](docs/evidence/R1-A01-auth.md) and [G1 history](docs/evidence/R1-G1-A-foundation.md). Delegated G2 is accepted; submission/feedback integration and a complete Sprint 1 release remain pending.
 
 `GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No test identity bypass is exposed.
 

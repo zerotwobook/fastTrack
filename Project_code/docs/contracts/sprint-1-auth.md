@@ -1,6 +1,6 @@
 # R1-A01 authentication contract and verification plan
 
-Owner A; reviewer B. Issue #5 / PR #54, branch `feature/s1-a-auth`, based on accepted Sprint 1 merge `ff5975c9ed96ec7cc528897a5437c9722105048b`. The exports and behavior below were verified at `2899d1b3a91e54b52a759e3f12ecd9f5fcf7b8d4`. B approved docs-only head `70dd0ce` and merged it into staging as `0b99a28`; F-01 is accepted and #5 is closed. See [actual evidence](../evidence/R1-A01-auth.md). The subsequent [milestone extension](sprint-1-milestones.md) in PR #56 awaits B review; G2 remains pending.
+Owner A; reviewer B. Issue #5 / PR #54, branch `feature/s1-a-auth`, based on accepted Sprint 1 merge `ff5975c9ed96ec7cc528897a5437c9722105048b`. The exports and behavior below were verified at `2899d1b3a91e54b52a759e3f12ecd9f5fcf7b8d4`. B approved docs-only head `70dd0ce` and merged it into staging as `0b99a28`; F-01 is accepted and #5 is closed. See [actual evidence](../evidence/R1-A01-auth.md). The subsequent [milestone extension](sprint-1-milestones.md) was accepted through B approval/merge of PR #56 as 78d0cca; [delegated G2 is accepted](../evidence/R1-G2-acceptance.md).
 
 ## Accepted prerequisite
 
@@ -24,7 +24,7 @@ Implement project detail 7.5/9 and D1 E.1 without changing schema or B's milesto
 
 Protected domain routers mount protection before JSON parsing: session -> role -> source/CSRF -> JSON type/parser -> input -> scoped service. The authorized B01 correction in PR #56 requires all guards and binds the real implementations. The former identity-header fallback is absent. A owns real auth/teams and composition; B's original branch/history is preserved, with B reviewing A-authored corrections.
 
-`server/src/modules/teams/index.ts` exports `createTeamsRouter`, `scopedTeamWhere(auth)`, `requireUuid(value)`, `requireTeamAccess(db,auth,id)` and `TeamActor` (userId/role). Pass the explicit Prisma/transaction client into the scope check. Mutations must recheck within their transaction; a prior route check is not sufficient for later mutations. PR #56 extends `server/src/modules/index.ts` to compose real auth/teams/milestones. Its verification is PASSED; peer acceptance and G2 remain separate.
+`server/src/modules/teams/index.ts` exports `createTeamsRouter`, `scopedTeamWhere(auth)`, `requireUuid(value)`, `requireTeamAccess(db,auth,id)` and `TeamActor` (userId/role). Pass the explicit Prisma/transaction client into the scope check. Mutations must recheck within their transaction; a prior route check is not sufficient for later mutations. PR #56 extends `server/src/modules/index.ts` to compose real auth/teams/milestones. It was approved/merged by B as 78d0cca; delegated G2 acceptance is recorded separately.
 
 B's original milestone head `043af8d` was independently reviewed with changes requested in PR #52. The corrected candidate and actual regression results are recorded in [B01 evidence](../evidence/R1-B01-A-review.md); B's earlier self-reported checks are retained as historical evidence.
 
