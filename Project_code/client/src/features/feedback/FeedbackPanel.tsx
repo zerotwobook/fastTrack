@@ -79,7 +79,11 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
     let value = intent.current;
     if (!value) {
       const checked = validateFeedbackContent(content);
-      if (!checked.valid) { setFieldError(checked.error ?? 'Enter valid feedback.'); return; }
+      if (!checked.valid) {
+        setFieldError(checked.error ?? 'Enter valid feedback.');
+        form.current?.querySelector<HTMLTextAreaElement>('textarea')?.focus();
+        return;
+      }
       if (!globalThis.crypto?.randomUUID) { setSaveError('Use a supported browser with a secure connection to save feedback.'); return; }
       value = { content: checked.value!, clientRequestId: crypto.randomUUID() };
       intent.current = value; setPending(value);
