@@ -1,3 +1,13 @@
+# Current B01 review status
+
+Original B source 043af8d received an independent changes-requested review. A implemented the user-authorized corrections in Issue #55 / PR #56 on fix/s1-a-b01-review while preserving B history. Current executable source 3b7b2cc passes a clean-clone install/build/typecheck, 83 ordinary tests, 33 milestone DB cases (7 retained service + 26 real-session), 28 auth cases, 38 G1 cases and seven migration scenarios. Actual Chromium create/read/reload, Bangkok conversion under a New York host zone, student rejection/no-write and foreign/missing 404 equality are verified.
+
+See [independent findings, RED/GREEN and final evidence](R1-B01-A-review.md). B must review A's current correction before accepted staging integration and G2. The original PR #52 head is superseded by #56, not approved as if it contained A's fixes. Existing accepted A01 is merge 0b99a28.
+
+## Historical B implementation report
+
+The following is B's original report for its own configured environment. A did not independently reproduce the reported 58-case command in that environment. The default clean-clone command failed at DB fixture import; the corrected pipeline isolates DB tests. Historical local connection values are redacted, not asserted as reusable credentials.
+
 # R1-B01 Verification Evidence
 
 **Task:** R1-B01 — Implement F-02 milestone creation, listing and details
@@ -46,8 +56,8 @@ Command:
 ```powershell
 cd Project_code
 $env:NODE_ENV="test"
-$env:DATABASE_URL="postgresql://fasttrack_dev:fasttrack_dev_local@127.0.0.1:5433/fasttrack_dev"
-$env:TEST_DATABASE_URL="postgresql://fasttrack_test:fasttrack_test_local@127.0.0.1:5433/fasttrack_test"
+$env:DATABASE_URL="<configure-your-own-protected-development-URL>"
+$env:TEST_DATABASE_URL="<configure-your-own-distinct-reserved-test-URL>"
 npm test
 ```
 

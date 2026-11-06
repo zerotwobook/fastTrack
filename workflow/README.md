@@ -20,7 +20,7 @@ New teammates should start with [DEVELOPMENT_README.md](../DEVELOPMENT_README.md
 | D1 → S2 และ Labs | [รอบ 2](02_SPRINT2_LABS5-7.md) | Docker/runtime, F-05A teams, F-07 progress, UAT/impact tests | CI/release, F-05B milestone planning, F-06 revisions, maintenance implementation |
 | S3 → D2 → Final | [รอบ 3](03_SPRINT3_D2_FINAL.md) | F-08A summary/filter/totals, domain/data QA และ traceability | F-08B drill-down/items/navigation, access/UI/operations QA และ package assembly |
 
-**Current checkpoint (6 November 2026):** G0, A00, B00 and the corrected G1 foundation are accepted. B approved/merged PR #50 into staging/sprint-1 as ff5975c; #49/#51 are closed with actual acceptance recorded. A's R1-A01 auth/team increment is in PR #54 awaiting peer review, and B owns milestone PR #52. Follow the live Issues/PRs; G2 and the full Sprint 1 release into main remain pending.
+**Current checkpoint (7 November 2026):** G0/foundation and A01 are accepted. B approved/merged PR #54 into staging as 0b99a28; #5 is closed. B01 original PR #52 received changes requested; A's authorized correction is #55 / PR #56 with verified real F-01/F-02 candidate flows. B reviews A's corrections before accepted staging integration and G2. A02/B02 and the full Sprint 1 release into main remain gated.
 
 เมื่อ G1 ผ่าน A ทำ F-01 และ B ทำ F-02 ขนาน เมื่อ G2 ผ่าน A ทำ F-03 และ B ทำ F-04 ขนาน ใช้ fixtures ที่ตกลงเพื่อเตรียมงานได้ แต่ผ่าน checkpoint ด้วยระบบจริงเท่านั้น
 

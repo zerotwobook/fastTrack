@@ -2,7 +2,11 @@
 
 Date: 6 November 2026, Asia/Bangkok. Owner A / zerotwobook; reviewer B / Atip-Infa. [Issue #5](https://github.com/zerotwobook/fastTrack/issues/5), [PR #54](https://github.com/zerotwobook/fastTrack/pull/54), branch `feature/s1-a-auth`, target `staging/sprint-1`.
 
-**Verification PASSED; peer Acceptance PENDING.** The feature is implemented on this task branch and has not been merged or released. Executable tested source: `2899d1b3a91e54b52a759e3f12ecd9f5fcf7b8d4`. Subsequent handoff changes update documentation/evidence only.
+**Current status: Verification PASSED; peer Acceptance ACCEPTED in staging.** Executable tested source: `2899d1b3a91e54b52a759e3f12ecd9f5fcf7b8d4`; approved docs-only head: `70dd0ce`. This is an accepted feature increment, not a main release or G2 acceptance.
+
+## Accepted integration update
+
+B approved PR #54 at head 70dd0ce on 2026-11-06T16:35:19Z, reporting local session/CSRF/accessibility/role-isolation and API/browser checks. B merged it into staging as 0b99a285deb0c6a40aede22e816a578ffa0b62d5 at 16:49:14Z. A verified the approved merge tree and reconciled #5/#54 as Done/PASSED/ACCEPTED; #5 is closed. The sections below describe the original A01 source/scope and preserve its pre-acceptance handoff statements and JSON. Current milestone corrections and joint G2 acceptance are separate; see [B01 review](R1-B01-A-review.md).
 
 ## Scope and actual prerequisite
 
