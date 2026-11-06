@@ -1,0 +1,89 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--color-divider);
+  padding-bottom: 0.75rem;
+}
+
+.heading {
+  font-size: 1.25rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.createForm {
+  background-color: var(--color-wash);
+  padding: 1.25rem;
+  border-radius: var(--radius-md);
+  border: 1px solid var(--color-divider);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 0.5rem;
+}
+
+.milestoneList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.milestoneCard {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1.25rem;
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-md);
+  background-color: var(--color-paper);
+}
+
+.cardMain {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+  max-width: 70%;
+}
+
+.dateBadge {
+  font-size: 0.75rem;
+  color: var(--color-muted);
+}
+
+.cardTitle {
+  font-size: 1.125rem;
+  font-weight: 500;
+  color: var(--color-ink);
+}
+
+.cardDesc {
+  font-size: 0.875rem;
+  color: var(--color-muted);
+  line-height: 1.4;
+}
+
+.cardSide {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.75rem;
+}
+
+.loadingState,
+.errorContainer {
+  padding: 2rem 0;
+  text-align: center;
+}
