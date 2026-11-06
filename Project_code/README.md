@@ -1,26 +1,30 @@
 # fastTrack application - technical guide
 
-## Implemented scope
+## Current implementation
 
-This is the A00 foundation: a minimal React page, Express app factory, `/api/health`, safe errors/request correlation, environment validation, TypeScript builds, Vitest/Supertest and a same-origin Vite proxy. No authentication, database schema/client connection, migration/seed, team, milestone, submission or feedback feature is implemented.
+The client/API scaffold includes a minimal React page, `/api/health`, safe JSON errors/request correlation, environment validation, a same-origin Vite proxy and TypeScript builds. PostgreSQL/Prisma schema/migrations/seed/fixtures and shared UI primitives are present.
 
-`GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}`. It reports process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No protected feature route or test identity bypass is exposed.
+The latest clean-clone foundation check passes **38/38 G1 cases and 7/7 migration scenarios**, alongside 51/51 ordinary tests; see [the independent reproduction](docs/evidence/R1-G1-A-foundation.md). Peer review and G1 acceptance remain pending. Authentication and team/milestone/submission/feedback endpoints are not implemented. These foundation checks do not establish domain-feature acceptance or a completed Sprint 1 application.
+
+`GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No test identity bypass is exposed.
 
 ## Verified toolchain
 
-| Tool | Verified version |
+| Tool | Version verified by the independent reproduction |
 |---|---|
 | Node.js / npm | 26.13.0 / 11.20.0 on Windows x64 |
 | React / React DOM | 19.3.1 / 19.3.1 |
 | Vite / React plugin | 8.3.6 / 6.2.1 |
 | TypeScript / Express | 7.0.2 / 5.3.0 |
 | Vitest / Supertest | 5.1.0 / 7.3.1 |
-| Prisma CLI / client | Both 7.10.1; CLI version command verified, no generated client or database integration yet |
-| Available local PostgreSQL image | `postgres:16.8` reports PostgreSQL 16.8, Debian build. Version discovery only; no database was started. The DB foundation will pin its actual tested runtime. |
+| Prisma CLI / client / PostgreSQL adapter | All 7.10.1; client generation and real DB access verified |
+| Isolated audit PostgreSQL | 16.8 Debian build, pinned image digest in the result JSON |
 
-`package.json` enforces Node 26 and npm 11 for this baseline; `.node-version` records the verified version. Other OS/runtime versions have not been verified. Direct dependencies use exact versions; one npm workspace lockfile lives here. Run installs from this directory. Do not create client/server lockfiles. The package manifest pins the necessary Prisma/esbuild install-script approvals; see [npm install-script policy](https://docs.npmjs.com/cli/v11/commands/npm-install-scripts/).
+Other OS/runtime combinations are not verified here. B's original evidence records a separate PostgreSQL 14 setup on port 5433; that machine-specific port is not universal. Configure the actual port in your own URLs. The isolated audit chooses an ephemeral loopback port automatically.
 
-## Install and local configuration
+The package manifest enforces Node 26/npm 11; `.node-version` records the verified exact Node version. Direct dependencies are pinned and there is one npm workspace lockfile in Project_code. Do not create child lockfiles. Necessary Prisma/esbuild install scripts have version-pinned approvals under the [npm install-script policy](https://docs.npmjs.com/cli/v11/commands/npm-install-scripts/).
+
+## Install and configuration
 
 From the repository root in PowerShell:
 
@@ -29,39 +33,46 @@ Set-Location Project_code
 node --version
 npm --version
 npm ci
+npm run db:generate --workspace @fasttrack/server
+```
+
+Copy server/.env.example to server/.env only if the local file does not already exist:
+
+```powershell
 Copy-Item server/.env.example server/.env
 ```
 
-Copy the example only when `server/.env` does not already exist. Keep local credentials in that ignored server file. The supplied URLs are development placeholders. The scaffold validates their shape but does not connect to them; a running PostgreSQL database is not needed for scaffold-only checks.
+The supplied database URLs are placeholders. Replace them only with your actual local configuration. Runtime and seed scripts load server/.env; Prisma CLI configuration reads process DATABASE_URL, so supply that environment value explicitly when migrating. Do not put database credentials or session/CSRF tokens in client code, logs, Git or VITE_* variables. The browser uses relative /api paths and needs no client .env.
 
 | Server variable | Contract |
 |---|---|
-| `NODE_ENV` | `development` (default), `test` or `production` |
-| `PORT` | Integer 1-65535; default 3000 |
-| `APP_ORIGIN` | Exact origin without trailing slash/path/query/credentials; local `http://127.0.0.1:5173`; production must explicitly use HTTPS |
-| `DATABASE_URL` | Required server-side PostgreSQL URL; never a browser variable |
-| `TEST_DATABASE_URL` | Separate reserved test database URL for future database fixtures |
-| `SESSION_TTL_HOURS` | Only 8 accepted; session implementation is still pending |
-| `RELEASE_SHA` | Safe local label in development/test; production requires a full 40-character lowercase commit SHA |
-| `DEMO_SEED_PASSWORD` | Reserved for B's future explicit seed input; no default credential/seed runs in A00 |
+| NODE_ENV | development (default), test or production |
+| PORT | Integer 1-65535; default 3000 |
+| APP_ORIGIN | Exact origin without trailing slash/path/query/credentials; local http://127.0.0.1:5173; production explicitly uses HTTPS |
+| DATABASE_URL | Required server-side PostgreSQL URL for runtime/CLI |
+| TEST_DATABASE_URL | Distinct reserved test-database URL; never reuse the development/production DB |
+| SESSION_TTL_HOURS | Only 8 accepted; session behavior is not implemented yet |
+| RELEASE_SHA | Safe local label for development/test; production requires a full 40-character lowercase commit SHA |
+| DEMO_SEED_PASSWORD | Explicit seed input; no default password. Repeat seed preserves existing names, password hashes, membership and history. |
 
-Never put database URLs, passwords, session tokens or CSRF tokens in `VITE_*`, client code, logs or Git. The client uses relative `/api` paths; no client environment file is needed.
+After provisioning your own database and supplying DATABASE_URL/DEMO_SEED_PASSWORD to the command environment, the verified workspace commands are:
 
-## Run and check
+```powershell
+npm run db:migrate --workspace @fasttrack/server
+npm run db:seed --workspace @fasttrack/server
+```
 
-All commands below run from `Project_code/`:
+The migrate command deploys pending ordered migrations. There is no general reset command. Before upgrading a database created from the unmerged PR #53 proposal, read [the migration adoption note](docs/decisions/0002-g1-migration-adoption.md); its third migration was amended before acceptance. Use the isolated audit command for review without changing an existing database.
+
+## Run, build and ordinary tests
+
+All following commands run from Project_code:
 
 ```powershell
 npm run dev
 ```
 
-Open `http://127.0.0.1:5173`. Vite uses strict port 5173 and proxies `/api` to `http://127.0.0.1:3000`, preserving same-origin browser requests. Use the same `127.0.0.1` hostname as APP_ORIGIN. If changing the backend port, update the Vite proxy target with it. There is no credentialed CORS setup. Ctrl+C stops both development processes.
-
-```powershell
-Invoke-RestMethod http://127.0.0.1:5173/api/health
-```
-
-Stop dev processes before `npm ci`, especially on Windows where running binaries can lock dependency files. In a separate terminal, or after stopping dev:
+Open http://127.0.0.1:5173. Vite uses strict port 5173 and proxies /api to http://127.0.0.1:3000. Keep the hostname consistent with APP_ORIGIN and update the proxy target if changing the backend port. Production uses one origin; there is no wildcard credentialed CORS setup. Ctrl+C stops the two dev processes. Stop them before npm ci on Windows to release dependency binaries.
 
 ```powershell
 npm run typecheck
@@ -69,14 +80,29 @@ npm test
 npm run build
 ```
 
-- `typecheck`: both workspaces, including typed unit/API tests.
-- `test`: Vitest with Supertest; no DB creation/reset or network listener started at import time.
-- `build`: client to `client/dist`, API to `server/dist`; tests are excluded from server output.
-- `test:watch`: optional local Vitest watch mode.
+- Generate the Prisma client before standalone typecheck on a fresh clone.
+- Ordinary Vitest/Supertest: 3 files / 51 tests passed in the latest reproduction; no database reset occurs.
+- Build writes client/dist and server/dist. The server build generates Prisma, compiles TypeScript and copies its generated runtime assets. No running DB is needed for generation/build.
+- Test files and G1 audit cases are excluded from the server build; generated source/build files remain ignored in Git.
+- npm run test:watch is available for ordinary local unit tests.
+
+## Independent G1 checks
+
+With Docker Engine running, from Project_code:
+
+```powershell
+npm run test:g1:isolated
+```
+
+This verified command creates its own temporary PostgreSQL instance with a random loopback-only port and distinct development/test databases, generates Prisma, migrates both DBs, repeats migrate deploy, runs typecheck, the 51 ordinary tests, a production-mode build and 38 dedicated G1 assertions. It also creates seven historical-schema databases inside that same new container to check upgrades and safe rejection. It removes only the newly created container and temporary credential file afterwards. Random DB/seed credentials are not committed or printed.
+
+The current expected exit is **0**. The runner prints a redacted JSON report path. Set G1_REPORT_PATH to choose that output file. Four negative upgrade scenarios intentionally receive a failed migration exit and pass only when the expected PostgreSQL error, existing records, schema and completed migration checksums are preserved. [Latest committed results](docs/evidence/R1-G1-A-remediation-results.json) and [findings/reproduction](docs/evidence/R1-G1-A-foundation.md) distinguish technical checks, historical failures and pending human acceptance.
+
+For an already prepared, dedicated empty test database, npm run test:g1 runs only the 38 G1 cases. It requires NODE_ENV=test, TEST_DATABASE_URL and a distinct protected DATABASE_URL. These checks create/update synthetic data; use the isolated wrapper for routine reproduction. Fixture setup/cleanup accepts only clients returned by createTestPrisma(), bound to the currently validated test URL. Passing an arbitrary Prisma client or changing the configured target after client creation is rejected before cleanup queries. Cleanup uses a transaction.
 
 ## Built server
 
-After `npm run build`, the compiled server can serve the built client and `/api` under one origin. In PowerShell, from `Project_code/`:
+After npm run build, the compiled server can serve the client/API under one origin. From Project_code in PowerShell:
 
 ```powershell
 $env:NODE_ENV = 'production'
@@ -85,35 +111,31 @@ $env:RELEASE_SHA = (git rev-parse HEAD)
 npm start
 ```
 
-The example HTTPS hostname must be replaced for a real deployment. The server listens on PORT behind a future HTTPS reverse proxy; the local smoke check does not demonstrate public hosting or TLS. `server/.env` still supplies DATABASE_URL when no process value is set. Production refuses to start without the built client. Unknown `/api/*` paths remain JSON 404 instead of receiving HTML; ordinary browser routes receive the built shell.
+Replace the HTTPS example origin for a real deployment. The listener uses PORT behind a future HTTPS reverse proxy. Prior local shell/API smoke is recorded in the A00 evidence; this foundation reproduction does not establish public hosting or TLS. Production requires the built client. Unknown /api paths stay JSON 404; browser routes receive the built shell.
 
-## Test database boundary
-
-`server/src/db/test-database.ts` exports `requireTestDatabase(env, protectedDatabaseUrls)`. Future fixture/reset code must call it **before** creating a destructive DB connection. It requires explicit NODE_ENV=test, TEST_DATABASE_URL, protected DATABASE_URL, a separate named database ending `_test`, and rejects protected identities independently of credentials/localhost spellings. Pass every additional known protected DB URL as an argument. Equal database names on other hosts are rejected conservatively; unsafe connection overrides are rejected. Pure URL checks cannot resolve arbitrary DNS aliases; use a DB role with access only to the test database.
-
-No reset/migrate/seed command exists in A00. B will add and verify Prisma 7 config, adapter/client generation, migrations, safe repeat seed and real test fixtures before those commands are documented here. Do not run an invented `migrate reset` command against the example URLs.
-
-## Source map
+## Source layout
 
 ```text
 Project_code/
   package.json, package-lock.json, .npmrc, .node-version
-  vitest.config.ts
-  client/                 Vite/React entry and build config
+  prisma.config.ts, prisma.g1-history.config.ts
+  vitest.config.ts, vitest.g1.config.ts
+  scripts/                 Isolated G1 runner, migration probes and Prisma runtime packaging
+  client/                  React entry, Vite config and shared design primitives
   server/
     .env.example
-    src/app.ts            Listener-free API factory and router composition
-    src/index.ts          Validated startup and shutdown
-    src/config.ts         Runtime validation
-    src/http/             Public errors, per-route JSON parsing, request IDs/logs
-    src/db/               Pure test-database safety guard
-    src/modules/          Domain module entry point; no domain implementation
-  e2e/                    Integrated browser-test location (not implemented yet)
-  docs/contracts/         Reviewed integration seams
-  docs/decisions/         Accepted source/ownership baseline
-  docs/evidence/          Actual verification records
+    prisma/                Schema, ordered migrations and explicit seed
+    src/app.ts             Listener-free router composition
+    src/index.ts           Validated startup/shutdown
+    src/config.ts          Runtime validation
+    src/http/              Safe errors, per-route JSON parsing, request IDs/logs
+    src/db/                Prisma singleton, generated client and test guard
+    src/testing/           Synthetic fixtures and independent G1 checks
+    src/modules/           Domain entry point; domain routes not implemented
+  e2e/                     Integrated browser journeys not implemented yet
+  docs/contracts/          Accepted integration seams
+  docs/decisions/          Source/ownership decisions
+  docs/evidence/           Actual verification and unresolved findings
 ```
 
-The minimal page uses the agreed black/white direction and font fallback stack. Font files, reusable tokens/components and full application screens are not supplied by this scaffold.
-
-See [verification evidence](docs/evidence/R1-A00-scaffold.md) for actual results and limits, or return to the [application overview](../README.md). Team/task/branch instructions remain in [the development guide](../DEVELOPMENT_README.md).
+The shared design files exist, while full application screens and self-hosted font assets are not implemented. Return to the [application overview](../README.md). Team/task/branch instructions remain in [the development guide](../DEVELOPMENT_README.md).

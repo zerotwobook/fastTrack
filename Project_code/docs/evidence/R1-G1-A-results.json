@@ -1,0 +1,105 @@
+{
+  "image": "postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae",
+  "startedAt": "2026-11-06T11:52:23.639Z",
+  "stages": [
+    {
+      "name": "client generation",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "fresh dev migrations",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "fresh test migrations",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "repeat migration deploy",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "ordinary unit/API tests",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "production build",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "G1 database, seed and compiled-client checks",
+      "passed": false,
+      "exitCode": 1
+    }
+  ],
+  "cleanup": "removed newly created audit container",
+  "postgresVersion": "postgres (PostgreSQL) 16.8 (Debian 16.8-1.pgdg120+1)",
+  "g1Tests": {
+    "passed": 4,
+    "failed": 8,
+    "cases": [
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL permits one supervisor to own multiple teams",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL provides nullable revocation and cancellation fields required before dependent auth/domain work",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL uses native UUID primary keys as specified by the accepted data model",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL rejects a submission with an unknown author through its foreign key",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces the version lower bound in the database",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces one team per student and foreign-key history restriction",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces the accepted title bound in the migration rather than only in future handlers",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL provides exact one-millisecond-before, equal and one-millisecond-after deadline fixtures",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL rechecks the test database guard at client creation even after the module was imported",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL repeats the seed without duplicating records or replacing stored password hashes/membership",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL preserves previously edited names when the add-only seed runs again",
+        "status": "failed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL loads the compiled database module and reads PostgreSQL through the generated client",
+        "status": "passed"
+      }
+    ]
+  },
+  "finishedAt": "2026-11-06T11:52:43.456Z",
+  "passed": false,
+  "testedSource": "3d9bd2f21afecc44a9a3e1683dc136a1e2e32e11"
+}

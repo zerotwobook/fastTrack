@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | [G0 ACCEPTED](../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md): Atip-Infa approved and merged PR #44. A00 checks are ready for separate peer review; G1 remains PENDING. |
+| Gate record | G0 accepted; A00 merged in PR #45; B00 candidate merged in PR #48 as 5f2ac0b. [G1 audit](../Project_code/docs/evidence/R1-G1-A-foundation.md): 38/38 database checks, 7/7 migration scenarios and 51/51 unit tests pass on A's remediation branch. B peer review, accepted integration and joint G1 acceptance remain PENDING before A01/B01. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -179,10 +179,20 @@ Owner A; reviewer B. Dependency: accepted G0, [PR #44](https://github.com/zerotw
 - [x] Add server `.env.example` and ignore rules; no real credentials, local env or generated files enter Git.
 - [x] Add and unit-test the distinct test-database guard. No reset, schema, migrate or seed command is invented before B00.
 - [x] Run install/typecheck/test/build in a fresh clone and verify dev/proxy/compiled-server/browser smoke. Record actual checks and limits in [A00 evidence](../Project_code/docs/evidence/R1-A00-scaffold.md).
-- [ ] B reproduces the tree/scripts/env/API/test-DB boundary on the actual PR head and records peer approval or requested changes.
-- [ ] Merge the reviewed scaffold into `staging/sprint-1`, then unblock B00. Do not mark G1 passed or start dependent F-01/F-02 before the real B foundation and joint check.
+- [x] B reproduced the scaffold and approved PR #45 at 292934b; actual review/merge is recorded on GitHub.
+- [x] The reviewed scaffold merged into staging/sprint-1 as 1a5e063 and unblocked B00. This acceptance does not pass G1 or authorize F-01/F-02 before the joint foundation check.
 
 B's review covers the file tree, manifests/lockfile, runtime, env names, API bootstrap, parser order, safe errors, test-DB guard and source ownership. The native tracked-PR merge rule moves its card to Done only after an actual merge; task-Issue completion and gate acceptance must be reconciled from evidence separately.
+
+### G1 audit before dependent implementation
+
+A's independent audit is [Issue #49](https://github.com/zerotwobook/fastTrack/issues/49), branch `test/s1-a-g1-foundation`, [PR #50](https://github.com/zerotwobook/fastTrack/pull/50). B00 was approved/merged in PR #48, with foundation reproduction explicitly deferred to G1.
+
+A's original audit reproduced eight foundation failures. B's PR #53 candidate fixed the original checks, but independent review found three blocking groups: canonical bounds, fixture-client isolation and migration atomicity. The user authorized A to finish those corrections, with B as the real peer reviewer. A incorporated B's commits into PR #50 without rewriting B's branch, then retained RED regression evidence before fixing the failures.
+
+The combined executable source at `6f3601ec1af3f0b7039bce175251642d1920c40c` passes a clean-clone install, generation, fresh/repeat migrations, typecheck, 51 unit tests, production build, 38 G1 tests and seven upgrade/rejection scenarios. See [the audit evidence](../Project_code/docs/evidence/R1-G1-A-foundation.md) and [migration adoption note](../Project_code/docs/decisions/0002-g1-migration-adoption.md).
+
+Corrective [Issue #51](https://github.com/zerotwobook/fastTrack/issues/51) now has owner A by explicit authorization; B reviews PR #50. At verified handoff, move #49/#50 Started -> PR Review and #51 Fixing -> PR Review, set Verification PASSED and keep Acceptance PENDING. B must review the current head and reproduce the checks before accepted integration into staging/sprint-1. Keep #49/#51 open and A01/B01 blocked until actual review, merge and joint G1 acceptance are recorded. PR #53's old candidate is superseded by the combined review; do not approve that old head as if it contained A's fixes. No main release is included.
 
 ### R1-A01: F-01 identity และทีมที่มีสิทธิ์
 

@@ -1,11 +1,11 @@
-// Test fixture helpers — B owns (R1-B00).
+// Test fixture helpers — B owns (R1-B00 / R1-B00-FIX-01).
 // Provides reusable setup/teardown for integration tests.
-// MUST call requireTestDatabase() before any destructive operation.
-// Guards are enforced at import time AND at fixture-creation time.
+// MUST call requireTestDatabase() before any destructive operation and at client creation (G1-07).
 
 import { PrismaClient, UserRole } from '../db/generated/client/index.js';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { requireTestDatabase } from '../db/test-database.js';
+import { ConfigError } from '../config.js';
 import { scryptSync, randomBytes } from 'node:crypto';
 
 // Validate test-database boundary immediately on import.
@@ -23,28 +23,41 @@ function hashPassword(plain: string): string {
 export const TEST_PASSWORD = 'test-password-fixture';
 export const TEST_PASSWORD_HASH = hashPassword(TEST_PASSWORD);
 
-/** Create an isolated Prisma client for integration tests using TEST_DATABASE_URL. */
-export function createTestPrisma(): PrismaClient {
-  const connectionString = process.env['TEST_DATABASE_URL'];
-  if (!connectionString) {
-    throw new Error('TEST_DATABASE_URL is required for test fixtures.');
+// Only this factory can bind a concrete client to the validated connection string.
+const testClientTargets = new WeakMap<PrismaClient, string>();
+
+function assertTestClientTarget(prisma: PrismaClient): void {
+  const target = requireTestDatabase(process.env);
+  if (testClientTargets.get(prisma) !== target) {
+    throw new ConfigError('test fixture client (unverified or changed database target)');
   }
-  const adapter = new PrismaPg({ connectionString });
-  return new PrismaClient({ adapter });
 }
 
-/** Full fixture set: two supervisors, three students, two teams, two milestones.
- *
- * Returns all created records so tests can reference IDs directly.
- * Milestones include boundary cases: 1 ms before/at/after a reference date.
- *
- * @param prisma - test Prisma client (from createTestPrisma())
- * @param refDate - reference datetime for deadline boundary fixtures (defaults to now + 1 day)
- */
+/** Create a client bound to the validated, reserved test database. */
+export function createTestPrisma(): PrismaClient {
+  const target = requireTestDatabase(process.env);
+  const client = new PrismaClient({ adapter: new PrismaPg({ connectionString: target }) });
+  testClientTargets.set(client, target);
+  return client;
+}
+
+/** Validate the actual client binding before deleting anything, then clean atomically. */
+export async function cleanTestDatabase(prisma: PrismaClient) {
+  assertTestClientTarget(prisma);
+  await prisma.$transaction([
+    prisma.feedback.deleteMany(), prisma.submission.deleteMany(), prisma.milestone.deleteMany(),
+    prisma.teamMember.deleteMany(), prisma.team.deleteMany(), prisma.session.deleteMany(), prisma.user.deleteMany(),
+  ]);
+}
+
+/** Full fixture set: two supervisors, three students, two teams, milestones with exact boundary fixtures. */
 export async function createBaseFixtures(
   prisma: PrismaClient,
   refDate?: Date,
 ) {
+  assertTestClientTarget(prisma);
+  await cleanTestDatabase(prisma);
+
   const ref = refDate ?? new Date(Date.now() + 24 * 60 * 60 * 1000);
 
   // Supervisors
@@ -121,12 +134,12 @@ export async function createBaseFixtures(
     },
   });
 
-  // Milestones with deadline boundary fixtures.
-  // dueAt values: ref - 1ms (past), ref (exact boundary), ref + 1 hour (future).
+  // Milestones with exact deadline boundary fixtures (G1-06: -1ms, equal 0ms, +1ms, plus general future)
   const milestonePast = await prisma.milestone.create({
     data: {
       teamId: teamA.id,
       title: 'Past deadline milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: new Date(ref.getTime() - 1),
       createdById: supA.id,
     },
@@ -136,7 +149,18 @@ export async function createBaseFixtures(
     data: {
       teamId: teamA.id,
       title: 'Exact boundary milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: ref,
+      createdById: supA.id,
+    },
+  });
+
+  const milestoneBoundaryPlus1ms = await prisma.milestone.create({
+    data: {
+      teamId: teamA.id,
+      title: 'Boundary plus one ms milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
+      dueAt: new Date(ref.getTime() + 1),
       createdById: supA.id,
     },
   });
@@ -145,6 +169,7 @@ export async function createBaseFixtures(
     data: {
       teamId: teamA.id,
       title: 'Future milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: new Date(ref.getTime() + 60 * 60 * 1000),
       createdById: supA.id,
     },
@@ -154,6 +179,7 @@ export async function createBaseFixtures(
     data: {
       teamId: teamB.id,
       title: 'Team B milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: new Date(ref.getTime() + 60 * 60 * 1000),
       createdById: supB.id,
     },
@@ -162,6 +188,6 @@ export async function createBaseFixtures(
   return {
     users: { supA, supB, stuA1, stuA2, stuB1 },
     teams: { teamA, teamB },
-    milestones: { milestonePast, milestoneExact, milestoneFuture, milestoneBTeam },
+    milestones: { milestonePast, milestoneExact, milestoneBoundaryPlus1ms, milestoneFuture, milestoneBTeam },
   };
 }

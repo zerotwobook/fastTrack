@@ -1,14 +1,11 @@
-// Seed script — B owns (R1-B00).
+// Seed script — B owns (R1-B00 / R1-B00-FIX-01).
 // Run with: node --env-file=server/.env --import tsx server/prisma/seed.ts
 // DEMO_SEED_PASSWORD must be supplied through the environment; no default credential is used.
-// Idempotent: safe to run multiple times. Existing records are preserved; duplicates are skipped.
-// Never resets passwords, moves members or removes submissions on repeat runs.
-// Production seed does NOT auto-create demo users; pass an explicit DEMO_SEED_PASSWORD env value.
-// Test fixture reset is handled separately by the test helper (guarded by requireTestDatabase).
+// Idempotent & Add-only: safe to run multiple times (G1-08).
+// Existing records are preserved; never overwrites edited names, passwords, membership or history.
 
 import { PrismaClient, UserRole } from '../src/db/generated/client/index.js';
 import { PrismaPg } from '@prisma/adapter-pg';
-import { createHash } from 'node:crypto';
 import { scryptSync, randomBytes } from 'node:crypto';
 
 const connectionString = process.env['DATABASE_URL'];
@@ -25,25 +22,6 @@ function hashPassword(plain: string): string {
   return `${salt}:${hash}`;
 }
 
-/** Idempotent upsert for a User. Never overwrites passwordHash on conflict. */
-async function upsertUser(data: {
-  email: string;
-  name: string;
-  role: UserRole;
-  studentId?: string;
-  passwordHash: string;
-}) {
-  return prisma.user.upsert({
-    where: { email: data.email },
-    create: data,
-    update: {
-      // Preserve existing password; only update non-sensitive metadata if needed.
-      name: data.name,
-      studentId: data.studentId ?? null,
-    },
-  });
-}
-
 async function main() {
   const rawPassword = process.env.DEMO_SEED_PASSWORD;
   if (!rawPassword) {
@@ -53,71 +31,96 @@ async function main() {
     );
   }
 
-  console.log('Seeding demo users and teams (idempotent)…');
+  console.log('Seeding demo users and teams (idempotent, add-only)…');
 
   // ---------------------------------------------------------------------------
-  // Supervisors
+  // Supervisors — find or create (add-only: do NOT overwrite name or password on existing)
   // ---------------------------------------------------------------------------
-  const supervisorA = await upsertUser({
-    email: 'supervisor.a@fasttrack.local',
-    name: 'Supervisor A',
-    role: UserRole.supervisor,
-    passwordHash: hashPassword(rawPassword),
-  });
+  let supervisorA = await prisma.user.findUnique({ where: { email: 'supervisor.a@fasttrack.local' } });
+  if (!supervisorA) {
+    supervisorA = await prisma.user.create({
+      data: {
+        email: 'supervisor.a@fasttrack.local',
+        name: 'Supervisor A',
+        role: UserRole.supervisor,
+        passwordHash: hashPassword(rawPassword),
+      },
+    });
+  }
 
-  const supervisorB = await upsertUser({
-    email: 'supervisor.b@fasttrack.local',
-    name: 'Supervisor B',
-    role: UserRole.supervisor,
-    passwordHash: hashPassword(rawPassword),
-  });
-
-  // ---------------------------------------------------------------------------
-  // Students
-  // ---------------------------------------------------------------------------
-  const studentA1 = await upsertUser({
-    email: 'student.a1@fasttrack.local',
-    name: 'Student A1',
-    role: UserRole.student,
-    studentId: '67000000001',
-    passwordHash: hashPassword(rawPassword),
-  });
-
-  const studentA2 = await upsertUser({
-    email: 'student.a2@fasttrack.local',
-    name: 'Student A2',
-    role: UserRole.student,
-    studentId: '67000000002',
-    passwordHash: hashPassword(rawPassword),
-  });
-
-  const studentB1 = await upsertUser({
-    email: 'student.b1@fasttrack.local',
-    name: 'Student B1',
-    role: UserRole.student,
-    studentId: '67000000003',
-    passwordHash: hashPassword(rawPassword),
-  });
+  let supervisorB = await prisma.user.findUnique({ where: { email: 'supervisor.b@fasttrack.local' } });
+  if (!supervisorB) {
+    supervisorB = await prisma.user.create({
+      data: {
+        email: 'supervisor.b@fasttrack.local',
+        name: 'Supervisor B',
+        role: UserRole.supervisor,
+        passwordHash: hashPassword(rawPassword),
+      },
+    });
+  }
 
   // ---------------------------------------------------------------------------
-  // Teams — one supervisor per team (unique constraint on supervisorId).
-  // Use upsert by supervisorId since that is unique; name may be updated.
+  // Students — find or create (add-only)
   // ---------------------------------------------------------------------------
-  const teamA = await prisma.team.upsert({
-    where: { supervisorId: supervisorA.id },
-    create: { name: 'Team A', supervisorId: supervisorA.id },
-    update: { name: 'Team A' },
-  });
+  let studentA1 = await prisma.user.findUnique({ where: { email: 'student.a1@fasttrack.local' } });
+  if (!studentA1) {
+    studentA1 = await prisma.user.create({
+      data: {
+        email: 'student.a1@fasttrack.local',
+        name: 'Student A1',
+        role: UserRole.student,
+        studentId: '67000000001',
+        passwordHash: hashPassword(rawPassword),
+      },
+    });
+  }
 
-  const teamB = await prisma.team.upsert({
-    where: { supervisorId: supervisorB.id },
-    create: { name: 'Team B', supervisorId: supervisorB.id },
-    update: { name: 'Team B' },
-  });
+  let studentA2 = await prisma.user.findUnique({ where: { email: 'student.a2@fasttrack.local' } });
+  if (!studentA2) {
+    studentA2 = await prisma.user.create({
+      data: {
+        email: 'student.a2@fasttrack.local',
+        name: 'Student A2',
+        role: UserRole.student,
+        studentId: '67000000002',
+        passwordHash: hashPassword(rawPassword),
+      },
+    });
+  }
+
+  let studentB1 = await prisma.user.findUnique({ where: { email: 'student.b1@fasttrack.local' } });
+  if (!studentB1) {
+    studentB1 = await prisma.user.create({
+      data: {
+        email: 'student.b1@fasttrack.local',
+        name: 'Student B1',
+        role: UserRole.student,
+        studentId: '67000000003',
+        passwordHash: hashPassword(rawPassword),
+      },
+    });
+  }
+
+  // ---------------------------------------------------------------------------
+  // Teams — find or create (add-only, G1-08: preserve custom names if edited)
+  // ---------------------------------------------------------------------------
+  let teamA = await prisma.team.findFirst({ where: { supervisorId: supervisorA.id } });
+  if (!teamA) {
+    teamA = await prisma.team.create({
+      data: { name: 'Team A', supervisorId: supervisorA.id },
+    });
+  }
+
+  let teamB = await prisma.team.findFirst({ where: { supervisorId: supervisorB.id } });
+  if (!teamB) {
+    teamB = await prisma.team.create({
+      data: { name: 'Team B', supervisorId: supervisorB.id },
+    });
+  }
 
   // ---------------------------------------------------------------------------
   // Team membership — idempotent via unique studentId constraint.
-  // Never moves a student to another team; skip if already in any team.
   // ---------------------------------------------------------------------------
   for (const { teamId, studentId } of [
     { teamId: teamA.id, studentId: studentA1.id },
@@ -127,7 +130,6 @@ async function main() {
     await prisma.teamMember
       .create({ data: { teamId, studentId } })
       .catch((err: { code?: string }) => {
-        // P2002 = unique constraint violation — student already a member; safe to skip.
         if (err?.code === 'P2002') return;
         throw err;
       });
@@ -148,4 +150,3 @@ main()
     process.exit(1);
   })
   .finally(() => prisma.$disconnect());
-

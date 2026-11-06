@@ -7,6 +7,7 @@
     "sourceMap": true
   },
   "exclude": [
-    "src/**/*.test.ts"
+    "src/**/*.test.ts",
+    "src/**/*.g1.ts"
   ]
 }

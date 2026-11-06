@@ -4,11 +4,11 @@ A course-project tracking application for students and supervisors, covering mil
 
 ## Implementation status
 
-The initial React/TypeScript client and Express/TypeScript API scaffold is implemented. It includes a minimal application page, a liveness endpoint, validated environment configuration, safe JSON errors and a local same-origin API proxy.
+The React/TypeScript client and Express/TypeScript API scaffold include a minimal application page, a liveness endpoint, validated environment configuration, safe JSON errors and a local same-origin API proxy.
 
-Sign-in, team workspaces, database schema/persistence, submissions and feedback are not implemented yet. The scaffold does not represent a completed Sprint 1 application.
+A PostgreSQL/Prisma schema, ordered migrations, repeatable seed/fixtures and shared UI primitives are present. The latest isolated foundation checks pass: 51 unit tests, 38 database/regression tests and seven migration scenarios. Peer review and foundation acceptance are pending.
 
-See [Project_code/README.md](Project_code/README.md) for verified prerequisites, installation, run/build commands and tests.
+Sign-in, team workspaces, milestone endpoints, submissions and feedback features are not implemented. See [Project_code/README.md](Project_code/README.md) for verified setup/build/test commands and the current foundation-check results.
 
 ## Development guide
 
