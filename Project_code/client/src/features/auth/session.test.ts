@@ -7,6 +7,14 @@ const denied = () => new Response(JSON.stringify({ error: { message: 'Sign in to
 function deferred<T>() { let resolve!: (value: T) => void; const promise = new Promise<T>(done => { resolve = done; }); return { promise, resolve }; }
 
 describe('F-01 account isolation and recovery', () => {
+  it('uses the global receiver required by the browser Fetch API', async () => {
+    vi.spyOn(globalThis, 'fetch').mockImplementation(function (this: unknown) {
+      expect(this).toBe(globalThis);
+      return Promise.resolve(json(auth('a')));
+    });
+    const store = new SessionStore(); await store.restore();
+    expect(store.getSnapshot().phase).toBe('ready');
+  });
   it('T-27 discards old private reads after logout/account change without changing the new account', async () => {
     const pending = deferred<Response>();
     const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(pending.promise)

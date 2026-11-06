@@ -9,9 +9,14 @@ a { color: var(--color-ink); text-underline-offset: 4px; }
 .login-form .wordmark { margin-bottom: 48px; }
 .intro { color: var(--color-muted); margin: 8px 0 32px; max-width: 65ch; line-height: 1.65; }
 .login-form form { display: grid; gap: 24px; }
+.login-form form > div { gap: 8px; }
+.login-form label { font-size: 16px; }
+.login-form input { min-height: 48px; font-size: 16px; line-height: 1.65; border-color: var(--color-control); border-radius: 8px; }
+.login-form input:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; border-color: var(--color-ink); }
+.login-form button, .application-shell button { font-size: 16px; line-height: 1.65; border-radius: 8px; }
 .password-control { display: flex; flex-direction: column; align-items: stretch; gap: 8px; }
 .password-control button { align-self: flex-end; min-height: 44px; }
-.login-submit { width: 100%; min-height: 48px; }
+.login-submit { width: 100%; min-height: 48px; justify-content: center; }
 .help { margin-top: 24px; font-size: 14px; color: var(--color-muted); line-height: 1.6; }
 .notice { padding: 16px; border: 1px solid var(--color-control); margin: 24px 0; line-height: 1.65; overflow-wrap: anywhere; }
 .recovery-actions { display: flex; gap: 24px; align-items: center; margin-top: 16px; flex-wrap: wrap; }

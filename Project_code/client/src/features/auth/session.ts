@@ -22,7 +22,7 @@ export class SessionStore {
   private pendingLogout: string | null = null;
   private listeners = new Set<() => void>();
   private snapshot: SessionSnapshot = { phase: 'loading', auth: null, error: null, busy: false, revision: 0, recovery: 'session' };
-  constructor(private readonly fetcher: typeof fetch = fetch) {}
+  constructor(private readonly fetcher: typeof fetch = globalThis.fetch.bind(globalThis)) {}
   readonly subscribe = (listener: () => void) => { this.listeners.add(listener); return () => { this.listeners.delete(listener); }; };
   readonly getSnapshot = () => this.snapshot;
   private publish(state: Omit<SessionSnapshot, 'revision'>) {

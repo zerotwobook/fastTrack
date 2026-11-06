@@ -1,9 +1,10 @@
-import { spawnSync } from 'node:child_process';
+import { spawn, spawnSync } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
 import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { authReviewStateFile } from './auth-review-state.mjs';
 
 const root = fileURLToPath(new URL('../', import.meta.url));
 const npmCli = process.env.npm_execpath;
@@ -17,6 +18,7 @@ const reportFile = process.env.G1_REPORT_PATH ?? join(directory, 'report.json');
 const report = { image, startedAt: new Date().toISOString(), stages: [], cleanup: 'pending' };
 const redactions = [password];
 let container;
+let reviewChild;
 let failed = false;
 function redact(value) {
   let text = String(value ?? '');
@@ -75,7 +77,7 @@ try {
   const testUrl = `${base}/fasttrack_g1_test`;
   redactions.push(runtimeUrl, testUrl);
   const env = { ...process.env, NODE_ENV: 'test', DATABASE_URL: runtimeUrl, TEST_DATABASE_URL: testUrl,
-    DEMO_SEED_PASSWORD: randomBytes(24).toString('hex') };
+    DEMO_SEED_PASSWORD: process.env.G1_REVIEW_AUTH === '1' ? process.env.AUTH_REVIEW_PASSWORD : randomBytes(24).toString('hex') };
   redactions.push(env.DEMO_SEED_PASSWORD);
   const legacyDirectory = join(directory, 'legacy-migrations');
   const candidateDirectory = join(directory, 'candidate-migrations');
@@ -105,11 +107,28 @@ try {
   process.stdout.write(redact(upgrades.stdout) + redact(upgrades.stderr));
   report.upgrades = JSON.parse(readFileSync(env.G1_UPGRADE_REPORT_PATH, 'utf8'));
   failed ||= upgrades.status !== 0;
+  if (process.env.G1_REVIEW_AUTH === '1') {
+    if (failed) throw new Error('Fix failed checks before starting browser review.');
+    stage('explicit disposable review seed', 'db:seed', env, true);
+    reviewChild = spawn(process.execPath, ['scripts/serve-auth-review.mjs'], {
+      cwd: root, env: { ...env, AUTH_REVIEW_STOP_FILE: join(directory, 'stop-review') }, stdio: 'inherit', windowsHide: true,
+    });
+    await new Promise((resolve, reject) => {
+      process.once('SIGINT', resolve); process.once('SIGTERM', resolve);
+      reviewChild.once('error', reject);
+      reviewChild.once('exit', code => code ? reject(new Error('Review server stopped unexpectedly.')) : resolve());
+    });
+  }
 } catch (error) {
   failed = true;
   report.error = redact(error.message);
   process.stderr.write(`${report.error}\n`);
 } finally {
+  if (reviewChild && reviewChild.exitCode === null) reviewChild.kill();
+  if (reviewChild) {
+    try { if (JSON.parse(readFileSync(authReviewStateFile, 'utf8')).containerId === container) rmSync(authReviewStateFile); }
+    catch { /* A state file is optional until the review listener becomes ready. */ }
+  }
   if (container && /^[a-f0-9]{64}$/.test(container)) {
     const cleanup = command('docker', ['rm', '--force', container]);
     report.cleanup = cleanup.status === 0 ? 'removed newly created audit container' : 'failed';
