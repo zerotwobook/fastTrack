@@ -1,6 +1,6 @@
 # R1-A02 first-submission contract and verification plan
 
-Owner A / zerotwobook; reviewer B / Atip-Infa. Issue #7, branch `feature/s1-a-submissions`, based on accepted staging `78d0cca`. [G2 is accepted](../evidence/R1-G2-acceptance.md) under the user's recorded delegation. This document defines the current implementation task; it does not claim F-03 is implemented or verified yet.
+Owner A / zerotwobook; reviewer B / Atip-Infa. Issue #7, branch `feature/s1-a-submissions`, based on accepted staging `78d0cca`. [G2 is accepted](../evidence/R1-G2-acceptance.md) under the user's recorded delegation. The contract is implemented and verified at 1bf8d63; B peer acceptance/merge of PR #57 remains pending. See [actual evidence](../evidence/R1-A02-submissions.md).
 
 Sources: project detail 4/5/7.4/8.6 D-F/9.2/9.4/9.5; D1 E.3; AC-03.1-03.6; T-09-T-16/T-25/T-26/T-31 local. Keep existing schema/migrations/seed/fixtures/shared design primitives and dependency lockfile unchanged. B owns feedback; no feedback endpoint is implemented by this task.
 
@@ -35,4 +35,4 @@ Preserve the established palette (#FFFFFF canvas, #000000 ink/actions, #F7F7F7 s
 
 Retain real deadline RED before adding its rule, then GREEN/regression commits. Verify strict payload/Unicode/URL boundaries, spoofing, parser/guard order, no-write failures, privacy/equal 404s, cancellation/duplicate/deadline precedence, two-student concurrency, offsets/precision, exact stored clock, lock waits and bounded contention mapping. Test app recreation with the same DB, compiled server packaging and the real student submit -> saved GET/reload -> supervisor read journey. Preserve prior auth/milestone/G1/upgrade checks.
 
-Open the early Draft PR/card Started after this first coherent commit. Keep Verification NOT RUN until actual checks; PR Review only after implementation/evidence and peer handoff are ready. B reviews the actual A-authored head before staging integration; G3 also needs B's real feedback flow.
+Early Draft PR #57/card Started was created after first coherent contract commit 4aaeed1, before implementation. The completed increment passes 111 ordinary/48 A02/33 B01/28 auth/38 G1 and seven upgrade cases from a clean clone, plus the actual browser observations. Move to PR Review only at the verified handoff after the final documentation commit. B reviews the actual A-authored head before staging integration; G3 also needs B's real feedback flow.

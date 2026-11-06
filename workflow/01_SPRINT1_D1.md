@@ -213,16 +213,18 @@ B's recorded A01 review covers both roles, logout/replay, session/CSRF and role 
 
 Owner A; reviewer B. Issue #7, branch feature/s1-a-submissions from accepted staging 78d0cca. References: project detail 4/5/7.4/8/9; D1 E.3; AC-03.1-03.6; T-09-T-16/T-25/T-26/T-31 local. [G2 acceptance](../Project_code/docs/evidence/R1-G2-acceptance.md); [concrete contract/test plan](../Project_code/docs/contracts/sprint-1-submissions.md).
 
-- [ ] Implement protected POST/GET milestone submissions and GET saved submission detail with server-derived author/version/time.
-- [ ] Reuse shared strict code-point/URL validation, real session guards and safe scoped DTOs; no client authority or clock override.
-- [ ] Use one transaction client with team -> milestone locks and membership/rule rechecks. Enforce cancelled -> duplicate -> deadline before insert.
-- [ ] Read the DB wall clock once after locks, truncated to milliseconds. Accept acceptedAt <= dueAt and persist the same submittedAt.
-- [ ] Enforce S1 version 1 and unique concurrency protection; map only known conflicts and retry confirmed rolled-back technical contention at most three attempts.
-- [ ] Implement form and persisted GET-backed detail, Bangkok times, safe external link, preserved values/error focus and truthful uncertain-result/teammate recovery. Add real milestone actions only where allowed.
-- [ ] Retain meaningful deadline RED -> GREEN/regression history; no disabled tests or false acceptance.
-- [ ] Verify exact before/equal/after 1ms, offsets/precision, real DB lock wait across dueAt, role/scope/CSRF, spoofing, validation, duplicates/precedence, no-write failures, app restart and browser persistence.
-- [ ] Publish the scoped-submission helper/DTO and version-specific FeedbackPanel slot for B; preserve B schema/fixtures/shared primitives/feedback branch.
-- [ ] Complete current-head B peer review/accepted staging merge; G3 and main release remain separate.
+- [x] Implement protected POST/GET milestone submissions and GET saved submission detail with server-derived author/version/time.
+- [x] Reuse shared strict code-point/URL validation, real session guards and safe scoped DTOs; no client authority or clock override.
+- [x] Use one transaction client with team -> milestone locks and membership/rule rechecks. Enforce cancelled -> duplicate -> deadline before insert.
+- [x] Read the DB wall clock once after locks, truncated to milliseconds. Accept acceptedAt <= dueAt and persist the same submittedAt.
+- [x] Enforce S1 version 1 and unique concurrency protection; map only known conflicts and retry confirmed rolled-back technical contention at most three attempts.
+- [x] Implement form and persisted GET-backed detail, Bangkok times, safe external link, preserved values/error focus and truthful uncertain-result/teammate recovery. Add real milestone actions only where allowed.
+- [x] Retain meaningful deadline RED -> GREEN/regression history; no disabled tests or false acceptance.
+- [x] Verify exact before/equal/after 1ms, offsets/precision, real DB lock wait across dueAt, role/scope/CSRF, spoofing, validation, duplicates/precedence, no-write failures, app restart and browser persistence.
+- [x] Publish the scoped-submission helper/DTO and version-specific FeedbackPanel slot for B; preserve B schema/fixtures/shared primitives/feedback branch.
+- [ ] Complete current-head B peer review/accepted staging merge of PR #57; G3 and main release remain separate.
+
+Technical verification at 1bf8d63 passes 111 ordinary, 48 A02, 33 B01, 28 auth, 38 G1 and seven upgrade cases from a fresh clone. Actual Chromium checks include persisted submit/reload, safe external links, host-zone-independent Bangkok time, supervisor/foreign denial, own/teammate uncertain-result recovery, explicit checked retry and a real deadline crossed in the open form. See [actual evidence](../Project_code/docs/evidence/R1-A02-submissions.md). Acceptance remains PENDING.
 
 ### R1-A03: เอกสาร/หลักฐานที่ A เป็นเจ้าของ
 
