@@ -53,9 +53,9 @@
 | Availability | A reports both members are available full days on 6-7 November 2026; exact net hours are not measured |
 | Repository | zerotwobook/fastTrack; public; both accounts have verified access |
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
-| Source baseline | c049d69b0ed8801ed5f30a5dfd3a77869b2d890b; new G0 acceptance remains PENDING |
+| Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | [G0 baseline review](../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md); B approval is still required before A00 |
+| Gate record | [G0 ACCEPTED](../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md): Atip-Infa approved and merged PR #44. A00 checks are ready for separate peer review; G1 remains PENDING. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -167,18 +167,22 @@ Freeze ที่ G0: envelope `{data}`/`{error}`, UUID, field names, API prefix 
 
 ## 7. รายละเอียดงาน A — คุณ
 
-### R1-A00: ตั้งโครงและสภาพแวดล้อม
+### R1-A00: Scaffold and environment
 
-- [ ] ตรวจ tree/versions ที่มีจริงก่อนสร้าง `Project_code/client`, `server`, `e2e`, docs/contracts/evidence/decisions ตาม §7.2
-- [ ] ตั้ง TypeScript/build/test scripts และ dependency lockfiles; เลือก versions ที่เข้ากัน ไม่คัด version จากคู่มือแล้วอ้างว่าทดสอบผ่าน
-- [ ] ส่งต่อ Node/package manager/DB versions ที่ตรวจจริง, lockfile policy และคำสั่งพร้อม working directory ใน Project_code/README.md; ทั้งคู่ใช้ชุดเดียวกัน ไม่ให้ B เดา runtime หรือสร้าง lockfile อีกแบบ
-- [ ] ตั้ง API `/api`, safe error handler/requestId และ config validation; จัด local Vite proxy ให้ browser เรียก same origin
-- [ ] กำหนด server module exports ให้ B เพิ่ม milestone/feedback โดยไม่ต้องแก้ app composition พร้อมกัน
-- [ ] ทำ `.env.example`/`.gitignore` และ README เริ่มต้น; DATABASE_URL/password อยู่ server เท่านั้น
-- [ ] แยก test DB จาก local/production; script reset ต้องตรวจ environment/DB ชัดเจน
-- [ ] ระบุคำสั่ง exact install/migrate/seed/dev/build/test หลังสร้างแล้ว; ก่อนนั้นใช้สถานะ planned ไม่อ้างผลสำเร็จ
+Owner A; reviewer B. Dependency: accepted G0, [PR #44](https://github.com/zerotwobook/fastTrack/pull/44). Task branch: `build/s1-a-scaffold` from accepted staging merge `30fc5ef`. App source remains under `Project_code/`.
 
-ส่งให้ B ตรวจ: file tree, manifests/scripts, env names, API bootstrap และวิธีต่อ test DB
+- [x] Inspect the actual tree/runtime before creating client, server, e2e and docs/contracts/evidence/decisions.
+- [x] Set up compatible pinned TypeScript/build/test scripts and one npm workspace lockfile; no authentication or business feature in this task.
+- [x] Document verified Node/npm/package versions, observed PostgreSQL image version, exact working directories and commands in [the technical README](../Project_code/README.md). Actual DB integration remains B00.
+- [x] Configure `/api`, safe errors/generated request IDs, environment validation and the same-origin Vite proxy. Keep JSON parsing behind each protected route's session/role/source checks.
+- [x] Record explicit module export/composition seams in [the contract](../Project_code/docs/contracts/sprint-1-module-boundaries.md); A owns composition/manifests/lockfile and B owns milestone/feedback modules.
+- [x] Add server `.env.example` and ignore rules; no real credentials, local env or generated files enter Git.
+- [x] Add and unit-test the distinct test-database guard. No reset, schema, migrate or seed command is invented before B00.
+- [x] Run install/typecheck/test/build in a fresh clone and verify dev/proxy/compiled-server/browser smoke. Record actual checks and limits in [A00 evidence](../Project_code/docs/evidence/R1-A00-scaffold.md).
+- [ ] B reproduces the tree/scripts/env/API/test-DB boundary on the actual PR head and records peer approval or requested changes.
+- [ ] Merge the reviewed scaffold into `staging/sprint-1`, then unblock B00. Do not mark G1 passed or start dependent F-01/F-02 before the real B foundation and joint check.
+
+B's review covers the file tree, manifests/lockfile, runtime, env names, API bootstrap, parser order, safe errors, test-DB guard and source ownership. The native tracked-PR merge rule moves its card to Done only after an actual merge; task-Issue completion and gate acceptance must be reconciled from evidence separately.
 
 ### R1-A01: F-01 identity และทีมที่มีสิทธิ์
 
