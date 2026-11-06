@@ -10,6 +10,7 @@
     "src/**/*.test.ts",
     "src/**/*.g1.ts",
     "src/**/*.auth.ts",
-    "src/**/*.b01.ts"
+    "src/**/*.b01.ts",
+    "src/**/*.a02.ts"
   ]
 }
