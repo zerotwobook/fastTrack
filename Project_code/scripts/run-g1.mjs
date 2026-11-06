@@ -41,9 +41,10 @@ function stage(name, script, env, required = false) {
   if (script === 'test:g1') {
     try {
       const tests = JSON.parse(readFileSync(testReport, 'utf8'));
-      report.g1Tests = { passed: tests.numPassedTests, failed: tests.numFailedTests,
+      report.g1Tests = { passed: tests.numPassedTests, failed: tests.numFailedTests, failedSuites: tests.numFailedTestSuites,
         cases: tests.testResults.flatMap(file => file.assertionResults.map(test => ({ name: test.fullName, status: test.status }))) };
-      process.stdout.write(`G1 cases: ${report.g1Tests.passed} passed, ${report.g1Tests.failed} failed.\n`);
+      process.stdout.write(`G1 cases: ${report.g1Tests.passed} passed, ${report.g1Tests.failed} failed; ${report.g1Tests.failedSuites} failed suites.\n`);
+      for (const suite of tests.testResults.filter(suite => suite.status === 'failed' && suite.assertionResults.length === 0)) process.stderr.write(redact(suite.message) + '\n');
       for (const test of report.g1Tests.cases.filter(test => test.status !== 'passed')) process.stdout.write(`${test.status}: ${test.name}\n`);
     } catch { report.testReportError = 'No readable Vitest report.'; }
   }

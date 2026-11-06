@@ -31,7 +31,7 @@ async function fingerprint(db) {
   const foreignKeys = await db.$queryRawUnsafe("SELECT count(*)::int AS count FROM pg_constraint WHERE contype='f' AND connamespace='public'::regnamespace");
   const columns = await db.$queryRawUnsafe(`SELECT table_name,column_name,data_type,character_maximum_length,is_nullable,column_default
     FROM information_schema.columns WHERE table_schema='public' AND table_name IN ${tableNames} ORDER BY table_name,column_name`);
-  const constraints = await db.$queryRawUnsafe(`SELECT r.relname AS table_name,c.conname,c.contype,pg_get_constraintdef(c.oid) AS definition
+  const constraints = await db.$queryRawUnsafe(`SELECT r.relname AS table_name,c.conname,c.contype::text AS contype,pg_get_constraintdef(c.oid) AS definition
     FROM pg_constraint c JOIN pg_class r ON c.conrelid=r.oid JOIN pg_namespace n ON r.relnamespace=n.oid
     WHERE n.nspname='public' AND r.relname IN ${tableNames} ORDER BY r.relname,c.conname`);
   const indexes = await db.$queryRawUnsafe(`SELECT tablename,indexname,indexdef FROM pg_indexes WHERE schemaname='public' AND tablename IN ${tableNames} ORDER BY tablename,indexname`);

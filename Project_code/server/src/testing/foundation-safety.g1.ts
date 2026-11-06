@@ -55,7 +55,7 @@ function canaryData() {
     studentId: randomUUID(), passwordHash: 'synthetic-test-hash' };
 }
 
-describe.sequential('G1 canonical boundaries and fixture-client isolation', () => {
+describe('G1 canonical boundaries and fixture-client isolation', () => {
   it.each(fields)('accepts the exact code-point maximum for $name', async ({ name, max }) => {
     const value = valueAt(name, max);
     await rollback(async tx => { expect(await persist(tx, name, value)).toBe(value); });
