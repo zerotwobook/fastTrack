@@ -1,6 +1,6 @@
 ﻿# รอบ 1 — Sprint 1: ระบบหลักที่ใช้งานจริง และ Deliverable 1
 
-> แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: PLANNED
+> แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: Backlog
 > A = คุณผู้ใช้, B = เพื่อนร่วมทีม ทั้งสองเป็นนักพัฒนาและ reviewer สลับกัน
 > วันส่ง D1: 8 พฤศจิกายน 2026 เวลา 23:59 น. (Asia/Bangkok)
 > ไฟล์นี้เป็นคำสั่งทำงานและเกณฑ์ตรวจ ไม่ใช่หลักฐานว่าทำเสร็จแล้ว
@@ -335,7 +335,7 @@ AI ช่วยเตรียม artifact ได้ แต่ไม่ upload �
 Task / owner:
 Branch / commit / PR:
 Contract baseline / affected requirements:
-Implementation status: PLANNED | IN PROGRESS | REVIEW | MERGED
+Implementation status: Backlog | Specified | Started | PR Review | Fixing | Done
 Verification: NOT RUN | FAILED | PASSED (command + output link)
 Human check: PENDING | A checked ... | B checked ...
 Gate / finding / follow-up:

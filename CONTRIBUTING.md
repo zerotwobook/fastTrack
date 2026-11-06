@@ -8,10 +8,12 @@ A = [zerotwobook](https://github.com/zerotwobook) / B = [Atip-Infa](https://gith
 
 - เลือกมุมมอง A/B เพื่อดูงานของตนรวมงานร่วม เลือก Sprint เพื่อจำกัดรอบ
 - Task ID เชื่อมกลับแผน; Owner A/B/SHARED เป็นบทบาท ส่วน Assignees คือบัญชีจริง
-- Status ใช้ PLANNED → IN PROGRESS → REVIEW → MERGED; Verification และ Acceptance เป็นคนละฟิลด์และเปลี่ยนเมื่อมีผลจริง
-- Issues เริ่ม PLANNED / NOT RUN / PENDING; PR ตั้งค่า GitHub อยู่ REVIEW และยังรอ peer approval
+- Status ใช้ Backlog → Specified → Started → PR Review → Fixing → Done; Verification และ Acceptance เป็นคนละฟิลด์และเปลี่ยนเมื่อมีผลจริง
+- Issues เริ่ม Backlog / NOT RUN / PENDING; PR ตั้งค่า GitHub อยู่ PR Review และยังรอ peer approval
 - `blocked` และ native dependencies แสดงสิ่งที่ต้องรอ; ต้องตรวจ gate ไม่ถือแค่ Issue ปิดว่า acceptance ผ่านแล้ว
 - เมื่อเปิด task/defect/PR ใหม่ให้เพิ่มเข้า Project นี้และกรอก Sprint/Owner/Task ID ไม่ถือว่าระบบเพิ่มหรือย้ายสถานะให้อัตโนมัติ
+
+Fixing เป็นทางแก้เมื่อ review/checks ไม่ผ่าน: PR Review → Fixing → PR Review; เมื่อ review ผ่านและ merge จริงจึง Done งานที่ review ผ่านครั้งแรกไป Done ได้โดยตรง
 
 ## เริ่มจากงานที่มีอยู่
 
@@ -43,7 +45,7 @@ Ruleset ของ repo บังคับ PR พร้อม approval 1 คน�
 
 ## สถานะและการรับงาน
 
-ใช้ PLANNED → IN PROGRESS → REVIEW → MERGED ตาม workflow; แยก verification NOT RUN/FAILED/PASSED กับ acceptance PENDING/ACCEPTED ไม่ถือปิด Issue ว่าผ่านทุก gate
+ใช้ Backlog → Specified → Started → PR Review → Fixing → Done ตาม workflow; แยก verification NOT RUN/FAILED/PASSED กับ acceptance PENDING/ACCEPTED ไม่ถือปิด Issue ว่าผ่านทุก gate
 
 Author ส่ง Task/Issue/PR, commit, สิ่งที่เปลี่ยน, วิธีลอง, actual tests/results และจุดให้เพื่อน review ก่อน merge บน staging ให้ตรวจ Issue linkage และปิด Issue ด้วยผลจริงเมื่อเข้าเกณฑ์ ไม่สมมติว่า Closes จะปิดบน non-default branch ให้เอง
 

@@ -134,7 +134,20 @@ Author ส่ง handoff สั้น ๆ 6 อย่าง: **Task/Issue/PR + c
 
 Release captain เลือกหนึ่งคนต่อ release: รอบ 1 A นำ/B review, รอบ 2 B นำ/A review, รอบ 3 A นำ D2 และ B นำ Final โดยอีกคน review ทั้งคู่ช่วยตรวจ integration เสมอ ถ้าต้องสลับให้บันทึกก่อน ไม่ต้องสร้าง release PR สองใบแข่งกัน
 
-สถานะที่ใช้ใน board/Issue ที่มีจริง: PLANNED → IN PROGRESS → REVIEW → MERGED ส่วน verification ใช้ NOT RUN/FAILED/PASSED และ acceptance gate ใช้ PENDING/ACCEPTED แยกกัน **MERGED ไม่เท่ากับผ่านทุก acceptance หรือส่งงานแล้ว**
+สถานะที่ใช้ใน board/Issue ที่มีจริง: Backlog → Specified → Started → PR Review → Fixing → Done ส่วน verification ใช้ NOT RUN/FAILED/PASSED และ acceptance gate ใช้ PENDING/ACCEPTED แยกกัน **Done หมายถึงงานผ่านเกณฑ์ของ task และ merge เข้า branch ถัดไปจริง ไม่เท่ากับผ่านทุก acceptance หรือส่งงานแล้ว**
+
+คอลัมน์เรียงตามที่ทีมกำหนด โดยเดินงานหลัก Backlog → Specified → Started → PR Review → Done ถ้า review/checks ต้องแก้ ให้เข้า Fixing แล้วส่งกลับ PR Review ก่อน Done ไม่จำเป็นต้องผ่าน Fixing เมื่อไม่มีข้อแก้ไข
+
+| Status | ความหมาย / เงื่อนไข |
+|---|---|
+| Backlog | รับงานเข้าหรือยังไม่พร้อมเริ่ม ไม่อ้างว่าสเปกผ่าน review แล้ว |
+| Specified | Scope/contracts/acceptance ชัดและทบทวนแล้ว; ยังต้องตรวจ dependency/gate ก่อนเริ่ม |
+| Started | กำลังพัฒนาบน task branch ของ owner |
+| PR Review | เปิด PR ให้เพื่อนตรวจ behavior/tests และผลจริง |
+| Fixing | แก้ review comments หรือ checks ที่ไม่ผ่าน แล้วส่งกลับ PR Review |
+| Done | ผ่านเกณฑ์ task และ merge เข้า staging/main ตามประเภท PR จริง; ไม่แทน final release acceptance |
+
+ข้อความสถานะเดิมใน Issue ที่สร้างก่อนปรับบอร์ดใช้ mapping: PLANNED = Backlog, IN PROGRESS = Started, REVIEW = PR Review, MERGED = Done ให้ใช้ค่าบนบอร์ดปัจจุบัน ไม่สร้าง Issue ใหม่เพียงเพื่อเปลี่ยนชื่อสถานะ
 
 ## 5. TDD, CI และหลักฐาน
 
