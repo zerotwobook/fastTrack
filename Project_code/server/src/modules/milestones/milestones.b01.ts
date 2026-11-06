@@ -80,6 +80,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
       .set('content-type', 'application/json')
       .send({
         title: 'Student Milestone Attempt',
+        description: 'Valid synthetic milestone description.',
         dueAt: futureDue,
       });
 
@@ -97,6 +98,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
       .set('content-type', 'application/json')
       .send({
         title: 'Unauthorized Cross-Team Milestone',
+        description: 'Valid synthetic milestone description.',
         dueAt: futureDue,
       });
 
@@ -112,6 +114,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
       .set('content-type', 'application/json')
       .send({
         title: 'Past Milestone',
+        description: 'Valid synthetic milestone description.',
         dueAt: pastDue,
       });
 
@@ -128,6 +131,7 @@ describe('Milestones Module (T-05, T-06, T-07, T-08, T-25)', () => {
       .set('content-type', 'application/json')
       .send({
         title: 'x'.repeat(121),
+        description: 'Valid synthetic milestone description.',
         dueAt: futureDue,
       });
 
