@@ -1,52 +1,56 @@
-# ทำงานร่วมกันบน GitHub
+# Contributing to fastTrack
 
-A = [zerotwobook](https://github.com/zerotwobook) / B = [Atip-Infa](https://github.com/Atip-Infa) ทั้งคู่พัฒนา feature และ review งานของกันและกัน อ่าน [SKILL_Project](skill/SKILL_Project.md), [Git skill](skill/SKILL_Github.md) และ [workflow](workflow/README.md) ก่อนเริ่ม
+A = [zerotwobook](https://github.com/zerotwobook); B = [Atip-Infa](https://github.com/Atip-Infa). Both implement features and review each other's work. Read [SKILL_Project](skill/SKILL_Project.md), the [Git skill](skill/SKILL_Github.md) and the [workflow](workflow/README.md) first.
 
-## ใช้ Project board
+## Language policy
 
-เปิด [fastTrack — Team Delivery](https://github.com/users/zerotwobook/projects/3) ซึ่งเชื่อมกับ repository และให้ Atip-Infa สิทธิ์ WRITER แล้ว มีมุมมอง All work, Sprint 1–3, A, B และ Blocked / Dependencies
+Conversation with the user may be Thai. **All newly authored or revised project content must be English**, including code comments/docstrings, UI text, documentation, tests, commits, Issues, PRs, reviews and Project metadata. Translate the legacy section being edited; do not rewrite unrelated legacy files or instructor source artifacts automatically. Follow [SKILL_Project section 1](skill/SKILL_Project.md) for details.
 
-- เลือกมุมมอง A/B เพื่อดูงานของตนรวมงานร่วม เลือก Sprint เพื่อจำกัดรอบ
-- Task ID เชื่อมกลับแผน; Owner A/B/SHARED เป็นบทบาท ส่วน Assignees คือบัญชีจริง
-- Status ใช้ Backlog → Specified → Started → PR Review → Fixing → Done; Verification และ Acceptance เป็นคนละฟิลด์และเปลี่ยนเมื่อมีผลจริง
-- Issues เริ่ม Backlog / NOT RUN / PENDING; PR ตั้งค่า GitHub อยู่ PR Review และยังรอ peer approval
-- `blocked` และ native dependencies แสดงสิ่งที่ต้องรอ; ต้องตรวจ gate ไม่ถือแค่ Issue ปิดว่า acceptance ผ่านแล้ว
-- เมื่อเปิด task/defect/PR ใหม่ให้เพิ่มเข้า Project นี้และกรอก Sprint/Owner/Task ID ไม่ถือว่าระบบเพิ่มหรือย้ายสถานะให้อัตโนมัติ
+## Project board
 
-Fixing เป็นทางแก้เมื่อ review/checks ไม่ผ่าน: PR Review → Fixing → PR Review; เมื่อ review ผ่านและ merge จริงจึง Done งานที่ review ผ่านครั้งแรกไป Done ได้โดยตรง
+Use [fastTrack — Team Delivery](https://github.com/users/zerotwobook/projects/3), linked to this repository. Atip-Infa has WRITER access. Views include all work, Sprints 1-3, A, B and blocked dependencies.
 
-## เริ่มจากงานที่มีอยู่
+- A/B views include jointly assigned work. Sprint views narrow the round.
+- Task ID refers to the workflow. Owner means A/B/SHARED; Assignees are real GitHub accounts.
+- Status: Backlog -> Specified -> Started -> PR Review -> Fixing -> Done. Update Verification and Acceptance only from actual results.
+- Initially, implementation tasks are Backlog / NOT RUN / PENDING. The setup PR is in PR Review until approved and merged.
+- Check native dependencies, the blocked label and actual gate decisions; a closed Issue does not prove acceptance.
+- Add new tasks/defects/PRs to this Project and populate Sprint/Owner/Task ID. Do not assume automatic addition or status movement.
 
-- [Issues ทั้งหมด](https://github.com/zerotwobook/fastTrack/issues): สร้างจาก Task IDs ทั้ง 3 รอบแล้ว ใช้ Issue เดิมของ task ไม่เปิดซ้ำ
-- [Milestones](https://github.com/zerotwobook/fastTrack/milestones): D1, Lab 5, Lab 6, Lab 7, D2 และ Final; วันส่งแสดงใน milestone ส่วนเวลา 23:59 Asia/Bangkok อยู่ใน description/workflow
-- [R1-J00 / G0](https://github.com/zerotwobook/fastTrack/issues/2): งานเริ่มต้นร่วมกัน ต้องบันทึกการยอมรับ baseline/เวลาว่าง/eligibility จริง
-- A รับ [R1-A00 scaffold](https://github.com/zerotwobook/fastTrack/issues/3); B เตรียมแบบและรับ [R1-B00 schema/UI foundation](https://github.com/zerotwobook/fastTrack/issues/4) หลัง scaffold merge ตามแผน
+Requested changes follow PR Review -> Fixing -> PR Review. A review that passes immediately can proceed to Done after the actual merge; Fixing is not mandatory when there are no changes to make.
 
-Issues ถูก assign ให้ owner จริงแล้ว งานร่วม assign ทั้งสองคน Labels `sprint:1/2/3`, `owner:A/B/shared`, `lab5/6/7` ใช้กรองงาน โดย `blocked` หมายถึงยังรอ dependency/gate ก่อน implementation ให้เอาออกเมื่อเงื่อนไขผ่านจริง Native dependency graph แสดงงานที่ต้องรอเพิ่มเติมใน Issue
+## Existing work
 
-## Branch และ PR
+- [Issues](https://github.com/zerotwobook/fastTrack/issues): 38 planned task Issues across three sprints; reuse the existing Task ID instead of creating duplicates.
+- [Milestones](https://github.com/zerotwobook/fastTrack/milestones): D1, Lab 5, Lab 6, Lab 7, D2 and Final. Official 23:59 Asia/Bangkok cutoffs are in descriptions/workflow; GitHub milestone fields display dates.
+- [R1-J00 / G0, Issue #2](https://github.com/zerotwobook/fastTrack/issues/2): jointly accept the real baseline, availability and topic eligibility.
+- A owns [R1-A00 scaffold, #3](https://github.com/zerotwobook/fastTrack/issues/3). B prepares [R1-B00 schema/UI, #4](https://github.com/zerotwobook/fastTrack/issues/4), then implements after syncing A's reviewed/merged scaffold.
 
-มี `staging/sprint-1` เตรียมจาก planning baseline บน main แล้ว การสร้าง branch ไม่ถือว่า G0 หรือ working Sprint 1 ผ่าน ตรวจ shared baseline จริงก่อนเริ่ม ไม่สร้าง staging ชื่อเดียวกันซ้ำหรือ reset งานเพื่อน
+Issues are assigned to their actual owners; shared work is assigned to both. Filter with sprint:1/2/3, owner:A/B/shared and lab5/6/7. Remove blocked only when the relevant dependency/gate is genuinely satisfied.
+
+## Branches and PRs
+
+staging/sprint-1 has been prepared from the main planning baseline. Branch creation does not accept G0 or a working S1 release. Verify the actual shared baseline rather than resetting or recreating a teammate's staging branch.
 
 ```bash
 git fetch origin
 git status --short --branch
-# งานใหม่และ working tree ที่ตรวจแล้วเท่านั้น: แทน <task-branch> ด้วยชื่อของตน
+# New task only, after inspecting the working tree and replacing the placeholder:
 git switch -c <task-branch> origin/staging/sprint-1
 ```
 
-A/B ใช้คนละ clone/worktree App code อยู่ใน `Project_code/` ดู shared-file owners ในแผน ก่อนแก้ schema/router/DTO/lockfile ต้องตกลงผู้รวมและ sync dependency ไม่แก้พร้อมกันโดยไม่ประสาน
+Use separate clones/worktrees and keep app code under Project_code/. Coordinate shared schema/router/DTO/lockfile changes with the designated owner.
 
-Task PR → staging → เพื่อน review/approve → merge commit เมื่อผ่าน integration จึง release PR → main ผู้เขียนไม่ approve ตัวเอง งานเก็บ RED/GREEN และ sync main กลับ staging ต้องรักษา history ตาม workflow
+Task PR -> staging -> peer review/approval -> merge commit. After integration, use a reviewed release PR into main. The author does not approve their own PR. Preserve RED/GREEN and main-to-staging synchronization history.
 
-Ruleset ของ repo บังคับ PR พร้อม approval 1 คนบน main และ `staging/sprint-*`, ยกเลิก approval เมื่อมี code changes ใหม่, resolve review conversations และห้าม force push/ลบ branch ไม่มี bypass actor ที่ตั้งไว้ Merge ใช้ merge commit และไม่เปิด auto-delete branch เพื่อรักษา staging หลัง release
+The active ruleset requires one peer approval on main and staging/sprint-*, dismisses stale approvals after reviewable changes, requires resolved conversations and blocks force pushes/deletion. No bypass actors are configured. Merge commits are enabled; automatic branch deletion stays off to preserve staging after a release.
 
-ยังไม่ผูก required CI context ที่ไม่มีจริง เมื่อทำ [R2-B01 / Lab 5](https://github.com/zerotwobook/fastTrack/issues/15) ต้องสร้าง meaningful build/tests/Docker workflow ให้รันจริงก่อน แล้วเพิ่ม required checks/up-to-date policy พร้อม failed-gate proof ตาม handout ห้ามถือ PR approval ปัจจุบันแทน CI gate ของ Lab 5
+No nonexistent CI context is required. [R2-B01 / Lab 5, #15](https://github.com/zerotwobook/fastTrack/issues/15) must create meaningful tests/build/Docker checks, then require the real check/up-to-date policy and prove a failing check blocks merge. Current peer approval is not the Lab 5 CI gate.
 
-## สถานะและการรับงาน
+## Handoff and acceptance
 
-ใช้ Backlog → Specified → Started → PR Review → Fixing → Done ตาม workflow; แยก verification NOT RUN/FAILED/PASSED กับ acceptance PENDING/ACCEPTED ไม่ถือปิด Issue ว่าผ่านทุก gate
+Keep board Status separate from Verification NOT RUN/FAILED/PASSED and Acceptance PENDING/ACCEPTED. Done means task criteria plus an actual integration merge, not all release/assessment gates.
 
-Author ส่ง Task/Issue/PR, commit, สิ่งที่เปลี่ยน, วิธีลอง, actual tests/results และจุดให้เพื่อน review ก่อน merge บน staging ให้ตรวจ Issue linkage และปิด Issue ด้วยผลจริงเมื่อเข้าเกณฑ์ ไม่สมมติว่า Closes จะปิดบน non-default branch ให้เอง
+Provide Task/Issue/PR, commit, changed behavior, reproduction instructions, actual checks/results and review focus. Verify Issue linkage for staging PRs; do not assume Closes automatically closes an Issue on a non-default branch.
 
-งานเอกสาร/แบบไม่ได้ยืนยัน app ทำงานแล้ว เวลาว่าง/ชื่อรหัส/สิทธิ์หัวข้อ/TA approval/UAT ต้องมีหลักฐานจริงตาม checkpoint ที่เกี่ยวข้อง
+Plans/designs do not prove working software. Member details, availability, eligibility, TA approval, UAT, tests and submission receipts require real evidence.

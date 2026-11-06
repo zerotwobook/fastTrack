@@ -1,5 +1,7 @@
 ﻿# fastTrack workflow — เริ่มใช้แผนจากหน้านี้
 
+> Language policy: conversation may be Thai; all newly authored or revised project content must be English. Read [SKILL_Project](../skill/SKILL_Project.md) and [AGENTS.md](../AGENTS.md). Translate legacy sections when editing them; unrelated existing sources are outside this change.
+
 > ทบทวน 6 พฤศจิกายน 2026 | A = คุณ / B = เพื่อน
 > มีแผนพัฒนา 3 รอบ และงานส่ง 6 ชุด; README นี้เป็นคู่มือใช้งาน ไม่ใช่รอบที่ 4
 > แผนพร้อมใช้เป็นรายการงาน แต่การอนุมัติ การพัฒนา tests และ submission ต้องมีหลักฐานจริงก่อนระบุว่าเสร็จ

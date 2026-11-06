@@ -1,5 +1,7 @@
 ﻿# รอบ 2 — Sprint 2: ขยายระบบ พร้อม Lab 5, Lab 6 และ Lab 7
 
+> Language policy: conversation may be Thai; all newly authored or revised project content must be English. Read [SKILL_Project](../skill/SKILL_Project.md) and [AGENTS.md](../AGENTS.md). Translate legacy sections when editing them; unrelated existing sources are outside this change.
+
 > แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: Backlog
 > A = คุณผู้ใช้, B = เพื่อน; ทั้งสองเขียนโค้ด/tests/review และมีส่วนร่วม delivery
 > เป้าหมายภายใน: accepted Sprint 2 ภายใน 24 พฤศจิกายน 2026

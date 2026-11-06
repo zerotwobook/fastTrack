@@ -1,28 +1,29 @@
 ## Task / Issue / Owner
 
-Task ID และ Issue:
-Owner A/B และ reviewer:
-Target staging ของรอบ หรือเหตุผลที่เป็น release/sync PR เข้า main:
+Task ID and related Issue:
+Owner A/B and reviewer:
+Target sprint staging, or the reason for a release/sync PR into main:
 
-## พฤติกรรมที่เปลี่ยน
+## Behavior change
 
-อธิบายผลลัพธ์ที่ผู้ใช้ได้รับและ source/contract ที่เกี่ยวข้อง
+Explain the resulting behavior and the relevant source/contract.
 
-## วิธีตรวจและผลจริง
+## Actual verification
 
 - Commands / environment / tested commit:
-- Actual results (หรือ NOT RUN พร้อมเหตุผล):
-- ขั้นตอนให้เพื่อนลอง happy path และ rule/access ที่เกี่ยวข้อง:
+- Actual results, or NOT RUN with a reason:
+- Happy-path and rule/access steps for the reviewer:
 
-## Dependencies และ shared files
+## Dependencies and shared files
 
-ระบุ schema/migrations/DTO/router/lockfile/UI tokens ที่กระทบ และ owner ที่ประสานแล้ว
+Identify affected schema/migrations/DTO/router/lockfile/UI tokens and the coordinated owners.
 
-## Review / Handoff
+## Review handoff
 
-- [ ] ขอบเขตตรง Issue และ workflow; app code อยู่ใต้ Project_code/
-- [ ] อ่าน SKILL_Project และ SKILL_Github; งาน UI ใช้ SKILL_UI และ project detail §8
-- [ ] ไม่มี secrets หรือ local env จริง
-- [ ] แยก implemented/verified/reviewed/merged ตามจริง; author ไม่ approve ตัวเอง
+- [ ] Scope matches the Issue/workflow; application code is under Project_code/.
+- [ ] Read SKILL_Project and SKILL_Github; UI work follows SKILL_UI and project detail section 8.
+- [ ] All newly authored or revised project content, including this PR, is English. Conversation may be Thai.
+- [ ] No real secrets or local env files are included.
+- [ ] Implementation, verification, peer review and merge states are factual; the author does not self-approve.
 
-PR ไป staging ให้ link Issue ด้วย Related #... และตรวจ Development linkage จริง การใช้ Closes บน non-default branch ไม่รับรองว่า Issue จะปิดอัตโนมัติ
+For staging PRs, use Related #... and verify the actual Development relationship. Closes on a non-default branch does not guarantee automatic Issue closure.

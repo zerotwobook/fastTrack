@@ -1,8 +1,11 @@
 name: Bug / Defect
-description: แจ้ง defect ที่ reproduce ได้ รวม UAT และ regression
+description: Report a reproducible defect, including UAT and regression findings
 labels:
   - bug
 body:
+  - type: markdown
+    attributes:
+      value: Write the title, reproduction steps and all other Issue content in English. Never include passwords or tokens.
   - type: input
     id: version
     attributes:
@@ -13,14 +16,14 @@ body:
     id: reproduce
     attributes:
       label: Role / Preconditions / Steps
-      description: ระบุขั้นตอนที่ทำให้พบปัญหาจริง ห้ามใส่ password/token/secrets
+      description: Provide actual reproduction steps without secrets or private credentials.
     validations:
       required: true
   - type: textarea
     id: expected
     attributes:
-      label: Expected และ Actual
-      description: อ้าง FR/BR/AC หรือ contract ที่ไม่ผ่าน พร้อมผลจริงที่พบ
+      label: Expected and actual behavior
+      description: Reference the affected FR/BR/AC or contract and the observed result.
     validations:
       required: true
   - type: textarea
@@ -33,4 +36,4 @@ body:
     id: retest
     attributes:
       label: Fix / Regression / Independent retest
-      description: เพิ่มเมื่อทำจริง ระบุ test/commit/ผู้ทดสอบ/ผล ไม่ปิด Issue จากภาพอย่างเดียว
+      description: Add real tests, commits, testers and results when available. A screenshot alone does not close a defect.

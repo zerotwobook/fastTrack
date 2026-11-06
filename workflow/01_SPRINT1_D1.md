@@ -1,5 +1,7 @@
 ﻿# รอบ 1 — Sprint 1: ระบบหลักที่ใช้งานจริง และ Deliverable 1
 
+> Language policy: conversation may be Thai; all newly authored or revised project content must be English. Read [SKILL_Project](../skill/SKILL_Project.md) and [AGENTS.md](../AGENTS.md). Translate legacy sections when editing them; unrelated existing sources are outside this change.
+
 > แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: Backlog
 > A = คุณผู้ใช้, B = เพื่อนร่วมทีม ทั้งสองเป็นนักพัฒนาและ reviewer สลับกัน
 > วันส่ง D1: 8 พฤศจิกายน 2026 เวลา 23:59 น. (Asia/Bangkok)
