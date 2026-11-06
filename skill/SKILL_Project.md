@@ -1,82 +1,91 @@
 ---
 name: fasttrack-project
-description: Develop or modify the fastTrack project using its Project_code directory, sprint workflow, teammate ownership, Git branches, and established UI design. Read before implementing project features or changing its UI.
+description: Develop or modify fastTrack using its Project_code directory, sprint workflow, teammate ownership, task branches, established UI and English-only project artifacts. Read before implementation or UI changes.
 ---
 
-# SKILL_Project — กติกาพัฒนา fastTrack
+# SKILL_Project — fastTrack project rules
 
-ใช้ไฟล์นี้เป็นจุดเริ่มก่อนพัฒนาหรือแก้ไขแอป fastTrack ทั้งสำหรับคุณ เพื่อน และ AI ที่รับงานต่อ กติกานี้ใช้กับ repository นี้โดยเฉพาะ โดย **A = คุณ / B = เพื่อน** ตาม workflow; ตรวจตัวตนผู้รับงานจริง ไม่สมมติว่าทุก session เป็น A
+Apply this repository-specific guide before developing or changing fastTrack. A is the project owner (`zerotwobook`); B is the teammate (`Atip-Infa`). Identify the actual task owner instead of assuming every AI session works for A.
 
-## 1. อ่านก่อนเริ่มงาน
+## 1. Language policy
 
-1. อ่าน [workflow/README.md](../workflow/README.md) เพื่อเข้าใจกติกากลาง แล้วอ่านแผนรอบปัจจุบัน:
-   - [รอบ 1 — Sprint 1 / D1](../workflow/01_SPRINT1_D1.md)
-   - [รอบ 2 — Sprint 2 / Labs 5–7](../workflow/02_SPRINT2_LABS5-7.md)
-   - [รอบ 3 — Sprint 3 / D2 / Final](../workflow/03_SPRINT3_D2_FINAL.md)
-2. ระบุ **owner A/B, Task ID, scope, dependencies, shared-file owner และ checkpoint** จากแผนก่อนแก้ไฟล์ อ่านรายละเอียดของ task ไม่อาศัยชื่อ feature อย่างเดียว
-3. อ่าน [Project_doc/project_detail.md](../Project_doc/project_detail.md) ส่วนที่เกี่ยวข้องกับงาน: §5 requirements/rules, §6 feature allocation, §7 architecture/data, §8 UI, §9 API, §10 progress, §11 acceptance และ contracts ที่ task อ้าง
-4. **ก่อนเริ่มเขียนโค้ดหรือทำ Git อ่าน [SKILL_Github.md](SKILL_Github.md) ทั้งไฟล์** แล้วตรวจ repository instructions, current branch, working tree และ Issue/PR ที่เกี่ยวข้องจริง
-5. **ก่อนออกแบบหรือแก้หน้าจอ อ่าน [SKILL_UI.md](SKILL_UI.md) ทั้งไฟล์** พร้อม project detail §8 และ component/token ที่มีอยู่จริง
+**Conversation may be in Thai. All newly authored or revised project content must be English.** A Thai request is not permission to write Thai into project artifacts.
 
-อ่านไฟล์ที่ยังไม่อ่านหรือที่เปลี่ยนจากครั้งล่าสุด ไม่ต้องอ่านซ้ำทุกคำสั่ง หากไม่ทราบ owner/task จนแบ่งงานไม่ได้ ให้ถามเฉพาะข้อมูลที่ขาด; ระหว่างรอทำการตรวจเอกสารหรือ dependencies ที่ไม่เสี่ยงแก้ทับงานเพื่อนได้
+This applies to code comments/docstrings, identifiers and descriptive strings, UI labels/errors/help/empty states, test names/descriptions, README/specifications/contracts/reports, commit messages/branch descriptions, Issues, PRs, review text, labels/milestones and Project descriptions/fields.
 
-## 2. ที่อยู่โค้ดและเอกสาร
+Preserve technical identifiers, paths, URLs, proper names and the identity of original external source artifacts. For Unicode tests, use explicit escaped sample values with English descriptions when non-English data is required. Existing Thai source documents are not automatically rewritten: translate the section you actively revise, and keep unrelated legacy content outside the current change. New English UI copy takes precedence over Thai wording in older mockups while preserving their visual direction and behavior.
 
-**โค้ดแอปทั้งหมดต้องพัฒนาใน `Project_code/` ที่ repo root** ได้แก่ frontend, backend, shared contracts, automated tests, schema/migrations/seed, app assets และ app build/runtime configuration ตามโครงสร้างที่ตกลงใน project detail §7.2 และ workflow
+## 2. Read before starting
 
-- ตรวจโครงสร้างที่มีจริงก่อนสร้าง scaffold; ใช้แอปเดิมต่อยอดทั้งสามรอบ ไม่สร้างแอปซ้ำในแต่ละ Sprint
-- ไม่วาง source app ที่ repo root, `workflow/`, `Project_doc/`, `deliverable _file/` หรือแก้ starter ใน `lab_file/` แทนแอปจริง
-- วางเอกสารแผนใน `workflow/`, แบบผลิตภัณฑ์ใน `Project_doc/` และงานส่งตาม path ที่แผนกำหนด
-- ไฟล์ระดับ repository ที่ต้องอยู่นอกโฟลเดอร์แอปให้คง path ที่ถูกต้อง เช่น `.github/workflows/`, `.gitignore`, `skill/` และ `docs/labs/lab-05/deployment.md` ตาม Lab 5; ไม่ย้าย GitHub Actions เข้า `Project_code/`
-- ทุกคำสั่ง install/build/test/Docker/CI ต้องใช้ working directory และ paths ที่ตรงโครงสร้างจริง ไม่สร้าง package/lockfile ซ้ำที่ root โดยไม่จำเป็น
+1. Read [workflow/README.md](../workflow/README.md), then the current round: [Sprint 1 / D1](../workflow/01_SPRINT1_D1.md), [Sprint 2 / Labs 5-7](../workflow/02_SPRINT2_LABS5-7.md), or [Sprint 3 / D2 / Final](../workflow/03_SPRINT3_D2_FINAL.md).
+2. Identify owner A/B, Task ID, scope, dependencies, shared-file owner and checkpoint. Read the actual task checklist, not just its title.
+3. Read the relevant [project detail](../Project_doc/project_detail.md): requirements/rules (5), allocation (6), architecture/data (7), UI (8), API (9), progress (10), acceptance (11), and the task's referenced contracts.
+4. **Read the complete [Git skill](SKILL_Github.md) before writing code or performing Git operations.** Inspect repository instructions, current branch/tree and the actual Issue/PR state.
+5. **Read the complete [UI skill](SKILL_UI.md) before designing or changing UI**, together with project detail section 8 and existing shared components/tokens.
 
-## 3. แยกงานและ branch เพื่อไม่แก้ทับกัน
+Reuse already-read guidance until it changes or the context requires a refresh. If missing owner/task information prevents safe work allocation, ask only for that missing information and continue independent read-only preparation where useful.
 
-- **งานใหม่ต้องมี task branch ใหม่ก่อนแก้ไฟล์** แตกจาก staging ของรอบตาม workflow เช่น `feature/s1-a-auth`, `feature/s1-b-milestones`; ใช้ชื่อที่บอก round/owner/task เมื่อเหมาะสม
-- แก้ review หรือทำ task เดิมต่อใช้ branch/PR เดิม หลังตรวจสถานะจริง ไม่เปิด branch ซ้ำทุกครั้งที่ AI เริ่ม session
-- ใช้ `staging/sprint-1`, `staging/sprint-2`, `staging/sprint-3` ตามรอบ; ถ้ายังไม่มี staging ให้ทำ bootstrap ตาม workflow/README §3.2 ก่อนเริ่ม feature implementation ไม่เดาฐานจาก branch ที่บังเอิญเปิดอยู่
-- A และ B ใช้ **คนละ clone หรือ worktree**; ห้ามสอง session สลับ branch ไปมาใน working directory เดียวกันพร้อมกัน
-- ทำเฉพาะ feature/task ที่ได้รับมอบหมายครบ UI/API/tests ตามขอบเขต ไม่หยิบงานเพื่อนมาแก้พร้อมกันโดยไม่ตกลงเจ้าของ
-- Branch แยกกันยังแก้ไฟล์เดียวกันชนกันได้: ตรวจตาราง shared files ของรอบ โดยเฉพาะ schema/migrations, DTO, auth, router, app shell, tokens และ lockfile ให้ owner รวมการเปลี่ยน shared interface ก่อน dependent feature
-- ระหว่างรอ dependency ทำ spec/test design/fixtures ที่ตกลงได้; การรับงานต้องตรวจ integration กับระบบจริง ไม่ใช้ mocks เป็นหลักฐานว่าระบบครบแล้ว
-- ก่อนรับงานเพื่อนให้ fetch และ sync ตาม workflow; หลัง release sync main กลับ staging ผ่านขั้นตอนที่กำหนด รักษา commit history และงานที่ยังไม่ commit ของทุกคน
-- ส่ง PR เข้า staging ให้เพื่อน review ก่อนรวม และใช้ reviewed release PR เข้า main ตามแผน ไม่เขียน feature ลง main/staging โดยตรง ไม่ self-approve หรือ merge แทน reviewer โดยไม่มีสิทธิ์อนุญาตตาม Git skill
+## 3. Code and document locations
 
-สำหรับงานเอกสารก่อนตั้ง staging ให้ใช้ docs branch ตาม bootstrap ที่ตกลง ตรวจ base/history และจำกัด diff ให้เฉพาะงานนั้น; งานตรวจอ่านอย่างเดียวไม่ต้องสร้าง branch หรือแก้ไฟล์
+**All application code belongs under repository-root `Project_code/`:** frontend, backend, shared contracts, automated tests, schema/migrations/seeds, assets and application build/runtime configuration, following project detail section 7.2 and the workflow.
 
-## 4. ออกแบบตามแบบที่กำหนดไว้
+- Inspect the existing tree before scaffolding; extend one application across all three sprints.
+- Do not implement the app in the repository root, workflow, project-design/report folders or the Lab 5 starter kit.
+- Keep plans in `workflow/`, product design in `Project_doc/`, and deliverables at their specified paths.
+- Use [README.md](../README.md) for the actual application overview and [Project_code/README.md](../Project_code/README.md) for verified code/setup details. Keep team coordination, AI prompts, task allocation and branch procedures in [DEVELOPMENT_README.md](../DEVELOPMENT_README.md), CONTRIBUTING and workflow. Before code exists, leave technical details explicitly pending rather than inventing features or commands.
+- Preserve required repository-level paths such as `.github/workflows/`, `.gitignore`, `skill/` and `docs/labs/lab-05/deployment.md`. GitHub Actions do not belong inside Project_code.
+- Use real working directories/build contexts for install/build/test/Docker/CI; do not create duplicate root packages or lockfiles unnecessarily.
 
-ใช้ **project detail §8 เป็น design brief ของ fastTrack** และใช้ SKILL_UI ช่วยทำแบบนั้นให้ดีขึ้น ไม่ตีความว่าให้คิดธีมใหม่ทุกครั้ง
+## 4. Task ownership and branch isolation
 
-- คงชื่อ **fastTrack**, ธีม **ขาว–ดำ–เทา**, white canvas และ black primary action; ใช้ color tokens จาก §8.3 ร่วมกันทั้งแอป
-- ใช้ **Inter + Noto Sans Thai** ตาม typography/weights/spacing ที่กำหนดใน §8.4 ไม่เปลี่ยนฟอนต์เองเพียงเพราะ UI skill แนะนำให้มีเอกลักษณ์
-- ยึด application shell, role-specific navigation, screen specifications/wireframes และ feature mapping ใน §8.5–8.7; ให้ milestone track, กำหนดส่ง, version และ feedback เป็นข้อมูลหลัก
-- ใช้ components/tokens ร่วมที่มีอยู่แล้ว ไม่สร้างชุดปุ่ม ฟอร์ม หรือสถานะอีกมาตรฐานหนึ่งใน feature ของตน
-- ทำ loading/empty/error/success, mobile layout, keyboard focus และ accessibility ตาม §8.8–8.11; status ใช้ข้อความ/ไอคอนตามแบบ ไม่เติมสีแดง/เขียวหรือ gradient นอกธีม
-- รักษาขอบเขตผลิตภัณฑ์และสิทธิ์ของ Student/Supervisor ตาม project detail; ไม่เพิ่ม feature หรือเปลี่ยนกฎธุรกิจเพื่อให้ mockup สวยขึ้น
+- **Create a new task branch before changing files for new work**, normally from the current sprint staging branch. Use meaningful round/owner/task names such as `feature/s1-a-auth` or `feature/s1-b-milestones`.
+- Continue the same branch/PR for the same task or review fixes after verifying current state; do not duplicate branches for every AI session.
+- Use `staging/sprint-1`, `staging/sprint-2`, `staging/sprint-3` according to the round. If missing, follow workflow README section 3.2 before feature implementation; do not assume the open branch is the right base.
+- A and B use separate clones/worktrees. Never run two sessions on different branches in one working directory simultaneously.
+- Each owner handles their assigned feature's UI/API/tests/documentation. Coordinate before taking over the other person's module.
+- Separate branches can still conflict: respect shared schema/migration, DTO, auth, routing, shell, token and lockfile owners. Integrate shared-interface changes before dependent features.
+- While waiting, prepare agreed specifications/test designs/fixtures. Integrated acceptance still requires the real system, not mocks.
+- Fetch/synchronize dependencies safely and sync main back to staging after releases as documented; preserve history and uncommitted work.
+- Task PR -> staging -> peer review -> reviewed release PR -> main. Do not implement directly on protected branches, self-approve or merge for the reviewer without the authorization required by the Git skill.
 
-ก่อนลง UI ให้สรุปหน้าที่จะแก้, source section, components/tokens ที่ใช้ และ states ที่ต้องรองรับ แล้วตรวจเทียบ brief เมื่อทำเสร็จ ตรวจ UI ที่รันจริงเมื่อ environment รองรับ และรายงานส่วนที่ยังตรวจไม่ได้
+For planning before staging exists, use the agreed docs-branch bootstrap and inspect base/history/scope. Read-only inspection needs no branch change.
 
-หากต้องเปลี่ยน shared design/API/schema/rule ให้บอกผลกระทบและทำตาม checkpoint ของ workflow ก่อนเขียน dependent code ปรับเอกสารที่เป็นแหล่งอ้างอิงให้ตรงกัน ไม่แก้แบบเงียบ ๆ; หากผู้ใช้ให้คำสั่งใหม่ชัดเจนแล้ว ให้ใช้ authorization นั้น ไม่ถามอนุมัติเรื่องเดิมซ้ำ
+## 5. Follow the established product and UI design
 
-## 5. ตรวจงานก่อนส่งต่อ
+Use **project detail section 8 as the fastTrack design brief**, with the UI skill improving that brief rather than inventing a new theme each time.
 
-- ทำตาม acceptance criteria/tests/DoD ของ task และเก็บผลตามที่รอบนั้นต้องใช้ ไม่สร้างผล PASS, review หรือ submission evidence ที่ยังไม่เกิด
-- TDD เก็บ RED บน task branch แล้วทำ GREEN/regression ก่อนรับ integration ตาม workflow ไม่ merge test ที่ตั้งใจล้มเข้า protected staging/main
-- ส่งให้เพื่อนตรวจเมื่อถึง PR/gate ที่กำหนด ก่อนเริ่มงานถัดไปที่พึ่งพาผลนั้น; งานอิสระทำต่อได้ ไม่ต้องขออนุมัติทุกไฟล์หรือทุกคำสั่ง
-- จบงานด้วย **owner + Task ID, branch, ไฟล์/พฤติกรรมที่เปลี่ยน, actual checks/results, จุดให้เพื่อนลอง และ next action**; ระบุ commit/PR เมื่อมีจริง และแยก implemented/verified/reviewed/merged ออกจากกัน
+- Keep fastTrack branding, the white/black/gray palette, white canvas, black primary actions and shared color tokens from section 8.3.
+- Keep Inter with Noto Sans Thai fallback and specified weights/spacing from section 8.4. English-only copy does not require discarding the agreed typography system.
+- Follow the application shell, role-aware navigation, screen specifications/wireframes and feature mapping in sections 8.5-8.7. Prioritize milestone tracks, due dates, versions and feedback.
+- Reuse shared components/tokens; do not invent a competing button/form/status system per feature.
+- Implement English loading/empty/error/success/recovery text, mobile behavior, keyboard focus and accessibility from sections 8.8-8.11. Use text/icons and the monochrome palette rather than added status colors/gradients.
+- Preserve the Student/Supervisor scope and business rules. Do not add features or weaken authorization to make a mockup attractive.
 
-ใช้ project detail สำหรับทิศทางผลิตภัณฑ์ ใช้ workflow สำหรับลำดับ/เจ้าของ/กำหนดส่ง และใช้ต้นฉบับโจทย์สำหรับเกณฑ์งานส่ง ถ้าเอกสารขัดกันจนเปลี่ยนพฤติกรรมหรือการประเมิน ให้ชี้จุดขัดแย้งก่อนแก้ส่วนที่เกี่ยวข้อง ไม่เลือกข้อที่ง่ายกว่าเอง
+Before UI implementation, briefly identify the screen, source section, shared components/tokens and required states. Review the rendered result against the brief when possible and report anything not actually verified.
 
-## 6. คำสั่งเริ่มงานตัวอย่าง
+For shared design/API/schema/rule changes, identify impacts and follow the workflow checkpoint before dependent code. Keep source documents synchronized. Use clear existing user authorization instead of repeatedly asking for approval of the same decision.
+
+## 6. Verification and handoff
+
+- Follow task AC/tests/DoD and required evidence. Never invent PASS, review, release or submission claims.
+- For TDD, retain RED on the task branch, then GREEN/regression before integration; never merge an intentionally failing change into protected main/staging.
+- Use the board stages **Backlog -> Specified -> Started -> PR Review -> Fixing -> Done**. Fixing returns to PR Review; successful review may go directly to Done after an actual merge. Keep Verification and Acceptance separate.
+- Add every PR to Project 3 and initialize the actual Task ID/Sprint/Owner before handoff. Ready PRs use PR Review; drafts remain Started. The enabled native Pull request merged rule moves a tracked merged PR to Done. Follow [Project automation](../workflow/GITHUB_PROJECT_AUTOMATION.md); do not infer Issue completion, test success or gate acceptance from that move.
+- Have the teammate review at the specified PR/gates before dependent work. Independent work may continue without approval for every file or command.
+- End with owner/Task ID, branch, changed behavior/files, actual checks/results, review instructions and next action; include real commits/PRs and distinguish implementation, verification, review and merge.
+
+Product direction comes from project detail, sequencing/owners/deadlines from workflow, and assessment criteria from original handouts. Surface material conflicts before changing affected behavior; do not silently choose the easier requirement.
+
+## 7. Example task request
 
 ```text
-อ่าน skill/SKILL_Project.md และทำตามลิงก์ที่เกี่ยวข้อง
-ฉันคือ <A หรือ B> ทำ Task <Task ID> จาก workflow/<ไฟล์รอบ>
-ตรวจ dependencies และไฟล์ที่เพื่อนรับผิดชอบก่อนเริ่ม
-อ่าน SKILL_Github ก่อนเขียนโค้ด งานใหม่แยก task branch ตาม workflow
-พัฒนาแอปใน Project_code/ ถ้ามีงาน UI อ่าน SKILL_UI และยึด project_detail §8
-ทำเฉพาะ task นี้พร้อมตรวจ acceptance แล้วส่ง handoff ให้เพื่อน review ตาม checkpoint
+Read skill/SKILL_Project.md and its relevant references.
+I am <A or B>, working on <Task ID> from workflow/<current-round file>.
+Check dependencies and the teammate's shared-file ownership before editing.
+Read SKILL_Github and create/resume the correct task branch.
+Implement the app in Project_code/. For UI, read SKILL_UI and project_detail section 8.
+Use English in all project artifacts; conversation with me may be Thai.
+Complete this task's checks and provide a factual handoff for peer review.
 ```
 
-ไฟล์นี้เป็นกติกาใน repository ตามรูปแบบ `skill/SKILL_*.md` ที่ทีมใช้ การวางไฟล์อย่างเดียวไม่ได้รับรองว่า AI ทุกเครื่องจะโหลดให้อัตโนมัติ ให้เริ่มจาก workflow หรือระบุให้อ่านไฟล์นี้ในคำสั่งเริ่มงาน
+This repository uses the `skill/SKILL_*.md` convention. The file is referenced by root AGENTS.md and workflow entry points; do not assume every AI tool automatically loads it without its own instruction mechanism.

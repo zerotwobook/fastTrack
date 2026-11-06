@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Workflow and task allocation
+    url: https://github.com/zerotwobook/fastTrack/blob/main/workflow/README.md
+    about: Read the workflow before opening work; reuse existing Task IDs and write project content in English.

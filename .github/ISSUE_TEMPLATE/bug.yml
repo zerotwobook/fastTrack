@@ -1,0 +1,39 @@
+name: Bug / Defect
+description: Report a reproducible defect, including UAT and regression findings
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: Write the title, reproduction steps and all other Issue content in English. Never include passwords or tokens.
+  - type: input
+    id: version
+    attributes:
+      label: Version / Commit / URL / Environment
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Role / Preconditions / Steps
+      description: Provide actual reproduction steps without secrets or private credentials.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected and actual behavior
+      description: Reference the affected FR/BR/AC or contract and the observed result.
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact / Severity / Module owner
+    validations:
+      required: true
+  - type: textarea
+    id: retest
+    attributes:
+      label: Fix / Regression / Independent retest
+      description: Add real tests, commits, testers and results when available. A screenshot alone does not close a defect.

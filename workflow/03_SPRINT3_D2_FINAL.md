@@ -1,6 +1,8 @@
 ﻿# รอบ 3 — Sprint 3: Summary, Deliverable 2 และ Final Delivery
 
-> แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: PLANNED
+> Language policy: conversation may be Thai; all newly authored or revised project content must be English. Read [SKILL_Project](../skill/SKILL_Project.md) and [AGENTS.md](../AGENTS.md). Translate legacy sections when editing them; unrelated existing sources are outside this change.
+
+> แผนแบ่งงาน fastTrack | จัดทำ 5 พฤศจิกายน 2026 | ทบทวน 6 พฤศจิกายน 2026 | สถานะเริ่มต้น: Backlog
 > A = คุณผู้ใช้, B = เพื่อน; ทั้งสองพัฒนา feature slices, tests, review และ release
 > เริ่มเป้าหมาย 25 พฤศจิกายน หลัง accepted S2; เตรียม contracts อิสระล่วงหน้าได้
 > D2 และ Lab 7: 29 พฤศจิกายน 2026 เวลา 23:59 น. | Final: 13 ธันวาคม 2026 เวลา 23:59 น.
