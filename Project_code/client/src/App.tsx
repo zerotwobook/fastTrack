@@ -3,6 +3,7 @@ import type { FormEvent } from 'react';
 import { Button, EmptyState, Field, Input } from './design/components';
 import { safeReturnTo, sessionStore, StaleSessionError } from './features/auth/session';
 import type { SessionSnapshot, Team } from './features/auth/session';
+import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/milestones';
 import './app.css';
 
 function Login({ state }: { state: SessionSnapshot }) {
@@ -44,16 +45,19 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   const [attempt, setAttempt] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
   const menu = useRef<HTMLButtonElement>(null);
-  const detailId = /^\/teams\/([a-f0-9-]{36})$/i.exec(path)?.[1];
-  const validPath = path === '/' || detailId !== undefined;
+  const detailId = /^\/teams\/([a-f0-9-]{36})(?:\/milestones\/new)?$/i.exec(path)?.[1];
+  const milestoneId = /^\/milestones\/([a-f0-9-]{36})$/i.exec(path)?.[1];
+  const creating = path.endsWith('/milestones/new');
+  const validPath = path === '/' || detailId !== undefined || milestoneId !== undefined;
   useEffect(() => {
     let active = true; setError(null); setResult(null);
+    if (milestoneId) return;
     if (!validPath) { setError('This page could not be found. Return to your overview.'); return; }
     void sessionStore.read<Team | Team[]>(detailId ? `/teams/${detailId}` : '/teams').then(data => {
       if (active) setResult({ revision: state.revision, path, teams: Array.isArray(data) ? data : [data] });
     }).catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
-  }, [state.revision, path, attempt, detailId, validPath]);
+  }, [state.revision, path, attempt, detailId, milestoneId, validPath]);
   const teams = result?.revision === state.revision && result.path === path ? result.teams : null;
   return <div className="application-shell">
     <aside className="sidebar"><a className="wordmark" href="/">fastTrack</a><Navigation role={user.role} /></aside>
@@ -65,7 +69,7 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
       <p><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
       <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
     </header><main id="main-content" className="workspace-content">
-      <p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
+      {milestoneId ? <MilestoneDetail id={milestoneId} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
       <h1>{detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
       <p className="intro">{detailId ? 'The people working on this project.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
       {error ? <section className="notice" role="alert"><p>{error}</p><div className="recovery-actions"><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}>Try again</Button><a href="/">Back to overview</a></div></section>
@@ -73,9 +77,10 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
       : teams.length === 0 ? <EmptyState title={user.role === 'student' ? 'No team assigned yet' : 'No supervised teams yet'} description="Contact your course supervisor to arrange your team." />
       : <section id="teams" aria-label="Teams" className="team-list">{teams.map(team => <article className="team-row" key={team.id}>
         {!detailId && <h2><a href={`/teams/${team.id}`}>{team.name}<span aria-hidden="true"> ↗</span></a></h2>}
-        <dl><div><dt>Supervisor</dt><dd>{team.supervisor.displayName}</dd></div><div><dt>Team members</dt><dd>{team.members.length ? <ul>{team.members.map(member => <li key={member.id}>{member.displayName}</li>)}</ul> : 'No members assigned yet'}</dd></div></dl>
+        {(detailId || user.role === 'supervisor') && <dl><div><dt>Supervisor</dt><dd>{team.supervisor.displayName}</dd></div><div><dt>Team members</dt><dd>{team.members.length ? <ul>{team.members.map(member => <li key={member.id}>{member.displayName}</li>)}</ul> : 'No members assigned yet'}</dd></div></dl>}
+        {(detailId || user.role === 'student') && (creating ? <MilestoneCreate teamId={team.id} userRole={user.role} /> : <MilestoneTrack teamId={team.id} userRole={user.role} />)}
         {!detailId && <a className="team-link" href={`/teams/${team.id}`}>Open team</a>}
-      </article>)}</section>}
+      </article>)}</section>}</>}
     </main></div>
   </div>;
 }

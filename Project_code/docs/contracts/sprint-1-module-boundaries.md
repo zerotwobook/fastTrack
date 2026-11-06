@@ -64,6 +64,6 @@ The test guard requires NODE_ENV=test, a separate `[a-z0-9_]+_test` database nam
 
 ## Review and changes
 
-R1-A01 now provides concrete real session/role/source/CSRF and scoped-team exports, described in [the auth contract](sprint-1-auth.md). `createApplicationRouters` mounts auth/teams only. B's milestone integration must inject the real guards before parsing; there is no production identity-header fallback. F-01 is verified on its task branch and awaits peer acceptance; G2 still requires the real combined feature flow.
+R1-A01 provides concrete real session/role/source/CSRF and scoped-team exports, described in [the auth contract](sprint-1-auth.md), accepted through B's approval/merge of PR #54 as `0b99a28`. PR #56 extends `createApplicationRouters` to auth/teams/milestones with required real guards before parsing, shared browser/API validation and scoped transactional reads/writes; see [the milestone contract](sprint-1-milestones.md). There is no production identity-header fallback. The combined candidate passes A's actual clean-clone/API/browser verification; B review of A-authored corrections, accepted integration and G2 remain pending.
 
 G0 approval is recorded in the [decision](../decisions/0001-sprint-1-g0-baseline.md). B reviews/reproduces the A00 exports/scripts before the scaffold merge; A then reviews B00 migrations/seed/UI before joint G1. Change shared seams through a reviewed contract revision, preserving the canonical domain routes/DTOs/rules.

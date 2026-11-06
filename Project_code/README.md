@@ -2,9 +2,9 @@
 
 ## Current implementation
 
-The React client and API implement login/me/logout, DB-backed eight-hour sessions, source/CSRF protection and authorized team list/detail. The interface includes login, role-aware navigation, mobile menu, team members/supervisor and loading/empty/error/retry states. PostgreSQL/Prisma schema/migrations/seed/fixtures, shared UI primitives, `/api/health`, safe errors/request correlation, validated configuration and TypeScript builds are present.
+The React client and API implement login/me/logout, DB-backed eight-hour sessions, source/CSRF protection and authorized team list/detail and milestone create/list/detail. The interface includes login, role-aware navigation, mobile menu, team members/supervisor and loading/empty/error/retry states. PostgreSQL/Prisma schema/migrations/seed/fixtures, shared UI primitives, `/api/health`, safe errors/request correlation, validated configuration and TypeScript builds are present.
 
-The latest clean-clone checks pass **67 ordinary tests, 28 auth/API/database tests, 38 G1 cases and seven migration scenarios**. G1 was accepted through PR #50's real peer approval/merge. The F-01 increment is awaiting peer review in PR #54; see [F-01 evidence](docs/evidence/R1-A01-auth.md) and [G1 history](docs/evidence/R1-G1-A-foundation.md). Milestone/submission/feedback integration and a complete Sprint 1 application are still pending.
+The latest clean-clone checks pass **83 ordinary tests, 33 milestone DB cases, 28 auth/API/database tests, 38 G1 cases and seven migration scenarios**. G1 was accepted through PR #50's real peer approval/merge. F-01 was accepted through B approval/merge of PR #54. The F-02 correction awaits B review in PR #56; see [F-01 evidence](docs/evidence/R1-A01-auth.md) and [G1 history](docs/evidence/R1-G1-A-foundation.md). Submission/feedback integration, joint G2 acceptance and a complete Sprint 1 release remain pending.
 
 `GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No test identity bypass is exposed.
 
@@ -81,7 +81,7 @@ npm run build
 ```
 
 - Generate the Prisma client before standalone typecheck on a fresh clone.
-- Ordinary Vitest/Supertest/client-state checks: 4 files / 67 tests pass; no database reset occurs.
+- Ordinary Vitest/Supertest/client-state checks: 5 files / 83 tests pass; no database reset occurs.
 - Build writes client/dist and server/dist. The server build generates Prisma, compiles TypeScript and copies its generated runtime assets. No running DB is needed for generation/build.
 - Test files, G1 cases and auth DB cases are excluded from the server build; generated source/build files remain ignored in Git.
 - npm run test:watch is available for ordinary local unit tests.
@@ -94,7 +94,7 @@ With Docker Engine running, from Project_code:
 npm run test:g1:isolated
 ```
 
-This verified command creates its own temporary PostgreSQL instance with a random loopback-only port and distinct development/test databases, generates Prisma, migrates both DBs, repeats migrate deploy, runs typecheck, the 67 ordinary tests, a production-mode build and 38 dedicated G1 assertions. It also creates seven historical-schema databases inside that same new container to check upgrades and safe rejection. It removes only the newly created container and temporary credential file afterwards. Random DB/seed credentials are not committed or printed.
+This verified command creates its own temporary PostgreSQL instance with a random loopback-only port and distinct development/test databases, generates Prisma, migrates both DBs, repeats migrate deploy, runs typecheck, the 83 ordinary tests, a production-mode build and 38 dedicated G1 assertions. It also creates seven historical-schema databases inside that same new container to check upgrades and safe rejection. It removes only the newly created container and temporary credential file afterwards. Random DB/seed credentials are not committed or printed.
 
 The current expected exit is **0**. The runner prints a redacted JSON report path. Set G1_REPORT_PATH to choose that output file. Four negative upgrade scenarios intentionally receive a failed migration exit and pass only when the expected PostgreSQL error, existing records, schema and completed migration checksums are preserved. [Foundation results](docs/evidence/R1-G1-A-remediation-results.json) and [findings/reproduction](docs/evidence/R1-G1-A-foundation.md) preserve their actual pre-acceptance snapshots; the later real G1 approval/merge is recorded separately.
 
@@ -130,6 +130,18 @@ Wait for the original terminal's cleanup report. This graceful stop was verified
 
 Authentication uses the existing scrypt seed format, a random opaque cookie token stored only as a hash, and independent in-memory CSRF tokens. Cookies are host-only, HttpOnly, SameSite=Lax and Secure for an HTTPS APP_ORIGIN. Source checks reject foreign/missing Origin/Referer; login also requires `X-fastTrack-Request: 1`. Logout validates CSRF for a valid session, revokes only that session and prevents replay. Team queries derive identity/scope from the database. Browser private state is memory-only and invalidated on logout, expiry, account changes and history restoration. See [the module contract](docs/contracts/sprint-1-auth.md).
 
+## Milestone checks and browser review
+
+```powershell
+npm run test:b01:isolated
+```
+
+This runs all ordinary/build/auth/G1/upgrade checks plus 33 milestone DB cases: seven retained service cases with explicit test actors and 26 new real-session regressions. Expected exit 0. For only those DB cases, `npm run test:b01` requires a prepared reserved test database and the usual guards. Ordinary `npm test` remains DB-independent.
+
+For the compiled milestone app, set a synthetic AUTH_REVIEW_PASSWORD as above and run `npm run review:b01`. Stop with `npm run review:auth:stop` in the same clone. Supervisor A can create a milestone in Team A, open its saved detail and reload it; Student A1 can read but cannot create; Supervisor B cannot read/write Team A. Dates entered in the labeled Asia/Bangkok field use seconds 00 and convert correctly even if the browser host zone differs. Title/description use shared Unicode code-point validation; errors preserve the draft. Unconfirmed mutation results direct the user to check the list before creating again.
+
+[Independent B01 review/results](docs/evidence/R1-B01-A-review.md) and [the integration contract](docs/contracts/sprint-1-milestones.md) identify actual coverage and pending peer acceptance. No inert submission/revision/feedback actions are exposed in this increment.
+
 ## Built server
 
 After npm run build, the compiled server can serve the client/API under one origin. From Project_code in PowerShell:
@@ -149,7 +161,8 @@ Replace the HTTPS example origin for a real deployment. The listener uses PORT b
 Project_code/
   package.json, package-lock.json, .npmrc, .node-version
   prisma.config.ts, prisma.g1-history.config.ts
-  vitest.config.ts, vitest.g1.config.ts, vitest.auth.config.ts
+  vitest.config.ts, vitest.g1.config.ts, vitest.auth.config.ts, vitest.b01.config.ts
+  shared/                  Pure milestone validation used by both client and API
   scripts/                 Isolated G1/auth checks, disposable browser review and Prisma packaging
   client/                  Login/session/team UI, Vite config and shared design primitives
   server/
@@ -161,11 +174,11 @@ Project_code/
     src/http/              Safe errors, per-route JSON parsing, request IDs/logs
     src/db/                Prisma singleton, generated client and test guard
     src/testing/           Synthetic fixtures and independent G1 checks
-    src/modules/           Real auth/teams and composition; other domain routes pending
+    src/modules/           Real auth/teams/milestones and composition; submissions/feedback pending
   e2e/                     Full milestone/submission/feedback journeys still pending
   docs/contracts/          Accepted integration seams
   docs/decisions/          Source/ownership decisions
   docs/evidence/           Actual verification and unresolved findings
 ```
 
-Login/team screens are implemented; the full milestone/submission/feedback screens and self-hosted font assets are pending. Existing shared typography includes an external Google Fonts import with a local fallback. Return to the [application overview](../README.md). Team/task/branch instructions remain in [the development guide](../DEVELOPMENT_README.md).
+Login/team/milestone screens are implemented; submission/feedback screens and self-hosted font assets are pending. Preserve the Project_code workspace layout when running the compiled API: server/dist imports the tracked shared/milestones.mjs module, which the browser build bundles separately. Existing shared typography includes an external Google Fonts import with a local fallback. Return to the [application overview](../README.md). Team/task/branch instructions remain in [the development guide](../DEVELOPMENT_README.md).

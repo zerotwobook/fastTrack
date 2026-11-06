@@ -6,13 +6,14 @@ export interface SessionSnapshot {
   readonly auth: AuthData | null; readonly error: string | null; readonly busy: boolean;
   readonly revision: number; readonly recovery: 'session' | 'logout';
 }
-export class ApiError extends Error { constructor(readonly status: number, message: string) { super(message); } }
+export interface DomainRead<T> { data: T; meta: { serverTime: string } }
+export class ApiError extends Error { constructor(readonly status: number, message: string, readonly fields: Readonly<Record<string, string>> = {}) { super(message); } }
 export class StaleSessionError extends Error {}
 export function safeReturnTo(value: string | null): string {
   if (!value || !value.startsWith('/') || value.startsWith('//') || /[\u0000-\u0020\\]/.test(value)) return '/';
   try {
     const url = new URL(value, 'https://fasttrack.invalid');
-    if (url.origin !== 'https://fasttrack.invalid' || !(url.pathname === '/' || /^\/teams\/[a-f0-9-]{36}$/i.test(url.pathname))) return '/';
+    if (url.origin !== 'https://fasttrack.invalid' || !(url.pathname === '/' || /^\/teams\/[a-f0-9-]{36}(?:\/milestones\/new)?$/i.test(url.pathname) || /^\/milestones\/[a-f0-9-]{36}$/i.test(url.pathname))) return '/';
     return url.pathname + url.search + url.hash;
   } catch { return '/'; }
 }
@@ -28,16 +29,16 @@ export class SessionStore {
   private publish(state: Omit<SessionSnapshot, 'revision'>) {
     this.snapshot = { ...state, revision: this.generation }; for (const listener of this.listeners) listener();
   }
-  private async api<T>(path: string, options: RequestInit = {}): Promise<T> {
+  private async api<T>(path: string, options: RequestInit = {}, envelope = false): Promise<T> {
     let response: Response;
     try { response = await this.fetcher(`/api${path}`, { ...options, credentials: 'same-origin', cache: 'no-store' }); }
     catch { throw new ApiError(0, 'Unable to reach fastTrack. Check your connection and try again.'); }
     if (response.status === 204) return undefined as T;
-    let body: { data?: T; error?: { message?: string } };
+    let body: { data?: T; meta?: { serverTime: string }; error?: { message?: string; fields?: Record<string, string> } };
     try { body = await response.json() as typeof body; }
     catch { throw new ApiError(0, 'The service returned an unreadable response. Try again.'); }
-    if (!response.ok) throw new ApiError(response.status, body.error?.message ?? 'The request could not be completed.');
-    return body.data as T;
+    if (!response.ok) throw new ApiError(response.status, body.error?.message ?? 'The request could not be completed.', body.error?.fields ?? {});
+    return (envelope ? body : body.data) as T;
   }
   lock(): void { this.generation++; this.publish({ phase: 'loading', auth: null, error: null, busy: false, recovery: this.pendingLogout ? 'logout' : 'session' }); }
   async restore(): Promise<void> {
@@ -77,10 +78,20 @@ export class SessionStore {
     }
   }
   async read<T>(path: string): Promise<T> {
+    return this.privateRequest<T>(path);
+  }
+  async readDomain<T>(path: string): Promise<DomainRead<T>> {
+    return this.privateRequest<DomainRead<T>>(path, {}, true);
+  }
+  async mutate<T>(path: string, value: unknown): Promise<T> {
+    const csrf = this.snapshot.auth?.csrfToken;
+    return this.privateRequest<T>(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf ?? '' }, body: JSON.stringify(value) });
+  }
+  private async privateRequest<T>(path: string, options: RequestInit = {}, envelope = false): Promise<T> {
     if (this.snapshot.phase !== 'ready') throw new StaleSessionError();
     const version = this.generation;
     try {
-      const data = await this.api<T>(path); if (version !== this.generation) throw new StaleSessionError(); return data;
+      const data = await this.api<T>(path, options, envelope); if (version !== this.generation) throw new StaleSessionError(); return data;
     } catch (error) {
       if (version !== this.generation) throw new StaleSessionError();
       if (error instanceof ApiError && error.status === 401) {
