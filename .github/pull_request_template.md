@@ -23,6 +23,7 @@ Identify affected schema/migrations/DTO/router/lockfile/UI tokens and the coordi
 - [ ] Scope matches the Issue/workflow; application code is under Project_code/.
 - [ ] Read SKILL_Project and SKILL_Github; UI work follows SKILL_UI and project detail section 8.
 - [ ] All newly authored or revised project content, including this PR, is English. Conversation may be Thai.
+- [ ] This PR is in Project 3 with the actual Task ID/Sprint/Owner and correct handoff status; its card will move to Done after merge.
 - [ ] No real secrets or local env files are included.
 - [ ] Implementation, verification, peer review and merge states are factual; the author does not self-approve.
 

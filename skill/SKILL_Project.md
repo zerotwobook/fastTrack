@@ -69,6 +69,7 @@ For shared design/API/schema/rule changes, identify impacts and follow the workf
 - Follow task AC/tests/DoD and required evidence. Never invent PASS, review, release or submission claims.
 - For TDD, retain RED on the task branch, then GREEN/regression before integration; never merge an intentionally failing change into protected main/staging.
 - Use the board stages **Backlog -> Specified -> Started -> PR Review -> Fixing -> Done**. Fixing returns to PR Review; successful review may go directly to Done after an actual merge. Keep Verification and Acceptance separate.
+- Add every PR to Project 3 and initialize the actual Task ID/Sprint/Owner before handoff. Ready PRs use PR Review; drafts remain Started. The enabled native Pull request merged rule moves a tracked merged PR to Done. Follow [Project automation](../workflow/GITHUB_PROJECT_AUTOMATION.md); do not infer Issue completion, test success or gate acceptance from that move.
 - Have the teammate review at the specified PR/gates before dependent work. Independent work may continue without approval for every file or command.
 - End with owner/Task ID, branch, changed behavior/files, actual checks/results, review instructions and next action; include real commits/PRs and distinguish implementation, verification, review and merge.
 

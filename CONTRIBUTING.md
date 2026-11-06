@@ -13,11 +13,17 @@ Use [fastTrack — Team Delivery](https://github.com/users/zerotwobook/projects/
 - A/B views include jointly assigned work. Sprint views narrow the round.
 - Task ID refers to the workflow. Owner means A/B/SHARED; Assignees are real GitHub accounts.
 - Status: Backlog -> Specified -> Started -> PR Review -> Fixing -> Done. Update Verification and Acceptance only from actual results.
-- Initially, implementation tasks are Backlog / NOT RUN / PENDING. The setup PR is in PR Review until approved and merged.
+- Implementation tasks start Backlog / NOT RUN / PENDING. PR #40 is merged and its setup card is Done; this does not accept implementation gates.
 - Check native dependencies, the blocked label and actual gate decisions; a closed Issue does not prove acceptance.
-- Add new tasks/defects/PRs to this Project and populate Sprint/Owner/Task ID. Do not assume automatic addition or status movement.
+- Add new tasks/defects/PRs to this Project and populate Sprint/Owner/Task ID. Every ready PR must have a Project card in PR Review before peer review. Tracked PRs move to Done automatically after an actual merge; other additions/status changes remain explicit.
 
 Requested changes follow PR Review -> Fixing -> PR Review. A review that passes immediately can proceed to Done after the actual merge; Fixing is not mandatory when there are no changes to make.
+
+## Automatic Done after merge
+
+The native Project workflow **Pull request merged -> Status: Done** is enabled. Authors/AI must add each PR to Project 3 and initialize its metadata when handing it off. The merge event then moves that PR card automatically, without a repository Actions token.
+
+Closed but unmerged PRs, related task Issues, Verification and Acceptance are not automatically completed by this rule. Follow [GitHub Project automation](workflow/GITHUB_PROJECT_AUTOMATION.md) for handoff commands, scope, configuration and recovery. Keep peer review and human gates intact.
 
 ## Existing work
 

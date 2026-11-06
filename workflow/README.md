@@ -231,3 +231,9 @@ Lab 6/7 ตรวจจาก Group specs หน้า 14–15; ยังไม�
 - [ ] A/B บันทึก G0 จริงและ A publish staging จาก baseline; B เข้าถึง repo/สร้าง branch/push/เปิด PR ไป staging ได้ตามสิทธิ์ที่ให้ ก่อนแยก implementation
 
 การมีแผนที่ตรวจได้ครบถือว่าพร้อมส่งให้เพื่อนทบทวนและเริ่ม kickoff ส่วนชื่อบัญชี/เวลาว่าง/eligibility/approval และผล setup ต้องเกิดจริงในขั้นตอนข้างต้น ไม่เติมสถานะ PASSED แทนการตรวจ
+
+## GitHub Project merge automation
+
+The native **Pull request merged -> Status: Done** rule is enabled for Project 3. Before peer review, add the PR card and initialize its actual Task ID/Sprint/Owner; the merge event then moves that tracked PR to Done automatically. Intermediate statuses and related task acceptance remain evidence-based author/reviewer decisions.
+
+Read [GitHub Project automation](GITHUB_PROJECT_AUTOMATION.md) for the full handoff, configuration, scope and recovery procedure. This automation does not approve or merge PRs, close unrelated Issues, mark tests passed or accept human gates.
