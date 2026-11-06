@@ -2,7 +2,7 @@
 
 Date: 6 November 2026 (Asia/Bangkok). Task: R1-J00 / Issue #2. Prepared for A; peer reviewer: B.
 
-**Decision status: PROPOSED - B review pending.** This is a preimplementation review record. R1-A00 must not start until G0 is accepted. A branch, a documentation check or a merge that does not accept this decision is not G0 approval.
+**Decision status: ACCEPTED.** B (`Atip-Infa`) explicitly approved the G0 baseline in [PR #44](https://github.com/zerotwobook/fastTrack/pull/44) at head `d57b3eca4c60092667291ac314d5255dc09f137f` on 6 November 2026 at 07:40:17 UTC, then merged it into `staging/sprint-1` as `30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf` at 07:40:31 UTC. A had authorized this scoped baseline and conditional A00 execution. Issue #2 is closed with this actual evidence. This decision permits A00; it does not accept G1 or application behavior.
 
 ## 1. People, availability and eligibility
 
@@ -27,7 +27,7 @@ Theme 6 is eligible through B: the last digit of 67070503446 is 6. [Group Work S
 
 Contracts already exist in committed history before application code. Historical paragraphs saying they were uncommitted describe the 5 November snapshot; they do not prove current gate acceptance. This record and its reviewed commit provide the new acceptance trail without rewriting that history.
 
-## 3. Scope being reviewed
+## 3. Accepted scope
 
 Sprint 1 delivers F-01 identity/team context, F-02 create/list/detail milestones, F-03 first submission/retrieval/deadline enforcement and F-04 exact-version feedback. The actual product journey must span both roles and UI -> API -> PostgreSQL. A scaffold or login alone does not complete S1.
 
@@ -68,25 +68,23 @@ Detailed routes/DTOs/AC remain in the original contracts rather than a second co
 
 All app source is under Project_code/. Repository-level workflows remain at .github/workflows/. Keep product README, technical README and development instructions separate and use English in authored artifacts.
 
-A's current branch is `docs/s1-a-g0-baseline`, based on the staging commit above. B's prepared branch is `feature/s1-b-foundation` from that same staging baseline; no B implementation is claimed. Each member uses their own clone/worktree. After this baseline is accepted and merged, both fetch/sync staging before starting their next task; A creates a new `build/s1-a-scaffold` branch for A00.
+A's G0 branch was `docs/s1-a-g0-baseline`, based on the staging commit above. B's prepared branch is `feature/s1-b-foundation` from that same staging baseline; no B implementation is claimed. Each member uses their own clone/worktree. After this baseline is accepted and merged, both fetch/sync staging before starting their next task; A creates a new `build/s1-a-scaffold` branch for A00.
 
 Every task PR targets **staging/sprint-1**. No main PR/release is authorized for this work until S1 requirements and G0-G5 are actually complete. The existing main/staging protection and real peer review remain in force.
 
-## 6. A00 boundary and readiness
+## 6. A00 boundary and preimplementation tool discovery
 
 A00 is a small scaffold with manifests/lockfiles, TypeScript/build/test harnesses, safe config/errors/request IDs, /api composition and the local Vite proxy. It must document reproducible setup and guarded test-DB settings, leaving schema/seed/shared UI to B and business/authentication implementation to later tasks.
 
-Observed tools: Node 26.13.0, npm 11.20.0, and a Docker executable. This is tool discovery, not a claim of package compatibility, a running Docker daemon or a usable database. A00 will verify and pin compatible package/runtime versions and exact commands. No installation/build/migration/test commands are claimed to work yet.
+Observed tools: Node 26.13.0, npm 11.20.0, and a Docker executable. At G0 this was tool discovery, not a claim of package compatibility, a running Docker daemon or a usable database. These were the preimplementation observations. A00 verifies/pins the actual package/runtime commands separately in its README and evidence; this G0 record does not claim app test success.
 
 Do not create fake authenticated routes or placeholder middleware that silently permits production access. Fixtures may support documented isolated preparation, but G1/G2 acceptance needs the real database/session integration.
 
-## 7. Review evidence and remaining decision
+## 7. Review evidence and decision
 
 - Source/route/DTO/rule/AC consistency has been inspected against the listed files and GitHub Issues #2-#12.
 - Member details and availability were supplied by A; Theme 6 was checked against the original matching-digit rule.
-- The starting branch has no application implementation; G0 acceptance, A00 execution and app tests remain separate states.
-- A authorized proceeding with this scoped audit and conditionally with A00 using the established design. This is not a claim that B has reviewed the contracts.
-- **B must review the scope, shared interfaces, ownership, availability and identified risks at this PR's actual head, then record approval or requested changes.** A review request or silence is not approval.
-- Gate outcome remains **PENDING** until that real decision is present and the accepted baseline is integrated into Sprint 1 staging.
-
-Once accepted: record the exact reviewer/decision/commit/PR and allow R1-A00; keep R1-B00 implementation blocked until the scaffold dependency is merged. A00's next gate is B review/G1 foundation work, not immediate F-01 implementation or a main release.
+- At the reviewed G0 source head there was no application implementation. G0 acceptance, A00 execution and application tests are separate states.
+- B's APPROVED review `PRR_kwDOVjq_T88AAAABWYl2HA` explicitly accepts the G0 scope/contracts, module boundaries and member/availability record at the actual reviewed head. The merge and commit above were confirmed through the live GitHub API.
+- The proposed module-boundary record is accepted as the G0 boundary; A00 records concrete exports for its own peer review.
+- A00 starts on `build/s1-a-scaffold` from the accepted staging merge. R1-B00 implementation remains blocked until the reviewed scaffold is merged. G1, real auth/database/domain tests and the S1 main release remain pending.

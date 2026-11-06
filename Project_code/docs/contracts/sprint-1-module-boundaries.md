@@ -1,12 +1,12 @@
-# Sprint 1 module boundaries - G0 proposal
+# Sprint 1 module boundaries
 
-Status: PROPOSED for the R1-J00 peer review. This document specifies integration seams before code; it does not implement or certify the application. Preserve the routes/DTOs/rules in project detail sections 7-9 and D1 Part C/E.
+Status: G0 boundary ACCEPTED by Atip-Infa in PR #44 at `d57b3ec`, integrated into staging as `30fc5ef`. The concrete A00 exports below require scaffold peer review before dependent implementation. This contract does not certify domain behavior. Preserve the routes/DTOs/rules in project detail sections 7-9 and D1 Part C/E.
 
 ## Application and configuration
 
 - A owns server/src/app.ts and the server entry point/configuration. The application factory accepts validated configuration and explicit domain-router registrations; tests can construct the app without starting a network listener.
 - The server entry point loads/validates configuration and starts the listener. Domain modules do not start listeners or create independent app instances.
-- A mounts the API router under /api. Each domain exports a router factory with explicit dependencies: createAuthRouter, createTeamsRouter, createMilestoneRouter, createSubmissionRouter and createFeedbackRouter. Names are proposed here for B's review.
+- A mounts the API router under /api. Each domain exports a router factory with explicit dependencies: createAuthRouter, createTeamsRouter, createMilestoneRouter, createSubmissionRouter and createFeedbackRouter. These factory names were accepted at G0. Each router declares its complete paths relative to `/api`; for example, milestone routes include `/teams/:teamId/milestones` and `/milestones/:id`.
 - B changes owned milestone/feedback module files and sends the exports/dependency requirements to A; A integrates composition/manifests/lockfiles. Do not edit the shared composition root on both branches concurrently.
 - Local client fetches use /api with credentials included through the same-origin Vite proxy. Production serves the built client/API under one origin.
 
@@ -21,7 +21,7 @@ Status: PROPOSED for the R1-J00 peer review. This document specifies integration
 ## Responses and errors
 
 - Keep the existing success data, error code/message/fields and domain-read meta.serverTime shapes. Use the D1 DTO allowlists rather than serializing ORM models.
-- A owns the safe error handler and request-ID middleware. Proposed correlation transport is X-Request-Id, preserving the existing body envelope; review this transport before implementation.
+- A owns the safe error handler and request-ID middleware. The accepted correlation transport is `X-Request-Id`, preserving the existing body envelope. A00 generates a fresh UUID, ignoring caller-supplied IDs.
 - Error messages/UI text are English. Do not return SQL, stacks, credentials, session/CSRF tokens or private payloads in generic errors/logs.
 - Apply the existing 400/401/403/404/409/415/500/503 policy and ordering; 404 does not reveal whether an out-of-scope record exists.
 - Shared DTO fields and ordering are those in D1 C.7/E and project detail 9.4. Freeze any concrete export-file layout/manifests in the small scaffold review before dependent features use them; do not import server-only runtime code into the browser.
@@ -38,7 +38,7 @@ Status: PROPOSED for the R1-J00 peer review. This document specifies integration
 
 Required configuration follows project detail section 13: DATABASE_URL, PORT, APP_ORIGIN, NODE_ENV, SESSION_TTL_HOURS, DEMO_SEED_PASSWORD and RELEASE_SHA as applicable to the implemented stage. Real credentials never enter Git, the client or logs.
 
-Propose a distinct TEST_DATABASE_URL for test fixtures. Any destructive reset must require an explicit test environment and a database name reserved for tests, and reject a development/production database identity even if credentials differ. No destructive production helper or automatic startup reset is introduced by this proposal. B implements the schema/fixture operations only after the guarded contract is agreed.
+Use a distinct TEST_DATABASE_URL for test fixtures. Any destructive reset must require an explicit test environment and a database name reserved for tests, and reject a development/production database identity even if credentials differ. No destructive production helper or automatic startup reset is introduced by this proposal. B implements the schema/fixture operations only after the guarded contract is agreed.
 
 ## Frontend and tests
 
@@ -46,6 +46,22 @@ A00 owns client entry/build/test wiring only. B owns shared fonts/tokens/fields/
 
 Use Vitest for meaningful unit/harness checks, Supertest for API behavior and real PostgreSQL for domain integration. Playwright exercises the integrated browser journey once it exists. Config/error-harness results in A00 are not evidence that auth, DB persistence or S1 AC pass.
 
-## Required peer decision
+## Concrete A00 exports for scaffold review
 
-B reviews these names/ownership/dependencies and the response/request-ID/test-DB proposals together with the G0 baseline. Requested changes are resolved on the same PR before dependent code. Once accepted, record actual commit/reviewer evidence and change shared seams through a reviewed contract revision rather than silently changing another member's interface.
+| File/export | Usage |
+|---|---|
+| `server/src/config.ts`: `loadConfig(env)`, `AppConfig`, `ConfigError` | Validated immutable runtime config; no DB connection or listener |
+| `server/src/app.ts`: `createApp(config, options)`, `AppRouters`, `AppOptions` | Named optional router registrations (`auth`, `teams`, `milestones`, `submissions`, `feedback`) for composition. No domain routers are registered in A00. A integrates the real factories later. |
+| `server/src/http/errors.ts`: `AppError`, `FieldErrors`, `requireJsonBody`, `parseJsonBody` | Public errors and per-route JSON validation. Router order: real session/role/source protection, then JSON type/parser/input, then scope/domain. There is no global parser ahead of authentication. |
+| `server/src/http/request-context.ts`: `RequestLogger`, `RequestLog` | Only generated ID/method/route template/status/duration; no raw query, headers, payload, exception or DB URL |
+| `server/src/db/test-database.ts`: `requireTestDatabase(env, protectedDatabaseUrls)` | Pure guard for B's future reset; no SQL, connection, reset or schema is implemented here |
+
+`createApp` has no listener side effects. Only `server/src/index.ts` starts the server. Optional routers allow the scaffold to expose health alone; they are not optional authentication dependencies. A future protected router must require real protection dependencies; missing guards must never mean allow access. Session/team/transaction service signatures will be concretized in their owned feature tasks and reviewed before integration.
+
+B owns `server/prisma/`, the runtime DB client and shared UI. Prisma CLI/client are both pinned to stable 7.10.1. Prisma 7 configuration, client generation, PostgreSQL adapter/driver dependencies, migrations and seeds still belong to B00; request additions from A before changing the shared manifest/lockfile. The scaffold never imports an ungenerated Prisma client.
+
+The test guard requires NODE_ENV=test, a separate `[a-z0-9_]+_test` database name and an explicit protected DATABASE_URL. Pass any additional protected production/development URLs as the second argument. Credentials/query parameters cannot distinguish databases; same names on another host are rejected conservatively. Only `schema=public` and strict TLS sslmode values are allowed on the test connection. B must invoke the guard before opening a destructive connection and use a DB role restricted to that test database. DNS aliases cannot be proven distinct by a pure URL check.
+
+## Review and changes
+
+G0 approval is recorded in the [decision](../decisions/0001-sprint-1-g0-baseline.md). B reviews/reproduces the A00 exports/scripts before the scaffold merge; A then reviews B00 migrations/seed/UI before joint G1. Change shared seams through a reviewed contract revision, preserving the canonical domain routes/DTOs/rules.
