@@ -1,6 +1,6 @@
 import { spawnSync } from 'node:child_process';
 import { randomBytes } from 'node:crypto';
-import { mkdtempSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, rmSync, mkdirSync, cpSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -44,7 +44,7 @@ function stage(name, script, env, required = false) {
       report.g1Tests = { passed: tests.numPassedTests, failed: tests.numFailedTests,
         cases: tests.testResults.flatMap(file => file.assertionResults.map(test => ({ name: test.fullName, status: test.status }))) };
       process.stdout.write(`G1 cases: ${report.g1Tests.passed} passed, ${report.g1Tests.failed} failed.\n`);
-      for (const test of report.g1Tests.cases) process.stdout.write(`${test.status}: ${test.name}\n`);
+      for (const test of report.g1Tests.cases.filter(test => test.status !== 'passed')) process.stdout.write(`${test.status}: ${test.name}\n`);
     } catch { report.testReportError = 'No readable Vitest report.'; }
   }
   failed ||= !passed;
@@ -74,6 +74,20 @@ try {
   const env = { ...process.env, NODE_ENV: 'test', DATABASE_URL: runtimeUrl, TEST_DATABASE_URL: testUrl,
     DEMO_SEED_PASSWORD: randomBytes(24).toString('hex') };
   redactions.push(env.DEMO_SEED_PASSWORD);
+  const legacyDirectory = join(directory, 'legacy-migrations');
+  const candidateDirectory = join(directory, 'candidate-migrations');
+  for (const target of [legacyDirectory, candidateDirectory]) {
+    mkdirSync(target, { recursive: true });
+    for (const name of ['20261106094006_init_sprint1_schema', '20261106094101_add_version_check_constraint']) {
+      cpSync(join(root, 'server/prisma/migrations', name), join(target, name), { recursive: true });
+    }
+    cpSync(join(root, 'server/prisma/migrations/migration_lock.toml'), join(target, 'migration_lock.toml'));
+  }
+  const originalCandidate = join(candidateDirectory, '20261106195734_g1_schema_corrections');
+  mkdirSync(originalCandidate);
+  cpSync(join(root, 'server/src/testing/migrations/g1-candidate-633a9fe.sql'), join(originalCandidate, 'migration.sql'));
+  Object.assign(env, { G1_AUDIT_CONTAINER_ID: container, G1_LEGACY_MIGRATIONS_DIR: legacyDirectory,
+    G1_CANDIDATE_MIGRATIONS_DIR: candidateDirectory, G1_UPGRADE_REPORT_PATH: join(directory, 'upgrade-report.json') });
   report.postgresVersion = must('docker', ['exec', container, 'postgres', '--version']);
   stage('client generation', 'db:generate', env, true);
   stage('fresh dev migrations', 'db:migrate', env, true);
@@ -83,6 +97,10 @@ try {
   stage('ordinary unit/API tests', 'test', env);
   stage('production build', 'build', { ...env, NODE_ENV: 'production' });
   stage('G1 database, seed and compiled-client checks', 'test:g1', env);
+  const upgrades = command(process.execPath, ['scripts/check-foundation-upgrade.mjs'], env);
+  process.stdout.write(redact(upgrades.stdout) + redact(upgrades.stderr));
+  report.upgrades = JSON.parse(readFileSync(env.G1_UPGRADE_REPORT_PATH, 'utf8'));
+  failed ||= upgrades.status !== 0;
 } catch (error) {
   failed = true;
   report.error = redact(error.message);
