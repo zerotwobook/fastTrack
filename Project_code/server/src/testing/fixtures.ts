@@ -5,6 +5,7 @@
 import { PrismaClient, UserRole } from '../db/generated/client/index.js';
 import { PrismaPg } from '@prisma/adapter-pg';
 import { requireTestDatabase } from '../db/test-database.js';
+import { ConfigError } from '../config.js';
 import { scryptSync, randomBytes } from 'node:crypto';
 
 // Validate test-database boundary immediately on import.
@@ -22,29 +23,31 @@ function hashPassword(plain: string): string {
 export const TEST_PASSWORD = 'test-password-fixture';
 export const TEST_PASSWORD_HASH = hashPassword(TEST_PASSWORD);
 
-/** Create an isolated Prisma client for integration tests using TEST_DATABASE_URL.
- * Rechecks requireTestDatabase on every invocation (G1-07).
- */
-export function createTestPrisma(): PrismaClient {
-  requireTestDatabase(process.env, [process.env['DATABASE_URL'] ?? '']);
-  const connectionString = process.env['TEST_DATABASE_URL'];
-  if (!connectionString) {
-    throw new Error('TEST_DATABASE_URL is required for test fixtures.');
+// Only this factory can bind a concrete client to the validated connection string.
+const testClientTargets = new WeakMap<PrismaClient, string>();
+
+function assertTestClientTarget(prisma: PrismaClient): void {
+  const target = requireTestDatabase(process.env);
+  if (testClientTargets.get(prisma) !== target) {
+    throw new ConfigError('test fixture client (unverified or changed database target)');
   }
-  const adapter = new PrismaPg({ connectionString });
-  return new PrismaClient({ adapter });
 }
 
-/** Clean test database tables in reverse foreign key order. */
+/** Create a client bound to the validated, reserved test database. */
+export function createTestPrisma(): PrismaClient {
+  const target = requireTestDatabase(process.env);
+  const client = new PrismaClient({ adapter: new PrismaPg({ connectionString: target }) });
+  testClientTargets.set(client, target);
+  return client;
+}
+
+/** Validate the actual client binding before deleting anything, then clean atomically. */
 export async function cleanTestDatabase(prisma: PrismaClient) {
-  requireTestDatabase(process.env, [process.env['DATABASE_URL'] ?? '']);
-  await prisma.feedback.deleteMany();
-  await prisma.submission.deleteMany();
-  await prisma.milestone.deleteMany();
-  await prisma.teamMember.deleteMany();
-  await prisma.team.deleteMany();
-  await prisma.session.deleteMany();
-  await prisma.user.deleteMany();
+  assertTestClientTarget(prisma);
+  await prisma.$transaction([
+    prisma.feedback.deleteMany(), prisma.submission.deleteMany(), prisma.milestone.deleteMany(),
+    prisma.teamMember.deleteMany(), prisma.team.deleteMany(), prisma.session.deleteMany(), prisma.user.deleteMany(),
+  ]);
 }
 
 /** Full fixture set: two supervisors, three students, two teams, milestones with exact boundary fixtures. */
@@ -52,7 +55,7 @@ export async function createBaseFixtures(
   prisma: PrismaClient,
   refDate?: Date,
 ) {
-  requireTestDatabase(process.env, [process.env['DATABASE_URL'] ?? '']);
+  assertTestClientTarget(prisma);
   await cleanTestDatabase(prisma);
 
   const ref = refDate ?? new Date(Date.now() + 24 * 60 * 60 * 1000);
@@ -136,6 +139,7 @@ export async function createBaseFixtures(
     data: {
       teamId: teamA.id,
       title: 'Past deadline milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: new Date(ref.getTime() - 1),
       createdById: supA.id,
     },
@@ -145,6 +149,7 @@ export async function createBaseFixtures(
     data: {
       teamId: teamA.id,
       title: 'Exact boundary milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: ref,
       createdById: supA.id,
     },
@@ -154,6 +159,7 @@ export async function createBaseFixtures(
     data: {
       teamId: teamA.id,
       title: 'Boundary plus one ms milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: new Date(ref.getTime() + 1),
       createdById: supA.id,
     },
@@ -163,6 +169,7 @@ export async function createBaseFixtures(
     data: {
       teamId: teamA.id,
       title: 'Future milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: new Date(ref.getTime() + 60 * 60 * 1000),
       createdById: supA.id,
     },
@@ -172,6 +179,7 @@ export async function createBaseFixtures(
     data: {
       teamId: teamB.id,
       title: 'Team B milestone',
+      description: 'Synthetic milestone fixture with valid required content.',
       dueAt: new Date(ref.getTime() + 60 * 60 * 1000),
       createdById: supB.id,
     },
