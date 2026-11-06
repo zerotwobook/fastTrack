@@ -4,7 +4,7 @@
 
 The client/API scaffold includes a minimal React page, `/api/health`, safe JSON errors/request correlation, environment validation, a same-origin Vite proxy and TypeScript builds. PostgreSQL/Prisma schema/migrations/seed/fixtures and shared UI primitives are present.
 
-The foundation check currently has **4 passing / 8 failing G1 cases**; see [the independent reproduction](docs/evidence/R1-G1-A-foundation.md). Authentication and team/milestone/submission/feedback endpoints are not implemented. Ordinary unit-test success does not mean the database foundation or a completed Sprint 1 application is accepted.
+The latest clean-clone foundation check passes **38/38 G1 cases and 7/7 migration scenarios**, alongside 51/51 ordinary tests; see [the independent reproduction](docs/evidence/R1-G1-A-foundation.md). Peer review and G1 acceptance remain pending. Authentication and team/milestone/submission/feedback endpoints are not implemented. These foundation checks do not establish domain-feature acceptance or a completed Sprint 1 application.
 
 `GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No test identity bypass is exposed.
 
@@ -53,7 +53,7 @@ The supplied database URLs are placeholders. Replace them only with your actual 
 | TEST_DATABASE_URL | Distinct reserved test-database URL; never reuse the development/production DB |
 | SESSION_TTL_HOURS | Only 8 accepted; session behavior is not implemented yet |
 | RELEASE_SHA | Safe local label for development/test; production requires a full 40-character lowercase commit SHA |
-| DEMO_SEED_PASSWORD | Explicit seed input; no default password. Repeat seed currently has the name-preservation defect recorded in the audit. |
+| DEMO_SEED_PASSWORD | Explicit seed input; no default password. Repeat seed preserves existing names, password hashes, membership and history. |
 
 After provisioning your own database and supplying DATABASE_URL/DEMO_SEED_PASSWORD to the command environment, the verified workspace commands are:
 
@@ -62,7 +62,7 @@ npm run db:migrate --workspace @fasttrack/server
 npm run db:seed --workspace @fasttrack/server
 ```
 
-Migrate applies ordered migrations; it is not a reset. There is no general reset command. Current schema/seed defects are documented; prefer the isolated audit command for reproducing findings without touching an existing DB.
+The migrate command deploys pending ordered migrations. There is no general reset command. Before upgrading a database created from the unmerged PR #53 proposal, read [the migration adoption note](docs/decisions/0002-g1-migration-adoption.md); its third migration was amended before acceptance. Use the isolated audit command for review without changing an existing database.
 
 ## Run, build and ordinary tests
 
@@ -94,11 +94,11 @@ With Docker Engine running, from Project_code:
 npm run test:g1:isolated
 ```
 
-This verified command creates its own temporary PostgreSQL instance with a random loopback-only port and distinct development/test databases, generates Prisma, migrates both DBs, repeats migrate deploy, runs typecheck, the 51 ordinary tests, a production-mode build and the dedicated G1 assertions. It removes only the newly created container and temporary credential file afterwards. Random DB/seed credentials are not committed or printed.
+This verified command creates its own temporary PostgreSQL instance with a random loopback-only port and distinct development/test databases, generates Prisma, migrates both DBs, repeats migrate deploy, runs typecheck, the 51 ordinary tests, a production-mode build and 38 dedicated G1 assertions. It also creates seven historical-schema databases inside that same new container to check upgrades and safe rejection. It removes only the newly created container and temporary credential file afterwards. Random DB/seed credentials are not committed or printed.
 
-The current expected exit is **1** because eight canonical contracts fail; do not treat that exit as an accepted gate. The runner prints a redacted JSON report path. Set G1_REPORT_PATH to choose that output file. [Committed results](docs/evidence/R1-G1-A-results.json) and [findings/reproduction](docs/evidence/R1-G1-A-foundation.md) distinguish actual successes, failures and unimplemented domain tests.
+The current expected exit is **0**. The runner prints a redacted JSON report path. Set G1_REPORT_PATH to choose that output file. Four negative upgrade scenarios intentionally receive a failed migration exit and pass only when the expected PostgreSQL error, existing records, schema and completed migration checksums are preserved. [Latest committed results](docs/evidence/R1-G1-A-remediation-results.json) and [findings/reproduction](docs/evidence/R1-G1-A-foundation.md) distinguish technical checks, historical failures and pending human acceptance.
 
-For an already prepared, dedicated empty test database, npm run test:g1 runs only the G1 cases. It requires NODE_ENV=test, TEST_DATABASE_URL and a distinct protected DATABASE_URL. These checks create/update synthetic data; use the isolated wrapper for routine reproduction. The current fixture-client factory misses a guard recheck after import; that defect is recorded rather than accepted.
+For an already prepared, dedicated empty test database, npm run test:g1 runs only the 38 G1 cases. It requires NODE_ENV=test, TEST_DATABASE_URL and a distinct protected DATABASE_URL. These checks create/update synthetic data; use the isolated wrapper for routine reproduction. Fixture setup/cleanup accepts only clients returned by createTestPrisma(), bound to the currently validated test URL. Passing an arbitrary Prisma client or changing the configured target after client creation is rejected before cleanup queries. Cleanup uses a transaction.
 
 ## Built server
 
@@ -118,9 +118,9 @@ Replace the HTTPS example origin for a real deployment. The listener uses PORT b
 ```text
 Project_code/
   package.json, package-lock.json, .npmrc, .node-version
-  prisma.config.ts
+  prisma.config.ts, prisma.g1-history.config.ts
   vitest.config.ts, vitest.g1.config.ts
-  scripts/                 Isolated G1 runner and Prisma runtime packaging
+  scripts/                 Isolated G1 runner, migration probes and Prisma runtime packaging
   client/                  React entry, Vite config and shared design primitives
   server/
     .env.example

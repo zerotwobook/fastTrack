@@ -1,0 +1,328 @@
+{
+  "testedSource": "6f3601ec1af3f0b7039bce175251642d1920c40c",
+  "role": "final clean-clone verification",
+  "acceptance": "PENDING",
+  "commands": [
+    "npm ci",
+    "npm run test:g1:isolated"
+  ],
+  "image": "postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae",
+  "startedAt": "2026-11-06T14:32:36.426Z",
+  "stages": [
+    {
+      "name": "client generation",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "fresh dev migrations",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "fresh test migrations",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "repeat migration deploy",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "ordinary unit/API tests",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "production build",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "G1 database, seed and compiled-client checks",
+      "passed": true,
+      "exitCode": 0
+    }
+  ],
+  "cleanup": "removed newly created audit container",
+  "postgresVersion": "postgres (PostgreSQL) 16.8 (Debian 16.8-1.pgdg120+1)",
+  "g1Tests": {
+    "passed": 38,
+    "failed": 0,
+    "failedSuites": 0,
+    "cases": [
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for team.name",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for milestone.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for milestone.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.url",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for feedback.content",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for team.name",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for milestone.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for milestone.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.url",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for feedback.content",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required team.name",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required milestone.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required milestone.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.url",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required feedback.content",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation counts a valid 120-code-point title independently of UTF-16 code units",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects an arbitrary protected dev client before deleting its canary",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation allows cleanup through a factory-bound test client",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects a factory client if the configured test target has changed since creation",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects an unbranded client even if its URL is the configured test URL",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL permits one supervisor to own multiple teams",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL provides nullable revocation and cancellation fields required before dependent auth/domain work",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL uses native UUID primary keys as specified by the accepted data model",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL rejects a submission with an unknown author through its foreign key",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces the version lower bound in the database",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces one team per student and foreign-key history restriction",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces the accepted title bound in the migration rather than only in future handlers",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL provides exact one-millisecond-before, equal and one-millisecond-after deadline fixtures",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL rechecks the test database guard at client creation even after the module was imported",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL repeats the seed without duplicating records or replacing stored password hashes/membership",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL preserves previously edited names when the add-only seed runs again",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL loads the compiled database module and reads PostgreSQL through the generated client",
+        "status": "passed"
+      }
+    ]
+  },
+  "upgrades": {
+    "cases": [
+      {
+        "variant": "control",
+        "passed": true,
+        "migrationExit": 0,
+        "databaseErrorCode": null,
+        "rejectionDiagnostic": null,
+        "recordsPreserved": true,
+        "schemaPreserved": false,
+        "matchesFreshSchema": true,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 10
+      },
+      {
+        "variant": "canonical_boundary",
+        "passed": true,
+        "migrationExit": 0,
+        "databaseErrorCode": null,
+        "rejectionDiagnostic": null,
+        "recordsPreserved": true,
+        "schemaPreserved": false,
+        "matchesFreshSchema": true,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 10
+      },
+      {
+        "variant": "invalid_uuid",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "22P02",
+        "rejectionDiagnostic": "Error: P3018 ERROR: G1 UUID preflight: invalid legacy identifiers in users.id; no schema changes applied. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E22P02), message: \"G1 UUID preflight: invalid legacy identifiers in users.id; no schema changes applied.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 27 at RAISE\\nSQL statement \\\"DO $uuid_preflight$\\r\\nDECLARE target RECORD; checked_count BIGINT;\\r\\nBEGIN\\r\\n  FOR target IN SELECT * FROM (VALUES\\r\\n      ('users', 'id'),\\r\\n      ('sessions', 'id'),\\r\\n      ('ses",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "invalid_required",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "23514",
+        "rejectionDiagnostic": "Error: P3018 ERROR: G1 bounds preflight: 1 invalid rows in milestones.description; resolve data without truncation before retrying. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E23514), message: \"G1 bounds preflight: 1 invalid rows in milestones.description; resolve data without truncation before retrying.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 18 at RAISE\\nSQL statement \\\"DO $bounds_preflight$\\r\\nDECLARE rule RECORD; invalid_count BIGINT; whitespace CONSTANT TEXT := U&'\\\\0009\\\\000A\\\\000B\\\\000C\\\\000D\\\\0020",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "invalid_overlength",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "23514",
+        "rejectionDiagnostic": "Error: P3018 ERROR: G1 bounds preflight: 1 invalid rows in teams.name; resolve data without truncation before retrying. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E23514), message: \"G1 bounds preflight: 1 invalid rows in teams.name; resolve data without truncation before retrying.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 18 at RAISE\\nSQL statement \\\"DO $bounds_preflight$\\r\\nDECLARE rule RECORD; invalid_count BIGINT; whitespace CONSTANT TEXT := U&'\\\\0009\\\\000A\\\\000B\\\\000C\\\\000D\\\\0020\\\\00A0\\\\1680\\\\2000\\\\2001",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "invalid_author",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "23503",
+        "rejectionDiagnostic": "Error: P3018 ERROR: insert or update on table \"submissions\" violates foreign key constraint \"submissions_submitted_by_id_fkey\"",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "candidate_applied",
+        "passed": true,
+        "migrationExit": 0,
+        "databaseErrorCode": null,
+        "rejectionDiagnostic": null,
+        "recordsPreserved": true,
+        "schemaPreserved": false,
+        "matchesFreshSchema": true,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 10,
+        "foreignKeysAfter": 10
+      }
+    ],
+    "passed": true
+  },
+  "finishedAt": "2026-11-06T14:33:15.108Z",
+  "passed": true,
+  "observedEnvironment": {
+    "os": "Windows x64",
+    "node": "26.13.0",
+    "npm": "11.20.0",
+    "ordinaryTestsPassed": 51,
+    "ordinaryTestFiles": 3,
+    "npmCiPackages": 316,
+    "cleanCloneGitStatus": "clean"
+  }
+}
