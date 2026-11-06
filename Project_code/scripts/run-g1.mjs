@@ -33,19 +33,21 @@ function must(bin, args, env) {
 }
 function stage(name, script, env, required = false) {
   const testReport = join(directory, 'tests.json');
-  const extra = script === 'test:g1' ? ['--', '--reporter=json', '--outputFile', testReport] : [];
+  const reportedTests = script === 'test:g1' || script === 'test:auth';
+  const extra = reportedTests ? ['--', '--reporter=json', '--outputFile', testReport] : [];
   const result = command(process.execPath, [npmCli, 'run', script, ...(script.startsWith('db:') ? ['--workspace', '@fasttrack/server'] : []), ...extra], env);
   const passed = result.status === 0;
   report.stages.push({ name, passed, exitCode: result.status });
   process.stdout.write(redact(result.stdout) + redact(result.stderr));
-  if (script === 'test:g1') {
+  if (reportedTests) {
     try {
       const tests = JSON.parse(readFileSync(testReport, 'utf8'));
-      report.g1Tests = { passed: tests.numPassedTests, failed: tests.numFailedTests, failedSuites: tests.numFailedTestSuites,
+      const summary = { passed: tests.numPassedTests, failed: tests.numFailedTests, failedSuites: tests.numFailedTestSuites,
         cases: tests.testResults.flatMap(file => file.assertionResults.map(test => ({ name: test.fullName, status: test.status }))) };
-      process.stdout.write(`G1 cases: ${report.g1Tests.passed} passed, ${report.g1Tests.failed} failed; ${report.g1Tests.failedSuites} failed suites.\n`);
+      report[script === 'test:g1' ? 'g1Tests' : 'authTests'] = summary;
+      process.stdout.write(`${script} cases: ${summary.passed} passed, ${summary.failed} failed; ${summary.failedSuites} failed suites.\n`);
       for (const suite of tests.testResults.filter(suite => suite.status === 'failed' && suite.assertionResults.length === 0)) process.stderr.write(redact(suite.message) + '\n');
-      for (const test of report.g1Tests.cases.filter(test => test.status !== 'passed')) process.stdout.write(`${test.status}: ${test.name}\n`);
+      for (const test of summary.cases.filter(test => test.status !== 'passed')) process.stdout.write(`${test.status}: ${test.name}\n`);
     } catch { report.testReportError = 'No readable Vitest report.'; }
   }
   failed ||= !passed;
@@ -98,6 +100,7 @@ try {
   stage('ordinary unit/API tests', 'test', env);
   stage('production build', 'build', { ...env, NODE_ENV: 'production' });
   stage('G1 database, seed and compiled-client checks', 'test:g1', env);
+  if (process.env.G1_AUTH_CHECKS === '1') stage('F-01 sessions, source protection and scoped team checks', 'test:auth', env);
   const upgrades = command(process.execPath, ['scripts/check-foundation-upgrade.mjs'], env);
   process.stdout.write(redact(upgrades.stdout) + redact(upgrades.stderr));
   report.upgrades = JSON.parse(readFileSync(env.G1_UPGRADE_REPORT_PATH, 'utf8'));

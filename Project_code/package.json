@@ -20,7 +20,9 @@
     "test:watch": "vitest",
     "start": "npm run start --workspace @fasttrack/server",
     "test:g1": "vitest run --config vitest.g1.config.ts",
-    "test:g1:isolated": "node scripts/run-g1.mjs"
+    "test:g1:isolated": "node scripts/run-g1.mjs",
+    "test:auth": "vitest run --config vitest.auth.config.ts",
+    "test:auth:isolated": "node scripts/run-auth.mjs"
   },
   "devDependencies": {
     "@types/node": "26.6.6",

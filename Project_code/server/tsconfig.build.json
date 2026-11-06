@@ -8,6 +8,7 @@
   },
   "exclude": [
     "src/**/*.test.ts",
-    "src/**/*.g1.ts"
+    "src/**/*.g1.ts",
+    "src/**/*.auth.ts"
   ]
 }
