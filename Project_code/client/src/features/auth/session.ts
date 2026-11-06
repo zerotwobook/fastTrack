@@ -7,13 +7,13 @@ export interface SessionSnapshot {
   readonly revision: number; readonly recovery: 'session' | 'logout';
 }
 export interface DomainRead<T> { data: T; meta: { serverTime: string } }
-export class ApiError extends Error { constructor(readonly status: number, message: string, readonly fields: Readonly<Record<string, string>> = {}) { super(message); } }
+export class ApiError extends Error { constructor(readonly status: number, message: string, readonly fields: Readonly<Record<string, string>> = {}, readonly code: string | null = null) { super(message); } }
 export class StaleSessionError extends Error {}
 export function safeReturnTo(value: string | null): string {
   if (!value || !value.startsWith('/') || value.startsWith('//') || /[\u0000-\u0020\\]/.test(value)) return '/';
   try {
     const url = new URL(value, 'https://fasttrack.invalid');
-    if (url.origin !== 'https://fasttrack.invalid' || !(url.pathname === '/' || /^\/teams\/[a-f0-9-]{36}(?:\/milestones\/new)?$/i.test(url.pathname) || /^\/milestones\/[a-f0-9-]{36}$/i.test(url.pathname))) return '/';
+    if (url.origin !== 'https://fasttrack.invalid' || !(url.pathname === '/' || /^\/teams\/[a-f0-9-]{36}(?:\/milestones\/new)?$/i.test(url.pathname) || /^\/milestones\/[a-f0-9-]{36}(?:\/submissions\/new)?$/i.test(url.pathname) || /^\/submissions\/[a-f0-9-]{36}$/i.test(url.pathname))) return '/';
     return url.pathname + url.search + url.hash;
   } catch { return '/'; }
 }
@@ -34,10 +34,10 @@ export class SessionStore {
     try { response = await this.fetcher(`/api${path}`, { ...options, credentials: 'same-origin', cache: 'no-store' }); }
     catch { throw new ApiError(0, 'Unable to reach fastTrack. Check your connection and try again.'); }
     if (response.status === 204) return undefined as T;
-    let body: { data?: T; meta?: { serverTime: string }; error?: { message?: string; fields?: Record<string, string> } };
+    let body: { data?: T; meta?: { serverTime: string }; error?: { code?: string; message?: string; fields?: Record<string, string> } };
     try { body = await response.json() as typeof body; }
     catch { throw new ApiError(0, 'The service returned an unreadable response. Try again.'); }
-    if (!response.ok) throw new ApiError(response.status, body.error?.message ?? 'The request could not be completed.', body.error?.fields ?? {});
+    if (!response.ok) throw new ApiError(response.status, body.error?.message ?? 'The request could not be completed.', body.error?.fields ?? {}, body.error?.code ?? null);
     return (envelope ? body : body.data) as T;
   }
   lock(): void { this.generation++; this.publish({ phase: 'loading', auth: null, error: null, busy: false, recovery: this.pendingLogout ? 'logout' : 'session' }); }

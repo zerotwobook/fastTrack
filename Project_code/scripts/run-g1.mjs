@@ -35,7 +35,7 @@ function must(bin, args, env) {
 }
 function stage(name, script, env, required = false) {
   const testReport = join(directory, 'tests.json');
-  const reportedTests = script === 'test:g1' || script === 'test:auth' || script === 'test:b01';
+  const reportedTests = script === 'test:g1' || script === 'test:auth' || script === 'test:b01' || script === 'test:a02';
   const extra = reportedTests ? ['--', '--reporter=json', '--outputFile', testReport] : [];
   const result = command(process.execPath, [npmCli, 'run', script, ...(script.startsWith('db:') ? ['--workspace', '@fasttrack/server'] : []), ...extra], env);
   const passed = result.status === 0;
@@ -46,7 +46,7 @@ function stage(name, script, env, required = false) {
       const tests = JSON.parse(readFileSync(testReport, 'utf8'));
       const summary = { passed: tests.numPassedTests, failed: tests.numFailedTests, failedSuites: tests.numFailedTestSuites,
         cases: tests.testResults.flatMap(file => file.assertionResults.map(test => ({ name: test.fullName, status: test.status }))) };
-      report[script === 'test:g1' ? 'g1Tests' : script === 'test:auth' ? 'authTests' : 'b01Tests'] = summary;
+      report[script === 'test:g1' ? 'g1Tests' : script === 'test:auth' ? 'authTests' : script === 'test:b01' ? 'b01Tests' : 'a02Tests'] = summary;
       process.stdout.write(`${script} cases: ${summary.passed} passed, ${summary.failed} failed; ${summary.failedSuites} failed suites.\n`);
       for (const suite of tests.testResults.filter(suite => suite.status === 'failed' && suite.assertionResults.length === 0)) process.stderr.write(redact(suite.message) + '\n');
       for (const test of summary.cases.filter(test => test.status !== 'passed')) process.stdout.write(`${test.status}: ${test.name}\n`);
@@ -104,6 +104,7 @@ try {
   stage('G1 database, seed and compiled-client checks', 'test:g1', env);
   if (process.env.G1_AUTH_CHECKS === '1') stage('F-01 sessions, source protection and scoped team checks', 'test:auth', env);
   if (process.env.G1_B01_CHECKS === '1') stage('B01 real-session milestone regression', 'test:b01', env);
+  if (process.env.G1_A02_CHECKS === '1') stage('F-03 first-submission regression', 'test:a02', env);
   const upgrades = command(process.execPath, ['scripts/check-foundation-upgrade.mjs'], env);
   process.stdout.write(redact(upgrades.stdout) + redact(upgrades.stderr));
   report.upgrades = JSON.parse(readFileSync(env.G1_UPGRADE_REPORT_PATH, 'utf8'));

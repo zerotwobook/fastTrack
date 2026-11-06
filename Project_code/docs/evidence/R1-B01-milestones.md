@@ -2,7 +2,7 @@
 
 Original B source 043af8d received an independent changes-requested review. A implemented the user-authorized corrections in Issue #55 / PR #56 on fix/s1-a-b01-review while preserving B history. Current executable source 3b7b2cc passes a clean-clone install/build/typecheck, 83 ordinary tests, 33 milestone DB cases (7 retained service + 26 real-session), 28 auth cases, 38 G1 cases and seven migration scenarios. Actual Chromium create/read/reload, Bangkok conversion under a New York host zone, student rejection/no-write and foreign/missing 404 equality are verified.
 
-See [independent findings, RED/GREEN and final evidence](R1-B01-A-review.md). B must review A's current correction before accepted staging integration and G2. The original PR #52 head is superseded by #56, not approved as if it contained A's fixes. Existing accepted A01 is merge 0b99a28.
+See [independent findings, RED/GREEN and final evidence](R1-B01-A-review.md). B subsequently approved/merged the correction as 78d0cca; [G2 acceptance](R1-G2-acceptance.md) records the user's delegation of the remaining UI check to A/AI. The original PR #52 head is superseded by #56, not approved as if it contained A's fixes. Existing accepted A01 is merge 0b99a28.
 
 ## Historical B implementation report
 
