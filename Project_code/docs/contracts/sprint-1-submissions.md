@@ -1,6 +1,6 @@
 # R1-A02 first-submission contract and verification plan
 
-Owner A / zerotwobook; reviewer B / Atip-Infa. Issue #7, branch `feature/s1-a-submissions`, based on accepted staging `78d0cca`. [G2 is accepted](../evidence/R1-G2-acceptance.md) under the user's recorded delegation. The contract is implemented and verified at 1bf8d63; B peer acceptance/merge of PR #57 remains pending. See [actual evidence](../evidence/R1-A02-submissions.md).
+Owner A / zerotwobook; reviewer B / Atip-Infa. Issue #7, branch `feature/s1-a-submissions`, based on accepted staging `78d0cca`. [G2 is accepted](../evidence/R1-G2-acceptance.md) under the user's recorded delegation. The contract is implemented and verified at 1bf8d63; B approved head f6c4988 and merged #57 into staging as 3365a36; the increment is accepted. See [actual evidence](../evidence/R1-A02-submissions.md).
 
 Sources: project detail 4/5/7.4/8.6 D-F/9.2/9.4/9.5; D1 E.3; AC-03.1-03.6; T-09-T-16/T-25/T-26/T-31 local. Keep existing schema/migrations/seed/fixtures/shared design primitives and dependency lockfile unchanged. B owns feedback; no feedback endpoint is implemented by this task.
 
