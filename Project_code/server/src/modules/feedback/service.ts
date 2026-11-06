@@ -4,14 +4,12 @@
 import type { Prisma, PrismaClient } from '../../db/generated/client/index.js';
 import { AppError } from '../../http/errors.js';
 import { database } from '../auth/security.js';
-import { requireUuid } from '../teams/index.js';
+import { requireUuid, scopedTeamWhere } from '../teams/index.js';
+import type { TeamActor } from '../teams/index.js';
 import { validateFeedbackContent, validateClientRequestId } from '../../../../shared/feedback.mjs';
-import type { FeedbackDto, CreateFeedbackInput } from './dto.js';
+import type { FeedbackDto } from './dto.js';
 
-export interface FeedbackAuthContext {
-  userId: string;
-  role: 'student' | 'supervisor';
-}
+export type FeedbackAuthContext = TeamActor;
 
 const notFound = () => new AppError(404, 'NOT_FOUND', 'The requested resource was not found.');
 
@@ -37,7 +35,7 @@ export class FeedbackService {
   constructor(private readonly prisma: PrismaClient) {}
 
   /**
-   * Helper: fetches a submission by ID and verifies scope.
+   * Helper: fetches a submission by ID and verifies scope using shared scopedTeamWhere.
    * Both missing submission and foreign-team submission return identical 404
    * to avoid leaking the existence of foreign records.
    */
@@ -45,36 +43,22 @@ export class FeedbackService {
     requireUuid(submissionId);
 
     const submission = await database(() =>
-      this.prisma.submission.findUnique({
-        where: { id: submissionId },
-        include: {
+      this.prisma.submission.findFirst({
+        where: {
+          id: submissionId,
           milestone: {
-            include: {
-              team: {
-                include: {
-                  members: true,
-                },
-              },
-            },
+            team: scopedTeamWhere(auth),
           },
+        },
+        select: {
+          id: true,
+          milestoneId: true,
         },
       }),
     );
 
     if (!submission) {
       throw notFound();
-    }
-
-    const team = submission.milestone.team;
-    if (auth.role === 'supervisor') {
-      if (team.supervisorId !== auth.userId) {
-        throw notFound();
-      }
-    } else {
-      const isMember = team.members.some((m) => m.studentId === auth.userId);
-      if (!isMember) {
-        throw notFound();
-      }
     }
 
     return submission;
