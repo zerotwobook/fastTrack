@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | [G0 ACCEPTED](../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md): Atip-Infa approved and merged PR #44. A00 checks are ready for separate peer review; G1 remains PENDING. |
+| Gate record | G0 accepted; A00 merged in PR #45; B00 candidate merged in PR #48 as 5f2ac0b. [G1 audit](../Project_code/docs/evidence/R1-G1-A-foundation.md): 4 passed / 8 failed; NOT ACCEPTED. Corrective Issue #51 precedes A01/B01. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -179,10 +179,18 @@ Owner A; reviewer B. Dependency: accepted G0, [PR #44](https://github.com/zerotw
 - [x] Add server `.env.example` and ignore rules; no real credentials, local env or generated files enter Git.
 - [x] Add and unit-test the distinct test-database guard. No reset, schema, migrate or seed command is invented before B00.
 - [x] Run install/typecheck/test/build in a fresh clone and verify dev/proxy/compiled-server/browser smoke. Record actual checks and limits in [A00 evidence](../Project_code/docs/evidence/R1-A00-scaffold.md).
-- [ ] B reproduces the tree/scripts/env/API/test-DB boundary on the actual PR head and records peer approval or requested changes.
-- [ ] Merge the reviewed scaffold into `staging/sprint-1`, then unblock B00. Do not mark G1 passed or start dependent F-01/F-02 before the real B foundation and joint check.
+- [x] B reproduced the scaffold and approved PR #45 at 292934b; actual review/merge is recorded on GitHub.
+- [x] The reviewed scaffold merged into staging/sprint-1 as 1a5e063 and unblocked B00. This acceptance does not pass G1 or authorize F-01/F-02 before the joint foundation check.
 
 B's review covers the file tree, manifests/lockfile, runtime, env names, API bootstrap, parser order, safe errors, test-DB guard and source ownership. The native tracked-PR merge rule moves its card to Done only after an actual merge; task-Issue completion and gate acceptance must be reconciled from evidence separately.
+
+### G1 audit before dependent implementation
+
+A's independent audit is [Issue #49](https://github.com/zerotwobook/fastTrack/issues/49), branch `test/s1-a-g1-foundation`, [Draft PR #50](https://github.com/zerotwobook/fastTrack/pull/50). B00 was approved/merged in PR #48, with foundation reproduction explicitly deferred to G1.
+
+A reproduced a clean install, generation, fresh/repeat migrations, typecheck, 51 ordinary tests and production build. The compiled Prisma runtime packaging defect was corrected on A's branch. The dedicated real-DB checks remain 4 passed / 8 failed; full results and commands are in [the audit evidence](../Project_code/docs/evidence/R1-G1-A-foundation.md).
+
+B's forward correction task is [Issue #51](https://github.com/zerotwobook/fastTrack/issues/51) for schema, seed and fixture contracts. A's audit remains Draft/Started with Verification FAILED and Acceptance PENDING. Do not start A01/B01 until the fixes are reproduced on the combined source and both members record actual G1 acceptance. No main release is included.
 
 ### R1-A01: F-01 identity และทีมที่มีสิทธิ์
 
