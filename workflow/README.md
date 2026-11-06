@@ -136,20 +136,24 @@ Author ส่ง handoff สั้น ๆ 6 อย่าง: **Task/Issue/PR + c
 
 Release captain เลือกหนึ่งคนต่อ release: รอบ 1 A นำ/B review, รอบ 2 B นำ/A review, รอบ 3 A นำ D2 และ B นำ Final โดยอีกคน review ทั้งคู่ช่วยตรวจ integration เสมอ ถ้าต้องสลับให้บันทึกก่อน ไม่ต้องสร้าง release PR สองใบแข่งกัน
 
-สถานะที่ใช้ใน board/Issue ที่มีจริง: Backlog → Specified → Started → PR Review → Fixing → Done ส่วน verification ใช้ NOT RUN/FAILED/PASSED และ acceptance gate ใช้ PENDING/ACCEPTED แยกกัน **Done หมายถึงงานผ่านเกณฑ์ของ task และ merge เข้า branch ถัดไปจริง ไม่เท่ากับผ่านทุก acceptance หรือส่งงานแล้ว**
+### Project stage timing
 
-คอลัมน์เรียงตามที่ทีมกำหนด โดยเดินงานหลัก Backlog → Specified → Started → PR Review → Done ถ้า review/checks ต้องแก้ ให้เข้า Fixing แล้วส่งกลับ PR Review ก่อน Done ไม่จำเป็นต้องผ่าน Fixing เมื่อไม่มีข้อแก้ไข
+Follow [the full Project protocol](GITHUB_PROJECT_AUTOMATION.md). Every new task Issue follows **Backlog -> Specified -> Started -> PR Review -> Done** as the work happens. For real review/check findings, use **PR Review -> Fixing -> PR Review**; Fixing is not mandatory without a finding.
 
-| Status | ความหมาย / เงื่อนไข |
+| Status | Entry condition and timing |
 |---|---|
-| Backlog | รับงานเข้าหรือยังไม่พร้อมเริ่ม ไม่อ้างว่าสเปกผ่าน review แล้ว |
-| Specified | Scope/contracts/acceptance ชัดและทบทวนแล้ว; ยังต้องตรวจ dependency/gate ก่อนเริ่ม |
-| Started | กำลังพัฒนาบน task branch ของ owner |
-| PR Review | เปิด PR ให้เพื่อนตรวจ behavior/tests และผลจริง |
-| Fixing | แก้ review comments หรือ checks ที่ไม่ผ่าน แล้วส่งกลับ PR Review |
-| Done | ผ่านเกณฑ์ task และ merge เข้า staging/main ตามประเภท PR จริง; ไม่แทน final release acceptance |
+| Backlog | Register/reuse the task, owner and sprint; do not imply specification/implementation is complete. |
+| Specified | Scope/contracts/acceptance/checks and dependencies are understood; save/read back this state before implementation. |
+| Started | Required gates/dependencies and isolated branch are ready; save/read back this state **before editing task files**. |
+| PR Review | Work/checks/evidence are ready, the PR is marked ready and the peer review is requested. |
+| Fixing | Actual requested changes or a handed-off failing check are being resolved on the same branch/PR. |
+| Done | Task criteria, real peer acceptance and intended integration merge are confirmed; this does not accept every release/assessment gate. |
 
-ข้อความสถานะเดิมใน Issue ที่สร้างก่อนปรับบอร์ดใช้ mapping: PLANNED = Backlog, IN PROGRESS = Started, REVIEW = PR Review, MERGED = Done ให้ใช้ค่าบนบอร์ดปัจจุบัน ไม่สร้าง Issue ใหม่เพียงเพื่อเปลี่ยนชื่อสถานะ
+Push the first coherent commit and open a **Draft PR during Started**, then immediately add its Project card as Started. Finish remaining work/checks before marking ready and moving both Issue/PR to PR Review. The Issue records the pre-PR lifecycle; do not fabricate earlier states on a PR created later.
+
+Log the real time/from/to/reason and available branch/PR/commit in the Issue body, preserving other authors' text. Do not skip stages or cycle through them only at final handoff. Keep Status separate from Verification NOT RUN/FAILED/PASSED and Acceptance PENDING/ACCEPTED. Native merged-PR -> Done remains enabled and does not enforce the intermediate steps.
+
+Leave previous completed cards/history unchanged. Continue existing active work from its verified current stage. Legacy mappings remain PLANNED = Backlog, IN PROGRESS = Started, REVIEW = PR Review, MERGED = Done; do not create duplicate tasks just to rename states.
 
 ## 5. TDD, CI และหลักฐาน
 

@@ -35,6 +35,7 @@ Reuse already-read guidance until it changes or the context requires a refresh. 
 - Use [README.md](../README.md) for the actual application overview and [Project_code/README.md](../Project_code/README.md) for verified code/setup details. Keep team coordination, AI prompts, task allocation and branch procedures in [DEVELOPMENT_README.md](../DEVELOPMENT_README.md), CONTRIBUTING and workflow. Before code exists, leave technical details explicitly pending rather than inventing features or commands.
 - Preserve required repository-level paths such as `.github/workflows/`, `.gitignore`, `skill/` and `docs/labs/lab-05/deployment.md`. GitHub Actions do not belong inside Project_code.
 - Use real working directories/build contexts for install/build/test/Docker/CI; do not create duplicate root packages or lockfiles unnecessarily.
+- The [Lab 5 starter](../lab_file/lab5/02_lab5-starter-kit/toktickit-lab5-starter/README.md) may guide client/server, container and CI/deploy structure. Adapt it to fastTrack under Project_code, the existing workspace/runtime and owned schema/UI; do not replace the accepted app with TokTickIT or claim unverified starter commands work. See [the development guide](../DEVELOPMENT_README.md#lab-5-starter-reference).
 
 ## 4. Task ownership and branch isolation
 
@@ -69,8 +70,8 @@ For shared design/API/schema/rule changes, identify impacts and follow the workf
 
 - Follow task AC/tests/DoD and required evidence. Never invent PASS, review, release or submission claims.
 - For TDD, retain RED on the task branch, then GREEN/regression before integration; never merge an intentionally failing change into protected main/staging.
-- Use the board stages **Backlog -> Specified -> Started -> PR Review -> Fixing -> Done**. Fixing returns to PR Review; successful review may go directly to Done after an actual merge. Keep Verification and Acceptance separate.
-- Add every PR to Project 3 and initialize the actual Task ID/Sprint/Owner before handoff. Ready PRs use PR Review; drafts remain Started. The enabled native Pull request merged rule moves a tracked merged PR to Done. Follow [Project automation](../workflow/GITHUB_PROJECT_AUTOMATION.md); do not infer Issue completion, test success or gate acceptance from that move.
+- Follow the [stage protocol](../workflow/GITHUB_PROJECT_AUTOMATION.md) for every new task: Issue Backlog -> Specified after scope review -> Started **before task-file edits** -> PR Review only at verified handoff -> Done after actual acceptance/merge. Use PR Review -> Fixing -> PR Review for real findings only. Read back and log each transition when it happens; never batch earlier stages at handoff or invent history. Preserve past completed cards.
+- After the first coherent commit is pushed, open a **Draft PR during Started**, add its Project 3 card immediately and initialize Task ID/Sprint/Owner/Verification/Acceptance with Status Started. Finish remaining work/checks, then mark ready and move both cards to PR Review before requesting peer review. The linked Issue holds the real pre-PR stages; do not fabricate those stages on a PR created later. Native merged-PR -> Done remains enabled; verify its result separately from Issue closure/gate acceptance.
 - Have the teammate review at the specified PR/gates before dependent work. Independent work may continue without approval for every file or command.
 - End with owner/Task ID, branch, changed behavior/files, actual checks/results, review instructions and next action; include real commits/PRs and distinguish implementation, verification, review and merge.
 
