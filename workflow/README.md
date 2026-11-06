@@ -8,6 +8,8 @@
 
 สำหรับเพื่อนที่เพิ่ง clone ให้เริ่มจาก [README หน้าแรกของ repository](../README.md) ซึ่งมีลำดับวันแรกและ prompt แยก A/B ก่อนอ่านรายละเอียดด้านล่าง
 
+GitHub setup และลิงก์รับงานจริงดู [CONTRIBUTING.md](../CONTRIBUTING.md); A = `zerotwobook`, B = `Atip-Infa` ใช้ Issues เดิมตาม Task ID ไม่สร้างซ้ำ
+
 ## 1. เปิดไฟล์ไหน และวันนี้เริ่มตรงไหน
 
 | อยู่ช่วงไหน | เปิดแผน | คุณ A ทำหลัก | เพื่อน B ทำหลัก |

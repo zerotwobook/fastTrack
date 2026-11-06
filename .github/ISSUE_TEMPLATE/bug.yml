@@ -1,0 +1,36 @@
+name: Bug / Defect
+description: แจ้ง defect ที่ reproduce ได้ รวม UAT และ regression
+labels:
+  - bug
+body:
+  - type: input
+    id: version
+    attributes:
+      label: Version / Commit / URL / Environment
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Role / Preconditions / Steps
+      description: ระบุขั้นตอนที่ทำให้พบปัญหาจริง ห้ามใส่ password/token/secrets
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected และ Actual
+      description: อ้าง FR/BR/AC หรือ contract ที่ไม่ผ่าน พร้อมผลจริงที่พบ
+    validations:
+      required: true
+  - type: textarea
+    id: impact
+    attributes:
+      label: Impact / Severity / Module owner
+    validations:
+      required: true
+  - type: textarea
+    id: retest
+    attributes:
+      label: Fix / Regression / Independent retest
+      description: เพิ่มเมื่อทำจริง ระบุ test/commit/ผู้ทดสอบ/ผล ไม่ปิด Issue จากภาพอย่างเดียว

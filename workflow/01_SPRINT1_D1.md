@@ -46,8 +46,8 @@
 
 | รายการ | ค่า |
 |---|---|
-| A: ชื่อ / รหัส / GitHub | TBD — ผู้ใช้เจ้าของคำขอนี้ |
-| B: ชื่อ / รหัส / GitHub | TBD — เพื่อนร่วมทีม |
+| A: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `zerotwobook` |
+| B: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `Atip-Infa` |
 | Repository / access | ตรวจ remote จริง; ต้อง public ตามข้อกำหนด Lab 5 และคงไว้จนตรวจเสร็จ |
 | Sprint staging | `staging/sprint-1` |
 | Contract baseline commit | TBD หลัง commit/review จริง |

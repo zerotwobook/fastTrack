@@ -1,0 +1,46 @@
+name: Task / งานพัฒนา
+description: งานใหม่ตาม workflow หรือ subtask ที่ตกลงร่วมกัน
+body:
+  - type: markdown
+    attributes:
+      value: อ่าน skill/SKILL_Project.md และ workflow ของรอบก่อนรับงาน ใช้ Task ID เดิมถ้ามี Issue อยู่แล้ว
+  - type: input
+    id: task
+    attributes:
+      label: Task ID / Sprint / Feature
+      placeholder: R1-A01 / Sprint 1 / F-01
+    validations:
+      required: true
+  - type: input
+    id: owner
+    attributes:
+      label: Owner และ reviewer
+      description: A = zerotwobook, B = Atip-Infa; reviewer เป็นอีกคน งานร่วมให้ระบุส่วนของแต่ละคน
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope และ source/contracts
+      description: ระบุส่วนที่จะทำและ path/หัวข้อใน project detail หรือ workflow ที่ใช้อ้างอิง
+    validations:
+      required: true
+  - type: textarea
+    id: dependencies
+    attributes:
+      label: Dependencies / Gate / Shared files
+      description: Issue ที่ต้องรอ, ผล checkpoint ที่ต้องมี และ owner ของ schema/router/DTO/lockfile ที่เกี่ยวข้อง
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance และวิธีตรวจ
+      description: พฤติกรรมที่ต้องได้และ tests/verification ที่จำเป็น ไม่ใส่ผล PASS ล่วงหน้า
+    validations:
+      required: true
+  - type: textarea
+    id: branch
+    attributes:
+      label: Branch / Base / Handoff
+      description: งานใหม่แยก branch จาก staging ของรอบ; app code อยู่ใต้ Project_code/; ส่งผลจริงให้เพื่อน review

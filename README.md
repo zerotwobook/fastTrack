@@ -17,6 +17,8 @@
 | รายงาน D1 และ S1 feature contracts | [D1 draft](deliverable%20_file/submit/project_deliverable_1.md) |
 | ต้นฉบับเกณฑ์งานส่ง | [Group specs](deliverable%20_file/group_work_specs_v1.pdf), [D1](deliverable%20_file/project_deliverable_1_v1.pdf), [D2](deliverable%20_file/project_deliverable_2_v1.pdf), [Final](deliverable%20_file/project_final_delivery_v1.pdf) |
 
+การรับงานผ่าน GitHub ใช้ [CONTRIBUTING.md](CONTRIBUTING.md) ซึ่งมีลิงก์ Issues/Milestones, ชื่อ A/B จริง และกติกา PR ที่ตั้งไว้
+
 ## วันแรกของคุณและเพื่อน
 
 A = ผู้ใช้ที่วางแผนนี้; B = เพื่อนร่วมทีม ให้จับคู่ A/B กับชื่อและ GitHub จริงใน Issue/PR ของ `R1-J00` เพื่อไม่ให้ AI ของเพื่อนคิดว่าตัวเองเป็น A
