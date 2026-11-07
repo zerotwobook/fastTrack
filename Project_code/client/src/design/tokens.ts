@@ -61,7 +61,8 @@ export const spacing = {
 /** Border radius — restrained; only interactive elements are rounded */
 export const radius = {
   sm: '4px',
-  md: '6px',
+  md: '8px',
+  panel: '12px',
   full: '9999px',
 } as const;
 

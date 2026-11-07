@@ -116,13 +116,6 @@ const STATUS_LABELS: Record<StatusVariant, string> = {
   feedback: 'Feedback available',
 };
 
-const STATUS_ICONS: Record<StatusVariant, string> = {
-  pending: '○',
-  submitted: '●',
-  overdue: '✕',
-  feedback: '◎',
-};
-
 interface StatusBadgeProps {
   status: StatusVariant;
   className?: string;
@@ -134,7 +127,12 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
       className={[styles.status, styles[`status--${status}`], className].filter(Boolean).join(' ')}
       aria-label={STATUS_LABELS[status]}
     >
-      <span aria-hidden="true">{STATUS_ICONS[status]}</span>
+      <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        {status === 'pending' ? <circle cx="10" cy="10" r="7" />
+          : status === 'submitted' ? <><circle cx="10" cy="10" r="7" /><path d="m6 10 3 3 5-6" /></>
+          : status === 'overdue' ? <><circle cx="10" cy="10" r="7" /><path d="M10 6v5m0 3h.01" /></>
+          : <path d="M3 3h14v11H8l-5 3V3Z M6 7h8M6 10h5" />}
+      </svg>
       {STATUS_LABELS[status]}
     </span>
   );
