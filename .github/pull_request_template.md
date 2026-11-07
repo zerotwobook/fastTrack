@@ -26,6 +26,15 @@ Do not request final peer approval or set PR Review while this PR is an unfinish
 
 Identify affected schema/migrations/DTO/router/lockfile/UI tokens and the coordinated owners.
 
+## User release authorization (target main only)
+
+For a staging-only PR, write N/A here. For any main-targeted PR, follow [the user review gate](../workflow/MAIN_RELEASE_GATE.md) and keep this PR Draft until actual user review and explicit authorization. AI verification, a notification, B approval and generic continuation are not user release permission.
+
+- User review / release authorization: PENDING or actual decision.
+- Presented PR / exact head / exact base:
+- Actual user authorization reference / time / approved head and base:
+- Changes since that authorization, or none; renew user review/authorization if head/base changes:
+
 ## Review handoff
 
 - [ ] Scope matches the Issue/workflow; application code is under Project_code/.
@@ -34,6 +43,7 @@ Identify affected schema/migrations/DTO/router/lockfile/UI tokens and the coordi
 - [ ] The Issue moved to Specified after scope review and Started before edits; its actual transition log is linked above.
 - [ ] This PR was opened as a draft during Started after the first coherent push and immediately added to Project 3 as Started with actual Task ID/Sprint/Owner/Verification/Acceptance.
 - [ ] At ready handoff only: remaining work/checks/evidence are complete, this PR is ready, both cards are PR Review and peer review is requested. Native automation moves the tracked PR to Done after an actual merge.
+- [ ] If targeting main, actual user review and explicit release authorization for this current head/base are recorded before ready/peer/merge handoff. For staging-only work this item is N/A; it does not authorize main.
 - [ ] No real secrets or local env files are included.
 - [ ] Implementation, verification, peer review and merge states are factual; the author does not self-approve.
 

@@ -130,6 +130,8 @@ Closes #<ISSUE_NUMBER>  <!-- only if this PR should close the Issue -->
 
 ## 6. Reviews, feedback, and merge verification
 
+**fastTrack main-release requirement:** Follow [the user review gate](../workflow/MAIN_RELEASE_GATE.md) for every PR targeting main. Keep it Draft until the user has reviewed the concrete current candidate and explicitly authorized that release; only then make the ready/peer/merge handoff. AI checks/notification, B approval, a staging merge or generic continuation do not authorize main. Record the actual decision and head/base; changed candidates require renewed authorization. This project-specific user requirement is additional to peer review/protection and does not block ordinary staging work.
+
 - Read review decisions, general comments, inline threads, CI checks, and the latest PR head before responding.
 - If changes are requested, fix them on the **same branch and PR**, review the diff, commit/push, and rerun affected checks where possible.
 - Prepare concise English replies explaining what changed, including commit references. **Only post comments when explicitly asked.** Do not invent reviewer feedback or claim to have replied when no reply was posted.
