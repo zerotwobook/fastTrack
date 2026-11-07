@@ -2,6 +2,8 @@
 
 A/Codex assembled this joint #12 candidate on docs/s1-a-d1-release / PR #66; B is the actual peer reviewer. Baseline 4de6a7a follows B's exact-head acceptance of #65. #11/#64 are closed; G3/G4 and source-package acceptance are actual. G5/main/tag/submission remain pending.
 
+**User review hold (7 November 2026):** B approved #66 exact ea29dc2 and merged the preparation into staging as 94e588d. Main release PR #67 remains Draft, unmerged and without auto-merge while the user reviews. Follow [the permanent main-release gate](../MAIN_RELEASE_GATE.md): user review and explicit authorization are required before any ready/peer/merge handoff. The earlier request for B to merge is withdrawn. This applies to future main releases as well; staging acceptance does not lift the hold. If staging changes, show and reassess the new release head/base before renewed user authorization.
+
 ## Current reviewable artifact
 
 [PDF candidate](../../output/pdf/fastTrack_D1_review_candidate.pdf), 44 pages. [Combined source and build instructions](../../deliverable%20_file/submit/d1_release/README.md) identify sources, page/hash map and actual checks. Navigation ranges:
@@ -28,7 +30,7 @@ The PDF embeds FR/BR/NFR and full product allocation, architecture/data/UI/API/s
 
 1. Accept the reviewed preparation into staging and read back the approved/merged head/tree. A merged preparation PR does not close #12 or accept G5 by itself.
 2. Prepare the actual staging-to-main release PR from the accepted sprint branch. Re-read exact base/head, complete diff and current code/docs/evidence; rerun only checks made insufficient by new executable changes.
-3. Obtain actual peer release review and both final G5 decisions as applicable. **Notify the user with the final PR/head, actual checks/findings and limitations before main merge.** Reassess if head/base changes; no bypass of protection/self-review.
+3. Present the concrete release PR/head/base, actual checks/findings and limitations for the user to inspect. **Keep the main PR Draft until the user reviews and explicitly authorizes that candidate. Notification alone is insufficient.** Record the decision, then obtain actual peer release review/protected integration and both final G5 decisions as applicable. Renew user review/authorization if head/base changes; no bypass of protection/self-review.
 4. Verify actual main merge, preserve an immutable assessed tag/commit and reconcile PDF version/page/evidence data to that real identity. This current candidate intentionally still says pending.
 5. Only an explicit actual course-submission instruction permits LEB2 upload; record receipt only when it exists. Then complete #12 and hand the accepted release/setup/schema/tests/known limits to S2.
 

@@ -56,6 +56,10 @@ Use separate clones/worktrees and keep app code under Project_code/. Coordinate 
 
 Task PR -> staging -> peer review/approval -> merge commit. After integration, use a reviewed release PR into main. The author does not approve their own PR. Preserve RED/GREEN and main-to-staging synchronization history.
 
+### User review before main
+
+For every main-targeted PR, follow [the mandatory user review and authorization gate](workflow/MAIN_RELEASE_GATE.md). Prepare a concrete candidate for the user to inspect and keep the PR Draft until the user explicitly authorizes that current head/base. AI checks/notification and B approval do not substitute for user release authorization. This applies to every sprint, documentation and fixes; ordinary staging PRs retain their existing peer workflow. Required peer review/protection still apply after user authorization.
+
 The active ruleset requires one peer approval on main and staging/sprint-*, dismisses stale approvals after reviewable changes, requires resolved conversations and blocks force pushes/deletion. No bypass actors are configured. Merge commits are enabled; automatic branch deletion stays off to preserve staging after a release.
 
 No nonexistent CI context is required. [R2-B01 / Lab 5, #15](https://github.com/zerotwobook/fastTrack/issues/15) must create meaningful tests/build/Docker checks, then require the real check/up-to-date policy and prove a failing check blocks merge. Current peer approval is not the Lab 5 CI gate.
