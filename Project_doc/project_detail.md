@@ -602,6 +602,14 @@ Status icon เป็น SVG แบบ stroke เดียวกันประ�
 
 เมื่อมี UI implementation ให้จับภาพหน้าที่มีข้อมูลจริงและทุก critical state แล้ววิจารณ์ว่า element ใดแย่งความสนใจจากชื่องาน/กำหนดส่ง/feedback ก่อนลดสิ่งตกแต่งที่ไม่ช่วยใช้งาน Wireframes ในเอกสารนี้เป็นแบบออกแบบ ยังไม่มี screenshots หรือ visual verification ของแอปที่รันจริง
 
+### 8.12 Responsive clarity refinement
+
+The user-requested R1-A-UI-POLISH refinement preserves the six colors, bundled typography, milestone track and role scope above. Shared controls use 8px corners, visible control borders, at least 44px targets and 16px input text. Disabled controls keep readable text rather than fading the entire element. Status badges pair a consistent stroke icon with text; overdue text stays readable without a strike-through.
+
+The content canvas remains left aligned internally and uses equal outer margins within its 1184px maximum width on wider screens. Team boundaries and reading rails use restrained 12px frames; due dates, milestone groups, form actions and feedback entries have clear separators. The desktop login frame contains a form no wider than 400px and becomes an unframed column on mobile. Shadows are reserved for the navigation overlay. Multiple supervisor teams can share balanced columns when space permits; a single team fills the available row.
+
+Creating a milestone opens with a task-specific page heading and fields rather than repeating the team roster. Mobile primary form actions fill their container. The navigation dialog announces its expanded state, cycles Tab and Shift+Tab, closes with Escape, returns focus to its trigger and closes when resized to desktop. Private-session masking and draft/recovery rules remain unchanged. Browser verification and its actual limitations are recorded in [the UI refinement handoff](../Project_code/docs/evidence/R1-A-UI-POLISH.md); this design specification alone is not a verification result.
+
 ## 9. API design
 
 ### 9.1 Common contract

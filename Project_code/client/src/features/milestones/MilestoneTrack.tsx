@@ -30,7 +30,7 @@ function TrackRows({ items, serverTime, userRole }: { items: MilestoneItem[]; se
     <div className={styles.item}><Heading><a href={`/milestones/${item.id}`}>{item.title}</a></Heading><State item={item} serverTime={serverTime} />
       <p>{item.description}</p>{item.latestSubmission && <p className={styles.meta}>Version {item.latestSubmission.version}, {item.latestSubmission.feedbackCount} feedback messages. <a href={`/submissions/${item.latestSubmission.id}`}>{userRole === 'supervisor' ? 'Open work and give feedback' : 'Open saved submission'}</a></p>}
       {userRole === 'student' && !item.cancelledAt && !item.latestSubmission && Date.parse(item.dueAt) >= Date.parse(serverTime) && <a className={styles.primaryLink} href={`/milestones/${item.id}/submissions/new`}>Submit work</a>}
-      <a href={`/milestones/${item.id}`}>View milestone</a></div>
+      <a className={styles.detailLink} href={`/milestones/${item.id}`}>View milestone</a></div>
   </li>)}</ol>;
 }
 function StudentGroups({ items, serverTime }: { items: MilestoneItem[]; serverTime: string }) {
@@ -93,7 +93,7 @@ export function MilestoneCreate({ teamId, userRole }: { teamId: string; userRole
     } finally { busy.current = false; if (alive.current) setSaving(false); }
   };
   const described = (id: string) => `${id}-${fields[id] ? 'error' : 'hint'}`;
-  return <section className={styles.container}><h2>Create milestone</h2><p className={styles.meta}>Set the work and deadline for this team.</p>
+  return <section className={styles.container}><h2>Milestone details</h2><p className={styles.meta}>All fields are required. Dates use Asia/Bangkok.</p>
     {error && <div ref={summary} tabIndex={-1} role="alert" className={styles.error}><p>{error}</p>{uncertain && <a href={`/teams/${teamId}`}>Check milestone list</a>}</div>}
     <form className={styles.form} onSubmit={event => { void submit(event); }}>
       <Field id="title" label="Title" hint={`${codePointLength(title.trim())}/120 characters`} {...(fields.title ? { error: fields.title } : {})}>
