@@ -1,0 +1,7 @@
+  it('T-11 rejects a first submission after the actual database deadline without writing', async () => {
+    const id = fixtures.milestones.milestoneFuture.id;
+    await prisma.milestone.update({ where: { id }, data: { dueAt: new Date(Date.now() - 1000) } });
+    const result = await post(body(), id).expect(409);
+    expect(result.body.error.code).toBe('DEADLINE_PASSED');
+    expect(await prisma.submission.count()).toBe(0);
+  });

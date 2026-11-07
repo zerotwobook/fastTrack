@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | G0/G1/G2 and A01/B01/A02/B02/A03 accepted. B approved f516b17 and merged #61 as staging 514f34c; #8/#60 are closed Done/PASSED/ACCEPTED. A is executing shared R1-J03 / #9 on test/s1-a-g3-g4 for integrated verification and B gate review. G3/G4/G5, final PDF and main remain pending. |
+| Gate record | G0/G1/G2 and A01/B01/A02/B02/A03 accepted; latest staging 514f34c after B merge of #61. Shared #9 / PR #62 contains A verification (310 cases/seven migrations/current UI and source mapping) and the explicitly user-reported native-200 check. B current-head G3/G4 decision, G5/main and final PDF remain pending. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 

@@ -19,3 +19,9 @@ Preserve accepted application behavior, schema/migrations/seed, shared UI tokens
 An early Draft PR follows this plan commit during Started, before new verification checks are complete. Record the actual checks/results/commit, then Ready + both cards PR Review + B review request. A verification pass is not a joint gate acceptance. B must independently review the current head/evidence and provide its actual G3/G4 result before accepted integration; do not infer a full G3/G4 decision from the earlier feature merge alone. If a required check fails, retain the finding and fix/retest the affected scope before handoff. Keep G5/main/release tag/final PDF/submission pending.
 
 Current new-task checks: NOT RUN. Existing feature evidence is referenced as historical accepted evidence, not relabeled as a new run.
+
+## Current execution record
+
+The first-plan NOT RUN statement above is historical at commit 6e11c85. The actual clean-clone checks at e1ada71 now pass 310 automated cases/seven migrations, typecheck/build and current browser/restart/account-switch checks. The user A supplied a native-200 manual PASS; automation did not corroborate the zoom and no 200% screenshot is claimed. [The system record](../evidence/R1-J03-system-verification.md), [full current results](../evidence/R1-J03-results.json) and [coverage map](../evidence/R1-J03-verification-map.json) preserve the exact source and limits. B current-head G3/G4 acceptance and G5/main/PDF are still pending.
+
+Pre-handoff UI inspection found a divider-colored control boundary below the specified 3:1 minimum. The one-line e1ada71 correction uses the already specified control token; final actual rendered borders measure 3.45:1 and text 21:1. Full regression/build and selected real UI/restart checks were repeated. The user-only native-200 report predates this color-only change and remains explicitly attributed.

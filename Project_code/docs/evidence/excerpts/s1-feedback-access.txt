@@ -1,0 +1,9 @@
+  it.each(['student','foreign-student','foreign-supervisor','missing'])('denies %s without a write or cross-team key oracle', async kind => {
+    const body = input(); await post(body).expect(201);
+    const who = await login(kind === 'student' ? 'stu-a1@test.local' : kind === 'foreign-student' ? 'stu-b1@test.local' : kind === 'foreign-supervisor' ? 'sup-b@test.local' : 'sup-a@test.local');
+    const target = kind === 'missing' ? randomUUID() : id;
+    const expected = kind === 'student' || kind === 'foreign-student' ? 403 : 404;
+    await post(body,target,who).expect(expected);
+    if (kind !== 'student') await get(target,who).expect(404);
+    expect(await prisma.feedback.count()).toBe(1);
+  });
