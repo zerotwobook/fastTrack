@@ -1,8 +1,11 @@
 {
-  "task": "R1-J04 / #12 / PR #66",
+  "task": "R1-J04-A-REFRESH / #74; parent R1-J04 / #12",
   "status": "Review candidate; G5/main/tag/submission pending",
-  "applicationSource": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
-  "preparedBy": "A / Codex; B combined-PDF review pending",
+  "applicationSource": "17f4398d52536fc8049022e56a7bacd0beeb822a",
+  "historicalApplicationSource": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+  "sourceHashBase": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+  "documentRef": "docs/s1-a-release-refresh",
+  "preparedBy": "A / Codex; B accepted original preparation #66; refreshed PDF review pending",
   "sourceHashes": {
     "deliverable _file/submit/d1_owner_a/A_SRS.md": "99702a42f34e8ad7d9fb151007fd27b4b2208be6d22e744f5a49a15e2da18b20",
     "deliverable _file/submit/d1_owner_a/B_FEATURES_TRACEABILITY.md": "1261109bbf4b7f2db9b35dbc60b0742cb9c865fd38fa5ab21e4b350c98033a6a",

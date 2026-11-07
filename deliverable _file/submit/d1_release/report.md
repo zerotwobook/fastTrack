@@ -6,9 +6,9 @@ A: Supapanya Yathip / 67070503443 / zerotwobook. B: Atip Infa-udom / 67070503446
 
 Repository: https://github.com/zerotwobook/fastTrack
 
-Accepted application/source: 4de6a7a8d3f6c1028d8a40fbbae17875c272361b. Prepared 7 November 2026. Due 8 November 2026 at 23:59 Asia/Bangkok.
+Accepted staging application/source: 17f4398d52536fc8049022e56a7bacd0beeb822a. Refreshed 7 November 2026. Due 8 November 2026 at 23:59 Asia/Bangkok.
 
-This is a combined review candidate, not an accepted main release or submitted PDF. G5/main/tag/submission is PENDING. The original packages and evidence remain preserved; this compilation updates preparation-state narratives using actual subsequent acceptance. A/Codex assembles this joint-task candidate; B's exact-version PDF review is pending.
+This is a combined review candidate, not an accepted main release or submitted PDF. G5/main/tag/submission is PENDING. B accepted the original 44-page preparation in PR #66; this refresh under R1-J04-A-REFRESH / #74 includes subsequently accepted corrections, release rules and UI from PRs #71, #69 and #73. The original A/B sources and historical evidence remain preserved. A/Codex prepares this refresh; its exact-version PDF/peer review and the user's explicit main-release authorization remain pending. The existing main-targeted PR #67 stays Draft.
 
 [NAVIGATION]
 

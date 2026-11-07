@@ -16,6 +16,9 @@ from pypdf import PdfReader
 ROOT = Path(__file__).resolve().parents[3]
 HERE = Path(__file__).resolve().parent
 OUTPUT = ROOT / 'output/pdf/fastTrack_D1_review_candidate.pdf'
+MANIFEST = json.loads((HERE / 'source_manifest.json').read_text(encoding='utf-8-sig'))
+APPLICATION_SOURCE = MANIFEST['applicationSource']
+DOCUMENT_REF = MANIFEST.get('documentRef', APPLICATION_SOURCE)
 PAGE_W, PAGE_H = 595.276, 841.89
 LEFT, RIGHT, TOP, BOTTOM = 49, 49, 50, 47
 WIDTH = PAGE_W-LEFT-RIGHT
@@ -39,7 +42,7 @@ def inline(s):
     def link(m):
         target=html.unescape(m.group(2))
         if not re.match(r'https?://',target):
-            target='https://github.com/zerotwobook/fastTrack/blob/4de6a7a8d3f6c1028d8a40fbbae17875c272361b/'+str((HERE/unquote(target)).resolve().relative_to(ROOT)).replace('\\','/').replace(' ','%20')
+            target='https://github.com/zerotwobook/fastTrack/blob/'+DOCUMENT_REF+'/'+str((HERE/unquote(target)).resolve().relative_to(ROOT)).replace('\\','/').replace(' ','%20')
         return '<link href="'+html.escape(target,quote=True)+'" color="#222222"><u>'+m.group(1)+'</u></link>'
     s=re.sub(r'\[([^\]]+)\]\(([^)]+)\)',link,s)
     s=re.sub(r'`([^`]+)`',lambda m:'<font name="Mono" size="8.5">'+m.group(1)+'</font>',s)
@@ -126,7 +129,7 @@ class Doc(BaseDocTemplate):
         self.addPageTemplates(PageTemplate(id='normal',frames=frame,onPage=self.header))
     def header(self,c,doc):
         c.saveState();c.setFont('Body',8.5);c.setFillColor(colors.HexColor('#555555'))
-        if doc.page>1:c.drawString(LEFT,PAGE_H-28,'fastTrack  /  Deliverable 1  /  candidate 4de6a7a')
+        if doc.page>1:c.drawString(LEFT,PAGE_H-28,'fastTrack  /  Deliverable 1  /  candidate '+APPLICATION_SOURCE[:7])
         c.setStrokeColor(colors.HexColor('#CCCCCC'));c.line(LEFT,36,PAGE_W-RIGHT,36)
         c.drawString(LEFT,23,'REVIEW CANDIDATE - G5 / MAIN / SUBMISSION PENDING')
         c.drawRightString(PAGE_W-RIGHT,23,str(doc.page)+((' / '+str(self.total)) if self.total else ''));c.restoreState()
