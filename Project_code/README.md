@@ -4,7 +4,7 @@
 
 The React client and API implement login/me/logout, DB-backed eight-hour sessions, source/CSRF protection, authorized team list/detail, milestone create/list/detail, first-submission create/list/detail and append-only exact-version feedback create/list. Students read their team's feedback; assigned supervisors save it with an immutable UUID/body intent and checked recovery after unknown outcomes. The interface includes role-aware navigation, mobile menu, shared monochrome controls and loading/empty/error/retry states. PostgreSQL/Prisma schema/migrations/seed/fixtures, safe errors/request correlation, validated configuration and TypeScript builds are present.
 
-Verified results: **120 ordinary tests, 42 feedback cases, 48 first-submission cases, 33 milestone DB cases, 28 auth cases, 38 G1 cases and seven migration scenarios**. Generation/typecheck/build pass. The feedback group includes 13 retained explicit-actor service cases and 29 actual-session/transaction regressions. A clean clone installs 316 packages and runs the ordinary suite without a database. [Feedback verification](docs/evidence/R1-B02-A-review.md) records exact source versions, UI recovery and actual process-restart readback. Feedback correction peer acceptance and the full Sprint 1 release remain pending; completed predecessor history is in the linked evidence.
+Verified results: **120 ordinary tests, 42 feedback cases, 48 first-submission cases, 33 milestone DB cases, 28 auth cases, 38 G1 cases, one compiled cross-feature system case and seven migration scenarios**. Generation/typecheck/build pass. The feedback group includes 13 retained explicit-actor service cases and 29 actual-session/transaction regressions. A clean clone installs 316 packages and runs the ordinary suite without a database. [Feedback verification](docs/evidence/R1-B02-A-review.md) records exact source versions, UI recovery and actual process-restart readback. B accepted the feedback correction through PR #61. [Current integrated verification](docs/evidence/R1-J03-system-verification.md) records the fresh 310-case run, exact coverage and manual-zoom provenance. Joint G3/G4 acceptance and the full Sprint 1 release remain pending.
 
 `GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No test identity bypass is exposed.
 
@@ -151,6 +151,16 @@ npm run test:b02:isolated
 This adds **42 F-04 PostgreSQL cases** to the full inherited foundation/auth/milestone/submission pipeline. It creates its own protected disposable database, runs real-session/source/CSRF, scope, Unicode, exact-version, replay/conflict, concurrent HTTP and forced unique-conflict/lock-wait checks, then removes its own container. Expected exit 0. `npm run test:b02` runs only the feedback DB files against an explicitly prepared reserved test database. Ordinary npm test does not load those fixtures.
 
 For a compiled app, set a synthetic AUTH_REVIEW_PASSWORD as described above and run `npm run review:b02`; stop with `npm run review:auth:stop` from the same clone. Supervisor A can open a submitted version, write feedback and reload it; Student A1 reads without a write form; Supervisor B cannot read it. The save UI checks persisted feedback after an unknown result and blocks further saves while that recovery read fails. A successful read with no matching row permits a manual retry of the same frozen UUID/body. [Contract](docs/contracts/sprint-1-feedback.md), [review](docs/evidence/R1-B02-A-review.md) and [actual results](docs/evidence/R1-B02-A-results.json) distinguish real DB behavior from controlled browser faults.
+
+## Integrated Sprint 1 verification
+
+```powershell
+npm run test:j03:isolated
+```
+
+This runs the complete inherited chain plus one compiled cross-feature system case: **310 automated cases and seven migration scenarios** in the verified current run. The system case verifies real login/milestone/submission/feedback requests, latest-version feedback counts, same-key replay/conflict, seed preservation of all seven tables, actual process restart/session readback, role/scope/duplicate rejection and logout replay. It uses protected disposable PostgreSQL and cleans its own container. `npm run test:j03` selects only the system case on a prepared reserved test database, after build/generation because it launches compiled artifacts.
+
+For interactive checks, set a synthetic AUTH_REVIEW_PASSWORD and run `npm run review:j03`; stop with `npm run review:auth:stop` in the same clone. The full JSON reporter output is finalized during teardown. [System results](docs/evidence/R1-J03-results.json), [AC coverage](docs/evidence/R1-J03-coverage.md) and [the verification record](docs/evidence/R1-J03-system-verification.md) separate directly automated results, user-reported native 200% and pending joint gate acceptance.
 
 ## Built server
 

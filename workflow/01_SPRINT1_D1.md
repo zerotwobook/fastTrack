@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | G0/G1/G2 and A01/B01/A02/A03 accepted. B approved/merged #59 as staging 5b35fc1; #10 is closed Done/PASSED/ACCEPTED. G2 retains its recorded task-specific delegation. B02 #58 has actual review findings; A repairs it under #60 / PR #61 with B review required. G3/G4/G5, final PDF and main release remain pending. |
+| Gate record | G0/G1/G2 and A01/B01/A02/B02/A03 accepted; latest staging 514f34c after B merge of #61. Shared #9 / PR #62 contains A verification (310 cases/seven migrations/current UI and source mapping) and the explicitly user-reported native-200 check. B current-head G3/G4 decision, G5/main and final PDF remain pending. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -236,7 +236,7 @@ Owner A; reviewer B. Issue #10, branch docs/s1-a-d1-evidence from accepted stagi
 - [x] Select the substantive domain-rule Issue/PR chain and real B peer review; record contract/test/implementation chronology.
 - [x] Review current B C/E source and accepted clean-setup results; identify remaining assembly updates instead of claiming unreviewed final content is accepted.
 - [x] Give B ready-to-use owned sections/captions/source images/results; B owns final C/E updates and PDF assembly.
-- [ ] Complete actual B peer review/merge of this package in PR #59; final G3/G4/G5 and submission remain separate.
+- [x] B approved dfb4d16 and merged PR #59 as 5b35fc1; #10 is closed Done/PASSED/ACCEPTED. Final G3/G4/G5 and submission remain separate.
 
 Document checks pass: full FR/BR/NFR/F coverage, 13 AC rows with 27 exact reported-case references, four byte-identical source images/hashes, local links, English, no secret-like values and exact test-excerpt/source match. Application code is unchanged from accepted staging; existing actual clean-clone results are reused. B reviews this package before acceptance; no final PDF or full S1 release is claimed.
 
@@ -265,18 +265,17 @@ References: project detail 8.6 B-E/9.2/9.4; D1 E.2; AC-02.1-02.3; T-06-T-08/T-25
 
 Original #52's reviewed head is superseded by the corrected candidate, not approved/merged as if fixed. Preserve B's history/branch, close/archive superseded work without a false Done claim and keep Verification separate from peer Acceptance. A01 is now accepted; fixture-only tests do not establish G2.
 
-### R1-B02: F-04 feedback
+### R1-B02: F-04 version-specific feedback
 
-อ้างอิง §8.6 F, §9.2/9.5; D1 E.4; AC-04.1–04.4, T-17–T-20/T-24
+Original owner B / PR #58; A independently reviewed and repaired findings under #60 / PR #61, preserving B history. [Contract](../Project_code/docs/contracts/sprint-1-feedback.md) and [actual findings/results](../Project_code/docs/evidence/R1-B02-A-review.md) describe the exact-version UI/API, strict Unicode input, source/CSRF/scope, immutable UUID/body recovery and transactional replay/conflict behavior.
 
-- [ ] POST/GET `/submissions/:id/feedback`; scope ตาม submission → milestone → team
-- [ ] Assigned supervisor เขียนได้ Student อ่านได้ตามทีม; author/time จาก server
-- [ ] Append-only; validate content และไม่สร้าง orphan; feedback อ่านได้แม้พ้น deadline
-- [ ] UI FeedbackPanel ระบุ version ชัด มี empty/loading/error/saving state และลำดับเวลา/id
-- [ ] clientRequestId ต่อหนึ่ง intent; retry key เดิม/content+target เดิมคืน record เดิม 200; intent ต่างคืน 409 REQUEST_KEY_REUSED
-- [ ] ตรวจ role/scope ก่อนค้น key เพื่อไม่เปิดข้อมูลทีมอื่น; concurrent retry ได้ record เดียว
-- [ ] เตรียม fixtures ตาม submission contract ขณะ A ทำ F-03; integrated result ต้องทดสอบกับ submission จริงที่ A สร้าง
-- [ ] Tests association, append/read, cross-team/role, empty/max content, key replay/conflict/race และ persistence
+- [x] Implement assigned-supervisor append-only feedback and scoped student/supervisor reads on the exact submission/version.
+- [x] Validate content/keys and derive identity/time server-side; enforce scope before key lookup and database uniqueness against concurrent retries.
+- [x] Compose FeedbackPanel through the saved-detail slot with current session protection, shared monochrome controls, loading/empty/error/recovery and focused validation.
+- [x] Verify 42 feedback cases, inherited regression, clean clone and actual UI/retry/restart; preserve original failed review/RED results.
+- [x] B approved exact f516b17 at 2026-11-07 02:36:37 UTC and merged #61 into staging as 514f34c at 02:40:23 UTC. #8/#60 are closed Done/PASSED/ACCEPTED. Original #58 remains closed unmerged and archived Fixing/FAILED/PENDING.
+
+G3/G4 joint acceptance is handled by shared R1-J03 / #9, not inferred from a feature merge.
 
 ### R1-B03: เอกสาร/หลักฐานที่ B เป็นเจ้าของ
 

@@ -56,6 +56,8 @@ This directly exercises the combined UI-after-process-restart gap recorded for A
 - [Supervisor at 320px](assets/b02-feedback/b02-supervisor-320.png)
 - [Student after actual process restart](assets/b02-feedback/b02-student-after-restart-1440.png)
 
-## Peer handoff and limits
+## Accepted integration and remaining gates
 
-Verification PASSED for the correction; acceptance remains PENDING until B reviews/approves the current PR #61 head and merges into staging/sprint-1. A must not approve/merge its own repair. Original PR #58 is superseded by this history-preserving correction, rather than accepted unchanged. Close #60 and #8 only after the accepted correction merge; reconcile native Done separately from verification/acceptance. G3 joint acceptance, G4 full release checks, G5/main and final PDF remain pending. B still owns C/E/F and PDF assembly; the accepted A03 package is not a final PDF.
+B (Atip-Infa) approved exact f516b1704af67b367f1e6ec09657134645b8eeed at 2026-11-07 02:36:37 UTC, reporting typecheck, 120 ordinary, 42 B02 and build plus architectural/UI-state review. B merged PR #61 into staging/sprint-1 at 02:40:23 UTC as 514f34cbdb95f2141d2c7f3159a1c36a0bd236a6. Approved and merged trees are identical. #8/#60 and PR #61 are Done/PASSED/ACCEPTED. Original PR #58 stays closed unmerged and archived Fixing/FAILED/PENDING; its rejected head was not accepted unchanged.
+
+[Shared R1-J03 / #9](R1-J03-system-verification.md) now covers integrated verification and the actual G3/G4 handoff. Earlier candidate evidence and source versions above remain historical facts. G3/G4 joint acceptance, G5/main, final PDF and submission remain separate. B still owns C/E/F and PDF assembly; accepted A03 content is not a final PDF.

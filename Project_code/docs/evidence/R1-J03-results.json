@@ -1,0 +1,1966 @@
+{
+  "task": "R1-J03",
+  "recordedAt": "2026-11-07T03:28:38+00:00",
+  "testedSource": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+  "acceptedApplicationBaseline": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
+  "status": "VERIFICATION PASSED; joint G3/G4 acceptance pending",
+  "automated": {
+    "counts": {
+      "ordinaryTests": 120,
+      "g1Tests": 38,
+      "authTests": 28,
+      "b01Tests": 33,
+      "a02Tests": 48,
+      "b02Tests": 42,
+      "j03Tests": 1
+    },
+    "totalPassed": 310,
+    "failed": 0,
+    "migrationScenariosPassed": 7,
+    "installPackages": 316,
+    "generation": "PASSED",
+    "freshAndRepeatMigrations": "PASSED",
+    "typecheck": "PASSED",
+    "build": "PASSED",
+    "source": "Full finalized JSON reporter data from the completed clean-clone review:j03 run; cleanup and process exit succeeded."
+  },
+  "applicationSourceTreesUnchanged": {
+    "Project_code/server/src/modules": "1fe4b8beca3ced5c97d042cc2572bcc0b22cc258",
+    "Project_code/server/prisma": "d9ca2f42ccf8f7a6dc4aa6a42699570645363fef",
+    "Project_code/shared": "1be2ae9c889c528e8474da2ffd6cac9784e07154"
+  },
+  "browser": [
+    {
+      "case": "login-supervisor.a",
+      "url": "http://127.0.0.1:65412/",
+      "text": "Overview\n\nYour teams\n\nChoose a team to view its workspace.\n\nTeam A \u2197\nSupervisor\nSupervisor A\nTeam members\nStudent A1\nStudent A2\nOpen team",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "supervisor-ui-created-milestone-readback",
+      "url": "http://127.0.0.1:65412/milestones/1170952e-1180-4bcd-a3ed-42b7b25904bd",
+      "status": 200,
+      "milestone": {
+        "id": "1170952e-1180-4bcd-a3ed-42b7b25904bd",
+        "teamId": "8d545d94-d5d4-4957-8091-e441ec7d2a37",
+        "title": "Sprint 1 verification checkpoint",
+        "description": "Fresh-clone UI journey for G3/G4 review.",
+        "dueAt": "2026-11-08T11:00:00.000Z",
+        "cancelledAt": null,
+        "createdAt": "2026-11-07T02:58:42.562Z",
+        "latestSubmission": null
+      },
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "login-student.a1",
+      "url": "http://127.0.0.1:65412/milestones/1170952e-1180-4bcd-a3ed-42b7b25904bd",
+      "text": "Loading milestone?",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "student-ui-submit-and-empty-feedback",
+      "url": "http://127.0.0.1:65412/submissions/7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+      "feedbackFormCount": 0,
+      "text": "Team A / Sprint 1 verification checkpoint / Saved submission\n\nSprint 1 saved verification work\n\nVersion 1, submitted by Student A1.\n\n7 Nov 2026, 10:00:10 (Asia/Bangkok)\n\nDescription\n\nCurrent accepted application exercised through the real UI.\n\nWork link\nOpen work link\n\nhttps://example.com/fasttrack-review\n\nFeedback for version 1\n\nNo feedback for this version yet.",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "login-supervisor.a",
+      "url": "http://127.0.0.1:65412/submissions/7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+      "text": "Loading saved submission...",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "supervisor-ui-feedback-and-persisted-readback",
+      "url": "http://127.0.0.1:65412/submissions/7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+      "focus": true,
+      "status": 200,
+      "rows": [
+        {
+          "id": "fede34b8-49ce-42a5-a2e0-5d199b3ae2bf",
+          "submissionId": "7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+          "supervisor": {
+            "id": "30faa26f-1a1f-4653-ae63-fbf60112e417",
+            "displayName": "Supervisor A"
+          },
+          "content": "Fresh system-verification feedback for version one.",
+          "clientRequestId": "d9f18acd-725c-4100-ad3f-fa1ad1c145b9",
+          "createdAt": "2026-11-07T03:00:39.362Z"
+        }
+      ],
+      "cleared": true,
+      "metrics": {
+        "innerWidth": 929,
+        "outerWidth": 945,
+        "dpr": 1
+      },
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "login-student.a1",
+      "url": "http://127.0.0.1:65482/submissions/7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+      "text": "Team A / Sprint 1 verification checkpoint / Saved submission\n\nSprint 1 saved verification work\n\nVersion 1, submitted by Student A1.\n\n7 Nov 2026, 10:00:10 (Asia/Bangkok)\n\nDescription\n\nCurrent accepted application exercised through the real UI.\n\nWork link\nOpen work link\n\nhttps://example.com/fasttrack-review\n\nFeedback for version 1\n\nLoading feedback...",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "student-before-current-process-restart",
+      "submission": {
+        "id": "7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+        "milestoneId": "1170952e-1180-4bcd-a3ed-42b7b25904bd",
+        "submittedBy": {
+          "id": "1484319d-c6da-4188-8b16-1c7590ccbf41",
+          "displayName": "Student A1"
+        },
+        "version": 1,
+        "title": "Sprint 1 saved verification work",
+        "description": "Current accepted application exercised through the real UI.",
+        "url": "https://example.com/fasttrack-review",
+        "submittedAt": "2026-11-07T03:00:10.414Z"
+      },
+      "feedback": [
+        {
+          "id": "fede34b8-49ce-42a5-a2e0-5d199b3ae2bf",
+          "submissionId": "7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+          "supervisor": {
+            "id": "30faa26f-1a1f-4653-ae63-fbf60112e417",
+            "displayName": "Supervisor A"
+          },
+          "content": "Fresh system-verification feedback for version one.",
+          "clientRequestId": "d9f18acd-725c-4100-ad3f-fa1ad1c145b9",
+          "createdAt": "2026-11-07T03:00:39.362Z"
+        }
+      ],
+      "rendered": 1,
+      "formCount": 0,
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "student-after-current-process-restart",
+      "submissionUnchanged": true,
+      "feedbackUnchanged": true,
+      "rendered": 1,
+      "formCount": 0,
+      "sessionRestored": true,
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "native-zoom-observation",
+      "innerWidth": 929,
+      "outerWidth": 945,
+      "dpr": 1,
+      "viewportScale": 1,
+      "bodyZoom": "1",
+      "documentWidth": 929,
+      "native200Observed": false,
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "T-27-late-feedback-after-account-switch",
+      "capturedStatus": 200,
+      "delivered": true,
+      "clearedAfterLogout": true,
+      "foreignStatus": 404,
+      "newAccount": true,
+      "noOldFeedback": true,
+      "formCount": 0,
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "login-supervisor.a",
+      "url": "http://127.0.0.1:65482/submissions/7bff7eb6-0c18-462b-9f3b-c1fe81f8e7a1",
+      "text": "Loading saved submission...",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "load-recovery-layout-keyboard-and-timezone",
+      "loading": true,
+      "intercepted": true,
+      "noFalseEmpty": true,
+      "zone": "America/New_York",
+      "bangkok": true,
+      "widths": [
+        {
+          "width": 320,
+          "view": 320,
+          "document": 320
+        },
+        {
+          "width": 390,
+          "view": 390,
+          "document": 390
+        },
+        {
+          "width": 768,
+          "view": 768,
+          "document": 768
+        },
+        {
+          "width": 1280,
+          "view": 1280,
+          "document": 1280
+        },
+        {
+          "width": 1440,
+          "view": 1440,
+          "document": 1440
+        }
+      ],
+      "keyboardSave": true,
+      "fieldFocus": {
+        "focused": true,
+        "outline": "2px"
+      },
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "T-27-external-returnTo-stays-local",
+      "sameOrigin": true,
+      "path": "/",
+      "search": "",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "native-zoom-observation",
+      "innerWidth": 929,
+      "outerWidth": 945,
+      "dpr": 1,
+      "viewportScale": 1,
+      "bodyZoom": "1",
+      "documentWidth": 929,
+      "native200Observed": false,
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "post-user-manual-check-reference",
+      "source": "User A confirmed a successful native 200% feedback/form/menu manual check. This separate automated snapshot retained 1x metrics; it is a normal reference image, not a 200% screenshot.",
+      "metrics": {
+        "innerWidth": 929,
+        "outerWidth": 945,
+        "dpr": 1,
+        "documentWidth": 929,
+        "viewportScale": 1,
+        "bodyZoom": "1"
+      },
+      "formCount": 1,
+      "saveButton": 1,
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "native-200-manual-user-result",
+      "result": "PASSED - user reported",
+      "source": "User A reply confirms the requested native 200% check was performed and all tested controls/readability worked.",
+      "recordedAt": "2026-11-07T03:13:16Z",
+      "instrumentalCorroboration": false,
+      "limit": "Automated window still reported DPR 1, viewport 929, outer width 945; the user may have checked a separate window. No automated native-200 screenshot or measurement is claimed.",
+      "executedAgainst": "cc0e206"
+    },
+    {
+      "case": "post-contrast-real-controls",
+      "executedAgainst": "e1ada71",
+      "inputs": [
+        {
+          "name": "Login email input",
+          "resting": {
+            "border": "rgb(138, 138, 138)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "3px"
+          },
+          "hover": {
+            "border": "rgb(138, 138, 138)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "3px"
+          },
+          "focused": {
+            "border": "rgb(131, 131, 131)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "2px"
+          },
+          "borderRatio": 3.4522201871078138,
+          "hoverRatio": 3.4522201871078138,
+          "focusRatio": 3.791080780794159,
+          "textRatio": 21
+        },
+        {
+          "name": "Login password input",
+          "resting": {
+            "border": "rgb(138, 138, 138)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "3px"
+          },
+          "hover": {
+            "border": "rgb(138, 138, 138)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "3px"
+          },
+          "focused": {
+            "border": "rgb(131, 131, 131)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "2px"
+          },
+          "borderRatio": 3.4522201871078138,
+          "hoverRatio": 3.4522201871078138,
+          "focusRatio": 3.791080780794159,
+          "textRatio": 21
+        },
+        {
+          "name": "Exact-version feedback textarea",
+          "resting": {
+            "border": "rgb(138, 138, 138)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "3px"
+          },
+          "hover": {
+            "border": "rgb(138, 138, 138)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "3px"
+          },
+          "focused": {
+            "border": "rgb(131, 131, 131)",
+            "background": "rgb(255, 255, 255)",
+            "text": "rgb(0, 0, 0)",
+            "opacity": "1",
+            "outline": "2px"
+          },
+          "borderRatio": 3.4522201871078138,
+          "hoverRatio": 3.4522201871078138,
+          "focusRatio": 3.791080780794159,
+          "textRatio": 21
+        }
+      ],
+      "widths": [
+        {
+          "width": 320,
+          "view": 320,
+          "document": 320
+        },
+        {
+          "width": 390,
+          "view": 390,
+          "document": 390
+        },
+        {
+          "width": 768,
+          "view": 768,
+          "document": 768
+        },
+        {
+          "width": 1280,
+          "view": 1280,
+          "document": 1280
+        },
+        {
+          "width": 1440,
+          "view": 1440,
+          "document": 1440
+        }
+      ],
+      "submissionId": "713fc06b-012c-4d3b-beff-cc324185955f",
+      "feedback": [
+        {
+          "id": "7172011a-0969-420e-a6dd-2d55d41d04ad",
+          "submissionId": "713fc06b-012c-4d3b-beff-cc324185955f",
+          "supervisor": {
+            "id": "14a748dd-4ebc-41fd-85ae-ee0edf8516ec",
+            "displayName": "Supervisor A"
+          },
+          "content": "Verified feedback after the control contrast correction.",
+          "clientRequestId": "8a9b8963-e665-41d0-93bc-6610225629b2",
+          "createdAt": "2026-11-07T03:25:47.123Z"
+        }
+      ],
+      "method": "Login and feedback controls rendered by the real compiled app; fixture work created by real protected API calls; feedback saved through UI."
+    },
+    {
+      "case": "final-contrast-supervisor-signout",
+      "executedAgainst": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1"
+    },
+    {
+      "case": "login-student.a1",
+      "url": "http://127.0.0.1:54816/submissions/713fc06b-012c-4d3b-beff-cc324185955f",
+      "text": "Team A / Final contrast verification / Saved submission\n\nFinal verified version\n\nVersion 1, submitted by Student A1.\n\n7 Nov 2026, 10:25:46 (Asia/Bangkok)\n\nDescription\n\nCurrent code with the specified control boundary token.\n\nWork link\nOpen work link\n\nhttps://example.com/final-verification\n\nFeedback for version 1\nSupervisor A\n7 Nov 2026, 10:25:47 (Asia/Bangkok)\n\nVerified feedback after the control contrast correction.",
+      "executedAgainst": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1"
+    },
+    {
+      "case": "student-before-final-process-restart",
+      "submission": {
+        "id": "713fc06b-012c-4d3b-beff-cc324185955f",
+        "milestoneId": "a37d28e4-3fdf-4df5-ac20-824a396f6b2c",
+        "submittedBy": {
+          "id": "08519b81-ed2e-4a1a-9254-ca054a3f2dd3",
+          "displayName": "Student A1"
+        },
+        "version": 1,
+        "title": "Final verified version",
+        "description": "Current code with the specified control boundary token.",
+        "url": "https://example.com/final-verification",
+        "submittedAt": "2026-11-07T03:25:46.700Z"
+      },
+      "feedback": [
+        {
+          "id": "7172011a-0969-420e-a6dd-2d55d41d04ad",
+          "submissionId": "713fc06b-012c-4d3b-beff-cc324185955f",
+          "supervisor": {
+            "id": "14a748dd-4ebc-41fd-85ae-ee0edf8516ec",
+            "displayName": "Supervisor A"
+          },
+          "content": "Verified feedback after the control contrast correction.",
+          "clientRequestId": "8a9b8963-e665-41d0-93bc-6610225629b2",
+          "createdAt": "2026-11-07T03:25:47.123Z"
+        }
+      ],
+      "rendered": 1,
+      "formCount": 0,
+      "executedAgainst": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1"
+    },
+    {
+      "case": "student-after-final-process-restart",
+      "executedAgainst": "e1ada71",
+      "submissionUnchanged": true,
+      "feedbackUnchanged": true,
+      "rendered": 1,
+      "formCount": 0,
+      "sessionRestored": true
+    }
+  ],
+  "browserRestart": {
+    "beforePid": 25988,
+    "afterPid": 5360,
+    "sameDatabaseAndOrigin": true,
+    "secondaryRuntimeStopped": true,
+    "source": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+    "earlierVerificationRestart": {
+      "source": "cc0e206",
+      "beforePid": 10888,
+      "afterPid": 17352
+    }
+  },
+  "nativeZoom": {
+    "result": "PASSED - user reported",
+    "recordedAt": "2026-11-07T03:13:16Z",
+    "checkedBy": "User A",
+    "scope": "Native Chrome 200%: feedback readability, Your feedback field, Save feedback control and navigation menu were reported usable.",
+    "instrumentalCorroboration": false,
+    "limit": "Automated snapshot remained at DPR 1 / inner width 929 / outer width 945. It is a separate normal reference image, not native-200 evidence. The user may have checked a separate browser/window; no instrumentally verified 200% result is claimed. The later change only corrects the boundary color; final actual rendered control measurements and layout checks are separate current evidence. B assesses current-head G4.",
+    "testedSource": "cc0e206 (before the color-only contrast correction)"
+  },
+  "cleanup": {
+    "mainReview": "removed newly created audit container",
+    "secondaryReview": "Stopped after headless browser closed; restart host state confirms stopped.",
+    "browsers": "Owned j03, j03-student and j03-contrast sessions closed"
+  },
+  "gates": {
+    "G3": "PENDING B current-head joint decision",
+    "G4": "PENDING B current-head joint decision; user A native-200 manual check reported passed",
+    "G5": "PENDING release/PDF"
+  },
+  "limits": [
+    "Initial Docker engine was stopped; Docker Desktop was started and the entire clean-clone run then passed. The first infrastructure failure is not a product failure.",
+    "An initial UI harness tried reading a POST response body after navigation; the saved milestone was recovered through real scoped GET instead of creating a duplicate. A login attempted before sign-out timed out; this harness sequencing error was corrected.",
+    "Controlled delayed feedback and load-error responses are QA interception; current persistence and authentication use real HTTP/PostgreSQL.",
+    "Native 200% is explicitly a user-reported manual result; automated window metrics did not corroborate that zoom. B reviews this limit before joint acceptance.",
+    "Final contrast inspection found a divider-token input boundary (~1.26:1). e1ada71 corrects it to the specified control token; actual resting/hover controls now measure ~3.45:1, text 21:1, and the full 310-case/seven-migration pipeline was rerun after that change."
+  ],
+  "database": {
+    "image": "postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae",
+    "startedAt": "2026-11-07T03:22:15.106Z",
+    "stages": [
+      {
+        "name": "client generation",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "fresh dev migrations",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "fresh test migrations",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "repeat migration deploy",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "typecheck",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "ordinary unit/API tests",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "production build",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "G1 database, seed and compiled-client checks",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "F-01 sessions, source protection and scoped team checks",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "B01 real-session milestone regression",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "F-03 first-submission regression",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "F-04 feedback real-session and retry regression",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "S1 compiled cross-feature journey, seed and restart",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "explicit disposable review seed",
+        "passed": true,
+        "exitCode": 0
+      }
+    ],
+    "cleanup": "removed newly created audit container",
+    "postgresVersion": "postgres (PostgreSQL) 16.8 (Debian 16.8-1.pgdg120+1)",
+    "ordinaryTests": {
+      "passed": 120,
+      "failed": 0,
+      "failedSuites": 0,
+      "cases": [
+        {
+          "name": "API composition and safe transport reports process liveness and version without claiming database readiness",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport generates a new correlation ID instead of trusting caller input",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport does not expose unimplemented identity/domain/readiness endpoints",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport mounts explicit full relative routes without creating listeners or changing another app",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport redacts thrown errors and logs only method, route template, status, duration and request ID",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport preserves approved public domain errors and field details",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport rejects malformed JSON without echoing the original request",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport enforces the JSON type only where a router explicitly requests it",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport leaves request parsing after route protection instead of leaking input errors first",
+          "status": "passed"
+        },
+        {
+          "name": "API composition and safe transport serves the built shell on browser routes but keeps unknown API/assets JSON 404",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration loads the agreed local defaults without connecting to a database",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects invalid PORT \"0\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects invalid PORT \"65536\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects invalid PORT \"3000abc\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects invalid PORT \"3.5\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects invalid PORT \"\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects invalid PORT \"-1\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"https://example.com/path\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"https://user:secret@example.com\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"https://example.com?token=private\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"null\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"*\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"ftp://example.com\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"https://example.com/\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects an invalid origin \"https://example.com#fragment\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration requires the production HTTPS origin and exact release commit",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects missing or invalid database configuration undefined",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects missing or invalid database configuration \"\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects missing or invalid database configuration \"file:private.db\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost/a/b\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost/%\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost/%20\"",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration does not reveal secret values in configuration errors",
+          "status": "passed"
+        },
+        {
+          "name": "runtime configuration rejects unsupported runtime modes, TTL changes and unsafe release labels",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary allows a separately named test database only in the explicit test environment",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects resets in \"development\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects resets in \"production\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects resets in undefined",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects the nonreserved database name \"fasttrack_dev\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects the nonreserved database name \"postgres\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects the nonreserved database name \"_test\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects the nonreserved database name \"fasttrack_testing\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects the protected DB even when credentials, schema and host spelling differ",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects a protected production name regardless of hostname",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects connection overrides \"host=production\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects connection overrides \"database=fasttrack_dev\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects connection overrides \"dbname=fasttrack_dev\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects connection overrides \"schema=other\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary rejects connection overrides \"options=-csearch_path%3Dother\"",
+          "status": "passed"
+        },
+        {
+          "name": "test database safety boundary requires the protected runtime DB and explicit test URL instead of falling back",
+          "status": "passed"
+        },
+        {
+          "name": "Shared Feedback Input Validation counts Unicode code points accurately without surrogate pair splitting",
+          "status": "passed"
+        },
+        {
+          "name": "Shared Feedback Input Validation validates feedback content within 1 to 4000 code points",
+          "status": "passed"
+        },
+        {
+          "name": "Shared Feedback Input Validation validates clientRequestId as UUID",
+          "status": "passed"
+        },
+        {
+          "name": "Shared Feedback Input Validation validates submissionId as UUID",
+          "status": "passed"
+        },
+        {
+          "name": "Shared Feedback Input Validation parseFeedbackInput validates valid objects and rejects unknown keys or bad shapes",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback PostgreSQL text boundaries rejects invalid Unicode or null content 0",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback PostgreSQL text boundaries rejects invalid Unicode or null content 1",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback PostgreSQL text boundaries rejects invalid Unicode or null content 2",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback PostgreSQL text boundaries accepts four thousand astral characters as four thousand code points",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API counts trimmed Unicode code points and permits the full description bound",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input null",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input undefined",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":3,\"description\":\"Complete this work.\",\"dueAt\":\"2030-01-02T18:30:00+07:00\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":\"Work\",\"description\":\"\",\"dueAt\":\"2030-01-02T18:30:00+07:00\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":\"Work\",\"description\":\"Complete this work.\",\"dueAt\":\"2030-01-02T18:30:00+07:00\",\"createdById\":\"forged\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"description\":\"Complete this work.\",\"dueAt\":\"2030-01-02T18:30:00+07:00\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-02-30T12:00:00Z",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-01-01T12:00:00.1234Z",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-01-01T12:00:00",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-01-01T12:00:00+24:00",
+          "status": "passed"
+        },
+        {
+          "name": "Canonical milestone validation shared with the API treats HH:mm as seconds 00 in Bangkok independent of host timezone",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery sends the current session CSRF for protected mutations and retains domain serverTime",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery drops a late mutation result after account change",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery uses the global receiver required by the browser Fetch API",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery T-27 discards old private reads after logout/account change without changing the new account",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery T-27 does not let an old 401 clear a newly authenticated account",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery T-27 clears current private state on expiry and on a navigation lock",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery T-27 clears private data immediately on sign-out and retains a safe retry if the request fails",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery T-23 restores only the latest session and uses same-origin/no-store request options",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 account isolation and recovery T-02 exposes useful network errors without retaining failed login credentials/private identity",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /milestones/11111111-1111-1111-1111-111111111111 with server-side scope still required",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /teams/11111111-1111-1111-1111-111111111111/milestones/new with server-side scope still required",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /milestones/11111111-1111-1111-1111-111111111111/submissions/new with server-side scope still required",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /submissions/11111111-1111-1111-1111-111111111111 with server-side scope still required",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"https://foreign.example\"",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"//foreign.example\"",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/\\\\foreign.example\"",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/%2f%2fforeign.example\"",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/login\"",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/teams/invalid\"",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/\\n/foreign.example\"",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination null",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 internal return-to destinations T-27 preserves an implemented internal path, whose API still rechecks scope",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 private mutation recovery information retains the actual business code and field errors for truthful duplicate/deadline recovery",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts trims work and preserves a validated URL without silently normalizing its content",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts accepts exact Unicode code-point maxima in title and description",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input null",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input undefined",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":false,\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\" \",\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"\u00a0\ufeff\",\"url\":\"https://example.edu/work\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\",\"url\":\"https://example.edu/work\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\",\"submittedAt\":\"2030-01-01T00:00:00Z\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\",\"role\":\"student\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\",\"version\":1}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"\\ud800\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"bad\\u0000value\",\"url\":\"https://example.edu/work\"}",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL javascript:alert(1)",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL //example.edu/work",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https:example.edu",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL ftp://example.edu",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://u:p@example.edu",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://example.edu/a b",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://example.edu/\\evil",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://example.edu/\nsecret",
+          "status": "passed"
+        },
+        {
+          "name": "Shared first-submission input contracts accepts an exact 2,048-code-point URL and rejects one extra code point",
+          "status": "passed"
+        }
+      ]
+    },
+    "g1Tests": {
+      "passed": 38,
+      "failed": 0,
+      "failedSuites": 0,
+      "cases": [
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for team.name",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for milestone.title",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for milestone.description",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.title",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.description",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.url",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for feedback.content",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for team.name",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for milestone.title",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for milestone.description",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.title",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.description",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.url",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for feedback.content",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required team.name",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required milestone.title",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required milestone.description",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.title",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.description",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.url",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required feedback.content",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation counts a valid 120-code-point title independently of UTF-16 code units",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects an arbitrary protected dev client before deleting its canary",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation allows cleanup through a factory-bound test client",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects a factory client if the configured test target has changed since creation",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical boundaries and fixture-client isolation rejects an unbranded client even if its URL is the configured test URL",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL permits one supervisor to own multiple teams",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL provides nullable revocation and cancellation fields required before dependent auth/domain work",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL uses native UUID primary keys as specified by the accepted data model",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL rejects a submission with an unknown author through its foreign key",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL enforces the version lower bound in the database",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL enforces one team per student and foreign-key history restriction",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL enforces the accepted title bound in the migration rather than only in future handlers",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL provides exact one-millisecond-before, equal and one-millisecond-after deadline fixtures",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL rechecks the test database guard at client creation even after the module was imported",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL repeats the seed without duplicating records or replacing stored password hashes/membership",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL preserves previously edited names when the add-only seed runs again",
+          "status": "passed"
+        },
+        {
+          "name": "G1 canonical foundation contracts on real PostgreSQL loads the compiled database module and reads PostgreSQL through the generated client",
+          "status": "passed"
+        }
+      ]
+    },
+    "authTests": {
+      "passed": 28,
+      "failed": 0,
+      "failedSuites": 0,
+      "cases": [
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-01 authenticates stu-a1@test.local with real seed-compatible hash and allowlisted DTO",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-01 authenticates sup-a@test.local with real seed-compatible hash and allowlisted DTO",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-02 conceals unknown email versus bad password and creates no session",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: {}",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: {\"email\":\"\",\"password\":\"\"}",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: {\"email\":\"stu-a1@test.local\",\"password\":\"test-password-fixture\",\"role\":\"supervisor\"}",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: undefined",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: null",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 denies missing login protection before parsing or writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 denies foreign login protection before parsing or writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 denies null login protection before parsing or writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 denies header login protection before parsing or writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 permits same-origin Referer fallback but never overrides a foreign Origin",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 rejects form login and rotates the old browser session on re-login",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-03 rejects missing/forged identity before reading /api/auth/me",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-03 rejects missing/forged identity before reading /api/teams",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-03 rejects missing/forged identity before reading /api/teams/not-a-uuid",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-03 expires at equality, rejects revocation and rejects ambiguous duplicate cookies",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-04 rejects wrong/missing CSRF without revocation then logout prevents replay and preserves another device",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-04 permits anonymous logout only with allowed source and clears the cookie",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 rejects a foreign source even with a valid session and CSRF without writing",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-03 converts a session database failure into a safe 503 with no private response",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-05 scopes list/detail for stu-a1@test.local and conceals missing versus foreign team",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-05 scopes list/detail for sup-a@test.local and conceals missing versus foreign team",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-05 scopes list/detail for sup-b@test.local and conceals missing versus foreign team",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-05 handles no-team students and multiple assigned teams in stable order",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-23 shared protection is fail-closed before JSON parsing and supplies immutable DB-derived identity",
+          "status": "passed"
+        },
+        {
+          "name": "F-01 real PostgreSQL session and team contracts T-01 HTTPS configuration sets Secure on the host-only cookie",
+          "status": "passed"
+        }
+      ]
+    },
+    "b01Tests": {
+      "passed": 33,
+      "failed": 0,
+      "failedSuites": 0,
+      "cases": [
+        {
+          "name": "B01 independent real-session regression requires every protection dependency at runtime",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-06 creates then reads identical persisted list/detail projections",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\",\"description\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\",\"description\":\"d\"}",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 0 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 1 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 2 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 3 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 4 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 5 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 6 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 7 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 8 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 9 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 10 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 11 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 requires description and validates input shape before foreign scope",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-02-30T12:00:00+07:00 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00.1234Z without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00 without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T25:00:00Z without writes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-07 checks session/role/CSRF before invalid JSON and rejects forged identity",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-07 conceals foreign versus missing milestone identity with equal 404 bodies",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-25 projects only latest-version feedback and preserves stable dueAt/id ordering",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-06 production composition exposes the real session-protected milestone routes",
+          "status": "passed"
+        },
+        {
+          "name": "B01 independent real-session regression T-08 rechecks database future time after waiting for the team lock",
+          "status": "passed"
+        },
+        {
+          "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-06: assigned supervisor can create a milestone with future dueAt",
+          "status": "passed"
+        },
+        {
+          "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-07: student cannot create a milestone (403 Forbidden)",
+          "status": "passed"
+        },
+        {
+          "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-07: unassigned supervisor cannot create milestone for another team (404 Not Found)",
+          "status": "passed"
+        },
+        {
+          "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone with past dueAt (400 Bad Request)",
+          "status": "passed"
+        },
+        {
+          "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone title exceeding canonical bound of 120 chars (400 Bad Request)",
+          "status": "passed"
+        },
+        {
+          "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-25: student can list milestones for their assigned team",
+          "status": "passed"
+        },
+        {
+          "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) student cannot list milestones of an unassigned team (404 Not Found)",
+          "status": "passed"
+        }
+      ]
+    },
+    "a02Tests": {
+      "passed": 48,
+      "failed": 0,
+      "failedSuites": 0,
+      "cases": [
+        {
+          "name": "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset -1 ms and persists that same instant",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset 0 ms and persists that same instant",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset 1 ms and persists that same instant",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 first-submission deadline TDD and persistence T-11 rejects a first submission after the actual database deadline without writing",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 first-submission deadline TDD and persistence T-09/T-16 creates version 1 and reads the exact saved DTO after app recreation",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 first-submission deadline TDD and persistence T-13/T-26 preserves the first submission and duplicate precedence after the deadline",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 first-submission deadline TDD and persistence T-13 serializes two different students to one immutable version 1",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts requires every router guard and forbids a production clock injection",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-14 checks session, role and source/CSRF before parsing JSON; rejects unsupported content types",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 0 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 1 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 2 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 3 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 4 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 5 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 6 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 7 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 8 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 9 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 10 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 11 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 12 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 13 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 14 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 15 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 16 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 17 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 18 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 19 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 20 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 rejects invalid/forged payload case 21 without partial writes",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-15 accepts exact Unicode/title/description/URL maxima and trims persisted values",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-14 denies foreign/absent milestone writes equally and checks input before scope",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-14/T-25 permits teammate/supervisor reads and conceals foreign/missing list and detail identically",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-14 protects anonymous reads and disallows update/delete of saved work",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts enforces cancellation before duplicate and deadline without changing saved history",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-12 uses equivalent offset instants and stores the once-read millisecond boundary",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts T-26 ignores a client test-clock header and rejects clock/precision body fields",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 authorization, validation and immutable submission contracts exports a transaction-bound scoped submission helper for B without foreign identifiers",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery T-16/T-31 creates through compiled HTTP and retains the exact submission/session after an actual process restart",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery T-26 rejects a real DB-clock deadline crossed while waiting for the team lock",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery T-26 rejects a real DB-clock deadline crossed while waiting for the milestone lock",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery rechecks membership after the team lock instead of trusting its initial scope query",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery retries confirmed rolled-back contention with fresh transactions and one final stored timestamp",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery bounds or avoids retries for technical condition P2034 without exposing details",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery bounds or avoids retries for technical condition P2028 without exposing details",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery bounds or avoids retries for technical condition UNKNOWN without exposing details",
+          "status": "passed"
+        },
+        {
+          "name": "F-03 real lock barriers and bounded technical recovery recognizes the actual pinned-driver unique conflict and excludes another unique constraint",
+          "status": "passed"
+        }
+      ]
+    },
+    "b02Tests": {
+      "passed": 42,
+      "failed": 0,
+      "failedSuites": 0,
+      "cases": [
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries T-17/T-20 persists server identity/time and returns only the DTO after application recreation",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries T-24 replays a trimmed identical intent with one row and conflicts on changed content",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries T-24 concurrent identical HTTP requests return one 201 and the remaining 200 with one persisted row",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries T-24 concurrent different intents on one key return 201/409 and preserve the winner",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries keeps feedback on its exact version, allows after the deadline, and rejects key reuse on another authorized version",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries orders feedback by createdAt and id without changing the content",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries denies student without a write or cross-team key oracle",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries denies foreign-student without a write or cross-team key oracle",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries denies foreign-supervisor without a write or cross-team key oracle",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries denies missing without a write or cross-team key oracle",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries authenticates before parsing, rejects missing/expired/revoked sessions and source/CSRF before input",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 0 with a field error and no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 1 with a field error and no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 2 with a field error and no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 3 with a field error and no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 4 with a field error and no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 5 with a field error and no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries supports 4000 astral code points and normalizes UUID casing on retry",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field supervisorId with no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field submissionId with no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field createdAt with no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field version with no write",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 real sessions, immutable versions and idempotent retries fails closed on database outages without exposing SQL or writing",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 transaction boundaries and actual driver conflicts handles a forced supervisor-wide key race across two authorized teams after actual PostgreSQL rollback",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 transaction boundaries and actual driver conflicts recognizes the real feedback UUID constraint and excludes primary-key or plain-object errors",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 transaction boundaries and actual driver conflicts bounds or avoids retry for technical condition P2034",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 transaction boundaries and actual driver conflicts bounds or avoids retry for technical condition P2028",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 transaction boundaries and actual driver conflicts bounds or avoids retry for technical condition UNKNOWN",
+          "status": "passed"
+        },
+        {
+          "name": "F-04 transaction boundaries and actual driver conflicts rechecks assignment after an actual team lock wait before any feedback write",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) construction requires all mandatory protection dependencies",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-17: assigned supervisor can create feedback for a team submission (201 Created)",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-18: student cannot create feedback (403 Forbidden)",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-19: unassigned supervisor cannot create feedback for another team submission (404 Not Found)",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-20: assigned supervisor and team members can list feedback; out-of-scope users receive 404",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-24: identical retry with same clientRequestId returns 200 replay without duplicate rows",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-24: reusing same clientRequestId with different content returns 409 REQUEST_KEY_REUSED",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-24: reusing same clientRequestId for a different submission returns 409 REQUEST_KEY_REUSED",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects unknown payload keys (400 Bad Request)",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects empty or whitespace-only feedback content (400 Bad Request)",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects feedback content exceeding 4000 code points (400 Bad Request)",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects invalid clientRequestId UUID (400 Bad Request)",
+          "status": "passed"
+        },
+        {
+          "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects invalid submissionId UUID (400 Bad Request)",
+          "status": "passed"
+        }
+      ]
+    },
+    "j03Tests": {
+      "passed": 1,
+      "failed": 0,
+      "failedSuites": 0,
+      "cases": [
+        {
+          "name": "Sprint 1 integrated compiled HTTP and durable data T-21/T-22/T-25/T-31 creates, submits, appends and scopes feedback; repeat seed and actual process restart preserve all records",
+          "status": "passed"
+        }
+      ]
+    },
+    "upgrades": {
+      "cases": [
+        {
+          "variant": "control",
+          "passed": true,
+          "migrationExit": 0,
+          "databaseErrorCode": null,
+          "rejectionDiagnostic": null,
+          "recordsPreserved": true,
+          "schemaPreserved": false,
+          "matchesFreshSchema": true,
+          "appliedHistoryPreserved": true,
+          "rejectionCauseVerified": true,
+          "foreignKeysBefore": 9,
+          "foreignKeysAfter": 10
+        },
+        {
+          "variant": "canonical_boundary",
+          "passed": true,
+          "migrationExit": 0,
+          "databaseErrorCode": null,
+          "rejectionDiagnostic": null,
+          "recordsPreserved": true,
+          "schemaPreserved": false,
+          "matchesFreshSchema": true,
+          "appliedHistoryPreserved": true,
+          "rejectionCauseVerified": true,
+          "foreignKeysBefore": 9,
+          "foreignKeysAfter": 10
+        },
+        {
+          "variant": "invalid_uuid",
+          "passed": true,
+          "migrationExit": 1,
+          "databaseErrorCode": "22P02",
+          "rejectionDiagnostic": "Error: P3018 ERROR: G1 UUID preflight: invalid legacy identifiers in users.id; no schema changes applied. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E22P02), message: \"G1 UUID preflight: invalid legacy identifiers in users.id; no schema changes applied.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 27 at RAISE\\nSQL statement \\\"DO $uuid_preflight$\\r\\nDECLARE target RECORD; checked_count BIGINT;\\r\\nBEGIN\\r\\n  FOR target IN SELECT * FROM (VALUES\\r\\n      ('users', 'id'),\\r\\n      ('sessions', 'id'),\\r\\n      ('ses",
+          "recordsPreserved": true,
+          "schemaPreserved": true,
+          "matchesFreshSchema": false,
+          "appliedHistoryPreserved": true,
+          "rejectionCauseVerified": true,
+          "foreignKeysBefore": 9,
+          "foreignKeysAfter": 9
+        },
+        {
+          "variant": "invalid_required",
+          "passed": true,
+          "migrationExit": 1,
+          "databaseErrorCode": "23514",
+          "rejectionDiagnostic": "Error: P3018 ERROR: G1 bounds preflight: 1 invalid rows in milestones.description; resolve data without truncation before retrying. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E23514), message: \"G1 bounds preflight: 1 invalid rows in milestones.description; resolve data without truncation before retrying.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 18 at RAISE\\nSQL statement \\\"DO $bounds_preflight$\\r\\nDECLARE rule RECORD; invalid_count BIGINT; whitespace CONSTANT TEXT := U&'\\\\0009\\\\000A\\\\000B\\\\000C\\\\000D\\\\0020",
+          "recordsPreserved": true,
+          "schemaPreserved": true,
+          "matchesFreshSchema": false,
+          "appliedHistoryPreserved": true,
+          "rejectionCauseVerified": true,
+          "foreignKeysBefore": 9,
+          "foreignKeysAfter": 9
+        },
+        {
+          "variant": "invalid_overlength",
+          "passed": true,
+          "migrationExit": 1,
+          "databaseErrorCode": "23514",
+          "rejectionDiagnostic": "Error: P3018 ERROR: G1 bounds preflight: 1 invalid rows in teams.name; resolve data without truncation before retrying. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E23514), message: \"G1 bounds preflight: 1 invalid rows in teams.name; resolve data without truncation before retrying.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 18 at RAISE\\nSQL statement \\\"DO $bounds_preflight$\\r\\nDECLARE rule RECORD; invalid_count BIGINT; whitespace CONSTANT TEXT := U&'\\\\0009\\\\000A\\\\000B\\\\000C\\\\000D\\\\0020\\\\00A0\\\\1680\\\\2000\\\\2001",
+          "recordsPreserved": true,
+          "schemaPreserved": true,
+          "matchesFreshSchema": false,
+          "appliedHistoryPreserved": true,
+          "rejectionCauseVerified": true,
+          "foreignKeysBefore": 9,
+          "foreignKeysAfter": 9
+        },
+        {
+          "variant": "invalid_author",
+          "passed": true,
+          "migrationExit": 1,
+          "databaseErrorCode": "23503",
+          "rejectionDiagnostic": "Error: P3018 ERROR: insert or update on table \"submissions\" violates foreign key constraint \"submissions_submitted_by_id_fkey\"",
+          "recordsPreserved": true,
+          "schemaPreserved": true,
+          "matchesFreshSchema": false,
+          "appliedHistoryPreserved": true,
+          "rejectionCauseVerified": true,
+          "foreignKeysBefore": 9,
+          "foreignKeysAfter": 9
+        },
+        {
+          "variant": "candidate_applied",
+          "passed": true,
+          "migrationExit": 0,
+          "databaseErrorCode": null,
+          "rejectionDiagnostic": null,
+          "recordsPreserved": true,
+          "schemaPreserved": false,
+          "matchesFreshSchema": true,
+          "appliedHistoryPreserved": true,
+          "rejectionCauseVerified": true,
+          "foreignKeysBefore": 10,
+          "foreignKeysAfter": 10
+        }
+      ],
+      "passed": true
+    },
+    "finishedAt": "2026-11-07T03:27:14.844Z",
+    "passed": true
+  },
+  "clientSourceChange": {
+    "file": "Project_code/client/src/design/components.module.css",
+    "commit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+    "change": "Shared Input/Textarea resting border token divider -> control, matching project detail 8.3/8.11. No geometry or application logic change.",
+    "sourceFinding": {
+      "beforeColor": "#E5E5E5",
+      "background": "#FFFFFF",
+      "ratio": 1.259690935041431,
+      "requiredMinimum": 3,
+      "type": "Declared source token and selected rendered screenshot inspection; not a TDD RED test."
+    },
+    "finalComputedStyleEvidence": "/browser/17",
+    "finalMeasuredBoundaryRatio": 3.4522201871078138
+  }
+}

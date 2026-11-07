@@ -25,6 +25,10 @@ These documents define work and acceptance, not a verified working application. 
 
 For tracked PRs, the enabled native Project workflow moves the card to Done after merge. Follow [Project merge automation](workflow/GITHUB_PROJECT_AUTOMATION.md) when opening/reviewing PRs.
 
+## Current Sprint 1 checkpoint
+
+Accepted application base: staging/sprint-1 514f34c after B approval/merge of PR #61. F-01-F-04 and A03 are accepted. A prepared shared R1-J03 / #9 in PR #62 for B current-head G3/G4 review; [the actual verification and B checklist](Project_code/docs/evidence/R1-J03-system-verification.md) includes fresh results, coverage, source excerpts/history and the user-only native-200 provenance. B separately owns #11 C/E/F/PDF assembly. Keep main/release/tag/final PDF/submission pending until G5. The first-day table below is sequencing guidance, not a request to redo completed feature tasks.
+
 ## First-day allocation
 
 A is `zerotwobook`; B is `Atip-Infa`. Each member uses a separate clone/worktree and records real names/student IDs, availability, topic eligibility and baseline acceptance in [R1-J00 / G0, Issue #2](https://github.com/zerotwobook/fastTrack/issues/2).

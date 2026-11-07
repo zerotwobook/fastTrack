@@ -1,0 +1,20 @@
+[
+  {
+    "path": "Project_code/docs/evidence/excerpts/s1-deadline-rejection.txt",
+    "source": "Project_code/server/src/testing/submissions.a02.ts",
+    "sourceCommit": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
+    "startLine": 55,
+    "endLine": 61,
+    "sourceSha256": "cd20252ca7b7c7ff59bbbcfb351dce43a0c49583929c7e55d0f6a03e1748d4a3",
+    "excerptSha256": "8408ed0d64f77b33091221795ce00bd5fc5e92a5a85c410a55eb6af2969d3317"
+  },
+  {
+    "path": "Project_code/docs/evidence/excerpts/s1-feedback-access.txt",
+    "source": "Project_code/server/src/testing/feedback-review.b02.ts",
+    "sourceCommit": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
+    "startLine": 88,
+    "endLine": 96,
+    "sourceSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28",
+    "excerptSha256": "56d1c3b696e81d89d67b81bb9a4cf7cd6703710506ea5f10f029b277864baca8"
+  }
+]
