@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | G0/G1/G2 and A01/B01/A02/B02/A03 accepted; latest staging 514f34c after B merge of #61. Shared #9 / PR #62 contains A verification (310 cases/seven migrations/current UI and source mapping) and the explicitly user-reported native-200 check. B current-head G3/G4 decision, G5/main and final PDF remain pending. |
+| Gate record | G0-G4, F-01-F-04 and A/B source packages are accepted. B approved/merged #65 as staging 4de6a7a; #11/#64 closed. Joint #12 / PR #66 contains the assembled PDF candidate and author verification; B combined-PDF review, G5/main/tag/submission remain pending. See the R1-J04 handoff. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -277,13 +277,13 @@ Original owner B / PR #58; A independently reviewed and repaired findings under 
 
 G3/G4 joint acceptance is handled by shared R1-J03 / #9, not inferred from a feature merge.
 
-### R1-B03: เอกสาร/หลักฐานที่ B เป็นเจ้าของ
+### R1-B03: Accepted B source package and final-assembly handoff
 
-- [ ] D1 C: system SDS/schema/API/UI/config; E: รวม F-01–F-04 contracts/AC/STS/DoD ที่ทั้งคู่เขียนและ review ก่อน code
-- [ ] หลักฐาน F-02/F-04, UI/API denied access, feedback association และ screenshots ของ flow
-- [ ] เลือก actual test excerpt access restriction; A เลือก deadline excerpt รวมเป็น 2 รายการตาม D1
-- [ ] เลือก Issue/PR chain ฝั่ง access restriction ที่มี teammate review จริง
-- [ ] รวม PDF หลัง A review content; ตรวจ page references/readability/secret redaction และ navigation A–F
+- [x] B prepared C/E/F sources in #63; A reviewed eight findings, repaired them in #64/#65 and preserved B history.
+- [x] B approved exact f7742df and merged #65 into staging as 4de6a7a. #11/#64 are closed Done/PASSED/ACCEPTED; #63 remains closed unmerged/superseded and archived Fixing/FAILED/PENDING.
+- [x] Corrected API/schema/security/config, exact test/source mapping, access excerpt, reviewed chains, figures and a real fresh 310-case/seven-migration setup record are accepted.
+- [ ] Joint R1-J04 / #12: A/Codex prepares the combined English PDF candidate in #66; B reviews its actual current source/PDF and confirms contributions. Final PDF/release acceptance is separate from the accepted source package.
+- [ ] Complete exact-head pre-main review/user notification, actual reviewed main/tag and both final G5 decisions before any claimed D1 submission.
 
 ## 9. Checkpoints: ต้องตรวจร่วมก่อนเดินงานที่พึ่งพากัน
 

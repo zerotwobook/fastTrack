@@ -1,0 +1,33 @@
+{
+  "pdf": "output/pdf/fastTrack_D1_review_candidate.pdf",
+  "pages": 44,
+  "parts": {
+    "A": [
+      2,
+      5
+    ],
+    "B": [
+      6,
+      8
+    ],
+    "C": [
+      9,
+      17
+    ],
+    "D": [
+      18,
+      19
+    ],
+    "E": [
+      20,
+      27
+    ],
+    "F": [
+      28,
+      44
+    ]
+  },
+  "sha256": "38d9c1fd8c2cb7cf1882a5d8b66524669e18f35fe1ec659d4421e7eb1da0ec08",
+  "status": "Review candidate; B PDF review/G5/main pending",
+  "rendering": "ReportLab; original PNGs drawn unedited, with explicitly labeled PDF layout crops/segments for legibility."
+}

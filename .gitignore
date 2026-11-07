@@ -17,3 +17,6 @@ output/playwright/
 # Local logs and editor files
 *.log
 .DS_Store
+
+# Intermediate PDF review renders
+tmp/pdfs/
