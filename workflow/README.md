@@ -46,23 +46,26 @@ New teammates should start with [DEVELOPMENT_README.md](../DEVELOPMENT_README.md
 
 ## 3. กติกา branch ที่ใช้ร่วมกันทั้งสามรอบ
 
-### 3.1 จำนวนและหน้าที่
+### 3.1 Branch roles and user review before main
 
-**แนะนำ 3 staging branches** ชื่อ `staging/sprint-1`, `staging/sprint-2`, `staging/sprint-3` สร้างเมื่อเริ่มรอบนั้น ไม่ต้องเปิดพร้อมกันทั้งหมด มี `main` หนึ่ง branch สำหรับ reviewed planning baseline ในช่วงตั้งต้น และ accepted releases หลังเริ่มพัฒนา และ task branches แยกตามงาน ชื่อ branches เป็นแนวทางของทีม ส่วนโจทย์บังคับกระบวนการ sprint staging/review/release
+Use three planned sprint integration branches: `staging/sprint-1`, `staging/sprint-2` and `staging/sprint-3`, creating each when its round starts. Keep one `main`: initially the reviewed planning baseline, then accepted application releases. Task branches isolate each unit of work. Branch names are a team convention; the assessment requires sprint integration, review and release history.
 
 ```text
-main (planning baseline ก่อนมีแอป; accepted release เมื่อพัฒนาแล้ว)
-  └─ staging/sprint-N
-       ├─ feature/sN-a-<task>  → PR → เพื่อน B review → staging
-       └─ feature/sN-b-<task>  → PR → คุณ A review   → staging
+main (planning baseline first; accepted application releases afterward)
+  -> staging/sprint-N
+       -> feature/sN-a-<task> -> B peer review -> staging
+       -> feature/sN-b-<task> -> A peer review -> staging
 
-staging ผ่าน integration → release PR → main → tag/commit
-ตั้งแต่ Lab 5: main → CI/deploy → ตรวจ public app/commit/image/revision
+staging -> Draft main PR -> user review + explicit release authorization
+        -> required peer review/protection -> main -> assessed tag/commit
+From Lab 5: main -> CI/deploy -> verify public app/commit/image/revision
 ```
 
-**Branch ต่อ task ไม่ใช่ branch ส่วนตัวถาวรชื่อ A หรือ B** งานใหม่ใช้ branch ใหม่; กลับมาแก้ review ของ Issue เดิมใช้ branch/PR เดิม ให้ตรวจ branch/PR ปัจจุบันจริง ไม่ยึดชื่อ docs branch จากข้อความในแผนเป็นสถานะสด
+**Every main change follows [the user review and authorization gate](MAIN_RELEASE_GATE.md).** Prepare the concrete candidate and checks, then keep the main PR Draft until the user reviews and explicitly authorizes its current head/base. AI checks/notification, B approval, a task merge into staging and generic continuation do not authorize main. Apply this to all sprints, D2/Final, documentation and fixes. Renew user review/authorization if the candidate changes; do not repeatedly ask for an unchanged valid authorization.
 
-A/B ต้องใช้คนละ clone หรือ worktree จริง เพราะ working directory เดียวสลับ branch จะกระทบกัน ห้ามให้ AI สอง session ทำคนละ branch ใน directory เดียวกันพร้อมกัน
+Use a branch per task rather than permanent personal A/B branches. New work starts on a new task branch; review fixes continue the same verified branch/PR. Read live state rather than treating an old planning branch name as the current checkout.
+
+A and B must use separate clones/worktrees. Never run two sessions on different branches in the same working directory at once. Ordinary staging PRs keep their normal peer workflow; main-release authorization is a separate decision.
 
 ### 3.2 เริ่มครั้งแรก: แชร์แผนบน main แล้วตั้ง staging กลาง
 
