@@ -1,0 +1,25 @@
+[
+  {
+    "path": "deliverable _file/submit/d1_owner_b/assets/B02_supervisor_feedback_mobile.png",
+    "sourcePath": "Project_code/docs/evidence/assets/j03-system/j03-final-supervisor-320.png",
+    "sha256": "9d83b9ca55917098cdfed936bfaba1d13c09b6d102b8201bca9edc41906c18c1",
+    "width": 320,
+    "height": 1334,
+    "caption": "Figure B1 — F-04 / AC-04.1-04.3, Supervisor A. Final shared control token (border-color: var(--color-control) with 3.45:1 contrast) at a 320px viewport; real API-created submission and supervisor feedback saved through the UI with Asia/Bangkok timestamps and immutable draft retention.",
+    "testedSource": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+    "visuallyInspected": true,
+    "edited": false
+  },
+  {
+    "path": "deliverable _file/submit/d1_owner_b/assets/B02_student_after_restart.png",
+    "sourcePath": "Project_code/docs/evidence/assets/j03-system/j03-final-student-after-restart.png",
+    "sha256": "3672fc49e92dea2e1d09e97ba146430547db3b61e61660e280dac46986bec4f2",
+    "width": 1440,
+    "height": 900,
+    "caption": "Figure B2 — F-04 / AC-04.4, Student A1. Compiled process restart persistence: Student A1 restores its session from cookie and reads the exact original submission and supervisor feedback DTOs; no write form is rendered for student role.",
+    "testedSource": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+    "visuallyInspected": true,
+    "edited": false
+  }
+]
+

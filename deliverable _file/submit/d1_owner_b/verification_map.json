@@ -1,0 +1,234 @@
+{
+  "acceptedBaseline": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
+  "testedSource": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+  "owner": "B",
+  "rows": [
+    {
+      "ac": "AC-02.1",
+      "plannedTests": "T-06",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b01Tests/1",
+        "b01Tests/24",
+        "b01Tests/26",
+        "b01Tests/27",
+        "b01Tests/28",
+        "b01Tests/29",
+        "b01Tests/30",
+        "b01Tests/31",
+        "b01Tests/32"
+      ],
+      "additionalEvidence": [],
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-02.2",
+      "plannedTests": "T-07",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b01Tests/21",
+        "b01Tests/22",
+        "b01Tests/26",
+        "b01Tests/27",
+        "b01Tests/28",
+        "b01Tests/29",
+        "b01Tests/30",
+        "b01Tests/31",
+        "b01Tests/32"
+      ],
+      "additionalEvidence": [],
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-02.3",
+      "plannedTests": "T-08",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b01Tests/2",
+        "b01Tests/3",
+        "b01Tests/4",
+        "b01Tests/5",
+        "b01Tests/6",
+        "b01Tests/7",
+        "b01Tests/8",
+        "b01Tests/9",
+        "b01Tests/10",
+        "b01Tests/11",
+        "b01Tests/12",
+        "b01Tests/13",
+        "b01Tests/14",
+        "b01Tests/15",
+        "b01Tests/16",
+        "b01Tests/17",
+        "b01Tests/18",
+        "b01Tests/19",
+        "b01Tests/20",
+        "b01Tests/25",
+        "b01Tests/26",
+        "b01Tests/27",
+        "b01Tests/28",
+        "b01Tests/29",
+        "b01Tests/30",
+        "b01Tests/31",
+        "b01Tests/32"
+      ],
+      "additionalEvidence": [],
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-04.1",
+      "plannedTests": "T-17/T-20",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b02Tests/0",
+        "b02Tests/4",
+        "b02Tests/29",
+        "b02Tests/30",
+        "b02Tests/31",
+        "b02Tests/32",
+        "b02Tests/33",
+        "b02Tests/34",
+        "b02Tests/35",
+        "b02Tests/36",
+        "b02Tests/37",
+        "b02Tests/38",
+        "b02Tests/39",
+        "b02Tests/40",
+        "b02Tests/41"
+      ],
+      "additionalEvidence": [
+        "supervisor-ui-feedback-and-persisted-readback",
+        "student-before-final-process-restart"
+      ],
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-04.2",
+      "plannedTests": "T-18/T-19/T-20",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b02Tests/0",
+        "b02Tests/6",
+        "b02Tests/7",
+        "b02Tests/8",
+        "b02Tests/9",
+        "b02Tests/10",
+        "b02Tests/29",
+        "b02Tests/30",
+        "b02Tests/31",
+        "b02Tests/32",
+        "b02Tests/33",
+        "b02Tests/34",
+        "b02Tests/35",
+        "b02Tests/36",
+        "b02Tests/37",
+        "b02Tests/38",
+        "b02Tests/39",
+        "b02Tests/40",
+        "b02Tests/41"
+      ],
+      "additionalEvidence": [
+        "T-27-late-feedback-after-account-switch"
+      ],
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-04.3",
+      "plannedTests": "T-17/T-19",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b02Tests/9",
+        "b02Tests/11",
+        "b02Tests/12",
+        "b02Tests/13",
+        "b02Tests/14",
+        "b02Tests/15",
+        "b02Tests/16",
+        "b02Tests/17",
+        "b02Tests/18",
+        "b02Tests/19",
+        "b02Tests/20",
+        "b02Tests/21",
+        "b02Tests/37",
+        "b02Tests/38",
+        "b02Tests/39",
+        "b02Tests/40",
+        "b02Tests/41"
+      ],
+      "additionalEvidence": [],
+      "scopeNote": ""
+    },
+    {
+      "ac": "AC-04.4",
+      "plannedTests": "T-20/T-31 local",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b02Tests/0",
+        "b02Tests/5",
+        "b02Tests/29",
+        "b02Tests/30",
+        "b02Tests/31",
+        "b02Tests/32",
+        "b02Tests/33",
+        "b02Tests/34",
+        "b02Tests/35",
+        "b02Tests/36",
+        "b02Tests/37",
+        "b02Tests/38",
+        "b02Tests/39",
+        "b02Tests/40",
+        "b02Tests/41"
+      ],
+      "additionalEvidence": [
+        "current-j03-compiled-journey",
+        "student-after-final-process-restart"
+      ],
+      "scopeNote": ""
+    },
+    {
+      "ac": "S1-AC-EXT-02",
+      "plannedTests": "T-24",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b02Tests/1",
+        "b02Tests/2",
+        "b02Tests/3",
+        "b02Tests/23",
+        "b02Tests/29",
+        "b02Tests/30",
+        "b02Tests/31",
+        "b02Tests/32",
+        "b02Tests/33",
+        "b02Tests/34",
+        "b02Tests/35",
+        "b02Tests/36",
+        "b02Tests/37",
+        "b02Tests/38",
+        "b02Tests/39",
+        "b02Tests/40",
+        "b02Tests/41"
+      ],
+      "additionalEvidence": [],
+      "scopeNote": ""
+    },
+    {
+      "ac": "S1-AC-EXT-03",
+      "plannedTests": "T-25",
+      "result": "PASSED",
+      "namedEvidence": [
+        "b01Tests/23",
+        "b01Tests/26",
+        "b01Tests/27",
+        "b01Tests/28",
+        "b01Tests/29",
+        "b01Tests/30",
+        "b01Tests/31",
+        "b01Tests/32"
+      ],
+      "additionalEvidence": [
+        "current-j03-compiled-journey"
+      ],
+      "scopeNote": ""
+    }
+  ]
+}
