@@ -1,0 +1,29 @@
+﻿/* Shared monochrome controls for both roles. */
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; max-width: 100%; padding: 8px 16px; font: 500 1rem/1.65 var(--font-family); border: 1px solid var(--color-control); border-radius: var(--radius-md); cursor: pointer; text-align: center; overflow-wrap: anywhere; transition: background-color .1s ease, box-shadow .1s ease; }
+.btn--primary { background: var(--color-ink); color: var(--color-paper); border-color: var(--color-ink); }
+.btn--primary:hover:not(:disabled) { box-shadow: inset 0 0 0 2px var(--color-paper); }
+.btn--secondary, .btn--ghost { background: var(--color-paper); color: var(--color-ink); }
+.btn--secondary:hover:not(:disabled), .btn--ghost:hover:not(:disabled) { background: var(--color-wash); border-color: var(--color-ink); }
+.btn:disabled { background: var(--color-wash); color: var(--color-muted); border-color: var(--color-control); cursor: not-allowed; }
+.spinner { flex: 0 0 auto; width: 16px; height: 16px; border: 2px solid currentColor; border-top-color: transparent; border-radius: 50%; animation: spin .6s linear infinite; }
+@keyframes spin { to { transform: rotate(360deg); } }
+.field { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
+.fieldLabel { font-size: 1rem; font-weight: 500; color: var(--color-ink); }
+.fieldHint, .fieldError { font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
+.fieldHint { color: var(--color-muted); }
+.fieldError { color: var(--color-ink); font-weight: 500; }
+.input, .textarea { width: 100%; min-height: 48px; padding: 10px 12px; font: 400 1rem/1.65 var(--font-family); color: var(--color-ink); background: var(--color-paper); border: 1px solid var(--color-control); border-radius: var(--radius-md); }
+.input:focus-visible, .textarea:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; border-color: var(--color-ink); }
+.input--error, .textarea.input--error, .input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-ink); }
+.input:disabled, .textarea:disabled, .textarea:read-only { background: var(--color-wash); color: var(--color-muted); opacity: 1; }
+.textarea { resize: vertical; min-height: 144px; }
+.status { display: inline-flex; align-items: center; justify-self: start; gap: 8px; max-width: 100%; padding: 4px 10px; border: 1px solid var(--color-control); border-radius: 9999px; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--color-ink); }
+.status svg { flex: 0 0 auto; }
+.status--submitted, .status--feedback { background: var(--color-wash); }
+.status--overdue { border-color: var(--color-ink); }
+.divider { border: 0; border-top: 1px solid var(--color-divider); margin: 0; }
+.emptyState { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px; border: 1px dashed var(--color-control); border-radius: var(--radius-panel); background: var(--color-wash); color: var(--color-muted); }
+.emptyStateTitle { font-size: 1rem; font-weight: 500; color: var(--color-ink); }
+.emptyStateDescription { max-width: 65ch; font-size: 14px; line-height: 1.65; }
+.emptyStateAction { margin-top: 8px; }
+.errorMessage { font-size: 14px; color: var(--color-ink); font-weight: 500; }

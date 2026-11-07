@@ -1,0 +1,273 @@
+{
+  "task": "R1-A-UI-POLISH",
+  "recordedAt": "2026-11-07T14:46:59.613Z",
+  "base": "4f003a166eda4d5211f365dfd2ef126f0ef7a93d",
+  "roleMatrices": [
+    {
+      "role": "student",
+      "layoutChecks": [
+        "overview:320x900",
+        "overview:390x844",
+        "overview:768x1024",
+        "overview:1199x900",
+        "overview:1200x900",
+        "overview:1280x900",
+        "overview:1440x1000",
+        "overview:844x390",
+        "overview:640x900",
+        "team:320x900",
+        "team:390x844",
+        "team:768x1024",
+        "team:1199x900",
+        "team:1200x900",
+        "team:1280x900",
+        "team:1440x1000",
+        "team:844x390",
+        "team:640x900",
+        "milestone:320x900",
+        "milestone:390x844",
+        "milestone:768x1024",
+        "milestone:1199x900",
+        "milestone:1200x900",
+        "milestone:1280x900",
+        "milestone:1440x1000",
+        "milestone:844x390",
+        "milestone:640x900",
+        "overdue:320x900",
+        "overdue:390x844",
+        "overdue:768x1024",
+        "overdue:1199x900",
+        "overdue:1200x900",
+        "overdue:1280x900",
+        "overdue:1440x1000",
+        "overdue:844x390",
+        "overdue:640x900",
+        "submission:320x900",
+        "submission:390x844",
+        "submission:768x1024",
+        "submission:1199x900",
+        "submission:1200x900",
+        "submission:1280x900",
+        "submission:1440x1000",
+        "submission:844x390",
+        "submission:640x900",
+        "submit:320x900",
+        "submit:390x844",
+        "submit:768x1024",
+        "submit:1199x900",
+        "submit:1200x900",
+        "submit:1280x900",
+        "submit:1440x1000",
+        "submit:844x390",
+        "submit:640x900"
+      ],
+      "keyboard": [
+        "focus trap in both directions",
+        "Escape and focus return",
+        "expanded state",
+        "desktop resize closes modal"
+      ],
+      "reflowMethod": "640 CSS px approximates 200% reflow at 1280; native browser zoom is separate."
+    },
+    {
+      "role": "supervisor",
+      "layoutChecks": [
+        "overview:320x900",
+        "overview:390x844",
+        "overview:768x1024",
+        "overview:1199x900",
+        "overview:1200x900",
+        "overview:1280x900",
+        "overview:1440x1000",
+        "overview:844x390",
+        "overview:640x900",
+        "team:320x900",
+        "team:390x844",
+        "team:768x1024",
+        "team:1199x900",
+        "team:1200x900",
+        "team:1280x900",
+        "team:1440x1000",
+        "team:844x390",
+        "team:640x900",
+        "milestone:320x900",
+        "milestone:390x844",
+        "milestone:768x1024",
+        "milestone:1199x900",
+        "milestone:1200x900",
+        "milestone:1280x900",
+        "milestone:1440x1000",
+        "milestone:844x390",
+        "milestone:640x900",
+        "overdue:320x900",
+        "overdue:390x844",
+        "overdue:768x1024",
+        "overdue:1199x900",
+        "overdue:1200x900",
+        "overdue:1280x900",
+        "overdue:1440x1000",
+        "overdue:844x390",
+        "overdue:640x900",
+        "submission:320x900",
+        "submission:390x844",
+        "submission:768x1024",
+        "submission:1199x900",
+        "submission:1200x900",
+        "submission:1280x900",
+        "submission:1440x1000",
+        "submission:844x390",
+        "submission:640x900",
+        "create:320x900",
+        "create:390x844",
+        "create:768x1024",
+        "create:1199x900",
+        "create:1200x900",
+        "create:1280x900",
+        "create:1440x1000",
+        "create:844x390",
+        "create:640x900"
+      ],
+      "keyboard": [
+        "focus trap in both directions",
+        "Escape and focus return",
+        "expanded state",
+        "desktop resize closes modal"
+      ],
+      "reflowMethod": "640 CSS px approximates 200% reflow at 1280; native browser zoom is separate."
+    }
+  ],
+  "layoutCombinations": 108,
+  "feedbackOrdering": {
+    "passed": [
+      "held genuine initial GET merges old and newly saved rows",
+      "delayed read failure cannot hide confirmed save",
+      "no duplicate feedback",
+      "real persisted rows match visible results",
+      "mobile CTA and helper sizing"
+    ],
+    "layouts": [
+      {
+        "width": 320,
+        "field": 254,
+        "button": 254,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "field": 309,
+        "button": 309,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "field": 639,
+        "button": 146.46875,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 1200,
+        "field": 296,
+        "button": 146.46875,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "field": 385.203125,
+        "button": 146.46875,
+        "hint": "14px",
+        "overflow": false
+      }
+    ],
+    "method": "Actual compiled UI and API; GET success body captured from real server before the real POST. The delayed failure is deliberately injected."
+  },
+  "feedbackRecovery": {
+    "passed": [
+      "real committed POST with lost response",
+      "failed reconciliation freezes original body and UUID",
+      "same-session verification masks and preserves frozen intent",
+      "explicit check finds the exact saved row without another POST",
+      "one persisted write and usable cleared form"
+    ],
+    "method": "Real compiled UI/API; deliberately abort the POST response after server commit and the first reconciliation read."
+  },
+  "privateDrafts": {
+    "passed": [
+      "same-session draft fields",
+      "private UI masked during verification",
+      "failed verification masked",
+      "retry preserves draft",
+      "modal closed while masked",
+      "revoked session discards draft"
+    ],
+    "method": "Controlled document.visibilityState and visibilitychange events on the real compiled app; not a native tab-switch claim."
+  },
+  "states": {
+    "passed": [
+      "visible loading state",
+      "scoped read failure",
+      "mobile recovery actions",
+      "retry clears failure",
+      "unavailable milestone recovery"
+    ],
+    "method": "Real API reads with deliberately held and injected failed team responses; genuine unavailable milestone."
+  },
+  "loginAndEmpty": {
+    "passed": [
+      "login at seven viewports",
+      "incorrect-login recovery",
+      "email retained and password cleared",
+      "password show/hide",
+      "student empty milestone state",
+      "supervisor empty milestone action"
+    ],
+    "sizes": [
+      [
+        320,
+        900
+      ],
+      [
+        390,
+        844
+      ],
+      [
+        768,
+        1024
+      ],
+      [
+        1280,
+        900
+      ],
+      [
+        1440,
+        1000
+      ],
+      [
+        844,
+        390
+      ],
+      [
+        640,
+        900
+      ]
+    ]
+  },
+  "limits": [
+    "Chromium on Windows only; no physical iOS/Android or Firefox/WebKit run.",
+    "640 CSS px is a reflow proxy, not an instrumented native 200% browser zoom.",
+    "Visibility tests dispatch controlled browser events, not native tab switching.",
+    "Final navigation highlight was rebuilt and verified in the Supervisor matrix; Student matrix preceded that highlight-only change.",
+    "Full DB pipeline ran before the final shell/keyboard polish; affected final client passed build and dedicated browser checks."
+  ],
+  "sourceHashes": {
+    "App.tsx": "6f4397a007d262976e7ba7e83da7f9a9569dad8187269c8db5075c39a3dcf2a0",
+    "app.css": "31213a37d017458d015e8f8c1471e51d2f4d91ed7fbb199e65c569802c22da84",
+    "design/components.module.css": "639984aa722107819ccd6aca367e473cd2665f32054ad203ce3030445460dc35",
+    "features/milestones/milestones.module.css": "35b7bff814ecc7de2e2f3061be4e99618248e25149ae252e88842bbea647672f",
+    "features/submissions/submissions.module.css": "c60f020c7783129fcf3bf58f0ea96ac8a5093f82fbc51911b3187a23c19c2184",
+    "features/feedback/feedback.module.css": "0c06a53f0d2c0e9f90bf6dd0e6843e789a82e5c1333a9b49de3cc9065456efce"
+  }
+}

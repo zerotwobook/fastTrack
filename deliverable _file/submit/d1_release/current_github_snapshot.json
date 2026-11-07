@@ -1,0 +1,224 @@
+﻿{
+    "capturedAt":  "2026-11-07T15:23:07.8814949Z",
+    "kind":  "Actual GitHub API data, reformatted; not a simulated GitHub UI",
+    "pullRequests":  [
+                         {
+                             "autoMergeRequest":  null,
+                             "baseRefName":  "staging/sprint-1",
+                             "baseRefOid":  "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+                             "headRefName":  "docs/s1-a-d1-release",
+                             "headRefOid":  "ea29dc20aab45f7809def9e919c79066712181b4",
+                             "isDraft":  false,
+                             "mergeCommit":  {
+                                                 "oid":  "94e588d60169e542550a773140558369550c400d"
+                                             },
+                             "mergedAt":  "2026-11-07T08:38:43Z",
+                             "mergedBy":  {
+                                              "id":  "U_kgDOCx557g",
+                                              "is_bot":  false,
+                                              "login":  "Atip-Infa",
+                                              "name":  ""
+                                          },
+                             "number":  66,
+                             "reviewRequests":  [
+
+                                                ],
+                             "reviews":  [
+                                             {
+                                                 "id":  "PRR_kwDOVjq_T88AAAABWl5Yqw",
+                                                 "author":  {
+                                                                "login":  "Atip-Infa"
+                                                            },
+                                                 "authorAssociation":  "COLLABORATOR",
+                                                 "body":  "I have reviewed the assembled 44-page D1 PDF candidate and source documentation, confirming that the page layouts, bookmarks, font embeddings, requirements traceabilities, and 310-case test provenances accurately reflect our baseline, so I explicitly approve merging this preparation into staging/sprint-1 while keeping the final G5 gate and main release pending under #12.",
+                                                 "submittedAt":  "2026-11-07T08:37:21Z",
+                                                 "includesCreatedEdit":  false,
+                                                 "reactionGroups":  [
+
+                                                                    ],
+                                                 "state":  "APPROVED",
+                                                 "commit":  {
+                                                                "oid":  "ea29dc20aab45f7809def9e919c79066712181b4"
+                                                            }
+                                             }
+                                         ],
+                             "state":  "MERGED",
+                             "title":  "docs: assemble D1 review candidate and pre-main handoff",
+                             "url":  "https://github.com/zerotwobook/fastTrack/pull/66"
+                         },
+                         {
+                             "autoMergeRequest":  null,
+                             "baseRefName":  "staging/sprint-1",
+                             "baseRefOid":  "94e588d60169e542550a773140558369550c400d",
+                             "headRefName":  "docs/s1-a-main-user-gate",
+                             "headRefOid":  "d07d22d3ca2e7cd77a2d2c141afe3cfb33259a28",
+                             "isDraft":  false,
+                             "mergeCommit":  {
+                                                 "oid":  "369e2cc18cfeaeebd12509b15a1dea335b9fc4cf"
+                                             },
+                             "mergedAt":  "2026-11-07T15:06:48Z",
+                             "mergedBy":  {
+                                              "id":  "U_kgDOCx557g",
+                                              "is_bot":  false,
+                                              "login":  "Atip-Infa",
+                                              "name":  ""
+                                          },
+                             "number":  69,
+                             "reviewRequests":  [
+
+                                                ],
+                             "reviews":  [
+                                             {
+                                                 "id":  "PRR_kwDOVjq_T88AAAABWny2jg",
+                                                 "author":  {
+                                                                "login":  "Atip-Infa"
+                                                            },
+                                                 "authorAssociation":  "COLLABORATOR",
+                                                 "body":  "I have reviewed the MAIN_RELEASE_GATE.md policy and workflow updates, confirming that all documentation references align, skill validations pass without application code changes, and the explicit user release authorization rule for main merges is properly documented, so I explicitly approve merging this rules update into staging/sprint-1.",
+                                                 "submittedAt":  "2026-11-07T15:05:41Z",
+                                                 "includesCreatedEdit":  false,
+                                                 "reactionGroups":  [
+
+                                                                    ],
+                                                 "state":  "APPROVED",
+                                                 "commit":  {
+                                                                "oid":  "d07d22d3ca2e7cd77a2d2c141afe3cfb33259a28"
+                                                            }
+                                             }
+                                         ],
+                             "state":  "MERGED",
+                             "title":  "docs: persist user review and authorization before main",
+                             "url":  "https://github.com/zerotwobook/fastTrack/pull/69"
+                         },
+                         {
+                             "autoMergeRequest":  null,
+                             "baseRefName":  "staging/sprint-1",
+                             "baseRefOid":  "94e588d60169e542550a773140558369550c400d",
+                             "headRefName":  "fix/s1-a-review-regressions",
+                             "headRefOid":  "f903cec6734ed6ad0b3e3bc60ea2e1b48ec3fdd3",
+                             "isDraft":  false,
+                             "mergeCommit":  {
+                                                 "oid":  "4f003a166eda4d5211f365dfd2ef126f0ef7a93d"
+                                             },
+                             "mergedAt":  "2026-11-07T13:51:03Z",
+                             "mergedBy":  {
+                                              "id":  "U_kgDOCx557g",
+                                              "is_bot":  false,
+                                              "login":  "Atip-Infa",
+                                              "name":  ""
+                                          },
+                             "number":  71,
+                             "reviewRequests":  [
+
+                                                ],
+                             "reviews":  [
+                                             {
+                                                 "id":  "PRR_kwDOVjq_T88AAAABWnRHEA",
+                                                 "author":  {
+                                                                "login":  "Atip-Infa"
+                                                            },
+                                                 "authorAssociation":  "COLLABORATOR",
+                                                 "body":  "I have reviewed the updates and verified the pipeline locally via npm run review:j03, confirming that all 340 tests pass, draft/intent state is safely preserved during visibility checks, feedback GET race conditions are resolved, and student overview grouping functions as intended, so I explicitly accept this PR and approve merging into staging/sprint-1.",
+                                                 "submittedAt":  "2026-11-07T13:50:17Z",
+                                                 "includesCreatedEdit":  false,
+                                                 "reactionGroups":  [
+
+                                                                    ],
+                                                 "state":  "APPROVED",
+                                                 "commit":  {
+                                                                "oid":  "f903cec6734ed6ad0b3e3bc60ea2e1b48ec3fdd3"
+                                                            }
+                                             }
+                                         ],
+                             "state":  "MERGED",
+                             "title":  "fix: preserve drafts and repair Sprint 1 review regressions",
+                             "url":  "https://github.com/zerotwobook/fastTrack/pull/71"
+                         },
+                         {
+                             "autoMergeRequest":  null,
+                             "baseRefName":  "staging/sprint-1",
+                             "baseRefOid":  "4f003a166eda4d5211f365dfd2ef126f0ef7a93d",
+                             "headRefName":  "style/s1-a-ui-polish",
+                             "headRefOid":  "866f9f3ca698c3121769e18bbf0e476f8536a38c",
+                             "isDraft":  false,
+                             "mergeCommit":  {
+                                                 "oid":  "17f4398d52536fc8049022e56a7bacd0beeb822a"
+                                             },
+                             "mergedAt":  "2026-11-07T15:07:33Z",
+                             "mergedBy":  {
+                                              "id":  "U_kgDOCx557g",
+                                              "is_bot":  false,
+                                              "login":  "Atip-Infa",
+                                              "name":  ""
+                                          },
+                             "number":  73,
+                             "reviewRequests":  [
+
+                                                ],
+                             "reviews":  [
+                                             {
+                                                 "id":  "PRR_kwDOVjq_T88AAAABWnzVNA",
+                                                 "author":  {
+                                                                "login":  "Atip-Infa"
+                                                            },
+                                                 "authorAssociation":  "COLLABORATOR",
+                                                 "body":  "I have reviewed the UI polish updates on head 866f9f3 and verified the drawer accessibility, password visibility controls, and responsive layout refinements across both roles, so I explicitly accept this PR and approve merging into staging/sprint-1.",
+                                                 "submittedAt":  "2026-11-07T15:06:38Z",
+                                                 "includesCreatedEdit":  false,
+                                                 "reactionGroups":  [
+
+                                                                    ],
+                                                 "state":  "APPROVED",
+                                                 "commit":  {
+                                                                "oid":  "866f9f3ca698c3121769e18bbf0e476f8536a38c"
+                                                            }
+                                             }
+                                         ],
+                             "state":  "MERGED",
+                             "title":  "style: clarify responsive Student and Supervisor workspaces",
+                             "url":  "https://github.com/zerotwobook/fastTrack/pull/73"
+                         },
+                         {
+                             "autoMergeRequest":  null,
+                             "baseRefName":  "staging/sprint-1",
+                             "baseRefOid":  "17f4398d52536fc8049022e56a7bacd0beeb822a",
+                             "headRefName":  "docs/s1-a-release-refresh",
+                             "headRefOid":  "6221c79d4768f8970f5ae95361f967517f6b13c9",
+                             "isDraft":  true,
+                             "mergeCommit":  null,
+                             "mergedAt":  null,
+                             "mergedBy":  null,
+                             "number":  75,
+                             "reviewRequests":  [
+
+                                                ],
+                             "reviews":  [
+
+                                         ],
+                             "state":  "OPEN",
+                             "title":  "docs: refresh D1 evidence for the held Sprint 1 release",
+                             "url":  "https://github.com/zerotwobook/fastTrack/pull/75"
+                         },
+                         {
+                             "autoMergeRequest":  null,
+                             "baseRefName":  "main",
+                             "baseRefOid":  "2080cf31f8d855ecba9624eafe4fe9a5fa74b4d8",
+                             "headRefName":  "staging/sprint-1",
+                             "headRefOid":  "17f4398d52536fc8049022e56a7bacd0beeb822a",
+                             "isDraft":  true,
+                             "mergeCommit":  null,
+                             "mergedAt":  null,
+                             "mergedBy":  null,
+                             "number":  67,
+                             "reviewRequests":  [
+
+                                                ],
+                             "reviews":  [
+
+                                         ],
+                             "state":  "OPEN",
+                             "title":  "release: deliver Sprint 1 application and D1 review candidate",
+                             "url":  "https://github.com/zerotwobook/fastTrack/pull/67"
+                         }
+                     ]
+}

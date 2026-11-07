@@ -1,0 +1,5 @@
+# Preserve source-identical verification excerpt hashes across platforms.
+Project_code/docs/evidence/excerpts/*.txt text eol=lf
+
+# Preserve generated PDF bytes across Windows and Linux checkouts.
+*.pdf binary

@@ -1,0 +1,583 @@
+{
+  "testedSource": "5f8de52894167caeaa3d53ab6a12d464e85bf5ea",
+  "acceptance": "PENDING",
+  "scope": "B01 service/real-session review regression",
+  "image": "postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae",
+  "startedAt": "2026-11-06T16:47:42.093Z",
+  "stages": [
+    {
+      "name": "client generation",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "fresh dev migrations",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "fresh test migrations",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "repeat migration deploy",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "typecheck",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "ordinary unit/API tests",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "production build",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "G1 database, seed and compiled-client checks",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "F-01 sessions, source protection and scoped team checks",
+      "passed": true,
+      "exitCode": 0
+    },
+    {
+      "name": "B01 real-session milestone regression",
+      "passed": false,
+      "exitCode": 1
+    }
+  ],
+  "cleanup": "removed newly created audit container",
+  "postgresVersion": "postgres (PostgreSQL) 16.8 (Debian 16.8-1.pgdg120+1)",
+  "g1Tests": {
+    "passed": 38,
+    "failed": 0,
+    "failedSuites": 0,
+    "cases": [
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for team.name",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for milestone.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for milestone.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for submission.url",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation accepts the exact code-point maximum for feedback.content",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for team.name",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for milestone.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for milestone.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for submission.url",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects one code point over the maximum for feedback.content",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required team.name",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required milestone.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required milestone.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.title",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.description",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required submission.url",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects empty and whitespace-only required feedback.content",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation counts a valid 120-code-point title independently of UTF-16 code units",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects an arbitrary protected dev client before deleting its canary",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation allows cleanup through a factory-bound test client",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects a factory client if the configured test target has changed since creation",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical boundaries and fixture-client isolation rejects an unbranded client even if its URL is the configured test URL",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL permits one supervisor to own multiple teams",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL provides nullable revocation and cancellation fields required before dependent auth/domain work",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL uses native UUID primary keys as specified by the accepted data model",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL rejects a submission with an unknown author through its foreign key",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces the version lower bound in the database",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces one team per student and foreign-key history restriction",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL enforces the accepted title bound in the migration rather than only in future handlers",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL provides exact one-millisecond-before, equal and one-millisecond-after deadline fixtures",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL rechecks the test database guard at client creation even after the module was imported",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL repeats the seed without duplicating records or replacing stored password hashes/membership",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL preserves previously edited names when the add-only seed runs again",
+        "status": "passed"
+      },
+      {
+        "name": "G1 canonical foundation contracts on real PostgreSQL loads the compiled database module and reads PostgreSQL through the generated client",
+        "status": "passed"
+      }
+    ]
+  },
+  "authTests": {
+    "passed": 28,
+    "failed": 0,
+    "failedSuites": 0,
+    "cases": [
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-01 authenticates stu-a1@test.local with real seed-compatible hash and allowlisted DTO",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-01 authenticates sup-a@test.local with real seed-compatible hash and allowlisted DTO",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-02 conceals unknown email versus bad password and creates no session",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: {}",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: {\"email\":\"\",\"password\":\"\"}",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: {\"email\":\"stu-a1@test.local\",\"password\":\"test-password-fixture\",\"role\":\"supervisor\"}",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: undefined",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-02 rejects invalid or spoofed credentials without writes: null",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 denies missing login protection before parsing or writes",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 denies foreign login protection before parsing or writes",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 denies null login protection before parsing or writes",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 denies header login protection before parsing or writes",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 permits same-origin Referer fallback but never overrides a foreign Origin",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 rejects form login and rotates the old browser session on re-login",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-03 rejects missing/forged identity before reading /api/auth/me",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-03 rejects missing/forged identity before reading /api/teams",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-03 rejects missing/forged identity before reading /api/teams/not-a-uuid",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-03 expires at equality, rejects revocation and rejects ambiguous duplicate cookies",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-04 rejects wrong/missing CSRF without revocation then logout prevents replay and preserves another device",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-04 permits anonymous logout only with allowed source and clears the cookie",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 rejects a foreign source even with a valid session and CSRF without writing",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-03 converts a session database failure into a safe 503 with no private response",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-05 scopes list/detail for stu-a1@test.local and conceals missing versus foreign team",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-05 scopes list/detail for sup-a@test.local and conceals missing versus foreign team",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-05 scopes list/detail for sup-b@test.local and conceals missing versus foreign team",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-05 handles no-team students and multiple assigned teams in stable order",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-23 shared protection is fail-closed before JSON parsing and supplies immutable DB-derived identity",
+        "status": "passed"
+      },
+      {
+        "name": "F-01 real PostgreSQL session and team contracts T-01 HTTPS configuration sets Secure on the host-only cookie",
+        "status": "passed"
+      }
+    ]
+  },
+  "b01Tests": {
+    "passed": 18,
+    "failed": 15,
+    "failedSuites": 2,
+    "cases": [
+      {
+        "name": "B01 independent real-session regression requires every protection dependency at runtime",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-06 creates then reads identical persisted list/detail projections",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\",\"description\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\",\"description\":\"d\"}",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 0 without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 1 without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 2 without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 3 without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 4 without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 5 without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 6 without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 7 without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 8 without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 9 without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 10 without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 11 without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 requires description and validates input shape before foreign scope",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-02-30T12:00:00+07:00 without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00.1234Z without writes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00 without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T25:00:00Z without writes",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-07 checks session/role/CSRF before invalid JSON and rejects forged identity",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-07 conceals foreign versus missing milestone identity with equal 404 bodies",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-25 projects only latest-version feedback and preserves stable dueAt/id ordering",
+        "status": "passed"
+      },
+      {
+        "name": "B01 independent real-session regression T-06 production composition exposes the real session-protected milestone routes",
+        "status": "failed"
+      },
+      {
+        "name": "B01 independent real-session regression T-08 rechecks database future time after waiting for the team lock",
+        "status": "failed"
+      },
+      {
+        "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-05: assigned supervisor can create a milestone with future dueAt",
+        "status": "passed"
+      },
+      {
+        "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-06: student cannot create a milestone (403 Forbidden)",
+        "status": "passed"
+      },
+      {
+        "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-07: unassigned supervisor cannot create milestone for another team (404 Not Found)",
+        "status": "passed"
+      },
+      {
+        "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone with past dueAt (400 Bad Request)",
+        "status": "passed"
+      },
+      {
+        "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone title exceeding canonical bound of 120 chars (400 Bad Request)",
+        "status": "passed"
+      },
+      {
+        "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-08: student can list milestones for their assigned team",
+        "status": "passed"
+      },
+      {
+        "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) student cannot list milestones of an unassigned team (404 Not Found)",
+        "status": "passed"
+      }
+    ]
+  },
+  "upgrades": {
+    "cases": [
+      {
+        "variant": "control",
+        "passed": true,
+        "migrationExit": 0,
+        "databaseErrorCode": null,
+        "rejectionDiagnostic": null,
+        "recordsPreserved": true,
+        "schemaPreserved": false,
+        "matchesFreshSchema": true,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 10
+      },
+      {
+        "variant": "canonical_boundary",
+        "passed": true,
+        "migrationExit": 0,
+        "databaseErrorCode": null,
+        "rejectionDiagnostic": null,
+        "recordsPreserved": true,
+        "schemaPreserved": false,
+        "matchesFreshSchema": true,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 10
+      },
+      {
+        "variant": "invalid_uuid",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "22P02",
+        "rejectionDiagnostic": "Error: P3018 ERROR: G1 UUID preflight: invalid legacy identifiers in users.id; no schema changes applied. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E22P02), message: \"G1 UUID preflight: invalid legacy identifiers in users.id; no schema changes applied.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 27 at RAISE\\nSQL statement \\\"DO $uuid_preflight$\\r\\nDECLARE target RECORD; checked_count BIGINT;\\r\\nBEGIN\\r\\n  FOR target IN SELECT * FROM (VALUES\\r\\n      ('users', 'id'),\\r\\n      ('sessions', 'id'),\\r\\n      ('ses",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "invalid_required",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "23514",
+        "rejectionDiagnostic": "Error: P3018 ERROR: G1 bounds preflight: 1 invalid rows in milestones.description; resolve data without truncation before retrying. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E23514), message: \"G1 bounds preflight: 1 invalid rows in milestones.description; resolve data without truncation before retrying.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 18 at RAISE\\nSQL statement \\\"DO $bounds_preflight$\\r\\nDECLARE rule RECORD; invalid_count BIGINT; whitespace CONSTANT TEXT := U&'\\\\0009\\\\000A\\\\000B\\\\000C\\\\000D\\\\0020",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "invalid_overlength",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "23514",
+        "rejectionDiagnostic": "Error: P3018 ERROR: G1 bounds preflight: 1 invalid rows in teams.name; resolve data without truncation before retrying. DbError { severity: \"ERROR\", parsed_severity: Some(Error), code: SqlState(E23514), message: \"G1 bounds preflight: 1 invalid rows in teams.name; resolve data without truncation before retrying.\", detail: None, hint: None, position: None, where_: Some(\"PL/pgSQL function inline_code_block line 18 at RAISE\\nSQL statement \\\"DO $bounds_preflight$\\r\\nDECLARE rule RECORD; invalid_count BIGINT; whitespace CONSTANT TEXT := U&'\\\\0009\\\\000A\\\\000B\\\\000C\\\\000D\\\\0020\\\\00A0\\\\1680\\\\2000\\\\2001",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "invalid_author",
+        "passed": true,
+        "migrationExit": 1,
+        "databaseErrorCode": "23503",
+        "rejectionDiagnostic": "Error: P3018 ERROR: insert or update on table \"submissions\" violates foreign key constraint \"submissions_submitted_by_id_fkey\"",
+        "recordsPreserved": true,
+        "schemaPreserved": true,
+        "matchesFreshSchema": false,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 9,
+        "foreignKeysAfter": 9
+      },
+      {
+        "variant": "candidate_applied",
+        "passed": true,
+        "migrationExit": 0,
+        "databaseErrorCode": null,
+        "rejectionDiagnostic": null,
+        "recordsPreserved": true,
+        "schemaPreserved": false,
+        "matchesFreshSchema": true,
+        "appliedHistoryPreserved": true,
+        "rejectionCauseVerified": true,
+        "foreignKeysBefore": 10,
+        "foreignKeysAfter": 10
+      }
+    ],
+    "passed": true
+  },
+  "finishedAt": "2026-11-06T16:48:42.991Z",
+  "passed": false
+}

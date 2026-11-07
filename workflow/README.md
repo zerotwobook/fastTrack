@@ -20,7 +20,7 @@ New teammates should start with [DEVELOPMENT_README.md](../DEVELOPMENT_README.md
 | D1 → S2 และ Labs | [รอบ 2](02_SPRINT2_LABS5-7.md) | Docker/runtime, F-05A teams, F-07 progress, UAT/impact tests | CI/release, F-05B milestone planning, F-06 revisions, maintenance implementation |
 | S3 → D2 → Final | [รอบ 3](03_SPRINT3_D2_FINAL.md) | F-08A summary/filter/totals, domain/data QA และ traceability | F-08B drill-down/items/navigation, access/UI/operations QA และ package assembly |
 
-**เริ่มตอนนี้:** ทั้งคู่ทำ `R1-J00 / G0` ในรอบ 1 ให้ตกลง baseline/สิทธิ์หัวข้อ/เจ้าของ/เวลาว่างก่อน จากนั้น A ทำ `R1-A00` scaffold ขนาดเล็ก; B เตรียม schema/UI contract และ tests design ของ `R1-B00` เมื่อ scaffold ผ่าน review/merge แล้ว B จึง sync ไปทำ migration/seed จริง และทั้งคู่ตรวจ G1
+**Current checkpoint (7 November 2026):** F-01-F-04, G0-G4 and the A/B source packages are accepted. B also approved/merged #71/#69/#73; accepted staging application is `17f4398`. Issues #68/#70/#72 were reconciled from actual peer acceptance. Current #74 / PR #75 maintains the D1 **Markdown source** and handoff, with 340-case/seven-scenario and 108 role/viewport evidence. The user assembles/exports final reports; generate or rebuild PDFs only on explicit request. The earlier 50-page PDF/QA at `209ccc7` is historical. B reviews the current Markdown/source preparation into staging. Follow [the pre-main handoff](handoffs/R1-J04_REFRESH_PRE_MAIN.md). Main #67 remains Draft with no auto-merge/final review request until explicit current-candidate user authorization. G5/main/tag/submission remain pending; current native 200% was not rerun.
 
 เมื่อ G1 ผ่าน A ทำ F-01 และ B ทำ F-02 ขนาน เมื่อ G2 ผ่าน A ทำ F-03 และ B ทำ F-04 ขนาน ใช้ fixtures ที่ตกลงเพื่อเตรียมงานได้ แต่ผ่าน checkpoint ด้วยระบบจริงเท่านั้น
 
@@ -46,23 +46,26 @@ New teammates should start with [DEVELOPMENT_README.md](../DEVELOPMENT_README.md
 
 ## 3. กติกา branch ที่ใช้ร่วมกันทั้งสามรอบ
 
-### 3.1 จำนวนและหน้าที่
+### 3.1 Branch roles and user review before main
 
-**แนะนำ 3 staging branches** ชื่อ `staging/sprint-1`, `staging/sprint-2`, `staging/sprint-3` สร้างเมื่อเริ่มรอบนั้น ไม่ต้องเปิดพร้อมกันทั้งหมด มี `main` หนึ่ง branch สำหรับ reviewed planning baseline ในช่วงตั้งต้น และ accepted releases หลังเริ่มพัฒนา และ task branches แยกตามงาน ชื่อ branches เป็นแนวทางของทีม ส่วนโจทย์บังคับกระบวนการ sprint staging/review/release
+Use three planned sprint integration branches: `staging/sprint-1`, `staging/sprint-2` and `staging/sprint-3`, creating each when its round starts. Keep one `main`: initially the reviewed planning baseline, then accepted application releases. Task branches isolate each unit of work. Branch names are a team convention; the assessment requires sprint integration, review and release history.
 
 ```text
-main (planning baseline ก่อนมีแอป; accepted release เมื่อพัฒนาแล้ว)
-  └─ staging/sprint-N
-       ├─ feature/sN-a-<task>  → PR → เพื่อน B review → staging
-       └─ feature/sN-b-<task>  → PR → คุณ A review   → staging
+main (planning baseline first; accepted application releases afterward)
+  -> staging/sprint-N
+       -> feature/sN-a-<task> -> B peer review -> staging
+       -> feature/sN-b-<task> -> A peer review -> staging
 
-staging ผ่าน integration → release PR → main → tag/commit
-ตั้งแต่ Lab 5: main → CI/deploy → ตรวจ public app/commit/image/revision
+staging -> Draft main PR -> user review + explicit release authorization
+        -> required peer review/protection -> main -> assessed tag/commit
+From Lab 5: main -> CI/deploy -> verify public app/commit/image/revision
 ```
 
-**Branch ต่อ task ไม่ใช่ branch ส่วนตัวถาวรชื่อ A หรือ B** งานใหม่ใช้ branch ใหม่; กลับมาแก้ review ของ Issue เดิมใช้ branch/PR เดิม ให้ตรวจ branch/PR ปัจจุบันจริง ไม่ยึดชื่อ docs branch จากข้อความในแผนเป็นสถานะสด
+**Every main change follows [the user review and authorization gate](MAIN_RELEASE_GATE.md).** Prepare the concrete candidate and checks, then keep the main PR Draft until the user reviews and explicitly authorizes its current head/base. AI checks/notification, B approval, a task merge into staging and generic continuation do not authorize main. Apply this to all sprints, D2/Final, documentation and fixes. Renew user review/authorization if the candidate changes; do not repeatedly ask for an unchanged valid authorization.
 
-A/B ต้องใช้คนละ clone หรือ worktree จริง เพราะ working directory เดียวสลับ branch จะกระทบกัน ห้ามให้ AI สอง session ทำคนละ branch ใน directory เดียวกันพร้อมกัน
+Use a branch per task rather than permanent personal A/B branches. New work starts on a new task branch; review fixes continue the same verified branch/PR. Read live state rather than treating an old planning branch name as the current checkout.
+
+A and B must use separate clones/worktrees. Never run two sessions on different branches in the same working directory at once. Ordinary staging PRs keep their normal peer workflow; main-release authorization is a separate decision.
 
 ### 3.2 เริ่มครั้งแรก: แชร์แผนบน main แล้วตั้ง staging กลาง
 
@@ -136,20 +139,24 @@ Author ส่ง handoff สั้น ๆ 6 อย่าง: **Task/Issue/PR + c
 
 Release captain เลือกหนึ่งคนต่อ release: รอบ 1 A นำ/B review, รอบ 2 B นำ/A review, รอบ 3 A นำ D2 และ B นำ Final โดยอีกคน review ทั้งคู่ช่วยตรวจ integration เสมอ ถ้าต้องสลับให้บันทึกก่อน ไม่ต้องสร้าง release PR สองใบแข่งกัน
 
-สถานะที่ใช้ใน board/Issue ที่มีจริง: Backlog → Specified → Started → PR Review → Fixing → Done ส่วน verification ใช้ NOT RUN/FAILED/PASSED และ acceptance gate ใช้ PENDING/ACCEPTED แยกกัน **Done หมายถึงงานผ่านเกณฑ์ของ task และ merge เข้า branch ถัดไปจริง ไม่เท่ากับผ่านทุก acceptance หรือส่งงานแล้ว**
+### Project stage timing
 
-คอลัมน์เรียงตามที่ทีมกำหนด โดยเดินงานหลัก Backlog → Specified → Started → PR Review → Done ถ้า review/checks ต้องแก้ ให้เข้า Fixing แล้วส่งกลับ PR Review ก่อน Done ไม่จำเป็นต้องผ่าน Fixing เมื่อไม่มีข้อแก้ไข
+Follow [the full Project protocol](GITHUB_PROJECT_AUTOMATION.md). Every new task Issue follows **Backlog -> Specified -> Started -> PR Review -> Done** as the work happens. For real review/check findings, use **PR Review -> Fixing -> PR Review**; Fixing is not mandatory without a finding.
 
-| Status | ความหมาย / เงื่อนไข |
+| Status | Entry condition and timing |
 |---|---|
-| Backlog | รับงานเข้าหรือยังไม่พร้อมเริ่ม ไม่อ้างว่าสเปกผ่าน review แล้ว |
-| Specified | Scope/contracts/acceptance ชัดและทบทวนแล้ว; ยังต้องตรวจ dependency/gate ก่อนเริ่ม |
-| Started | กำลังพัฒนาบน task branch ของ owner |
-| PR Review | เปิด PR ให้เพื่อนตรวจ behavior/tests และผลจริง |
-| Fixing | แก้ review comments หรือ checks ที่ไม่ผ่าน แล้วส่งกลับ PR Review |
-| Done | ผ่านเกณฑ์ task และ merge เข้า staging/main ตามประเภท PR จริง; ไม่แทน final release acceptance |
+| Backlog | Register/reuse the task, owner and sprint; do not imply specification/implementation is complete. |
+| Specified | Scope/contracts/acceptance/checks and dependencies are understood; save/read back this state before implementation. |
+| Started | Required gates/dependencies and isolated branch are ready; save/read back this state **before editing task files**. |
+| PR Review | Work/checks/evidence are ready, the PR is marked ready and the peer review is requested. |
+| Fixing | Actual requested changes or a handed-off failing check are being resolved on the same branch/PR. |
+| Done | Task criteria, real peer acceptance and intended integration merge are confirmed; this does not accept every release/assessment gate. |
 
-ข้อความสถานะเดิมใน Issue ที่สร้างก่อนปรับบอร์ดใช้ mapping: PLANNED = Backlog, IN PROGRESS = Started, REVIEW = PR Review, MERGED = Done ให้ใช้ค่าบนบอร์ดปัจจุบัน ไม่สร้าง Issue ใหม่เพียงเพื่อเปลี่ยนชื่อสถานะ
+Push the first coherent commit and open a **Draft PR during Started**, then immediately add its Project card as Started. Finish remaining work/checks before marking ready and moving both Issue/PR to PR Review. The Issue records the pre-PR lifecycle; do not fabricate earlier states on a PR created later.
+
+Log the real time/from/to/reason and available branch/PR/commit in the Issue body, preserving other authors' text. Do not skip stages or cycle through them only at final handoff. Keep Status separate from Verification NOT RUN/FAILED/PASSED and Acceptance PENDING/ACCEPTED. Native merged-PR -> Done remains enabled and does not enforce the intermediate steps.
+
+Leave previous completed cards/history unchanged. Continue existing active work from its verified current stage. Legacy mappings remain PLANNED = Backlog, IN PROGRESS = Started, REVIEW = PR Review, MERGED = Done; do not create duplicate tasks just to rename states.
 
 ## 5. TDD, CI และหลักฐาน
 

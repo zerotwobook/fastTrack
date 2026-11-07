@@ -1,0 +1,101 @@
+{
+  "acceptedStaging": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
+  "chains": [
+    {
+      "author": {
+        "id": "U_kgDOCBOdQw",
+        "is_bot": false,
+        "login": "zerotwobook",
+        "name": "suapapnya yathip"
+      },
+      "baseRefName": "staging/sprint-1",
+      "headRefOid": "f6c4988d48e6e92310332f1e110007b93945bf03",
+      "mergeCommit": {
+        "oid": "3365a36e4cd1fcdd7410cca2086447ec4ae5dc33"
+      },
+      "mergedAt": "2026-11-06T18:50:50Z",
+      "mergedBy": {
+        "id": "U_kgDOCx557g",
+        "is_bot": false,
+        "login": "Atip-Infa",
+        "name": ""
+      },
+      "reviews": [
+        {
+          "id": "PRR_kwDOVjq_T88AAAABWgV2KQ",
+          "author": "Atip-Infa",
+          "state": "APPROVED",
+          "commit": "f6c4988d48e6e92310332f1e110007b93945bf03",
+          "submittedAt": "2026-11-06T18:48:37Z"
+        }
+      ],
+      "state": "MERGED",
+      "url": "https://github.com/zerotwobook/fastTrack/pull/57",
+      "issue": 7,
+      "number": 57
+    },
+    {
+      "author": {
+        "id": "U_kgDOCBOdQw",
+        "is_bot": false,
+        "login": "zerotwobook",
+        "name": "suapapnya yathip"
+      },
+      "baseRefName": "staging/sprint-1",
+      "headRefOid": "f516b1704af67b367f1e6ec09657134645b8eeed",
+      "mergeCommit": {
+        "oid": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6"
+      },
+      "mergedAt": "2026-11-07T02:40:23Z",
+      "mergedBy": {
+        "id": "U_kgDOCx557g",
+        "is_bot": false,
+        "login": "Atip-Infa",
+        "name": ""
+      },
+      "reviews": [
+        {
+          "id": "PRR_kwDOVjq_T88AAAABWkaJqg",
+          "author": "Atip-Infa",
+          "state": "APPROVED",
+          "commit": "f516b1704af67b367f1e6ec09657134645b8eeed",
+          "submittedAt": "2026-11-07T02:36:37Z"
+        }
+      ],
+      "state": "MERGED",
+      "url": "https://github.com/zerotwobook/fastTrack/pull/61",
+      "issue": 8,
+      "number": 61
+    }
+  ],
+  "originalFeedbackChangesRequested": [
+    {
+      "id": 5805952642,
+      "author": "zerotwobook",
+      "state": "CHANGES_REQUESTED",
+      "commit": "687c5687a683737d17b0bc0af51316f80bffe67a",
+      "url": "https://github.com/zerotwobook/fastTrack/pull/58#pullrequestreview-5805952642",
+      "submittedAt": "2026-11-06T19:39:48Z"
+    }
+  ],
+  "feedbackCorrection": {
+    "originalPr": 58,
+    "originalHead": "687c5687a683737d17b0bc0af51316f80bffe67a",
+    "correctionIssue": 60,
+    "correctionPr": 61,
+    "originalDisposition": "Closed unmerged, archived Fixing/FAILED/PENDING; B commits preserved in correction merge"
+  },
+  "deadlineTdd": {
+    "redSource": "165f891100978c990e54a1bd71bbaf6e97227e9e",
+    "redEvidence": "Project_code/docs/evidence/R1-A02-red.json",
+    "passed": 5,
+    "failed": 2,
+    "failedCases": [
+      "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset 1 ms and persists that same instant",
+      "F-03 first-submission deadline TDD and persistence T-11 rejects a first submission after the actual database deadline without writing"
+    ],
+    "greenSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+    "acceptedPr": 57,
+    "note": "The two RED assertions test deadline rejection, not syntax/configuration failure. The same rules also run in the current integrated regression; later verification does not invent a new TDD cycle."
+  }
+}

@@ -1,0 +1,191 @@
+{
+  "capturedAt": "2026-11-07T07:57:19+00:00",
+  "kind": "Actual GitHub API snapshot, reformatted for readable PDF evidence; no simulated GitHub UI",
+  "pullRequests": [
+    {
+      "pr": 57,
+      "url": "https://github.com/zerotwobook/fastTrack/pull/57",
+      "state": "MERGED",
+      "author": "zerotwobook",
+      "branch": "feature/s1-a-submissions",
+      "head": "f6c4988d48e6e92310332f1e110007b93945bf03",
+      "base": "staging/sprint-1",
+      "merge": "3365a36e4cd1fcdd7410cca2086447ec4ae5dc33",
+      "mergedAt": "2026-11-06T18:50:50Z",
+      "mergedBy": "Atip-Infa",
+      "approvals": [
+        {
+          "by": "Atip-Infa",
+          "at": "2026-11-06T18:48:37Z",
+          "head": "f6c4988d48e6e92310332f1e110007b93945bf03",
+          "state": "APPROVED"
+        }
+      ]
+    },
+    {
+      "pr": 61,
+      "url": "https://github.com/zerotwobook/fastTrack/pull/61",
+      "state": "MERGED",
+      "author": "zerotwobook",
+      "branch": "fix/s1-a-b02-review",
+      "head": "f516b1704af67b367f1e6ec09657134645b8eeed",
+      "base": "staging/sprint-1",
+      "merge": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
+      "mergedAt": "2026-11-07T02:40:23Z",
+      "mergedBy": "Atip-Infa",
+      "approvals": [
+        {
+          "by": "Atip-Infa",
+          "at": "2026-11-07T02:36:37Z",
+          "head": "f516b1704af67b367f1e6ec09657134645b8eeed",
+          "state": "APPROVED"
+        }
+      ]
+    },
+    {
+      "pr": 65,
+      "url": "https://github.com/zerotwobook/fastTrack/pull/65",
+      "state": "MERGED",
+      "author": "zerotwobook",
+      "branch": "fix/s1-a-b03-review",
+      "head": "f7742df9300525285e653399979b17867e7198dd",
+      "base": "staging/sprint-1",
+      "merge": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+      "mergedAt": "2026-11-07T05:54:07Z",
+      "mergedBy": "Atip-Infa",
+      "approvals": [
+        {
+          "by": "Atip-Infa",
+          "at": "2026-11-07T05:51:00Z",
+          "head": "f7742df9300525285e653399979b17867e7198dd",
+          "state": "APPROVED"
+        }
+      ]
+    }
+  ],
+  "issues": [
+    {
+      "number": 2,
+      "title": "[R1-J00] Agree on the baseline and complete the G0 kickoff",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "SHARED",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 3,
+      "title": "[R1-A00] Set up the scaffold, scripts and environment contract",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "A",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 4,
+      "title": "[R1-B00] Build the schema, migrations, safe seeds and shared UI foundation",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "B",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 5,
+      "title": "[R1-A01] Implement F-01 authentication, sessions and scoped team context",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "A",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 6,
+      "title": "[R1-B01] Implement F-02 milestone creation, listing and details",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "B",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 7,
+      "title": "[R1-A02] Implement F-03 first submissions and strict deadlines",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "A",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 8,
+      "title": "[R1-B02] Implement F-04 version-specific feedback and retry safety",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "B",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 9,
+      "title": "[R1-J03] Verify the integrated S1 journey, clean setup and persistence",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "SHARED",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 10,
+      "title": "[R1-A03] Prepare D1 requirements, inventory, sprint plan and domain evidence",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "A",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 11,
+      "title": "[R1-B03] Prepare D1 design, contracts and access/feedback/UI evidence",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "B",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    },
+    {
+      "number": 12,
+      "title": "[R1-J04] Accept the S1 release and assemble the D1 submission",
+      "state": "OPEN",
+      "Status": "Started",
+      "Sprint": "Sprint 1",
+      "Owner": "SHARED",
+      "Verification": "NOT RUN",
+      "Acceptance": "PENDING"
+    },
+    {
+      "number": 64,
+      "title": "[R1-B03-A-REVIEW] Repair the reviewed D1 B package and evidence",
+      "state": "CLOSED",
+      "Status": "Done",
+      "Sprint": "Sprint 1",
+      "Owner": "A",
+      "Verification": "PASSED",
+      "Acceptance": "ACCEPTED"
+    }
+  ],
+  "main": "2080cf31f8d855ecba9624eafe4fe9a5fa74b4d8",
+  "acceptedStaging": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+  "releaseState": "Preparation #12 Started; main/tag/final submission pending"
+}

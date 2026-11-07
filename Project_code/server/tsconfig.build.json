@@ -1,0 +1,18 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "noEmit": false,
+    "rootDir": "src",
+    "outDir": "dist",
+    "sourceMap": true
+  },
+  "exclude": [
+    "src/**/*.test.ts",
+    "src/**/*.g1.ts",
+    "src/**/*.auth.ts",
+    "src/**/*.b01.ts",
+    "src/**/*.a02.ts",
+    "src/**/*.b02.ts",
+    "src/**/*.j03.ts"
+  ]
+}

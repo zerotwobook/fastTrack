@@ -46,15 +46,16 @@
 
 เติมข้อมูลจริงใน Issue หรือ PR แรกของรอบ:
 
-| รายการ | ค่า |
+| Item | Current information |
 |---|---|
-| A: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `zerotwobook` |
-| B: ชื่อ / รหัส / GitHub | ชื่อ/รหัส TBD; GitHub `Atip-Infa` |
-| Repository / access | ตรวจ remote จริง; ต้อง public ตามข้อกำหนด Lab 5 และคงไว้จนตรวจเสร็จ |
-| Sprint staging | `staging/sprint-1` |
-| Contract baseline commit | TBD หลัง commit/review จริง |
-| เวลาว่าง A/B | TBD; ใช้ตรวจ feasibility ของกำหนดภายใน |
-| Theme 6 eligibility | ตรวจเลขท้ายรหัสของสมาชิกอย่างน้อยหนึ่งคนตรง Theme 6 หรือมีหลักฐานอนุมัติจากผู้สอน ตาม Group specs §6 หน้า 4; ห้ามถือว่าเลือกชื่อแอปแล้วคืออนุมัติหัวข้อ |
+| A / GitHub | Supapanya Yathip / 67070503443 / zerotwobook |
+| B / GitHub | Atip Infa-udom / 67070503446 / Atip-Infa |
+| Availability | A reports both members are available full days on 6-7 November 2026; exact net hours are not measured |
+| Repository | zerotwobook/fastTrack; public; both accounts have verified access |
+| Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
+| Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
+| Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
+| Gate record | G0-G4, F-01-F-04, A/B source packages and original #66 preparation are accepted. B approved/merged #71/#69/#73; staging application is 17f4398. Current #74 / PR #75 maintains the D1 Markdown source/handoff with 340-case/seven-scenario and 108-browser-combination evidence. The user assembles/exports final reports; the earlier 50-page PDF at 209ccc7 is historical. B Markdown/source review, user main authorization, final G5/main/tag/submission remain pending. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 
@@ -166,59 +167,78 @@ Freeze ที่ G0: envelope `{data}`/`{error}`, UUID, field names, API prefix 
 
 ## 7. รายละเอียดงาน A — คุณ
 
-### R1-A00: ตั้งโครงและสภาพแวดล้อม
+### R1-A00: Scaffold and environment
 
-- [ ] ตรวจ tree/versions ที่มีจริงก่อนสร้าง `Project_code/client`, `server`, `e2e`, docs/contracts/evidence/decisions ตาม §7.2
-- [ ] ตั้ง TypeScript/build/test scripts และ dependency lockfiles; เลือก versions ที่เข้ากัน ไม่คัด version จากคู่มือแล้วอ้างว่าทดสอบผ่าน
-- [ ] ส่งต่อ Node/package manager/DB versions ที่ตรวจจริง, lockfile policy และคำสั่งพร้อม working directory ใน Project_code/README.md; ทั้งคู่ใช้ชุดเดียวกัน ไม่ให้ B เดา runtime หรือสร้าง lockfile อีกแบบ
-- [ ] ตั้ง API `/api`, safe error handler/requestId และ config validation; จัด local Vite proxy ให้ browser เรียก same origin
-- [ ] กำหนด server module exports ให้ B เพิ่ม milestone/feedback โดยไม่ต้องแก้ app composition พร้อมกัน
-- [ ] ทำ `.env.example`/`.gitignore` และ README เริ่มต้น; DATABASE_URL/password อยู่ server เท่านั้น
-- [ ] แยก test DB จาก local/production; script reset ต้องตรวจ environment/DB ชัดเจน
-- [ ] ระบุคำสั่ง exact install/migrate/seed/dev/build/test หลังสร้างแล้ว; ก่อนนั้นใช้สถานะ planned ไม่อ้างผลสำเร็จ
+Owner A; reviewer B. Dependency: accepted G0, [PR #44](https://github.com/zerotwobook/fastTrack/pull/44). Task branch: `build/s1-a-scaffold` from accepted staging merge `30fc5ef`. App source remains under `Project_code/`.
 
-ส่งให้ B ตรวจ: file tree, manifests/scripts, env names, API bootstrap และวิธีต่อ test DB
+- [x] Inspect the actual tree/runtime before creating client, server, e2e and docs/contracts/evidence/decisions.
+- [x] Set up compatible pinned TypeScript/build/test scripts and one npm workspace lockfile; no authentication or business feature in this task.
+- [x] Document verified Node/npm/package versions, observed PostgreSQL image version, exact working directories and commands in [the technical README](../Project_code/README.md). Actual DB integration remains B00.
+- [x] Configure `/api`, safe errors/generated request IDs, environment validation and the same-origin Vite proxy. Keep JSON parsing behind each protected route's session/role/source checks.
+- [x] Record explicit module export/composition seams in [the contract](../Project_code/docs/contracts/sprint-1-module-boundaries.md); A owns composition/manifests/lockfile and B owns milestone/feedback modules.
+- [x] Add server `.env.example` and ignore rules; no real credentials, local env or generated files enter Git.
+- [x] Add and unit-test the distinct test-database guard. No reset, schema, migrate or seed command is invented before B00.
+- [x] Run install/typecheck/test/build in a fresh clone and verify dev/proxy/compiled-server/browser smoke. Record actual checks and limits in [A00 evidence](../Project_code/docs/evidence/R1-A00-scaffold.md).
+- [x] B reproduced the scaffold and approved PR #45 at 292934b; actual review/merge is recorded on GitHub.
+- [x] The reviewed scaffold merged into staging/sprint-1 as 1a5e063 and unblocked B00. This acceptance does not pass G1 or authorize F-01/F-02 before the joint foundation check.
 
-### R1-A01: F-01 identity และทีมที่มีสิทธิ์
+B's review covers the file tree, manifests/lockfile, runtime, env names, API bootstrap, parser order, safe errors, test-DB guard and source ownership. The native tracked-PR merge rule moves its card to Done only after an actual merge; task-Issue completion and gate acceptance must be reconciled from evidence separately.
 
-อ้างอิง project detail §3, §7.5, §9.1–9.4; D1 E.1; AC-01.1–01.5, T-01–T-05, T-23/T-27
+### G1 audit before dependent implementation
 
-- [ ] Implement `/auth/login`, `/auth/me`, `/auth/logout` และ scoped `/teams`, `/teams/:id`
-- [ ] Password hash; opaque session token เก็บ hash ใน DB; HttpOnly cookie, secure เมื่อ HTTPS, SameSite และ absolute TTL 8 ชั่วโมงตามแบบ
-- [ ] Login protection: JSON/custom header + source origin; mutations ใช้ CSRF; me คืน CSRF สำหรับ reload; no-store; ล้าง cache เมื่อ logout/เปลี่ยน account
-- [ ] Invalid/expired/revoked session ถูกปฏิเสธ; logout revoke cookie เดิม; returnTo จำกัด internal route
-- [ ] Middleware/queries ตรวจ role และ team ownership จาก DB ไม่มี dev user switch/spoofed user IDs
-- [ ] สร้าง login, role-aware shell, dashboard/team context และ empty/error/loading states ใช้ UI skill/§8
-- [ ] B1/Supervisor-B อ่านข้อมูล A ไม่ได้; Student ไม่มีทีมเห็น empty state ที่ถูกต้อง
-- [ ] Test credentials/origin/CSRF, expiry/replay, cross-team list/detail และ browser account-switch cache; asserts ทั้ง response และ DB/session effects
+A's independent audit is [Issue #49](https://github.com/zerotwobook/fastTrack/issues/49), branch `test/s1-a-g1-foundation`, [PR #50](https://github.com/zerotwobook/fastTrack/pull/50). B00 was approved/merged in PR #48, with foundation reproduction explicitly deferred to G1.
 
-Reviewer B ต้องลอง login ทั้งสอง role, logout/replay และแก้ URL ไปทีมอื่น ไม่รับเฉพาะ screenshot หน้า login
+A's original audit reproduced eight foundation failures. B's PR #53 candidate fixed the original checks, but independent review found three blocking groups: canonical bounds, fixture-client isolation and migration atomicity. The user authorized A to finish those corrections, with B as the real peer reviewer. A incorporated B's commits into PR #50 without rewriting B's branch, then retained RED regression evidence before fixing the failures.
 
-### R1-A02: F-03 ส่งงานครั้งแรก
+The combined executable source at `6f3601ec1af3f0b7039bce175251642d1920c40c` passes a clean-clone install, generation, fresh/repeat migrations, typecheck, 51 unit tests, production build, 38 G1 tests and seven upgrade/rejection scenarios. See [the audit evidence](../Project_code/docs/evidence/R1-G1-A-foundation.md) and [migration adoption note](../Project_code/docs/decisions/0002-g1-migration-adoption.md).
 
-อ้างอิง §4.1–4.2, §5 BR-04/05/08, §7.4, §9; D1 E.3; AC-03.1–03.6, T-09–T-16/T-26
+Corrective [Issue #51](https://github.com/zerotwobook/fastTrack/issues/51) transferred to A by explicit authorization. The actual handoff moved #49/#50 Started -> PR Review and #51 Fixing -> PR Review. B approved the current PR #50 head 6a5de5f and merged it into staging as ff5975c. A verified that merge tree against the tested source and accepted G1; #49/#51 are closed Done/PASSED/ACCEPTED. B's earlier scaffold reproduction remains the recorded B command evidence; do not invent a new B run. PR #53 is closed unmerged/archived as superseded. A01/B01's G1 dependency is removed; G2 and main release remain separate.
 
-- [ ] ทำ POST/GET `/milestones/:id/submissions` และ GET `/submissions/:id`; server กำหนด author/version/time
-- [ ] สร้าง form title/description/URL และ saved detail; หลังสำเร็จอ่านกลับด้วย GET ไม่ใช้ form state แทน persistence
-- [ ] Transaction ใช้ team → milestone locks; ตรวจ membership/rules ซ้ำภายใน; ใช้ transaction client เดียวกัน
-- [ ] อ่าน DB clock หลังได้ lock truncate millisecond ครั้งเดียว; acceptedAt <= dueAt รับได้; เก็บเวลาเดียวกันลง submittedAt
-- [ ] S1 บังคับ version=1 และ unique constraint; parallel/duplicate ไม่สร้างเกินหนึ่ง row
-- [ ] Error precedence หลัง auth/input/scope: cancelled → duplicate → deadline; ไม่เผยกฎของทีมอื่น
-- [ ] Validate Unicode code points/trim/URL ตาม §5; URL http/https ไม่มี credential; backend ไม่ fetch URL
-- [ ] จัดการ timeout ด้วย GET เช็กผลก่อน retry ไม่โชว์ success ของตนเมื่อเพื่อนเป็นผู้ส่ง
-- [ ] Meaningful TDD deadline: บันทึก RED ก่อน implement rule → GREEN หลัง implement → regression; เก็บ commit/command/output จริง ไม่ปิด tests เพื่อให้ green
-- [ ] Tests ก่อน/ตรง/หลัง deadline 1 ms, offset/precision, รอ lock ข้าม due, spoofing/role/scope, invalid payload, duplicate-after-deadline และ no-write assertions
-- [ ] Exact boundary tests ใช้ internal test clock; ไม่มี production clock override ใน API; มี integration case DB clock/lock barrier จริง
+### R1-A01: F-01 identity and authorized team context
 
-ส่งให้ B ตรวจ: submission DTO/schema IDs, test assertions, rejection UI, GET persistence และ hooks สำหรับ FeedbackPanel
+References: project detail 3/7.5/8/9.1-9.4; D1 E.1; AC-01.1-01.5, T-01-T-05/T-23/T-27. Owner A; reviewer B. Issue #5, PR #54, branch feature/s1-a-auth from accepted staging ff5975c. Implementation/tested source: 2899d1b. [Contract](../Project_code/docs/contracts/sprint-1-auth.md); [evidence](../Project_code/docs/evidence/R1-A01-auth.md).
 
-### R1-A03: เอกสาร/หลักฐานที่ A เป็นเจ้าของ
+- [x] Implement login/me/logout and scoped team list/detail with allowlisted DTOs.
+- [x] Verify existing scrypt hashes; store only opaque token hashes; use HttpOnly/SameSite host-only cookies, Secure for HTTPS and absolute eight-hour expiration.
+- [x] Enforce JSON/custom-header/source login protection, source/CSRF mutation protection, me bootstrap and no-store responses.
+- [x] Reject invalid/expired/revoked sessions; revoke the current browser session on re-login/logout; constrain return-to and clear account/private state including stale requests/history restoration.
+- [x] Derive immutable identity/role/team scope from DB sessions, with reusable fail-closed middleware and explicit transaction-client scope helpers. No identity-header bypass.
+- [x] Implement the established monochrome login, role-aware shell, team list/detail and loading/empty/error/retry/mobile/keyboard states; do not expose unintegrated milestone actions.
+- [x] Verify no-team students, foreign-team denial, session effects and browser account switch/replay/history/expiry/recovery. Clean-clone checks pass 67 ordinary tests, 28 auth/DB tests, 38 G1 tests and seven migration scenarios.
+- [x] B approved/reproduced A01 head 70dd0ce and merged #54 as 0b99a28. #5/#54 are Done/PASSED/ACCEPTED; #5 closed. G2 was subsequently accepted under the recorded user delegation; A02 may proceed.
 
-- [ ] D1 A: requirements/business rules/out-of-scope ตรง app; B: inventory/traceability; D: three-sprint plan และ dependencies
-- [ ] หลักฐาน F-01/F-03: normal flow, deadline rejection, auth/logout, commands/results และ TDD RED/GREEN
-- [ ] จับคู่ AC → actual test file/name → result → tested commit; NOT RUN ยังเป็น NOT RUN
-- [ ] เลือก Issue/PR chain ฝั่ง domain rule ที่มี teammate review จริง
-- [ ] Review เอกสาร C/E ของ B และลองทำ setup README บนสภาพแวดล้อมสะอาด
+B's recorded A01 review covers both roles, logout/replay, session/CSRF and role isolation at the approved head. That increment is accepted. B subsequently approved/merged A's B01 correction in #56; the remaining G2 UI check/acceptance was explicitly delegated by the user to A/AI and accepted using the actual recorded results. Native merged-PR Done and Issue closure/Acceptance remain separate.
+
+### R1-A02: F-03 first submission
+
+Owner A; reviewer B. Issue #7, branch feature/s1-a-submissions from accepted staging 78d0cca. References: project detail 4/5/7.4/8/9; D1 E.3; AC-03.1-03.6; T-09-T-16/T-25/T-26/T-31 local. [G2 acceptance](../Project_code/docs/evidence/R1-G2-acceptance.md); [concrete contract/test plan](../Project_code/docs/contracts/sprint-1-submissions.md).
+
+- [x] Implement protected POST/GET milestone submissions and GET saved submission detail with server-derived author/version/time.
+- [x] Reuse shared strict code-point/URL validation, real session guards and safe scoped DTOs; no client authority or clock override.
+- [x] Use one transaction client with team -> milestone locks and membership/rule rechecks. Enforce cancelled -> duplicate -> deadline before insert.
+- [x] Read the DB wall clock once after locks, truncated to milliseconds. Accept acceptedAt <= dueAt and persist the same submittedAt.
+- [x] Enforce S1 version 1 and unique concurrency protection; map only known conflicts and retry confirmed rolled-back technical contention at most three attempts.
+- [x] Implement form and persisted GET-backed detail, Bangkok times, safe external link, preserved values/error focus and truthful uncertain-result/teammate recovery. Add real milestone actions only where allowed.
+- [x] Retain meaningful deadline RED -> GREEN/regression history; no disabled tests or false acceptance.
+- [x] Verify exact before/equal/after 1ms, offsets/precision, real DB lock wait across dueAt, role/scope/CSRF, spoofing, validation, duplicates/precedence, no-write failures, app restart and browser persistence.
+- [x] Publish the scoped-submission helper/DTO and version-specific FeedbackPanel slot for B; preserve B schema/fixtures/shared primitives/feedback branch.
+- [x] B approved/reproduced current #57 head f6c4988 and merged as 3365a36; #7 closed Done/PASSED/ACCEPTED. G3/main release remain separate.
+
+Technical verification at 1bf8d63 passes 111 ordinary, 48 A02, 33 B01, 28 auth, 38 G1 and seven upgrade cases from a fresh clone. Actual Chromium checks include persisted submit/reload, safe external links, host-zone-independent Bangkok time, supervisor/foreign denial, own/teammate uncertain-result recovery, explicit checked retry and a real deadline crossed in the open form. See [actual evidence](../Project_code/docs/evidence/R1-A02-submissions.md). B peer acceptance is recorded at merge 3365a36; earlier JSON snapshots remain historical.
+
+### R1-A03: Owner A documentation and evidence
+
+Owner A; reviewer B. Issue #10, branch docs/s1-a-d1-evidence from accepted staging 3365a36. [Package scope/assembly handoff](handoffs/R1-A03_D1_A_PACKAGE.md). This independent documentation task may proceed while B owns F-04; it does not accept G3 or release main.
+
+- [x] Prepare English D1 A context/requirements/rules/exclusions, B full-product inventory/traceability and D three-sprint plan with real dependencies.
+- [x] Package actual F-01/F-03 normal, deadline, auth/logout, build/test and genuine RED/GREEN evidence with exact tested sources.
+- [x] Map AC -> actual file/name -> result -> commit; preserve NOT RUN/PARTIAL and release limitations.
+- [x] Select the substantive domain-rule Issue/PR chain and real B peer review; record contract/test/implementation chronology.
+- [x] Review current B C/E source and accepted clean-setup results; identify remaining assembly updates instead of claiming unreviewed final content is accepted.
+- [x] Give B ready-to-use owned sections/captions/source images/results; B owns final C/E updates and PDF assembly.
+- [x] B approved dfb4d16 and merged PR #59 as 5b35fc1; #10 is closed Done/PASSED/ACCEPTED. Final G3/G4/G5 and submission remain separate.
+
+Document checks pass: full FR/BR/NFR/F coverage, 13 AC rows with 27 exact reported-case references, four byte-identical source images/hashes, local links, English, no secret-like values and exact test-excerpt/source match. Application code is unchanged from accepted staging; existing actual clean-clone results are reused. B reviews this package before acceptance; no final PDF or full S1 release is claimed.
 
 ## 8. รายละเอียดงาน B — เพื่อน
 
@@ -232,40 +252,38 @@ Reviewer B ต้องลอง login ทั้งสอง role, logout/replay
 - [ ] Implement tokens/fonts/shared field/button/status ตาม §8 และตกลง export กับ A ก่อนใช้
 - [ ] ทดสอบ migrate fresh DB, constraints, seed repeat และให้ A ทดลองใช้จริง
 
-### R1-B01: F-02 milestone
+### R1-B01: F-02 milestones
 
-อ้างอิง §8.6 B–E, §9.2/9.4; D1 E.2; AC-02.1–02.3, T-06–T-08/T-25
+References: project detail 8.6 B-E/9.2/9.4; D1 E.2; AC-02.1-02.3; T-06-T-08/T-25. Original owner B / PR #52; independent reviewer and authorized correction author A / Issue #55, PR #56. B reviews A-authored corrections before merge. See [findings/results](../Project_code/docs/evidence/R1-B01-A-review.md) and [contract](../Project_code/docs/contracts/sprint-1-milestones.md).
 
-- [ ] POST/GET `/teams/:id/milestones` และ GET `/milestones/:id`
-- [ ] Assigned supervisor เท่านั้นสร้าง; dueAt ใหม่อยู่อนาคต; input lengths/timezone/millisecond ตาม contract
-- [ ] List/detail ใช้ DTO เดียวกัน มี latestSubmission/feedbackCount/scoped serverTime และ ordering ที่แน่นอน
-- [ ] latestSubmission query ไม่รั่วทีมอื่น; ไม่ทำ dashboard ยิง feedback API ทีละ milestone
-- [ ] ทำ milestone track, team workspace, create form/detail; Student/Supervisor มี actions ตามสิทธิ์
-- [ ] แสดง deadline Asia/Bangkok และความละเอียดวินาที; helper อธิบาย HH:mm หมายถึงวินาที 00
-- [ ] S1 ยังไม่มี milestone edit/cancel/team settings; ไม่เปิดปุ่ม S2 เปล่า
-- [ ] Tests create→GET/reload, invalid time/length, student forbidden, other supervisor 404, scoped projection และ no-write rejection
-- [ ] ขณะ auth ยังไม่ merge ใช้ documented fixture สำหรับ tests ได้ แต่ผ่าน G2 เฉพาะเมื่อต่อ session จริงแล้ว
+- [x] Implement protected POST/GET team milestones and GET milestone detail with mandatory real session/role/source/CSRF dependencies.
+- [x] Validate strict payload allowlist, trimmed Unicode title 1-120 and description 1-4,000; valid calendar/explicit zone/millisecond precision. Check future database time after the scoped team lock and scope recheck in the same transaction.
+- [x] Return identical scoped list/detail DTOs with batch latestSubmission/feedbackCount, serverTime and deterministic dueAt/id order; foreign/missing records share a generic 404.
+- [x] Integrate the real milestone track, dedicated create form and persisted detail into A01's authenticated shell. Use explicit Bangkok input conversion and second-level display; hide unreleased actions.
+- [x] Verify actual candidate API/DB/browser flows: supervisor create/read/reload, student read with 403/no-write create denial, foreign-supervisor privacy, host-zone independence and 320px layout. Clean clone: 83 ordinary, 33 milestone DB, 28 auth, 38 G1 and seven upgrade cases pass.
+- [x] B approved/reproduced current PR #56 head 2d3576e and merged staging as 78d0cca. #6/#55 are closed Done/PASSED/ACCEPTED. The user explicitly delegated the remaining G2 UI check/acceptance to A/AI; [actual accepted evidence](../Project_code/docs/evidence/R1-G2-acceptance.md) clears A02/B02. G3/main release remain separate.
 
-### R1-B02: F-04 feedback
+Original #52's reviewed head is superseded by the corrected candidate, not approved/merged as if fixed. Preserve B's history/branch, close/archive superseded work without a false Done claim and keep Verification separate from peer Acceptance. A01 is now accepted; fixture-only tests do not establish G2.
 
-อ้างอิง §8.6 F, §9.2/9.5; D1 E.4; AC-04.1–04.4, T-17–T-20/T-24
+### R1-B02: F-04 version-specific feedback
 
-- [ ] POST/GET `/submissions/:id/feedback`; scope ตาม submission → milestone → team
-- [ ] Assigned supervisor เขียนได้ Student อ่านได้ตามทีม; author/time จาก server
-- [ ] Append-only; validate content และไม่สร้าง orphan; feedback อ่านได้แม้พ้น deadline
-- [ ] UI FeedbackPanel ระบุ version ชัด มี empty/loading/error/saving state และลำดับเวลา/id
-- [ ] clientRequestId ต่อหนึ่ง intent; retry key เดิม/content+target เดิมคืน record เดิม 200; intent ต่างคืน 409 REQUEST_KEY_REUSED
-- [ ] ตรวจ role/scope ก่อนค้น key เพื่อไม่เปิดข้อมูลทีมอื่น; concurrent retry ได้ record เดียว
-- [ ] เตรียม fixtures ตาม submission contract ขณะ A ทำ F-03; integrated result ต้องทดสอบกับ submission จริงที่ A สร้าง
-- [ ] Tests association, append/read, cross-team/role, empty/max content, key replay/conflict/race และ persistence
+Original owner B / PR #58; A independently reviewed and repaired findings under #60 / PR #61, preserving B history. [Contract](../Project_code/docs/contracts/sprint-1-feedback.md) and [actual findings/results](../Project_code/docs/evidence/R1-B02-A-review.md) describe the exact-version UI/API, strict Unicode input, source/CSRF/scope, immutable UUID/body recovery and transactional replay/conflict behavior.
 
-### R1-B03: เอกสาร/หลักฐานที่ B เป็นเจ้าของ
+- [x] Implement assigned-supervisor append-only feedback and scoped student/supervisor reads on the exact submission/version.
+- [x] Validate content/keys and derive identity/time server-side; enforce scope before key lookup and database uniqueness against concurrent retries.
+- [x] Compose FeedbackPanel through the saved-detail slot with current session protection, shared monochrome controls, loading/empty/error/recovery and focused validation.
+- [x] Verify 42 feedback cases, inherited regression, clean clone and actual UI/retry/restart; preserve original failed review/RED results.
+- [x] B approved exact f516b17 at 2026-11-07 02:36:37 UTC and merged #61 into staging as 514f34c at 02:40:23 UTC. #8/#60 are closed Done/PASSED/ACCEPTED. Original #58 remains closed unmerged and archived Fixing/FAILED/PENDING.
 
-- [ ] D1 C: system SDS/schema/API/UI/config; E: รวม F-01–F-04 contracts/AC/STS/DoD ที่ทั้งคู่เขียนและ review ก่อน code
-- [ ] หลักฐาน F-02/F-04, UI/API denied access, feedback association และ screenshots ของ flow
-- [ ] เลือก actual test excerpt access restriction; A เลือก deadline excerpt รวมเป็น 2 รายการตาม D1
-- [ ] เลือก Issue/PR chain ฝั่ง access restriction ที่มี teammate review จริง
-- [ ] รวม PDF หลัง A review content; ตรวจ page references/readability/secret redaction และ navigation A–F
+G3/G4 joint acceptance is handled by shared R1-J03 / #9, not inferred from a feature merge.
+
+### R1-B03: Accepted B source package and final-assembly handoff
+
+- [x] B prepared C/E/F sources in #63; A reviewed eight findings, repaired them in #64/#65 and preserved B history.
+- [x] B approved exact f7742df and merged #65 into staging as 4de6a7a. #11/#64 are closed Done/PASSED/ACCEPTED; #63 remains closed unmerged/superseded and archived Fixing/FAILED/PENDING.
+- [x] Corrected API/schema/security/config, exact test/source mapping, access excerpt, reviewed chains, figures and a real fresh 310-case/seven-migration setup record are accepted.
+- [ ] Joint R1-J04 / #12: A/Codex prepares the combined English PDF candidate in #66; B reviews its actual current source/PDF and confirms contributions. Final PDF/release acceptance is separate from the accepted source package.
+- [ ] Complete exact-head pre-main review/user notification, actual reviewed main/tag and both final G5 decisions before any claimed D1 submission.
 
 ## 9. Checkpoints: ต้องตรวจร่วมก่อนเดินงานที่พึ่งพากัน
 

@@ -1,0 +1,53 @@
+{
+  "name": "fasttrack",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "npm@11.20.0",
+  "engines": {
+    "node": ">=26.13.0 <27",
+    "npm": ">=11.20.0 <12"
+  },
+  "workspaces": [
+    "client",
+    "server"
+  ],
+  "scripts": {
+    "dev": "concurrently --kill-others --names api,web \"npm run dev --workspace @fasttrack/server\" \"npm run dev --workspace @fasttrack/client\"",
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run typecheck --workspaces",
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "start": "npm run start --workspace @fasttrack/server",
+    "test:g1": "vitest run --config vitest.g1.config.ts",
+    "test:g1:isolated": "node scripts/run-g1.mjs",
+    "test:auth": "vitest run --config vitest.auth.config.ts",
+    "test:auth:isolated": "node scripts/run-auth.mjs",
+    "review:auth": "node scripts/run-auth.mjs --review",
+    "review:auth:stop": "node scripts/stop-auth-review.mjs",
+    "test:b01": "vitest run --config vitest.b01.config.ts",
+    "test:b01:isolated": "node scripts/run-b01.mjs",
+    "review:b01": "node scripts/run-b01.mjs --review",
+    "test:a02": "vitest run --config vitest.a02.config.ts",
+    "test:a02:isolated": "node scripts/run-a02.mjs",
+    "review:a02": "node scripts/run-a02.mjs --review",
+    "test:b02": "vitest run --config vitest.b02.config.ts",
+    "test:b02:isolated": "node scripts/run-b02.mjs",
+    "review:b02": "node scripts/run-b02.mjs --review",
+    "test:j03": "vitest run --config vitest.j03.config.ts",
+    "test:j03:isolated": "node scripts/run-j03.mjs",
+    "review:j03": "node scripts/run-j03.mjs --review"
+  },
+  "devDependencies": {
+    "@types/node": "26.6.6",
+    "concurrently": "10.0.6",
+    "typescript": "7.0.2",
+    "vitest": "5.1.0",
+    "vite": "8.3.6"
+  },
+  "allowScripts": {
+    "@prisma/engines@7.10.1": true,
+    "esbuild@0.28.2": true,
+    "prisma@7.10.1": true
+  }
+}

@@ -16,16 +16,19 @@ Use [fastTrack — Team Delivery](https://github.com/users/zerotwobook/projects/
 
 - A/B views include jointly assigned work. Sprint views narrow the round.
 - Task ID refers to the workflow. Owner means A/B/SHARED; Assignees are real GitHub accounts.
-- Status: Backlog -> Specified -> Started -> PR Review -> Fixing -> Done. Update Verification and Acceptance only from actual results.
+- Status: Backlog -> Specified -> Started -> PR Review -> Done, with PR Review -> Fixing -> PR Review for actual findings. Save/read back transitions when each milestone occurs; do not batch the early stages at final handoff. Update Verification and Acceptance only from actual results.
 - Implementation tasks start Backlog / NOT RUN / PENDING. PR #40 is merged and its setup card is Done; this does not accept implementation gates.
 - Check native dependencies, the blocked label and actual gate decisions; a closed Issue does not prove acceptance.
-- Add new tasks/defects/PRs to this Project and populate Sprint/Owner/Task ID. Every ready PR must have a Project card in PR Review before peer review. Tracked PRs move to Done automatically after an actual merge; other additions/status changes remain explicit.
+- Add/reuse the task Issue in Backlog, move to Specified after scope review, then Started before edits on its task branch. Keep a concise timestamped progress log in its body.
+- Push the first coherent commit and open a Draft PR during Started; immediately add its Project card as Started and populate Sprint/Owner/Task ID/Verification/Acceptance. After remaining work/checks are complete, mark ready and move both cards to PR Review before requesting peer review. Tracked PRs move to Done automatically after an actual merge; other additions/status changes remain explicit.
+
+The Issue carries the full lifecycle before the PR exists; do not fabricate Backlog/Specified history for a later-created PR. Follow [the exact stage/timing protocol](workflow/GITHUB_PROJECT_AUTOMATION.md), including documentation-only work. This correction is prospective; leave completed cards/history unchanged.
 
 Requested changes follow PR Review -> Fixing -> PR Review. A review that passes immediately can proceed to Done after the actual merge; Fixing is not mandatory when there are no changes to make.
 
 ## Automatic Done after merge
 
-The native Project workflow **Pull request merged -> Status: Done** is enabled. Authors/AI must add each PR to Project 3 and initialize its metadata when handing it off. The merge event then moves that PR card automatically, without a repository Actions token.
+The native Project workflow **Pull request merged -> Status: Done** is enabled. Authors/AI must add each Draft PR to Project 3 as Started immediately after opening it, then update it to PR Review at actual handoff. The merge event then moves that PR card automatically, without a repository Actions token.
 
 Closed but unmerged PRs, related task Issues, Verification and Acceptance are not automatically completed by this rule. Follow [GitHub Project automation](workflow/GITHUB_PROJECT_AUTOMATION.md) for handoff commands, scope, configuration and recovery. Keep peer review and human gates intact.
 
@@ -52,6 +55,10 @@ git switch -c <task-branch> origin/staging/sprint-1
 Use separate clones/worktrees and keep app code under Project_code/. Coordinate shared schema/router/DTO/lockfile changes with the designated owner.
 
 Task PR -> staging -> peer review/approval -> merge commit. After integration, use a reviewed release PR into main. The author does not approve their own PR. Preserve RED/GREEN and main-to-staging synchronization history.
+
+### User review before main
+
+For every main-targeted PR, follow [the mandatory user review and authorization gate](workflow/MAIN_RELEASE_GATE.md). Prepare a concrete candidate for the user to inspect and keep the PR Draft until the user explicitly authorizes that current head/base. AI checks/notification and B approval do not substitute for user release authorization. This applies to every sprint, documentation and fixes; ordinary staging PRs retain their existing peer workflow. Required peer review/protection still apply after user authorization.
 
 The active ruleset requires one peer approval on main and staging/sprint-*, dismisses stale approvals after reviewable changes, requires resolved conversations and blocks force pushes/deletion. No bypass actors are configured. Merge commits are enabled; automatic branch deletion stays off to preserve staging after a release.
 
