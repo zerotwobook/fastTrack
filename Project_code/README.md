@@ -8,6 +8,8 @@ Verified correction results: **144 ordinary tests, 42 feedback cases, 48 first-s
 
 `GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No test identity bypass is exposed.
 
+The responsive UI refinement adds consistent control borders, readable status badges, team/feedback frames, aligned form actions and keyboard navigation that closes on desktop resize. Its compiled-browser checks passed 108 Student/Supervisor page-and-viewport combinations, plus login, empty/loading/error and recovery checks. [Actual verification and screenshots](docs/evidence/R1-A-UI-POLISH.md) distinguish the early 340-case pipeline from final affected-client checks; native 200% zoom and physical mobile devices were not verified for this refinement.
+
 ## Verified toolchain
 
 | Tool | Version verified by the independent reproduction |

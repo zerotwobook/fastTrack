@@ -16,6 +16,8 @@ npx --yes --package @playwright/cli playwright-cli -s=s1fix snapshot
 | `s1-feedback-visibility.js` | Assigned supervisor on the same disposable submission | Lose the response after a real committed POST, fail reconciliation, preserve the frozen body/UUID across masked same-session verification and recover exactly one saved row without another POST. |
 | `s1-draft-visibility.js` | Supervisor on `/teams/<id>/milestones/new?disposableReview=1` | Preserve all form fields for the same session; mask private UI, handle verification outage/retry, close modal, discard drafts on actual session revocation. Ends signed out. |
 | `s1-student-overview.js` | Student overview `/?disposableReview=1`; seed at least one actionable, overdue, submitted and cancelled milestone in its dedicated review DB | Compare real API membership/order with sections and eligible submit links, then inspect five viewport widths. Cancelled fixtures use the isolated DB fixture mechanism; there is no Sprint 1 cancellation endpoint. |
+| `s1-ui-responsive.js` | Either role on an authenticated disposable page; one assigned team with pending, overdue and submitted milestones | Six role-specific screens at nine viewport sizes, control dimensions, input focus, long-content wrapping and keyboard drawer behavior. Saves selected screenshots under `output/playwright/`. |
+| `s1-ui-states.js` | Either role on an authenticated disposable page | Visible held loading state, injected read error, mobile retry and genuine unavailable milestone recovery. No writes. |
 
 Run the matching function after navigating/authenticating as required:
 
