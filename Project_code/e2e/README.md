@@ -13,6 +13,7 @@ npx --yes --package @playwright/cli playwright-cli -s=s1fix snapshot
 | Function file | Required starting page and fixtures | Assertions |
 |---|---|---|
 | `s1-feedback-ordering.js` | Assigned supervisor on `/submissions/<id>?disposableReview=1`; real synthetic saved submission | Hold a genuine initial GET across a successful POST, retain old/new rows, delay a read failure after a save, verify persistence and 320/390/768/1200/1440px layouts. |
+| `s1-feedback-visibility.js` | Assigned supervisor on the same disposable submission | Lose the response after a real committed POST, fail reconciliation, preserve the frozen body/UUID across masked same-session verification and recover exactly one saved row without another POST. |
 | `s1-draft-visibility.js` | Supervisor on `/teams/<id>/milestones/new?disposableReview=1` | Preserve all form fields for the same session; mask private UI, handle verification outage/retry, close modal, discard drafts on actual session revocation. Ends signed out. |
 | `s1-student-overview.js` | Student overview `/?disposableReview=1`; seed at least one actionable, overdue, submitted and cancelled milestone in its dedicated review DB | Compare real API membership/order with sections and eligible submit links, then inspect five viewport widths. Cancelled fixtures use the isolated DB fixture mechanism; there is no Sprint 1 cancellation endpoint. |
 
