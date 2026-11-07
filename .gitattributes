@@ -1,0 +1,2 @@
+# Preserve source-identical verification excerpt hashes across platforms.
+Project_code/docs/evidence/excerpts/*.txt text eol=lf

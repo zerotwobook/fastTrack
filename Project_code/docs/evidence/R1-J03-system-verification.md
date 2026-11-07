@@ -58,7 +58,7 @@ Two complete source-identical excerpts are ready for B's Part F assembly:
 - [Deadline no-write rejection](excerpts/s1-deadline-rejection.txt), from submissions.a02.ts T-11.
 - [Real-session feedback access/no-write denials](excerpts/s1-feedback-access.txt), from feedback-review.b02.ts for student/foreign/missing callers.
 
-[Excerpt source metadata](R1-J03-excerpts.json) records the immutable source commit, line boundaries and file/block hashes. [History metadata](R1-J03-history.json) verifies the two complete peer-reviewed chains: #7 -> PR #57 -> B approval/3365a36 merge, and B #8 / original #58 changes-requested review -> A correction #60 / PR #61 -> B approval/514f34c merge. B's original commits are preserved in the latter chain; the original rejected head is not accepted unchanged.
+[Excerpt source metadata](R1-J03-excerpts.json) records the immutable source commit, line boundaries and file/block hashes. Root .gitattributes pins these excerpt files to LF so their hashes also match a Windows checkout. [History metadata](R1-J03-history.json) verifies the two complete peer-reviewed chains: #7 -> PR #57 -> B approval/3365a36 merge, and B #8 / original #58 changes-requested review -> A correction #60 / PR #61 -> B approval/514f34c merge. B's original commits are preserved in the latter chain; the original rejected head is not accepted unchanged.
 
 Meaningful domain TDD is retained at 165f891: five passed/two failed, specifically the one-millisecond-late deadline and late first-submission rejection. Rule implementation 1bf8d63 then passed; its actual reviewed integration is PR #57. A syntax/configuration failure is not used as TDD RED, and this verification-only task does not invent a new RED/GREEN cycle.
 
