@@ -15,6 +15,7 @@ export interface FeedbackPanelProps {
 }
 type Intent = { content: string; clientRequestId: string };
 const chronological = (rows: FeedbackItem[]) => [...rows].sort((a, b) => Date.parse(a.createdAt) - Date.parse(b.createdAt) || a.id.localeCompare(b.id));
+const mergeFeedback = (existing: FeedbackItem[] | null, incoming: FeedbackItem[]) => chronological([...new Map([...(existing ?? []), ...incoming].map(row => [row.id, row])).values()]);
 
 /** Mounted with an exact submission key inside the authenticated workspace. */
 export function FeedbackPanel({ submissionId, submissionVersion, userRole }: FeedbackPanelProps) {
@@ -31,6 +32,7 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
   const active = useRef(false);
   const busy = useRef(false);
   const intent = useRef<Intent | null>(null);
+  const confirmedWrites = useRef(0);
   const form = useRef<HTMLFormElement>(null);
   const alert = useRef<HTMLParagraphElement>(null);
   const path = `/submissions/${submissionId}/feedback`;
@@ -40,16 +42,17 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
     return () => { active.current = false; };
   }, []);
   useEffect(() => {
-    let current = true; setLoadError(null); setItems(null);
-    void sessionStore.read<FeedbackItem[]>(path).then(rows => { if (current) setItems(chronological(rows)); })
-      .catch(error => { if (current && !(error instanceof StaleSessionError)) setLoadError((error as Error).message); });
+    let current = true; const writes = confirmedWrites.current; setLoadError(null);
+    void sessionStore.read<FeedbackItem[]>(path).then(rows => { if (current) setItems(previous => mergeFeedback(previous, rows)); })
+      .catch(error => { if (current && writes === confirmedWrites.current && !(error instanceof StaleSessionError)) setLoadError((error as Error).message); });
     return () => { current = false; };
   }, [path, attempt]);
   useEffect(() => { if (fieldError) form.current?.querySelector<HTMLTextAreaElement>('textarea')?.focus(); else if (saveError) alert.current?.focus(); }, [fieldError, saveError]);
 
   const finish = (row: FeedbackItem) => {
     if (!active.current) return;
-    setItems(previous => chronological([...(previous ?? []).filter(item => item.id !== row.id), row]));
+    confirmedWrites.current++; setLoadError(null);
+    setItems(previous => mergeFeedback(previous, [row]));
     intent.current = null; setPending(null); setRecovery(null); setContent(''); setFieldError(undefined);
     setSaveError(null); setNotice(`Feedback saved for version ${submissionVersion}.`);
   };
@@ -58,7 +61,7 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
     try {
       const rows = await sessionStore.read<FeedbackItem[]>(path);
       if (!active.current) return;
-      setItems(chronological(rows)); setLoadError(null);
+      setItems(previous => mergeFeedback(previous, rows)); setLoadError(null);
       const saved = rows.find(row => row.supervisor.id === sessionStore.getSnapshot().auth?.user.id && row.clientRequestId.toLowerCase() === value.clientRequestId.toLowerCase());
       if (saved && saved.submissionId.toLowerCase() === submissionId.toLowerCase() && saved.content === value.content) { finish(saved); return; }
       if (saved) {

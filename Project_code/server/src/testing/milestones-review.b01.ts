@@ -51,6 +51,12 @@ describe('B01 independent real-session regression', () => {
   });
   const invalid = [null, [], {}, { title: 123 }, { description: false }, { description: '' }, { description: '\u00a0\ufeff' },
     { title: 'x'.repeat(121) }, { description: 'd'.repeat(4001) }, { dueAt: 123 }, { createdById: 'forged' }, { teamId: 'forged' }];
+  it.each(['title', 'description'].flatMap(field => ['\u0000', '\ud800', '\udfff'].map(invalid => [field, invalid] as const)))('rejects unsupported Unicode in %s as 400 before persistence (%j)', async (field, invalid) => {
+    const before = await prisma.milestone.count();
+    const response = await post({ ...good(), [field]: `Work${invalid}text` }).expect(400);
+    expect(response.body.error.code).toBe('INVALID_INPUT'); expect(response.body.error.fields).toHaveProperty(field);
+    expect(await prisma.milestone.count()).toBe(before);
+  });
   it.each(invalid.map((value, index) => [index, value] as const))('T-08 rejects malformed/forged payload case %i without writes', async (_index, value) => {
     const before = await prisma.milestone.count();
     const body = value !== null && !Array.isArray(value) && typeof value === 'object' && Object.keys(value).length ? { ...good(), ...value } : value;

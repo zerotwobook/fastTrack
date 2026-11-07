@@ -586,31 +586,33 @@ Contracts ทั้งสี่เป็น version **0.2 / Proposed / 2026-11-0
 
 ทุก contract ใช้ schema C.2, auth/access C.3, UI/API conventions C.4, transaction/retry C.5 และ DTOs C.7 ที่ฝังในรายงานนี้ เพิ่ม S1-AC-EXT-01–05 ใน E.4.1 โดยระบุ feature ที่เกี่ยวข้องชัดเจน ทุก feature ต้องผ่านทั้ง AC เดิมและ extension ของตน
 
-#### E.1 F-01 — Authentication and scoped team context
+#### E.1 F-01 - Authentication and scoped team context
 
-**Links:** FR-01/02, BR-01/02, NFR-01/02/05; actors ทั้งสอง role; dependency DB และ seed M001
+**Contract clarification, 7 November 2026:** this section aligns the legacy v0.2 planning draft with the accepted [Sprint 1 auth contract](../../Project_code/docs/contracts/sprint-1-auth.md), accepted through PR #54. The old proposed email <=254/password <=128 caps were not adopted. G1 deliberately preserves unrestricted identity TEXT values. Login validates required strings and request shape, subject to the existing JSON body-size limit, without silently imposing a new cap on accepted credentials. Unknown credentials within that request contract return 401. The original planning draft and its history are not evidence of an implemented length cap.
 
-**Flow/UI:** หน้า login รับ email/password → สร้าง session → dashboard เรียก me และ teams; แสดงชื่อ/role จาก server; detail ทีมแสดงสมาชิกและลิงก์ milestone; logout ออกจาก authenticated UI หลัง server revoke ไม่มี role selector ที่ใช้กำหนดสิทธิ์ Empty team list แจ้งว่ายังไม่ได้รับการจัดทีม
+**Links:** FR-01/02, BR-01/02, NFR-01/02/05; both roles; DB and M001 seed dependency.
+
+**Flow/UI:** login accepts email/password and creates a session; the workspace loads me and scoped teams. Display the server-provided identity/role and team members/milestone links. No role selector grants privileges. Empty teams explain that no team is assigned. Sign-out immediately clears private UI and confirms server revocation, with explicit recovery if revocation cannot be confirmed.
 
 | Method / Path | Input | Success | Failure |
 |---|---|---|---|
-| POST /api/auth/login | `{email,password}` + X-fastTrack-Request และ valid source origin | 200 `{data:{user:User,csrfToken}}` + cookie | 400; 401 INVALID_CREDENTIALS; 403 source/header; 415 |
-| GET /api/auth/me | session cookie | 200 `{data:{user:User,csrfToken}}` | 401 |
-| POST /api/auth/logout | valid source origin; session + CSRF เมื่อมี session | 204; revoke current session และ clear cookie | 403 origin หรือ authenticated CSRF ผิด |
-| GET /api/teams | session | 200 `{data:Team[]}` เฉพาะ scope | 401 |
-| GET /api/teams/:id | UUID + session | 200 `{data:Team}` | 401/404 |
+| POST /api/auth/login | `{email,password}`, X-fastTrack-Request and valid source origin | 200 `{data:{user:User,csrfToken}}` and cookie | 400; 401 INVALID_CREDENTIALS; 403 source/header; 415 |
+| GET /api/auth/me | Session cookie | 200 `{data:{user:User,csrfToken}}` | 401 |
+| POST /api/auth/logout | Valid source; session CSRF when authenticated | 204; revoke current session and clear cookie | 403 invalid source or authenticated CSRF |
+| GET /api/teams | Session | 200 `{data:Team[]}` within scope | 401 |
+| GET /api/teams/:id | UUID and session | 200 `{data:Team}` | 401/404 |
 
-**Validation/data:** email normalize/trim; password ไม่ trim; required strings, email ไม่เกิน 254/password ไม่เกิน 128 ตัวอักษร; allowlist input keys; สร้างเฉพาะ session ไม่สร้าง user จาก login; DB role/membership เป็นข้อมูล authoritative; password comparison ผ่าน hashing library
+**Validation/data:** normalize/trim email; do not trim password. Require nonempty strings and allowlisted input keys. Login creates a session, never a user. DB role/membership are authoritative. Compare passwords through the accepted scrypt hashing implementation. Keep generic credential failures and existing request-size protection.
 
 | AC | Acceptance criterion |
 |---|---|
-| AC-01.1 | valid credential ของแต่ละ role คืน user ถูกคน มี session ใช้งานได้ และไม่คืน password/password hash/raw authentication token ใน JSON (CSRF token ส่งตาม contract) |
-| AC-01.2 | password ผิดหรือ email ไม่พบคืน 401 ข้อความเดียวกัน ไม่สร้าง session; input ว่างคืน 400 พร้อมข้อความ |
-| AC-01.3 | ไม่มี/ปลอม/หมดอายุ session เรียก protected endpoint แล้วได้ 401 ไม่มี private data |
-| AC-01.4 | logout แล้ว cookie/session เดิมใช้เรียก me ไม่ได้; CSRF ผิดบน authenticated mutation ถูกปฏิเสธ |
-| AC-01.5 | team list/detail แสดงเฉพาะ scope และ seed รักษา student หนึ่งทีม; ข้ามทีมคืน 404 |
+| AC-01.1 | Valid credentials return the correct user and usable session. Never return password/hash/raw authentication token in JSON; CSRF is explicitly included by contract. |
+| AC-01.2 | Unknown email and wrong password share a 401 response and create no session. Empty required input returns 400. |
+| AC-01.3 | Missing, forged or expired sessions receive 401 from protected endpoints without private data. |
+| AC-01.4 | Logout revokes the old cookie/session; invalid authenticated CSRF is rejected. |
+| AC-01.5 | Team list/detail are scoped; seed preserves one team per student; foreign teams return 404. |
 
-**Feature DoD:** AC-01.1–01.5 และ S1-AC-EXT-01/05 มีผล T-01–T-05, T-23/T-27 จาก DB จริง; reviewer ตรวจ session lifecycle/hash/scoped queries; หลักฐาน login/logout เชื่อม release; ผ่าน shared DoD E.6
+**Feature DoD:** actual DB-backed AC-01.1-01.5 and S1-AC-EXT-01/05 results cover T-01-T-05, T-23/T-27; peer review covers session lifecycle, password hashing and scoped queries; release evidence identifies the tested source; shared DoD E.6 still applies. Historical accepted evidence and pending release acceptance remain separate.
 
 #### E.2 F-02 — Create and view milestone
 

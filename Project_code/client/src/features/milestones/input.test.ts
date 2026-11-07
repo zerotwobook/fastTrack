@@ -2,6 +2,11 @@ import { describe, expect, it } from 'vitest';
 import { bangkokInputToIso, codePointLength, MilestoneInputError, parseMilestoneInput, parseTimestamp } from '../../../../shared/milestones.mjs';
 const good = { title: 'Work', description: 'Complete this work.', dueAt: '2030-01-02T18:30:00+07:00' };
 describe('Canonical milestone validation shared with the API', () => {
+  it.each(['title', 'description'].flatMap(field => ['\u0000', '\ud800', '\udfff'].map(invalid => [field, invalid] as const)))('rejects unsupported Unicode in %s with a field error (%j)', (field, invalid) => {
+    expect(() => parseMilestoneInput({ ...good, [field]: `Work${invalid}text` })).toThrow(MilestoneInputError);
+    try { parseMilestoneInput({ ...good, [field]: `Work${invalid}text` }); }
+    catch (error) { expect((error as MilestoneInputError).fields).toHaveProperty(field); }
+  });
   it('counts trimmed Unicode code points and permits the full description bound', () => {
     const title = '\u{1f680}'.repeat(120);
     const result = parseMilestoneInput({ ...good, title: ` ${title} `, description: 'd'.repeat(4000) });

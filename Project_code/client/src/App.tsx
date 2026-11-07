@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState, useSyncExternalStore } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { FormEvent } from 'react';
 import { Button, EmptyState, Field, Input } from './design/components';
 import { safeReturnTo, sessionStore, StaleSessionError } from './features/auth/session';
@@ -47,6 +47,7 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   const [attempt, setAttempt] = useState(0);
   const dialog = useRef<HTMLDialogElement>(null);
   const menu = useRef<HTMLButtonElement>(null);
+  useLayoutEffect(() => { if (state.phase !== 'ready') dialog.current?.close(); }, [state.phase]);
   const detailId = /^\/teams\/([a-f0-9-]{36})(?:\/milestones\/new)?$/i.exec(path)?.[1];
   const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/submissions\/new)?$/i.exec(path)?.[1];
   const submissionId = /^\/submissions\/([a-f0-9-]{36})$/i.exec(path)?.[1];
@@ -65,14 +66,14 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   const teams = result?.revision === state.revision && result.path === path ? result.teams : null;
   return <div className="application-shell">
     <aside className="sidebar"><a className="wordmark" href="/">fastTrack</a><Navigation role={user.role} /></aside>
-    <dialog ref={dialog} className="navigation-dialog" aria-labelledby="navigation-title" onClose={() => menu.current?.focus()}>
+    <dialog ref={dialog} className="navigation-dialog" aria-labelledby="navigation-title" onClose={() => { if (state.phase === 'ready') menu.current?.focus(); }}>
       <h2 id="navigation-title">Navigation</h2><Button type="button" variant="secondary" onClick={() => dialog.current?.close()}>Close menu</Button><Navigation role={user.role} />
     </dialog>
     <div className="workspace"><header className="app-header">
       <button ref={menu} className="menu-button" type="button" onClick={() => dialog.current?.showModal()}>Menu</button>
       <p><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
       <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
-    </header><main id="main-content" className="workspace-content">
+    </header><main id={state.phase === 'ready' ? 'main-content' : undefined} className="workspace-content">
       {submissionId ? <SubmissionDetail id={submissionId} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
       <h1>{detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
       <p className="intro">{detailId ? 'The people working on this project.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
@@ -96,13 +97,14 @@ export function App() {
     const pop = () => { setPath(location.pathname); void sessionStore.restore(); };
     const pagehide = () => sessionStore.lock();
     const pageshow = (event: PageTransitionEvent) => { if (event.persisted) { setPath(location.pathname); void sessionStore.restore(); } };
-    const visibility = () => { if (document.visibilityState === 'hidden') sessionStore.lock(); else void sessionStore.restore(); };
+    const visibility = () => { if (document.visibilityState === 'hidden') sessionStore.suspend(); else void sessionStore.revalidate(); };
     window.addEventListener('popstate', pop); window.addEventListener('pagehide', pagehide); window.addEventListener('pageshow', pageshow); document.addEventListener('visibilitychange', visibility);
     return () => { window.removeEventListener('popstate', pop); window.removeEventListener('pagehide', pagehide); window.removeEventListener('pageshow', pageshow); document.removeEventListener('visibilitychange', visibility); };
   }, []);
   return <><a className="skip-link" href="#main-content">Skip to content</a>
-    {state.phase === 'loading' ? <main id="main-content" className="session-status" role="status"><p className="wordmark">fastTrack</p><p>{state.recovery === 'logout' ? 'Signing out…' : 'Checking your session…'}</p></main>
-    : state.phase === 'unavailable' ? <main id="main-content" className="session-status"><h1>Unable to continue</h1><p role="alert">{state.error}</p><Button onClick={() => { void (state.recovery === 'logout' ? sessionStore.logout() : sessionStore.restore()); }}>{state.recovery === 'logout' ? 'Retry sign-out' : 'Try again'}</Button></main>
-    : state.auth ? <Workspace key={state.revision} state={state} path={path} /> : <Login state={state} />}
+    {state.phase === 'loading' || state.phase === 'checking' ? <main id="main-content" className="session-status" role="status"><p className="wordmark">fastTrack</p><p>{state.recovery === 'logout' ? 'Signing out…' : 'Checking your session…'}</p></main>
+    : state.phase === 'unavailable' ? <main id="main-content" className="session-status"><h1>Unable to continue</h1><p role="alert">{state.error}</p><Button onClick={() => { void (state.recovery === 'logout' ? sessionStore.logout() : sessionStore.revalidate()); }}>{state.recovery === 'logout' ? 'Retry sign-out' : 'Try again'}</Button>{state.auth && <Button variant="ghost" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>}</main>
+    : !state.auth ? <Login state={state} /> : null}
+    <div hidden={state.phase !== 'ready'}>{state.auth && <Workspace key={state.revision} state={state} path={path} />}</div>
   </>;
 }
