@@ -6,15 +6,16 @@
 วันที่จัดทำ: **5 พฤศจิกายน 2026** | ฉบับเอกสาร **0.2 — Synchronized engineering baseline**<br>
 กำหนดส่งตามเอกสาร D1: **8 พฤศจิกายน 2026 เวลา 23:59** (ใช้เวลา Asia/Bangkok เป็นสมมติฐาน)
 
-| ข้อมูลหน้าปก | รายละเอียด |
+| Cover information | Details |
 |---|---|
-| สมาชิกคนที่ 1 / รหัสนักศึกษา | TBD — รอข้อมูลจริง |
-| สมาชิกคนที่ 2 / รหัสนักศึกษา | TBD — รอข้อมูลจริง |
-| รายวิชาที่ระบบให้บริการ | รายวิชาโครงงานหนึ่งรายวิชา; ชื่อรายวิชาจริง TBD |
-| สิทธิ์เลือก Theme 6 | รอตรวจเลขท้ายรหัสนักศึกษาหรือการอนุญาตจากผู้สอน |
-| Repository URL | https://github.com/zerotwobook/fastTrack — พบจาก local Git remote; ยังไม่ได้ตรวจสิทธิ์เข้าถึงภายนอก |
-| Submitted release tag / commit | ยังไม่มี release ที่ตรวจสอบได้ |
-| สถานะรายงาน | จัดทำรายละเอียด baseline และ Sprint 1 contracts แล้ว; ยังไม่ใช่รายงานยืนยัน working release |
+| Member A / student ID | Supapanya Yathip / 67070503443 |
+| Member B / student ID | Atip Infa-udom / 67070503446 |
+| Product course context | One course-project context; actual course title remains TBD |
+| Theme 6 eligibility | B's student ID ends in 6; Group specs section 6, physical page 4 permits the matching theme of either partner |
+| Repository | https://github.com/zerotwobook/fastTrack; public with A/B access verified |
+| Submitted release tag / commit | No accepted working S1 release yet |
+| Report status | Proposed baseline/contracts; G0 peer acceptance and implementation evidence remain pending |
+| Current team/gate record | [Sprint 1 G0 baseline](../../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md) |
 
 > **สถานะและขอบเขต:** รายงานฉบับนี้ปรับให้ตรงกับ `Project_doc/project_detail.md` v0.5 (แบบผลิตภัณฑ์จาก v0.4; v0.5 บันทึกการ sync เอกสาร) ใช้ชื่อ fastTrack ธีมขาวดำ และ Inter + Noto Sans Thai ตามที่ผู้ใช้กำหนด เทคโนโลยีและกฎเชิงรายละเอียดเป็นแบบเสนอสำหรับพัฒนา ไม่ใช่ข้อบังคับเพิ่มเติมจากผู้สอน
 >

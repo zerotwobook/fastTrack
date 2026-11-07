@@ -1,16 +1,14 @@
 # fastTrack
 
-A planned course-project tracking application for students and supervisors, covering milestone submissions, feedback and progress tracking.
+A course-project tracking application for students and supervisors, covering milestones, submitted work and version-specific feedback.
 
-## Implementation status
+## Application
 
-Application implementation has not started. There is no runnable application, implemented feature set or verified installation procedure yet.
+Students sign in, view their team's milestones, submit one immutable version of work before the deadline, and read the saved work and supervisor feedback. Assigned supervisors create milestones, read submissions and append feedback to the exact submission version. Other teams' records remain outside the caller's scope.
 
-## Application documentation
+The React/TypeScript client and Express/TypeScript API use PostgreSQL/Prisma, DB-backed eight-hour sessions and source/CSRF protection. The monochrome interface includes role-aware navigation, mobile layouts, validation and recovery for uncertain feedback saves. Submission and feedback records persist across application restarts.
 
-Implemented features, architecture, prerequisites, configuration, run/build commands and tests will be documented as the code is developed and verified.
-
-See [Project_code/README.md](Project_code/README.md) for the application source and technical documentation.
+See [the technical guide](Project_code/README.md) for verified installation, configuration, build, tests and local browser review. Revisions, progress calculations and summary screens belong to later increments.
 
 ## Development guide
 

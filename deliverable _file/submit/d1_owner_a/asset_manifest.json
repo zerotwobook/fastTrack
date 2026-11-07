@@ -1,0 +1,49 @@
+{
+  "scope": "Actual source screenshots; no synthetic image generation or pixel edits",
+  "assets": [
+    {
+      "file": "assets/A01_login_mobile.png",
+      "originalArtifact": "output/playwright/a01-login-mobile.png",
+      "sha256": "8bcc6a4ae24319a7a05fe6c4a39cf44d12d9208e07c119e25ebeb59c7bff2227",
+      "width": 320,
+      "height": 720,
+      "testedSource": "2899d1b3a91e54b52a759e3f12ecd9f5fcf7b8d4",
+      "acceptedBaseline": "3365a36e4cd1fcdd7410cca2086447ec4ae5dc33",
+      "scenario": "Blank login screen; session/login/logout assertions are separate API/browser records.",
+      "transformation": "None; byte-identical copy of actual captured screenshot."
+    },
+    {
+      "file": "assets/A02_saved_mobile.png",
+      "originalArtifact": "output/playwright/a02-saved-mobile.png",
+      "sha256": "35e045f45895751798d8869215c9c2a6d376dfcb1b32d50eb6c8c5fa417933ef",
+      "width": 320,
+      "height": 800,
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "acceptedBaseline": "3365a36e4cd1fcdd7410cca2086447ec4ae5dc33",
+      "scenario": "Actual saved version/author/time/link after real UI POST and fresh GET/reload.",
+      "transformation": "None; byte-identical copy of actual captured screenshot."
+    },
+    {
+      "file": "assets/A02_deadline_rejection_mobile.png",
+      "originalArtifact": "output/playwright/a02-deadline-viewport-mobile.png",
+      "sha256": "5876dbb889be9660d0a08d3026f9fb7aac7822c4b89c04b2e417c7aba0988969",
+      "width": 320,
+      "height": 1000,
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "acceptedBaseline": "3365a36e4cd1fcdd7410cca2086447ec4ae5dc33",
+      "scenario": "Actual 409 after a real deadline crosses in an open form, count 0 and retained draft.",
+      "transformation": "None; byte-identical copy of actual captured screenshot."
+    },
+    {
+      "file": "assets/A02_foreign_denial_mobile.png",
+      "originalArtifact": "output/playwright/a02-foreign-denial-mobile.png",
+      "sha256": "393b3229a5920e58ecb76aa82e1267dfc803f5b5021565d5a93faac3cbaa8256",
+      "width": 320,
+      "height": 1000,
+      "testedSource": "1bf8d632a4520cb8b2dd495c51b43d73a5e8a561",
+      "acceptedBaseline": "3365a36e4cd1fcdd7410cca2086447ec4ae5dc33",
+      "scenario": "Foreign supervisor at the prior private submission URL receives generic denial.",
+      "transformation": "None; byte-identical copy of actual captured screenshot."
+    }
+  ]
+}

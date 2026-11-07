@@ -1,0 +1,50 @@
+[
+  {
+    "path": "Project_code/docs/evidence/assets/j03-system/j03-supervisor-320.png",
+    "sha256": "0c814b4539236e18e9c8c8fb30a4dc3c4fd2b28c69d4211180754a437c9690f1",
+    "width": 320,
+    "height": 1306,
+    "source": "output/playwright/j03-supervisor-320.png",
+    "caption": "Current supervisor feedback form and exact-version reading rail at a 320px viewport; shared monochrome controls and complete labels/actions.",
+    "testedSource": "cc0e206",
+    "visuallyInspected": true,
+    "edited": false,
+    "phase": "Initial verification before the control-border-only correction"
+  },
+  {
+    "path": "Project_code/docs/evidence/assets/j03-system/j03-student-after-restart.png",
+    "sha256": "859eb37fc8818833f65253efc0aa6c5b9b21480a68aaa2cda7d09e762a9265a7",
+    "width": 1280,
+    "height": 720,
+    "source": "output/playwright/j03-student-after-restart.png",
+    "caption": "Student A1 reads the unchanged submission and feedback after the actual compiled process restart; no write form is rendered.",
+    "testedSource": "cc0e206",
+    "visuallyInspected": true,
+    "edited": false,
+    "phase": "Initial verification before the control-border-only correction"
+  },
+  {
+    "path": "Project_code/docs/evidence/assets/j03-system/j03-final-supervisor-320.png",
+    "sha256": "9d83b9ca55917098cdfed936bfaba1d13c09b6d102b8201bca9edc41906c18c1",
+    "width": 320,
+    "height": 1334,
+    "source": "output/playwright/j03-final-supervisor-320.png",
+    "caption": "Final shared control token at a 320px viewport; real API-created work and supervisor feedback saved through the UI. Boundary color is measured separately from computed style.",
+    "testedSource": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+    "phase": "Final contrast-corrected verification",
+    "visuallyInspected": true,
+    "edited": false
+  },
+  {
+    "path": "Project_code/docs/evidence/assets/j03-system/j03-final-student-after-restart.png",
+    "sha256": "3672fc49e92dea2e1d09e97ba146430547db3b61e61660e280dac46986bec4f2",
+    "width": 1440,
+    "height": 900,
+    "source": "output/playwright/j03-final-student-after-restart.png",
+    "caption": "Final e1ada71 compiled process restart: Student A1 restores its session and reads the exact original submission/feedback; no supervisor form.",
+    "testedSource": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+    "phase": "Final contrast-corrected verification",
+    "visuallyInspected": true,
+    "edited": false
+  }
+]

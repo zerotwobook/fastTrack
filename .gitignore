@@ -1,0 +1,22 @@
+# Local secrets and environment files
+.env
+.env.*
+!.env.example
+# Dependencies and generated output
+node_modules/
+dist/
+coverage/
+*.tsbuildinfo
+# Prisma generated client — regenerate with: cd Project_code && npm run db:generate
+Project_code/server/src/db/generated/
+# Local browser artifacts
+.playwright-cli/
+playwright-report/
+test-results/
+output/playwright/
+# Local logs and editor files
+*.log
+.DS_Store
+
+# Intermediate PDF review renders
+tmp/pdfs/

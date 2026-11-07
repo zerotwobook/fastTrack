@@ -1,0 +1,106 @@
+{
+  "task": "R1-J04 / #12 / PR #66",
+  "status": "Review candidate; G5/main/tag/submission pending",
+  "applicationSource": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+  "preparedBy": "A / Codex; B combined-PDF review pending",
+  "sourceHashes": {
+    "deliverable _file/submit/d1_owner_a/A_SRS.md": "99702a42f34e8ad7d9fb151007fd27b4b2208be6d22e744f5a49a15e2da18b20",
+    "deliverable _file/submit/d1_owner_a/B_FEATURES_TRACEABILITY.md": "1261109bbf4b7f2db9b35dbc60b0742cb9c865fd38fa5ab21e4b350c98033a6a",
+    "deliverable _file/submit/d1_owner_b/C_SYSTEM_SDS.md": "b0995117efd491118818689b4d11bbeaa877f25588152db4d4bd7c75cfe21f2a",
+    "deliverable _file/submit/d1_owner_a/D_THREE_SPRINT_PLAN.md": "982d301b11d5fb247e556779beda6420987914fc3075815dccd307963ee5b530",
+    "deliverable _file/submit/d1_owner_b/E_CONTRACTS.md": "49724dc805087bf06576442baf9bc49b9aab7c577de56ab8f2dee29c5be38eaf",
+    "deliverable _file/submit/d1_owner_b/F_B_VERIFICATION.md": "cb51ddd4686956f6bdfd2ebea8bfeb0babbcf3073bbdea1cc2b66813a1a6fd1a",
+    "Project_code/docs/evidence/R1-J03-verification-map.json": "1a2cc443fdf330ac475bfecacda1a3012e6588a4e1ec36b78c05c914da266faa",
+    "Project_code/docs/evidence/R1-J03-results.json": "b754daf1421ac719233d689ce30d23dc0e0ca730b277687066fbbb27d11b9ad1",
+    "Project_code/docs/evidence/excerpts/s1-deadline-rejection.txt": "8408ed0d64f77b33091221795ce00bd5fc5e92a5a85c410a55eb6af2969d3317",
+    "deliverable _file/submit/d1_owner_a/assets/A01_login_mobile.png": "8bcc6a4ae24319a7a05fe6c4a39cf44d12d9208e07c119e25ebeb59c7bff2227",
+    "deliverable _file/submit/d1_owner_a/assets/A02_saved_mobile.png": "35e045f45895751798d8869215c9c2a6d376dfcb1b32d50eb6c8c5fa417933ef",
+    "deliverable _file/submit/d1_owner_a/assets/A02_deadline_rejection_mobile.png": "5876dbb889be9660d0a08d3026f9fb7aac7822c4b89c04b2e417c7aba0988969",
+    "deliverable _file/submit/d1_owner_a/assets/A02_foreign_denial_mobile.png": "393b3229a5920e58ecb76aa82e1267dfc803f5b5021565d5a93faac3cbaa8256",
+    "deliverable _file/submit/d1_owner_b/asset_manifest.json": "eaf97a36fe51a0b6a844394a1fa51240d6cfe93335f34ebeba7bd9c2acd413f8",
+    "deliverable _file/submit/d1_owner_a/asset_manifest.json": "c937816efa00d5ba0a8425da6b161db7e0f40f32a9c4f080fbfcab8b0026f23a",
+    "deliverable _file/submit/d1_owner_b/assets/B02_supervisor_feedback_mobile.png": "9d83b9ca55917098cdfed936bfaba1d13c09b6d102b8201bca9edc41906c18c1",
+    "deliverable _file/submit/d1_owner_b/assets/B02_student_after_restart.png": "3672fc49e92dea2e1d09e97ba146430547db3b61e61660e280dac46986bec4f2"
+  },
+  "output": "output/pdf/fastTrack_D1_review_candidate.pdf",
+  "parts": [
+    "A",
+    "B",
+    "C",
+    "D",
+    "E",
+    "F"
+  ],
+  "selectedPrintedEvidence": {
+    "AC-02.1": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "jsonPointer": "/database/b01Tests/cases/1",
+      "name": "B01 independent real-session regression T-06 creates then reads identical persisted list/detail projections"
+    },
+    "AC-02.2": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "jsonPointer": "/database/b01Tests/cases/22",
+      "name": "B01 independent real-session regression T-07 conceals foreign versus missing milestone identity with equal 404 bodies"
+    },
+    "AC-02.3": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "jsonPointer": "/database/b01Tests/cases/4",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 0 without writes"
+    },
+    "AC-03.2": {
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "jsonPointer": "/database/a02Tests/cases/2",
+      "name": "F-03 first-submission deadline TDD and persistence T-10/T-12/T-26 uses exact acceptedAt offset 1 ms and persists that same instant"
+    },
+    "AC-03.5": {
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "jsonPointer": "/database/a02Tests/cases/32",
+      "name": "F-03 authorization, validation and immutable submission contracts T-14 denies foreign/absent milestone writes equally and checks input before scope"
+    },
+    "AC-03.6": {
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "jsonPointer": "/database/a02Tests/cases/39",
+      "name": "F-03 real lock barriers and bounded technical recovery T-16/T-31 creates through compiled HTTP and retains the exact submission/session after an actual process restart"
+    },
+    "AC-04.1": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "jsonPointer": "/database/b02Tests/cases/4",
+      "name": "F-04 real sessions, immutable versions and idempotent retries keeps feedback on its exact version, allows after the deadline, and rejects key reuse on another authorized version"
+    },
+    "AC-04.2": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "jsonPointer": "/database/b02Tests/cases/6",
+      "name": "F-04 real sessions, immutable versions and idempotent retries denies student without a write or cross-team key oracle"
+    },
+    "AC-04.3": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "jsonPointer": "/database/b02Tests/cases/11",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 0 with a field error and no write"
+    },
+    "AC-04.4": {
+      "file": "Project_code/server/src/testing/integrated-s1.j03.ts",
+      "jsonPointer": "/database/j03Tests/cases/0",
+      "name": "Sprint 1 integrated compiled HTTP and durable data T-21/T-22/T-25/T-31 creates, submits, appends and scopes feedback; repeat seed and actual process restart preserve all records"
+    },
+    "S1-AC-EXT-03": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "jsonPointer": "/database/b01Tests/cases/23",
+      "name": "B01 independent real-session regression T-25 projects only latest-version feedback and preserves stable dueAt/id ordering"
+    },
+    "S1-AC-EXT-04": {
+      "file": "Project_code/server/src/testing/submissions.a02.ts",
+      "jsonPointer": "/database/a02Tests/cases/40",
+      "name": "F-03 real lock barriers and bounded technical recovery T-26 rejects a real DB-clock deadline crossed while waiting for the team lock"
+    },
+    "S1-AC-EXT-05": {
+      "kind": "actual browser checks",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointers": [
+        "/browser/10",
+        "/browser/13"
+      ],
+      "note": "Controlled late feedback after account switch and external returnTo records; not extra automated leaf-case counts."
+    }
+  },
+  "sourceHashFormat": "SHA-256 of original repository Git blob bytes at applicationSource; checkout CRLF conversion does not change source identity."
+}

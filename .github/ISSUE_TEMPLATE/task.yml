@@ -3,7 +3,7 @@ description: A planned workflow task or an agreed subtask
 body:
   - type: markdown
     attributes:
-      value: Write all Issue content in English. Read SKILL_Project and the current workflow; reuse an existing Task ID instead of opening a duplicate.
+      value: Write all Issue content in English. Read SKILL_Project and workflow/GITHUB_PROJECT_AUTOMATION.md; reuse an existing Task ID. Register Backlog, then Specified after scope review and Started before edits. Open a Draft PR during Started; PR Review is only for verified ready handoff.
   - type: input
     id: task
     attributes:
@@ -44,3 +44,11 @@ body:
     attributes:
       label: Branch / Base / Handoff
       description: New tasks use a branch from current sprint staging; app code belongs in Project_code/. Provide actual results for peer review.
+  - type: textarea
+    id: progress
+    attributes:
+      label: Actual stage progress log
+      description: Update this body log at each real transition; never fill invented past times or batch earlier stages at handoff. The Issue records Backlog/Specified before a PR exists. Leave previously completed cards unchanged.
+      value: |
+        | Time (UTC or Asia/Bangkok) | From | To | Actual reason/evidence and branch/PR/commit |
+        |---|---|---|---|

@@ -25,6 +25,10 @@ These documents define work and acceptance, not a verified working application. 
 
 For tracked PRs, the enabled native Project workflow moves the card to Done after merge. Follow [Project merge automation](workflow/GITHUB_PROJECT_AUTOMATION.md) when opening/reviewing PRs.
 
+## Current Sprint 1 checkpoint
+
+Accepted application base: staging/sprint-1 4de6a7a after B approval/merge of PR #65. F-01-F-04, G0-G4 and both source packages are accepted; #11/#64 are closed. Joint #12 / PR #66 contains the combined A-F PDF review candidate, prepared by A/Codex for B review. [Release review handoff](workflow/handoffs/R1-J04_D1_RELEASE_REVIEW.md) identifies the actual pages/checks and remaining main/tag/G5 steps. The historical J03 and manual-200 records retain their original provenance; source-package acceptance does not accept final main/PDF/submission.
+
 ## First-day allocation
 
 A is `zerotwobook`; B is `Atip-Infa`. Each member uses a separate clone/worktree and records real names/student IDs, availability, topic eligibility and baseline acceptance in [R1-J00 / G0, Issue #2](https://github.com/zerotwobook/fastTrack/issues/2).
@@ -40,6 +44,19 @@ staging/sprint-1 has been prepared from main. Verify its actual baseline rather 
 | Next features | R1-A02: first submission/deadline | R1-B02: feedback | G3, then regression/review/D1 acceptance |
 
 Read [Sprint 1 sections 5-8](workflow/01_SPRINT1_D1.md) for exact paths/checklists. B does not create a second scaffold. Coordinate schema/router/DTO/lockfile/token changes with the shared owner.
+
+## Daily task progression
+
+Use the [Project stage protocol](workflow/GITHUB_PROJECT_AUTOMATION.md) for application and documentation tasks. The task Issue is the complete lifecycle:
+
+1. Backlog: register/reuse the real task and owner.
+2. Specified: finish scope/contracts/acceptance/dependency review and update the card now.
+3. Started: verify dependencies and the isolated task branch, then update the card **before editing task files**.
+4. Push the first coherent commit, open a Draft PR and add its Project card as Started while remaining work/checks continue. Keep the Issue Started too.
+5. PR Review: finish implementation/checks/evidence, mark the PR ready, move both cards and request the peer. Real requested changes use Fixing -> PR Review.
+6. Done: verify actual peer acceptance and integration merge; native automation moves the PR card, while Issue closure/Acceptance are reconciled from evidence.
+
+Save/read back each transition when it happens and append real timestamp/reason/branch-PR-commit evidence in the Issue body. Never update all earlier statuses at final handoff or fabricate a PR's pre-creation history. Past completed cards are unchanged. These steps are required team/AI rules; current native automation does not block arbitrary manual intermediate transitions.
 
 ## Clone and start a task
 
@@ -94,3 +111,19 @@ Move to the next Task ID only when its dependency/gate requirements are satisfie
 | CONTRIBUTING.md and workflow/ | Detailed collaboration rules, sprint task checklists and acceptance gates | Keep references consistent without duplicating entire guides. |
 
 During R1-A00, A documents verified Node/package-manager/database versions, lockfile policy, exact working directories and install/dev/build/test commands. B adds migration/seed instructions and reset safeguards during R1-B00. Each member reproduces the other's setup before G1. Until implementation exists, application-facing README files state that the relevant documentation is pending.
+
+## Lab 5 starter reference
+
+The user permits using the [original Lab 5 starter](lab_file/lab5/02_lab5-starter-kit/toktickit-lab5-starter/README.md) as a structural reference. Its README explicitly says to adapt the example to the team's own app and notes that application code is not included. Keep that instructor source unchanged; develop fastTrack under Project_code rather than editing or running the example as the product.
+
+| Starter example | fastTrack adaptation |
+|---|---|
+| `client/` and `server/` | Use the existing Project_code/client and Project_code/server; do not create a second scaffold or replace product routes/UI with TokTickIT. |
+| Separate client/server package installs | fastTrack has npm workspaces and one Project_code/package-lock.json. Future Docker/CI installs must include the workspace manifests and use the actual workspace root; do not invent child lockfiles. |
+| Node 24 Alpine images | The currently verified app pins Node 26.13.0/npm 11.20.0. Adapt and verify a compatible image/toolchain, or review a deliberate runtime change; do not silently copy an incompatible Node 24 image. |
+| Prisma generation, migration and seed commands | B owns B00 Prisma 7 config/schema/adapter/client/migrations/seed. Adopt only implemented/reproduced commands and actual generated paths. No second schema or unguarded reset. |
+| Unified production image and local Compose | Preserve the client/API same-origin arrangement and separate PostgreSQL/migration responsibilities. Dockerfiles/Compose/runtime readiness are still R2-A01 work, not completed by this policy. |
+| `.github/workflows/` and deployment scripts | Adapt working directories/build context to Project_code, actual tests and fastTrack resources. GitHub Actions remain at repository-root .github/workflows; CI/release belongs to R2-B01 and the lab gates. |
+| Health/readiness/smoke examples | `/api/health` is implemented liveness only. Future readiness must check the real DB; smoke checks must use implemented fastTrack endpoints rather than `/api/categories` or other TokTickIT behavior. |
+
+Retain the starter's sound separation of app startup from migration jobs, runtime-injected secrets, same-origin access and reviewed deployment controls when implementing the corresponding tasks. Supply fastTrack-specific .dockerignore/env names/commands/resources and verify the result; permission to use the example does not authorize cloud provisioning or prove Docker/CI/deployment success now.

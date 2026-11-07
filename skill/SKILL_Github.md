@@ -71,6 +71,14 @@ Example Project statuses, **only if the existing board uses them**:
 | `Fixing` | Feedback or failed checks are being addressed |
 | `Done` | Changes are merged and the Issue is complete |
 
+### fastTrack stage timing
+
+For this repository, follow [Project stage progression](../workflow/GITHUB_PROJECT_AUTOMATION.md). The linked Issue must move Backlog -> Specified after scope review, then Started before editing task files. Read back and record each transition at that milestone; never skip stages or cycle through them only when the work is finished. Preserve past completed cards.
+
+After the first coherent commit is pushed, open a **Draft PR while work is Started** and immediately add its Project card as Started with the actual metadata. Complete the remaining work/checks, update evidence, mark ready and move both cards to PR Review before requesting the peer. The Issue holds the real Backlog/Specified history before a PR exists; do not fabricate that history on the PR card. Real findings use PR Review -> Fixing -> PR Review; accepted integration permits Done. Keep Status, Verification and Acceptance separate.
+
+Maintain the concise progress log in the Issue body, preserving other authors' text. This is not permission to post comments/messages. The native merged-PR rule does not technically enforce intermediate transitions; follow the procedure and verify the live states.
+
 ## 4. Branch, commit, and push
 
 1. Confirm the intended base branch and that the working tree can be changed safely.
@@ -80,7 +88,7 @@ Example Project statuses, **only if the existing board uses them**:
 5. Review the diff before staging and committing; stage selected files, not automatically everything.
 6. Check `git diff --check` and any relevant project checks already required by the task. Report actual results, never inferred results.
 7. Write a concise, meaningful commit message. Push the intended branch to the correct remote.
-8. Verify the remote branch and pushed commit SHA.
+8. Verify the remote branch and pushed commit SHA. For fastTrack, open/add the Started Draft PR after the first coherent push, before finishing remaining task work/checks; continue that same PR.
 
 Example commands (replace placeholders):
 
@@ -99,7 +107,7 @@ Do not run these blindly. If a branch already exists, switch to it instead of cr
 
 ## 5. Pull Requests
 
-Before opening or updating a PR, verify its base/head branches, changed files, commits, issue linkage, and actual check status. Reuse an existing PR when continuing or responding to feedback. Use the repository's PR template if one exists; otherwise keep the PR body focused on GitHub review:
+Before opening or updating a PR, verify its base/head branches, changed files, commits, issue linkage, and actual check status. In fastTrack, open the initial PR as a draft during Started and record incomplete checks honestly; do not wait for final handoff to create its first card. Reuse an existing PR when continuing or responding to feedback. Use the repository's PR template if one exists; otherwise keep the PR body focused on GitHub review:
 
 ```md
 ## Related Issue

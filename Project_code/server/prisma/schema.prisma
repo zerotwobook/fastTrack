@@ -1,0 +1,160 @@
+// fastTrack Prisma schema — Sprint 1 foundation
+// Foundation by B; remaining G1 remediation authorized to A, with B peer review.
+// Prisma 7.10.1 with postgresql-adapter; use the generated client from db/client.ts.
+// All timestamps stored as timestamptz (UTC) and surfaced in Asia/Bangkok where shown.
+
+generator client {
+  provider = "prisma-client-js"
+  output   = "../src/db/generated/client"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+// ---------------------------------------------------------------------------
+// users — shared identity table for both roles
+// ---------------------------------------------------------------------------
+model User {
+  id           String   @id @default(uuid()) @db.Uuid
+  email        String   @unique
+  passwordHash String   @map("password_hash")
+  name         String
+  role         UserRole
+  studentId    String?  @unique @map("student_id")
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  // Relations
+  sessions        Session[]
+  supervisedTeams Team[]       @relation("TeamSupervisor")
+  teamMembership  TeamMember?
+  milestones      Milestone[]  @relation("MilestoneCreatedBy")
+  submissions     Submission[] @relation("SubmissionAuthor")
+  feedback        Feedback[]   @relation("FeedbackAuthor")
+
+  @@map("users")
+}
+
+enum UserRole {
+  student
+  supervisor
+
+  @@map("user_role")
+}
+
+// ---------------------------------------------------------------------------
+// sessions — server-side DB-backed session (8-hour absolute TTL)
+// ---------------------------------------------------------------------------
+model Session {
+  id        String    @id @default(uuid()) @db.Uuid
+  userId    String    @map("user_id") @db.Uuid
+  tokenHash String    @unique @map("token_hash")
+  csrfToken String    @map("csrf_token")
+  expiresAt DateTime  @map("expires_at") @db.Timestamptz
+  revokedAt DateTime? @map("revoked_at") @db.Timestamptz
+  createdAt DateTime  @default(now()) @map("created_at") @db.Timestamptz
+
+  user User @relation(fields: [userId], references: [id])
+
+  @@index([userId])
+  @@index([expiresAt])
+  @@map("sessions")
+}
+
+// ---------------------------------------------------------------------------
+// teams — one team per student group; multiple teams per supervisor permitted (G1-01)
+// ---------------------------------------------------------------------------
+model Team {
+  id           String   @id @default(uuid()) @db.Uuid
+  name         String   @db.VarChar(120)
+  supervisorId String   @map("supervisor_id") @db.Uuid
+  createdAt    DateTime @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt    DateTime @updatedAt @map("updated_at") @db.Timestamptz
+
+  supervisor User         @relation("TeamSupervisor", fields: [supervisorId], references: [id])
+  members    TeamMember[]
+  milestones Milestone[]
+
+  @@index([supervisorId])
+  @@map("teams")
+}
+
+// ---------------------------------------------------------------------------
+// team_members — locked after first submission exists for the team
+// ---------------------------------------------------------------------------
+model TeamMember {
+  teamId    String   @map("team_id") @db.Uuid
+  studentId String   @unique @map("student_id") @db.Uuid
+  joinedAt  DateTime @default(now()) @map("joined_at") @db.Timestamptz
+
+  team    Team @relation(fields: [teamId], references: [id])
+  student User @relation(fields: [studentId], references: [id])
+
+  @@id([teamId, studentId])
+  @@map("team_members")
+}
+
+// ---------------------------------------------------------------------------
+// milestones — created by assigned supervisor only; dueAt must be future
+// ---------------------------------------------------------------------------
+model Milestone {
+  id          String    @id @default(uuid()) @db.Uuid
+  teamId      String    @map("team_id") @db.Uuid
+  title       String    @db.VarChar(120)
+  description String    @db.VarChar(4000)
+  dueAt       DateTime  @map("due_at") @db.Timestamptz
+  cancelledAt DateTime? @map("cancelled_at") @db.Timestamptz
+  createdById String    @map("created_by_id") @db.Uuid
+  createdAt   DateTime  @default(now()) @map("created_at") @db.Timestamptz
+  updatedAt   DateTime  @updatedAt @map("updated_at") @db.Timestamptz
+
+  team        Team         @relation(fields: [teamId], references: [id])
+  createdBy   User         @relation("MilestoneCreatedBy", fields: [createdById], references: [id])
+  submissions Submission[]
+
+  @@index([teamId])
+  @@map("milestones")
+}
+
+// ---------------------------------------------------------------------------
+// submissions — version starts at 1
+// ---------------------------------------------------------------------------
+model Submission {
+  id            String   @id @default(uuid()) @db.Uuid
+  milestoneId   String   @map("milestone_id") @db.Uuid
+  submittedById String   @map("submitted_by_id") @db.Uuid
+  version       Int      @default(1)
+  title         String   @db.VarChar(120)
+  description   String   @db.VarChar(4000)
+  url           String   @db.VarChar(2048)
+  submittedAt   DateTime @map("submitted_at") @db.Timestamptz
+  createdAt     DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  milestone   Milestone  @relation(fields: [milestoneId], references: [id])
+  submittedBy User       @relation("SubmissionAuthor", fields: [submittedById], references: [id])
+  feedback    Feedback[]
+
+  @@unique([milestoneId, version])
+  @@index([milestoneId])
+  @@map("submissions")
+}
+
+// ---------------------------------------------------------------------------
+// feedback — append-only; supervisor only writes; teams/members read their own.
+// ---------------------------------------------------------------------------
+model Feedback {
+  id              String   @id @default(uuid()) @db.Uuid
+  submissionId    String   @map("submission_id") @db.Uuid
+  supervisorId    String   @map("supervisor_id") @db.Uuid
+  content         String   @db.VarChar(4000)
+  clientRequestId String   @map("client_request_id") @db.Uuid
+  createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
+
+  submission Submission @relation(fields: [submissionId], references: [id])
+  supervisor User       @relation("FeedbackAuthor", fields: [supervisorId], references: [id])
+
+  @@unique([supervisorId, clientRequestId])
+  @@index([submissionId])
+  @@map("feedback")
+}
