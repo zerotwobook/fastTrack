@@ -1,5 +1,7 @@
 # fastTrack - Deliverable 1 review candidate
 
+**Documentation format instruction (7 November 2026):** This Markdown file is the maintained source for the user's own report assembly. Continue authoring notes, evidence narratives and handoffs as `.md`; generate or rebuild a PDF only when explicitly requested. PDF page numbers, layout checks and export references below describe the snapshot prepared at `209ccc7` before this instruction. They are historical evidence, not a requirement to regenerate the export after Markdown edits. The instructor's final submission format remains unchanged and is handled by the user.
+
 CPE 334 Software Engineering / Semester 1, 2026. Theme 6: Course Project Management System.
 
 A: Supapanya Yathip / 67070503443 / zerotwobook. B: Atip Infa-udom / 67070503446 / Atip-Infa.

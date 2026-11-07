@@ -2,6 +2,7 @@
 
 - Conversation with the user may be in Thai. All newly authored or revised project content must be English.
 - This includes code comments/docstrings, documentation, UI messages, test descriptions, commit messages, Issues, PRs, review text and Project metadata. Use English in artifacts even when the request is Thai.
+- Author project documentation, evidence narratives and handoffs as Markdown (`.md`). The user assembles and exports the final reports. Do not generate, rebuild or export PDFs, including through PDF-rebuilding verifiers, unless the user explicitly requests it. Retain existing historical/instructor artifacts and actual machine-readable test results.
 - Read `skill/SKILL_Project.md` before project work and `workflow/README.md` plus the current sprint/task before implementation.
 - Read `skill/SKILL_Github.md` before code/Git work. Identify owner A/B, dependencies and shared-file ownership; use a separate task branch and clone/worktree for each developer.
 - Keep `README.md` focused on the actual application, and `Project_code/README.md` on verified code/setup details. Put team/AI/task/branch instructions in `DEVELOPMENT_README.md`, `CONTRIBUTING.md` and `workflow/`. Do not mix planning claims into implemented-feature documentation.

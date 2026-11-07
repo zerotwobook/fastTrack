@@ -4,6 +4,8 @@ Owner A/zerotwobook, task R1-J04-A-REFRESH / [#74](https://github.com/zerotwoboo
 
 The user asked to complete remaining preparation and notify them just before main so they can arrange peer review. This is permission to prepare a concrete candidate, not permission to merge main, approve as B, create an assessed tag or upload to LEB2. Follow [MAIN_RELEASE_GATE.md](../MAIN_RELEASE_GATE.md).
 
+**Current documentation instruction:** Maintain [the D1 Markdown source](../../deliverable%20_file/submit/d1_release/report.md) and Markdown handoff notes. The user assembles/exports the final reports. Generate or rebuild PDFs only on explicit request, including through tools that rebuild PDFs as a verification side effect. PDF counts, hashes and visual QA below are historical results from `209ccc7`, before this preference; they are not new validation of subsequent Markdown edits. Official course requirements remain unchanged.
+
 ## Completed preparation
 
 - Verified B's exact-head approvals and actual staging merges of #71 (repairs), #69 (main gate) and #73 (UI/eye toggle). Reconciled #70/#68/#72 as closed Done/PASSED/ACCEPTED and filled real PR acceptance without replaying native Done events.
@@ -12,29 +14,24 @@ The user asked to complete remaining preparation and notify them just before mai
 - Fresh compiled-browser normal create/submit/save-feedback/reload journey, real foreign 404 and expired-deadline UI, API-matched student groups, **108 role/viewport combinations**, feedback read/write ordering/lost-response/frozen-intent recovery, loading/error/retry and masked private drafts passed. [Methods/results](../../Project_code/docs/evidence/R1-J04-REFRESH-browser.json).
 - Refreshed [PDF](../../output/pdf/fastTrack_D1_review_candidate.pdf), [source](../../deliverable%20_file/submit/d1_release/report.md), [page map/hash](../../deliverable%20_file/submit/d1_release/page_map.json), [source manifest](../../deliverable%20_file/submit/d1_release/source_manifest.json) and [QA](../../deliverable%20_file/submit/d1_release/qa_checks.json). Original source packages, figures, accepted preparation and historical 310-case/native-zoom records retain their identities.
 
-## Review the concrete artifact
+## Review the current Markdown source
 
-The PDF has 50 pages: A 2-5, B 6-8, C 9-17, D 18-19, E 20-27, F 28-50. The current merged-source/evidence update is on pages 45-50. Both real source-identical automated excerpts, current/historical test results, complete AC/STS/DoD and original reviewed Issue/PR chains remain embedded.
+The primary document is report.md: complete Parts A-F, merged-source evidence in F.R1, two real source-identical test excerpts, current/historical test results, complete AC/STS/DoD and original reviewed Issue/PR chains. The user will assemble the final report from this Markdown. The existing PDF remains a 50-page historical snapshot at `209ccc7`.
 
-All pages were rendered and visually inspected; changed table/figure pages were rechecked. Screenshot page splits now choose nearby whitespace to avoid cutting through text, without altering source image bytes. Deterministic rebuild, original/current source hashes, links, requirements/AC/STS coverage, real case names, exact excerpts, six bookmarks, page starts and text bounds passed. Run from repository root:
-
-```powershell
-python 'deliverable _file/submit/d1_release/build_report.py'
-python 'deliverable _file/submit/d1_release/verify_report.py'
-```
+The snapshot's pages were rendered/visually inspected and its deterministic rebuild, original/current hashes, links, requirements/AC/STS coverage, real case names, exact excerpts, bookmarks, page starts and text bounds passed. These are retained historical checks. Do not rerun build_report.py or verify_report.py during ordinary Markdown work: both generate/rebuild a PDF and require an explicit user request.
 
 The verifier records mechanical checks and renders. Human/agent visual inspection is recorded separately after viewing, tied to the exact PDF hash; rerendering alone is not visual acceptance. The first Supervisor browser run raced the native close event; the helper now waits for collapsed state/restored focus before the same assertions, and both final matrices passed. One initial artifact check required correcting its T-31-local matching; neither harness issue is hidden as a product failure.
 
 ## B preparation review
 
-Review PR #75 current head, complete source/PDF diff, all 50 rendered pages and attribution. Confirm the unchanged executable tree against 17f4398, source/hash manifests, fresh 340-case evidence, current versus historical browser records and main hold. Inspect especially the current setup checkout commit, bundled-font claim, updated controls/figures, 340-versus-310 tables and native-zoom disclosure. B may accept/merge this preparation into staging under normal protection; A does not self-approve or merge it.
+Review PR #75 current head, the Markdown/source diff and attribution. Confirm the unchanged executable tree against 17f4398, actual execution evidence, current versus historical records and main hold. Inspect the setup checkout commit, bundled-font claim, updated control descriptions/figures, 340-versus-310 tables and native-zoom disclosure. Historical PDF QA is not a current Markdown validation claim. B may accept/merge this preparation into staging under normal protection; A does not self-approve or merge it.
 
 ## Exact main boundary
 
 1. PR #75 needs independent preparation acceptance/integration first. Read back its actual merge/new staging head and compare runtime tree identity to tested 17f4398. A docs-only merge does not need a redundant full DB run; unexpected runtime changes need affected rechecks.
 2. Keep [release PR #67](https://github.com/zerotwobook/fastTrack/pull/67) **Draft**, no auto-merge and no outstanding final release review request while user authorization is pending. Main base is 2080cf3; current staging head before preparation integration is 17f4398. The preparation PR head is obtained live from #75 rather than guessed from this document's self-referential commit.
-3. Show the user that concrete post-preparation head/base, application preview/PDF, actual checks and limits. Obtain/record their explicit current-candidate release authorization before main ready/final peer handoff. Changed candidates require reassessment; silence and staging approval do not authorize main.
-4. Then obtain actual B release review and both final G5 decisions as applicable, respect branch protection and verify the real main merge. Only then preserve a new immutable assessed tag/commit and reconcile final PDF identity. Never move an assessed tag or predeclare acceptance.
+3. Show the user that concrete post-preparation head/base, application preview/Markdown source, actual checks and limits. Obtain/record their explicit current-candidate release authorization before main ready/final peer handoff. Changed candidates require reassessment; silence and staging approval do not authorize main.
+4. Then obtain actual B release review and both final G5 decisions as applicable, respect branch protection and verify the real main merge. Only then preserve a new immutable assessed tag/commit; the user handles final report assembly/export and its real release identity. Never move an assessed tag or predeclare acceptance.
 5. Submit only on actual user course-submission instruction by **8 November 2026, 23:59 Asia/Bangkok**; retain a real receipt. Close #12 only after its full release/submission/handoff criteria, then start S2 from accepted main under #13.
 
 ## Remaining practical limits
