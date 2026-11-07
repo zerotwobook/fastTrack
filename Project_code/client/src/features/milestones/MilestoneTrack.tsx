@@ -5,6 +5,7 @@ import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import type { Team } from '../auth/session';
 import { bangkokInputToIso, codePointLength, MilestoneInputError, parseMilestoneInput } from '../../../../shared/milestones.mjs';
 import styles from './milestones.module.css';
+import { groupStudentMilestones } from './overview';
 
 export interface MilestoneItem {
   id: string; teamId: string; title: string; description: string; dueAt: string;
@@ -22,6 +23,28 @@ function State({ item, serverTime }: { item: MilestoneItem; serverTime: string }
 function Failure({ message, retry }: { message: string; retry: () => void }) {
   return <div className={styles.error} role="alert"><p>{message}</p><Button variant="secondary" onClick={retry}>Try again</Button></div>;
 }
+function TrackRows({ items, serverTime, userRole }: { items: MilestoneItem[]; serverTime: string; userRole: 'student' | 'supervisor' }) {
+  const Heading = userRole === 'student' ? 'h4' : 'h3';
+  return <ol className={styles.track}>{items.map(item => <li key={item.id} className={styles.row}>
+    <time dateTime={item.dueAt} className={styles.date}>{formatBangkok(item.dueAt)}</time><span className={styles.marker} aria-hidden="true" />
+    <div className={styles.item}><Heading><a href={`/milestones/${item.id}`}>{item.title}</a></Heading><State item={item} serverTime={serverTime} />
+      <p>{item.description}</p>{item.latestSubmission && <p className={styles.meta}>Version {item.latestSubmission.version}, {item.latestSubmission.feedbackCount} feedback messages. <a href={`/submissions/${item.latestSubmission.id}`}>{userRole === 'supervisor' ? 'Open work and give feedback' : 'Open saved submission'}</a></p>}
+      {userRole === 'student' && !item.cancelledAt && !item.latestSubmission && Date.parse(item.dueAt) >= Date.parse(serverTime) && <a className={styles.primaryLink} href={`/milestones/${item.id}/submissions/new`}>Submit work</a>}
+      <a href={`/milestones/${item.id}`}>View milestone</a></div>
+  </li>)}</ol>;
+}
+function StudentGroups({ items, serverTime }: { items: MilestoneItem[]; serverTime: string }) {
+  const groups = groupStudentMilestones(items, serverTime);
+  const sections = [
+    ['actionable', 'Work to submit', 'No upcoming work to submit.'],
+    ['overdue', 'Overdue', 'No overdue work.'],
+    ['submitted', 'Submitted work', 'No saved submissions yet.'],
+    ['cancelled', 'Cancelled', ''],
+  ] as const;
+  return <div className={styles.groups}>{sections.filter(([key]) => key !== 'cancelled' || groups.cancelled.length > 0).map(([key, heading, empty]) => <section key={key} aria-label={heading} className={styles.group}>
+    <h3>{heading}</h3>{groups[key].length ? <TrackRows items={groups[key]} serverTime={serverTime} userRole="student" /> : <p className={styles.meta}>{empty}</p>}
+  </section>)}</div>;
+}
 export function MilestoneTrack({ teamId, userRole }: { teamId: string; userRole: 'student' | 'supervisor' }) {
   const [result, setResult] = useState<{ teamId: string; items: MilestoneItem[]; serverTime: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -36,14 +59,10 @@ export function MilestoneTrack({ teamId, userRole }: { teamId: string; userRole:
   return <section className={styles.container} aria-label="Milestones">
     <header className={styles.header}><h2>Milestones</h2>{userRole === 'supervisor' && <a className={styles.primaryLink} href={`/teams/${teamId}/milestones/new`}>Create milestone</a>}</header>
     {error ? <Failure message={error} retry={() => setAttempt(value => value + 1)} />
-      : !result || result.teamId !== teamId ? <p role="status">Loading milestones?</p>
+      : !result || result.teamId !== teamId ? <p role="status">Loading milestones…</p>
       : <>{result.items.length === 0 ? <EmptyState title="No milestones yet" description={userRole === 'supervisor' ? 'Create a milestone to set the next deadline for your team.' : 'Your supervisor has not scheduled a milestone yet.'} />
-        : <ol className={styles.track}>{result.items.map(item => <li key={item.id} className={styles.row}>
-          <time dateTime={item.dueAt} className={styles.date}>{formatBangkok(item.dueAt)}</time><span className={styles.marker} aria-hidden="true" />
-          <div className={styles.item}><h3><a href={`/milestones/${item.id}`}>{item.title}</a></h3><State item={item} serverTime={result.serverTime} />
-            <p>{item.description}</p>{item.latestSubmission && <p className={styles.meta}>Version {item.latestSubmission.version}, {item.latestSubmission.feedbackCount} feedback messages. <a href={`/submissions/${item.latestSubmission.id}`}>Open saved submission</a></p>}
-            <a href={`/milestones/${item.id}`}>View milestone</a></div>
-        </li>)}</ol>}
+        : userRole === 'student' ? <StudentGroups items={result.items} serverTime={result.serverTime} />
+        : <TrackRows items={result.items} serverTime={result.serverTime} userRole={userRole} />}
         <div className={styles.refresh}><p className={styles.meta}>Status as of {formatBangkok(result.serverTime)}.</p><Button variant="ghost" onClick={() => setAttempt(value => value + 1)}>Refresh milestones</Button></div>
       </>}
   </section>;
@@ -86,7 +105,7 @@ export function MilestoneCreate({ teamId, userRole }: { teamId: string; userRole
       <Field id="dueAt" label="Deadline in Asia/Bangkok" hint="A time entered as HH:mm uses seconds 00, not the end of that minute." {...(fields.dueAt ? { error: fields.dueAt } : {})}>
         <Input id="dueAt" name="dueAt" type="datetime-local" step="60" required value={dueAt} onChange={event => setDueAt(event.target.value)} disabled={saving} aria-invalid={!!fields.dueAt} aria-describedby={described('dueAt')} />
       </Field>
-      <div className={styles.actions}><Button type="submit" loading={saving} disabled={saving || uncertain}>{saving ? 'Creating milestone?' : 'Create milestone'}</Button><a href={`/teams/${teamId}`}>Back to team</a></div>
+      <div className={styles.actions}><Button type="submit" loading={saving} disabled={saving || uncertain}>{saving ? 'Creating milestone…' : 'Create milestone'}</Button><a href={`/teams/${teamId}`}>Back to team</a></div>
     </form>
   </section>;
 }
@@ -102,7 +121,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
     return () => { active = false; };
   }, [id, attempt]);
   if (error) return <><h1>Milestone unavailable</h1><Failure message={error} retry={() => setAttempt(value => value + 1)} /><a href="/">Back to overview</a></>;
-  if (!result || result.id !== id) return <p role="status">Loading milestone?</p>;
+  if (!result || result.id !== id) return <p role="status">Loading milestone…</p>;
   return <><p className={styles.meta}><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
     <div className={styles.detail}><section><h2>Description</h2><p className={styles.description}>{result.item.description}</p></section>
       <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><State item={result.item} serverTime={result.serverTime} />

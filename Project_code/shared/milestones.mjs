@@ -31,6 +31,8 @@ export function parseMilestoneInput(value) {
   const description = typeof value.description === 'string' ? value.description.trim() : '';
   if (!title || codePointLength(title) > 120) fields.title = 'Use 1-120 characters after trimming.';
   if (!description || codePointLength(description) > 4000) fields.description = 'Use 1-4,000 characters after trimming.';
+  if (/[\u0000\uD800-\uDFFF]/u.test(title)) fields.title = 'Remove unsupported characters from the title.';
+  if (/[\u0000\uD800-\uDFFF]/u.test(description)) fields.description = 'Remove unsupported characters from the description.';
   let dueAt;
   try { dueAt = parseTimestamp(value.dueAt).toISOString(); }
   catch (error) { Object.assign(fields, error.fields); }
