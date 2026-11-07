@@ -111,3 +111,96 @@ describe('F-03 private mutation recovery information', () => {
     expect(store.getSnapshot().phase).toBe('ready');
   });
 });
+
+describe('Visibility verification without losing same-session state', () => {
+  it('preserves the workspace revision only after the same user, role and CSRF are verified', async () => {
+    const pending = deferred<Response>();
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(pending.promise);
+    const store = new SessionStore(fetcher); await store.restore(); const revision = store.getSnapshot().revision;
+    store.suspend(); expect(store.getSnapshot()).toMatchObject({ phase: 'checking', revision, auth: auth('a') });
+    const check = store.revalidate(); expect(store.getSnapshot().phase).toBe('checking');
+    pending.resolve(json(auth('a'))); await check;
+    expect(store.getSnapshot()).toMatchObject({ phase: 'ready', revision, auth: auth('a') });
+  });
+  it.each([
+    ['account', auth('b')], ['session', { ...auth('a'), csrfToken: 'new-session' }],
+    ['role', { ...auth('a'), user: { ...auth('a').user, role: 'supervisor' } }],
+  ])('destroys the old workspace revision on a changed %s', async (_kind, replacement) => {
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockResolvedValueOnce(json(replacement)));
+    await store.restore(); const revision = store.getSnapshot().revision;
+    store.suspend(); await store.revalidate();
+    expect(store.getSnapshot().revision).toBeGreaterThan(revision); expect(store.getSnapshot().auth).toEqual(replacement);
+  });
+  it('keeps preserved state masked during an outage and permits a same-session retry', async () => {
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a')))
+      .mockRejectedValueOnce(new Error('offline')).mockResolvedValueOnce(json(auth('a'))));
+    await store.restore(); const revision = store.getSnapshot().revision;
+    store.suspend(); await store.revalidate(); expect(store.getSnapshot()).toMatchObject({ phase: 'unavailable', revision, auth: auth('a') });
+    await store.revalidate(); expect(store.getSnapshot()).toMatchObject({ phase: 'ready', revision });
+  });
+  it('expiry invalidates preserved state instead of revealing the old workspace', async () => {
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockResolvedValueOnce(denied()));
+    await store.restore(); const revision = store.getSnapshot().revision;
+    store.suspend(); await store.revalidate(); expect(store.getSnapshot()).toMatchObject({ phase: 'anonymous', auth: null });
+    expect(store.getSnapshot().revision).toBeGreaterThan(revision);
+  });
+  it('does not let a delayed session check replace a newer login', async () => {
+    const pending = deferred<Response>();
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(pending.promise).mockResolvedValueOnce(json(auth('b'))));
+    await store.restore(); store.suspend(); const check = store.revalidate(); await store.login('b', 'synthetic');
+    pending.resolve(json(auth('a'))); await check; expect(store.getSnapshot().auth).toEqual(auth('b'));
+  });
+  it('an older visibility check cannot reveal a workspace after another suspension', async () => {
+    const pending = deferred<Response>();
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(pending.promise).mockResolvedValueOnce(json(auth('a'))));
+    await store.restore(); store.suspend(); const old = store.revalidate(); store.suspend();
+    pending.resolve(json(auth('a'))); await old; expect(store.getSnapshot().phase).toBe('checking');
+    await store.revalidate(); expect(store.getSnapshot().phase).toBe('ready');
+  });
+  it('holds an in-flight successful mutation until the same session is verified', async () => {
+    const response = deferred<Response>(); const verification = deferred<Response>(); let delivered = false;
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(response.promise).mockReturnValueOnce(verification.promise));
+    await store.restore(); const saving = store.mutate('/submissions/id/feedback', { content: 'Draft' }).then(value => { delivered = true; return value; });
+    store.suspend(); const check = store.revalidate(); response.resolve(json({ id: 'saved' }));
+    await new Promise(resolve => setTimeout(resolve, 0)); expect(delivered).toBe(false);
+    verification.resolve(json(auth('a'))); await check; await expect(saving).resolves.toEqual({ id: 'saved' });
+  });
+  it('rejects a held mutation if revalidation finds a different session', async () => {
+    const response = deferred<Response>(); const verification = deferred<Response>();
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(response.promise).mockReturnValueOnce(verification.promise));
+    await store.restore(); const saving = store.mutate('/submissions/id/feedback', {}); const rejected = expect(saving).rejects.toBeInstanceOf(StaleSessionError);
+    store.suspend(); const check = store.revalidate(); response.resolve(json({ id: 'private' }));
+    verification.resolve(json({ ...auth('a'), csrfToken: 'different-session' })); await check; await rejected;
+  });
+  it('resumes an uncertain-save recovery read after verification and uses the same CSRF for a queued retry', async () => {
+    const verification = deferred<Response>();
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(verification.promise)
+      .mockResolvedValueOnce(json([])).mockResolvedValueOnce(json({ id: 'saved' }));
+    const store = new SessionStore(fetcher); await store.restore(); store.suspend(); const check = store.revalidate();
+    const recovery = store.read('/submissions/id/feedback'); const retry = store.mutate('/submissions/id/feedback', { content: 'Frozen intent' });
+    expect(fetcher).toHaveBeenCalledTimes(2); verification.resolve(json(auth('a'))); await check;
+    await expect(recovery).resolves.toEqual([]); await expect(retry).resolves.toEqual({ id: 'saved' });
+    expect(fetcher.mock.calls[3]?.[1]?.headers).toMatchObject({ 'X-CSRF-Token': auth('a').csrfToken });
+  });
+  it('does not send a queued mutation under a replacement account', async () => {
+    const verification = deferred<Response>();
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(verification.promise);
+    const store = new SessionStore(fetcher); await store.restore(); store.suspend(); const check = store.revalidate();
+    const retry = store.mutate('/submissions/id/feedback', {}); const rejected = expect(retry).rejects.toBeInstanceOf(StaleSessionError);
+    verification.resolve(json(auth('b'))); await check; await rejected; expect(fetcher).toHaveBeenCalledTimes(2);
+  });
+  it('logout invalidates queued reads and late verification without retaining private state', async () => {
+    const verification = deferred<Response>();
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(verification.promise).mockResolvedValueOnce(new Response(null, { status: 204 })));
+    await store.restore(); store.suspend(); const check = store.revalidate(); const read = store.read('/teams');
+    const rejected = expect(read).rejects.toBeInstanceOf(StaleSessionError); await store.logout(); await rejected;
+    verification.resolve(json(auth('a'))); await check; expect(store.getSnapshot()).toMatchObject({ phase: 'anonymous', auth: null });
+  });
+  it('a current 401 from an in-flight private request immediately invalidates masked state', async () => {
+    const response = deferred<Response>(); const verification = deferred<Response>();
+    const store = new SessionStore(vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(response.promise).mockReturnValueOnce(verification.promise));
+    await store.restore(); const read = store.read('/teams'); store.suspend(); const check = store.revalidate();
+    const rejected = expect(read).rejects.toMatchObject({ status: 401 }); response.resolve(denied()); await rejected;
+    verification.resolve(json(auth('a'))); await check; expect(store.getSnapshot()).toMatchObject({ phase: 'anonymous', auth: null });
+  });
+});

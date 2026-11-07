@@ -8,8 +8,10 @@
 .content { white-space: pre-wrap; overflow-wrap: anywhere; margin-top: 12px; }
 .form { display: flex; flex-direction: column; gap: 12px; padding-top: 24px; border-top: 1px solid var(--color-divider); }
 .form textarea { font-size: 1rem; min-height: 144px; }
+.form [id$="-hint"], .form [id$="-error"] { font-size: 14px; line-height: 1.6; }
 .form textarea:focus-visible { outline: 2px solid var(--color-ink); outline-offset: 2px; }
 .notice { padding: 12px; border-left: 3px solid var(--color-ink); background: var(--color-wash); overflow-wrap: anywhere; }
 .notice button { margin-top: 12px; }
 .actions { display: flex; flex-wrap: wrap; gap: 12px; }
 .actions button { min-height: 44px; white-space: normal; }
+@media (max-width: 767px) { .actions button[type="submit"] { width: 100%; justify-content: center; } }
