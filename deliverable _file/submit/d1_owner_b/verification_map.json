@@ -1,7 +1,13 @@
 {
-  "acceptedBaseline": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
+  "task": "R1-B03 / correction #64",
+  "owner": "B original package; A authorized corrections; B peer review pending",
+  "acceptedBaseline": "fe65b1962e2c62bf5a11a96e3fb536da9e3e98bc",
+  "acceptedApplicationBaseline": "514f34cbdb95f2141d2c7f3159a1c36a0bd236a6",
   "testedSource": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
-  "owner": "B",
+  "canonicalMap": "Project_code/docs/evidence/R1-J03-verification-map.json",
+  "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+  "pathBase": "repository root",
+  "scope": "Reused accepted J03 evidence; not a new 310-case run or B review result. Names below are full raw reporter identities, including parameterized values.",
   "rows": [
     {
       "ac": "AC-02.1",
@@ -230,5 +236,718 @@
       ],
       "scopeNote": ""
     }
-  ]
+  ],
+  "namedEvidence": {
+    "b01Tests/1": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-06 creates then reads identical persisted list/detail projections",
+      "fullNameSha256": "18586ee9756bd607487f2141c38ca17e0ab7b5fb58895bb1f461a8e9d20252f4",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/1",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/10": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 6 without writes",
+      "fullNameSha256": "42d108ab89ed2de3b9acf13ba66034c934cc3e58cf6be6ef52244d2a9d4693be",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/10",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/11": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 7 without writes",
+      "fullNameSha256": "f88bb95cec56e0600e1976002a1d6bbf4bfa6fe6982f5ce2d2ddde45e02a060b",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/11",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/12": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 8 without writes",
+      "fullNameSha256": "e64a3ab663980d417f53e6b7ef260186f9641e9e081b37c1266991bf161f6564",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/12",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/13": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 9 without writes",
+      "fullNameSha256": "ec29eb2bd3a84558d3d7cbecfe7e129ae688627e717b317a5cfaaf3511a43647",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/13",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/14": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 10 without writes",
+      "fullNameSha256": "db63c2c59da709e553b5f41739633e98919f55da70d07cea6a45f49daeaf53ff",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/14",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/15": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 11 without writes",
+      "fullNameSha256": "4d203f54db72f657d055ea343cac6956f5a70d729af86ed7f9d2ec4a42a0f551",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/15",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/16": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 requires description and validates input shape before foreign scope",
+      "fullNameSha256": "b8b5ddac721297559faeb71d06c5a3d18e37766f99951ee2ebff6837857b1db4",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/16",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/17": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-02-30T12:00:00+07:00 without writes",
+      "fullNameSha256": "35df5c48203d5af5c458e17135f4f3818549ee975758281068e7e4b35dc0b801",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/17",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/18": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00.1234Z without writes",
+      "fullNameSha256": "1b2a4b84288d68dcbcb6c8b771349da7107f253137eec2fb4f19ea9f3af553fa",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/18",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/19": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00 without writes",
+      "fullNameSha256": "955e0d8a43e23e217080681da02a286cdc910c74c3a82e9b9c5a9896b688f56b",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/19",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/2": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\",\"description\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}",
+      "fullNameSha256": "eb931ea01413578fe6d423f7c7ac20d17e1bf3718f3416ba4c139d008bc8001e",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/2",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/20": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T25:00:00Z without writes",
+      "fullNameSha256": "4df9441a997e3252596a13deef9b4c0f83b90bb108439039a167c2f9cb8beec4",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/20",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/21": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-07 checks session/role/CSRF before invalid JSON and rejects forged identity",
+      "fullNameSha256": "b49f2f80c05599757e111e7250b0ceeeb8537a62020e7a69fd436317c970204f",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/21",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/22": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-07 conceals foreign versus missing milestone identity with equal 404 bodies",
+      "fullNameSha256": "5f8059764affccdf600051698d52abe975c2e918bec9b51b16aada251a7b13ce",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/22",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/23": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-25 projects only latest-version feedback and preserves stable dueAt/id ordering",
+      "fullNameSha256": "e4a44691221b8b2f6d0b0a3c7be3b108d1504f57b08542e3e75ade0e64a77743",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/23",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/24": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-06 production composition exposes the real session-protected milestone routes",
+      "fullNameSha256": "85694d563980a8ef7ea74f0e4f075b91c8271f12b9b25193a373c8b914901fec",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/24",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/25": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rechecks database future time after waiting for the team lock",
+      "fullNameSha256": "1136dde247d30708f53dff4863c9f1c03d3fca9aa540ec2d200588f1ed75cd39",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/25",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/26": {
+      "file": "Project_code/server/src/modules/milestones/milestones.b01.ts",
+      "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-06: assigned supervisor can create a milestone with future dueAt",
+      "fullNameSha256": "e2326c26557521d046c6df385ac6f02771f3490703a3a1f2c5b120fd93c42a49",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/26",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "745ffcb3088e847dc3d6337ab79f2d69518433af1f10de0e5aaa7623911c7c17"
+    },
+    "b01Tests/27": {
+      "file": "Project_code/server/src/modules/milestones/milestones.b01.ts",
+      "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-07: student cannot create a milestone (403 Forbidden)",
+      "fullNameSha256": "37cb9dff5dfb1d5d5be96fa40c42e5cfa643d0ebae09993cc325d5d128558be8",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/27",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "745ffcb3088e847dc3d6337ab79f2d69518433af1f10de0e5aaa7623911c7c17"
+    },
+    "b01Tests/28": {
+      "file": "Project_code/server/src/modules/milestones/milestones.b01.ts",
+      "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-07: unassigned supervisor cannot create milestone for another team (404 Not Found)",
+      "fullNameSha256": "a2f2e80081c000072a15866343aad7d40130928cc4e8b5fa44e116e097a9eb53",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/28",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "745ffcb3088e847dc3d6337ab79f2d69518433af1f10de0e5aaa7623911c7c17"
+    },
+    "b01Tests/29": {
+      "file": "Project_code/server/src/modules/milestones/milestones.b01.ts",
+      "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone with past dueAt (400 Bad Request)",
+      "fullNameSha256": "c23f9c10e43a8de3712fd81c594997aa45e7f00c9ec9a7ab94b3aadb5511c119",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/29",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "745ffcb3088e847dc3d6337ab79f2d69518433af1f10de0e5aaa7623911c7c17"
+    },
+    "b01Tests/3": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\ud83d\ude80\",\"description\":\"d\"}",
+      "fullNameSha256": "6b019e0e3020042018d2d83e040c031b4729fc5b539bee7825f6d2e23c829359",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/3",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/30": {
+      "file": "Project_code/server/src/modules/milestones/milestones.b01.ts",
+      "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone title exceeding canonical bound of 120 chars (400 Bad Request)",
+      "fullNameSha256": "85495abcbab0b14f63c09eb9c63ee616e97e3b50bdccf74f9bde2ffa8843219e",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/30",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "745ffcb3088e847dc3d6337ab79f2d69518433af1f10de0e5aaa7623911c7c17"
+    },
+    "b01Tests/31": {
+      "file": "Project_code/server/src/modules/milestones/milestones.b01.ts",
+      "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-25: student can list milestones for their assigned team",
+      "fullNameSha256": "574ec368b18d1c8e1fe2f95ea10c6fc267c19b32ec745ea4c99912af45f0b9aa",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/31",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "745ffcb3088e847dc3d6337ab79f2d69518433af1f10de0e5aaa7623911c7c17"
+    },
+    "b01Tests/32": {
+      "file": "Project_code/server/src/modules/milestones/milestones.b01.ts",
+      "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) student cannot list milestones of an unassigned team (404 Not Found)",
+      "fullNameSha256": "947e47150eaa8f181871fe1956aaf82ec9332d1feacf939e0045224525f6d642",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/32",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "745ffcb3088e847dc3d6337ab79f2d69518433af1f10de0e5aaa7623911c7c17"
+    },
+    "b01Tests/4": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 0 without writes",
+      "fullNameSha256": "76d555c6be0bf42568f30702481862c0cf76d6edddb7d40dab65f0d857609f3e",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/4",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/5": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 1 without writes",
+      "fullNameSha256": "9981cb8dd23e4a2c9b6e08280523a09e4be323978d8664ee0cc870537ba625e8",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/5",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/6": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 2 without writes",
+      "fullNameSha256": "eb1385e4d4121fd56bad1b6d8d2f911a2f015f64cfd31d5bc716cd03fbbc4163",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/6",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/7": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 3 without writes",
+      "fullNameSha256": "7b1f72532183a74105259c471a4b3ee68d5e67169d66a133fb2e2c8605b6ca2d",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/7",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/8": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 4 without writes",
+      "fullNameSha256": "363b6ae8fa57c4acec187d7106ef64a35479aa4a6a26c99fe511c6e5a8204efe",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/8",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b01Tests/9": {
+      "file": "Project_code/server/src/testing/milestones-review.b01.ts",
+      "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 5 without writes",
+      "fullNameSha256": "350ca4bbb5f13280d5e1198788cc6098b00e9912a8f5876e1ad1e2305b53a5f2",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b01Tests/cases/9",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "8fc25be8e893c4920a80b6e6d13e4c93e83b0609b232ed231d85e572f4c1cafa"
+    },
+    "b02Tests/0": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries T-17/T-20 persists server identity/time and returns only the DTO after application recreation",
+      "fullNameSha256": "62ae25b0587e6ad717fd1914aa44b275857b648533fc289caf30b3f7a84a7c42",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/0",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/1": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries T-24 replays a trimmed identical intent with one row and conflicts on changed content",
+      "fullNameSha256": "ea57aa0629897a0f00190725d556452c99b8b67948770a4417c1051e3812a228",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/1",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/10": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries authenticates before parsing, rejects missing/expired/revoked sessions and source/CSRF before input",
+      "fullNameSha256": "52da3524831cc46b873ed2e250b73bb2acb3f12aa2c47ce0c1eb9069b321818c",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/10",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/11": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 0 with a field error and no write",
+      "fullNameSha256": "1a7a752cd46968d38edf8b2351fe50564ca432509b10fc5a3d6adb15bd660081",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/11",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/12": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 1 with a field error and no write",
+      "fullNameSha256": "302da08e2712d35726a0d5c83205c7a46c85524f8917b89fa1a4683fb096e726",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/12",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/13": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 2 with a field error and no write",
+      "fullNameSha256": "a4ad6122f7234605cb9f744386af83e6b19d30d5c92935257dc05b0851a35111",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/13",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/14": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 3 with a field error and no write",
+      "fullNameSha256": "602018c0dd7b376214f76c213a84e58e0363e10060173b00d9f5ca334893849a",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/14",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/15": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 4 with a field error and no write",
+      "fullNameSha256": "4aa46f1de7bb303bd11599cb998498060fa31bf3974f916016cd7c272fe656ac",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/15",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/16": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects invalid content 5 with a field error and no write",
+      "fullNameSha256": "4930e79c69388db1049612a31d85de2c8774c439a5aca27f4df75b2802a93052",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/16",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/17": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries supports 4000 astral code points and normalizes UUID casing on retry",
+      "fullNameSha256": "75f9e3eb67690133eac2f8940808422c64a7787dedb62a106d415baab0d86c46",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/17",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/18": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field supervisorId with no write",
+      "fullNameSha256": "ad897da2afd7035aa04143ec3c2d2b9b5d1a072fafe2dce1bb44415b0b686216",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/18",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/19": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field submissionId with no write",
+      "fullNameSha256": "8794ae71163b409ac8cd304566f0f6f5330f050d877a546b8de6d2384a8c3b41",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/19",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/2": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries T-24 concurrent identical HTTP requests return one 201 and the remaining 200 with one persisted row",
+      "fullNameSha256": "b3950147c0237214750b6c4612913df0e2413296d15020c40bae954ad84b4a48",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/2",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/20": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field createdAt with no write",
+      "fullNameSha256": "f411e18718c0d50c76bf8416de8b355411f7dc0376b4cefd09ef938aa66d58d1",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/20",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/21": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries rejects spoofed field version with no write",
+      "fullNameSha256": "d14383d30edc3fc32e0ee78d72da681481e91f3ce43ac313d93520585a4e3e3a",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/21",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/23": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 transaction boundaries and actual driver conflicts handles a forced supervisor-wide key race across two authorized teams after actual PostgreSQL rollback",
+      "fullNameSha256": "057846e13884940bd10b5fe970096283030f9730f3334d99dd1baf978d8cbf83",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/23",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/29": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) construction requires all mandatory protection dependencies",
+      "fullNameSha256": "31bd5f8d555213532a6d41ac66f293a95630c29b029cded555f232a9f1d7dae2",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/29",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/3": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries T-24 concurrent different intents on one key return 201/409 and preserve the winner",
+      "fullNameSha256": "d8b791a5bf690a70cefbbf308236ae7ce40e22c610e756deea1cf92123f7a0b4",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/3",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/30": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-17: assigned supervisor can create feedback for a team submission (201 Created)",
+      "fullNameSha256": "50199ede91c4285ca32b211283c6ecc7da6d5db0617f75744457cf03bb87d8d5",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/30",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/31": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-18: student cannot create feedback (403 Forbidden)",
+      "fullNameSha256": "ad1859832309624af43f743c8a684fa4c4455383f4581f5939c0208d81b67eca",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/31",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/32": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-19: unassigned supervisor cannot create feedback for another team submission (404 Not Found)",
+      "fullNameSha256": "1b9edcc6d376c8e1ef4902b57a75181e549021097598c3f172feaae11c429c0e",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/32",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/33": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-20: assigned supervisor and team members can list feedback; out-of-scope users receive 404",
+      "fullNameSha256": "ebe986b30271797d479db46997718254168f8c90ea80fb6739045f81731fa222",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/33",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/34": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-24: identical retry with same clientRequestId returns 200 replay without duplicate rows",
+      "fullNameSha256": "6c9c2d35ca98a74c2b599c20c9b0066741eee9c132afb046f7fb23119570fa27",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/34",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/35": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-24: reusing same clientRequestId with different content returns 409 REQUEST_KEY_REUSED",
+      "fullNameSha256": "530fd6d5244dbb1090fc2dd788f816af25294628b65168705f6ab15a8bd6ce3b",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/35",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/36": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) T-24: reusing same clientRequestId for a different submission returns 409 REQUEST_KEY_REUSED",
+      "fullNameSha256": "f50c20ae7822ee837622aa92d9885c180db7d95f14c8355880b74f015adb2159",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/36",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/37": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects unknown payload keys (400 Bad Request)",
+      "fullNameSha256": "676c4216fc0f8577655a995c58cb9f99e0b6b95af968722e9cd15a1eade8aed6",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/37",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/38": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects empty or whitespace-only feedback content (400 Bad Request)",
+      "fullNameSha256": "f41b85bd4dac631339328f40c9702383b04082d412d9d99137d62a64cea7d822",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/38",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/39": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects feedback content exceeding 4000 code points (400 Bad Request)",
+      "fullNameSha256": "89c1f4625564bf40bbdf572e5ffb5bd6d4e65d1224152004f90e1d1471cf5949",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/39",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/4": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries keeps feedback on its exact version, allows after the deadline, and rejects key reuse on another authorized version",
+      "fullNameSha256": "4061b87217323ddd9d36879298026337c7a54b5a9d7571894817a9ce56588cd0",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/4",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/40": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects invalid clientRequestId UUID (400 Bad Request)",
+      "fullNameSha256": "788159919c818466d99d8bf590a712f26d7a9d6b9b71b4df436773d25c85436f",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/40",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/41": {
+      "file": "Project_code/server/src/modules/feedback/feedback.b02.ts",
+      "name": "Feedback Module (T-17, T-18, T-19, T-20, T-24) rejects invalid submissionId UUID (400 Bad Request)",
+      "fullNameSha256": "1ed768fc90250a063b2af806cae8cfa1f75f85341a0e27688f565ef2afbb078b",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/41",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "2369a84a1c160f6ffd6ea0f199e7fa23eb7999f15a55665d5c8333004b1417d6"
+    },
+    "b02Tests/5": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries orders feedback by createdAt and id without changing the content",
+      "fullNameSha256": "7092843b0054262536cdb620d297715d0d53da88f57e5c8e8303b15ed0c571a9",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/5",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/6": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries denies student without a write or cross-team key oracle",
+      "fullNameSha256": "8fcbe17921caca69fc3621d6819bef18591fc00bc6571f469a2c88ee67678967",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/6",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/7": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries denies foreign-student without a write or cross-team key oracle",
+      "fullNameSha256": "aa31c4a7ff563acf7edb92d62e41427b55a00e8818f8d5c84e2542c64de8f254",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/7",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/8": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries denies foreign-supervisor without a write or cross-team key oracle",
+      "fullNameSha256": "806f132c72f9737adaf095365a6dd580b1d3feaf2efaf82992da10a94327ff3a",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/8",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    },
+    "b02Tests/9": {
+      "file": "Project_code/server/src/testing/feedback-review.b02.ts",
+      "name": "F-04 real sessions, immutable versions and idempotent retries denies missing without a write or cross-team key oracle",
+      "fullNameSha256": "366040cfdb82f9bd1310d16c9de3e65e8e0cdf630fb0aabfa4bc0e740427d100",
+      "sourceReport": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/b02Tests/cases/9",
+      "reportedStatus": "passed",
+      "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+      "testFileSha256": "c9ae5f5acd1c4f9f0dd7c71ce6d590605b5a2dcea571a4fb7a378c953a408b28"
+    }
+  },
+  "additionalEvidence": {
+    "T-27-late-feedback-after-account-switch": {
+      "report": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/browser/10"
+    },
+    "current-j03-compiled-journey": {
+      "report": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/database/j03Tests/cases/0"
+    },
+    "student-after-final-process-restart": {
+      "report": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/browser/21"
+    },
+    "student-before-final-process-restart": {
+      "report": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/browser/20"
+    },
+    "supervisor-ui-feedback-and-persisted-readback": {
+      "report": "Project_code/docs/evidence/R1-J03-results.json",
+      "jsonPointer": "/browser/5"
+    }
+  },
+  "currentCompiledCase": {
+    "report": "Project_code/docs/evidence/R1-J03-results.json",
+    "jsonPointer": "/database/j03Tests/cases/0",
+    "file": "Project_code/server/src/testing/integrated-s1.j03.ts",
+    "name": "Sprint 1 integrated compiled HTTP and durable data T-21/T-22/T-25/T-31 creates, submits, appends and scopes feedback; repeat seed and actual process restart preserve all records",
+    "status": "passed",
+    "sourceCommit": "e1ada71112cdfc0f9ddd985a3e49e82c8638c4a1",
+    "testFileSha256": "70c0cf8dcfb0415fffb24a0718419dd33bdf26d858458f0da95f283f4a8e9df9"
+  }
 }
