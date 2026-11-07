@@ -30,7 +30,10 @@
     "review:b01": "node scripts/run-b01.mjs --review",
     "test:a02": "vitest run --config vitest.a02.config.ts",
     "test:a02:isolated": "node scripts/run-a02.mjs",
-    "review:a02": "node scripts/run-a02.mjs --review"
+    "review:a02": "node scripts/run-a02.mjs --review",
+    "test:b02": "vitest run --config vitest.b02.config.ts",
+    "test:b02:isolated": "node scripts/run-b02.mjs",
+    "review:b02": "node scripts/run-b02.mjs --review"
   },
   "devDependencies": {
     "@types/node": "26.6.6",

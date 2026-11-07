@@ -2,9 +2,9 @@
 
 ## Current implementation
 
-The React client and API implement login/me/logout, DB-backed eight-hour sessions, source/CSRF protection and authorized team list/detail, milestone create/list/detail and first-submission create/list/detail. The interface includes login, role-aware navigation, mobile menu, team members/supervisor and loading/empty/error/retry states. PostgreSQL/Prisma schema/migrations/seed/fixtures, shared UI primitives, `/api/health`, safe errors/request correlation, validated configuration and TypeScript builds are present.
+The React client and API implement login/me/logout, DB-backed eight-hour sessions, source/CSRF protection, authorized team list/detail, milestone create/list/detail, first-submission create/list/detail and append-only exact-version feedback create/list. Students read their team's feedback; assigned supervisors save it with an immutable UUID/body intent and checked recovery after unknown outcomes. The interface includes role-aware navigation, mobile menu, shared monochrome controls and loading/empty/error/retry states. PostgreSQL/Prisma schema/migrations/seed/fixtures, safe errors/request correlation, validated configuration and TypeScript builds are present.
 
-The latest clean-clone checks pass **111 ordinary tests, 48 first-submission API/DB/service cases, 33 milestone DB cases, 28 auth/API/database tests, 38 G1 cases and seven migration scenarios**. G1 was accepted through PR #50's real peer approval/merge. F-01 was accepted through B approval/merge of PR #54. The F-02 correction was accepted through B review/merge of PR #56; see [F-01 evidence](docs/evidence/R1-A01-auth.md) and [G1 history](docs/evidence/R1-G1-A-foundation.md). Delegated G2 is accepted. First submissions were accepted through B review/merge of PR #57. Feedback integration and a complete Sprint 1 release remain pending.
+Verified results: **120 ordinary tests, 42 feedback cases, 48 first-submission cases, 33 milestone DB cases, 28 auth cases, 38 G1 cases and seven migration scenarios**. Generation/typecheck/build pass. The feedback group includes 13 retained explicit-actor service cases and 29 actual-session/transaction regressions. A clean clone installs 316 packages and runs the ordinary suite without a database. [Feedback verification](docs/evidence/R1-B02-A-review.md) records exact source versions, UI recovery and actual process-restart readback. Feedback correction peer acceptance and the full Sprint 1 release remain pending; completed predecessor history is in the linked evidence.
 
 `GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness only. There is no database readiness endpoint yet; unimplemented API routes return JSON 404. No test identity bypass is exposed.
 
@@ -142,6 +142,16 @@ For the compiled milestone app, set a synthetic AUTH_REVIEW_PASSWORD as above an
 
 [Independent B01 review/results](docs/evidence/R1-B01-A-review.md) and [the integration contract](docs/contracts/sprint-1-milestones.md) identify actual coverage and subsequent milestone acceptance. No inert submission/revision/feedback actions are exposed in this increment.
 
+## Feedback checks and browser review
+
+```powershell
+npm run test:b02:isolated
+```
+
+This adds **42 F-04 PostgreSQL cases** to the full inherited foundation/auth/milestone/submission pipeline. It creates its own protected disposable database, runs real-session/source/CSRF, scope, Unicode, exact-version, replay/conflict, concurrent HTTP and forced unique-conflict/lock-wait checks, then removes its own container. Expected exit 0. `npm run test:b02` runs only the feedback DB files against an explicitly prepared reserved test database. Ordinary npm test does not load those fixtures.
+
+For a compiled app, set a synthetic AUTH_REVIEW_PASSWORD as described above and run `npm run review:b02`; stop with `npm run review:auth:stop` from the same clone. Supervisor A can open a submitted version, write feedback and reload it; Student A1 reads without a write form; Supervisor B cannot read it. The save UI checks persisted feedback after an unknown result and blocks further saves while that recovery read fails. A successful read with no matching row permits a manual retry of the same frozen UUID/body. [Contract](docs/contracts/sprint-1-feedback.md), [review](docs/evidence/R1-B02-A-review.md) and [actual results](docs/evidence/R1-B02-A-results.json) distinguish real DB behavior from controlled browser faults.
+
 ## Built server
 
 After npm run build, the compiled server can serve the client/API under one origin. From Project_code in PowerShell:
@@ -174,9 +184,9 @@ Project_code/
   package.json, package-lock.json, .npmrc, .node-version
   prisma.config.ts, prisma.g1-history.config.ts
   vitest.config.ts, vitest.g1.config.ts, vitest.auth.config.ts, vitest.b01.config.ts, vitest.a02.config.ts
-  shared/                  Pure milestone/submission validation used by client and API
-  scripts/                 Isolated G1/auth/milestone/submission checks, compiled restart/browser review
-  client/                  Real login/team/milestone/submission UI, Vite and shared primitives
+  shared/                  Pure milestone/submission/feedback validation used by client and API
+  scripts/                 Isolated G1/auth/milestone/submission/feedback checks, compiled restart/browser review
+  client/                  Real login/team/milestone/submission/feedback UI, Vite and shared primitives
   server/
     .env.example
     prisma/                Schema, ordered migrations and explicit seed
@@ -185,12 +195,12 @@ Project_code/
     src/config.ts          Runtime validation
     src/http/              Safe errors, per-route JSON parsing, request IDs/logs
     src/db/                Prisma singleton, generated client and test guard
-    src/testing/           Guarded fixtures and G1/auth/milestone/submission regression
-    src/modules/           Real auth/teams/milestones/submissions; feedback pending
-  e2e/                     Full milestone/submission/feedback journeys still pending
+    src/testing/           Guarded fixtures and G1/auth/milestone/submission/feedback regression
+    src/modules/           Real auth/teams/milestones/submissions/feedback
+  e2e/                     Later repeatable browser automation; actual local journeys recorded in evidence
   docs/contracts/          Accepted seams and pending candidate contracts
   docs/decisions/          Source/ownership decisions
   docs/evidence/           Actual verification and unresolved findings
 ```
 
-Login/team/milestone/submission screens are implemented; feedback screens and self-hosted font assets are pending. Preserve the Project_code workspace layout when running the compiled API: server/dist imports the tracked shared/milestones.mjs and shared/submissions.mjs modules, which the browser build bundles separately. Existing shared typography includes an external Google Fonts import with a local fallback. Return to the [application overview](../README.md). Team/task/branch instructions remain in [the development guide](../DEVELOPMENT_README.md).
+Login/team/milestone/submission/feedback screens are implemented; self-hosted font assets remain pending. Preserve the Project_code workspace layout when running the compiled API: server/dist imports the tracked shared/milestones.mjs, shared/submissions.mjs and shared/feedback.mjs modules, which the browser build bundles separately. Existing shared typography includes an external Google Fonts import with a local fallback. Return to the [application overview](../README.md). Team/task/branch instructions remain in [the development guide](../DEVELOPMENT_README.md).

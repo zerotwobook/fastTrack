@@ -20,7 +20,7 @@ New teammates should start with [DEVELOPMENT_README.md](../DEVELOPMENT_README.md
 | D1 → S2 และ Labs | [รอบ 2](02_SPRINT2_LABS5-7.md) | Docker/runtime, F-05A teams, F-07 progress, UAT/impact tests | CI/release, F-05B milestone planning, F-06 revisions, maintenance implementation |
 | S3 → D2 → Final | [รอบ 3](03_SPRINT3_D2_FINAL.md) | F-08A summary/filter/totals, domain/data QA และ traceability | F-08B drill-down/items/navigation, access/UI/operations QA และ package assembly |
 
-**Current checkpoint (7 November 2026):** A01/B01/A02 are peer-accepted, latest staging 3365a36 after B approval/merge of PR #57; #7 is closed Done/PASSED/ACCEPTED. G2's task-specific delegation remains recorded. A prepared the English R1-A03 / #10 Parts A/B/D and selected F evidence package in PR #59; [start with its assembly/source handoff](handoffs/R1-A03_D1_A_PACKAGE.md). B owns F-04 / #8 and C/E/final-PDF work on separate branches. G3/full S1 verification, main release and final submission remain pending.
+**Current checkpoint (7 November 2026):** A01/B01/A02 and A03 are peer-accepted. B approved/merged PR #59 into `staging/sprint-1` as `5b35fc1`; #10 is closed Done/PASSED/ACCEPTED. [A's D1 assembly/source handoff](handoffs/R1-A03_D1_A_PACKAGE.md) remains the entry point for Parts A/B/D and selected F evidence. A requested changes on B02 PR #58 and is repairing feedback under #60 / PR #61, preserving B commits on a separate A correction branch; B must review A changes. B owns C/E/final-PDF assembly. G3/full S1 verification, main release and final submission remain pending.
 
 เมื่อ G1 ผ่าน A ทำ F-01 และ B ทำ F-02 ขนาน เมื่อ G2 ผ่าน A ทำ F-03 และ B ทำ F-04 ขนาน ใช้ fixtures ที่ตกลงเพื่อเตรียมงานได้ แต่ผ่าน checkpoint ด้วยระบบจริงเท่านั้น
 

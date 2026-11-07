@@ -1,14 +1,14 @@
 # fastTrack
 
-A course-project tracking application for students and supervisors, covering milestone submissions, feedback and progress tracking.
+A course-project tracking application for students and supervisors, covering milestones, submitted work and version-specific feedback.
 
-## Implementation status
+## Application
 
-The React/TypeScript client and Express/TypeScript API provide sign-in, DB-backed eight-hour sessions, sign-out/revocation, CSRF/source protection and authorized team list/detail, milestone create/list/detail and first-submission form/saved-detail pages. The monochrome interface includes role-aware navigation, mobile layout and loading/empty/error recovery.
+Students sign in, view their team's milestones, submit one immutable version of work before the deadline, and read the saved work and supervisor feedback. Assigned supervisors create milestones, read submissions and append feedback to the exact submission version. Other teams' records remain outside the caller's scope.
 
-A PostgreSQL/Prisma schema, ordered migrations, repeatable seed/fixtures and shared UI primitives are present. The latest clean-clone checks pass: 111 ordinary tests, 48 first-submission API/DB/service cases, 33 milestone DB cases, 28 authentication/API/database tests, 38 foundation tests and seven migration scenarios. The foundation and authentication increment are accepted; the milestone correction was accepted through B review/merge of PR #56. First submissions were accepted through B review/merge of PR #57.
+The React/TypeScript client and Express/TypeScript API use PostgreSQL/Prisma, DB-backed eight-hour sessions and source/CSRF protection. The monochrome interface includes role-aware navigation, mobile layouts, validation and recovery for uncertain feedback saves. Submission and feedback records persist across application restarts.
 
-Submission and feedback features are not integrated yet. See [Project_code/README.md](Project_code/README.md) for verified setup, build, tests and disposable browser review.
+See [the technical guide](Project_code/README.md) for verified installation, configuration, build, tests and local browser review. Revisions, progress calculations and summary screens belong to later increments.
 
 ## Development guide
 

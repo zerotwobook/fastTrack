@@ -54,12 +54,16 @@ A's clean-setup review uses the actual no-hardlink clone at 1bf8d63: npm ci 316 
 
 ## Completion and remaining gates
 
-A-owned content, exact evidence mapping, original images and this C/E review handoff are prepared for document verification and B peer review. The actual check summary and Ready/PR Review transition are recorded in Issue #10 at handoff. Verification of the final PDF and full S1 release is not part of this package's completed scope.
+B approved PR #59 at dfb4d1650eb74ebd7aef1b86fae967a9b95c7187 on 6 November 2026 at 19:25:25 UTC and merged it into staging/sprint-1 as 5b35fc1847e1482a4625772fcb007f43401d45bd at 19:28:52 UTC. The approved and merged trees match. Issue #10 is closed Done/PASSED/ACCEPTED. Verification of the final PDF and full S1 release is outside this accepted package scope.
 
-B completes/reviews its C/E/F contribution, accepts this A-owned package through its PR and assembles the final PDF after G3/G4/G5. Keep Issue #10 open until its actual accepted merge. Do not change past completed cards or infer a main release/submission from a documentation merge.
+B completes its C/E/F contribution and assembles the final PDF after G3/G4/G5. The A-owned package has already been accepted through PR #59. Do not change past completed cards or infer a main release/submission from a documentation merge.
 
 ## Actual package verification
 
 Passed checks: all FR-01-FR-10, BR-01-BR-10, NFR-01-NFR-06 and F-01-F-08 are covered; 13 AC/extension rows reference 27 exact passing case names from actual results; the selected test excerpt equals its immutable source; all four images match their original bytes/hashes/dimensions. Authored content is English; local links, JSON and secret-pattern/whitespace checks pass. No application/schema/runtime/lockfile differences from accepted staging 3365a36. No application suite was rerun for these document-only changes.
 
-PR #59 carries this complete owned package and the accepted-A02 status update. It remains subject to B current-head document review and staging integration; #10 is not closed before that actual acceptance. The final whole-report PDF, B's current C/E revision and G3/G4/G5 are not certified by these package checks.
+PR #59 carries the accepted owned package and A02 status update; its B review/merge and Issue #10 closure are verified above. The final whole-report PDF, B's current C/E revision and G3/G4/G5 are not certified by these package checks.
+
+## Subsequent feedback candidate evidence
+
+The combined UI-after-actual-process-restart gap in the older A03 source/map was exercised during #60 / PR #61 feedback correction review. [The new candidate evidence](../../Project_code/docs/evidence/R1-B02-A-review.md) records unchanged submission and feedback DTOs plus student UI/session restoration after a real compiled process restart. This is additional current-candidate evidence; the accepted historical A03 map is preserved. B must accept the feedback correction before using it as the accepted full journey in the final PDF. G3/G4/G5 are not automatically accepted by this follow-up.
