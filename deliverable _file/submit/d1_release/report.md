@@ -80,7 +80,7 @@ These are measurable behavior/verification targets, not invented latency or thro
 | NFR-05 | Forms expose loading/empty/error/recovery states, meaningful field labels and keyboard focus; mobile layout remains usable at 320px. Check real browser behavior, safe rendering, actual persisted reads and representative viewport/keyboard scenarios. | S1 and every new screen |
 | NFR-06 | Failed required CI checks block release; release SHA, image and deployed revision agree; smoke and persistence checks pass. Verify a deliberately failed gate and deployed identifiers. | Lab 5 onward; final |
 
-Local F-01-F-04 and full journey/persistence are accepted through G3/G4. The separate fresh setup passed 310 cases and seven migration scenarios; NFR-06/cloud verification remains allocated to Lab 5. There is no agreed performance SLA or measured load result.
+Local F-01-F-04 and full journey/persistence are accepted through G3/G4. The historical clean setup passed 310 cases; the merged release-refresh run passes 340 cases and seven separate migration scenarios, as distinguished in Part F; NFR-06/cloud verification remains allocated to Lab 5. There is no agreed performance SLA or measured load result.
 
 ## A.6 Decisions, assumptions and open matters
 
@@ -408,10 +408,10 @@ The visual theme strictly implements a minimalist monochrome palette using CSS c
 ### C.6.3 Typography and Responsive Layout
 
 - **Font Stack:** `Inter, "Noto Sans Thai", Tahoma, sans-serif`.
-- **Target Viewports:** Verified across 320px (iPhone SE), 390px (iPhone 12/13), 768px (iPad Mini), 1280px (Desktop), and 1440px (HiDPI Display). Selected real API-backed screens were checked without horizontal overflow; this does not certify every possible content/state combination.
+- **Target Viewports:** Current compiled-browser matrices cover 320, 390, 768, 1199, 1200, 1280 and 1440 CSS px, landscape 844x390 and a 640px reflow proxy. These are viewport checks, not physical-device tests. Selected real API-backed screens have no page overflow; this does not certify every possible content/state combination.
 - **Focus Rings:** Visible 2px outline on focused interactive elements (`outline: 2px solid var(--color-ink); outline-offset: 2px`).
-- **Control sizing:** Use the existing shared components; their CSS does not establish a universal 48px minimum. No full WCAG certification is claimed from these selected checks.
-- **Native Zoom:** User A reported usable feedback, Your feedback, Save feedback and navigation at native Chrome 200% on 7 November 2026 at 03:13:16 UTC. Automation did not corroborate the zoom level and its reference image remained DPR 1. The manual report predates the later border-color-only correction; final contrast/layout measurements are separate. B explicitly accepted G4 in the actual PR #62 review. Preserve this attribution and limit, rather than presenting the normal-size images as 200% evidence. See [the native zoom record](../../../Project_code/docs/evidence/R1-J03-results.json).
+- **Control sizing:** Shared buttons have at least 44px targets; inputs have at least 48px height and 16px text. The password visibility eye is inside the input with a 44px target, accessible name/state and keyboard activation. No full WCAG certification is claimed from these selected checks.
+- **Native Zoom:** User A reported usable feedback, Your feedback, Save feedback and navigation at native Chrome 200% on 7 November 2026 at 03:13:16 UTC. Automation did not corroborate the zoom level and its reference image remained DPR 1. The manual report predates subsequent corrections and UI refinements. Native 200% was not rerun on this refresh; current 640px reflow and contrast/layout checks are separate. B explicitly accepted G4 in the actual PR #62 review. Preserve this attribution and limit, rather than presenting the normal-size images as 200% evidence. See [the native zoom record](../../../Project_code/docs/evidence/R1-J03-results.json).
 
 
 ## C.7 Configuration, packaging and implemented limits
@@ -427,7 +427,7 @@ The visual theme strictly implements a minimalist monochrome palette using CSS c
 | Local browser | Vite binds 127.0.0.1:5173 and proxies /api to 127.0.0.1:3000; keep APP_ORIGIN and browser hostname identical. |
 | Compiled packaging | Keep shared/*.mjs alongside server/dist; the compiled server imports those tracked modules. The browser build bundles its own imports. |
 
-S1 implements F-01 through F-04 only: authentication/scoped teams, milestone create/read, first submission and append-only exact-version feedback. Later team management, revisions, progress and summary work is planned for S2/S3. Self-hosted font assets, hosted CI/Docker/deployment and final PDF/release are not supplied by this source package. The current health endpoint is liveness, not a verified database-readiness check. See [technical setup](../../../Project_code/README.md) and Part F for the pinned disposable review route.
+S1 implements F-01 through F-04 only: authentication/scoped teams, milestone create/read, first submission and append-only exact-version feedback. Later team management, revisions, progress and summary work is planned for S2/S3. Inter and Noto Sans Thai are bundled locally with pinned provenance/licenses. Hosted CI/Docker/deployment remain Lab 5 work; final main release and submission remain pending. The current health endpoint is liveness, not a verified database-readiness check. See [technical setup](../../../Project_code/README.md) and Part F for the pinned disposable review route.
 
 ## C.8 Main screens and delivery plan
 
@@ -492,7 +492,7 @@ Part A defines the baseline; Part B maps every requirement into these sprints; P
 
 ## D.6 Current sequence
 
-G0 -> reviewed scaffold/schema/seed -> G1 -> F-01/F-02 -> delegated G2 -> F-03/F-04 -> G3 complete journey -> G4 clean setup/restart/access/UI -> accepted A/B source packages. B accepted G3/G4 in #62 and corrected source package #65. Current staging is 4de6a7a. This combined report is under joint #12 / PR #66. Final G5/main/tag/submission remains pending; inspect the exact future candidate again and notify the user before main merge.
+G0 -> reviewed scaffold/schema/seed -> G1 -> F-01/F-02 -> delegated G2 -> F-03/F-04 -> G3 complete journey -> G4 clean setup/restart/access/UI -> accepted A/B source packages. B accepted G3/G4 in #62 and corrected source package #65. Accepted staging is 17f4398 after B approved/merged #71, #69 and #73. B accepted the original combined preparation in #66; this report refresh is under #74 / parent #12. Final G5/main/tag/submission remains pending; inspect the exact future candidate again and notify the user before main merge.
 
 
 # Part E - Sprint 1 engineering contracts
@@ -625,27 +625,27 @@ Feature DoD: T-17-T-20/T-24/T-25/T-31 local; real source/CSRF/scope, no-write an
 
 The planned stimuli/expected assertions are retained in baseline D1 E.5 (T-01-T-27 plus T-31 local) and each source contract above. The nine B-owned AC rows have [a resolvable exact test map](../d1_owner_b/verification_map.json); the full current map covers all 18 feature ACs, five extensions and shared targets. Do not substitute this run summary for the individual test specifications.
 
-The following **reuses A/Codex's finalized J03 clean-clone run**, Node 26.13.0/npm 11.20.0, pinned PostgreSQL 16.8. This table retains that historical run identity rather than relabeling it as B-owned. The separate fresh 310-case setup reproduction performed by A/Codex during #64 is documented in Part F and setup_reproduction.json with its own times/source. Ordinary tests do not require PostgreSQL; the isolated groups do.
+The following records **A/Codex's current merged-source refresh run** at 17f4398, Node 26.13.0/npm 11.20.0 and pinned PostgreSQL 16.8. This is a fresh disposable database/build/test run in A's existing clean task workspace, not a new clone/install. Historical 310-case clean-clone evidence remains separately identified in Part F. Ordinary tests do not require PostgreSQL; the isolated groups do.
 
 | Group / selector | Cases passed | Scope |
 |---|---:|---|
-| npm test / ordinary *.test.ts files | 120 | Pure validation, config, HTTP envelope/logging and client state; seven files, no external DB required. |
+| npm test / ordinary *.test.ts files | 144 | Pure validation, config, HTTP envelope/logging, grouping and client session state; eight files, no external DB required. |
 | test:g1 / foundation.g1.ts and foundation-safety.g1.ts | 38 | DB constraints, guarded targets, add-only seed and foundation safety. |
 | test:auth / sessions.auth.ts | 28 | Real session/hash/source/CSRF/scoped team lifecycle; browser account-switch evidence is separately attributed. |
-| test:b01 / milestones-review.b01.ts and milestones.b01.ts | 33 | 26 real-session regressions plus seven retained explicit-actor service cases. |
+| test:b01 / milestones-review.b01.ts and milestones.b01.ts | 39 | 32 real-session regressions plus seven retained explicit-actor service cases, including invalid-Unicode/no-write cases. |
 | test:a02 / submissions.a02.ts | 48 | Deadline boundaries, locks/no-write, scope, duplicates, compiled process restart. |
 | test:b02 / feedback-review.b02.ts and feedback.b02.ts | 42 | 29 real-session/transaction cases plus 13 retained explicit-actor service cases. |
 | test:j03 / integrated-s1.j03.ts | 1 | Actual compiled HTTP cross-feature journey, all-table seed fingerprint and restart/session persistence. |
-| **Total cases** | **310** | **0 failed; cases are not a coverage percentage.** |
+| **Total cases** | **340** | **0 failed; cases are not a coverage percentage.** |
 | Migration scenarios, separately counted | 7 | Upgrade success and expected invalid-legacy-data rejection with history/data preservation. |
 
-See [actual finalized report](../../../Project_code/docs/evidence/R1-J03-results.json), [verification narrative](../../../Project_code/docs/evidence/R1-J03-system-verification.md), and [Part F](../d1_owner_b/F_B_VERIFICATION.md) for exact names, sources, chronology and manual/browser limits. B's recorded independent #61/#62 review checks are separate from this retained full run.
+See [current merged-source runner report](../../../Project_code/docs/evidence/R1-J04-REFRESH-system.json) for exact current cases/stages and Part F for fresh browser evidence. The [historical J03 report](../../../Project_code/docs/evidence/R1-J03-results.json) and [B source package](../d1_owner_b/F_B_VERIFICATION.md) retain their original 310-case chronology and manual limits. B's independent #61/#62/#71 reviews are separate from A/Codex's runs.
 
 ## E.7 Definition of Done and release boundary
 
-The accepted engineering increment has actual feature peer reviews, DB constraints/migrations, source/CSRF/scope protection, automated regression and selected actual browser/restart evidence. Typing and build passed in the attributed J03 run; this correction does not claim new app tests merely because text changed.
+The accepted engineering increment has actual feature peer reviews, DB constraints/migrations, source/CSRF/scope protection, automated regression and selected actual browser/restart evidence. Typecheck/build and the current 340-case run passed at the merged application source in E.6. Historical J03 results keep their original identities in Part F.
 
-The **D1 release DoD is still pending**: the combined PDF needs B review; the corrected source package is accepted; both owners' A-F content must be assembled into one self-contained English PDF with navigation/readable figures; exact candidate/tag and contributions/AI-use/limits must match; both real G5 decisions and the final pre-main review/user notification in #12 must occur. PDF assembly/review feeds G5; it is not deferred until after G5 acceptance. No main release or submission is accepted by this source-package PR.
+The **D1 release DoD is still pending**: the original combined PDF preparation was accepted in #66, and the refreshed PDF now requires exact-version peer review. Both owners' A-F content, navigation and figures are assembled. The actual assessed main/tag identity, both final G5 decisions, explicit user release authorization and protected peer release review remain. Preparation acceptance does not create a main release or course receipt.
 
 ## E.8 Per-feature UI and data boundaries
 
@@ -765,7 +765,7 @@ B approved final #61 head on 2026-11-07T02:36:37Z and merged `514f34c` at 02:40:
 | Member / assistance | Actual contribution and attribution |
 |---|---|
 | A - Supapanya Yathip, 67070503443, zerotwobook | Scaffold, auth/teams, submissions/deadline, original A/B/D report sections, G1 verification/repairs; reviewed and repaired B01 (#55/#56) and B02 (#60/#61) preserving B history; J03 tests/contrast/verification (#62); current B-package repair (#64/#65). B reviews A-authored corrections. |
-| B - Atip Infa-udom, 67070503446, Atip-Infa | Original schema/migrations/seed/shared UI, milestone #52 and feedback #58 increments, original C/E/F package #63; actual peer reviews/merges of A increments. #56 was A's repair of B's #52, not solely B-authored. The original plan allocated assembly to B; A/Codex prepares this joint candidate under #12, and B's combined-PDF review is pending. |
+| B - Atip Infa-udom, 67070503446, Atip-Infa | Original schema/migrations/seed/shared UI, milestone #52 and feedback #58 increments, original C/E/F package #63; actual peer reviews/merges of A increments. #56 was A's repair of B's #52, not solely B-authored. The original plan allocated assembly to B; A/Codex assembled the original and refreshed joint candidates. B accepted the original combined PDF in #66 and approved the actual corrections/rules/UI in #71/#69/#73; refreshed PDF and G5 review remain pending. |
 | A / Codex assistance | Actual A sessions used Codex to implement/review/test/repair code and prepare evidence/docs, including this correction. Reported automated checks are agent-run; do not turn them into invented human commands. Native-200% came from user A; B approvals/gate decisions are linked separately. |
 | B / reported assistance | The original B package reports Antigravity assistance for typing, validation/tests and Markdown. This is B's self-report, not an independently verified tool log or a claim that B authored A's corrective tests/CSS. B confirms its own final disclosure during peer review. |
 
@@ -778,7 +778,7 @@ The default main is currently the planning baseline, so **select the runnable ac
 ```powershell
 git clone https://github.com/zerotwobook/fastTrack.git fastTrack-s1-review
 Set-Location fastTrack-s1-review
-git switch --detach fe65b1962e2c62bf5a11a96e3fb536da9e3e98bc
+git switch --detach 17f4398d52536fc8049022e56a7bacd0beeb822a
 Set-Location Project_code
 node --version
 npm --version
@@ -813,13 +813,13 @@ A/Codex reproduced the pinned route during #64 from a new HTTPS clone at `fe65b1
 | G2 | ACCEPTED in the recorded user-delegated A/AI acceptance after B's #56 merge; [G2 record](../../../Project_code/docs/evidence/R1-G2-acceptance.md) preserves the delegation and actual checks. Do not invent a new B UI run. |
 | G3 | ACCEPTED explicitly by B's actual #62 review of 6a11378; accepted staging merge fe65b19. |
 | G4 | ACCEPTED explicitly by that same review, including the user-attributed native-200% limit. |
-| G5 | **PENDING**: combined PDF peer review, final rendered-page review, exact release candidate/tag, both owners' real decisions and #12 pre-main review/user notification remain. |
+| G5 | **PENDING**: refreshed PDF/peer review, actual main/tag identity, both owners' final decisions and the user's explicit current-candidate release authorization remain. |
 
 The corrected source package was accepted through #65; no source-package merge alone completes the final report or submission. A/Codex assembles this joint R1-J04 / #12 candidate from both accepted packages; B reviews the exact combined PDF and confirms contributions. There is no R1-B04 task introduced by this document. Final PDF preparation/review occurs before final G5 acceptance; accepted main identity and the PDF must be reconciled to the actual release. Notify the user with the final candidate and actual checks before main merge. Do not upload to the course system or invent a receipt without an actual authorized submission.
 
-## F.8 Complete current acceptance results
+## F.8 Acceptance results and browser provenance
 
-This current compilation supersedes earlier A03 partial/not-run status for full-S1 acceptance only. Historical sources remain unchanged. All 18 feature ACs/five extensions/shared targets have current evidence. The following exact representative names and source files are embedded; full report pointers/hashes remain in the manifest sources. Counts are cases, not a coverage percentage.
+This compilation supersedes earlier A03 partial/not-run status for full-S1 acceptance only. Historical sources remain unchanged. The representative automated names below are also found in the current 340-case run. Named historical browser records retain their original provenance; fresh compiled-browser checks and the current native-zoom limitation are in F.R1. Counts are cases, not a coverage percentage.
 
 | AC / planned test IDs | Actual file and reported name or evidence type | Result |
 |---|---|---|
@@ -849,7 +849,7 @@ This current compilation supersedes earlier A03 partial/not-run status for full-
 | Shared-T21 / T-21 | Actual compiled J03/browser evidence: current-j03-compiled-journey, supervisor-ui-created-milestone-readback, student-ui-submit-and-empty-feedback, supervisor-ui-feedback-and-persisted-readback, student-before-final-process-restart | PASSED |
 | Shared-T22 / T-22 | Actual compiled J03/browser evidence: fresh-clean-clone-stage-output | PASSED |
 | Shared-T31-local / T-31 local | server/src/testing/foundation.g1.ts<br/>G1 canonical foundation contracts on real PostgreSQL repeats the seed without duplicating records or replacing stored password hashes/membership | PASSED |
-| Shared-UI-acceptance / Responsive/keyboard/states/contrast/native 200% | Actual compiled J03/browser evidence: load-recovery-layout-keyboard-and-timezone, supervisor-ui-feedback-and-persisted-readback, native-200-manual-user-result, post-contrast-real-controls | PASSED - mixed automated/manual evidence |
+| Shared-UI-acceptance / Responsive/keyboard/states/contrast/native 200% | Historical J03/browser evidence: load-recovery-layout-keyboard-and-timezone, supervisor-ui-feedback-and-persisted-readback, native-200-manual-user-result, post-contrast-real-controls. Current automated checks: F.R1. | Historical PASS; current native 200% NOT RUN |
 
 ## F.9 Domain-rule excerpt and A deadline TDD
 
@@ -929,7 +929,7 @@ https://github.com/zerotwobook/fastTrack/pull/65
 | fix(b02): compose version feedback and reconcile transactional retries | 44cac63bfb5b073c5cc2ebc02c6ad7a2b70f22b5 / 2026-11-07T02:50:56+07:00 |
 | docs: correct D1 contracts setup and evidence attribution | f7742df9300525285e653399979b17867e7198dd / 2026-11-07T12:29:50+07:00 |
 
-Actual pre-release board snapshot at 2026-11-07T07:57:19+00:00. Completed source work is separate from the pending final release.
+Historical pre-release board snapshot at 2026-11-07T07:57:19+00:00, retained for the original preparation. The current reconciliation is recorded in F.R1 below; final release remains pending.
 
 | Issue / task | Live issue state | Status / verification / acceptance |
 |---|---|---|
@@ -948,3 +948,67 @@ Actual pre-release board snapshot at 2026-11-07T07:57:19+00:00. Completed source
 
 
 Current local increment and G0-G4/source packages are accepted. This combined report is A/Codex assembly under joint #12, reviewed separately by B. Main release/tag, both final G5 decisions and authorized course receipt are pending. Before main merge, inspect the exact latest release PR/base/head, verify applicable checks/peer approval, resolve blockers and notify the user with real findings/limits. If head/base changes, reassess affected checks. Do not infer final submission from source preparation.
+
+
+## F.R1 Current merged application and pre-main refresh
+
+Application demonstration and fresh domain/API test source: **17f4398d52536fc8049022e56a7bacd0beeb822a**. It is the accepted Sprint 1 staging merge, not a main release or an assessed tag. A/Codex runs the current checks and refreshes this report under #74 / PR #75. Application, domain/API test, schema, migration and dependency sources are unchanged. The browser helper now waits for the native dialog's asynchronous close/React focus state before asserting it; the earlier immediate assertion raced that event. The focus/expanded-state requirements are unchanged.
+
+| Accepted change | Actual B review and staging integration | Effect |
+|---|---|---|
+| #70 / #71 review repairs | B approved f903cec and merged 4f003a1 on 7 November 2026. | Same-session private draft retention, frozen feedback intent, read/write ordering, Unicode/no-write validation and actionable student groups. B explicitly recorded an independent 340-case run. |
+| #68 / #69 main gate | B approved d07d22d and merged 369e2cc. | Explicit user review/authorization is required before main ready/peer/merge handoff. |
+| #72 / #73 responsive UI | B approved 866f9f3 and merged 17f4398. | Aligned shared controls/frames/rails, 44px actions, keyboard drawer, responsive layouts and inline password eye. |
+
+The accepted task Issues were reconciled from their actual peer reviews/merges. PR native Done states were preserved; no historical stage was replayed. G5 and release #12/#67 remain pending. The current [GitHub snapshot](current_github_snapshot.json) and [acceptance reconciliation](acceptance_reconciliation.json) retain source/time and exact heads. No B command is invented from a generic approval.
+
+### F.R1.1 Current build/test execution
+
+Command: from Project_code, run `npm run review:j03` with a private synthetic AUTH_REVIEW_PASSWORD and an explicit report path, then `npm run review:auth:stop` after browser checks. The wrapper generates Prisma, applies/repeats migrations on its own fresh databases, runs typecheck, eight ordinary test files, production build, real API/DB suites and the compiled restart/seed journey. The [current report](../../../Project_code/docs/evidence/R1-J04-REFRESH-system.json) records 340 passed / 0 failed / 0 skipped cases and seven separate successful migration scenarios, with individual case names and owned cleanup.
+
+```text
+Application source: 17f4398d52536fc8049022e56a7bacd0beeb822a
+npm run review:j03
+ordinary 144 passed; G1 38 passed; auth 28 passed
+milestones 39 passed; submissions 48 passed; feedback 42 passed
+compiled integration/restart 1 passed
+total 340 passed, 0 failed, 0 skipped
+migration scenarios 7 passed, counted separately
+generation / migrations / typecheck / production build: passed
+```
+
+This is a fresh current-source run in the existing workspace; it is not labeled a new clean-clone installation. The earlier accepted 310-case #64 clean setup and the later accepted 340-case #71 clean setup retain their actual identities. The unchanged lockfile/setup commands make that historical setup evidence relevant; it is not relabeled as this run.
+
+### F.R1.2 Current compiled-browser checks
+
+Synthetic Supervisor A created a future milestone through the actual UI. Student A1 submitted title/description/HTTP(S) work link; fresh saved detail showed author/version/time. Supervisor A saved feedback on version 1. Student A1 read the exact saved work and feedback after reload. A foreign Supervisor B received real API 404 without the work title. An expired synthetic milestone displayed deadline rejection and disabled submission. Overdue/cancelled fixture dates were arranged only in the runner-owned disposable database; normal creation correctly requires a future deadline and S1 exposes no cancellation endpoint.
+
+Fresh role matrices check six screens for each role at nine viewport sizes: 320x900, 390x844, 768x1024, 1199x900, 1200x900, 1280x900, 1440x1000, 844x390 and 640x900. The 108 combinations cover overflow/control sizing, field text/focus and dialog keyboard/resize behavior. Student group membership/actions are separately compared with the real API, including pending/overdue/submitted/cancelled states. Feedback ordering, committed-response-loss recovery and private-draft masking/revalidation are tested on the real compiled app using controlled response/event faults.
+
+These results are summarized in [current browser evidence](../../../Project_code/docs/evidence/R1-J04-REFRESH-browser.json). Controlled visibility events are not native tab switching. The 640px case is a reflow proxy rather than native browser 200% zoom. Physical devices, Firefox/WebKit, public deployment and load testing are not claimed. Earlier user-reported native zoom remains historical; a current native-zoom check is an explicit reviewer limitation.
+
+### Figure R1 - Current login with password eye
+
+F-01 / AC-01.1-01.4. Anonymous user, current merged compiled UI at 390 CSS px. The eye toggle is inside the password field; Tab/Enter, accessible Show/Hide password state and preserved text were checked during #73 and accepted by B at 866f9f3. This capture contains no credential. The new full run separately exercises real login/logout/session authorization.
+
+![Current login](../../../Project_code/docs/evidence/assets/d1-refresh/login-mobile.png)
+
+### Figure R2 - Current persisted Student work and feedback
+
+F-03/F-04 / AC-03.1, AC-04.1/04.4, Student A1, 390 CSS px. Supervisor A first created the milestone; Student A1 submitted work; Supervisor A saved version-1 feedback. Student A1 opened the saved submission and reloaded, retaining the exact feedback and read-only role controls. Actual compiled UI/API/DB; source 17f4398. Process-restart proof is the separately passing compiled system case, not an inference from this screenshot.
+
+![Current student saved work](../../../Project_code/docs/evidence/assets/d1-refresh/student-saved-mobile.png)
+
+### Figure R3 - Current foreign ownership denial
+
+F-01/F-03 / AC-03.5, Supervisor B, 390 CSS px. Starting with Supervisor A's saved Team A work, sign out and authenticate as Supervisor B, then request that submission. Expected/actual: Submission unavailable; a direct authenticated API read returned 404 with no work title. No authorization bypass or mocked identity was used. Source 17f4398.
+
+![Current ownership denial](../../../Project_code/docs/evidence/assets/d1-refresh/foreign-denial-mobile.png)
+
+### F.R1.3 Exact remaining release boundary
+
+The user instructed A/Codex to finish preparation and notify them before entering main so they can arrange peer review. Main remains 2080cf31f8d855ecba9624eafe4fe9a5fa74b4d8. Release PR #67 remains Draft with no auto-merge or outstanding final release review request. This refresh PR #75 targets staging only and still requires B's independent PDF/source acceptance and integration. After that merge, re-read the new staging head, compare executable tree identity, show the concrete candidate to the user and obtain explicit release authorization before the final protected peer review/main merge.
+
+Only after actual accepted main integration may the team create the assessed immutable tag, reconcile the PDF to that real release identity, record both final G5 decisions and submit the self-contained PDF through LEB2 under actual user instruction. The course deadline is 8 November 2026 at 23:59 Asia/Bangkok. No release, tag, G5 decision or course receipt is fabricated by this preparation.
+
+The current scoped preparation diff passes whitespace checks. The unfiltered main-to-staging diff has eight inherited whitespace/blank-EOF notes in seven files, including original font licenses, an applied migration and its historical fixture. They are disclosed for peer disposition; applied checksums, license bytes and historical test identity are preserved. This is not a claim that the unfiltered whitespace command passes.

@@ -1,0 +1,273 @@
+{
+  "source": "17f4398d52536fc8049022e56a7bacd0beeb822a",
+  "recordedAt": "2026-11-07T15:24:52.819Z",
+  "journey": {
+    "passed": [
+      "real supervisor milestone creation",
+      "real student submission",
+      "real exact-version supervisor feedback",
+      "student fresh read and reload",
+      "both roles and logout/login"
+    ],
+    "teamId": "705f2592-9a1d-43df-bd12-548cb40b8c0f",
+    "milestoneId": "8377bf5e-f7a5-428f-a6b1-fc6c8a5937b6",
+    "submissionId": "2f249d32-d447-446a-b37c-51e1b623a031",
+    "fixtures": {
+      "pending": "496607df-ccca-4a37-aea2-3926fcfabe36",
+      "overdue": "651ce16b-a680-4e14-8978-d4ce268e2480",
+      "cancelled": "a1fa90d9-93cd-406d-913f-41d0f3ea2906"
+    },
+    "source": "17f4398d52536fc8049022e56a7bacd0beeb822a"
+  },
+  "negativeJourneys": {
+    "passed": [
+      "genuine expired milestone shows rejection",
+      "late submit disabled",
+      "real foreign supervisor receives 404 without title",
+      "logout and role switch"
+    ],
+    "forbiddenStatus": 404
+  },
+  "studentGroups": {
+    "passed": [
+      "actionable first",
+      "separate overdue/submitted/cancelled groups",
+      "canonical ordering and complete membership",
+      "direct submit only for eligible work",
+      "no horizontal overflow"
+    ],
+    "widths": [
+      320,
+      390,
+      768,
+      1200,
+      1440
+    ],
+    "groups": {
+      "Work to submit": 1,
+      "Overdue": 1,
+      "Submitted work": 1,
+      "Cancelled": 1
+    }
+  },
+  "matrices": [
+    {
+      "role": "student",
+      "layoutChecks": [
+        "overview:320x900",
+        "overview:390x844",
+        "overview:768x1024",
+        "overview:1199x900",
+        "overview:1200x900",
+        "overview:1280x900",
+        "overview:1440x1000",
+        "overview:844x390",
+        "overview:640x900",
+        "team:320x900",
+        "team:390x844",
+        "team:768x1024",
+        "team:1199x900",
+        "team:1200x900",
+        "team:1280x900",
+        "team:1440x1000",
+        "team:844x390",
+        "team:640x900",
+        "milestone:320x900",
+        "milestone:390x844",
+        "milestone:768x1024",
+        "milestone:1199x900",
+        "milestone:1200x900",
+        "milestone:1280x900",
+        "milestone:1440x1000",
+        "milestone:844x390",
+        "milestone:640x900",
+        "overdue:320x900",
+        "overdue:390x844",
+        "overdue:768x1024",
+        "overdue:1199x900",
+        "overdue:1200x900",
+        "overdue:1280x900",
+        "overdue:1440x1000",
+        "overdue:844x390",
+        "overdue:640x900",
+        "submission:320x900",
+        "submission:390x844",
+        "submission:768x1024",
+        "submission:1199x900",
+        "submission:1200x900",
+        "submission:1280x900",
+        "submission:1440x1000",
+        "submission:844x390",
+        "submission:640x900",
+        "submit:320x900",
+        "submit:390x844",
+        "submit:768x1024",
+        "submit:1199x900",
+        "submit:1200x900",
+        "submit:1280x900",
+        "submit:1440x1000",
+        "submit:844x390",
+        "submit:640x900"
+      ],
+      "keyboard": [
+        "focus trap in both directions",
+        "Escape and focus return",
+        "expanded state",
+        "desktop resize closes modal"
+      ],
+      "reflowMethod": "640 CSS px approximates 200% reflow at 1280; native browser zoom is separate."
+    },
+    {
+      "role": "supervisor",
+      "layoutChecks": [
+        "overview:320x900",
+        "overview:390x844",
+        "overview:768x1024",
+        "overview:1199x900",
+        "overview:1200x900",
+        "overview:1280x900",
+        "overview:1440x1000",
+        "overview:844x390",
+        "overview:640x900",
+        "team:320x900",
+        "team:390x844",
+        "team:768x1024",
+        "team:1199x900",
+        "team:1200x900",
+        "team:1280x900",
+        "team:1440x1000",
+        "team:844x390",
+        "team:640x900",
+        "milestone:320x900",
+        "milestone:390x844",
+        "milestone:768x1024",
+        "milestone:1199x900",
+        "milestone:1200x900",
+        "milestone:1280x900",
+        "milestone:1440x1000",
+        "milestone:844x390",
+        "milestone:640x900",
+        "overdue:320x900",
+        "overdue:390x844",
+        "overdue:768x1024",
+        "overdue:1199x900",
+        "overdue:1200x900",
+        "overdue:1280x900",
+        "overdue:1440x1000",
+        "overdue:844x390",
+        "overdue:640x900",
+        "submission:320x900",
+        "submission:390x844",
+        "submission:768x1024",
+        "submission:1199x900",
+        "submission:1200x900",
+        "submission:1280x900",
+        "submission:1440x1000",
+        "submission:844x390",
+        "submission:640x900",
+        "create:320x900",
+        "create:390x844",
+        "create:768x1024",
+        "create:1199x900",
+        "create:1200x900",
+        "create:1280x900",
+        "create:1440x1000",
+        "create:844x390",
+        "create:640x900"
+      ],
+      "keyboard": [
+        "focus trap in both directions",
+        "Escape and focus return",
+        "expanded state",
+        "desktop resize closes modal"
+      ],
+      "reflowMethod": "640 CSS px approximates 200% reflow at 1280; native browser zoom is separate."
+    }
+  ],
+  "feedbackOrdering": {
+    "passed": [
+      "held genuine initial GET merges old and newly saved rows",
+      "delayed read failure cannot hide confirmed save",
+      "no duplicate feedback",
+      "real persisted rows match visible results",
+      "mobile CTA and helper sizing"
+    ],
+    "layouts": [
+      {
+        "width": 320,
+        "field": 254,
+        "button": 254,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 390,
+        "field": 309,
+        "button": 309,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 768,
+        "field": 639,
+        "button": 146.46875,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 1200,
+        "field": 296,
+        "button": 146.46875,
+        "hint": "14px",
+        "overflow": false
+      },
+      {
+        "width": 1440,
+        "field": 385.203125,
+        "button": 146.46875,
+        "hint": "14px",
+        "overflow": false
+      }
+    ],
+    "method": "Actual compiled UI and API; GET success body captured from real server before the real POST. The delayed failure is deliberately injected."
+  },
+  "feedbackIntent": {
+    "passed": [
+      "real committed POST with lost response",
+      "failed reconciliation freezes original body and UUID",
+      "same-session verification masks and preserves frozen intent",
+      "explicit check finds the exact saved row without another POST",
+      "one persisted write and usable cleared form"
+    ],
+    "method": "Real compiled UI/API; deliberately abort the POST response after server commit and the first reconciliation read."
+  },
+  "privateDrafts": {
+    "passed": [
+      "same-session draft fields",
+      "private UI masked during verification",
+      "failed verification masked",
+      "retry preserves draft",
+      "modal closed while masked",
+      "revoked session discards draft"
+    ],
+    "method": "Controlled document.visibilityState and visibilitychange events on the real compiled app; not a native tab-switch claim."
+  },
+  "readStates": {
+    "passed": [
+      "visible loading state",
+      "scoped read failure",
+      "mobile recovery actions",
+      "retry clears failure",
+      "unavailable milestone recovery"
+    ],
+    "method": "Real API reads with deliberately held and injected failed team responses; genuine unavailable milestone."
+  },
+  "harnessFinding": "The first Supervisor run raced the native dialog close event; the helper now waits for actual collapsed state and restored focus before asserting. Both final matrices passed without changing application code.",
+  "browserHelperSha256": "676cf8f3aca11f126d6af07028b4ba7241bb8a55c668adfaa3bb9722b56155a8",
+  "limits": [
+    "Windows Chromium; no physical devices, Firefox or WebKit.",
+    "640 CSS px is a reflow proxy, not native browser 200% zoom.",
+    "Controlled visibility events and deliberately held/failed responses supplement real API/database journeys.",
+    "Overdue/cancelled fixture state was arranged only in the verified owned disposable container."
+  ]
+}

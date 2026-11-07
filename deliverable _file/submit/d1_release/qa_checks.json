@@ -1,11 +1,38 @@
 {
-  "recordedAt": "2026-11-07T08:18:39.738088+00:00",
-  "renderer": "PyMuPDF at 1.3x scale",
-  "pages": 44,
-  "pdfSha256": "38d9c1fd8c2cb7cf1882a5d8b66524669e18f35fe1ec659d4421e7eb1da0ec08",
+  "recordedAt": "2026-11-07T15:37:08.300283+00:00",
+  "applicationSource": "17f4398d52536fc8049022e56a7bacd0beeb822a",
+  "pdfSha256": "9b129d6049d25e04c1eeb670b4d00a342f3e4e74f4f15f1d3c73efe6bd7127ff",
+  "pages": 50,
+  "parts": {
+    "A": [
+      2,
+      5
+    ],
+    "B": [
+      6,
+      8
+    ],
+    "C": [
+      9,
+      17
+    ],
+    "D": [
+      18,
+      19
+    ],
+    "E": [
+      20,
+      27
+    ],
+    "F": [
+      28,
+      50
+    ]
+  },
   "checks": {
-    "deterministicRebuild": "PASSED",
-    "originalSourcesUnchanged": "PASSED",
+    "historicalSourceHashes": "PASSED",
+    "currentEvidenceHashes": "PASSED",
+    "runtimeAndDomainTestTreeUnchanged": "PASSED",
     "localLinks": "PASSED",
     "FRCoverage": "PASSED",
     "BRCoverage": "PASSED",
@@ -13,55 +40,77 @@
     "featureAcceptanceCoverage": "PASSED",
     "extensionCoverage": "PASSED",
     "plannedTestSpecifications": "PASSED",
-    "canonicalCaseHashesAndStatus": "PASSED",
-    "printedRepresentativeEvidence": "PASSED",
+    "current340Cases": "PASSED",
+    "currentBuildAndTypecheck": "PASSED",
+    "ownedCleanup": "PASSED",
+    "migrationScenarios": "PASSED",
+    "printedCurrentCaseNames": "PASSED",
     "sourceIdenticalExcerpt-s1-deadline-rejection": "PASSED",
     "sourceIdenticalExcerpt-s1-feedback-access": "PASSED",
+    "current108RoleLayouts": "PASSED",
+    "currentBrowserJourneys": "PASSED",
+    "deterministicRebuild": "PASSED",
     "pagesAndBookmarks": "PASSED",
     "partPageStarts": "PASSED",
+    "currentApplicationIdentity": "PASSED",
     "noUnrenderedDirectives": "PASSED",
-    "EnglishNewReport": "PASSED",
-    "credentialPatternScan": "PASSED",
+    "EnglishRefreshedReport": "PASSED",
+    "noLiveCredentials": "PASSED",
     "textBounds": "PASSED",
-    "jsonArtifactsParse": "PASSED",
-    "executableTreeUnchanged": "PASSED"
+    "recordedVisualInspection": "PASSED"
   },
   "counts": {
-    "originalSourceHashes": 17,
-    "localLinks": 38,
+    "historicalSources": 17,
+    "currentEvidenceSources": 11,
+    "localLinks": 36,
     "featureAcs": 18,
-    "extensions": 5,
-    "plannedTestRows": 28,
-    "canonicalNamedCases": 138,
-    "selectedPrintedEvidence": 13,
-    "sourceIdenticalExcerpts": 2
+    "automatedCases": 340,
+    "roleViewportCombinations": 108
   },
-  "sourceHashFormat": "SHA-256 of original repository Git blob bytes at applicationSource; checkout CRLF conversion does not change source identity.",
   "textBoundsFindings": [],
   "visualInspection": {
     "status": "PASSED",
-    "method": "All pages inspected through rendered page sheets; changed pages rechecked after layout/evidence corrections.",
-    "finalPageRange": [
+    "reviewedBy": "A / Codex author visual inspection, not B peer acceptance",
+    "recordedAt": "2026-11-07T15:35:47.971670+00:00",
+    "pdfSha256": "9b129d6049d25e04c1eeb670b4d00a342f3e4e74f4f15f1d3c73efe6bd7127ff",
+    "pageRange": [
       1,
-      44
+      50
     ],
-    "finalSheetRange": [
+    "sheetRange": [
       1,
-      22
+      25
     ],
-    "renderDirectory": "tmp/pdfs/d1-review",
-    "findingsResolved": [
-      "Raw diagram directives replaced with diagrams and physical relationship table.",
-      "Table widths, code wrapping and keep-together layout corrected.",
-      "Original PNG layout segments/detail crops labeled; trailing blank area removed from PDF layout only.",
-      "Current versus historical attribution and exact representative case evidence corrected."
+    "method": "All 50 pages viewed as 25 rendered two-page sheets at 1.3x source render; modified table/figure sheets rechecked after corrections.",
+    "recheckedPages": [
+      25,
+      26,
+      29,
+      30,
+      31,
+      32,
+      35,
+      36,
+      37,
+      38,
+      41,
+      42,
+      47,
+      48,
+      49,
+      50
     ],
-    "originalImageBytes": "Unchanged; included in source hashes."
+    "resolvedFindings": [
+      "Updated reproduction checkout to current application source.",
+      "Separated historical browser/native-zoom outcomes from current execution.",
+      "Moved tall screenshot split to nearby whitespace to avoid cutting text."
+    ],
+    "peerAcceptance": "PENDING",
+    "finalDisclosureReview": "Page 50 rechecked after adding the inherited-whitespace disposition; no text clipping or overlap.",
+    "renderDirectory": "tmp/pdfs/d1-refresh",
+    "pagesRendered": 50,
+    "sheets": 25
   },
-  "applicationTests": {
-    "newRun": false,
-    "source": "Existing accepted source-package setup_reproduction.json and J03 results; actual 310 cases and seven migration scenarios, attributed in report.",
-    "reason": "No executable, schema, lockfile or test-source changes in this preparation."
-  },
-  "acceptance": "B combined-PDF review / G5 / main / tag / submission PENDING"
+  "acceptance": "B refreshed-PDF review / user main authorization / G5 / main / tag / submission PENDING",
+  "passed": true
 }

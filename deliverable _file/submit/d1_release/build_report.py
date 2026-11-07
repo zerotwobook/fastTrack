@@ -156,7 +156,16 @@ def figure(title,body,img):
         h=min(h,(bounds[3]+14) if bounds else h);total=h*scale
         if total<=550:views=[((0,0,w,h),scale,'Original capture - trailing white space omitted by PDF layout crop')]
         else:
-            count=math.ceil(total/470);step=math.ceil(h/count);views=[((0,i*step,w,min((i+1)*step,h)),scale,'Original capture, vertical page segment '+str(i+1)+' of '+str(count)) for i in range(count)]
+            count=math.ceil(total/470)
+            gray=original.convert('L')
+            def whitespace_cut(desired):
+                candidates=[]
+                for y in range(max(3,desired-36),min(h-3,desired+37)):
+                    if all(sum(value<240 for value in gray.crop((0,row,w,row+1)).tobytes())<=4 for row in range(y-2,y+3)):
+                        candidates.append(y)
+                return min(candidates,key=lambda y:abs(y-desired)) if candidates else desired
+            cuts=[0]+[whitespace_cut(round(h*i/count)) for i in range(1,count)]+[h]
+            views=[((0,cuts[i],w,cuts[i+1]),scale,'Original capture, vertical page segment '+str(i+1)+' of '+str(count)) for i in range(count)]
     result=[]
     for i,(box,scale,label) in enumerate(views):
         result.extend([PageBreak(),P(title+(' (continued)' if i else ''),'h3')])
