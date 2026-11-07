@@ -1,0 +1,67 @@
+{
+  "recordedAt": "2026-11-07T08:18:39.738088+00:00",
+  "renderer": "PyMuPDF at 1.3x scale",
+  "pages": 44,
+  "pdfSha256": "38d9c1fd8c2cb7cf1882a5d8b66524669e18f35fe1ec659d4421e7eb1da0ec08",
+  "checks": {
+    "deterministicRebuild": "PASSED",
+    "originalSourcesUnchanged": "PASSED",
+    "localLinks": "PASSED",
+    "FRCoverage": "PASSED",
+    "BRCoverage": "PASSED",
+    "NFRCoverage": "PASSED",
+    "featureAcceptanceCoverage": "PASSED",
+    "extensionCoverage": "PASSED",
+    "plannedTestSpecifications": "PASSED",
+    "canonicalCaseHashesAndStatus": "PASSED",
+    "printedRepresentativeEvidence": "PASSED",
+    "sourceIdenticalExcerpt-s1-deadline-rejection": "PASSED",
+    "sourceIdenticalExcerpt-s1-feedback-access": "PASSED",
+    "pagesAndBookmarks": "PASSED",
+    "partPageStarts": "PASSED",
+    "noUnrenderedDirectives": "PASSED",
+    "EnglishNewReport": "PASSED",
+    "credentialPatternScan": "PASSED",
+    "textBounds": "PASSED",
+    "jsonArtifactsParse": "PASSED",
+    "executableTreeUnchanged": "PASSED"
+  },
+  "counts": {
+    "originalSourceHashes": 17,
+    "localLinks": 38,
+    "featureAcs": 18,
+    "extensions": 5,
+    "plannedTestRows": 28,
+    "canonicalNamedCases": 138,
+    "selectedPrintedEvidence": 13,
+    "sourceIdenticalExcerpts": 2
+  },
+  "sourceHashFormat": "SHA-256 of original repository Git blob bytes at applicationSource; checkout CRLF conversion does not change source identity.",
+  "textBoundsFindings": [],
+  "visualInspection": {
+    "status": "PASSED",
+    "method": "All pages inspected through rendered page sheets; changed pages rechecked after layout/evidence corrections.",
+    "finalPageRange": [
+      1,
+      44
+    ],
+    "finalSheetRange": [
+      1,
+      22
+    ],
+    "renderDirectory": "tmp/pdfs/d1-review",
+    "findingsResolved": [
+      "Raw diagram directives replaced with diagrams and physical relationship table.",
+      "Table widths, code wrapping and keep-together layout corrected.",
+      "Original PNG layout segments/detail crops labeled; trailing blank area removed from PDF layout only.",
+      "Current versus historical attribution and exact representative case evidence corrected."
+    ],
+    "originalImageBytes": "Unchanged; included in source hashes."
+  },
+  "applicationTests": {
+    "newRun": false,
+    "source": "Existing accepted source-package setup_reproduction.json and J03 results; actual 310 cases and seven migration scenarios, attributed in report.",
+    "reason": "No executable, schema, lockfile or test-source changes in this preparation."
+  },
+  "acceptance": "B combined-PDF review / G5 / main / tag / submission PENDING"
+}
