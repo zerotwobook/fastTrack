@@ -1,0 +1,80 @@
+﻿[
+    {
+        "issue":  68,
+        "pr":  69,
+        "recordedAt":  "2026-11-07T15:17:24.0992194Z",
+        "priorIssueStatus":  "PR Review",
+        "result":  "Done/PASSED/ACCEPTED",
+        "peerApproval":  {
+                             "id":  "PRR_kwDOVjq_T88AAAABWny2jg",
+                             "author":  {
+                                            "login":  "Atip-Infa"
+                                        },
+                             "authorAssociation":  "COLLABORATOR",
+                             "body":  "I have reviewed the MAIN_RELEASE_GATE.md policy and workflow updates, confirming that all documentation references align, skill validations pass without application code changes, and the explicit user release authorization rule for main merges is properly documented, so I explicitly approve merging this rules update into staging/sprint-1.",
+                             "submittedAt":  "2026-11-07T15:05:41Z",
+                             "includesCreatedEdit":  false,
+                             "reactionGroups":  [
+
+                                                ],
+                             "state":  "APPROVED",
+                             "commit":  {
+                                            "oid":  "d07d22d3ca2e7cd77a2d2c141afe3cfb33259a28"
+                                        }
+                         },
+        "merge":  "369e2cc18cfeaeebd12509b15a1dea335b9fc4cf",
+        "mergedAt":  "2026-11-07T15:06:48Z"
+    },
+    {
+        "issue":  70,
+        "pr":  71,
+        "recordedAt":  "2026-11-07T15:17:40.6916085Z",
+        "priorIssueStatus":  "PR Review",
+        "result":  "Done/PASSED/ACCEPTED",
+        "peerApproval":  {
+                             "id":  "PRR_kwDOVjq_T88AAAABWnRHEA",
+                             "author":  {
+                                            "login":  "Atip-Infa"
+                                        },
+                             "authorAssociation":  "COLLABORATOR",
+                             "body":  "I have reviewed the updates and verified the pipeline locally via npm run review:j03, confirming that all 340 tests pass, draft/intent state is safely preserved during visibility checks, feedback GET race conditions are resolved, and student overview grouping functions as intended, so I explicitly accept this PR and approve merging into staging/sprint-1.",
+                             "submittedAt":  "2026-11-07T13:50:17Z",
+                             "includesCreatedEdit":  false,
+                             "reactionGroups":  [
+
+                                                ],
+                             "state":  "APPROVED",
+                             "commit":  {
+                                            "oid":  "f903cec6734ed6ad0b3e3bc60ea2e1b48ec3fdd3"
+                                        }
+                         },
+        "merge":  "4f003a166eda4d5211f365dfd2ef126f0ef7a93d",
+        "mergedAt":  "2026-11-07T13:51:03Z"
+    },
+    {
+        "issue":  72,
+        "pr":  73,
+        "recordedAt":  "2026-11-07T15:17:55.9483550Z",
+        "priorIssueStatus":  "PR Review",
+        "result":  "Done/PASSED/ACCEPTED",
+        "peerApproval":  {
+                             "id":  "PRR_kwDOVjq_T88AAAABWnzVNA",
+                             "author":  {
+                                            "login":  "Atip-Infa"
+                                        },
+                             "authorAssociation":  "COLLABORATOR",
+                             "body":  "I have reviewed the UI polish updates on head 866f9f3 and verified the drawer accessibility, password visibility controls, and responsive layout refinements across both roles, so I explicitly accept this PR and approve merging into staging/sprint-1.",
+                             "submittedAt":  "2026-11-07T15:06:38Z",
+                             "includesCreatedEdit":  false,
+                             "reactionGroups":  [
+
+                                                ],
+                             "state":  "APPROVED",
+                             "commit":  {
+                                            "oid":  "866f9f3ca698c3121769e18bbf0e476f8536a38c"
+                                        }
+                         },
+        "merge":  "17f4398d52536fc8049022e56a7bacd0beeb822a",
+        "mergedAt":  "2026-11-07T15:07:33Z"
+    }
+]

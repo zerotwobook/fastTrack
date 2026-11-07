@@ -1,0 +1,40 @@
+{
+  "status": "PASSED",
+  "reviewedBy": "A / Codex author visual inspection, not B peer acceptance",
+  "recordedAt": "2026-11-07T15:35:47.971670+00:00",
+  "pdfSha256": "9b129d6049d25e04c1eeb670b4d00a342f3e4e74f4f15f1d3c73efe6bd7127ff",
+  "pageRange": [
+    1,
+    50
+  ],
+  "sheetRange": [
+    1,
+    25
+  ],
+  "method": "All 50 pages viewed as 25 rendered two-page sheets at 1.3x source render; modified table/figure sheets rechecked after corrections.",
+  "recheckedPages": [
+    25,
+    26,
+    29,
+    30,
+    31,
+    32,
+    35,
+    36,
+    37,
+    38,
+    41,
+    42,
+    47,
+    48,
+    49,
+    50
+  ],
+  "resolvedFindings": [
+    "Updated reproduction checkout to current application source.",
+    "Separated historical browser/native-zoom outcomes from current execution.",
+    "Moved tall screenshot split to nearby whitespace to avoid cutting text."
+  ],
+  "peerAcceptance": "PENDING",
+  "finalDisclosureReview": "Page 50 rechecked after adding the inherited-whitespace disposition; no text clipping or overlap."
+}

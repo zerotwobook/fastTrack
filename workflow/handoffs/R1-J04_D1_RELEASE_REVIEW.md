@@ -1,5 +1,7 @@
 # R1-J04 - Combined D1 candidate and pre-main review
 
+**Historical preparation record:** PR #66 was accepted/merged before the later review corrections and UI refinements. Use [the current refresh/pre-main handoff](R1-J04_REFRESH_PRE_MAIN.md) for #74 / PR #75, application `17f4398`, the refreshed 50-page candidate and the held main PR #67. The 44-page details below retain their original preparation identity.
+
 A/Codex assembled this joint #12 candidate on docs/s1-a-d1-release / PR #66; B is the actual peer reviewer. Baseline 4de6a7a follows B's exact-head acceptance of #65. #11/#64 are closed; G3/G4 and source-package acceptance are actual. G5/main/tag/submission remain pending.
 
 **User review hold (7 November 2026):** B approved #66 exact ea29dc2 and merged the preparation into staging as 94e588d. Main release PR #67 remains Draft, unmerged and without auto-merge while the user reviews. Follow [the permanent main-release gate](../MAIN_RELEASE_GATE.md): user review and explicit authorization are required before any ready/peer/merge handoff. The earlier request for B to merge is withdrawn. This applies to future main releases as well; staging acceptance does not lift the hold. If staging changes, show and reassess the new release head/base before renewed user authorization.

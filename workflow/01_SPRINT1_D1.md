@@ -55,7 +55,7 @@
 | Sprint integration | staging/sprint-1; all task PRs target this branch until S1 is accepted |
 | Source baseline | G0 head d57b3eca4c60092667291ac314d5255dc09f137f; accepted staging merge 30fc5ef9fa6e0aa39332a0127541341f5b5e1fcf |
 | Theme eligibility | B's ID ends in 6, matching Theme 6 under Group specs section 6, page 4 |
-| Gate record | G0-G4, F-01-F-04 and A/B source packages are accepted. B approved/merged #65 as staging 4de6a7a; #11/#64 closed. Joint #12 / PR #66 contains the assembled PDF candidate and author verification; B combined-PDF review, G5/main/tag/submission remain pending. See the R1-J04 handoff. |
+| Gate record | G0-G4, F-01-F-04, A/B source packages and original #66 preparation are accepted. B approved/merged #71/#69/#73; staging application is 17f4398. Current #74 / PR #75 maintains the D1 Markdown source/handoff with 340-case/seven-scenario and 108-browser-combination evidence. The user assembles/exports final reports; the earlier 50-page PDF at 209ccc7 is historical. B Markdown/source review, user main authorization, final G5/main/tag/submission remain pending. |
 
 AI ต้องเริ่ม session โดยระบุว่าทำงานให้ A หรือ B และ Task ID ใด หาก prompt ระบุไว้แล้วให้ใช้ตามนั้น หากยังไม่ทราบ owner ให้ทำได้เฉพาะการตรวจ/เตรียมขอบเขตที่ไม่ชนงาน แล้วถาม owner ก่อนเริ่ม implementation ของคนใดคนหนึ่ง
 

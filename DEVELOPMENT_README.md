@@ -10,6 +10,12 @@ Start with [SKILL_Project](skill/SKILL_Project.md), [workflow](workflow/README.m
 
 Conversation with the user may be Thai. **All newly authored or revised project content must be English**: code/comments, UI copy, documentation, tests, commits, Issues, PRs, review text and Project metadata. Root [AGENTS.md](AGENTS.md) and the project skill carry this rule into later AI sessions. Translate the legacy sections being edited; unrelated existing source documents are not automatically rewritten.
 
+## Documentation format preference
+
+User instruction recorded on 7 November 2026: write and maintain project documentation, evidence narratives and handoffs in **Markdown (`.md`)**. The user will assemble and export the final reports. Generate or rebuild a PDF only after an explicit user request, including when a verifier would rebuild it as a side effect. Existing PDF snapshots, instructor handouts and machine-readable execution evidence retain their original identities.
+
+Use [the D1 Markdown source](deliverable%20_file/submit/d1_release/report.md) for current report content and [the current handoff](workflow/handoffs/R1-J04_REFRESH_PRE_MAIN.md) for release coordination. The instructor's required final submission format is unchanged; the user handles that final assembly/export. This preference does not authorize main integration or course submission.
+
 ## Planning baseline
 
 These documents define work and acceptance, not a verified working application. Publishing planning documents to main does not accept G0, Sprint 1 or the product. Inspect the live repository, Issues and PRs before starting.
@@ -27,7 +33,7 @@ For tracked PRs, the enabled native Project workflow moves the card to Done afte
 
 ## Current Sprint 1 checkpoint
 
-Accepted application base: staging/sprint-1 4de6a7a after B approval/merge of PR #65. F-01-F-04, G0-G4 and both source packages are accepted; #11/#64 are closed. Joint #12 / PR #66 contains the combined A-F PDF review candidate, prepared by A/Codex for B review. [Release review handoff](workflow/handoffs/R1-J04_D1_RELEASE_REVIEW.md) identifies the actual pages/checks and remaining main/tag/G5 steps. The historical J03 and manual-200 records retain their original provenance; source-package acceptance does not accept final main/PDF/submission.
+Accepted application base: staging/sprint-1 `17f4398` after B approval/merge of #71/#69/#73. F-01-F-04, G0-G4, source packages and the original #66 preparation are accepted. Current #74 / PR #75 provides the combined A-F Markdown source, current execution evidence and [pre-main handoff](workflow/handoffs/R1-J04_REFRESH_PRE_MAIN.md). The user handles final report assembly/export; the earlier PDF/QA is a historical snapshot. Main #67 remains Draft pending explicit current-candidate user authorization; final G5/main/tag/submission remain pending.
 
 ## First-day allocation
 

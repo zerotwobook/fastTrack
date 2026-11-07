@@ -1,8 +1,11 @@
 {
-  "task": "R1-J04 / #12 / PR #66",
+  "task": "R1-J04-A-REFRESH / #74; parent R1-J04 / #12",
   "status": "Review candidate; G5/main/tag/submission pending",
-  "applicationSource": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
-  "preparedBy": "A / Codex; B combined-PDF review pending",
+  "applicationSource": "17f4398d52536fc8049022e56a7bacd0beeb822a",
+  "historicalApplicationSource": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+  "sourceHashBase": "4de6a7a8d3f6c1028d8a40fbbae17875c272361b",
+  "documentRef": "docs/s1-a-release-refresh",
+  "preparedBy": "A / Codex; B accepted original preparation #66; refreshed PDF review pending",
   "sourceHashes": {
     "deliverable _file/submit/d1_owner_a/A_SRS.md": "99702a42f34e8ad7d9fb151007fd27b4b2208be6d22e744f5a49a15e2da18b20",
     "deliverable _file/submit/d1_owner_a/B_FEATURES_TRACEABILITY.md": "1261109bbf4b7f2db9b35dbc60b0742cb9c865fd38fa5ab21e4b350c98033a6a",
@@ -102,5 +105,26 @@
       "note": "Controlled late feedback after account switch and external returnTo records; not extra automated leaf-case counts."
     }
   },
-  "sourceHashFormat": "SHA-256 of original repository Git blob bytes at applicationSource; checkout CRLF conversion does not change source identity."
+  "sourceHashFormat": "Historical sourceHashes are SHA-256 of original Git blob bytes at sourceHashBase; currentSourceHashes use actual binary image bytes and LF-normalized text evidence bytes. Historical evidence is not relabeled as a new run.",
+  "currentSourceHashes": {
+    "Project_code/docs/evidence/R1-J04-REFRESH-system.json": "c4d2071c80ce94a2e90817ec113ef849a4459fc8ca04dd24a6da791e2d88f4b1",
+    "Project_code/docs/evidence/R1-J04-REFRESH-browser.json": "6572857250e8ea8542749c88508d1579b04d77f6b907e6a5c127f8c2296812bd",
+    "Project_code/e2e/s1-ui-responsive.js": "676cf8f3aca11f126d6af07028b4ba7241bb8a55c668adfaa3bb9722b56155a8",
+    "Project_code/docs/evidence/assets/d1-refresh/deadline-mobile.png": "3261678eda2efaca072ac202c56524f1270d15415f542d4c1c0ae9665cf8814d",
+    "Project_code/docs/evidence/assets/d1-refresh/foreign-denial-mobile.png": "451eb909063a296f8907ad4fd62a1e849ab24e8fc584c58c3b3beb7357715c76",
+    "Project_code/docs/evidence/assets/d1-refresh/login-mobile.png": "071c94ad84ad69ead4b39714cd3fdd08b0e4aa9d1cded9ccef5a04818218108b",
+    "Project_code/docs/evidence/assets/d1-refresh/student-saved-mobile.png": "c9d5bfc4e55bd6609dd1d7dad1706f8cd6ffacdd8b31d1041ac642c8d5fd5895",
+    "Project_code/docs/evidence/assets/d1-refresh/supervisor-feedback-desktop.png": "0c5e6f9eecdb2b1abad52620cceb7f7d032c18137d607f15eaccc60704328be0",
+    "deliverable _file/submit/d1_release/acceptance_reconciliation.json": "43fd67317999a7bf0b85a1f8bbe467b2fd0c30fd2f322de80378473d073a2fff",
+    "deliverable _file/submit/d1_release/current_board.json": "e4b897b32eac999ee1aaa238e162f1c11a3f4bd45effc1913ada142b59786a71",
+    "deliverable _file/submit/d1_release/current_github_snapshot.json": "8837fa68e6a8d5a7d493cc1a980196be70e21d08edc4acacf36e118a168998cc"
+  },
+  "currentVerification": {
+    "runner": "Project_code/docs/evidence/R1-J04-REFRESH-system.json",
+    "browser": "Project_code/docs/evidence/R1-J04-REFRESH-browser.json",
+    "applicationSource": "17f4398d52536fc8049022e56a7bacd0beeb822a",
+    "newClone": false,
+    "mainAuthorization": "PENDING",
+    "G5": "PENDING"
+  }
 }

@@ -79,6 +79,10 @@ async (page) => {
   await page.keyboard.press('Shift+Tab');
   if (!await focusable.last().evaluate(element => element === document.activeElement)) throw new Error('Reverse drawer focus escaped.');
   await page.keyboard.press('Escape');
+  await page.waitForFunction(() => {
+    const trigger = document.querySelector('.menu-button');
+    return trigger?.getAttribute('aria-expanded') === 'false' && trigger === document.activeElement;
+  });
   if (!await menu.evaluate(element => element === document.activeElement) || await menu.getAttribute('aria-expanded') !== 'false') throw new Error('Drawer focus/expanded state was not restored.');
   await menu.click();
   await page.setViewportSize({ width: 1280, height: 900 });
