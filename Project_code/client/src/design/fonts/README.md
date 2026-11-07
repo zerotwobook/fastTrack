@@ -4,6 +4,8 @@ Unmodified variable TrueType fonts from the official [Google Fonts repository](h
 
 Pinned upstream commit: `86aced91de05cd4f96a06838124cca45be337b2b`. Downloaded 7 November 2026. The UI retains the project brief's Inter and Noto Sans Thai families and 400/500/600 weights, with `font-display: swap`.
 
+Hashes and byte counts below describe the original upstream download/Git blob. Git may normalize text-license line endings in a Windows working copy; the font binaries are unchanged.
+
 | Local file | Bytes | SHA-256 | Upstream path |
 |---|---|---|---|
 | Inter-variable.ttf | 876576 | `29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031` | `ofl/inter/Inter[opsz,wght].ttf` |

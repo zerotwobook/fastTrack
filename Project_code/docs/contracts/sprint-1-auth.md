@@ -8,6 +8,8 @@ PR #50 head `6a5de5f` was approved by Atip-Infa at 2026-11-06T14:50:03Z and merg
 
 ## API and security
 
+Contract clarification (7 November 2026): the accepted implementation requires nonempty string credentials, trims/normalizes email, preserves password whitespace, allowlists keys and retains the existing JSON request-size limit. It does not adopt the legacy v0.2 planning draft's proposed 254/128-character credential caps. G1 preserves unrestricted identity TEXT values; adding a new login cap could reject an existing valid account. Unknown credentials within the accepted request contract return the generic 401. The legacy E.1 section is now aligned explicitly rather than silently changing credential acceptance. Visibility/draft corrections are versioned in [the independent-review correction contract](sprint-1-review-corrections.md); they do not change server authentication or the eight-hour expiry.
+
 Implement project detail 7.5/9 and D1 E.1 without changing schema or B's milestone module:
 
 - POST `/api/auth/login`: only `{email,password}`; source Origin, or Referer origin when Origin is absent, must match APP_ORIGIN; `X-fastTrack-Request: 1`; JSON only. Unknown email and wrong password share a 401 response and create no session.

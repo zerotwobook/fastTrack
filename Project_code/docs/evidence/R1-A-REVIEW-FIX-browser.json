@@ -1,0 +1,171 @@
+{
+  "fullSuiteSource": "fa9f32b0951d98bd0ba21643212b131b9864aa3a",
+  "studentFollowupSource": "de55c38b83a865c9f0fffb8534219f339be8ffeb",
+  "results": [
+    {
+      "passed": [
+        "held genuine initial GET merges old and newly saved rows",
+        "delayed read failure cannot hide confirmed save",
+        "no duplicate feedback",
+        "real persisted rows match visible results",
+        "mobile CTA and helper sizing"
+      ],
+      "layouts": [
+        {
+          "width": 320,
+          "field": 288,
+          "button": 288,
+          "hint": "14px",
+          "overflow": false
+        },
+        {
+          "width": 390,
+          "field": 358,
+          "button": 358,
+          "hint": "14px",
+          "overflow": false
+        },
+        {
+          "width": 768,
+          "field": 704,
+          "button": 146.46875,
+          "hint": "14px",
+          "overflow": false
+        },
+        {
+          "width": 1200,
+          "field": 263,
+          "button": 146.46875,
+          "hint": "14px",
+          "overflow": false
+        },
+        {
+          "width": 1440,
+          "field": 332.34375,
+          "button": 146.46875,
+          "hint": "14px",
+          "overflow": false
+        }
+      ],
+      "method": "Actual compiled UI and API; GET success body captured from real server before the real POST. The delayed failure is deliberately injected."
+    },
+    {
+      "passed": [
+        "same-session draft fields",
+        "private UI masked during verification",
+        "failed verification masked",
+        "retry preserves draft",
+        "modal closed while masked",
+        "revoked session discards draft"
+      ],
+      "method": "Controlled document.visibilityState and visibilitychange events on the real compiled app; not a native tab-switch claim."
+    },
+    {
+      "passed": [
+        "real committed POST with lost response",
+        "failed reconciliation freezes original body and UUID",
+        "same-session verification masks and preserves frozen intent",
+        "explicit check finds the exact saved row without another POST",
+        "one persisted write and usable cleared form"
+      ],
+      "method": "Real compiled UI/API; deliberately abort the POST response after server commit and the first reconciliation read."
+    },
+    {
+      "passed": [
+        "local Inter and Noto Sans Thai load without Google Fonts requests",
+        "actual cookie account switch masks and destroys old draft",
+        "foreign team denied after switch",
+        "old identity removed"
+      ],
+      "fonts": {
+        "files": [
+          "/assets/Inter-variable-VF2RPR_K.ttf",
+          "/assets/NotoSansThai-variable-BmKSpygy.ttf"
+        ],
+        "inter": true,
+        "thai": true
+      }
+    },
+    {
+      "passed": [
+        "actionable first",
+        "separate overdue/submitted/cancelled groups",
+        "canonical ordering and complete membership",
+        "direct submit only for eligible work",
+        "no horizontal overflow"
+      ],
+      "widths": [
+        320,
+        390,
+        768,
+        1200,
+        1440
+      ],
+      "groups": {
+        "Work to submit": 1,
+        "Overdue": 1,
+        "Submitted work": 1,
+        "Cancelled": 1
+      }
+    },
+    {
+      "passed": [
+        "compact desktop primary action",
+        "320px student overview visual capture",
+        "keyboard direct submit opens correct form",
+        "all student submission draft fields preserved and masked",
+        "one main landmark and no mobile overflow"
+      ],
+      "desktopActionWidth": 127.78125,
+      "method": "Compiled app, keyboard Enter, controlled visibility events; no POST and no native tab/zoom claim."
+    }
+  ],
+  "unicodeApi": [
+    {
+      "field": "title",
+      "invalid": "'\\x00'",
+      "status": 400,
+      "code": "INVALID_INPUT"
+    },
+    {
+      "field": "title",
+      "invalid": "'\\ud800'",
+      "status": 400,
+      "code": "INVALID_INPUT"
+    },
+    {
+      "field": "title",
+      "invalid": "'\\udfff'",
+      "status": 400,
+      "code": "INVALID_INPUT"
+    },
+    {
+      "field": "description",
+      "invalid": "'\\x00'",
+      "status": 400,
+      "code": "INVALID_INPUT"
+    },
+    {
+      "field": "description",
+      "invalid": "'\\ud800'",
+      "status": 400,
+      "code": "INVALID_INPUT"
+    },
+    {
+      "field": "description",
+      "invalid": "'\\udfff'",
+      "status": 400,
+      "code": "INVALID_INPUT"
+    }
+  ],
+  "unicodeNoWriteCounts": {
+    "before": 4,
+    "after": 4
+  },
+  "methodLimits": [
+    "Visibility is controlled by document.visibilityState and visibilitychange, not native browser tab switching.",
+    "Native browser 200% zoom was not rerun on this patch. The earlier user-reported result remains historical.",
+    "The first account-switch helper timed out because a PowerShell-written Unicode selector became a question mark. The ASCII/escaped selector correction passed; this was a test-helper failure, not a product finding."
+  ],
+  "peerAcceptance": "PENDING"
+}
