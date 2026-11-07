@@ -31,7 +31,18 @@ function Login({ state }: { state: SessionSnapshot }) {
       {state.error && <p className="notice" role="alert" tabIndex={-1} ref={alert}>{state.error}</p>}
       <form onSubmit={event => { void submit(event); }}>
         <Field id="email" label="Email"><Input id="email" name="email" type="email" autoComplete="username" required value={email} onChange={event => setEmail(event.target.value)} disabled={state.busy} /></Field>
-        <Field id="password" label="Password"><div className="password-control"><Input id="password" name="password" type={visible ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} disabled={state.busy} /><Button type="button" variant="ghost" aria-pressed={visible} onClick={() => setVisible(!visible)}>{visible ? 'Hide password' : 'Show password'}</Button></div></Field>
+        <Field id="password" label="Password">
+          <div className="password-control">
+            <Input id="password" name="password" type={visible ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} disabled={state.busy} />
+            <Button className="password-toggle" type="button" variant="ghost" disabled={state.busy} aria-controls="password" aria-label={visible ? 'Hide password' : 'Show password'} title={visible ? 'Hide password' : 'Show password'} aria-pressed={visible} onClick={() => setVisible(!visible)}>
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+                <circle cx="12" cy="12" r="3" />
+                {visible && <path d="m3 3 18 18" />}
+              </svg>
+            </Button>
+          </div>
+        </Field>
         <Button className="login-submit" type="submit" loading={state.busy}>{state.busy ? 'Signing in…' : 'Sign in'}</Button>
       </form><p className="help">Use the account provided for your course.</p>
     </div>
