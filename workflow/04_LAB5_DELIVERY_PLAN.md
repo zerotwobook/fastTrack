@@ -419,6 +419,8 @@ If #13's broader F-05-F-07 specification is unfinished, record a reviewed delive
 
 ## 14. Reusable Issue, review and AI handoffs
 
+For detailed copy-ready instructions by owner and execution phase, use [the Lab 5 prompt pack](../prompt_project/prompt_lab5/README.md). Its A/B prompts expand the work below, including initial main bootstrap when needed and separate before-release/restart/after-redeploy evidence. Read its shared execution rules and follow actual dependencies; prompts do not authorize cloud changes or main integration.
+
 Use the existing repository templates. The following English fields can supplement the current task Issue body without deleting other members' records:
 
 ```markdown
