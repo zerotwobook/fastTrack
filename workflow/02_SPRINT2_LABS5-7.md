@@ -147,6 +147,10 @@ A นำ provisioning/runtime; B นำ WIF/CI/release แต่ทั้งค�
 
 `deployment.md` ระบุ stack/env purpose+secret/source, commands, project/region/resources, release/rollback limits และวิธีหา running commit หลักฐานห้ามมี secrets PDF ชื่อ `lab5_sec<section>_<group name>.pdf`, ใช้ Answer Part 0–4, direct links/คำอธิบาย/ภาพ caption ตาม handout ส่ง 15 พ.ย. ก่อน 23:59
 
+### 5.5 Detailed Lab 5 runbook
+
+Follow [the dedicated fastTrack Lab 5 delivery plan](04_LAB5_DELIVERY_PLAN.md) before executing R2-J00/#13, R2-A01/#14, R2-B01/#15 and R2-J01/#16. It expands this allocation into file ownership, concrete runtime/CI/cloud checks, dependency checkpoints, the GitHub stage/branch/PR/release procedure, distinct restart/redeploy evidence, a proposed daily schedule and acceptance checklists. Reuse these existing Issues and preserve the main-release user gate. Treat its starting snapshot as dated observations; recheck live state. Author documentation/report sources in Markdown; PDF export and course submission remain user-controlled actions.
+
 ## 6. R2-A02 — คุณ: F-05A จัดทีมและสมาชิก
 
 อ้างอิง FR-06, BR-01/02/03/09, §9.3 และ T-28; ทำ contract/AC/STS/DoD ก่อน code

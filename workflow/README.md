@@ -34,6 +34,10 @@ New teammates should start with [DEVELOPMENT_README.md](../DEVELOPMENT_README.md
 
 ไม่ต้องคัดลอกเอกสารทั้งหมดเข้า prompt ซ้ำ ให้ระบุ owner/Task ID/ไฟล์แผนและให้ AI อ่าน source ที่เกี่ยวข้อง หากยังไม่มี Task ID ที่พร้อม ให้แก้ dependency หรือทำ contract/evidence ที่อิสระก่อน
 
+### 1.1 Detailed Lab 5 execution plan
+
+Use [the fastTrack Lab 5 delivery plan](04_LAB5_DELIVERY_PLAN.md) for the detailed A/B checklists, existing Issues #13-#16, file ownership, dependency gates, GitHub branch/Project/PR procedures, cloud authorization, C-01-C-06 evidence and proposed 9-15 November schedule. It expands the Lab 5 workstream in Sprint 2; it does not add a sprint or declare deployment/tests complete. Prepare report content in Markdown; the user handles final PDF assembly/export unless explicitly requesting otherwise.
+
 ## 2. หลักแบ่งงานให้ทำพร้อมกันได้จริง
 
 - แต่ละคนทำ feature ของตนครบ UI/API/tests/เอกสาร ไม่แบ่งถาวรให้คนหนึ่งเป็นผู้ทำเอกสารเท่านั้น
