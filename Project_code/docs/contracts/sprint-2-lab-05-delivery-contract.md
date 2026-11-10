@@ -2,11 +2,13 @@
 
 **Task ID:** `R2-J00` / [Issue #13](https://github.com/zerotwobook/fastTrack/issues/13)
 **Author:** A (`zerotwobook`). Independent reviewer and schema/CI integrator: B (`Atip-Infa`); B authorship or acceptance is not claimed.
-**Status:** CORRECTED PROPOSAL BY A (pending B's actual delivery-specific acceptance)
+**Status:** Delivery-specific planning checkpoint accepted by B at exact head `490fe8b` (PR #83); broader #13 execution/S2/main gates remain pending.
 **Creation Date:** 10 November 2026
 **Target Milestone:** Lab 5 — Delivery (GCP Cloud Run & PostgreSQL)
 
 This is a design and implementation/test handoff. No new application test, image build, cloud inspection, deployment or persistence PASS is claimed. See [the Lab 5 plan](../../../workflow/04_LAB5_DELIVERY_PLAN.md), [Project stages](../../../workflow/GITHUB_PROJECT_AUTOMATION.md) and [main release gate](../../../workflow/MAIN_RELEASE_GATE.md).
+
+Lifecycle update: B approved the exact corrected proposal at `2026-11-10T05:07:35Z`; PR #83 merged into staging as `09caaa8` at `06:10:12Z`. Proposed decisions/test cases below retain their original planning role; the historical Pending B Review cells are superseded for that delivery-specific planning checkpoint, not execution acceptance. Subsequent A01 implementation and actual local results are recorded in [R2-A01 evidence](../evidence/R2-A01-runtime.md) and [the deployment guide](../../../docs/labs/lab-05/deployment.md). Image/cloud checks described as future work below are not retroactive claims of a run on the original contract commit.
 
 ---
 

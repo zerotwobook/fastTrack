@@ -12,6 +12,18 @@ datasource db {
   provider = "postgresql"
 }
 
+// Additive Lab 5 proposal by A; B remains the migration/schema integrator.
+model AuthRateLimit {
+  key         String    @id @db.VarChar(128)
+  attempts    Int       @default(0)
+  firstAt     DateTime  @default(now()) @map("first_at") @db.Timestamptz
+  lockedUntil DateTime? @map("locked_until") @db.Timestamptz
+  updatedAt   DateTime  @default(now()) @updatedAt @map("updated_at") @db.Timestamptz
+
+  @@index([updatedAt])
+  @@map("auth_rate_limits")
+}
+
 // ---------------------------------------------------------------------------
 // users — shared identity table for both roles
 // ---------------------------------------------------------------------------

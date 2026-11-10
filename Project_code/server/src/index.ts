@@ -8,12 +8,13 @@ try {
   const config = loadConfig(process.env);
   const { prisma } = await import('./db/client.js');
   const clientDirectory = fileURLToPath(new URL('../../client/dist/', import.meta.url));
-  if (config.mode === 'production' && !existsSync(new URL('../../client/dist/index.html', import.meta.url))) {
+  const hasClient = existsSync(new URL('../../client/dist/index.html', import.meta.url));
+  if (config.mode === 'production' && !hasClient) {
     throw new Error('Build the client before starting production.');
   }
   const routers = createApplicationRouters({ prisma, config });
-  const app = createApp(config, { routers, ...(config.mode === 'production' ? { clientDirectory } : {}) });
-  const server = app.listen(config.port, () => {
+  const app = createApp(config, { routers, readiness: () => prisma.$queryRaw`SELECT 1`, ...(hasClient ? { clientDirectory } : {}) });
+  const server = app.listen(config.port, '0.0.0.0', () => {
     process.stdout.write(`fastTrack API listening on port ${config.port}.\n`);
   });
   server.on('error', () => {

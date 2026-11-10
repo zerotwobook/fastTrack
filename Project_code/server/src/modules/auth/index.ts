@@ -4,6 +4,7 @@ import type { CookieOptions } from 'express';
 import { AppError, parseJsonBody, requireJsonBody } from '../../http/errors.js';
 import { createSessionProtection, database, requireCsrf, requireSource, SESSION_COOKIE, sessionToken, tokenHash, verifyPassword } from './security.js';
 import type { AuthDependencies, SessionProtection } from './security.js';
+import { loginKey, rateLimitedLogin } from './rate-limit.js';
 export { createSessionProtection } from './security.js';
 export type { AuthContext, AuthDependencies, SessionProtection } from './security.js';
 
@@ -26,20 +27,27 @@ export function createAuthRouter(deps: AuthDependencies & { readonly protection?
       throw new AppError(400, 'INVALID_INPUT', 'Provide your email and password.', { email: 'Enter your email.', password: 'Enter your password.' });
     }
     const email = body.email.trim().toLowerCase();
-    const user = await database(() => prisma.user.findUnique({ where: { email } }));
-    const matched = await verifyPassword(body.password, user?.passwordHash);
-    if (!user || !matched) throw new AppError(401, 'INVALID_CREDENTIALS', 'Email or password is incorrect. Check and try again.');
-    const token = randomBytes(32).toString('base64url');
-    const csrfToken = randomBytes(32).toString('base64url');
-    const at = now();
-    const expiresAt = new Date(at.getTime() + config.sessionTtlHours * 60 * 60 * 1000);
+    const password = body.password;
     const previous = sessionToken(req);
-    await database(() => prisma.$transaction(async tx => {
+    const outcome = await database(() => rateLimitedLogin(prisma, config, loginKey(req.ip), async (tx, at) => {
+      const user = await tx.user.findUnique({ where: { email } });
+      const matched = await verifyPassword(password, user?.passwordHash);
+      if (!user || !matched) return null;
+      const token = randomBytes(32).toString('base64url');
+      const csrfToken = randomBytes(32).toString('base64url');
+      const expiresAt = new Date(at.getTime() + config.sessionTtlHours * 60 * 60 * 1000);
       if (previous) await tx.session.updateMany({ where: { tokenHash: tokenHash(previous), revokedAt: null }, data: { revokedAt: at } });
       await tx.session.create({ data: { userId: user.id, tokenHash: tokenHash(token), csrfToken, createdAt: at, expiresAt } });
-    }));
-    res.cookie(SESSION_COOKIE, token, { ...cookie, expires: expiresAt });
-    res.json({ data: { user: userDto(user), csrfToken } });
+      return { token, csrfToken, expiresAt, user: userDto(user) };
+    }, deps.now));
+    if (outcome.kind === 'limited') {
+      res.setHeader('Retry-After', String(outcome.retryAfter));
+      throw new AppError(429, 'LOGIN_RATE_LIMITED', 'Too many sign-in attempts. Please try again later.');
+    }
+    if (outcome.kind === 'invalid') throw new AppError(401, 'INVALID_CREDENTIALS', 'Email or password is incorrect. Check and try again.');
+    const value = outcome.value;
+    res.cookie(SESSION_COOKIE, value.token, { ...cookie, expires: value.expiresAt });
+    res.json({ data: { user: value.user, csrfToken: value.csrfToken } });
   });
   router.get('/auth/me', protection.requireSession, async (req, res) => {
     const session = (await protection.readSession(req))!;

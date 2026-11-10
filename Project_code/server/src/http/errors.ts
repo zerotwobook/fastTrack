@@ -2,7 +2,7 @@ import express from 'express';
 import type { ErrorRequestHandler, RequestHandler } from 'express';
 
 export type FieldErrors = Readonly<Record<string, string>>;
-export type ErrorStatus = 400 | 401 | 403 | 404 | 409 | 415 | 500 | 503;
+export type ErrorStatus = 400 | 401 | 403 | 404 | 409 | 415 | 429 | 500 | 503;
 
 export class AppError extends Error {
   constructor(readonly status: ErrorStatus, readonly code: string, message: string, readonly fields: FieldErrors = {}) {
