@@ -28,13 +28,17 @@ echo "$*" >> "$CALL_LOG"
 case "$*" in
   'artifacts docker images describe '*fasttrack-app:*)
     [[ "${FAIL_AT:-}" != image ]] || exit 1
+    [[ "${FAIL_AT:-}" != malformed_web ]] || { echo 'asia-southeast1-docker.pkg.dev/release-test/fasttrack-docker/fasttrack-app@sha256:'; exit 0; }
     echo 'asia-southeast1-docker.pkg.dev/release-test/fasttrack-docker/fasttrack-app@sha256:abcdef1234567890abcdef1234567890abcdef1234567890abcdef1234567890' ;;
   'artifacts docker images describe '*fasttrack-jobs:*)
     [[ "${FAIL_AT:-}" != jobs_image ]] || exit 1
+    [[ "${FAIL_AT:-}" != malformed_jobs ]] || { echo 'asia-southeast1-docker.pkg.dev/release-test/fasttrack-docker/fasttrack-jobs@sha256:bad'; exit 0; }
     echo 'asia-southeast1-docker.pkg.dev/release-test/fasttrack-docker/fasttrack-jobs@sha256:9999991234567890abcdef1234567890abcdef1234567890abcdef1234567890' ;;
   'run jobs execute '*) [[ "${FAIL_AT:-}" != migration ]] || exit 1 ;;
   'run services describe '*status.url*) echo 'https://fasttrack-demo.example.test' ;;
   'run services describe '*latestReadyRevisionName*) echo 'fasttrack-app-00001-abc' ;;
+  'run services describe '*status.traffic.percent*) echo "${STUB_TRAFFIC:-100}" ;;
+  'run services describe '*status.traffic.revisionName*) echo 'fasttrack-app-00001-abc' ;;
 esac
 STUB
 chmod +x "$TASK_TMP/gcloud"
@@ -46,9 +50,11 @@ grep -q 'run jobs update fasttrack-migrate .*fasttrack-jobs@sha256:999999' "$CAL
 grep -q 'run jobs execute .*--wait' "$CALL_LOG"
 grep -q "run services update fasttrack-app .*fasttrack-app@sha256:abcdef.*--update-env-vars=RELEASE_SHA=${IMAGE_TAG}" "$CALL_LOG"
 grep -q 'SERVICE_URL=https://fasttrack-demo.example.test' "$GITHUB_ENV"
+grep -q 'TRAFFIC_PERCENT=100' "$GITHUB_ENV"
 grep -q 'SERVING_REVISION=fasttrack-app-00001-abc' "$GITHUB_ENV"
 grep -q 'DEPLOYED_IMAGE=asia-southeast1-docker.pkg.dev/release-test/fasttrack-docker/fasttrack-app@sha256:abcdef' "$GITHUB_ENV"
 grep -q 'DEPLOYED_JOBS_IMAGE=asia-southeast1-docker.pkg.dev/release-test/fasttrack-docker/fasttrack-jobs@sha256:999999' "$GITHUB_ENV"
+grep -q 'run jobs update .*--max-retries=0' "$CALL_LOG"
 echo 'PASS normal release uses web/jobs digests, awaits migration, and sets RELEASE_SHA'
 
 # Scenario 2: Rollback
@@ -72,7 +78,7 @@ test ! -s "$CALL_LOG"
 echo 'PASS non-main GITHUB_REF rejected before GCP calls'
 
 # Scenario 4: Failures (web image describe, jobs image describe, migration failure)
-for failure in image jobs_image migration; do
+for failure in image jobs_image migration malformed_web malformed_jobs; do
   : > "$CALL_LOG"
   if ROLLBACK=false FAIL_AT="$failure" bash "$ROOT/deploy/release.sh"; then
     echo "Expected $failure failure but script succeeded" >&2
@@ -93,3 +99,10 @@ if IMAGE_TAG='invalid;tag' bash "$ROOT/deploy/release.sh" 2>/dev/null; then
 fi
 test ! -s "$CALL_LOG"
 echo 'PASS invalid tag rejected before GCP calls'
+
+# Split traffic must not be reported as a successfully serving release.
+if STUB_TRAFFIC='50;50' ROLLBACK=false bash "$ROOT/deploy/release.sh" >/dev/null 2>&1; then
+  echo 'Expected split-traffic verification failure' >&2
+  exit 1
+fi
+echo 'PASS split traffic is rejected instead of reporting success'

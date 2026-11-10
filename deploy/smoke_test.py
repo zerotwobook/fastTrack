@@ -63,12 +63,16 @@ def _version_matches(payload_json, expected_sha):
 
 def _is_sanitized_not_found(raw_bytes):
     parsed = json.loads(raw_bytes)
+    if not isinstance(parsed, dict) or set(parsed) != {'error'}:
+        return False
     error = parsed.get('error')
-    if not isinstance(error, dict) or not error.get('code') or not error.get('message'):
+    if not isinstance(error, dict) or set(error) != {'code', 'message', 'fields'}:
         return False
-    if 'stack' in error or 'postgresql://' in raw_bytes.decode('utf-8', errors='ignore'):
-        return False
-    return True
+    return (
+        error.get('code') == 'NOT_FOUND'
+        and error.get('message') == 'The requested resource was not found.'
+        and error.get('fields') == {}
+    )
 
 
 def check(base):
@@ -188,8 +192,8 @@ def check(base):
                     expected_status=204,
                 )
                 print('PASS logout')
-            except Exception as err:
-                print(f'WARNING: Logout encountered: {err}')
+            except Exception:
+                raise RuntimeError('Logout smoke check failed') from None
 
 
 if __name__ == '__main__':

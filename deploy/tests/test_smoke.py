@@ -18,7 +18,7 @@ class SmokeTests(unittest.TestCase):
             ('/api/health', 200): b'{"status":"ok","version":"1111111111111111111111111111111111111111"}',
             ('/api/ready', 200): b'{"status":"ready","database":"connected","version":"1111111111111111111111111111111111111111"}',
             ('/', 200): b'<!doctype html><html><head><title>fastTrack</title></head><body></body></html>',
-            ('/api/nonexistent', 404): b'{"error":{"code":"NOT_FOUND","message":"Resource not found.","fields":{}}}',
+            ('/api/nonexistent', 404): b'{"error":{"code":"NOT_FOUND","message":"The requested resource was not found.","fields":{}}}',
             ('/api/auth/login', 200): b'{"data":{"user":{"id":"usr_01","displayName":"Tester","role":"student"},"csrfToken":"csrf_test_token"}}',
             ('/api/auth/me', 200): b'{"data":{"user":{"id":"usr_01","displayName":"Tester","role":"student"},"csrfToken":"csrf_test_token"}}',
             ('/api/teams', 200): b'{"data":[{"id":"team_01","name":"Team Alpha"}],"meta":{"serverTime":"2026-11-10T00:00:00.000Z"}}',
@@ -77,6 +77,47 @@ class SmokeTests(unittest.TestCase):
     def test_mismatched_credentials_raises(self):
         with patch.object(smoke, 'request', side_effect=self.response):
             with self.assertRaisesRegex(RuntimeError, 'Set both SMOKE_EMAIL and SMOKE_PASSWORD'):
+                smoke.check('https://demo.example.test')
+
+
+    @patch.dict('os.environ', {'SMOKE_EMAIL': 'tester@example.test', 'SMOKE_PASSWORD': 'test-password'}, clear=True)
+    def test_logout_failure_fails_smoke_without_leaking_details(self):
+        def failed_logout(base, path, **kwargs):
+            if path == '/api/auth/logout':
+                raise ValueError('private session diagnostic')
+            return self.response(base, path, **kwargs)
+        with patch.object(smoke, 'request', side_effect=failed_logout):
+            with self.assertRaisesRegex(RuntimeError, '^Logout smoke check failed$'):
+                smoke.check('https://demo.example.test')
+
+    @patch.dict('os.environ', {}, clear=True)
+    def test_wrong_not_found_code_fails(self):
+        def wrong_code(base, path, **kwargs):
+            if path == '/api/nonexistent':
+                return b'{"error":{"code":"INTERNAL_ERROR","message":"The requested resource was not found.","fields":{}}}'
+            return self.response(base, path, **kwargs)
+        with patch.object(smoke, 'request', side_effect=wrong_code), patch.object(smoke.time, 'sleep'):
+            with self.assertRaisesRegex(RuntimeError, '/api/nonexistent'):
+                smoke.check('https://demo.example.test')
+
+    @patch.dict('os.environ', {}, clear=True)
+    def test_unexpected_not_found_message_fails(self):
+        def wrong_message(base, path, **kwargs):
+            if path == '/api/nonexistent':
+                return b'{"error":{"code":"NOT_FOUND","message":"private diagnostic","fields":{}}}'
+            return self.response(base, path, **kwargs)
+        with patch.object(smoke, 'request', side_effect=wrong_message), patch.object(smoke.time, 'sleep'):
+            with self.assertRaisesRegex(RuntimeError, '/api/nonexistent'):
+                smoke.check('https://demo.example.test')
+
+    @patch.dict('os.environ', {}, clear=True)
+    def test_top_level_stack_is_rejected(self):
+        def leaked_stack(base, path, **kwargs):
+            if path == '/api/nonexistent':
+                return b'{"error":{"code":"NOT_FOUND","message":"The requested resource was not found.","fields":{}},"stack":"internal details"}'
+            return self.response(base, path, **kwargs)
+        with patch.object(smoke, 'request', side_effect=leaked_stack), patch.object(smoke.time, 'sleep'):
+            with self.assertRaisesRegex(RuntimeError, '/api/nonexistent'):
                 smoke.check('https://demo.example.test')
 
 

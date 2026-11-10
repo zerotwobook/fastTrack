@@ -19,7 +19,16 @@ set -euo pipefail
 #   (secret access)   8 build image        9 migrate job         10 Cloud Run service
 # ==============================================================================
 
+# Bootstrap is a cloud mutation: use only a clean accepted main checkout.
+# The caller must fetch/synchronize origin/main and obtain cloud authorization first.
 DRY_RUN="${DRY_RUN:-0}"
+RELEASE_SHA="$(git rev-parse HEAD)"
+[[ "$RELEASE_SHA" =~ ^[0-9a-f]{40}$ ]] || { echo 'Invalid source commit.' >&2; exit 1; }
+if [ "$DRY_RUN" != "1" ]; then
+  [[ "$(git symbolic-ref --quiet HEAD)" == refs/heads/main ]] || { echo 'Bootstrap requires main.' >&2; exit 1; }
+  [[ "$RELEASE_SHA" == "$(git rev-parse origin/main)" ]] || { echo 'Synchronize accepted origin/main before bootstrap.' >&2; exit 1; }
+  [[ -z "$(git status --porcelain --untracked-files=normal)" ]] || { echo 'Bootstrap requires a clean checkout.' >&2; exit 1; }
+fi
 REGION="${REGION:-asia-southeast1}"
 SEED_DEMO_DATA="false"
 
@@ -80,8 +89,8 @@ SA_NAME="sa-fasttrack-runtime"
 SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
 SQL_CONN_NAME="${PROJECT_ID}:${REGION}:${SQL_INSTANCE}"
 APP_ORIGIN="${APP_ORIGIN:-https://${SERVICE_NAME}-${PROJECT_NUMBER}.${REGION}.run.app}"
-IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${SERVICE_NAME}:latest"
-JOBS_IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${JOBS_IMAGE_NAME}:latest"
+IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${SERVICE_NAME}:${RELEASE_SHA}"
+JOBS_IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${JOBS_IMAGE_NAME}:${RELEASE_SHA}"
 
 SECRET_DB_URL="fasttrack-database-url"
 SECRET_DEMO_PASS="fasttrack-demo-password"
@@ -236,18 +245,28 @@ if [ "$SEED_DEMO_DATA" = "true" ]; then
 fi
 
 # 8. Build initial web and jobs images (using Project_code context)
-RELEASE_SHA="$(git rev-parse HEAD 2>/dev/null || echo '0000000000000000000000000000000000000000')"
 run_cmd gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
 run_cmd docker build --build-arg RELEASE_SHA="$RELEASE_SHA" -t "$IMAGE_URI" Project_code
 run_cmd docker push "$IMAGE_URI"
 run_cmd docker build --target jobs --build-arg RELEASE_SHA="$RELEASE_SHA" -t "$JOBS_IMAGE_URI" Project_code
 run_cmd docker push "$JOBS_IMAGE_URI"
 
+# Resolve the exact images before running migrations or rolling out the web service.
+if [ "$DRY_RUN" != "1" ]; then
+  DIGEST_APP_IMAGE="$(gcloud artifacts docker images describe "$IMAGE_URI" --project="$PROJECT_ID" --format='value(image_summary.fully_qualified_digest)')"
+  DIGEST_JOBS_IMAGE="$(gcloud artifacts docker images describe "$JOBS_IMAGE_URI" --project="$PROJECT_ID" --format='value(image_summary.fully_qualified_digest)')"
+  [[ "$DIGEST_APP_IMAGE" == "${IMAGE_URI%:*}@sha256:"* && "${DIGEST_APP_IMAGE##*@sha256:}" =~ ^[0-9a-f]{64}$ ]] || { echo 'Invalid web image digest.' >&2; exit 1; }
+  [[ "$DIGEST_JOBS_IMAGE" == "${JOBS_IMAGE_URI%:*}@sha256:"* && "${DIGEST_JOBS_IMAGE##*@sha256:}" =~ ^[0-9a-f]{64}$ ]] || { echo 'Invalid jobs image digest.' >&2; exit 1; }
+  IMAGE_URI="$DIGEST_APP_IMAGE"
+  JOBS_IMAGE_URI="$DIGEST_JOBS_IMAGE"
+fi
+
 # 9. Create Cloud Run Job for migrations (idempotent, uses jobs image target)
 if [ "$DRY_RUN" = "1" ]; then
   run_cmd gcloud run jobs describe "$MIGRATE_JOB_NAME" --region="$REGION" --project="$PROJECT_ID"
   run_cmd gcloud run jobs create "$MIGRATE_JOB_NAME" \
     --image="$JOBS_IMAGE_URI" \
+    --max-retries=0 --tasks=1 --parallelism=1 \
     --region="$REGION" \
     --project="$PROJECT_ID" \
     --service-account="$SA_EMAIL" \
@@ -260,6 +279,7 @@ else
   if ! gcloud run jobs describe "$MIGRATE_JOB_NAME" --region="$REGION" --project="$PROJECT_ID" >/dev/null 2>&1; then
     run_cmd gcloud run jobs create "$MIGRATE_JOB_NAME" \
       --image="$JOBS_IMAGE_URI" \
+      --max-retries=0 --tasks=1 --parallelism=1 \
       --region="$REGION" \
       --project="$PROJECT_ID" \
       --service-account="$SA_EMAIL" \
@@ -267,6 +287,13 @@ else
       --set-secrets="DATABASE_URL=${SECRET_DB_URL}:latest" \
       --command="npm" \
       --args="run,db:migrate,--workspace,@fasttrack/server"
+  else
+    run_cmd gcloud run jobs update "$MIGRATE_JOB_NAME" \
+      --image="$JOBS_IMAGE_URI" \
+      --max-retries=0 --tasks=1 --parallelism=1 \
+      --command="npm" \
+      --args="run,db:migrate,--workspace,@fasttrack/server" \
+      --region="$REGION" --project="$PROJECT_ID"
   fi
   run_cmd gcloud run jobs execute "$MIGRATE_JOB_NAME" --wait --region="$REGION" --project="$PROJECT_ID"
 fi

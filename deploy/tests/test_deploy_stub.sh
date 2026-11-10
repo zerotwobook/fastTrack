@@ -21,6 +21,19 @@ TEST_STATE_DIR="$(mktemp -d)"
 trap 'rm -rf "$TEST_STATE_DIR"' EXIT
 mkdir -p "$TEST_STATE_DIR/bin"
 
+# Stub source identity so offline tests never require a main checkout.
+cat > "$TEST_STATE_DIR/bin/git" <<'STUB'
+#!/usr/bin/env bash
+case "$*" in
+  'symbolic-ref --quiet HEAD') echo "${STUB_REF:-refs/heads/main}" ;;
+  'rev-parse HEAD') echo 1111111111111111111111111111111111111111 ;;
+  'rev-parse origin/main') echo "${STUB_MAIN_SHA:-1111111111111111111111111111111111111111}" ;;
+  'status --porcelain --untracked-files=normal') printf '%s' "${STUB_DIRTY:-}" ;;
+  *) exit 1 ;;
+esac
+STUB
+chmod +x "$TEST_STATE_DIR/bin/git"
+
 # --- Fake `docker` (skips local daemon) ---------------------------------------
 cat > "$TEST_STATE_DIR/bin/docker" <<'STUB'
 #!/usr/bin/env bash
@@ -59,6 +72,11 @@ if [ "${1:-} ${2:-}" = 'config get-value' ]; then
 fi
 if [ "${1:-} ${2:-}" = 'projects describe' ]; then
   echo 970128017651
+  exit 0
+fi
+if [ "${1:-} ${2:-} ${3:-}" = 'artifacts docker images' ]; then
+  image="${5%:*}"
+  printf '%s@sha256:%064d\n' "$image" 1
   exit 0
 fi
 if [ "${1:-} ${2:-} ${3:-}" = 'run services describe' ]; then
@@ -193,6 +211,15 @@ for MODE in first_run rerun partial job-fail demo; do
     fi
   done
 
+  # Both fresh and existing jobs must migrate the current immutable image once.
+  if [ "$MODE" = first_run ]; then
+    grep -q 'run jobs create .*fasttrack-jobs@sha256:.*--max-retries=0' "$GCLOUD_LOG"
+  else
+    grep -q 'run jobs update .*fasttrack-jobs@sha256:.*--max-retries=0' "$GCLOUD_LOG"
+  fi
+  grep -q 'run deploy .*fasttrack-app@sha256:' "$GCLOUD_LOG"
+  grep -q 'fasttrack-app:1111111111111111111111111111111111111111' "$TEST_STATE_DIR/docker.log"
+
   # Migration must run with --wait using fasttrack-jobs image
   grep -q 'run jobs execute fasttrack-migrate --wait' "$GCLOUD_LOG" \
     || { echo "FAIL: migration job was not awaited with --wait" >&2; exit 1; }
@@ -215,3 +242,19 @@ if [ -s "$DRY_LOG" ]; then
   exit 1
 fi
 echo "PASS: DRY_RUN=1 made 0 gcloud calls"
+# Rejected source must not invoke cloud commands.
+export DRY_RUN=0
+: > "$GCLOUD_LOG"
+if STUB_REF=refs/heads/staging/sprint-2 bash "$DEPLOY_SCRIPT" >/dev/null 2>&1; then
+  echo 'FAIL: unmerged staging source was accepted' >&2; exit 1
+fi
+test ! -s "$GCLOUD_LOG"
+if STUB_DIRTY=' M Project_code/server/src/app.ts' bash "$DEPLOY_SCRIPT" >/dev/null 2>&1; then
+  echo 'FAIL: dirty source was accepted' >&2; exit 1
+fi
+test ! -s "$GCLOUD_LOG"
+if STUB_MAIN_SHA=2222222222222222222222222222222222222222 bash "$DEPLOY_SCRIPT" >/dev/null 2>&1; then
+  echo 'FAIL: checkout differing from origin/main was accepted' >&2; exit 1
+fi
+test ! -s "$GCLOUD_LOG"
+echo 'PASS: non-main, dirty and divergent sources rejected before cloud calls'

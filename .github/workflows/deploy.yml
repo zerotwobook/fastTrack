@@ -126,6 +126,7 @@ jobs:
             echo "- Commit image tag: \`$IMAGE_TAG\`"
             echo "- Web Digest: \`$DEPLOYED_IMAGE\`"
             echo "- Jobs Digest: \`${DEPLOYED_JOBS_IMAGE:-skipped-rollback}\`"
+            echo "- Verified Traffic: ${TRAFFIC_PERCENT}%"
             echo "- Serving Revision: \`${SERVING_REVISION:-unknown}\`"
             echo "- Rollback: $ROLLBACK"
             echo "- URL: $SERVICE_URL"

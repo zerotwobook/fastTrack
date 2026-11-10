@@ -50,7 +50,7 @@ ROLLBACK="${ROLLBACK:-false}"
 # ------------------------------------------------------------------------------
 APP_IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$SERVICE_NAME:$IMAGE_TAG"
 DIGEST_APP_IMAGE="$(gcloud artifacts docker images describe "$APP_IMAGE" --project="$PROJECT_ID" --format='value(image_summary.fully_qualified_digest)')"
-[[ "$DIGEST_APP_IMAGE" == "$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$SERVICE_NAME@sha256:"* ]] || { echo 'Web image digest not found or malformed.' >&2; exit 1; }
+[[ "$DIGEST_APP_IMAGE" == "$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$SERVICE_NAME@sha256:"* && "${DIGEST_APP_IMAGE##*@sha256:}" =~ ^[0-9a-f]{64}$ ]] || { echo 'Web image digest not found or malformed.' >&2; exit 1; }
 
 # ------------------------------------------------------------------------------
 # 3. Database migration (normal release only; uses jobs image target)
@@ -60,10 +60,10 @@ DIGEST_JOBS_IMAGE=""
 if [[ "$ROLLBACK" == false ]]; then
   JOBS_IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$JOBS_IMAGE_NAME:$IMAGE_TAG"
   DIGEST_JOBS_IMAGE="$(gcloud artifacts docker images describe "$JOBS_IMAGE" --project="$PROJECT_ID" --format='value(image_summary.fully_qualified_digest)')"
-  [[ "$DIGEST_JOBS_IMAGE" == "$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$JOBS_IMAGE_NAME@sha256:"* ]] || { echo 'Jobs image digest not found or malformed.' >&2; exit 1; }
+  [[ "$DIGEST_JOBS_IMAGE" == "$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$JOBS_IMAGE_NAME@sha256:"* && "${DIGEST_JOBS_IMAGE##*@sha256:}" =~ ^[0-9a-f]{64}$ ]] || { echo 'Jobs image digest not found or malformed.' >&2; exit 1; }
 
   echo "Updating migration job $MIGRATE_JOB_NAME with jobs image $DIGEST_JOBS_IMAGE..."
-  gcloud run jobs update "$MIGRATE_JOB_NAME" --image="$DIGEST_JOBS_IMAGE" --project="$PROJECT_ID" --region="$REGION" --quiet
+  gcloud run jobs update "$MIGRATE_JOB_NAME" --image="$DIGEST_JOBS_IMAGE" --max-retries=0 --tasks=1 --parallelism=1 --command=npm --args=run,db:migrate,--workspace,@fasttrack/server --project="$PROJECT_ID" --region="$REGION" --quiet
   echo "Executing database migration job..."
   gcloud run jobs execute "$MIGRATE_JOB_NAME" --wait --project="$PROJECT_ID" --region="$REGION" --quiet
   echo "Database migration completed successfully."
@@ -88,6 +88,10 @@ gcloud run services update-traffic "$SERVICE_NAME" --to-latest --project="$PROJE
 # ------------------------------------------------------------------------------
 SERVICE_URL="$(gcloud run services describe "$SERVICE_NAME" --project="$PROJECT_ID" --region="$REGION" --format='value(status.url)')"
 SERVING_REVISION="$(gcloud run services describe "$SERVICE_NAME" --project="$PROJECT_ID" --region="$REGION" --format='value(status.latestReadyRevisionName)')"
+TRAFFIC_PERCENT="$(gcloud run services describe "$SERVICE_NAME" --project="$PROJECT_ID" --region="$REGION" --format='value(status.traffic.percent)')"
+TRAFFIC_REVISION="$(gcloud run services describe "$SERVICE_NAME" --project="$PROJECT_ID" --region="$REGION" --format='value(status.traffic.revisionName)')"
+[[ -n "$SERVICE_URL" && -n "$SERVING_REVISION" && "$TRAFFIC_PERCENT" == 100 && "$TRAFFIC_REVISION" == "$SERVING_REVISION" ]] || { echo 'Serving revision or 100% traffic could not be verified.' >&2; exit 1; }
+echo "Traffic: ${TRAFFIC_PERCENT}% to $TRAFFIC_REVISION"
 echo "Service URL: $SERVICE_URL"
 echo "Serving Revision: ${SERVING_REVISION:-unknown}"
 echo "Deployed Web Image: $DIGEST_APP_IMAGE"
@@ -96,6 +100,6 @@ if [[ -n "$DIGEST_JOBS_IMAGE" ]]; then
 fi
 
 if [[ -n "${GITHUB_ENV:-}" ]]; then
-  printf 'SERVICE_URL=%s\nDEPLOYED_IMAGE=%s\nDEPLOYED_JOBS_IMAGE=%s\nSERVING_REVISION=%s\n' \
-    "$SERVICE_URL" "$DIGEST_APP_IMAGE" "$DIGEST_JOBS_IMAGE" "${SERVING_REVISION:-}" >> "$GITHUB_ENV"
+  printf 'SERVICE_URL=%s\nDEPLOYED_IMAGE=%s\nDEPLOYED_JOBS_IMAGE=%s\nSERVING_REVISION=%s\nTRAFFIC_PERCENT=%s\n' \
+    "$SERVICE_URL" "$DIGEST_APP_IMAGE" "$DIGEST_JOBS_IMAGE" "${SERVING_REVISION:-}" "$TRAFFIC_PERCENT" >> "$GITHUB_ENV"
 fi
