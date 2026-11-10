@@ -1,224 +1,246 @@
-# R2-J01 Cloud Runtime and Provisioning Plan (Phase A/B Handoff)
+# R2-J01 Cloud Runtime and Provisioning Plan
 
-**Task ID:** `R2-J01` (Joint Cloud Delivery & Lab 5 Evidence)  
-**Issue:** [#16](https://github.com/zerotwobook/fastTrack/issues/16)  
-**Author / Owner:** A (`@zerotwobook`)  
-**Reviewer:** B (`@Atip-Infa`)  
-**Branch:** `ops/s2-a-cloud-runtime`  
-**Base:** `staging/sprint-2` (`8edab6f30c051a1a8f6c0d1a2222af5f2125fc9e`)  
-**Execution Mode:** `Prepare` (Phase A discovery + Phase B concrete plan & offline verification; stops before cloud mutation or main release)
+| Field | Value |
+|---|---|
+| Task / Issue | R2-J01 / [#16](https://github.com/zerotwobook/fastTrack/issues/16) |
+| Owner / peer reviewer | A (`zerotwobook`) / B (`Atip-Infa`) |
+| Branch / PR | `ops/s2-a-cloud-runtime` / [#89](https://github.com/zerotwobook/fastTrack/pull/89) |
+| Target base observed on 11 November 2026 | `staging/sprint-2` at `7936ebb35ad79490b46f05c23ef26fdcddfeee33` |
+| Original plan | `438b3e741298031cac59b02143f7f4a144540063`, originally based on `8edab6f30c051a1a8f6c0d1a2222af5f2125fc9e` |
+| Execution mode | Preparation and review corrections only |
+| Delivery readiness | **BLOCKED for cloud execution**: account/resource discovery, connection verification, costs, bootstrap settings and authorizations remain pending |
 
----
+## 1. Scope, ownership and evidence boundaries
 
-## 1. Executive Summary and Operational Boundaries
+This is the reviewable A/07 runtime proposal and resume record. It does not certify completion of Phase A/B, first deployment, C-01-C-06 or Issue #16. The user authorized corrections after assisted review; this is not authorization to change cloud resources, GitHub deployment protection or `main`.
 
-This handoff establishes the concrete, reproducible cloud runtime and provisioning architecture for fastTrack Lab 5. It fulfills the independent preparation phase owned by A under `prompt_project/prompt_lab5/A/07_R2-J01_CLOUD_RUNTIME.md`, respecting all repository rules (`AGENTS.md`, `skill/SKILL_Project.md`, `skill/SKILL_Github.md`, `workflow/04_LAB5_DELIVERY_PLAN.md`, and `workflow/MAIN_RELEASE_GATE.md`).
+A owns this handoff, runtime/resource discovery, the connection proposal and external verification. B owns WIF/deployer trust, GitHub environment/check settings and release orchestration. The accepted [B handoff](R2-B01_B_LIVE_GATE_PLAN.md), corrected at `441b7e5` and merged through [PR #88](https://github.com/zerotwobook/fastTrack/pull/88) as `7936ebb`, is the companion plan. Its snapshots are historical observations; reread settings before execution. Changes to B-owned workflows/scripts or the shared deployment guide require coordination with B. This correction changes only this Markdown handoff.
 
-### Strict Operational Boundaries
-1. **Zero Unapproved Cloud Mutations:** No GCP commands modifying billing, IAM, SQL, secrets, or compute are executed during this preparation phase.
-2. **Main Release Gate Hold:** Staging head (`8edab6f`) contains the verified container and delivery workflows, while `main` remains at planning baseline `b7174a7`. No deployment will occur from staging; all production releases require an explicit user-authorized candidate targeting `main` via B's release preparation ([B/08](../../prompt_project/prompt_lab5/B/08_R2-B01_J01_WIF_GATE_AND_RELEASE_PREP.md)).
-3. **Secret Redaction:** No actual connection strings, database passwords, session secrets, cookies, or CSRF tokens appear in this plan, repository code, or chat logs.
+Use existing paths: application/runtime source in `Project_code/`, Actions in `.github/workflows/`, scripts in `deploy/`, and the canonical [deployment guide](../../docs/labs/lab-05/deployment.md). No app, migration or release implementation is introduced here. Unaccepted F-05-F-07 features, later restart/redeploy evidence and C-02 remain outside this preparation.
 
----
+`origin/main` was fetched as `b7174a7eb5acd0eca7fa0b0ef0bec078954e2d82`. It contains the accepted S1 application and historical D1 artifacts, but not the Sprint 2 delivery Dockerfile/workflows/scripts. Deploy only the subsequently reviewed and accepted main source. The [main-release gate](../MAIN_RELEASE_GATE.md) and cloud-action authorization are separate.
 
-## 2. Phase A: Tooling and Cloud State Discovery
+## 2. Discovery record and remaining unknowns
 
-### 2.1 Tooling & Environment Verification
-A pre-execution discovery check was performed on the local execution host on 11 November 2026:
+### Verified observations on 11 November 2026
 
-| Tool | Checked Command | Observed Status | Implications |
-|---|---|---|---|
-| **gcloud CLI** | `Get-Command gcloud` | `NOT INSTALLED` on local PATH | Cloud mutations cannot be run directly via local CLI without installation. Concrete gcloud commands and console instructions are fully documented below for account-holder review. |
-| **Docker Engine** | `docker --version` | `Docker version 29.9.2, build a82e528` (VERIFIED PRESENT) | Available for clean image builds (`runner` and `jobs` targets) and local validation. |
-| **Git** | `git --version` | `git version 2.47.1.windows.1` (VERIFIED PRESENT) | Clean repository tree verified on `ops/s2-a-cloud-runtime`. |
-| **Bash** | `C:\Program Files\Git\bin\bash.exe` | GNU bash 5.2.37 (VERIFIED PRESENT) | Successfully executes delivery test stubs and offline verification scripts. |
-| **Python** | `python --version` | `Python 3.13.16` (VERIFIED PRESENT) | Successfully executes `deploy/tests/test_smoke.py` unittest suite. |
+| Check | Result and limit |
+|---|---|
+| `Get-Command gcloud -ErrorAction SilentlyContinue` | No command found on PATH. This does not prove no installation elsewhere or no existing cloud resource. |
+| `git --version` | `2.56.0.windows.3`; fetched main/staging refs and inspected the task branch. |
+| Git Bash `--version` | `5.3.15(2)-release`; path `C:\Program Files\Git\bin\bash.exe`. |
+| `python --version` | `3.13.16`. |
+| `docker --version` | Client `29.9.2`, build `a82e528`; configuration access warning. This does not establish daemon availability or an image build. |
+| `gh api repos/zerotwobook/fastTrack/environments` | `total_count: 0`; no configured `demo` environment or required-reviewer hold. |
+| Issue #16 and PR #89 Project cards before edits | Both read back `Fixing / FAILED / PENDING` after actual findings; the Issue log records the transition. |
 
-### 2.2 GCP Project Discovery Lead
-Based on accepted delivery contracts (`docs/labs/lab-05/deployment.md` and `Project_code/docs/contracts/sprint-2-lab-05-delivery-contract.md`):
-- **Proposed Project ID:** `fasttrack-se-002`
-- **Proposed Project Number:** `970128017651`
-- **Target Region:** `asia-southeast1` (Singapore; minimal latency for Thailand/Bangkok)
-- **Account Type:** Personal Gmail Free Trial ($300 credit tier), adhering strictly to handout section 4.4 and Student Guide Episode 1. No prepayments or paid account upgrades are permitted.
+The original plan's Git/Bash versions are superseded by these observations. Historical exact test durations are not fresh evidence. No authenticated GCP session was established, and no GCP query or mutation was performed during this correction. The account holder can complete discovery in Cloud Console or an approved existing CLI session; no password, token or key file is needed in chat.
 
-### 2.3 Cloud Resource Inventory
-As gcloud CLI is not locally available in the agent workspace, all live cloud resources are classified in accordance with Section 5 of Prompt A/07:
+### Proposed resource inventory
 
-| Resource Type | Resource Name / ID | Planned Target | Current State | Verification Source / Time |
-|---|---|---|---|---|
-| **Artifact Registry** | `fasttrack-docker` | `asia-southeast1` | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Cloud SQL Instance** | `fasttrack-db` | PostgreSQL 16 Enterprise (`db-f1-micro`) | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Database** | `fasttrack_prod` | In `fasttrack-db` | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Database User** | `fasttrack_user` | Scoped DB user | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Runtime Identity** | `sa-fasttrack-runtime` | Service Account | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Deployer Identity** | `sa-fasttrack-deployer`| Service Account (WIF) | `UNKNOWN` | Managed via B/08 handoff (11 Nov 2026) |
-| **Secret: DB URL** | `fasttrack-database-url`| Secret Manager | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Secret: Demo Pass** | `fasttrack-demo-password`| Secret Manager (optional) | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Cloud Run Job** | `fasttrack-migrate` | Migration Job | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
-| **Cloud Run Service** | `fasttrack-app` | Web Service | `UNKNOWN` | Requires Console or authorized gcloud inspection (11 Nov 2026) |
+All identifiers below are **proposal leads**, not verified ownership, existing resources or approved execution targets.
 
-*Note: In accordance with project rules, permission failure or absence of CLI is recorded as `UNKNOWN`, not absence.*
+| Resource | Proposed identity / configuration | State / missing verification |
+|---|---|---|
+| Project | `fasttrack-se-002`, number `970128017651` | UNKNOWN: verify both identifiers and account access together. |
+| Account / billing | Handout-compliant account; no prepayment or Upgrade | UNKNOWN: account type, billing linkage, credit balance/expiry and quota. |
+| Region | `asia-southeast1` | Proposal; confirm capacity, cost and approved region. |
+| Artifact Registry | `fasttrack-docker` | UNKNOWN: repository/location and permissions. |
+| SQL | `fasttrack-db`, PostgreSQL 16 Enterprise `db-f1-micro`, 10 GB SSD | UNKNOWN: support/quota, storage auto-increase, backups, deletion protection and existing data. |
+| Database / user | `fasttrack_prod` / `fasttrack_user` | UNKNOWN: existence and credential ownership; preserve existing credentials. |
+| Runtime / deployer | `sa-fasttrack-runtime` / `sa-fasttrack-deployer` | UNKNOWN: identities/effective scoped IAM; deployer is B-owned. |
+| DB secret | `fasttrack-database-url` | UNKNOWN: metadata/version availability and per-secret IAM; do not access payload. |
+| Optional seed secret | `fasttrack-demo-password` | UNKNOWN; excluded from ordinary web runtime and initial bootstrap unless separately selected. |
+| Migration job / service | `fasttrack-migrate` / `fasttrack-app` | UNKNOWN: verify both before selecting bootstrap versus normal release. |
+| Public origin | `https://fasttrack-app-970128017651.asia-southeast1.run.app` | Predicted URL only; no live service/HTTPS/auth verification. |
 
----
+Permission failure means UNKNOWN. A successful inventory establishing no matching resource is required before VERIFIED ABSENT. Never interpret a failed `describe` as permission to create or reset something.
 
-## 3. Phase B: Concrete Runtime and Resource Plan
+### Read-only discovery for the account holder
 
-### 3.1 Change Matrix (A07-01 to A07-10)
+Run these Bash commands in an approved authenticated session. Confirm project ID/number first; stop and revise the proposal if they differ. These commands do not provision resources.
 
-| Action ID | Current State and Evidence | Exact Project / Region / Resource | Proposed Command or Console Action | Purpose | IAM / DB / Secret / Cost Impact | Recovery Limit | Authorization | Verification |
-|---|---|---|---|---|---|---|---|---|
-| **A07-01** | `UNKNOWN` (discovery lead) | `fasttrack-se-002` (Project-level APIs) | `gcloud services enable run.googleapis.com sqladmin.googleapis.com artifactregistry.googleapis.com cloudbuild.googleapis.com secretmanager.googleapis.com iam.googleapis.com --project fasttrack-se-002` | Enable required Google Cloud APIs for Cloud Run, Cloud SQL, Artifact Registry, Secrets, and IAM | Free tier API enablement; no direct cost. | Disable unneeded services if enabled by mistake. | `PENDING` user review | `gcloud services list --enabled --project fasttrack-se-002` |
-| **A07-02** | `UNKNOWN` | `fasttrack-docker` in `asia-southeast1` | `gcloud artifacts repositories create fasttrack-docker --repository-format=docker --location=asia-southeast1 --description="fastTrack container repository" --project=fasttrack-se-002` | Container registry for web and jobs immutable images | Storage cost negligible (<$0.10/mo for 2 images). | Repository can be deleted if misconfigured. | `PENDING` user review | `gcloud artifacts repositories describe fasttrack-docker --location=asia-southeast1 --project=fasttrack-se-002` |
-| **A07-03** | `UNKNOWN` | `fasttrack-db` in `asia-southeast1` | `gcloud sql instances create fasttrack-db --database-version=POSTGRES_16 --edition=enterprise --tier=db-f1-micro --region=asia-southeast1 --storage-size=10GB --storage-type=SSD --backup-start-time=03:00 --project=fasttrack-se-002` | Provision minimal supported persistent PostgreSQL 16 database | Covered by Free Trial $300 credit (~$10-15/month for db-f1-micro). Backup daily at 03:00 UTC. | Instance deletion requires explicit flag; preserve data. | `PENDING` user review | `gcloud sql instances describe fasttrack-db --project=fasttrack-se-002` |
-| **A07-04** | `UNKNOWN` | `fasttrack_prod` in `fasttrack-db` | `gcloud sql databases create fasttrack_prod --instance=fasttrack-db --project=fasttrack-se-002` | Production application database catalog | Logical database catalog creation; no additional cost. | Database can be dropped if corrupted before data entry. | `PENDING` user review | `gcloud sql databases list --instance=fasttrack-db --project=fasttrack-se-002` |
-| **A07-05** | `UNKNOWN` | `sa-fasttrack-runtime` | `gcloud iam service-accounts create sa-fasttrack-runtime --display-name="fastTrack Cloud Run Runtime" --project=fasttrack-se-002` && `gcloud projects add-iam-policy-binding fasttrack-se-002 --member="serviceAccount:sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com" --role="roles/cloudsql.client" --condition=None --quiet` | Scoped least-privilege runtime service account | Grants `cloudsql.client` ONLY; no Owner/Editor permissions; zero cost. | IAM role binding can be removed or revoked. | `PENDING` user review | `gcloud iam service-accounts describe sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com --project=fasttrack-se-002` |
-| **A07-06** | `UNKNOWN` | `fasttrack_user` & `fasttrack-database-url` | Generate 24-byte hex password -> create DB user `fasttrack_user` -> store socket URL in `fasttrack-database-url` -> grant `roles/secretmanager.secretAccessor` on secret | Secure database credential generation and Secret Manager storage | Secret Manager pricing ($0.06/secret/mo; free tier covers 6 active secrets). Runtime SA gets access to this secret ONLY. | Password can be rotated; secret versions are retained. | `PENDING` user review | `gcloud secrets describe fasttrack-database-url --project=fasttrack-se-002` (do NOT print payload) |
-| **A07-07** | `UNKNOWN` | `fasttrack-app` & `fasttrack-jobs` images | Build web and jobs targets from clean accepted `main` commit -> push to Artifact Registry -> resolve immutable 64-hex SHA-256 digests | Produce reproducible, immutable deployment artifacts | Bandwidth and storage within standard free tier limits. | Images are immutable by SHA; old tags remain accessible. | `PENDING` main release | `gcloud artifacts docker images list asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker` |
-| **A07-08** | `UNKNOWN` | `fasttrack-migrate` Cloud Run Job | `gcloud run jobs create fasttrack-migrate --image=$JOBS_DIGEST --max-retries=0 --tasks=1 --parallelism=1 --region=asia-southeast1 --service-account=sa-fasttrack-runtime@... --set-cloudsql-instances=... --set-secrets=DATABASE_URL=fasttrack-database-url:latest --command=npm --args=run,db:migrate,--workspace,@fasttrack/server` | Run Prisma schema migration before web rollout with zero automatic retries | Job compute is billed per-second during run (<$0.01). Halts on error without rolling out web app. | Job specification can be updated; migration failures halt rollout. | `PENDING` user review | `gcloud run jobs describe fasttrack-migrate --region=asia-southeast1 --project=fasttrack-se-002` |
-| **A07-09** | `UNKNOWN` | `fasttrack-app` Cloud Run Service | `gcloud run deploy fasttrack-app --image=$APP_DIGEST --region=asia-southeast1 --service-account=sa-fasttrack-runtime@... --set-cloudsql-instances=... --set-secrets=DATABASE_URL=fasttrack-database-url:latest --set-env-vars=NODE_ENV=production,APP_ORIGIN=https://fasttrack-app-970128017651.asia-southeast1.run.app,SESSION_TTL_HOURS=8,TRUST_PROXY_HOPS=1,RELEASE_SHA=$RELEASE_SHA --port=8080 --memory=512Mi --min-instances=0 --max-instances=2 --allow-unauthenticated` | Deploy public web application serving frontend + API | Cloud Run scale-to-zero (min=0, max=2 instances). Free tier covers 2M requests/month. | Previous revision can receive 100% traffic immediately on rollback. | `PENDING` user review & main release | `gcloud run services describe fasttrack-app --region=asia-southeast1 --project=fasttrack-se-002` |
-| **A07-10** | `UNKNOWN` | Public URL Verification | Run `python deploy/smoke_test.py https://fasttrack-app-970128017651.asia-southeast1.run.app $RELEASE_SHA` | External automated verification of `/api/health`, `/api/ready`, static assets, and 404 envelope | Read-only HTTP traffic; no state change. | N/A (read-only verification). | `PENDING` deployment | Smoke test exit code 0; sanitized JSON response matching contracts. |
-
----
-
-## 4. Resolution of the 10 Technical Architecture Points
-
-### 1. Registry and Image Identity
-- **Web Service Target:** `asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app:<RELEASE_SHA>`
-- **Migration Jobs Target:** `asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-jobs:<RELEASE_SHA>` (`--target jobs`)
-- **Immutable Digests:** All deployment commands (`deploy.sh`, `release.sh`, GitHub Actions) resolve and use the immutable 64-hex SHA-256 digest (`@sha256:[0-9a-f]{64}`).
-- **Source SHA Differentiation:** The built and deployed `RELEASE_SHA` must be the exact 40-character git commit from `main` that was built. The PR head commit on staging and the eventual merge commit on main can differ; runtime `/api/health` asserts the exact deployed main commit.
-
-### 2. SQL Architecture and Cloud SQL Connection
-- **Instance Configuration:** PostgreSQL 16 on Cloud SQL Enterprise edition, tier `db-f1-micro` (1 vCPU, 0.614 GB RAM), 10GB SSD storage, automated daily backups at 03:00 UTC.
-- **Connection Mechanism:** Unix domain socket integration via Cloud Run built-in connector (`--set-cloudsql-instances=fasttrack-se-002:asia-southeast1:fasttrack-db`).
-- **Connection String Format:**
-  `postgresql://fasttrack_user:<REDACTED>@127.0.0.1:5432/fasttrack_prod?host=/cloudsql/fasttrack-se-002:asia-southeast1:fasttrack-db`
-- **Driver Compatibility:** Fully compatible with `@prisma/adapter-pg` and PostgreSQL pool. Validated offline in `deploy/tests/test_deploy_stub.sh`.
-
-### 3. Identity and Access Management (Least Privilege)
-- **Runtime Identity:** `sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com`
-  - Scoped role `roles/cloudsql.client` on the project.
-  - Scoped role `roles/secretmanager.secretAccessor` granted strictly on individual secrets (`fasttrack-database-url` and optionally `fasttrack-demo-password`).
-  - Prohibited: No project-wide Secret Accessor, no Owner, no Editor.
-- **Deployer Identity:** `sa-fasttrack-deployer@fasttrack-se-002.iam.gserviceaccount.com` (owned by B in B/08)
-  - Scoped permissions to push images to Artifact Registry, update Cloud Run service/job, and impersonate `sa-fasttrack-runtime` (`roles/iam.serviceAccountUser`).
-  - Keyless authentication via GitHub Actions Workload Identity Federation (WIF). Zero service account JSON keys.
-
-### 4. Secret Management
-- **Storage:** Google Secret Manager (`fasttrack-database-url`).
-- **Input Method:** Generated securely via `openssl rand -hex 24` and piped directly via stdin (`--data-file=-`) without ever writing password files or echoing to stdout.
-- **Consumers:** Injected exclusively into `fasttrack-app` (server runtime) and `fasttrack-migrate` (job) via `--set-secrets=DATABASE_URL=fasttrack-database-url:latest`.
-- **Client Security:** Never exposed to Vite client build, browser HTML, or git.
-
-### 5. Runtime Configuration and Connection Capacity
-- **Port:** 8080 (Cloud Run injected `PORT=8080`).
-- **Canonical Origin:** `APP_ORIGIN=https://fasttrack-app-970128017651.asia-southeast1.run.app` (HTTPS, no trailing slash).
-- **Session Security:** 8-hour absolute TTL (`SESSION_TTL_HOURS=8`), HttpOnly, Secure, SameSite=Lax cookie.
-- **Proxy Trust:** `TRUST_PROXY_HOPS=1` (trusts single Cloud Run Google Frontend hop; prevents header spoofing).
-- **Connection Pool Bounds:**
-  - `DB_POOL_MAX=2` per container instance.
-  - With `max-instances=2`, total concurrent connections = 4 (well within `db-f1-micro` connection limits).
-  - Deadlines: `DB_CONNECT_TIMEOUT_MS=1000`, `DB_STATEMENT_TIMEOUT_MS=1000`, `DB_QUERY_TIMEOUT_MS=1500`, `READINESS_TIMEOUT_MS=3000`.
-
-### 6. Origin Bootstrap and Security
-- **Deterministic Service URL:** In Google Cloud Run, default regional URLs follow `https://<service>-<project-number>.<region>.run.app`.
-  For `fasttrack-app`, Project Number `970128017651`, and Region `asia-southeast1`, the deterministic canonical URL is:
-  `https://fasttrack-app-970128017651.asia-southeast1.run.app`
-- **Zero CSRF Compromise:** The origin is known deterministically before deployment; CSRF checks (`X-CSRF-Token`, `Origin` header validation, and `X-fastTrack-Request: 1`) remain 100% active. No wildcard origins or lax settings are allowed.
-
-### 7. Migration Job Execution
-- **Image:** Built from `--target jobs`, packaging Prisma CLI, TypeScript runner, and schema migrations.
-- **Execution Command:** `npm run db:migrate --workspace @fasttrack/server`
-- **Execution Safeguards:** `--max-retries=0`, `--tasks=1`, `--parallelism=1`.
-- **Gate:** Executed with `--wait`. If migration fails, deployment script aborts with exit code 1 immediately; Cloud Run web service rollout is never attempted.
-
-### 8. Seed Policy
-- **Synthetic Demo Data Only:** Seed is an explicit, add-only operation (`npm run db:seed --workspace @fasttrack/server`).
-- **Separation:** `deploy/deploy.sh --demo` provisions the optional demo password secret, but does NOT trigger automatic seed execution.
-- **Data Safety:** Never performs table truncate, schema push, or user overwrite. Preserves existing accounts and passwords.
-
-### 9. Cost Controls and Quotas
-- **Cloud Run Instance Bounds:** `min-instances=0` (scale-to-zero when idle, zero compute charges when not receiving traffic), `max-instances=2` (caps burst compute).
-- **Cloud SQL Tier:** `db-f1-micro`, 10GB SSD, backup retention standard.
-- **Budget Notification:** Recommended Google Cloud Budget Alert set at $10.00 / 300 THB with email alerts to account holder (note: budget alerts notify; they do not hard-terminate running instances).
-- **Availability Obligation:** Assessed services will not be paused or stopped during grading and Lab 6 peer UAT.
-
-### 10. Bootstrap and Release Sequencing
-```mermaid
-flowchart TD
-    A["Stage 1: Pre-Release Cloud Infrastructure (A07-01 to A07-06)<br/>APIs, Artifact Registry, Cloud SQL, Secret Manager, Runtime SA"] --> B["Stage 2: WIF and Deployer IAM Setup (Prompt B/08)<br/>WIF Pool/Provider, Deployer SA, GitHub Environment demo"]
-    B --> C["Stage 3: Main Release Gate (workflow/MAIN_RELEASE_GATE.md)<br/>User reviews candidate head/base, authorizes PR to main"]
-    C --> D["Stage 4: Automated CI/CD Pipeline (deploy.yml on push:main)<br/>CI test-and-docker -> Docker Build -> Resolve 64-hex Digests"]
-    D --> E["Stage 5: Database Migration Job (fasttrack-migrate)<br/>max-retries=0, 1 task, awaited success"]
-    E --> F["Stage 6: Cloud Run Web Service Rollout (fasttrack-app)<br/>100% traffic, RELEASE_SHA injected"]
-    F --> G["Stage 7: External Verification (deploy/smoke_test.py)<br/>/api/health, /api/ready, static assets, 404 envelope"]
+```bash
+gcloud projects describe fasttrack-se-002 --format='json(projectId,projectNumber,lifecycleState)'
+gcloud billing projects describe fasttrack-se-002 --format='json(projectId,billingEnabled)'
+gcloud services list --enabled --project=fasttrack-se-002 --format='value(config.name)'
+gcloud artifacts repositories list --location=asia-southeast1 --project=fasttrack-se-002 --format='table(name,format)'
+gcloud sql instances list --project=fasttrack-se-002 --format='table(name,region,databaseVersion,settings.tier)'
+gcloud iam service-accounts list --project=fasttrack-se-002 --format='table(email,disabled)'
+gcloud secrets list --project=fasttrack-se-002 --format='value(name)'
+gcloud run jobs list --region=asia-southeast1 --project=fasttrack-se-002 --format='value(metadata.name)'
+gcloud run services list --region=asia-southeast1 --project=fasttrack-se-002 --format='table(metadata.name,status.url)'
 ```
 
----
+After the instance/secret is confirmed present, inspect metadata only:
 
-## 5. Offline Verification and Test Results
+```bash
+gcloud sql instances describe fasttrack-db --project=fasttrack-se-002 --format='json(connectionName,region,databaseVersion,settings.edition,settings.tier,settings.dataDiskSizeGb,settings.dataDiskType,settings.storageAutoResize,settings.backupConfiguration,settings.deletionProtectionEnabled)'
+gcloud sql databases list --instance=fasttrack-db --project=fasttrack-se-002 --format='value(name)'
+gcloud sql users list --instance=fasttrack-db --project=fasttrack-se-002 --format='value(name)'
+gcloud secrets versions list fasttrack-database-url --project=fasttrack-se-002 --format='table(name,state,createTime)'
+gcloud secrets get-iam-policy fasttrack-database-url --project=fasttrack-se-002 --format=json
+```
 
-To guarantee that deployment scripts and safeguards function reliably without incurring cloud mutations or costs, all delivery scripts were exercised locally through the project's offline test suites:
+Privately verify the active account, billing/credit expiry, regional quota and effective IAM. Record sanitized results, source and timestamp per inventory row. Do not publish billing identifiers, secret payloads, full service env dumps or connection strings.
 
-### 5.1 Deployment Script Offline Stubs (`deploy/tests/test_deploy_stub.sh`)
-Executed via Git Bash (`C:\Program Files\Git\bin\bash.exe deploy/tests/test_deploy_stub.sh`):
-- `PASS: scenario first_run` (verifies initial creation of all resources, `--edition=enterprise`, and scoped secretAccessor)
-- `PASS: scenario rerun` (verifies idempotency: existing SQL, secrets, and SA are preserved without rotating credentials)
-- `PASS: scenario partial` (verifies missing DB secret triggers password reset and secret recreation)
-- `PASS: job-fail prevents service deployment` (verifies that migration failure aborts before `gcloud run deploy`)
-- `PASS: scenario demo` (verifies `--demo` provisions secret without running unauthorized seed)
-- `PASS: DRY_RUN=1 made 0 gcloud calls` (verifies command preview isolation)
-- `PASS: non-main, dirty and divergent sources rejected before cloud calls` (verifies source branch integrity guards)
+## 3. Change matrix and execution prerequisites
 
-### 5.2 Release Pipeline Offline Stubs (`deploy/tests/test_release_stub.sh`)
-Executed via Git Bash (`C:\Program Files\Git\bin\bash.exe deploy/tests/test_release_stub.sh`):
-- `PASS normal release uses web/jobs digests, awaits migration, and sets RELEASE_SHA`
-- `PASS rollback reuses web image without touching migration job`
-- `PASS non-main GITHUB_REF rejected before GCP calls`
-- `PASS image failure blocks service update`
-- `PASS jobs_image failure blocks service update`
-- `PASS migration failure blocks service update`
-- `PASS malformed_web failure blocks service update`
-- `PASS malformed_jobs failure blocks service update`
-- `PASS invalid tag rejected before GCP calls`
-- `PASS split traffic is rejected instead of reporting success`
+**Every row remains PROPOSED / NOT EXECUTED.** This is a preparation review, not a blanket execution request while discovery, costs, storage policy and bootstrap protection are unresolved. Before requesting execution, attach final commands generated from reviewed source and verified values, source SHA/image digests, current-state readbacks and selected action IDs. Replace proposed names if discovery finds different targets.
 
-### 5.3 Smoke Test Suite (`deploy/tests/test_smoke.py`)
-Executed via Python (`python -m unittest discover -s deploy/tests -p test_smoke.py`):
-- `Ran 10 tests in 0.017s: OK`
-- Covers: `/api/health` 200 and version matching; `/api/ready` 503 DB-down handling; static HTML fastTrack branding; `/api/nonexistent` exact 404 error envelope; scoped `/api/teams` read-only check; cookie jar and CSRF verification; guaranteed session logout in `finally` block.
+| Action | Resource / proposed operation | Prerequisites and impact | Verification / recovery boundary |
+|---|---|---|---|
+| A07-01 | Project APIs listed in `deploy/deploy.sh` section 1, only where needed | Verified account/project/billing and account-holder authorization. API enablement alone is not a cost estimate. | Read enabled API names. No automatic disabling of APIs used by existing services. |
+| A07-02 | `asia-southeast1/fasttrack-docker`, create only if VERIFIED ABSENT | Verified location, storage/network estimate and scoped IAM. | Describe repository; preserve existing images. No automatic deletion. |
+| A07-03 | `fasttrack-db`, PostgreSQL 16 Enterprise `db-f1-micro`, proposed 10 GB SSD/daily backup | Verify tier/quota, storage auto-increase policy, retention, protection and regional estimate. Current script defaults do not resolve these choices. | Filtered SQL metadata; inspect partial provisioning before retry. No automatic deletion. |
+| A07-04 | `fasttrack_prod`, create only if VERIFIED ABSENT | Confirm instance/existing data and DB authorization. | List databases. No DROP/reset/schema-push recovery. |
+| A07-05 | Runtime `sa-fasttrack-runtime`, create if absent; grant Cloud SQL Client at supported project scope | IAM authorization. This project-level role is not instance-only; B reviews scope. | Read SA existence and effective IAM, not SA existence alone. Correct only identified erroneous bindings with authorization. |
+| A07-06 | `fasttrack_user` and `fasttrack-database-url`, private credential input and per-secret access | Inspect both first; preserve credentials. Missing secret with an existing user requires a separately reviewed recovery/rotation decision. | User/secret metadata, scoped IAM and private connection result; no automatic password reset. |
+| A07-07 | Web `fasttrack-app` and `jobs` images from exact accepted main | Clean main equals fetched `origin/main`; release and cloud build/push authorization. Context `Project_code`. | Full source SHA, both tags and validated immutable digests. Tags can move; digests identify content. |
+| A07-08 | Create/configure `fasttrack-migrate`, then execute migration | A07-03..07, tested connection, approved bootstrap hold, exact jobs digest. Command `npm run db:migrate --workspace @fasttrack/server`, one task, zero retries. | Describe image/command/identity/secret reference; record execution `--wait` success. Inspect schema before recovery. |
+| A07-09 | Create initial `fasttrack-app` or update established service | Migration success, exact web digest, HTTPS origin, pool/proxy/instance configuration and public-access authorization. | Ready revision/resolved image/traffic/URL. Rollback requires compatible schema and an actual previous revision. |
+| A07-10 | External public/auth verification | Verified URL/SHA; optional approved synthetic credentials through private config. | Section 6. Public checks read endpoints; optional login/logout writes sessions. No automatic rollback/retry on failure. |
 
-### 5.4 Command Preview (`DRY_RUN=1 ./deploy/deploy.sh`)
-Executed from repository root on `ops/s2-a-cloud-runtime`:
-- Verified exact command generation for APIs, Artifact Registry, Cloud SQL Enterprise `db-f1-micro`, Database, Service Account, Secret Manager, Docker build/push, Migration Job, and Cloud Run service rollout. Zero cloud API calls were made.
+All cloud-action authorizations are **PENDING**. The correction request authorizes documentation, checks, commits and the existing staging PR handoff, not cloud actions or B-owned settings changes.
 
----
+### Command preview and existing-script limits
 
-## 6. Handoff to B (`Atip-Infa` / Prompt B/08)
+From the repository root, this preview uses proposal identifiers and makes no cloud calls:
 
-To proceed with Lab 5 delivery, B can now execute [Prompt B/08](../../prompt_project/prompt_lab5/B/08_R2-B01_J01_WIF_GATE_AND_RELEASE_PREP.md) with the following agreed delivery interface inputs:
+```bash
+PROJECT_ID=fasttrack-se-002 PROJECT_NUMBER=970128017651 REGION=asia-southeast1 DRY_RUN=1 bash deploy/deploy.sh
+```
 
-1. **GCP Project Lead:** `fasttrack-se-002` (Project Number: `970128017651`, Region: `asia-southeast1`)
-2. **Runtime Service Account:** `sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com`
-3. **Deployer Service Account:** `sa-fasttrack-deployer@fasttrack-se-002.iam.gserviceaccount.com`
-4. **WIF Provider Format:** `projects/970128017651/locations/global/workloadIdentityPools/github-pool/providers/github-provider`
-5. **Canonical Origin:** `https://fasttrack-app-970128017651.asia-southeast1.run.app`
-6. **Required GitHub Environment:** `demo` (restricted strictly to branch `main`) with variables:
-   - `GCP_PROJECT_ID`: `fasttrack-se-002`
-   - `GCP_REGION`: `asia-southeast1`
-   - `WIF_PROVIDER`: `projects/970128017651/locations/global/workloadIdentityPools/github-pool/providers/github-provider`
-   - `WIF_SERVICE_ACCOUNT`: `sa-fasttrack-deployer@fasttrack-se-002.iam.gserviceaccount.com`
-7. **Main Candidate Preparation:** B prepares the Draft PR from `staging/sprint-2` to `main`, keeping it Draft until user review and explicit release authorization.
+It reads local Git and generates local random values. It previews the creation path and SHA-tagged images; real execution resolves digests afterward. It does not establish existing-resource behavior, prices, permissions or socket compatibility. The reviewed source/failure tests govern rerun paths.
 
----
+The script is not resource-only: it combines API/IAM/DB/secret mutation, image build/push, migration and rollout. Its missing-secret path can reset an existing DB user's password; `--demo` adds a seed-secret version and does not run a seed. Failed resource lookups can be treated as absence. Complete inventory first; use a separately reviewed subset or code correction if actual state differs. No `teardown.sh`, reset or blind rerun belongs to this plan.
 
-## 7. Status, Verification, and Next Steps
+## 4. Runtime and database contract
 
-- **Owner:** A (`@zerotwobook`)
-- **Issue:** [#16](https://github.com/zerotwobook/fastTrack/issues/16) (Status: `Started`)
-- **Verification:** `PASSED` (local offline tests, command preview, syntax, and delivery matrix)
-- **Acceptance:** `PENDING` (awaits cloud execution authorization and main release gate)
-- **Next Human Action:**
-  1. Review this cloud runtime plan and Change Matrix (A07-01 to A07-10).
-  2. Confirm GCP project account access in Google Cloud Console.
-  3. Authorize B to proceed with Prompt B/08 (WIF setup and initial main candidate preparation).
+### Images, migration and seed
+
+Intended registry prefix: `asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker`. Images: `fasttrack-app` (runner) and `fasttrack-jobs` (`--target jobs`). Both use the full accepted-main source SHA as tag/build argument. Record immutable digests before use. PR head, main merge SHA and image digest are different identities.
+
+The jobs image retains Prisma CLI/source/config/migrations. Migration is explicit, one task, parallelism one, zero retries and awaited before rollout. Failure requires schema inspection. Image rollback skips migration/seed and cannot reverse schema/data. Demo seed is explicit/add-only; `DEMO_SEED_PASSWORD` belongs only to the authorized seed job, never ordinary web runtime or Vite builds.
+
+### Connection proposal and required validation
+
+Proposed Cloud Run Cloud SQL socket attachment: `fasttrack-se-002:asia-southeast1:fasttrack-db`. This is a **non-secret template**, not a usable connection string:
+
+```text
+postgresql://fasttrack_user:<PRIVATE_PASSWORD>@127.0.0.1:5432/fasttrack_prod?host=/cloudsql/fasttrack-se-002:asia-southeast1:fasttrack-db
+```
+
+Runtime uses `PrismaPg` in `Project_code/server/src/db/runtime-client.ts`; migration CLI reads `DATABASE_URL` from `Project_code/prisma.config.ts`. Offline shell stubs inspect command construction/secret plumbing. **They do not validate either consumer's socket connection.**
+
+Connection validation is NOT RUN. A must test both consumers with pinned runtime/jobs images and private synthetic credentials on an approved disposable Linux/socket PostgreSQL fixture: run the real migration entrypoint, then a real adapter query/readiness check. Retain source/image identity and sanitized results. Before rollout, repeat via the real Cloud Run migration job/socket and `/api/ready`. Never point cleanup-capable fixtures at cloud/shared data. If consumers need different URL encoding/configuration, coordinate a tested A/B correction before creating the production secret.
+
+Generate new approved credentials privately with `openssl rand -hex 24`, and send the URL to Secret Manager via stdin (`--data-file=-`) as implemented. No printing or shell tracing. gcloud receives a password argument during SQL user creation/reset; this does not mean secrets never exist in process memory/arguments. Metadata checks do not prove payload authentication.
+
+### Runtime configuration
+
+| Setting | Proposed value / verification requirement |
+|---|---|
+| Port / memory | Cloud Run 8080; proposed 512 MiB. Verify server binding and a ready instance. |
+| `NODE_ENV`, `RELEASE_SHA` | `production`, exact lowercase 40-hex built main SHA. |
+| `APP_ORIGIN` | Predicted HTTPS URL, no path/trailing slash; verify metadata/browser origin before business access. |
+| Session policy | `SESSION_TTL_HOURS=8`; externally verify Secure/HttpOnly/SameSite attributes without retaining values. |
+| Proxy | Proposed `TRUST_PROXY_HOPS=1`; verify real forwarded-header topology before claiming spoofing resistance. |
+| Pool / deadlines | Implemented defaults: pool 2, connect/statement 1000 ms, query 1500 ms, readiness 3000 ms. Check effective configuration. |
+| Instances / concurrency | Proposed min 0/max 2. Approve effective concurrency against DB capacity. Four web connections is only steady-state pool arithmetic; include jobs/admin connections and rollout overlap/headroom. |
+| IAM | Runtime: Cloud SQL Client and individual required secrets. Separate B-owned deployer. No project-wide Secret Accessor, Owner/Editor or JSON keys. |
+
+The predicted URL follows [Cloud Run HTTPS documentation](https://docs.cloud.google.com/run/docs/triggering/https-request), including its DNS-length condition. It does not establish the real project number or running service. Preserve exact origin/custom-header/CSRF checks; no wildcard origin workaround.
+
+## 5. First-deployment sequence with existing code
+
+### Creation is required before normal release
+
+`deploy/release.sh` uses `gcloud run jobs update` and `gcloud run services update`; both resources must exist. The main-push workflow builds images but does not create these resources. `deploy/deploy.sh` creates them but requires clean accepted `main` matching fetched `origin/main`; it cannot bootstrap from this staging branch in advance.
+
+### Proposed route: hold automatic deployment, bootstrap accepted main, then reject the waiting duplicate
+
+This is a concrete proposal for B/account-holder review, **not a configured hold**. Environments API currently returns zero environments. B must incorporate the required-reviewer hold below into the authorized B08-02 settings delta before the first main release. Branch-only restrictions do not hold a deployment job.
+
+1. Complete verified inventory/cost/connection discovery and scoped A07 authorization. B prepares WIF/main-only `demo` configuration. Separately authorize a required deployment reviewer (proposed B, `Atip-Infa`), prevent-self-review and no administrative bypass. Verify eligibility/availability and read back protection before main authorization. GitHub documents that environment protection gates jobs before execution; see [environment management](https://docs.github.com/en/actions/how-tos/deploy/configure-and-manage-deployments/manage-environments). If this hold cannot be configured/verified, keep the main candidate Draft and have B prepare a tested bootstrap-capable workflow. Do not rely on racing to cancel a running migration.
+2. Record exact main-candidate head/base, user release decision, peer/protection checks, authorized cloud subset and bootstrap operator. Prepare an isolated clean release checkout and working Docker/gcloud tools; preserve this task worktree. No other main release, manual deploy or seed may run during bootstrap.
+3. After the authorized merge, automatic CI runs; the `deploy` job must remain awaiting `demo` review. Record its run/status. Do not approve or bypass it yet. A main merge does not mean deployment succeeded.
+4. In the isolated checkout, fetch/synchronize accepted `main`. Verify clean status and equality of HEAD, `origin/main` and the authorized merge SHA. Review preview and actual existing-resource branches. Only with authorization covering the **whole script's actual effects**, use the future bootstrap command below. Otherwise prepare a reviewed narrower sequence first. Omit optional `--demo`.
+5. Bootstrap builds accepted-main images, validates digests, creates/configures the migration job, awaits success, then creates the service. Independently inspect ready revision/resolved image/traffic/URL and run smoke. On partial failure leave Actions waiting, inspect the failure/schema, and do not blindly rerun or approve the pending job.
+6. B reviews bootstrap evidence. The waiting Actions job would build the same tags again and migrate again; do not approve it as an assumed no-op. The proposed bounded route is to **reject this waiting initial deployment before its deploy job starts**. Record its actual unsuccessful/cancelled conclusion and link the manual accepted-main bootstrap evidence. This is not a successful automatic deployment or C-06 proof. Use normal deployment review; do not disable/delete the workflow or weaken protection.
+7. Later authorized main releases use the normal WIF pipeline against established resources, with environment review preserved. The later reviewed visible change supplies C-06 and the distinct C-05 redeploy after original records/restart evidence exist. It is not released automatically during this preparation.
+
+Future command, only after all conditions above, at the root of the isolated accepted-main checkout:
+
+```bash
+PROJECT_ID=fasttrack-se-002 PROJECT_NUMBER=970128017651 REGION=asia-southeast1 bash deploy/deploy.sh
+```
+
+Identifiers must match verified inventory/authorization. Record actual main SHA and reviewed preview before execution. Bootstrap does not validate traffic as thoroughly as `release.sh`; independently verify resolved image, ready revision and intended single 100% assignment. On a first-ever deployment there may be no rollback revision; recovery is diagnosis/roll-forward, not an invented rollback target.
+
+This hold/bootstrap/reject route remains **PENDING B review and settings/cloud/main decisions**. If a bootstrap-capable workflow is chosen instead, B owns implementation, failure tests and renewed exact-candidate review. Do not silently substitute routes after authorization.
+
+Proposed addition for B's settings review, without applying it in this task:
+
+| Setting | Observed before | Proposed delta / verification |
+|---|---|---|
+| `demo` required reviewer | Environment absent | Reviewer user `Atip-Infa` (ID `186546670`, verify before apply), `prevent_self_review: true`, `can_admins_bypass: false`. Preserve B's exact-main-branch deployment policy and WIF claim restrictions. |
+| Before main decision | No actual gate exists | Read back environment protection and reviewer eligibility. Include this configuration in the main/cloud authorization package. If unavailable, the bootstrap route stays blocked. |
+| Initial deployment disposition | No run yet | Observe waiting deploy job, execute authorized manual bootstrap, then B rejects the still-waiting job. Preserve its real failed/cancelled result and manual source/image/revision chain. |
+
+## 6. External verification and corrected smoke invocation
+
+After deployment, set `EXPECTED_RELEASE_SHA` and `SERVICE_URL` privately from verified release output. This PowerShell invocation requires the exact identity before requests:
+
+```powershell
+if ($env:EXPECTED_RELEASE_SHA -cnotmatch '^[0-9a-f]{40}$') { throw 'Set EXPECTED_RELEASE_SHA to the exact deployed source commit.' }
+if ([string]::IsNullOrWhiteSpace($env:SERVICE_URL)) { throw 'Set SERVICE_URL to the verified HTTPS service origin.' }
+python deploy/smoke_test.py $env:SERVICE_URL
+if ($LASTEXITCODE -ne 0) { throw 'Public smoke verification failed.' }
+```
+
+The script accepts **one positional argument**, URL; SHA comes from `EXPECTED_RELEASE_SHA`. A second positional SHA exits with usage error before HTTP requests. Confirm HTTPS/exact canonical origin before optional login; do not put credentials on the command line.
+
+Public smoke verifies health/release identity, DB readiness, root HTML branding and exact API 404 envelope. It does **not** fetch every asset/font/deep link or prove both business roles, proxy trust, cookie attributes or persistence. Check those separately using safe fixtures. Missing both optional credentials means authenticated SKIP; configured login/logout writes session state and uses the approved synthetic account. Health alone does not establish C-04/C-05/C-06.
+
+## 7. Cost inputs, availability and dated sources
+
+Official sources checked on **11 November 2026** are estimate inputs, not an account-specific quote or proof of trial eligibility:
+
+| Item | Estimate inputs / source |
+|---|---|
+| SQL | Select `asia-southeast1` Enterprise shared-core rate, running hours, SSD, backups and network from [Cloud SQL pricing](https://cloud.google.com/sql/pricing). The default region is not a Singapore quote. Replace the unsupported USD 10-15/month assertion with a dated regional calculation before approval. |
+| Cloud Run | Estimate service CPU/memory/request time, startup, jobs, region/network separately; min 0/max 2 is not a cost cap. Free allowance depends on billing mode/account aggregation; see [Cloud Run pricing](https://cloud.google.com/run/pricing). |
+| Registry / secrets | Measure image storage/retention/transfer; two images alone does not establish a USD 0.10 bill. See [Artifact Registry pricing](https://cloud.google.com/artifact-registry/pricing). Secret costs depend on active **versions**, accesses and replication, not names; see [Secret Manager pricing](https://cloud.google.com/secret-manager/pricing). |
+| Trial / availability | General published offer: USD 300 over 90 days, subject to eligibility; actual balance/expiry UNKNOWN. See [Google Cloud Free Program](https://docs.cloud.google.com/free/docs/free-cloud-features). Follow the handout account method; payment/Upgrade errors require account-holder/TA action. |
+
+Before paid-resource authorization, record region/SKUs, operating window, storage/backup/traffic assumptions, currency/tax, credit expiry and estimate timestamp. An optional USD 10 budget alert needs owner selection; no THB conversion is asserted. Alerts notify rather than terminate usage. Keep services available through grading/UAT; no assumed pause/deletion optimization.
+
+## 8. Verification record and review handoff
+
+Actual findings were invalid smoke arguments, missing first-deploy creation order, unsupported socket/cost/proxy claims, incomplete inventory and mismatched status/whitespace evidence. Corrections preserve scripts and state their limits. Live transitions belong in [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16); this file is a dated snapshot.
+
+### Correction-session checks
+
+Delivery scripts are unchanged from `438b3e7`; merging staging `7936ebb` only added B's handoff. The final document commit/current CI are recorded on PR #89.
+
+| Check | Result |
+|---|---|
+| Shell syntax | PASS: `bash -n` run separately for `deploy/deploy.sh` and `deploy/release.sh`. |
+| Provisioning suite | PASS: `bash deploy/tests/test_deploy_stub.sh`; first-run, rerun, partial-secret, migration-failure, demo, dry-run and source-guard checks. Only stubs execute. |
+| Release suite | PASS: `bash deploy/tests/test_release_stub.sh`; ten normal/rollback/ref/image/migration/digest/tag/traffic scenarios. Only stubs execute. |
+| Smoke suite | PASS: `python -m unittest discover -s deploy/tests -p test_smoke.py`; 10 mocked-network tests. |
+| Smoke command shape | PASS: one-argument document invocation matches CLI/env source; old two-argument invocation returns usage error before HTTP. Existing tests assert expected-SHA success and mismatch failure. |
+| Document checks | PASS: 3 local Markdown links resolve, no Thai text/trailing whitespace, 4 Bash snippets and 1 PowerShell snippet parse; `git diff --check origin/staging/sprint-2` passes. |
+| Exact proposal preview | PASS: section 3's `DRY_RUN=1` command completes on the task branch; no cloud execution. This is command generation, not validation of gcloud flags against an installed SDK. |
+| GCP / real socket adapter+CLI / public flow / deployment / costs | NOT RUN; no authenticated cloud session, private fixture or approved execution target. |
+
+Offline tests simulate gcloud, Docker and HTTP. Their PASS establishes their assertions, not cloud success. Application/DB/image CI belongs to its actual run/event/source; no fresh app result is inferred from prose. The original PR-body claim of zero trailing whitespace is superseded by the corrected verification record.
+
+### Resume and acceptance
+
+- **Correction stage:** Fixing until checks/PR handoff are complete; then read back both cards PR Review. Do not replay earlier stages or change completed cards.
+- **Verification:** document/offline checks only, based on actual results; cloud NOT RUN.
+- **Acceptance:** PENDING. B review, staging integration, overall #16 acceptance and main/cloud release are separate.
+- **Next owners:** B reviews hold/bootstrap/reject and B08-02 impact; account holder completes read-only inventory/cost inputs; A validates both socket consumers on a disposable fixture. Resolve these before requesting cloud execution or a main-candidate decision.
+- **Remaining gates:** final commands/verified targets, settings/WIF evidence, scoped cloud authorization, exact main-candidate user decision, real peer/protection checks, then deployment and later C-01-C-06 evidence. No merge, deployment, lab completion or submission is claimed.
