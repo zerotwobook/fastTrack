@@ -114,6 +114,7 @@ jobs:
 
       - name: Smoke test public URL
         env:
+          EXPECTED_RELEASE_SHA: ${{ env.IMAGE_TAG }}
           SMOKE_EMAIL: ${{ vars.SMOKE_EMAIL }}
           SMOKE_PASSWORD: ${{ secrets.SMOKE_PASSWORD }}
         run: python3 deploy/smoke_test.py "$SERVICE_URL"
@@ -125,8 +126,9 @@ jobs:
             echo "- Commit image tag: \`$IMAGE_TAG\`"
             echo "- Web Digest: \`$DEPLOYED_IMAGE\`"
             echo "- Jobs Digest: \`${DEPLOYED_JOBS_IMAGE:-skipped-rollback}\`"
+            echo "- Serving Revision: \`${SERVING_REVISION:-unknown}\`"
             echo "- Rollback: $ROLLBACK"
             echo "- URL: $SERVICE_URL"
-            echo '- Smoke test: passed (health, readiness/DB, HTML).'
-            echo '- See smoke step for optional login check status.'
+            echo '- Smoke test: passed (/api/health version match, /api/ready DB, / HTML, /api/nonexistent 404).'
+            echo '- See smoke step for optional authenticated /api/auth/me + /api/teams + logout status.'
           } >> "$GITHUB_STEP_SUMMARY"

@@ -5,8 +5,8 @@
 # WHAT THIS SCRIPT DOES
 #   Updates pre-provisioned Cloud Run service and migration job.
 #   Does not create SQL, IAM or secrets (handled by deploy/deploy.sh).
-#   Normal release : verify web/jobs images -> run migration job -> update service.
-#   Rollback       : verify web image -> update service (NO migration, NO seed).
+#   Normal release : validate ref/tag -> resolve web/jobs digests -> migrate -> rollout.
+#   Rollback       : validate ref/tag -> resolve web digest -> rollout (NO migration/seed).
 #
 # INPUT (environment variables)
 #   PROJECT_ID, REGION, IMAGE_TAG   required (IMAGE_TAG = full 40-char commit SHA)
@@ -15,9 +15,12 @@
 #   MIGRATE_JOB_NAME                default: fasttrack-migrate
 #   REGISTRY_REPO                   default: fasttrack-docker
 #   ROLLBACK                        true | false (default false)
-#   GITHUB_ENV                      appends SERVICE_URL, DEPLOYED_IMAGE, DEPLOYED_JOBS_IMAGE
+#   GITHUB_REF                      if set, MUST equal refs/heads/main
+#   GITHUB_ENV                      appends SERVICE_URL, DEPLOYED_IMAGE,
+#                                   DEPLOYED_JOBS_IMAGE, SERVING_REVISION
 #
 # IMPORTANT
+#   - Rejects non-main refs when GITHUB_REF is set before making any GCP call.
 #   - If the migration job fails, `set -e` aborts BEFORE the service is updated.
 #   - Images are resolved to immutable @sha256 digests so job and service are traceable.
 #   - Offline test: deploy/tests/test_release_stub.sh
@@ -27,6 +30,11 @@ set -euo pipefail
 # ------------------------------------------------------------------------------
 # 1. Read and validate inputs (fail before any GCP call)
 # ------------------------------------------------------------------------------
+if [[ -n "${GITHUB_REF:-}" && "$GITHUB_REF" != "refs/heads/main" ]]; then
+  echo "Release ref rejected: expected refs/heads/main, got $GITHUB_REF" >&2
+  exit 1
+fi
+
 : "${PROJECT_ID:?Required}" "${REGION:?Required}" "${IMAGE_TAG:?Required}"
 SERVICE_NAME="${SERVICE_NAME:-fasttrack-app}"
 JOBS_IMAGE_NAME="${JOBS_IMAGE_NAME:-fasttrack-jobs}"
@@ -64,22 +72,30 @@ else
 fi
 
 # ------------------------------------------------------------------------------
-# 4. Point Cloud Run service at web image and route 100% traffic
+# 4. Point Cloud Run service at web image, propagate RELEASE_SHA, and route 100% traffic
 # ------------------------------------------------------------------------------
 echo "Updating Cloud Run service $SERVICE_NAME..."
-gcloud run services update "$SERVICE_NAME" --image="$DIGEST_APP_IMAGE" --project="$PROJECT_ID" --region="$REGION" --quiet
+gcloud run services update "$SERVICE_NAME" \
+  --image="$DIGEST_APP_IMAGE" \
+  --update-env-vars="RELEASE_SHA=$IMAGE_TAG" \
+  --project="$PROJECT_ID" \
+  --region="$REGION" \
+  --quiet
 gcloud run services update-traffic "$SERVICE_NAME" --to-latest --project="$PROJECT_ID" --region="$REGION" --quiet
 
 # ------------------------------------------------------------------------------
-# 5. Report URL and export to GITHUB_ENV
+# 5. Inspect live URL and serving revision, and export to GITHUB_ENV
 # ------------------------------------------------------------------------------
 SERVICE_URL="$(gcloud run services describe "$SERVICE_NAME" --project="$PROJECT_ID" --region="$REGION" --format='value(status.url)')"
+SERVING_REVISION="$(gcloud run services describe "$SERVICE_NAME" --project="$PROJECT_ID" --region="$REGION" --format='value(status.latestReadyRevisionName)')"
 echo "Service URL: $SERVICE_URL"
+echo "Serving Revision: ${SERVING_REVISION:-unknown}"
 echo "Deployed Web Image: $DIGEST_APP_IMAGE"
 if [[ -n "$DIGEST_JOBS_IMAGE" ]]; then
   echo "Executed Jobs Image: $DIGEST_JOBS_IMAGE"
 fi
 
 if [[ -n "${GITHUB_ENV:-}" ]]; then
-  printf 'SERVICE_URL=%s\nDEPLOYED_IMAGE=%s\nDEPLOYED_JOBS_IMAGE=%s\n' "$SERVICE_URL" "$DIGEST_APP_IMAGE" "$DIGEST_JOBS_IMAGE" >> "$GITHUB_ENV"
+  printf 'SERVICE_URL=%s\nDEPLOYED_IMAGE=%s\nDEPLOYED_JOBS_IMAGE=%s\nSERVING_REVISION=%s\n' \
+    "$SERVICE_URL" "$DIGEST_APP_IMAGE" "$DIGEST_JOBS_IMAGE" "${SERVING_REVISION:-}" >> "$GITHUB_ENV"
 fi

@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
-# Offline regression checks: every gcloud and openssl call is a local stub.
+# Offline regression checks: every gcloud, docker, and openssl call is a local stub.
 # ==============================================================================
 # WHAT THIS TEST DOES (no real GCP calls, no cost)
-#   Puts fake `gcloud` / `openssl` first on PATH and runs deploy/deploy.sh in
+#   Puts fake `gcloud` / `docker` / `openssl` first on PATH and runs deploy/deploy.sh in
 #   these scenarios, asserting on the recorded commands:
 #     first_run : nothing exists      -> everything is created
 #     rerun     : everything exists   -> nothing replaced (credentials kept)
@@ -10,7 +10,8 @@
 #     job-fail  : migration fails     -> script exits 1, service NOT deployed
 #     demo      : --demo flag         -> demo secret is created and granted
 #   Checks: `--edition=enterprise`, no project-wide secretAccessor role,
-#   DB password matches secret payload, and DRY_RUN=1 makes zero gcloud calls.
+#   DB password matches secret payload, zero secret leaks to stdout/stderr,
+#   APP_ORIGIN & TRUST_PROXY_HOPS propagation, and DRY_RUN=1 makes zero gcloud calls.
 # ==============================================================================
 set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
@@ -27,6 +28,8 @@ echo "$*" >> "$TEST_STATE_DIR/docker.log"
 exit 0
 STUB
 chmod +x "$TEST_STATE_DIR/bin/docker"
+
+# --- Fake `openssl` -----------------------------------------------------------
 cat > "$TEST_STATE_DIR/bin/openssl" <<'STUB'
 #!/usr/bin/env bash
 if [ "$2" = "-hex" ]; then
@@ -54,6 +57,10 @@ if [ "${1:-} ${2:-}" = 'config get-value' ]; then
   echo fasttrack-se-002
   exit 0
 fi
+if [ "${1:-} ${2:-}" = 'projects describe' ]; then
+  echo 970128017651
+  exit 0
+fi
 if [ "${1:-} ${2:-} ${3:-}" = 'run services describe' ]; then
   echo https://fasttrack-stub.example.invalid
   exit 0
@@ -70,7 +77,7 @@ if [ "${1:-} ${2:-} ${3:-}" = 'sql users list' ]; then
   if [ "$STUB_MODE" = first_run ]; then
     echo postgres
   else
-    printf 'postgres\nfasttrack\n'
+    printf 'postgres\nfasttrack_user\n'
   fi
   exit 0
 fi
@@ -97,12 +104,15 @@ export DRY_RUN=0
 for MODE in first_run rerun partial job-fail demo; do
   export STUB_MODE="$MODE"
   export GCLOUD_LOG="$TEST_STATE_DIR/gcloud-${MODE}.log"
+  OUT_LOG="$TEST_STATE_DIR/output-${MODE}.log"
   : > "$GCLOUD_LOG"
+  : > "$OUT_LOG"
+  rm -f "$TEST_STATE_DIR/sql-pass" "$TEST_STATE_DIR"/payload-*
   FLAGS=()
   [ "$MODE" != demo ] || FLAGS+=(--demo)
 
   if [ "$MODE" = job-fail ]; then
-    if bash "$DEPLOY_SCRIPT" "${FLAGS[@]}" >/dev/null 2>&1; then
+    if bash "$DEPLOY_SCRIPT" "${FLAGS[@]}" >"$OUT_LOG" 2>&1; then
       echo "FAIL: job-fail should have exited with non-zero status" >&2
       exit 1
     fi
@@ -114,12 +124,20 @@ for MODE in first_run rerun partial job-fail demo; do
     continue
   fi
 
-  bash "$DEPLOY_SCRIPT" "${FLAGS[@]}" >/dev/null
+  bash "$DEPLOY_SCRIPT" "${FLAGS[@]}" >"$OUT_LOG" 2>&1
+
+  # Security check: never grant project-wide secretAccessor role
+  if grep -q '^projects add-iam-policy-binding .*roles/secretmanager.secretAccessor' "$GCLOUD_LOG"; then
+    echo "FAIL: runtime granted project-wide secretAccessor role" >&2
+    exit 1
+  fi
 
   # Check Cloud SQL PostgreSQL tier
   if [ "$MODE" = first_run ]; then
     grep -q 'sql instances create fasttrack-db.*--edition=enterprise.*--tier=db-f1-micro' "$GCLOUD_LOG" \
       || { echo "FAIL: first_run did not create Cloud SQL instance with enterprise edition" >&2; exit 1; }
+    grep -q '^sql users create fasttrack_user ' "$GCLOUD_LOG" \
+      || { echo "FAIL: first_run did not create fasttrack_user" >&2; exit 1; }
   fi
 
   # Idempotency check: rerun must NOT create resources or set password
@@ -138,8 +156,8 @@ for MODE in first_run rerun partial job-fail demo; do
 
   # Partial check: reset DB user password and add secret version
   if [ "$MODE" = partial ]; then
-    grep -q 'sql users set-password fasttrack' "$GCLOUD_LOG" \
-      || { echo "FAIL: partial did not reset the database user password" >&2; exit 1; }
+    grep -q 'sql users set-password fasttrack_user' "$GCLOUD_LOG" \
+      || { echo "FAIL: partial did not reset fasttrack_user password" >&2; exit 1; }
     grep -q 'secrets versions add fasttrack-database-url' "$GCLOUD_LOG" \
       || { echo "FAIL: partial did not update fasttrack-database-url" >&2; exit 1; }
   fi
@@ -153,13 +171,35 @@ for MODE in first_run rerun partial job-fail demo; do
     exit 1
   fi
 
-  # Migration must run with --wait
+  # DB password matches DATABASE_URL secret and never leaks to stdout/stderr
+  if [ -f "$TEST_STATE_DIR/sql-pass" ]; then
+    db_pass="$(cat "$TEST_STATE_DIR/sql-pass")"
+    db_url="$(cat "$TEST_STATE_DIR/payload-fasttrack-database-url")"
+    case "$db_url" in
+      "postgresql://fasttrack_user:${db_pass}@"*) ;;
+      *) echo "FAIL: DB password differs from secret payload" >&2; exit 1 ;;
+    esac
+    if grep -Fq "$db_pass" "$OUT_LOG"; then
+      echo "FAIL: DB password leaked to script output" >&2
+      exit 1
+    fi
+  fi
+  for secret_file in "$TEST_STATE_DIR"/payload-*; do
+    [ -f "$secret_file" ] || continue
+    secret_val="$(cat "$secret_file")"
+    if [ -n "$secret_val" ] && grep -Fq "$secret_val" "$OUT_LOG"; then
+      echo "FAIL: secret payload leaked to script output" >&2
+      exit 1
+    fi
+  done
+
+  # Migration must run with --wait using fasttrack-jobs image
   grep -q 'run jobs execute fasttrack-migrate --wait' "$GCLOUD_LOG" \
     || { echo "FAIL: migration job was not awaited with --wait" >&2; exit 1; }
 
-  # Cloud Run service deployment
-  grep -q 'run deploy fasttrack-app' "$GCLOUD_LOG" \
-    || { echo "FAIL: service fasttrack-app was not deployed" >&2; exit 1; }
+  # Cloud Run service deployment includes APP_ORIGIN and TRUST_PROXY_HOPS
+  grep -q 'run deploy fasttrack-app .*APP_ORIGIN=https://fasttrack-app-970128017651\.asia-southeast1\.run\.app.*TRUST_PROXY_HOPS=1' "$GCLOUD_LOG" \
+    || { echo "FAIL: service fasttrack-app missing APP_ORIGIN or TRUST_PROXY_HOPS=1" >&2; exit 1; }
 
   echo "PASS: scenario ${MODE}"
 done
@@ -169,7 +209,7 @@ DRY_LOG="$TEST_STATE_DIR/gcloud-dryrun.log"
 : > "$DRY_LOG"
 export GCLOUD_LOG="$DRY_LOG"
 export DRY_RUN=1
-bash "$DEPLOY_SCRIPT" >/dev/null
+bash "$DEPLOY_SCRIPT" --demo >/dev/null
 if [ -s "$DRY_LOG" ]; then
   echo "FAIL: DRY_RUN=1 executed gcloud commands" >&2
   exit 1

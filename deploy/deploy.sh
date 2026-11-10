@@ -57,6 +57,7 @@ run_cmd() {
 
 if [ "$DRY_RUN" = "1" ]; then
   PROJECT_ID="${PROJECT_ID:-fasttrack-se-002}"
+  PROJECT_NUMBER="${PROJECT_NUMBER:-970128017651}"
 else
   PROJECT_ID="${PROJECT_ID:-$(gcloud config get-value project 2>/dev/null || true)}"
   if [ -z "$PROJECT_ID" ]; then
@@ -64,19 +65,21 @@ else
     echo "Run: gcloud config set project YOUR_PROJECT_ID" >&2
     exit 1
   fi
+  PROJECT_NUMBER="${PROJECT_NUMBER:-$(gcloud projects describe "$PROJECT_ID" --format='value(projectNumber)')}"
 fi
 
-# Resource names (matching docs/labs/lab-05/deployment.md)
+# Resource names (matching docs/labs/lab-05/deployment.md & sprint-2-lab-05-delivery-contract.md)
 REPO_NAME="fasttrack-docker"
 SQL_INSTANCE="fasttrack-db"
 DB_NAME="fasttrack_prod"
-DB_USER="fasttrack"
+DB_USER="fasttrack_user"
 SERVICE_NAME="fasttrack-app"
 JOBS_IMAGE_NAME="fasttrack-jobs"
 MIGRATE_JOB_NAME="fasttrack-migrate"
 SA_NAME="sa-fasttrack-runtime"
 SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
 SQL_CONN_NAME="${PROJECT_ID}:${REGION}:${SQL_INSTANCE}"
+APP_ORIGIN="${APP_ORIGIN:-https://${SERVICE_NAME}-${PROJECT_NUMBER}.${REGION}.run.app}"
 IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${SERVICE_NAME}:latest"
 JOBS_IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${JOBS_IMAGE_NAME}:latest"
 
@@ -276,7 +279,7 @@ run_cmd gcloud run deploy "$SERVICE_NAME" \
   --service-account="$SA_EMAIL" \
   --set-cloudsql-instances="$SQL_CONN_NAME" \
   --set-secrets="DATABASE_URL=${SECRET_DB_URL}:latest" \
-  --set-env-vars="NODE_ENV=production,RELEASE_SHA=${RELEASE_SHA}" \
+  --set-env-vars="NODE_ENV=production,APP_ORIGIN=${APP_ORIGIN},SESSION_TTL_HOURS=8,TRUST_PROXY_HOPS=1,RELEASE_SHA=${RELEASE_SHA}" \
   --port=8080 \
   --memory=512Mi \
   --min-instances=0 \

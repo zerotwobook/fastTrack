@@ -129,17 +129,20 @@ B implements and maintains root CI/deploy workflows, deployment scripts, offline
 
 - **CI Workflow ([.github/workflows/ci-docker.yml](../../../.github/workflows/ci-docker.yml))**:
   - Triggers on pull requests and pushes to `main` and `staging/sprint-*`, as well as reusable `workflow_call`.
-  - Job ID is strictly **`test-and-docker`** (emits stable check for branch protection).
-  - Sequence: script syntax and offline stub tests -> `Project_code` lockfile install (`npm ci`) -> typecheck -> unit tests -> production build -> S1 runtime regressions -> production Dockerfile build (both runner and jobs targets).
+  - Job ID is strictly **`test-and-docker`** (emits stable check for branch protection). Cancels in-progress PR runs on update while preserving pushes and release runs.
+  - Sequence: script syntax and offline stub tests -> `Project_code` lockfile install (`npm ci`) -> `db:generate` -> typecheck -> unit tests -> production build -> isolated Docker PostgreSQL suite (`npm run test:runtime:isolated`) -> artifact upload (`ci-runtime-report`) -> production Dockerfile builds (both `runner` and `jobs` targets).
 - **Deploy Workflow ([.github/workflows/deploy.yml](../../../.github/workflows/deploy.yml))**:
-  - Main-only automatic trigger on `push` to `main`, and manual `workflow_dispatch` for rollback.
+  - Main-only automatic trigger on `push` to `main`, and manual `workflow_dispatch` for rollback. `deploy/release.sh` additionally rejects any non-main `GITHUB_REF` before calling GCP.
   - Concurrency group `deploy-main` with `cancel-in-progress: false` ensures active migrations are never aborted mid-flight.
   - Environment: `demo` with scoped variables (`GCP_PROJECT_ID`, `GCP_REGION`, `WIF_PROVIDER`, `WIF_SERVICE_ACCOUNT`).
-  - Sequence: calls CI `test-and-docker` -> authenticates via WIF -> builds and pushes image tagged with `${{ github.sha }}` -> resolves immutable `@sha256:` digest -> executes `deploy/release.sh` -> executes `deploy/smoke_test.py` -> publishes factual summary to GitHub Step Summary.
+  - Sequence: calls CI `test-and-docker` -> authenticates via WIF -> builds and pushes `fasttrack-app` (web) and `fasttrack-jobs` (`--target jobs`) tagged with `IMAGE_TAG` -> resolves immutable `@sha256:` digests -> executes `deploy/release.sh` (migrates via `fasttrack-jobs`, updates `fasttrack-app` with web digest and `RELEASE_SHA=$IMAGE_TAG`, captures `SERVING_REVISION`) -> executes `deploy/smoke_test.py` -> publishes factual summary to GitHub Step Summary.
+- **Smoke Checks (`deploy/smoke_test.py`)**:
+  - Public checks validate `/api/health` (status `ok` and `version == EXPECTED_RELEASE_SHA`), `/api/ready` (`status: ready`, `database: connected`, matching version), `/` (HTML containing `fastTrack`), and `/api/nonexistent` (HTTP 404 sanitized JSON error envelope).
+  - Optional private smoke runs when both `SMOKE_EMAIL` and `SMOKE_PASSWORD` are configured, exercising cookie jar, `X-fastTrack-Request: 1`, `Origin`, `X-CSRF-Token`, `/api/auth/me`, read-only scoped `GET /api/teams`, and guaranteed `/api/auth/logout` in `finally`. Missing credentials print `SKIP login`; partial or invalid credentials fail the check.
 - **Offline Deployment Script Tests**:
-  - `bash deploy/tests/test_release_stub.sh`: Verifies normal digest release, awaited migration, rollback without migration, image failure blocking rollout, migration failure blocking rollout, and invalid tag rejection.
-  - `bash deploy/tests/test_deploy_stub.sh`: Verifies idempotent provisioning, Cloud SQL enterprise edition, non-leaking credentials, and migration failure abortion.
-  - `python3 -m unittest discover -s deploy/tests -p 'test_smoke.py'`: Verifies health JSON, DB readiness, HTML serving, and session logout handling.
+  - `bash deploy/tests/test_release_stub.sh`: Verifies normal web/jobs digest release, awaited migration, `RELEASE_SHA` propagation, rollback without migration, non-main `GITHUB_REF` rejection, image/jobs_image/migration failure blocking rollout, and invalid tag rejection.
+  - `bash deploy/tests/test_deploy_stub.sh`: Verifies idempotent provisioning (`fasttrack_user`, `APP_ORIGIN`, `TRUST_PROXY_HOPS=1`), Cloud SQL enterprise edition, no project-wide `secretAccessor`, zero leaked secrets in stdout, and migration failure abortion.
+  - `python3 -m unittest discover -s deploy/tests -p 'test_smoke.py'`: Verifies health, version match enforcement, DB readiness failure, `/api/nonexistent` 404, scoped `/api/teams`, and session logout guarantees.
 - **Rollback Procedure**:
   - Rollback is triggered manually via GitHub Actions `Deploy demo` workflow dispatch by providing the full 40-character `image_tag` of an existing known image.
   - The script sets `ROLLBACK=true`, resolves the existing image digest, points Cloud Run at the image, and sets traffic to 100%. Build, migration, and seed steps are deliberately skipped.
