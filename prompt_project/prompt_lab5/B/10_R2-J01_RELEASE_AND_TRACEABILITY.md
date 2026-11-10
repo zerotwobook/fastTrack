@@ -1,40 +1,133 @@
-# B / 10: user-reviewed visible-change release and C-06
+# B / 10: release the reviewed visible change and establish C-06 traceability
 
-I am B (`Atip-Infa`), release captain for **R2-J01 / Issue #16**. Prepare and, only when the exact user/peer/protection/action gates allow it, verify the later visible-change release. A (`zerotwobook`) is the non-author peer for B-authored release work. Do not self-approve/merge or skip the pre-release record baseline.
+## Invocation, responsibility and hold
 
-## Required reads and hard entry conditions
+I am B (`Atip-Infa`), release captain for **R2-J01 / Issue #16**. A (`zerotwobook`) is the non-author peer for B-authored release work and performs the subsequent persistence read-back. This prompt governs the **later visible-change release**, not the initial delivery bootstrap in B/08.
 
-Read `prompt_project/prompt_lab5/00_SHARED_EXECUTION_RULES.md` completely, current `workflow/MAIN_RELEASE_GATE.md`, Lab 5 plan sections 8-11, live #16 and #15 accepted scope, actual release workflow/scripts and A/09's durable public-flow/original-ID/restart evidence. Inspect current main/staging/candidate PR/head/base/reviews/checks, WIF/environment, cloud resources and existing authorizations.
+**An authoring-only request does not execute this prompt.** When only expanding Markdown, do not create/change a release candidate, modify #16, request a main approval, deploy or mutate cloud/DB/IAM. Preserve the existing hold.
 
-Before any later release: initial main delivery/first URL is actually established, accepted container/CI exists, live required-check proof is real or explicitly pending as a blocker, applicable WIF/cloud permissions are ready, and A/09 has created the exact original records and restart evidence. If these are missing, keep the candidate Draft, complete independent reviewable preparation and name the exact blocking action. Never recreate a before-release timestamp after deploy.
+When explicitly invoked, select preparation, resume, or execution of a separately authorized exact candidate/action subset. Complete all independent authorized preparation first. Keep the main candidate Draft until the user reviews and explicitly authorizes its current head/base under [the main-release gate](../../../workflow/MAIN_RELEASE_GATE.md).
 
-## 1. Build the concrete candidate
+Project artifacts and handoffs must be English Markdown. Do not export PDFs, submit coursework, send external messages or start A/11 automatically.
 
-1. Find/reuse the existing visible-change Issue/task PR and main release Draft. If a justified change has not been implemented, define a small accepted-S1 visible change with owner/AC, follow its own branch/early-Draft/staging peer process, and coordinate UI design/English copy. No unapproved business-rule/S2 feature expansion.
-2. Inspect full staging-to-main commits/files and ancestry. Synchronize main through a reviewed history-preserving sync PR if required. Ensure no unfinished S2 changes, unrelated planning PR or stale generated artifact contaminates the release.
-3. Verify actual current build/type/unit/real-DB/image/CI results, migration/job commands, schema compatibility, secret references, main-only environment, queue behavior, safe smoke and rollback limits. Reuse exact applicable evidence with attribution; run affected checks after new changes.
-4. Prepare/reuse Draft release PR `staging/sprint-2` -> main. Add real Project card/metadata during Started when newly created. Record exact head/base, resulting behavior, diff, case/results, pending limits and a practical way for the user to review it. Keep auto-merge disabled.
-5. Verify A/09's baseline/IDs/restart evidence corresponds to the actual pre-release service and persistent DB. Coordinate A to avoid racing changes during the comparison.
+## 1. Required reads and evidence gate
 
-## 2. User authorization, then real peer/protected integration
+Read [all shared rules](../00_SHARED_EXECUTION_RULES.md), project/Git instructions, Lab 5 plan sections 8-11, actual #15/#16 scope/state, current main gate, [B/08](08_R2-B01_J01_WIF_GATE_AND_RELEASE_PREP.md) release/settings handoff and [A/09](../A/09_R2-J01_PRE_RELEASE_BUSINESS_AND_RESTART.md) original-record/restart evidence.
 
-Present the concrete exact candidate **before** requesting main approval/merge. Keep Draft until the user actually reviews and explicitly authorizes this current head/base; notification, generic continuation, A's approval, CI green or earlier bootstrap authorization is insufficient. Do not ask again for unchanged valid authorization already recorded. If the candidate head/base changes, show the delta/reassess checks and obtain renewed authorization.
+Inspect current root workflows/scripts/tests, runtime/job/env contracts, actual main/staging/candidate refs and changes, reviews/checks, WIF/environment settings, cloud resources and existing action-specific authorizations. Preserve accepted root `deploy/` paths and `Project_code/` build context.
 
-Once authorization is valid, record the actual decision/reference/time/head/base. Only then lift Draft and make the real peer-review handoff under the repository protocol. Obtain required non-author human review and pass protection. The AI's analysis is not A's human approval, and user main authorization does not by itself authorize self-merge. Leave integration to the authorized maintainer unless an explicit applicable instruction and policy permit the action. Verify actual MERGED/actor/merge commit/base before claiming release.
+Use this entry matrix before any later deployment:
 
-## 3. Observe the actual main release pipeline
+| Prerequisite | Evidence required | If missing |
+|---|---|---|
+| Initial working release | Actual accepted main source, public HTTPS URL, real readiness and runtime identity | Coordinate A/07/B/08; do not call the later release a first bootstrap |
+| Container/CI integration | Actual relevant source/run/build/DB/image results and accepted scope | Finish independent candidate review; keep release blocked |
+| Merge gate | Observed required check/up-to-date/review rules and valid C-02 proof | Record the actual live-gate blocker; do not substitute Draft-only proof |
+| Deployment prerequisites | Verified WIF/environment/resources/secret references and applicable cloud authorization | Prepare concrete missing actions; do not broaden permissions |
+| A/09 baseline | Durable original milestone/submission/feedback IDs and pre-release values/source/time | Hold release; do not backfill a before-state after deploy |
+| Distinct restart | Real method/provenance and original-record read-back, with actual witness status | Keep C-05 prerequisite incomplete and return the precise dependency |
+| Visible change | Agreed accepted-S1 behavior, task/AC, actual staging integration and current evidence | Prepare through its proper owner/PR workflow |
 
-1. Identify the workflow run triggered by the actual main source merge. Do not trigger a duplicate run just because it has not yet been inspected. Confirm the run checks out the intended main SHA and uses accepted permissions/environment.
-2. Observe CI -> image build/push -> tag/digest resolution -> migration execution -> service rollout -> smoke/summary. Record real outcomes and links. If fail, inspect the exact failed step and current schema/traffic; do not blindly retry partial migration or auto-rollback incompatible code.
-3. Verify source SHA -> image tag/digest -> serving Cloud Run revision/traffic -> `/api/health` version, with actual service URL and time. The deployed main merge SHA may differ from the release PR head. A green Actions job is not enough.
-4. Open the live public URL and verify the visible change plus healthy DB readiness/HTML. Distinguish bootstrap result, smoke, business flow and persistence; do not declare C-05 complete here.
-5. If configured optional private smoke ran, verify low-privilege cookie/source/CSRF/read/logout outcome without retaining credentials. Missing optional account stays SKIP, not successful login evidence.
-6. If rollout/smoke fails, record actual serving traffic and recovery needs; present a compatible authorized rollback/roll-forward plan. No secret dump, broad IAM workaround or automatic DB reversal.
+A Draft PR, local build, intended restart or historical green run is not an executed prerequisite. Keep missing items PENDING/NOT RUN with the owner and exact next action.
 
-## 4. C-06 record and next handoff
+## 2. Establish safe workspace and release ownership
 
-Write/link one real labelled chain: Issue -> feature/task PR -> specific current-head teammate review -> staging integration -> user-authorized main release PR -> CI/deploy run -> actual main SHA/image/digest/revision/traffic/version. Include tested source, timestamps, responsible humans and unresolved limits. Preserve CI/contract/history; no deletion/rewrite to clean evidence.
+Use B's separate clone/worktree, inspect clean/staged/untracked state and preserve unrelated work. Resume the actual open visible-change/release branch/PR. A merged old PR cannot receive a new release under its old approval; create a scoped new candidate when required.
 
-Update Project states only to actual milestones, with current-head peer acceptance and intended merge verified separately. A release PR may be Done from native merge automation while #16 remains active for post-deploy data checks/report/submission. Reconcile Issue closure/Acceptance separately, not automatically.
+Keep the joint #16 lifecycle and historical acceptance intact. Follow real early-Draft/card timing for newly created work; do not manufacture Backlog/Specified stages for each phase or move past completed cards. Record actual transitions/read-backs in the appropriate Issue body.
 
-Prepare the reviewed main-to-staging sync when ancestry requires it; no direct protected push or squash/rebase that removes main ancestry. Hand A the exact URL/main/image/digest/serving revision and A/09 original evidence reference. Next: A/11_R2-J01_POST_RELEASE_PERSISTENCE.md. Stop with truthful pending/failure status if user, peer, merge or pipeline action is not complete.
+Agree which owner edits the visible change and who reviews it. If UI copy is involved, read the UI skill/project brief and preserve the monochrome shared design and English copy. Do not add unfinished F-05-F-07 work or alter a business rule merely to obtain a visible difference.
+
+## 3. Define and integrate the visible change
+
+If no accepted change exists, specify a small concrete S1-compatible change with an actual Issue, owner, expected before/after behavior and acceptance case. Prefer a change whose public result can be verified without touching the original persistence records. Coordinate file ownership before implementation.
+
+Use task branch -> early Draft staging PR -> affected verification -> real current-head peer acceptance -> authorized staging merge. Record the real commits/review/merge and source identity. Do not implement on main or treat an AI review as a separate human acceptance.
+
+If the change is already integrated, inspect its exact diff/history and reuse valid evidence. Do not repeat edits/tests/releases just to generate fresh-looking output. New differences, missing proof or failures justify affected revalidation.
+
+## 4. Assemble the exact main candidate
+
+1. Fetch actual refs and inspect the full candidate-to-main commits/files/source tree, not just the visible-change commit. Identify unrelated docs/config/scripts, generated artifacts and unfinished features.
+2. Check ancestry and current up-to-date policy. If main must be synchronized back into staging, use a reviewed sync branch/PR preserving main ancestry; no protected direct push, force push or history-erasing squash/rebase.
+3. Reuse a matching Draft release PR from the agreed staging/release branch into main. If staging contains unrelated unfinished work, agree a scoped release branch and inspect the full resulting diff instead of silently shipping everything.
+4. Verify current relevant type/unit/build/real-DB/migration/image/CI evidence, runtime/source propagation and rollback compatibility. Bind each result to its tested source; explain applicability of earlier unchanged-code evidence.
+5. Read the release workflow's actual triggers, environment/permissions, concurrency and manual-input behavior. Main merge can automatically mutate cloud resources; ensure the intended pipeline/actions are within recorded authorization before requesting the release decision.
+6. Confirm A/09's original ledger and actual serving environment still match the pre-release target. Coordinate against concurrent writes/releases; do not overwrite its baseline.
+
+## 5. Prepare the user review package
+
+Present a concrete inspectable candidate using this schema:
+
+| Field | Required value |
+|---|---|
+| Release/task | Actual Issue and task/staging/release PR URLs; labels and owner |
+| Exact candidate | Full current head and full main base SHA; source branch and full diff |
+| Visible behavior | Before/after and how to inspect it at a local/preview route before release |
+| Current evidence | Relevant runs/checks/artifacts, tested sources, actual outcomes and limitations |
+| Persistence prerequisite | A/09 ledger/commit, original IDs, actual restart/witness result and target environment |
+| Cloud scope | Approved service/job/image/resources and actual action authorization references |
+| Compatibility/recovery | Migration impact, old-image/new-schema compatibility and proposed bounded recovery |
+| User decision | PENDING or actual decision/reference/time bound to this exact head/base |
+| Peer/protection | Actual requested/reviewed state, required checks and unresolved threads |
+
+Keep Draft and auto-merge off while the user's current-candidate decision is pending. Notification, a green build, earlier bootstrap approval, generic continuation or silence is not permission to release. If the unchanged candidate already has valid authorization, read back that record rather than asking again.
+
+If head or base changes, show the delta, reassess affected checks and obtain renewed candidate authorization before lifting Draft. The release PR head is not necessarily the source SHA later built from the main merge.
+
+## 6. Authorized peer/protected merge
+
+Only after valid current-candidate user authorization, record the actual decision/head/base and make the ready/peer handoff permitted by the repository. Obtain the required real non-author review and checks, with resolved findings. User release authorization does not itself provide peer approval or self-merge permission.
+
+Leave integration to the authorized maintainer unless an explicit applicable instruction and policy permit the action. Preserve all protection; do not use an admin bypass or alter rules to recover time. Immediately before integration, read current head/base/checks/reviews again and reject a moved candidate.
+
+Afterward verify actual MERGED state, actor/time, target main branch, main merge SHA and source tree. A marked-ready/approved PR or queued auto-merge is not an actual merge. Read back native Project PR Done separately from overall #16 acceptance.
+
+## 7. Observe the real main pipeline once
+
+Find the workflow run for the actual main source merge. Inspect current running/completed runs before considering a manual dispatch; do not trigger a duplicate deployment because a page is stale or a job has not started. If an automatic run is absent, identify the actual trigger/permission problem and coordinate an explicitly scoped recovery, recording its event/source honestly.
+
+Observe and record each actual stage:
+
+| Stage | Evidence and failure rule |
+|---|---|
+| Source/ref | Main ref, actual checked-out SHA and correct approved workflow; reject stale/wrong source |
+| CI | Meaningful current-source tests/build/DB/image checks passed; no skipped dependency masquerading as success |
+| Images | Web/jobs built from the same actual main SHA, full source tags and resolved immutable digests |
+| Migration | Intended jobs image/command, one task, zero automatic retries, awaited actual success; failure blocks rollout |
+| Rollout | Selected web digest and runtime RELEASE_SHA; no unapproved env/secret changes |
+| Traffic | Actual serving revision and intended single 100% assignment, not merely latest-ready metadata |
+| Smoke | Expected source version, DB readiness, HTML and exact safe API error; private auth result PASS/FAIL/SKIP as actually configured |
+| Summary | Source/run/image/job/revision/traffic/URL/results agree with observations |
+
+Keep command output sanitized. Do not dump environment, secret payloads, DB URLs, cookies or CSRF values. Capture migration execution identity/result without retaining sensitive logs.
+
+## 8. Verify the public result independently of job color
+
+Open the real HTTPS URL and establish observed time, canonical origin, health version/readiness, served image/revision/traffic and the visible change. Distinguish stale browser caches, an old revision or a different host from the intended new result. Do not disable security or alter expected identity to make the check pass.
+
+Correlate the chain explicitly:
+
+`task change -> staging integration -> user-reviewed release head/base -> actual main merge SHA -> build/run -> web/jobs digests -> migration -> serving revision/traffic -> health version + visible result`.
+
+If optional private smoke has no configured credentials, retain SKIP; it is not public business-flow proof. A/09's earlier business test and A/11's later original-record read-back remain separate. Do not declare C-05 complete in this phase.
+
+## 9. Failure and recovery decision table
+
+| Actual failure | Immediate action | Recovery boundary |
+|---|---|---|
+| CI or image/digest failure | Stop release, retain actual failed step/source and inspect service still serving | Fix on proper task branch; current candidate authorization may need renewal |
+| Migration failed/partially applied | Preserve actual execution/schema status; do not roll out or blindly rerun | Owner inspects partial state; explicit reviewed DB recovery only |
+| Rollout/readiness/traffic mismatch | Read current revision/image/traffic safely; retain source identity | Prepare compatible bounded rollback/roll-forward with applicable authorization |
+| Smoke/visible change wrong | Record real endpoint/result/cache/source context; do not label the release healthy | Inspect actual service; no automatic schema/data reversal or secret dump |
+| Concurrent or duplicate deployment | Identify both sources/runs and current traffic before acting | Coordinate owners; do not cancel an active migration blindly |
+
+Image rollback is only for a known compatible existing SHA/digest and skips migration/seed as implemented. It does not restore DB/schema/data. A future rollback plan is not authorization to execute it now. Do not tear down resources to repair evidence.
+
+## 10. C-06 record, handoff and stop
+
+Create/reuse one English Markdown release record with the actual labelled Issue/task PR/specific peer review/staging merge/user-authorized main PR/CI-deploy run/source/image/job/revision/traffic/URL chain. Each link gets a short explanation of what it proves and its scope. Preserve proof/history and original outputs; no fabricated actor/time/result.
+
+Hand A the exact original ledger reference, new main SHA, run/job links, web/jobs digests, migration result, public URL, serving revision/traffic, actual visible/smoke result and recovery limitations. Record the actual release time so A can distinguish baseline/restart/redeploy observations.
+
+Keep #16 active for [A/11](../A/11_R2-J01_POST_RELEASE_PERSISTENCE.md), report-source preparation and final acceptance. A native merged PR Done does not close these remaining criteria. Prepare reviewed main-to-staging sync only when ancestry requires it. Stop here; A/11's readback is a separate invocation and no persistence result, PDF export, upload or Lab 6/7 work is implied.
