@@ -35,6 +35,33 @@ The instructions reduce ambiguity; they cannot guarantee error-free execution by
 
 **First-deploy bootstrap loop:** if the needed delivery code has not reached main, 07 prepares runtime/resources and pauses rollout. 08 prepares the initial delivery main candidate and follows the exact user/peer/protection gates; after the real main bootstrap, resume 07 to verify the first URL. Then run 09 before the **later visible-change release** in 10. These are two different release events when bootstrap is required; do not deploy staging or invent pre-release evidence to collapse them into one.
 
+## Next prompts after the runtime and CI code integration
+
+The recorded 10 November checkpoint is accepted runtime PR #84 and CI/release PR #85 integrated into `staging/sprint-2` as `cb9b969`; its push CI run `42847298597` passed. Recheck actual refs/reviews/runs before execution. This checkpoint is code integration, not completed WIF, C-02, cloud deployment, broader #13 contracts or #16 acceptance.
+
+**Current authoring request: prepare the Markdown prompts only. Do not start the next execution phase from this documentation edit.** The expanded A/07 and B/08 files specify their own future invocation modes and endpoints.
+
+| Next role | Read/copy the complete file | First permitted phase when later invoked |
+|---|---|---|
+| A | [A/07: cloud runtime](A/07_R2-J01_CLOUD_RUNTIME.md) | Discover live state read-only and prepare the concrete resource/runtime/action plan under #16. |
+| B | [B/08: live gate and initial release](B/08_R2-B01_J01_WIF_GATE_AND_RELEASE_PREP.md) | Discover actual CI/protection/environment/WIF state and prepare separately scoped #15/#16 changes. |
+
+Example future request for A:
+
+```text
+Execute the preparation phase of prompt_project/prompt_lab5/A/07_R2-J01_CLOUD_RUNTIME.md as A. Read its shared rules, inspect current state and finish the concrete reviewable plan and authorized local/offline preparation. Preserve existing valid authorizations. Stop before unapproved cloud mutations or a main release; do not run A/09 automatically.
+```
+
+Example future request for B:
+
+```text
+Execute Phase A of prompt_project/prompt_lab5/B/08_R2-B01_J01_WIF_GATE_AND_RELEASE_PREP.md as B. Read its shared rules and prepare the current CI/ruleset/environment/WIF plan with A's runtime interface. Preserve existing valid authorizations. Do not apply unapproved settings/IAM changes, release main or start the C-02 experiment from this preparation request.
+```
+
+Send the chosen request only when that role's work should actually start. An authoring-only request is not either execution request. Resume a later phase by identifying the real completed handoff, current candidate/actions and existing decisions; do not paste an entire sequence and assume it authorizes all phases.
+
+#15 still includes live WIF/environment/required-check/C-02 work after its code PR is merged. #13 still includes broader F-05-F-07/shared-interface/G0 work after its Lab 5 delivery subset is accepted. Do not close either Issue merely because A/07 or B/08 has a detailed prompt, a passing check or a completed preparation document.
+
 ## What each prompt contains
 
 Role and task; required reads; live-state/dependency discovery; allowed files and shared ownership; design decisions; implementation or independent verification steps; actual checks; GitHub handoff; specific stop/resume conditions and output format. [Shared execution rules](00_SHARED_EXECUTION_RULES.md) supply the full reusable Project/branch/PR/security protocol.
