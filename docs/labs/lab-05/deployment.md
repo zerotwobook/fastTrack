@@ -48,7 +48,7 @@ Copy examples privately; never commit actual env values, passwords, connection s
 
 `TEST_DATABASE_URL` is a secret for a separately reserved, guarded test DB; never a cloud/shared DB. `AUTH_REVIEW_PASSWORD` is private disposable-browser-review input. `AUTH_REVIEW_STATE_PATH`, `AUTH_REVIEW_STOP_FILE` and `RESTART_PROTECTED_DATABASE_URL` are existing local runner controls; the last is secret. They do not belong in public runtime configuration.
 
-The isolated runner sets `G1_AUDIT_CONTAINER_ID`, `G1_LEGACY_MIGRATIONS_DIR`, `G1_CANDIDATE_MIGRATIONS_DIR`, `G1_UPGRADE_REPORT_PATH` and the `G1_REVIEW_AUTH`, `G1_AUTH_CHECKS`, `G1_B01_CHECKS`, `G1_A02_CHECKS`, `G1_B02_CHECKS`, `G1_J03_CHECKS`, `G1_A01_CHECKS` selectors internally. Do not supply spoofed audit identity/unsafe DB targets. `G1_REPORT_PATH` chooses a non-secret result destination. `A01_CONTAINER_REPORT` optionally chooses the container-verification JSON destination. npm supplies `npm_execpath` internally; invoke the wrappers through npm.
+The isolated runner sets `G1_AUDIT_CONTAINER_ID`, `G1_LEGACY_MIGRATIONS_DIR`, `G1_CANDIDATE_MIGRATIONS_DIR`, `G1_HISTORY_MIGRATIONS_DIR`, `G1_UPGRADE_REPORT_PATH` and the `G1_REVIEW_AUTH`, `G1_AUTH_CHECKS`, `G1_B01_CHECKS`, `G1_A02_CHECKS`, `G1_B02_CHECKS`, `G1_J03_CHECKS`, `G1_A01_CHECKS` selectors internally. Do not supply spoofed audit identity/unsafe DB targets. `G1_REPORT_PATH` chooses a non-secret result destination. `A01_CONTAINER_REPORT` optionally chooses the container-verification JSON destination. npm supplies `npm_execpath` internally; invoke the wrappers through npm.
 
 ## 3. Tests and build commands
 

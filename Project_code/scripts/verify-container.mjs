@@ -87,6 +87,16 @@ try {
     run('docker', ['run', '--rm', '--entrypoint', 'node', webImage, '-e',
       "const f=require('node:fs'); for(const p of ['shared/milestones.mjs','shared/submissions.mjs','shared/feedback.mjs','server/dist/db/generated/client/index.js','client/dist/index.html'])if(!f.existsSync(p))process.exit(1); for(const p of ['server/.env','.env','server/dist/testing'])if(f.existsSync(p))process.exit(2); if(process.getuid()===0)process.exit(3)"]);
   });
+  check('compiled maintenance requires explicit confirmation before any DB access', () => {
+    const denied = spawnSync('docker', ['run', '--rm', '--entrypoint', 'node', webImage,
+      'server/dist/operations/cleanup-rate-limits.js'], { encoding: 'utf8', windowsHide: true });
+    if (denied.status !== 1 || !denied.stderr.includes('maintenance failed')) throw new Error('Maintenance confirmation guard failed.');
+  });
+  check('production image rejects an HTTP origin before startup', () => {
+    const denied = spawnSync('docker', ['run', '--rm', '--env', 'APP_ORIGIN=http://localhost:8080',
+      '--entrypoint', 'node', webImage, 'server/dist/index.js'], { encoding: 'utf8', windowsHide: true });
+    if (denied.status !== 1 || !denied.stderr.includes('Server startup failed')) throw new Error('Production origin guard failed.');
+  });
   run('docker', ['network', 'create', network]); networkCreated = true;
   const dbEnv = envFile('db.env', { POSTGRES_USER: 'a01_admin', POSTGRES_DB: 'fasttrack_a01_test', POSTGRES_PASSWORD: password });
   start(['--name', dbName, '--env-file', dbEnv, '--tmpfs', '/var/lib/postgresql/data:rw',
@@ -127,6 +137,20 @@ try {
   };
   if ((await api('/health')).data.version !== report.sourceCommit) throw new Error('Serving source mismatch.');
   const html = await (await fetch(url)).text(); if (!/fastTrack/.test(html)) throw new Error('Built HTML missing.');
+  for (const match of html.matchAll(/(?:src|href)="(\/assets\/[^\"]+)"/g)) {
+    const asset = await fetch(`${url}${match[1]}`);
+    if (asset.status !== 200 || !asset.headers.get('cache-control')?.includes('immutable')) throw new Error('Built hashed asset/cache failed.');
+    if (asset.headers.get('content-type')?.includes('text/css')) {
+      const css = await asset.text();
+      for (const font of css.matchAll(/url\(["']?(\/assets\/[^\s)"']+)/g)) {
+        if ((await fetch(`${url}${font[1]}`)).status !== 200) throw new Error('Bundled font asset failed.');
+      }
+    }
+  }
+  const deepLink = await fetch(`${url}/teams/synthetic-browser-path`, { headers: { Accept: 'text/html' } });
+  if (deepLink.status !== 200 || !deepLink.headers.get('cache-control')?.includes('no-cache')) throw new Error('Built SPA deep link failed.');
+  await api('/nonexistent', { expected: 404 });
+  report.checks.push({ name: 'built hashed assets/fonts, no-cache SPA deep link and JSON API 404', passed: true });
   const supervisor = await auth('supervisor.a@fasttrack.local');
   const student = await auth('student.a1@fasttrack.local');
   const teams = (await api('/teams', supervisor)).data.data;
