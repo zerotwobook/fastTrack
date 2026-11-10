@@ -4,7 +4,7 @@
 // Import from here throughout the server; never instantiate PrismaClient elsewhere.
 
 import { PrismaClient } from './generated/client/index.js';
-import { PrismaPg } from '@prisma/adapter-pg';
+import { createRuntimeClient } from './runtime-client.js';
 
 function createPrismaClient(): PrismaClient {
   const connectionString = process.env['DATABASE_URL'];
@@ -14,8 +14,7 @@ function createPrismaClient(): PrismaClient {
         'Ensure the environment is loaded before importing the Prisma client.',
     );
   }
-  const adapter = new PrismaPg({ connectionString });
-  return new PrismaClient({ adapter });
+  return createRuntimeClient(process.env);
 }
 
 // Singleton: one client per process (dev HMR creates a new module each reload,

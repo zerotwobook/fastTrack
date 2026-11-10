@@ -1,0 +1,48 @@
+services:
+  db:
+    image: postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae
+    environment:
+      POSTGRES_USER: fasttrack_local
+      POSTGRES_DB: fasttrack_local
+      POSTGRES_PASSWORD: ${LOCAL_DB_PASSWORD:?Set a private synthetic local DB password}
+    volumes:
+      - local-db:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U fasttrack_local -d fasttrack_local"]
+      interval: 2s
+      timeout: 2s
+      retries: 30
+  jobs:
+    profiles: [tools]
+    image: fasttrack-jobs:local
+    build:
+      context: .
+      target: jobs
+      args:
+        RELEASE_SHA: ${RELEASE_SHA:?Set the full source commit SHA}
+    environment:
+      DATABASE_URL: postgresql://fasttrack_local:${LOCAL_DB_PASSWORD}@db:5432/fasttrack_local
+      DEMO_SEED_PASSWORD: ${DEMO_SEED_PASSWORD:-}
+    depends_on:
+      db:
+        condition: service_healthy
+  app:
+    image: fasttrack-app:local
+    build:
+      context: .
+      target: runner
+      args:
+        RELEASE_SHA: ${RELEASE_SHA:?Set the full source commit SHA}
+    environment:
+      # Explicit loopback HTTP development mode; production requires canonical HTTPS.
+      NODE_ENV: development
+      PORT: 8080
+      APP_ORIGIN: http://127.0.0.1:8080
+      DATABASE_URL: postgresql://fasttrack_local:${LOCAL_DB_PASSWORD}@db:5432/fasttrack_local
+    ports:
+      - 127.0.0.1:8080:8080
+    depends_on:
+      db:
+        condition: service_healthy
+volumes:
+  local-db:

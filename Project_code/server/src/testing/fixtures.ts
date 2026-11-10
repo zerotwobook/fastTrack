@@ -45,6 +45,7 @@ export function createTestPrisma(): PrismaClient {
 export async function cleanTestDatabase(prisma: PrismaClient) {
   assertTestClientTarget(prisma);
   await prisma.$transaction([
+    prisma.authRateLimit.deleteMany(),
     prisma.feedback.deleteMany(), prisma.submission.deleteMany(), prisma.milestone.deleteMany(),
     prisma.teamMember.deleteMany(), prisma.team.deleteMany(), prisma.session.deleteMany(), prisma.user.deleteMany(),
   ]);

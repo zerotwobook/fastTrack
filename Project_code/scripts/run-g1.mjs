@@ -35,7 +35,7 @@ function must(bin, args, env) {
 }
 function stage(name, script, env, required = false) {
   const testReport = join(directory, 'tests.json');
-  const reportKey = { test: 'ordinaryTests', 'test:g1': 'g1Tests', 'test:auth': 'authTests', 'test:b01': 'b01Tests', 'test:a02': 'a02Tests', 'test:b02': 'b02Tests', 'test:j03': 'j03Tests' }[script];
+  const reportKey = { test: 'ordinaryTests', 'test:g1': 'g1Tests', 'test:auth': 'authTests', 'test:b01': 'b01Tests', 'test:a02': 'a02Tests', 'test:b02': 'b02Tests', 'test:j03': 'j03Tests', 'test:runtime': 'runtimeTests' }[script];
   const reportedTests = reportKey !== undefined;
   const extra = reportedTests ? ['--', '--reporter=json', '--outputFile', testReport] : [];
   const result = command(process.execPath, [npmCli, 'run', script, ...(script.startsWith('db:') ? ['--workspace', '@fasttrack/server'] : []), ...extra], env);
@@ -108,6 +108,7 @@ try {
   if (process.env.G1_A02_CHECKS === '1') stage('F-03 first-submission regression', 'test:a02', env);
   if (process.env.G1_B02_CHECKS === '1') stage('F-04 feedback real-session and retry regression', 'test:b02', env);
   if (process.env.G1_J03_CHECKS === '1') stage('S1 compiled cross-feature journey, seed and restart', 'test:j03', env);
+  if (process.env.G1_A01_CHECKS === '1') stage('Lab 5 real-DB limiter, timeout, proxy and cleanup', 'test:runtime', env);
   const upgrades = command(process.execPath, ['scripts/check-foundation-upgrade.mjs'], env);
   process.stdout.write(redact(upgrades.stdout) + redact(upgrades.stderr));
   report.upgrades = JSON.parse(readFileSync(env.G1_UPGRADE_REPORT_PATH, 'utf8'));
