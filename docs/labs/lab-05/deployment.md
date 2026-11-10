@@ -125,7 +125,28 @@ For first origin bootstrap use the accepted deterministic service URL format, th
 
 ## 7. CI, normal release, rollback and version lookup
 
-B owns root CI/deploy workflows and actual GitHub required checks in R2-B01; this runtime PR does not claim they exist or passed. The future normal release is reviewed task PR -> sprint staging -> concrete user-authorized main candidate -> real peer/protected merge -> CI -> source-SHA web/jobs image build/digest -> successful explicit migration job -> service rollout -> smoke -> revision/traffic verification.
+B implements and maintains root CI/deploy workflows, deployment scripts, offline tests and smoke tests under task R2-B01:
+
+- **CI Workflow ([.github/workflows/ci-docker.yml](../../../.github/workflows/ci-docker.yml))**:
+  - Triggers on pull requests and pushes to `main` and `staging/sprint-*`, as well as reusable `workflow_call`.
+  - Job ID is strictly **`test-and-docker`** (emits stable check for branch protection). Cancels in-progress PR runs on update while preserving pushes and release runs.
+  - Sequence: script syntax and offline stub tests -> `Project_code` lockfile install (`npm ci`) -> `db:generate` -> typecheck -> unit tests -> production build -> isolated Docker PostgreSQL suite (`npm run test:runtime:isolated`) -> artifact upload (`ci-runtime-report`) -> production Dockerfile builds (both `runner` and `jobs` targets).
+- **Deploy Workflow ([.github/workflows/deploy.yml](../../../.github/workflows/deploy.yml))**:
+  - Main-only automatic trigger on `push` to `main`, and manual `workflow_dispatch` for rollback. `deploy/release.sh` additionally rejects any non-main `GITHUB_REF` before calling GCP.
+  - Concurrency group `deploy-main` with `cancel-in-progress: false` ensures active migrations are never aborted mid-flight.
+  - Environment: `demo` with scoped variables (`GCP_PROJECT_ID`, `GCP_REGION`, `WIF_PROVIDER`, `WIF_SERVICE_ACCOUNT`).
+  - Sequence: calls CI `test-and-docker` -> authenticates via WIF -> builds and pushes `fasttrack-app` (web) and `fasttrack-jobs` (`--target jobs`) tagged with `IMAGE_TAG` -> resolves immutable `@sha256:` digests -> executes `deploy/release.sh` (migrates via `fasttrack-jobs`, updates `fasttrack-app` with web digest and `RELEASE_SHA=$IMAGE_TAG`, captures `SERVING_REVISION`) -> executes `deploy/smoke_test.py` -> publishes factual summary to GitHub Step Summary.
+- **Smoke Checks (`deploy/smoke_test.py`)**:
+  - Public checks validate `/api/health` (status `ok` and `version == EXPECTED_RELEASE_SHA`), `/api/ready` (`status: ready`, `database: connected`, matching version), `/` (HTML containing `fastTrack`), and `/api/nonexistent` (HTTP 404 sanitized JSON error envelope).
+  - Optional private smoke runs when both `SMOKE_EMAIL` and `SMOKE_PASSWORD` are configured, exercising cookie jar, `X-fastTrack-Request: 1`, `Origin`, `X-CSRF-Token`, `/api/auth/me`, read-only scoped `GET /api/teams`, and guaranteed `/api/auth/logout` in `finally`. Missing credentials print `SKIP login`; partial or invalid credentials fail the check.
+- **Offline Deployment Script Tests**:
+  - `bash deploy/tests/test_release_stub.sh`: Verifies normal web/jobs digest release, awaited migration, `RELEASE_SHA` propagation, rollback without migration, non-main `GITHUB_REF` rejection, image/jobs_image/migration failure blocking rollout, and invalid tag rejection.
+  - `bash deploy/tests/test_deploy_stub.sh`: Verifies idempotent provisioning (`fasttrack_user`, `APP_ORIGIN`, `TRUST_PROXY_HOPS=1`), Cloud SQL enterprise edition, no project-wide `secretAccessor`, zero leaked secrets in stdout, and migration failure abortion.
+  - `python3 -m unittest discover -s deploy/tests -p 'test_smoke.py'`: Verifies health, version match enforcement, DB readiness failure, `/api/nonexistent` 404, scoped `/api/teams`, and session logout guarantees.
+- **Rollback Procedure**:
+  - Rollback is triggered manually via GitHub Actions `Deploy demo` workflow dispatch by providing the full 40-character `image_tag` of an existing known image.
+  - The script sets `ROLLBACK=true`, resolves the existing image digest, points Cloud Run at the image, and sets traffic to 100%. Build, migration, and seed steps are deliberately skipped.
+  - Rollback requires schema compatibility; it does not reverse database migrations or recover mutated data.
 
 Every main-targeted candidate follows [the user gate](../../../workflow/MAIN_RELEASE_GATE.md). Queue releases without cancelling migrations. On migration failure stop before rollout and inspect partial schema state. Rollback deploys a known compatible existing image and skips migration/seed; it does not undo DB data/schema. Do not blindly retry or assume automatic rollback after smoke failure.
 
@@ -136,3 +157,11 @@ Version proof compares actual built main SHA (possibly different from PR head), 
 Read the failed stage before fixing it. For missing runtime modules inspect final shared/generated layout. For unavailable readiness inspect private DB configuration/deadlines/migration state without printing URLs. For login/source failure verify canonical origin, cookie/source/CSRF and trusted proxy path; do not loosen authorization. For image/job failure verify actual tool pins/entrypoint/workspace working directory.
 
 Keep actual test outputs under [application evidence](../../../Project_code/docs/evidence). Current RED/GREEN/regression/container records identify their real source/commands; the final A01 handoff records actual verified results and remaining peer/cloud limits. Keep repo/service available through grading/UAT and preserve CI/contract history for later labs. Markdown report preparation does not authorize PDF export/upload or coursework submission.
+
+### PR #85 review corrections
+
+Bootstrap with `deploy/deploy.sh` requires a clean local `main` checkout matching the fetched `origin/main`; fetch and synchronize it first. This source check does not grant cloud authorization. `DRY_RUN=1` permits command preview from a task branch without cloud calls. Both web and jobs images use the full source SHA tag and are resolved to validated 64-hex immutable digests before migration or rollout. Provisioning reruns update the existing migration job to the selected jobs image before execution.
+
+Bootstrap and normal release configure one migration task with `--max-retries=0`, reset its command to `npm run db:migrate --workspace @fasttrack/server`, and await completion. A migration failure requires inspection before any deliberate retry. Rollback leaves the migration job untouched. Normal release verifies the actual traffic revision and a single 100% traffic assignment before exporting its result; split traffic is a failure rather than a successful summary.
+
+The authenticated smoke check fails with a sanitized error if logout fails. The API 404 must match the implemented `NOT_FOUND` envelope exactly, including empty fields and no extra diagnostic keys. Offline tests cover these failures; they do not establish live WIF, public cloud behavior or C-02 acceptance. `--demo` prepares a seed-password secret; this provisioning script does not run a seed automatically. Seed remains a separate explicitly authorized operation.
