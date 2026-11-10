@@ -125,7 +125,25 @@ For first origin bootstrap use the accepted deterministic service URL format, th
 
 ## 7. CI, normal release, rollback and version lookup
 
-B owns root CI/deploy workflows and actual GitHub required checks in R2-B01; this runtime PR does not claim they exist or passed. The future normal release is reviewed task PR -> sprint staging -> concrete user-authorized main candidate -> real peer/protected merge -> CI -> source-SHA web/jobs image build/digest -> successful explicit migration job -> service rollout -> smoke -> revision/traffic verification.
+B implements and maintains root CI/deploy workflows, deployment scripts, offline tests and smoke tests under task R2-B01:
+
+- **CI Workflow ([.github/workflows/ci-docker.yml](../../../.github/workflows/ci-docker.yml))**:
+  - Triggers on pull requests and pushes to `main` and `staging/sprint-*`, as well as reusable `workflow_call`.
+  - Job ID is strictly **`test-and-docker`** (emits stable check for branch protection).
+  - Sequence: script syntax and offline stub tests -> `Project_code` lockfile install (`npm ci`) -> typecheck -> unit tests -> production build -> S1 runtime regressions -> production Dockerfile build (both runner and jobs targets).
+- **Deploy Workflow ([.github/workflows/deploy.yml](../../../.github/workflows/deploy.yml))**:
+  - Main-only automatic trigger on `push` to `main`, and manual `workflow_dispatch` for rollback.
+  - Concurrency group `deploy-main` with `cancel-in-progress: false` ensures active migrations are never aborted mid-flight.
+  - Environment: `demo` with scoped variables (`GCP_PROJECT_ID`, `GCP_REGION`, `WIF_PROVIDER`, `WIF_SERVICE_ACCOUNT`).
+  - Sequence: calls CI `test-and-docker` -> authenticates via WIF -> builds and pushes image tagged with `${{ github.sha }}` -> resolves immutable `@sha256:` digest -> executes `deploy/release.sh` -> executes `deploy/smoke_test.py` -> publishes factual summary to GitHub Step Summary.
+- **Offline Deployment Script Tests**:
+  - `bash deploy/tests/test_release_stub.sh`: Verifies normal digest release, awaited migration, rollback without migration, image failure blocking rollout, migration failure blocking rollout, and invalid tag rejection.
+  - `bash deploy/tests/test_deploy_stub.sh`: Verifies idempotent provisioning, Cloud SQL enterprise edition, non-leaking credentials, and migration failure abortion.
+  - `python3 -m unittest discover -s deploy/tests -p 'test_smoke.py'`: Verifies health JSON, DB readiness, HTML serving, and session logout handling.
+- **Rollback Procedure**:
+  - Rollback is triggered manually via GitHub Actions `Deploy demo` workflow dispatch by providing the full 40-character `image_tag` of an existing known image.
+  - The script sets `ROLLBACK=true`, resolves the existing image digest, points Cloud Run at the image, and sets traffic to 100%. Build, migration, and seed steps are deliberately skipped.
+  - Rollback requires schema compatibility; it does not reverse database migrations or recover mutated data.
 
 Every main-targeted candidate follows [the user gate](../../../workflow/MAIN_RELEASE_GATE.md). Queue releases without cancelling migrations. On migration failure stop before rollout and inspect partial schema state. Rollback deploys a known compatible existing image and skips migration/seed; it does not undo DB data/schema. Do not blindly retry or assume automatic rollback after smoke failure.
 

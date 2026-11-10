@@ -1,0 +1,90 @@
+# ##############################################################################
+# CI — "CI & Docker Build"
+# ##############################################################################
+# WHAT THIS WORKFLOW DOES
+#   Runs the project's verification suite and is used in two ways:
+#     1) directly on every pull request and push to `main` and `staging/sprint-*` (and manually), and
+#     2) as a REUSABLE workflow called by deploy.yml (`workflow_call`) so deployment
+#        only starts after these checks pass.
+#   Steps: offline deploy-script tests -> workspace install -> typecheck -> unit tests
+#          -> client/server build -> runtime regressions -> production Docker build.
+#   It does NOT deploy anything.
+#
+# ⚠️ DO NOT RENAME:
+#   - job id : test-and-docker (required by rubric and branch protection rules)
+# ##############################################################################
+
+name: CI & Docker Build
+
+on:
+  workflow_call:
+  pull_request:
+    branches:
+      - main
+      - 'staging/sprint-*'
+  push:
+    branches:
+      - main
+      - 'staging/sprint-*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  test-and-docker:
+    name: test-and-docker
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js 26.13.0
+        uses: actions/setup-node@v4
+        with:
+          node-version: '26.13.0'
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Check deployment scripts without accessing GCP
+        run: |
+          bash -n deploy/release.sh deploy/deploy.sh deploy/teardown.sh
+          bash deploy/tests/test_release_stub.sh
+          bash deploy/tests/test_deploy_stub.sh
+          python3 -m unittest discover -s deploy/tests -p 'test_smoke.py'
+
+      - name: Install workspace dependencies
+        working-directory: Project_code
+        run: npm ci
+
+      - name: TypeScript typecheck
+        working-directory: Project_code
+        run: npm run typecheck
+
+      - name: FastTrack unit and contract tests
+        working-directory: Project_code
+        run: npm test
+
+      - name: Client and server production build
+        working-directory: Project_code
+        run: npm run build
+
+      - name: FastTrack runtime regressions
+        working-directory: Project_code
+        run: npm run test:runtime
+
+      - name: Verify production Docker build
+        run: |
+          docker build --build-arg RELEASE_SHA=${{ github.sha }} -t fasttrack-app:ci Project_code
+          docker build --target jobs --build-arg RELEASE_SHA=${{ github.sha }} -t fasttrack-jobs:ci Project_code
