@@ -109,7 +109,7 @@ try {
   });
   const web = start(['--publish', '127.0.0.1::8080', '--env-file', runtimeEnv, webImage]);
   const binding = inspect(web).NetworkSettings.Ports['8080/tcp'][0];
-  const url = `http://127.0.0.1:${binding.HostPort}`;
+  let url = `http://127.0.0.1:${binding.HostPort}`;
   await waitReady(url);
   const api = async (path, { cookie, body, expected = 200 } = {}) => {
     const response = await fetch(`${url}/api${path}`, { method: body ? 'POST' : 'GET',
@@ -146,6 +146,8 @@ try {
     run('docker', ['stop', '--time', '10', web]);
     if (inspect(web).State.ExitCode !== 0) throw new Error('Web did not stop gracefully.');
     run('docker', ['start', web]);
+    // Docker may allocate a different ephemeral host port when the same container restarts.
+    url = `http://127.0.0.1:${inspect(web).NetworkSettings.Ports['8080/tcp'][0].HostPort}`;
   });
   await waitReady(url);
   const restored = (await api(`/submissions/${submission.id}`, student)).data.data;
