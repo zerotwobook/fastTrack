@@ -72,11 +72,13 @@ SQL_INSTANCE="fasttrack-db"
 DB_NAME="fasttrack_prod"
 DB_USER="fasttrack"
 SERVICE_NAME="fasttrack-app"
+JOBS_IMAGE_NAME="fasttrack-jobs"
 MIGRATE_JOB_NAME="fasttrack-migrate"
 SA_NAME="sa-fasttrack-runtime"
 SA_EMAIL="${SA_NAME}@${PROJECT_ID}.iam.gserviceaccount.com"
 SQL_CONN_NAME="${PROJECT_ID}:${REGION}:${SQL_INSTANCE}"
 IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${SERVICE_NAME}:latest"
+JOBS_IMAGE_URI="${REGION}-docker.pkg.dev/${PROJECT_ID}/${REPO_NAME}/${JOBS_IMAGE_NAME}:latest"
 
 SECRET_DB_URL="fasttrack-database-url"
 SECRET_DEMO_PASS="fasttrack-demo-password"
@@ -230,17 +232,19 @@ if [ "$SEED_DEMO_DATA" = "true" ]; then
     --quiet
 fi
 
-# 8. Build initial image (using Project_code context)
+# 8. Build initial web and jobs images (using Project_code context)
 RELEASE_SHA="$(git rev-parse HEAD 2>/dev/null || echo '0000000000000000000000000000000000000000')"
 run_cmd gcloud auth configure-docker "${REGION}-docker.pkg.dev" --quiet
 run_cmd docker build --build-arg RELEASE_SHA="$RELEASE_SHA" -t "$IMAGE_URI" Project_code
 run_cmd docker push "$IMAGE_URI"
+run_cmd docker build --target jobs --build-arg RELEASE_SHA="$RELEASE_SHA" -t "$JOBS_IMAGE_URI" Project_code
+run_cmd docker push "$JOBS_IMAGE_URI"
 
-# 9. Create Cloud Run Job for migrations (idempotent)
+# 9. Create Cloud Run Job for migrations (idempotent, uses jobs image target)
 if [ "$DRY_RUN" = "1" ]; then
   run_cmd gcloud run jobs describe "$MIGRATE_JOB_NAME" --region="$REGION" --project="$PROJECT_ID"
   run_cmd gcloud run jobs create "$MIGRATE_JOB_NAME" \
-    --image="$IMAGE_URI" \
+    --image="$JOBS_IMAGE_URI" \
     --region="$REGION" \
     --project="$PROJECT_ID" \
     --service-account="$SA_EMAIL" \
@@ -252,7 +256,7 @@ if [ "$DRY_RUN" = "1" ]; then
 else
   if ! gcloud run jobs describe "$MIGRATE_JOB_NAME" --region="$REGION" --project="$PROJECT_ID" >/dev/null 2>&1; then
     run_cmd gcloud run jobs create "$MIGRATE_JOB_NAME" \
-      --image="$IMAGE_URI" \
+      --image="$JOBS_IMAGE_URI" \
       --region="$REGION" \
       --project="$PROJECT_ID" \
       --service-account="$SA_EMAIL" \

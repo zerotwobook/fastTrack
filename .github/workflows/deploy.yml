@@ -6,12 +6,13 @@
 #     1) runs the CI workflow (ci-docker.yml, job `test-and-docker`) first,
 #     2) authenticates to Google Cloud WITHOUT a key file (Workload Identity
 #        Federation),
-#     3) builds + pushes the image tagged with the commit SHA,
-#     4) runs deploy/release.sh (verify image -> migrate -> update service),
+#     3) builds + pushes web (`fasttrack-app`) and jobs (`fasttrack-jobs`)
+#        images tagged with the full source commit SHA,
+#     4) runs deploy/release.sh (resolve digests -> migrate -> update service),
 #     5) smoke-tests the public URL (deploy/smoke_test.py),
-#     6) writes a deployment summary.
+#     6) writes a factual deployment summary.
 #   MANUAL ROLLBACK: run the workflow by hand and enter `image_tag` = the full
-#   40-character commit SHA of an image that already exists. Tests, build and
+#   40-character commit SHA of an existing web image. Tests, build and
 #   migration are skipped; only the service is pointed back to that image.
 #
 # ⚠️ DO NOT RENAME:
@@ -62,6 +63,7 @@ jobs:
       PROJECT_ID: ${{ vars.GCP_PROJECT_ID }}
       REGION: ${{ vars.GCP_REGION }}
       SERVICE_NAME: fasttrack-app
+      JOBS_IMAGE_NAME: fasttrack-jobs
       MIGRATE_JOB_NAME: fasttrack-migrate
       REGISTRY_REPO: fasttrack-docker
       IMAGE_TAG: ${{ inputs.image_tag || github.sha }}
@@ -69,7 +71,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
 
@@ -91,19 +93,22 @@ jobs:
       - name: Set up Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
 
-      - name: Build and push production image
+      - name: Build and push production web and jobs images
         if: env.ROLLBACK != 'true'
         run: |
           gcloud auth configure-docker "$REGION-docker.pkg.dev" --quiet
-          IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$SERVICE_NAME:$IMAGE_TAG"
-          docker build --build-arg RELEASE_SHA="$IMAGE_TAG" --tag "$IMAGE" Project_code
-          docker push "$IMAGE"
+          APP_IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$SERVICE_NAME:$IMAGE_TAG"
+          JOBS_IMAGE="$REGION-docker.pkg.dev/$PROJECT_ID/$REGISTRY_REPO/$JOBS_IMAGE_NAME:$IMAGE_TAG"
+          docker build --build-arg RELEASE_SHA="$IMAGE_TAG" --tag "$APP_IMAGE" Project_code
+          docker push "$APP_IMAGE"
+          docker build --target jobs --build-arg RELEASE_SHA="$IMAGE_TAG" --tag "$JOBS_IMAGE" Project_code
+          docker push "$JOBS_IMAGE"
 
       - name: Verify image, migrate and deploy
         run: bash deploy/release.sh
 
       - name: Setup Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
@@ -118,7 +123,8 @@ jobs:
           {
             echo '### fastTrack demo deployment'
             echo "- Commit image tag: \`$IMAGE_TAG\`"
-            echo "- Digest: \`$DEPLOYED_IMAGE\`"
+            echo "- Web Digest: \`$DEPLOYED_IMAGE\`"
+            echo "- Jobs Digest: \`${DEPLOYED_JOBS_IMAGE:-skipped-rollback}\`"
             echo "- Rollback: $ROLLBACK"
             echo "- URL: $SERVICE_URL"
             echo '- Smoke test: passed (health, readiness/DB, HTML).'

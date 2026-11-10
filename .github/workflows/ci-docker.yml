@@ -6,8 +6,9 @@
 #     1) directly on every pull request and push to `main` and `staging/sprint-*` (and manually), and
 #     2) as a REUSABLE workflow called by deploy.yml (`workflow_call`) so deployment
 #        only starts after these checks pass.
-#   Steps: offline deploy-script tests -> workspace install -> typecheck -> unit tests
-#          -> client/server build -> runtime regressions -> production Docker build.
+#   Steps: offline deploy-script tests -> workspace install -> Prisma generate
+#          -> typecheck -> unit tests -> client/server build -> isolated DB/migration/
+#          S1/runtime regressions -> production Docker builds (runner & jobs).
 #   It does NOT deploy anything.
 #
 # ⚠️ DO NOT RENAME:
@@ -43,17 +44,17 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           persist-credentials: false
 
       - name: Setup Node.js 26.13.0
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
         with:
           node-version: '26.13.0'
 
       - name: Setup Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
         with:
           python-version: '3.12'
 
@@ -68,6 +69,12 @@ jobs:
         working-directory: Project_code
         run: npm ci
 
+      - name: Generate Prisma client
+        working-directory: Project_code
+        env:
+          DATABASE_URL: postgresql://build:placeholder@127.0.0.1:1/fasttrack_build
+        run: npm run db:generate --workspace @fasttrack/server
+
       - name: TypeScript typecheck
         working-directory: Project_code
         run: npm run typecheck
@@ -78,13 +85,26 @@ jobs:
 
       - name: Client and server production build
         working-directory: Project_code
+        env:
+          DATABASE_URL: postgresql://build:placeholder@127.0.0.1:1/fasttrack_build
         run: npm run build
 
-      - name: FastTrack runtime regressions
+      - name: Isolated DB, migration, S1 and Lab 5 runtime regressions
         working-directory: Project_code
-        run: npm run test:runtime
+        env:
+          G1_REPORT_PATH: ${{ runner.temp }}/ci-runtime-report.json
+        run: npm run test:runtime:isolated
 
-      - name: Verify production Docker build
+      - name: Upload sanitized runtime regression report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-runtime-report
+          path: ${{ runner.temp }}/ci-runtime-report.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Verify production Docker builds (runner and jobs targets)
         run: |
           docker build --build-arg RELEASE_SHA=${{ github.sha }} -t fasttrack-app:ci Project_code
           docker build --target jobs --build-arg RELEASE_SHA=${{ github.sha }} -t fasttrack-jobs:ci Project_code
