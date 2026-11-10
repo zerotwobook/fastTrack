@@ -8,6 +8,8 @@ Historical Sprint 1 verification at `17f4398`: **144 ordinary tests, 42 feedback
 
 `GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness. The Lab 5 runtime adds real bounded `/api/ready` DB checks (200/503), a bounded PostgreSQL pool and shared PostgreSQL login throttling with compatible 401/429 errors. No test identity bypass is exposed. See [the runtime/container guide](../docs/labs/lab-05/deployment.md) for exact configuration, explicit jobs, local Compose and the separate unverified cloud handoff.
 
+Lab 5 author verification passed **374 automated cases plus seven migration scenarios**, with 13 clean-clone final-image checks. [Actual runtime results](docs/evidence/R2-A01-runtime.md) identify RED/GREEN history, exact tested source/image identities and the initial verifier-port correction. From this directory, use `npm run test:runtime:isolated` for the complete guarded suite and `npm run verify:container` for committed-source image/job/business/restart verification. These establish local behavior, not a public GCP/TLS release.
+
 The responsive UI refinement adds consistent control borders, readable status badges, team/feedback frames, aligned form actions and keyboard navigation that closes on desktop resize. Its compiled-browser checks passed 108 Student/Supervisor page-and-viewport combinations, plus login, empty/loading/error and recovery checks. [Actual verification and screenshots](docs/evidence/R1-A-UI-POLISH.md) distinguish the early 340-case pipeline from final affected-client checks; native 200% zoom and physical mobile devices were not verified for this refinement.
 
 ## Verified toolchain
@@ -96,7 +98,7 @@ With Docker Engine running, from Project_code:
 npm run test:g1:isolated
 ```
 
-This command creates its own temporary PostgreSQL instance with a random loopback-only port and distinct development/test databases, generates Prisma, migrates both DBs, repeats migrate deploy, runs typecheck, the 144 ordinary tests, a production-mode build and 38 dedicated G1 assertions. It also creates seven historical-schema databases inside that same new container to check upgrades and safe rejection. It removes only the newly created container and temporary credential file afterwards. Random DB/seed credentials are not committed or printed.
+This command creates its own temporary PostgreSQL instance with a random loopback-only port and distinct development/test databases, generates Prisma, migrates both DBs, repeats migrate deploy, runs typecheck, the current ordinary unit/API suite, a production-mode build and 38 dedicated G1 assertions. It also creates seven historical-schema databases inside that same new container to check upgrades and safe rejection. It removes only the newly created container and temporary credential file afterwards. Random DB/seed credentials are not committed or printed.
 
 The current expected exit is **0**. The runner prints a redacted JSON report path. Set G1_REPORT_PATH to choose that output file. Four negative upgrade scenarios intentionally receive a failed migration exit and pass only when the expected PostgreSQL error, existing records, schema and completed migration checksums are preserved. [Foundation results](docs/evidence/R1-G1-A-remediation-results.json) and [findings/reproduction](docs/evidence/R1-G1-A-foundation.md) preserve their actual pre-acceptance snapshots; the later real G1 approval/merge is recorded separately.
 

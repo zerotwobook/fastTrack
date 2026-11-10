@@ -1,0 +1,92 @@
+{
+  "startedAt": "2026-11-10T07:15:47.407Z",
+  "checks": [
+    {
+      "name": "fresh clone has the exact committed source",
+      "passed": true
+    },
+    {
+      "name": "clean runner image build",
+      "passed": true
+    },
+    {
+      "name": "clean jobs image build",
+      "passed": true
+    },
+    {
+      "name": "final runner has runtime modules, no env files and no test fixtures",
+      "passed": true
+    },
+    {
+      "name": "compiled maintenance requires explicit confirmation before any DB access",
+      "passed": true
+    },
+    {
+      "name": "production image rejects an HTTP origin before startup",
+      "passed": true
+    },
+    {
+      "name": "actual jobs image migrates a fresh DB and repeats without reset",
+      "passed": true
+    },
+    {
+      "name": "explicit image seed preserves existing users and credentials",
+      "passed": true
+    },
+    {
+      "name": "built hashed assets/fonts, no-cache SPA deep link and JSON API 404",
+      "passed": true
+    },
+    {
+      "name": "compiled production UI/API/DB business flow and secure cookie",
+      "passed": true
+    },
+    {
+      "name": "graceful actual web stop retains external DB",
+      "passed": true
+    },
+    {
+      "name": "same original IDs and still-valid DB session survive actual container restart and repeat seed",
+      "passed": true
+    },
+    {
+      "name": "actual final image returns sanitized disconnected DB 503 and independent health 200",
+      "passed": true
+    }
+  ],
+  "cleanup": [
+    {
+      "container": "5c9aeb5ca6d9ddae1fc85410401b8252d4d615a468df27851b7dc800de53099c",
+      "removed": true
+    },
+    {
+      "container": "b9fb79311f4dda660bfe6ee4de6451a37dcee974f5c62cee603be0ca6795db90",
+      "removed": true
+    },
+    {
+      "container": "e1bd6f3f357c42841f2389d11a8418e8e2a8355bf5d7ec979c97ec410ea739ef",
+      "removed": true
+    }
+  ],
+  "scope": "local clean-clone container verification; no cloud/TLS claim",
+  "sourceCommit": "11e6c73fba391cce15f416c9b686cecd6bdb8e88",
+  "images": {
+    "web": {
+      "id": "sha256:3236c811b65e56a06a9d3cfe117c65a79977555f898d91d6c3c1f5fb8d727b08",
+      "sourceCommit": "11e6c73fba391cce15f416c9b686cecd6bdb8e88",
+      "user": "node"
+    },
+    "jobs": {
+      "id": "sha256:6a57dd172f0f2e4d447c19f650a2da49eb03159b480ec6a09af3b3dc364f1705",
+      "sourceCommit": "11e6c73fba391cce15f416c9b686cecd6bdb8e88",
+      "user": "node"
+    }
+  },
+  "records": {
+    "milestone": "5a11724b-2021-455c-ba6e-45ade54f8790",
+    "submission": "2f6a70bf-afc9-4074-9222-35c8013c1c1c",
+    "feedback": "0e1c5c0b-adff-4ed7-8ad5-d8516be6df56"
+  },
+  "passed": true,
+  "finishedAt": "2026-11-10T07:16:48.802Z"
+}

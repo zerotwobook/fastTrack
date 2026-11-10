@@ -1,0 +1,69 @@
+{
+  "startedAt": "2026-11-10T07:03:55.393Z",
+  "checks": [
+    {
+      "name": "fresh clone has the exact committed source",
+      "passed": true
+    },
+    {
+      "name": "clean runner image build",
+      "passed": true
+    },
+    {
+      "name": "clean jobs image build",
+      "passed": true
+    },
+    {
+      "name": "final runner has runtime modules, no env files and no test fixtures",
+      "passed": true
+    },
+    {
+      "name": "actual jobs image migrates a fresh DB and repeats without reset",
+      "passed": true
+    },
+    {
+      "name": "explicit image seed preserves existing users and credentials",
+      "passed": true
+    },
+    {
+      "name": "compiled production UI/API/DB business flow and secure cookie",
+      "passed": true
+    },
+    {
+      "name": "graceful actual web stop retains external DB",
+      "passed": true
+    }
+  ],
+  "cleanup": [
+    {
+      "container": "ad2e08fa84366f2ae4a495cdc0f97b326d013c400dbac2434a6a8f226c19ac84",
+      "removed": true
+    },
+    {
+      "container": "49c7135bb36552f12804093937adda1f34a47d9ba0d4d9992c28ea1ff481c0c8",
+      "removed": true
+    }
+  ],
+  "scope": "local clean-clone container verification; no cloud/TLS claim",
+  "sourceCommit": "6b6d165b45727b719cb0deea59a4f20b94144d98",
+  "images": {
+    "web": {
+      "id": "sha256:e7e7f7bed09a9d836d28222c65b4d5da815f1f2558175c2e46835a0757ebebcf",
+      "sourceCommit": "6b6d165b45727b719cb0deea59a4f20b94144d98",
+      "user": "node"
+    },
+    "jobs": {
+      "id": "sha256:b6f63f22f841a810beab0e65e3630bff15eaecd2c93324cf1ad1dfa8b5426b96",
+      "sourceCommit": "6b6d165b45727b719cb0deea59a4f20b94144d98",
+      "user": "node"
+    }
+  },
+  "records": {
+    "milestone": "51134edf-685c-456c-8f9f-507acae5cddd",
+    "submission": "2fe6bb7f-7291-4474-be9a-2328394f4367",
+    "feedback": "ff0ac0b6-c4e4-4638-bb29-6f87a82d810c"
+  },
+  "passed": false,
+  "error": "New local web container did not become ready.",
+  "finishedAt": "2026-11-10T07:07:06.534Z"
+}
