@@ -62,6 +62,28 @@ Send the chosen request only when that role's work should actually start. An aut
 
 #15 still includes live WIF/environment/required-check/C-02 work after its code PR is merged. #13 still includes broader F-05-F-07/shared-interface/G0 work after its Lab 5 delivery subset is accepted. Do not close either Issue merely because A/07 or B/08 has a detailed prompt, a passing check or a completed preparation document.
 
+## Detailed later prompts: 09-13
+
+The later prompts are detailed reusable instructions, not work already executed. The current authoring-only hold applies to all of them. Select one role/phase only after its real predecessor is ready; do not run the entire sequence automatically.
+
+| Order / role | Full prompt | Required input | Concrete output / endpoint |
+|---|---|---|---|
+| 09 / A | [Public business flow and distinct restart](A/09_R2-J01_PRE_RELEASE_BUSINESS_AND_RESTART.md) | Real first URL, approved synthetic role access and current runtime/release identity | C-04 cases/rejection, exact original-record ledger and separately authorized restart proof; hold later release if incomplete |
+| 10 / B | [Visible-change release and traceability](B/10_R2-J01_RELEASE_AND_TRACEABILITY.md) | 09's real original IDs/restart plus ready live gate/runtime prerequisites | Exact Draft main candidate; only after applicable user/peer/action authorization, real pipeline/source/image/revision/traffic/C-06 handoff |
+| 11 / A | [Original records after redeploy](A/11_R2-J01_POST_RELEASE_PERSISTENCE.md) | 09 ledger and 10's actual later main deployment | Same-ID before/restart/redeploy comparison, honest session-TTL and authorization outcomes; C-05 result, not replacement data |
+| 12 / B | [Evidence and report Markdown](B/12_R2-J01_EVIDENCE_AND_REPORT_SOURCE.md) | Actual A/B C-01-C-06 artifacts/results and identities | R-01-R-12 evidence index, deployment guide and Answer Parts 0-4 source with explicit gaps; no PDF export/upload |
+| 13 / A | [Independent final readiness audit](A/13_R2-J01_FINAL_CROSS_CHECK.md) | 12's exact committed source/index/guide and actual underlying proof | Independent claim-by-claim findings/readiness matrix and user export/submission/Lab 6 handoff; no invented acceptance/receipt |
+
+Topics covered include safe role fixtures and deadlines; UI/API/DB business and rejection cases; canonical source/URL/traffic identity; private sessions/CSRF and absolute TTL; immutable record/version/feedback links; supported restart provenance; exact-candidate main authorization; migration/release/rollback failures; evidence provenance and human attribution; requirement/rubric coverage; captions/public links/redaction; report-source validation; targeted correction/retest; and continued availability/history.
+
+For a future invocation, identify the file, actor and selected mode, for example:
+
+```text
+Execute the preparation mode of prompt_project/prompt_lab5/A/09_R2-J01_PRE_RELEASE_BUSINESS_AND_RESTART.md as A. Read the shared rules, verify the real predecessor and specify the cases, original-record ledger and concrete restart plan. Preserve existing valid authorizations. Stop before an unapproved disruptive operation and do not start B/10 automatically.
+```
+
+For 10-13, use the corresponding full file and its entry/handoff requirements. A missing baseline, pending release, unavailable private access or incomplete proof is a real gap to record, not permission to invent a result. Resume the last actual checkpoint; do not recreate records, redeploy, rerun tests or repeat disruptive steps solely to make the evidence look newer.
+
 ## What each prompt contains
 
 Role and task; required reads; live-state/dependency discovery; allowed files and shared ownership; design decisions; implementation or independent verification steps; actual checks; GitHub handoff; specific stop/resume conditions and output format. [Shared execution rules](00_SHARED_EXECUTION_RULES.md) supply the full reusable Project/branch/PR/security protocol.
