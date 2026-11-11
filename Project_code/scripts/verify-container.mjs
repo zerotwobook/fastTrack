@@ -32,7 +32,7 @@ const report = { startedAt: new Date().toISOString(), checks: [], cleanup: [],
   scope: 'local clean-clone container verification; no Cloud SQL proxy, cloud IAM or public TLS claim' };
 let networkCreated = false;
 let socketVolumeCreated = false;
-const redact = value => String(value ?? '').replaceAll(password, '[redacted]').replaceAll(demoPassword, '[redacted]')
+const redact = value => secrets.reduce((text, secret) => text.replaceAll(secret, '[redacted]'), String(value ?? ''))
   .replace(/postgres(?:ql)?:\/\/[^\s'"<>]+/g, '[database URL]');
 function run(bin, args, cwd = repo) {
   const result = spawnSync(bin, args, { cwd, encoding: 'utf8', windowsHide: true, timeout: 600_000 });
@@ -74,9 +74,9 @@ try {
   const dirty = run('git', ['status', '--porcelain', '--', 'Project_code', ':(exclude)Project_code/docs/evidence/**']);
   if (dirty) throw new Error('Commit application/script changes before clean-clone verification.');
   report.sourceCommit = run('git', ['rev-parse', 'HEAD']);
-  const branch = run('git', ['branch', '--show-current']);
   check('fresh clone has the exact committed source', () => {
-    run('git', ['clone', '--quiet', '--no-hardlinks', '--single-branch', '--branch', branch, repo, clone]);
+    run('git', ['clone', '--quiet', '--no-hardlinks', '--no-checkout', repo, clone]);
+    run('git', ['checkout', '--quiet', '--detach', report.sourceCommit], clone);
     if (run('git', ['rev-parse', 'HEAD'], clone) !== report.sourceCommit) throw new Error('Clean clone source mismatch.');
     if (run('git', ['status', '--porcelain'], clone)) throw new Error('Clean clone is dirty.');
   });
