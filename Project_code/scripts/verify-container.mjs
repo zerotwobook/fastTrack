@@ -129,7 +129,9 @@ try {
     ...(socketMode ? ['-c', 'listen_addresses='] : [])]);
   let dbReady = false;
   for (let i = 0; i < 80; i++) {
-    const ready = spawnSync('docker', ['exec', dbName, 'pg_isready', '-U', 'a01_admin', '-d', 'fasttrack_a01_test'], { windowsHide: true });
+    // The image starts a temporary server during init; wait for the final PID 1 server.
+    const ready = spawnSync('docker', ['exec', dbName, 'sh', '-ec',
+      'test "$(cat /proc/1/comm)" = postgres; exec pg_isready -U a01_admin -d fasttrack_a01_test'], { windowsHide: true });
     if (ready.status === 0) { dbReady = true; break; }
     await new Promise(resolve => setTimeout(resolve, 250));
   }
