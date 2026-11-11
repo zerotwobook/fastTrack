@@ -28,7 +28,7 @@ Use the actual pinned runner/jobs images from a clean committed clone, the exist
 | Existing production behavior | Real local Student/Supervisor flow, assets/deep links/404, exact records/session persistence and explicit seed preservation remain verified. |
 | Cleanup/privacy | Only newly created containers/network/volume and known temporary credential files removed; report is sanitized JSON with source/image/check/cleanup identity. |
 
-This fixture validates the two consumers and URL shape on Linux; it does not reproduce the Cloud SQL proxy, WIF, Cloud Run permissions/TLS or public production topology. All new checks are NOT RUN until actual execution. Retain failures honestly and fix any actual result on the same branch/PR.
+This fixture validates the two consumers and URL shape on Linux; it does not reproduce the Cloud SQL proxy, WIF, Cloud Run permissions/TLS or public production topology. The initial design recorded these checks as NOT RUN; actual results are recorded below. Retain failures honestly and fix any actual result on the same branch/PR.
 
 ## 3. Remaining first-release ordering
 
@@ -40,4 +40,19 @@ This fixture validates the two consumers and URL shape on Linux; it does not rep
 
 ## 4. Current phase
 
-Implementation/verification of owned socket preparation is in progress. The new staging PR is opened as an early Draft after the first coherent commit; complete actual checks before review handoff. Whole #16 stays open for real deployment and later C-01-C-06 evidence. No main release, cloud mutation, seed, teardown, external message or PDF export is performed by this preparation.
+Owned socket verification and the [resource-only command package](R2-J01_A_RESOURCE_ONLY_COMMANDS.md) are prepared in PR #92. The package gives exact project/resource names, sequential readbacks, storage/backup choices, private credential creation and the boundary before first rollout. These commands were inspected and their five Bash blocks passed syntax checking; they have not been executed against GCP.
+
+| Actual check | Result and source identity |
+|---|---|
+| Local production-image socket fixture | PASS, 17 checks, `2026-11-11T09:08:56.576Z` to `09:10:11.143Z`, source `26f155cc46351fb7846bd152afd3786c29b6dc24`. Actual [JSON](../../Project_code/docs/evidence/R2-J01-socket-results.json) retains both image IDs, checks, synthetic record IDs and cleanup. |
+| First implementation CI | [42992664665](https://github.com/zerotwobook/fastTrack/actions/runs/42992664665) FAILED after existing regressions passed: Actions checks out a detached commit, and the previous verifier tried to clone an empty branch name. PR stayed Started; Verification FAILED was saved/read back on PR #92 and Issue #16. |
+| Actual correction | `c874b9e82ace8b7dac00db290962cf6dced40b49` clones without selecting a branch, explicitly checks out the exact source commit, then verifies identity/cleanliness. Also includes the generated negative-control password in redaction. No workflow/schema/app behavior change. |
+| Corrected CI | [42993436201](https://github.com/zerotwobook/fastTrack/actions/runs/42993436201) PASSED at PR head `c874b9e82ace8b7dac00db290962cf6dced40b49`, including typecheck/unit/production build, isolated DB/migration/runtime, socket fixture and runner/jobs Docker builds. The actual detached merge checkout is `adfc3f410dec7590160d90bbf10702b96daabec7`, not the PR head. |
+| CI socket machine result | PASS, 17 checks, `2026-11-11T09:15:27.746Z` to `09:16:15.980Z`; [JSON](../../Project_code/docs/evidence/R2-J01-socket-ci-results.json) extracted unchanged from the sanitized successful run log. |
+| Local syntax/whitespace | `node --check` for both changed JS scripts, `bash -n` for the five resource-command blocks and `git diff --check` passed. No cloud commands were executed by syntax checks. |
+
+Historical results above retain their actual source identities. The final PR head/base and its automatic CI are recorded in the live PR/Issue handoff; retaining evidence changes the head and does not rewrite a previous result's source. Run `npm run verify:socket` from a clean committed checkout in `Project_code/` with Docker to reproduce the standalone fixture; `npm run test:runtime:isolated` also invokes it after existing regressions. Only generated disposable local test resources are used.
+
+Review focus for B: actual Prisma CLI/runtime consume the same colon-containing socket path with TCP disabled; wrong passwords are rejected without trust-auth fallback; both branch and detached checkouts select the exact source; cleanup does not touch pre-existing resources; resource-only commands preserve existing credentials and remain separate from B-owned WIF/settings/release work. The package changes owned verifier/runner/npm command, machine evidence and A handoffs only. No dependencies, lockfile, migrations, Actions or deploy scripts changed.
+
+The next owner action is B/08 setup and the eventual Draft main candidate, followed by the user's concrete main review. Resource/IAM/DB approval applies to A07-01 delta and A07-02..06 in the linked command package; unchanged prior API enablement is not requested again. Actual execution needs an authenticated account-holder Cloud Shell session. Main release and A07-07..10 remain pending, with no image push, migration execution, service URL or serving revision claimed. Whole #16 stays open for real deployment and later C-01-C-06 evidence. No main release, cloud mutation, production seed, teardown, external message or PDF export is performed by this preparation.
