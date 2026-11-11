@@ -141,7 +141,8 @@ B implements and maintains root CI/deploy workflows, deployment scripts, offline
   - Optional private smoke runs when both `SMOKE_EMAIL` and `SMOKE_PASSWORD` are configured, exercising cookie jar, `X-fastTrack-Request: 1`, `Origin`, `X-CSRF-Token`, `/api/auth/me`, read-only scoped `GET /api/teams`, and guaranteed `/api/auth/logout` in `finally`. Missing credentials print `SKIP login`; partial or invalid credentials fail the check.
 - **Offline Deployment Script Tests**:
   - `bash deploy/tests/test_release_stub.sh`: Verifies normal web/jobs digest release, awaited migration, `RELEASE_SHA` propagation, rollback without migration, non-main `GITHUB_REF` rejection, image/jobs_image/migration failure blocking rollout, and invalid tag rejection.
-  - `bash deploy/tests/test_deploy_stub.sh`: Verifies idempotent provisioning (`fasttrack_user`, `APP_ORIGIN`, `TRUST_PROXY_HOPS=1`), Cloud SQL enterprise edition, no project-wide `secretAccessor`, zero leaked secrets in stdout, and migration failure abortion.
+  - `bash deploy/tests/test_deploy_stub.sh`: Verifies fresh/preserved credentials, failed discovery and mismatched user/secret state stopping without credential writes, source guards, no leaked secrets, and migration failure blocking rollout.
+  - `bash deploy/tests/test_teardown_stub.sh`: Verifies protected/unknown SQL state blocks deletion, failed or unconfirmed deletion preserves dependent resources, already-absent resources are skipped, final absence is checked, and dry-run/confirmation guards hold. Every cloud call is stubbed.
   - `python3 -m unittest discover -s deploy/tests -p 'test_smoke.py'`: Verifies health, version match enforcement, DB readiness failure, `/api/nonexistent` 404, scoped `/api/teams`, and session logout guarantees.
 - **Rollback Procedure**:
   - Rollback is triggered manually via GitHub Actions `Deploy demo` workflow dispatch by providing the full 40-character `image_tag` of an existing known image.
@@ -155,6 +156,14 @@ Version proof compares actual built main SHA (possibly different from PR head), 
 ## 8. Diagnosis and evidence
 
 Read the failed stage before fixing it. For missing runtime modules inspect final shared/generated layout. For unavailable readiness inspect private DB configuration/deadlines/migration state without printing URLs. For login/source failure verify canonical origin, cookie/source/CSRF and trusted proxy path; do not loosen authorization. For image/job failure verify actual tool pins/entrypoint/workspace working directory.
+
+### Credential and teardown safety
+
+Bootstrap requires successful SQL user and Secret Manager inventories (including the corresponding list permissions). Both user and secret present preserves credentials; both absent permits fresh creation. A failed query or mismatched presence stops before any credential write. The script never resets an existing SQL user's password. Inspect partial state and obtain separate recovery/rotation authorization rather than rerunning credential creation after a failure. A secret metadata match alone does not certify payload validity or live connectivity.
+
+Teardown remains a separately authorized destructive operation. After project confirmation it reads all managed-resource inventories and checks SQL deletion protection before any deletion. Protection is never disabled automatically. Only successfully verified absent targets are skipped. Any deletion failure stops execution; SQL absence must be confirmed before deleting the registry, secrets or runtime account. A final successful inventory must show all managed targets absent before completion is reported.
+
+A failure can leave earlier resources already removed; inspect the recorded commands and current inventory before deciding how to recover. The script does not recreate resources or retry destructive operations automatically. `DRY_RUN=1` previews the selected targets without Cloud calls and does not establish their actual presence or deletion permissions.
 
 Keep actual test outputs under [application evidence](../../../Project_code/docs/evidence). Current RED/GREEN/regression/container records identify their real source/commands; the final A01 handoff records actual verified results and remaining peer/cloud limits. Keep repo/service available through grading/UAT and preserve CI/contract history for later labs. Markdown report preparation does not authorize PDF export/upload or coursework submission.
 

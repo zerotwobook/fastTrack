@@ -12,7 +12,7 @@ set -euo pipefail
 #   REGION       GCP Region (default: asia-southeast1)
 #   DRY_RUN      Set DRY_RUN=1 to print all gcloud commands without executing
 #
-# WHAT THIS SCRIPT DOES (one-time / manual initial setup; safe to re-run)
+# WHAT THIS SCRIPT DOES (manual bootstrap; inspect partial state before retry)
 #   Creates every cloud resource the app needs and performs initial deployment:
 #   1 enable APIs     2 Artifact Registry  3 Cloud SQL instance  4 database
 #   5 runtime SA+IAM  6 DB user + secret   7 demo password (optional)
@@ -174,47 +174,41 @@ run_cmd gcloud projects add-iam-policy-binding "$PROJECT_ID" \
   --condition=None \
   --quiet
 
-# 6. Database User and Secret Manager (idempotent)
+# 6. Preserve existing credentials; never infer absence from failed discovery.
 DB_USER_EXISTS=0
-if [ "$DRY_RUN" != "1" ]; then
-  if gcloud sql users list --instance="$SQL_INSTANCE" --project="$PROJECT_ID" --format="value(name)" 2>/dev/null | grep -qx "$DB_USER"; then
-    DB_USER_EXISTS=1
-  fi
-fi
-
 DB_SECRET_EXISTS=0
 if [ "$DRY_RUN" != "1" ]; then
-  if gcloud secrets describe "$SECRET_DB_URL" --project="$PROJECT_ID" >/dev/null 2>&1; then
-    DB_SECRET_EXISTS=1
+  if ! DB_USERS="$(gcloud sql users list --instance="$SQL_INSTANCE" --project="$PROJECT_ID" --format='value(name)' 2>/dev/null)"; then
+    echo 'Could not verify database users; credentials were not changed. Inspect access and retry discovery.' >&2
+    exit 1
+  fi
+  if ! DB_SECRETS="$(gcloud secrets list --project="$PROJECT_ID" --format='value(name)' 2>/dev/null)"; then
+    echo 'Could not verify secret inventory; credentials were not changed. Inspect access and retry discovery.' >&2
+    exit 1
+  fi
+  if grep -Fxq "$DB_USER" <<< "$DB_USERS"; then
+    DB_USER_EXISTS=1
+  fi
+  while IFS= read -r secret; do
+    if [ "${secret##*/}" = "$SECRET_DB_URL" ]; then DB_SECRET_EXISTS=1; fi
+  done <<< "$DB_SECRETS"
+  if [ "$DB_USER_EXISTS" != "$DB_SECRET_EXISTS" ]; then
+    echo 'Database user and secret state differ. Stop for separately authorized recovery; credentials were not changed.' >&2
+    exit 1
   fi
 fi
 
-if [ "$DB_USER_EXISTS" = "0" ] || [ "$DB_SECRET_EXISTS" = "0" ]; then
+if [ "$DB_USER_EXISTS" = "0" ] && [ "$DB_SECRET_EXISTS" = "0" ]; then
   NEW_DB_PASSWORD="$(openssl rand -hex 24)"
-  if [ "$DB_USER_EXISTS" = "0" ]; then
-    run_cmd gcloud sql users create "$DB_USER" \
-      --instance="$SQL_INSTANCE" \
-      --password="$NEW_DB_PASSWORD" \
-      --project="$PROJECT_ID"
-  else
-    run_cmd gcloud sql users set-password "$DB_USER" \
-      --instance="$SQL_INSTANCE" \
-      --password="$NEW_DB_PASSWORD" \
-      --project="$PROJECT_ID"
-  fi
-
+  run_cmd gcloud sql users create "$DB_USER" \
+    --instance="$SQL_INSTANCE" \
+    --password="$NEW_DB_PASSWORD" \
+    --project="$PROJECT_ID"
   DATABASE_URL_VALUE="postgresql://${DB_USER}:${NEW_DB_PASSWORD}@127.0.0.1:5432/${DB_NAME}?host=/cloudsql/${SQL_CONN_NAME}"
-
-  if [ "$DRY_RUN" = "1" ]; then
-    run_cmd gcloud secrets describe "$SECRET_DB_URL" --project "$PROJECT_ID"
-    run_cmd gcloud secrets create "$SECRET_DB_URL" --replication-policy=automatic --project "$PROJECT_ID"
-    printf '%s' "$DATABASE_URL_VALUE" | run_cmd gcloud secrets versions add "$SECRET_DB_URL" --data-file=- --project "$PROJECT_ID"
-  else
-    if ! gcloud secrets describe "$SECRET_DB_URL" --project "$PROJECT_ID" >/dev/null 2>&1; then
-      run_cmd gcloud secrets create "$SECRET_DB_URL" --replication-policy=automatic --project "$PROJECT_ID"
-    fi
-    printf '%s' "$DATABASE_URL_VALUE" | run_cmd gcloud secrets versions add "$SECRET_DB_URL" --data-file=- --project "$PROJECT_ID"
-  fi
+  # A racing create fails rather than overwriting another process's credentials.
+  run_cmd gcloud secrets create "$SECRET_DB_URL" --replication-policy=automatic --project "$PROJECT_ID"
+  printf '%s' "$DATABASE_URL_VALUE" | run_cmd gcloud secrets versions add "$SECRET_DB_URL" --data-file=- --project "$PROJECT_ID"
+  unset NEW_DB_PASSWORD DATABASE_URL_VALUE
 fi
 
 # Grant secretAccessor on database URL secret
