@@ -14,4 +14,10 @@ Run the new negative tests against the current scripts first and retain actual R
 
 ## Current checkpoint
 
-Design prepared before implementation. New regressions and fixes are NOT RUN. Open an early Draft staging PR after this first coherent commit; keep the release PR Draft and unresolved until peer-accepted staging integration and current-candidate re-review. Whole #15/#16 acceptance and main-release authorization remain pending. No Cloud provisioning, password rotation, deletion, seed, release or PDF export is performed by this correction.
+Design commit `4cbc457` was pushed and early Draft PR [#94](https://github.com/zerotwobook/fastTrack/pull/94) was added/read back Started / NOT RUN / PENDING before implementation. Issue #15 stayed at its actual Fixing stage. A is the fix PR author; B remains its non-author reviewer.
+
+Actual RED at regression commit `471c0d9127f7c6aeca820e1f00fabcf36d72d7d7`: the deployment test exited 1 because the partial-state scenario incorrectly succeeded; the teardown test exited 1 because protected SQL teardown incorrectly reported success. The fix PR stayed Started and its Verification FAILED was saved/read back. These tests ran against the original scripts before implementation.
+
+After implementation, all local deployment scenarios pass, including both mismatched-state directions and both inventory failures; all 14 teardown cases pass, including protected/failed discovery, failed/unconfirmed deletion, final-read failure, partial/absent targets, confirmation and dry-run. Existing release/rollback and mocked smoke tests are also required before handoff. All use local stubs: no real Cloud/Docker/DB mutation is claimed. The final exact-head CI/review/acceptance state is recorded in the live PR and Issue; do not rewrite the RED source or claim whole-task completion from these checks.
+
+Keep release PR #93 Draft and its findings unresolved until peer-accepted staging integration and current-candidate re-review. Whole #15/#16 acceptance and main-release authorization remain pending. No Cloud provisioning, password rotation, deletion, seed, release or PDF export is performed by this correction.
