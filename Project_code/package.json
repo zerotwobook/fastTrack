@@ -13,6 +13,10 @@
     "server"
   ],
   "scripts": {
+    "test:runtime": "vitest run --config vitest.a01.config.ts",
+    "test:runtime:isolated": "node scripts/run-a01.mjs",
+    "verify:container": "node scripts/verify-container.mjs",
+    "verify:socket": "node scripts/verify-container.mjs --socket",
     "dev": "concurrently --kill-others --names api,web \"npm run dev --workspace @fasttrack/server\" \"npm run dev --workspace @fasttrack/client\"",
     "build": "npm run build --workspaces",
     "typecheck": "npm run typecheck --workspaces",

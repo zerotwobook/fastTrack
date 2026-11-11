@@ -31,8 +31,8 @@ describe('API composition and safe transport', () => {
     expect(first.headers['x-request-id']).not.toBe(second.headers['x-request-id']);
   });
 
-  it('does not expose unimplemented identity/domain/readiness endpoints', async () => {
-    for (const path of ['/api/auth/me', '/api/teams', '/api/milestones', '/api/ready']) {
+  it('does not expose unconfigured identity/domain endpoints', async () => {
+    for (const path of ['/api/auth/me', '/api/teams', '/api/milestones']) {
       const response = await request(createApp(config, quiet)).get(path).set('Accept', 'text/html').expect(404);
       expect(response.body).toEqual({ error: { code: 'NOT_FOUND', message: 'The requested resource was not found.', fields: {} } });
     }

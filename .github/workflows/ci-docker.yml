@@ -1,0 +1,111 @@
+# ##############################################################################
+# CI — "CI & Docker Build"
+# ##############################################################################
+# WHAT THIS WORKFLOW DOES
+#   Runs the project's verification suite and is used in two ways:
+#     1) directly on every pull request and push to `main` and `staging/sprint-*` (and manually), and
+#     2) as a REUSABLE workflow called by deploy.yml (`workflow_call`) so deployment
+#        only starts after these checks pass.
+#   Steps: offline deploy-script tests -> workspace install -> Prisma generate
+#          -> typecheck -> unit tests -> client/server build -> isolated DB/migration/
+#          S1/runtime regressions -> production Docker builds (runner & jobs).
+#   It does NOT deploy anything.
+#
+# ⚠️ DO NOT RENAME:
+#   - job id : test-and-docker (required by rubric and branch protection rules)
+# ##############################################################################
+
+name: CI & Docker Build
+
+on:
+  workflow_call:
+  pull_request:
+    branches:
+      - main
+      - 'staging/sprint-*'
+  push:
+    branches:
+      - main
+      - 'staging/sprint-*'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
+
+jobs:
+  test-and-docker:
+    name: test-and-docker
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        with:
+          persist-credentials: false
+
+      - name: Setup Node.js 26.13.0
+        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        with:
+          node-version: '26.13.0'
+
+      - name: Setup Python 3.12
+        uses: actions/setup-python@a26af69be951a213d495a4c3e4e4022e16d87065 # v5
+        with:
+          python-version: '3.12'
+
+      - name: Check deployment scripts without accessing GCP
+        run: |
+          bash -n deploy/release.sh deploy/deploy.sh deploy/teardown.sh
+          bash deploy/tests/test_release_stub.sh
+          bash deploy/tests/test_deploy_stub.sh
+          bash deploy/tests/test_teardown_stub.sh
+          python3 -m unittest discover -s deploy/tests -p 'test_smoke.py'
+
+      - name: Install workspace dependencies
+        working-directory: Project_code
+        run: npm ci
+
+      - name: Generate Prisma client
+        working-directory: Project_code
+        env:
+          DATABASE_URL: postgresql://build:placeholder@127.0.0.1:1/fasttrack_build
+        run: npm run db:generate --workspace @fasttrack/server
+
+      - name: TypeScript typecheck
+        working-directory: Project_code
+        run: npm run typecheck
+
+      - name: FastTrack unit and contract tests
+        working-directory: Project_code
+        run: npm test
+
+      - name: Client and server production build
+        working-directory: Project_code
+        env:
+          DATABASE_URL: postgresql://build:placeholder@127.0.0.1:1/fasttrack_build
+        run: npm run build
+
+      - name: Isolated DB, migration, S1 and Lab 5 runtime regressions
+        working-directory: Project_code
+        env:
+          G1_REPORT_PATH: ${{ runner.temp }}/ci-runtime-report.json
+        run: npm run test:runtime:isolated
+
+      - name: Upload sanitized runtime regression report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: ci-runtime-report
+          path: ${{ runner.temp }}/ci-runtime-report.json
+          if-no-files-found: ignore
+          retention-days: 14
+
+      - name: Verify production Docker builds (runner and jobs targets)
+        run: |
+          docker build --build-arg RELEASE_SHA=${{ github.sha }} -t fasttrack-app:ci Project_code
+          docker build --target jobs --build-arg RELEASE_SHA=${{ github.sha }} -t fasttrack-jobs:ci Project_code
