@@ -6,7 +6,7 @@
 #   these scenarios, asserting on the recorded commands:
 #     first_run : nothing exists      -> everything is created
 #     rerun     : everything exists   -> nothing replaced (credentials kept)
-#     partial   : DB secret missing   -> DB user password reset + secret created
+#     partial/discovery failures      -> stop without credential writes
 #     job-fail  : migration fails     -> script exits 1, service NOT deployed
 #     demo      : --demo flag         -> demo secret is created and granted
 #   Checks: `--edition=enterprise`, no project-wide secretAccessor role,
@@ -92,11 +92,20 @@ if [ "${1:-} ${2:-} ${3:-}" = 'secrets versions add' ]; then
   exit 0
 fi
 if [ "${1:-} ${2:-} ${3:-}" = 'sql users list' ]; then
-  if [ "$STUB_MODE" = first_run ]; then
+  [ "$STUB_MODE" != users_read_fail ] || exit 1
+  if [ "$STUB_MODE" = first_run ] || [ "$STUB_MODE" = secret_only ]; then
     echo postgres
   else
     printf 'postgres\nfasttrack_user\n'
   fi
+  exit 0
+fi
+if [ "${1:-} ${2:-}" = 'secrets list' ]; then
+  [ "$STUB_MODE" != secret_read_fail ] || exit 1
+  case "$STUB_MODE" in
+    first_run|partial) ;;
+    *) echo projects/970128017651/secrets/fasttrack-database-url ;;
+  esac
   exit 0
 fi
 for word in "$@"; do
@@ -119,7 +128,7 @@ export REGION=asia-southeast1
 export DRY_RUN=0
 
 # --- Run scenarios and assert --------------------------------------------------
-for MODE in first_run rerun partial job-fail demo; do
+for MODE in first_run rerun job-fail demo; do
   export STUB_MODE="$MODE"
   export GCLOUD_LOG="$TEST_STATE_DIR/gcloud-${MODE}.log"
   OUT_LOG="$TEST_STATE_DIR/output-${MODE}.log"
@@ -172,14 +181,6 @@ for MODE in first_run rerun partial job-fail demo; do
     fi
   fi
 
-  # Partial check: reset DB user password and add secret version
-  if [ "$MODE" = partial ]; then
-    grep -q 'sql users set-password fasttrack_user' "$GCLOUD_LOG" \
-      || { echo "FAIL: partial did not reset fasttrack_user password" >&2; exit 1; }
-    grep -q 'secrets versions add fasttrack-database-url' "$GCLOUD_LOG" \
-      || { echo "FAIL: partial did not update fasttrack-database-url" >&2; exit 1; }
-  fi
-
   # Demo flag check
   if [ "$MODE" = demo ]; then
     grep -q '^secrets add-iam-policy-binding fasttrack-demo-password ' "$GCLOUD_LOG" \
@@ -229,6 +230,21 @@ for MODE in first_run rerun partial job-fail demo; do
     || { echo "FAIL: service fasttrack-app missing APP_ORIGIN or TRUST_PROXY_HOPS=1" >&2; exit 1; }
 
   echo "PASS: scenario ${MODE}"
+done
+
+# Existing credentials and unknown discovery must never enter a recovery path.
+for MODE in partial secret_only users_read_fail secret_read_fail; do
+  export STUB_MODE="$MODE" GCLOUD_LOG="$TEST_STATE_DIR/gcloud-${MODE}.log"
+  : > "$GCLOUD_LOG"
+  : > "$TEST_STATE_DIR/docker.log"
+  if bash "$DEPLOY_SCRIPT" >"$TEST_STATE_DIR/output-${MODE}.log" 2>&1; then
+    echo "FAIL: ${MODE} should stop for deliberate recovery/discovery" >&2; exit 1
+  fi
+  if grep -Eq '^sql users (create|set-password) |^secrets (create|versions add|add-iam-policy-binding) |^run (jobs execute|deploy) ' "$GCLOUD_LOG"; then
+    echo "FAIL: ${MODE} changed credentials or continued rollout" >&2; exit 1
+  fi
+  test ! -s "$TEST_STATE_DIR/docker.log"
+  echo "PASS: ${MODE} stops without credential writes or rollout"
 done
 
 # DRY_RUN test: must not make any gcloud calls
