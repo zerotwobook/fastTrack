@@ -23,6 +23,7 @@ case "${1:-} ${2:-} ${3:-}" in
   'run jobs list') [ ! -f "$TASK_STATE/job" ] || echo fasttrack-migrate ;;
   'sql instances list')
     [ "$TASK_MODE" != discovery_error ] || exit 1
+    if [ "$TASK_MODE" = sql_postread_error ] && [ -f "$TASK_STATE/deletions-started" ]; then exit 1; fi
     [ ! -f "$TASK_STATE/sql" ] || echo fasttrack-db ;;
   'sql instances describe')
     [ "$TASK_MODE" != protection_error ] || exit 1
@@ -44,7 +45,9 @@ case "${1:-} ${2:-} ${3:-}" in
     touch "$TASK_STATE/deletions-started"
     [ "$TASK_MODE" = sql_still_present ] || rm -f "$TASK_STATE/sql" ;;
   'artifacts repositories delete') touch "$TASK_STATE/deletions-started"; rm -f "$TASK_STATE/repo" ;;
-  'secrets delete fasttrack-database-url') touch "$TASK_STATE/deletions-started"; rm -f "$TASK_STATE/db-secret" ;;
+  'secrets delete fasttrack-database-url')
+    touch "$TASK_STATE/deletions-started"
+    [ "$TASK_MODE" = secret_still_present ] || rm -f "$TASK_STATE/db-secret" ;;
   'secrets delete fasttrack-demo-password') touch "$TASK_STATE/deletions-started"; rm -f "$TASK_STATE/demo-secret" ;;
   'iam service-accounts delete') touch "$TASK_STATE/deletions-started"; rm -f "$TASK_STATE/sa" ;;
   *) echo 'Unexpected stub command' >&2; exit 97 ;;
@@ -65,7 +68,7 @@ reset_state() {
 }
 
 for TASK_MODE in protected discovery_error protection_error invalid_protection secret_inventory_error \
-  sql_delete_error service_delete_error sql_still_present verification_error success partial absent; do
+  sql_delete_error service_delete_error sql_still_present sql_postread_error verification_error secret_still_present success partial absent; do
   export TASK_MODE
   reset_state
   if printf 'review-fixture\n' | bash "$ROOT/deploy/teardown.sh" > "$TASK_ROOT/output" 2>&1; then
@@ -88,10 +91,12 @@ for TASK_MODE in protected discovery_error protection_error invalid_protection s
         protected|discovery_error|protection_error|invalid_protection|secret_inventory_error)
           ! grep -q ' delete ' "$TASK_CALLS"
           test -f "$TASK_STATE/app"; test -f "$TASK_STATE/db-secret" ;;
-        sql_delete_error|sql_still_present)
-          test -f "$TASK_STATE/sql"; test -f "$TASK_STATE/repo"
+        sql_delete_error|sql_still_present|sql_postread_error)
+          if [ "$TASK_MODE" != sql_postread_error ]; then test -f "$TASK_STATE/sql"; fi
+          test -f "$TASK_STATE/repo"
           test -f "$TASK_STATE/db-secret"; test -f "$TASK_STATE/sa"
           ! grep -Eq '^artifacts repositories delete |^secrets delete |^iam service-accounts delete ' "$TASK_CALLS" ;;
+        secret_still_present) test -f "$TASK_STATE/db-secret" ;;
       esac ;;
   esac
   ! grep -q 'instances patch' "$TASK_CALLS"
