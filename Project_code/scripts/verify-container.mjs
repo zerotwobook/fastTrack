@@ -6,6 +6,9 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 // Only newly created containers/network and explicit temporary credential files are removed.
+const arguments_ = process.argv.slice(2);
+if (arguments_.some(value => value !== '--socket') || arguments_.length > 1) throw new Error('Use verify-container.mjs [--socket].');
+const socketMode = arguments_.includes('--socket');
 const appRoot = fileURLToPath(new URL('../', import.meta.url));
 const repo = fileURLToPath(new URL('../../', import.meta.url));
 const temp = mkdtempSync(join(tmpdir(), 'fasttrack-a01-container-'));
@@ -13,16 +16,23 @@ const clone = join(temp, 'clean-clone');
 const suffix = randomBytes(5).toString('hex');
 const password = randomBytes(24).toString('hex');
 const demoPassword = randomBytes(24).toString('hex');
-const secrets = [password, demoPassword];
+const wrongPassword = randomBytes(24).toString('hex');
+const secrets = [password, demoPassword, wrongPassword];
 const network = `fasttrack-a01-${suffix}`;
 const dbName = `${network}-db`;
+const socketVolume = `${network}-socket`;
+const socketDirectory = '/cloudsql/fasttrack-socket-check:asia-southeast1:test-db';
+const clientSocketMounts = socketMode ? ['--mount', `type=volume,source=${socketVolume},target=${socketDirectory},readonly`] : [];
 const webImage = `${network}-web:check`;
 const jobsImage = `${network}-jobs:check`;
 const containers = [];
 const files = [];
-const report = { startedAt: new Date().toISOString(), checks: [], cleanup: [], scope: 'local clean-clone container verification; no cloud/TLS claim' };
+const report = { startedAt: new Date().toISOString(), checks: [], cleanup: [],
+  transport: socketMode ? 'unix-socket' : 'tcp',
+  scope: 'local clean-clone container verification; no Cloud SQL proxy, cloud IAM or public TLS claim' };
 let networkCreated = false;
-const redact = value => String(value ?? '').replaceAll(password, '[redacted]').replaceAll(demoPassword, '[redacted]')
+let socketVolumeCreated = false;
+const redact = value => secrets.reduce((text, secret) => text.replaceAll(secret, '[redacted]'), String(value ?? ''))
   .replace(/postgres(?:ql)?:\/\/[^\s'"<>]+/g, '[database URL]');
 function run(bin, args, cwd = repo) {
   const result = spawnSync(bin, args, { cwd, encoding: 'utf8', windowsHide: true, timeout: 600_000 });
@@ -64,9 +74,9 @@ try {
   const dirty = run('git', ['status', '--porcelain', '--', 'Project_code', ':(exclude)Project_code/docs/evidence/**']);
   if (dirty) throw new Error('Commit application/script changes before clean-clone verification.');
   report.sourceCommit = run('git', ['rev-parse', 'HEAD']);
-  const branch = run('git', ['branch', '--show-current']);
   check('fresh clone has the exact committed source', () => {
-    run('git', ['clone', '--quiet', '--no-hardlinks', '--single-branch', '--branch', branch, repo, clone]);
+    run('git', ['clone', '--quiet', '--no-hardlinks', '--no-checkout', repo, clone]);
+    run('git', ['checkout', '--quiet', '--detach', report.sourceCommit], clone);
     if (run('git', ['rev-parse', 'HEAD'], clone) !== report.sourceCommit) throw new Error('Clean clone source mismatch.');
     if (run('git', ['status', '--porcelain'], clone)) throw new Error('Clean clone is dirty.');
   });
@@ -98,26 +108,83 @@ try {
     if (denied.status !== 1 || !denied.stderr.includes('Server startup failed')) throw new Error('Production origin guard failed.');
   });
   run('docker', ['network', 'create', network]); networkCreated = true;
-  const dbEnv = envFile('db.env', { POSTGRES_USER: 'a01_admin', POSTGRES_DB: 'fasttrack_a01_test', POSTGRES_PASSWORD: password });
+  if (socketMode) {
+    check('new socket volume has this verification identity only', () => {
+      const existing = run('docker', ['volume', 'ls', '--format', '{{.Name}}']).split('\n');
+      if (existing.includes(socketVolume)) throw new Error('Refusing to reuse an existing socket volume.');
+      if (run('docker', ['volume', 'create', '--label', `io.fasttrack.verification=${suffix}`, socketVolume]) !== socketVolume) {
+        throw new Error('Unexpected new socket volume identity.');
+      }
+      const volume = JSON.parse(run('docker', ['volume', 'inspect', socketVolume]))[0];
+      if (volume.Labels?.['io.fasttrack.verification'] !== suffix) throw new Error('Socket volume ownership mismatch.');
+      socketVolumeCreated = true;
+    });
+  }
+  const dbEnv = envFile('db.env', { POSTGRES_USER: 'a01_admin', POSTGRES_DB: 'fasttrack_a01_test',
+    POSTGRES_PASSWORD: password, PGPASSWORD: password,
+    ...(socketMode ? { POSTGRES_INITDB_ARGS: '--auth-local=scram-sha-256' } : {}) });
   start(['--name', dbName, '--env-file', dbEnv, '--tmpfs', '/var/lib/postgresql/data:rw',
-    'postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae']);
+    ...(socketMode ? ['--mount', `type=volume,source=${socketVolume},target=/var/run/postgresql`] : []),
+    'postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae',
+    ...(socketMode ? ['-c', 'listen_addresses='] : [])]);
   let dbReady = false;
   for (let i = 0; i < 80; i++) {
-    const ready = spawnSync('docker', ['exec', dbName, 'pg_isready', '-U', 'a01_admin', '-d', 'fasttrack_a01_test'], { windowsHide: true });
+    // The image starts a temporary server during init; wait for the final PID 1 server.
+    const ready = spawnSync('docker', ['exec', dbName, 'sh', '-ec',
+      'test "$(cat /proc/1/comm)" = postgres; exec pg_isready -U a01_admin -d fasttrack_a01_test'], { windowsHide: true });
     if (ready.status === 0) { dbReady = true; break; }
     await new Promise(resolve => setTimeout(resolve, 250));
   }
   if (!dbReady) throw new Error('New isolated database is unavailable.');
+  if (socketMode) {
+    check('socket fixture disables database TCP and requires local password authentication', () => {
+      if (sql('SHOW listen_addresses') !== '') throw new Error('Socket fixture still accepts TCP.');
+      if (sql("SELECT count(*) FROM pg_hba_file_rules WHERE type='local' AND auth_method <> 'scram-sha-256'") !== '0') {
+        throw new Error('Local password authentication is not enforced.');
+      }
+      report.socketDirectory = socketDirectory; report.databaseTcpDisabled = true;
+    });
+  }
   const origin = 'https://verification.fasttrack.invalid';
-  const runtimeEnv = envFile('runtime.env', { DATABASE_URL: `postgresql://a01_admin:${password}@${dbName}:5432/fasttrack_a01_test`,
+  const databaseUrl = value => socketMode
+    ? `postgresql://a01_admin:${value}@127.0.0.1:5432/fasttrack_a01_test?host=${socketDirectory}`
+    : `postgresql://a01_admin:${value}@${dbName}:5432/fasttrack_a01_test`;
+  const runtimeEnv = envFile('runtime.env', { DATABASE_URL: databaseUrl(password),
     DEMO_SEED_PASSWORD: demoPassword, APP_ORIGIN: origin, RELEASE_SHA: report.sourceCommit });
-  const job = script => run('docker', ['run', '--rm', '--network', network, '--env-file', runtimeEnv, jobsImage,
+  if (socketMode) {
+    const rejectedEnv = envFile('rejected.env', { DATABASE_URL: databaseUrl(wrongPassword), APP_ORIGIN: origin });
+    check('real migration CLI rejects the wrong socket password', () => {
+      const denied = spawnSync('docker', ['run', '--rm', '--network', network, ...clientSocketMounts,
+        '--env-file', rejectedEnv, jobsImage, 'run', 'db:migrate', '--workspace', '@fasttrack/server'],
+      { encoding: 'utf8', windowsHide: true, timeout: 60_000 });
+      if (denied.error || denied.status === null || denied.status === 0 ||
+          !/P1000|password authentication failed/i.test(`${denied.stdout}\n${denied.stderr}`)) {
+        throw new Error('Migration did not explicitly reject socket authentication.');
+      }
+    });
+    const rejectedWeb = start(['--publish', '127.0.0.1::8080', ...clientSocketMounts, '--env-file', rejectedEnv, webImage]);
+    const rejectedUrl = `http://127.0.0.1:${inspect(rejectedWeb).NetworkSettings.Ports['8080/tcp'][0].HostPort}`;
+    let rejectedResponse;
+    for (let i = 0; i < 60; i++) {
+      try { rejectedResponse = await fetch(`${rejectedUrl}/api/ready`, { signal: AbortSignal.timeout(5000) }); break; }
+      catch { await new Promise(resolve => setTimeout(resolve, 250)); }
+    }
+    if (rejectedResponse?.status !== 503 || (await fetch(`${rejectedUrl}/api/health`)).status !== 200) {
+      throw new Error('Wrong socket password did not isolate readiness from liveness.');
+    }
+    const payload = await rejectedResponse.text();
+    if (secrets.some(value => payload.includes(value)) || /postgres|cloudsql|authentication/i.test(payload)) {
+      throw new Error('Socket readiness leaked connection details.');
+    }
+    report.checks.push({ name: 'actual runtime adapter rejects wrong socket password with safe readiness 503 and health 200', passed: true });
+  }
+  const job = script => run('docker', ['run', '--rm', '--network', network, ...clientSocketMounts, '--env-file', runtimeEnv, jobsImage,
     'run', script, '--workspace', '@fasttrack/server']);
   check('actual jobs image migrates a fresh DB and repeats without reset', () => { job('db:migrate'); job('db:migrate'); });
   check('explicit image seed preserves existing users and credentials', () => {
     job('db:seed'); const before = fingerprint(); job('db:seed'); if (before !== fingerprint()) throw new Error('Repeat seed changed existing records.');
   });
-  const web = start(['--publish', '127.0.0.1::8080', '--env-file', runtimeEnv, webImage]);
+  const web = start(['--publish', '127.0.0.1::8080', ...clientSocketMounts, '--env-file', runtimeEnv, webImage]);
   const binding = inspect(web).NetworkSettings.Ports['8080/tcp'][0];
   let url = `http://127.0.0.1:${binding.HostPort}`;
   await waitReady(url);
@@ -198,11 +265,17 @@ try {
     if (removed.status !== 0) report.passed = false;
   }
   if (networkCreated) { try { run('docker', ['network', 'rm', network]); } catch { report.passed = false; } }
+  if (socketVolumeCreated) {
+    const removed = spawnSync('docker', ['volume', 'rm', socketVolume], { windowsHide: true, encoding: 'utf8' });
+    report.cleanup.push({ volume: socketVolume, removed: removed.status === 0 });
+    if (removed.status !== 0) report.passed = false;
+  }
   for (const path of files) rmSync(path, { force: true });
   report.finishedAt = new Date().toISOString();
-  const destination = process.env.A01_CONTAINER_REPORT ?? join(appRoot, 'docs/evidence/R2-A01-container-results.json');
+  const destination = process.env.A01_CONTAINER_REPORT ?? join(appRoot, socketMode ? 'docs/evidence/R2-J01-socket-results.json' : 'docs/evidence/R2-A01-container-results.json');
   mkdirSync(join(appRoot, 'docs/evidence'), { recursive: true });
   writeFileSync(destination, redact(JSON.stringify(report, null, 2)) + '\n');
   process.stdout.write(`Container verification ${report.passed ? 'PASSED' : 'FAILED'}; report: ${destination}\n`);
+  if (process.env.CI) process.stdout.write(redact(JSON.stringify(report)) + '\n');
   process.exitCode = report.passed ? 0 : 1;
 }
