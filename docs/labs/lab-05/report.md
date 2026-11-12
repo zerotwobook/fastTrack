@@ -2,6 +2,8 @@
 
 Markdown source for the Lab 5 team report. The user assembles, exports and uploads the final document; no PDF is produced here. Every claim points to an artifact in [evidence-index.md](evidence-index.md) and keeps its own source, time and limit. Where a fact is not established, the text says NOT RUN, NOT ESTABLISHED or PENDING.
 
+**Package status:** technical behaviour has recorded passing evidence, but final submission is PENDING. The C-04 URL-visible captures and C-02 blocked-control screenshot remain visual-evidence gaps. See the [submission handoff](submission-handoff.md) for exact owners, capture steps, selected application version and final export/upload checklist.
+
 ## Answer Part 0: Team and Evidence Index
 
 | Field | Value |
@@ -117,3 +119,5 @@ Initial B checks on 12 November 2026 (about 09:35Z), before the first report-sou
 **A/13 assisted correction review.** Under the user's explicit review/fix request, A verified the actual approval IDs through the PR review API, corrected the two citation targets, added the rubric-part/contribution tables and four existing captioned figures, and added the `lab5` PR label. Validation checked 92 local file/image targets and 8 Markdown anchors across all four PR files, the actual C-01 artifact counts, unchanged application/configuration scope and the retained pending items. A GitHub-GFM HTML preview showed all five report tables and four loaded figures without horizontal overflow at 1440px; representative text and figure views were visually inspected. This is Markdown/HTML review, not PDF export or a new application test run. Final corrected-head CI and review/merge status are recorded in PR #102.
 
 No PDF was generated, rebuilt or exported. No secret value, cookie or token appears in these files.
+
+**Closure follow-up:** the fresh [anonymous HTTP readback](../../../Project_code/docs/evidence/R2-J01-closure-readback.json) passed four public checks and confirmed the accepted sign-in copy at `2026-11-12T15:37:42Z`-`15:37:46Z`. This is separate from the earlier CI/browser observations and does not establish new authenticated execution or current Cloud traffic allocation. PR #104 records the final documentation checks and exact candidate; its peer review and the missing images must not be inferred from this paragraph.

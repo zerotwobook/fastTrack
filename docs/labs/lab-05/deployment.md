@@ -177,6 +177,8 @@ Version proof compares actual built main SHA (possibly different from PR head), 
 
 ## 8. Diagnosis and evidence
 
+Final Lab 5 package preparation and submission steps are tracked in [submission-handoff.md](submission-handoff.md). The selected application snapshot is `8e637e537cd037d630a5fffc1b5672d1b44371a8`; documentation source identities and the real upload receipt are recorded separately. A later anonymous [HTTP readback](../../../Project_code/docs/evidence/R2-J01-closure-readback.json) confirms that source/readiness and the served sign-in copy without another deployment. Genuine C-04 URL-visible and C-02 blocked-control images remain missing; technical results alone do not complete those visual-evidence requirements.
+
 Read the failed stage before fixing it. For missing runtime modules inspect final shared/generated layout. For unavailable readiness inspect private DB configuration/deadlines/migration state without printing URLs. For login/source failure verify canonical origin, cookie/source/CSRF and trusted proxy path; do not loosen authorization. For image/job failure verify actual tool pins/entrypoint/workspace working directory.
 
 ### Credential and teardown safety

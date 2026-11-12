@@ -41,6 +41,10 @@ After the requested [COMMENT review](https://github.com/zerotwobook/fastTrack/pu
 
 B's prior record attributes the controlled non-Draft exception to its user decision. This review reports that provenance without claiming access to the other session's human conversation. No Draft lift, approval, bypass, source modification or protected merge was performed by this witness.
 
-## Remaining scope
+## Historical checkpoint and later acceptance
 
-C-02's technical proof and final never-merge disposition are verified by this assisted review. Issue #15 remains OPEN with overall Acceptance PENDING: live WIF/deployer and the later repeatable release still require their actual evidence. The initial manual bootstrap and this proof do not establish C-06 or authenticated C-04/C-05. Use [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16) for the next public-flow preparation.
+At the original witness checkpoint, C-02's technical proof and final never-merge disposition were verified, while Issue #15 remained OPEN / Acceptance PENDING for live WIF/deployer and the later repeatable release. The initial manual bootstrap and this proof alone did not establish C-06 or authenticated C-04/C-05.
+
+The later [C-06 delivery](C06-release-traceability.md), A's [post-redeploy checks](C05-redeploy.md) and B's accepted [post-release witness](B-post-release-readback.md) now provide those separately dated observations. A reconciled [Issue #15](https://github.com/zerotwobook/fastTrack/issues/15) to CLOSED / Done / PASSED / ACCEPTED for its CI/release scope on 12 November 2026 after reading the actual successful WIF run and B environment approval. This does not rewrite the original checkpoint or turn the deliberate failing proof into accepted code.
+
+The missing historical blocked-control screenshot and final report/submission remain tracked in [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16) and the [submission handoff](../submission-handoff.md). No new proof was opened, no closed page was relabelled as its earlier blocked state, and no TA acceptance of substitute evidence is claimed.

@@ -2,7 +2,7 @@
 
 Task R2-J01 / [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16), B/10 record, assembled in B/12. Owner B (`Atip-Infa`); cross-check A (`zerotwobook`). All times are UTC on 12 November 2026 unless stated. This record only links and summarizes observations that already exist; it creates no new result.
 
-**Outcome: one labelled change traversed task PR -> staging -> user-authorized release PR -> main -> live WIF pipeline -> new serving revision, and the live service reports the exact main SHA and shows the change. C-06 technical chain: PASSED. A's independent cross-check of the identity is recorded in [C05-redeploy.md](C05-redeploy.md). B's whole-task acceptance of #15/#16 remains PENDING.**
+**Outcome: one labelled change traversed task PR -> staging -> user-authorized release PR -> main -> live WIF pipeline -> new serving revision, and the live service reports the exact main SHA and shows the change. C-06 technical chain: PASSED. A's assisted cross-check of the identity is recorded in [C05-redeploy.md](C05-redeploy.md). Issue #15's CI/release scope was later accepted and closed; whole Issue #16 and course submission remain PENDING.**
 
 ## 1. The labelled change
 
