@@ -1,0 +1,82 @@
+{
+  "observedAt": "2026-11-12T04:08:48.655Z",
+  "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "actor": {
+    "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+    "displayName": "Student A1",
+    "role": "student"
+  },
+  "team": {
+    "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+    "name": "Team A",
+    "supervisor": {
+      "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+      "displayName": "Supervisor A"
+    },
+    "members": [
+      {
+        "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+        "displayName": "Student A1"
+      },
+      {
+        "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+        "displayName": "Student A2"
+      }
+    ]
+  },
+  "milestone": {
+    "id": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+    "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+    "title": "C04 baseline 2026-11-12 0404 UTC",
+    "description": "Synthetic public verification baseline. Preserve the original milestone, submission and exact feedback for distinct restart and later redeploy checks.",
+    "dueAt": "2026-11-19T04:04:00.000Z",
+    "cancelledAt": null,
+    "createdAt": "2026-11-12T04:04:50.033Z",
+    "latestSubmission": {
+      "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "version": 1,
+      "submittedAt": "2026-11-12T04:07:08.322Z",
+      "feedbackCount": 1
+    }
+  },
+  "submission": {
+    "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+    "milestoneId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+    "submittedBy": {
+      "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+      "displayName": "Student A1"
+    },
+    "version": 1,
+    "title": "C04 initial submission",
+    "description": "Synthetic work record created through the public Student UI for the approved C04 case.",
+    "url": "https://example.com/fasttrack-c04",
+    "submittedAt": "2026-11-12T04:07:08.322Z"
+  },
+  "feedback": [
+    {
+      "id": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+      "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "supervisor": {
+        "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+        "displayName": "Supervisor A"
+      },
+      "content": "C04 verified feedback on the exact original submission version. Preserve this record through restart and redeploy.",
+      "clientRequestId": "d8e93c8b-3968-4c54-b5a7-e0ebaed367ad",
+      "createdAt": "2026-11-12T04:08:02.974Z"
+    }
+  ],
+  "submissionCount": 1,
+  "feedbackCount": 1,
+  "cookies": [
+    {
+      "name": "fasttrack_session",
+      "secure": true,
+      "httpOnly": true,
+      "sameSite": "Lax",
+      "expires": 1794485199.354929,
+      "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+      "path": "/"
+    }
+  ]
+}

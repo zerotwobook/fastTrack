@@ -27,7 +27,7 @@ function Login({ state }: { state: SessionSnapshot }) {
   };
   return <main id="main-content" className="login-page">
     <div className="login-form"><p className="wordmark">fastTrack</p><h1>Sign in</h1>
-      <p className="intro">Keep track of your team's work and feedback.</p>
+      <p className="intro">Track your team's milestones, submissions, and feedback.</p>
       {state.error && <p className="notice" role="alert" tabIndex={-1} ref={alert}>{state.error}</p>}
       <form onSubmit={event => { void submit(event); }}>
         <Field id="email" label="Email"><Input id="email" name="email" type="email" autoComplete="username" required value={email} onChange={event => setEmail(event.target.value)} disabled={state.busy} /></Field>

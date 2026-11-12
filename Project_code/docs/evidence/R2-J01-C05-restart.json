@@ -1,0 +1,987 @@
+{
+  "runId": "C05-RESTART-20261112T061310Z",
+  "owner": "A / zerotwobook",
+  "observedAt": "2026-11-12T06:18:56.745619+00:00",
+  "restartHalf": "PASS",
+  "laterRedeploy": "NOT RUN",
+  "wholeC05": "PENDING",
+  "humanAcceptance": "PENDING",
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+  "baseline": {
+    "path": "Project_code/docs/evidence/R2-J01-C04-baseline.json",
+    "fileSha256": "a54074ae9a07a0ce3138193245fd16c9ff2fc2800568f02f3f6e010cd86eb114",
+    "canonicalKeys": [
+      "team",
+      "milestone",
+      "submission",
+      "feedback",
+      "submissionCount",
+      "feedbackCount"
+    ],
+    "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e"
+  },
+  "commands": [
+    {
+      "startedAt": "2026-11-12T06:13:10.458133+00:00",
+      "finishedAt": "2026-11-12T06:13:18.083538+00:00",
+      "scaling": "0",
+      "exitCode": 0
+    },
+    {
+      "startedAt": "2026-11-12T06:14:40.646466+00:00",
+      "finishedAt": "2026-11-12T06:14:47.312342+00:00",
+      "scaling": "auto",
+      "exitCode": 0
+    }
+  ],
+  "startedAt": "2026-11-12T06:13:10.448417+00:00",
+  "restorationStartedAfterSeconds": 90.198049,
+  "watchdogOwner": "independent-watchdog",
+  "recoveryAfterSeconds": 112.7331565000004,
+  "beforeRuntime": {
+    "observedAt": "2026-11-12T06:13:04.122299+00:00",
+    "generation": "2",
+    "observedGeneration": "2",
+    "latestReadyRevision": "fasttrack-app-00002-f75",
+    "latestCreatedRevision": "fasttrack-app-00002-f75",
+    "terminalCondition": "CONDITION_SUCCEEDED",
+    "scaling": {
+      "maxInstanceCount": 3
+    },
+    "revisionScaling": {
+      "maxInstanceCount": 2
+    },
+    "concurrency": 8,
+    "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+    "traffic": [
+      {
+        "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+        "revision": "fasttrack-app-00002-f75",
+        "percent": 100
+      }
+    ],
+    "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+  },
+  "afterRuntime": {
+    "observedAt": "2026-11-12T06:15:03.181608+00:00",
+    "elapsedSeconds": 112.7331565000004,
+    "runtime": {
+      "observedAt": "2026-11-12T06:15:00.932216+00:00",
+      "generation": "4",
+      "observedGeneration": "4",
+      "latestReadyRevision": "fasttrack-app-00002-f75",
+      "latestCreatedRevision": "fasttrack-app-00002-f75",
+      "terminalCondition": "CONDITION_SUCCEEDED",
+      "scaling": {
+        "scalingMode": "AUTOMATIC",
+        "maxInstanceCount": 3
+      },
+      "revisionScaling": {
+        "maxInstanceCount": 2
+      },
+      "concurrency": 8,
+      "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+      "traffic": [
+        {
+          "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+          "revision": "fasttrack-app-00002-f75",
+          "percent": 100
+        }
+      ],
+      "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+    },
+    "health": {
+      "observedAt": "2026-11-12T06:15:02.661902+00:00",
+      "httpStatus": 200,
+      "status": "ok",
+      "version": "16ec6d268ac087f3834be7da55dda29e589847ce"
+    },
+    "ready": {
+      "observedAt": "2026-11-12T06:15:03.181580+00:00",
+      "httpStatus": 200,
+      "status": "ready",
+      "database": "connected",
+      "version": "16ec6d268ac087f3834be7da55dda29e589847ce"
+    }
+  },
+  "observations": [
+    {
+      "observedAt": "2026-11-12T06:13:18.361238+00:00",
+      "elapsedSeconds": 7.913,
+      "runtime": {
+        "observedAt": "2026-11-12T06:13:18.270175+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:13:18.360977+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:13:28.612128+00:00",
+      "elapsedSeconds": 18.164,
+      "runtime": {
+        "observedAt": "2026-11-12T06:13:28.535644+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:13:28.611883+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:13:38.842483+00:00",
+      "elapsedSeconds": 28.394,
+      "runtime": {
+        "observedAt": "2026-11-12T06:13:38.740668+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:13:38.842301+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:13:49.131771+00:00",
+      "elapsedSeconds": 38.683,
+      "runtime": {
+        "observedAt": "2026-11-12T06:13:49.031165+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:13:49.131374+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:13:59.438855+00:00",
+      "elapsedSeconds": 48.99,
+      "runtime": {
+        "observedAt": "2026-11-12T06:13:59.344363+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:13:59.438669+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:14:09.713609+00:00",
+      "elapsedSeconds": 59.265,
+      "runtime": {
+        "observedAt": "2026-11-12T06:14:09.590764+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:14:09.713047+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:14:19.986716+00:00",
+      "elapsedSeconds": 69.538,
+      "runtime": {
+        "observedAt": "2026-11-12T06:14:19.887762+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:14:19.986433+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:14:30.284909+00:00",
+      "elapsedSeconds": 79.836,
+      "runtime": {
+        "observedAt": "2026-11-12T06:14:30.180367+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:14:30.284726+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:14:40.558092+00:00",
+      "elapsedSeconds": 90.11,
+      "runtime": {
+        "observedAt": "2026-11-12T06:14:40.467282+00:00",
+        "generation": "3",
+        "observedGeneration": "3",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "MANUAL",
+          "manualInstanceCount": 0
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:14:40.557489+00:00",
+        "httpStatus": 503
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:14:50.773302+00:00",
+      "elapsedSeconds": 100.325,
+      "runtime": {
+        "observedAt": "2026-11-12T06:14:50.691892+00:00",
+        "generation": "4",
+        "observedGeneration": "4",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "AUTOMATIC",
+          "maxInstanceCount": 3
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:14:50.772517+00:00",
+        "httpStatus": 500
+      }
+    },
+    {
+      "observedAt": "2026-11-12T06:15:02.661978+00:00",
+      "elapsedSeconds": 112.214,
+      "runtime": {
+        "observedAt": "2026-11-12T06:15:00.932216+00:00",
+        "generation": "4",
+        "observedGeneration": "4",
+        "latestReadyRevision": "fasttrack-app-00002-f75",
+        "latestCreatedRevision": "fasttrack-app-00002-f75",
+        "terminalCondition": "CONDITION_SUCCEEDED",
+        "scaling": {
+          "scalingMode": "AUTOMATIC",
+          "maxInstanceCount": 3
+        },
+        "revisionScaling": {
+          "maxInstanceCount": 2
+        },
+        "concurrency": 8,
+        "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+        "traffic": [
+          {
+            "type": "TRAFFIC_TARGET_ALLOCATION_TYPE_LATEST",
+            "revision": "fasttrack-app-00002-f75",
+            "percent": 100
+          }
+        ],
+        "templateSha256": "59f85e6560ab9163e75d2d102e40c7cbe4c0eccd664b6053b13c4479fccbd2fd"
+      },
+      "health": {
+        "observedAt": "2026-11-12T06:15:02.661902+00:00",
+        "httpStatus": 200,
+        "status": "ok",
+        "version": "16ec6d268ac087f3834be7da55dda29e589847ce"
+      }
+    }
+  ],
+  "confirmedManualInterval": {
+    "firstObservedAt": "2026-11-12T06:13:18.270175+00:00",
+    "lastObservedAt": "2026-11-12T06:14:40.646311+00:00"
+  },
+  "explicitZeroInstancePoints": [
+    "2026-11-12T06:14:00Z"
+  ],
+  "oldInstanceIds": [
+    "00e8a408bd2e46cab5980787f6545e735cc9715d4dc6a79816c1b0fa2e0313a2a958649c40be86e97811393c399a30e56995c4dd559d4565ca019b2d6d122d8fcfd3be96278132e310ce31a4e3e2ebec5bba9a2817d30389c2db2960"
+  ],
+  "newStartupEvents": [
+    {
+      "timestamp": "2026-11-12T06:14:59.596620Z",
+      "instanceId": "00e8a408bd95f4ee034ff48256680b6b014349a4e4e4ba95b933c0799351df470bd0ee840b51aa632fb885239ac3ecf81d90ba1bbe57e05ce871e40a2723347a12e7b24f60a0aa060a27721e4cf720b8817642dc87e8f29afccfa6cd",
+      "revision": "fasttrack-app-00002-f75",
+      "startupMessage": "Starting new instance. Reason: AUTOSCALING - Instance started due to configured scaling factors (e.g. CPU utilization, request throughput, etc.) or no existing capacity for current traffic."
+    }
+  ],
+  "applicationStartupEvents": [
+    {
+      "timestamp": "2026-11-12T06:15:01.062081Z",
+      "instanceId": "00e8a408bd95f4ee034ff48256680b6b014349a4e4e4ba95b933c0799351df470bd0ee840b51aa632fb885239ac3ecf81d90ba1bbe57e05ce871e40a2723347a12e7b24f60a0aa060a27721e4cf720b8817642dc87e8f29afccfa6cd",
+      "revision": "fasttrack-app-00002-f75",
+      "startupMessage": "fastTrack API listening on port 8080."
+    }
+  ],
+  "newInstanceServingAfterRoleReads": {
+    "latestObservedAt": "2026-11-12T06:16:39.063851Z",
+    "instanceIds": [
+      "00e8a408bd95f4ee034ff48256680b6b014349a4e4e4ba95b933c0799351df470bd0ee840b51aa632fb885239ac3ecf81d90ba1bbe57e05ce871e40a2723347a12e7b24f60a0aa060a27721e4cf720b8817642dc87e8f29afccfa6cd"
+    ]
+  },
+  "instanceCountTelemetry": {
+    "observedAt": "2026-11-12T06:16:49.782559+00:00",
+    "queryStart": "2026-11-12T06:10:10.448417+00:00",
+    "queryEnd": "2026-11-12T06:16:44.003113+00:00",
+    "morePages": false,
+    "series": [
+      {
+        "state": "active",
+        "revision": "fasttrack-app-00002-f75",
+        "points": [
+          {
+            "endTime": "2026-11-12T06:16:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:15:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:14:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:13:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:12:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:11:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          }
+        ]
+      },
+      {
+        "state": "idle",
+        "revision": "fasttrack-app-00002-f75",
+        "points": [
+          {
+            "endTime": "2026-11-12T06:16:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:15:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:14:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:13:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:12:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T06:11:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          }
+        ]
+      }
+    ]
+  },
+  "roles": [
+    {
+      "role": "student",
+      "sessionReference": "ft-c05-student",
+      "baselineSession": "new login for this restart experiment; original C04 context was closed",
+      "before": {
+        "observedAt": "2026-11-12T06:09:02.702Z",
+        "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+        "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+        "actor": {
+          "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+          "displayName": "Student A1",
+          "role": "student"
+        },
+        "team": {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        },
+        "milestone": {
+          "id": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "title": "C04 baseline 2026-11-12 0404 UTC",
+          "description": "Synthetic public verification baseline. Preserve the original milestone, submission and exact feedback for distinct restart and later redeploy checks.",
+          "dueAt": "2026-11-19T04:04:00.000Z",
+          "cancelledAt": null,
+          "createdAt": "2026-11-12T04:04:50.033Z",
+          "latestSubmission": {
+            "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "version": 1,
+            "submittedAt": "2026-11-12T04:07:08.322Z",
+            "feedbackCount": 1
+          }
+        },
+        "submission": {
+          "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+          "milestoneId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "submittedBy": {
+            "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+            "displayName": "Student A1"
+          },
+          "version": 1,
+          "title": "C04 initial submission",
+          "description": "Synthetic work record created through the public Student UI for the approved C04 case.",
+          "url": "https://example.com/fasttrack-c04",
+          "submittedAt": "2026-11-12T04:07:08.322Z"
+        },
+        "feedback": [
+          {
+            "id": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+            "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "C04 verified feedback on the exact original submission version. Preserve this record through restart and redeploy.",
+            "clientRequestId": "d8e93c8b-3968-4c54-b5a7-e0ebaed367ad",
+            "createdAt": "2026-11-12T04:08:02.974Z"
+          }
+        ],
+        "submissionCount": 1,
+        "feedbackCount": 1,
+        "cookies": [
+          {
+            "name": "fasttrack_session",
+            "secure": true,
+            "httpOnly": true,
+            "sameSite": "Lax",
+            "expires": 1794492509.627853,
+            "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+            "path": "/"
+          }
+        ]
+      },
+      "after": {
+        "observedAt": "2026-11-12T06:16:25.721Z",
+        "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+        "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+        "actor": {
+          "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+          "displayName": "Student A1",
+          "role": "student"
+        },
+        "team": {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        },
+        "milestone": {
+          "id": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "title": "C04 baseline 2026-11-12 0404 UTC",
+          "description": "Synthetic public verification baseline. Preserve the original milestone, submission and exact feedback for distinct restart and later redeploy checks.",
+          "dueAt": "2026-11-19T04:04:00.000Z",
+          "cancelledAt": null,
+          "createdAt": "2026-11-12T04:04:50.033Z",
+          "latestSubmission": {
+            "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "version": 1,
+            "submittedAt": "2026-11-12T04:07:08.322Z",
+            "feedbackCount": 1
+          }
+        },
+        "submission": {
+          "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+          "milestoneId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "submittedBy": {
+            "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+            "displayName": "Student A1"
+          },
+          "version": 1,
+          "title": "C04 initial submission",
+          "description": "Synthetic work record created through the public Student UI for the approved C04 case.",
+          "url": "https://example.com/fasttrack-c04",
+          "submittedAt": "2026-11-12T04:07:08.322Z"
+        },
+        "feedback": [
+          {
+            "id": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+            "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "C04 verified feedback on the exact original submission version. Preserve this record through restart and redeploy.",
+            "clientRequestId": "d8e93c8b-3968-4c54-b5a7-e0ebaed367ad",
+            "createdAt": "2026-11-12T04:08:02.974Z"
+          }
+        ],
+        "submissionCount": 1,
+        "feedbackCount": 1,
+        "cookies": [
+          {
+            "name": "fasttrack_session",
+            "secure": true,
+            "httpOnly": true,
+            "sameSite": "Lax",
+            "expires": 1794492509.627853,
+            "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+            "path": "/"
+          }
+        ]
+      },
+      "sameOriginalRecords": true,
+      "sameCookieAttributesAndExpiry": true,
+      "noLoginBetweenBeforeAndAfter": true,
+      "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e"
+    },
+    {
+      "role": "supervisor",
+      "sessionReference": "ft-c05-supervisor",
+      "baselineSession": "new login for this restart experiment; original C04 context was closed",
+      "before": {
+        "observedAt": "2026-11-12T06:09:05.727Z",
+        "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+        "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+        "actor": {
+          "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+          "displayName": "Supervisor A",
+          "role": "supervisor"
+        },
+        "team": {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        },
+        "milestone": {
+          "id": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "title": "C04 baseline 2026-11-12 0404 UTC",
+          "description": "Synthetic public verification baseline. Preserve the original milestone, submission and exact feedback for distinct restart and later redeploy checks.",
+          "dueAt": "2026-11-19T04:04:00.000Z",
+          "cancelledAt": null,
+          "createdAt": "2026-11-12T04:04:50.033Z",
+          "latestSubmission": {
+            "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "version": 1,
+            "submittedAt": "2026-11-12T04:07:08.322Z",
+            "feedbackCount": 1
+          }
+        },
+        "submission": {
+          "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+          "milestoneId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "submittedBy": {
+            "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+            "displayName": "Student A1"
+          },
+          "version": 1,
+          "title": "C04 initial submission",
+          "description": "Synthetic work record created through the public Student UI for the approved C04 case.",
+          "url": "https://example.com/fasttrack-c04",
+          "submittedAt": "2026-11-12T04:07:08.322Z"
+        },
+        "feedback": [
+          {
+            "id": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+            "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "C04 verified feedback on the exact original submission version. Preserve this record through restart and redeploy.",
+            "clientRequestId": "d8e93c8b-3968-4c54-b5a7-e0ebaed367ad",
+            "createdAt": "2026-11-12T04:08:02.974Z"
+          }
+        ],
+        "submissionCount": 1,
+        "feedbackCount": 1,
+        "cookies": [
+          {
+            "name": "fasttrack_session",
+            "secure": true,
+            "httpOnly": true,
+            "sameSite": "Lax",
+            "expires": 1794492508.511404,
+            "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+            "path": "/"
+          }
+        ]
+      },
+      "after": {
+        "observedAt": "2026-11-12T06:16:31.062Z",
+        "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+        "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+        "actor": {
+          "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+          "displayName": "Supervisor A",
+          "role": "supervisor"
+        },
+        "team": {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        },
+        "milestone": {
+          "id": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "title": "C04 baseline 2026-11-12 0404 UTC",
+          "description": "Synthetic public verification baseline. Preserve the original milestone, submission and exact feedback for distinct restart and later redeploy checks.",
+          "dueAt": "2026-11-19T04:04:00.000Z",
+          "cancelledAt": null,
+          "createdAt": "2026-11-12T04:04:50.033Z",
+          "latestSubmission": {
+            "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "version": 1,
+            "submittedAt": "2026-11-12T04:07:08.322Z",
+            "feedbackCount": 1
+          }
+        },
+        "submission": {
+          "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+          "milestoneId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "submittedBy": {
+            "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+            "displayName": "Student A1"
+          },
+          "version": 1,
+          "title": "C04 initial submission",
+          "description": "Synthetic work record created through the public Student UI for the approved C04 case.",
+          "url": "https://example.com/fasttrack-c04",
+          "submittedAt": "2026-11-12T04:07:08.322Z"
+        },
+        "feedback": [
+          {
+            "id": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+            "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "C04 verified feedback on the exact original submission version. Preserve this record through restart and redeploy.",
+            "clientRequestId": "d8e93c8b-3968-4c54-b5a7-e0ebaed367ad",
+            "createdAt": "2026-11-12T04:08:02.974Z"
+          }
+        ],
+        "submissionCount": 1,
+        "feedbackCount": 1,
+        "cookies": [
+          {
+            "name": "fasttrack_session",
+            "secure": true,
+            "httpOnly": true,
+            "sameSite": "Lax",
+            "expires": 1794492508.511404,
+            "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+            "path": "/"
+          }
+        ]
+      },
+      "sameOriginalRecords": true,
+      "sameCookieAttributesAndExpiry": true,
+      "noLoginBetweenBeforeAndAfter": true,
+      "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e"
+    }
+  ],
+  "publicSmoke": {
+    "command": "EXPECTED_RELEASE_SHA=16ec6d268ac087f3834be7da55dda29e589847ce python deploy/smoke_test.py https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+    "passed": [
+      "GET /api/health",
+      "GET /api/ready",
+      "GET /",
+      "GET /api/nonexistent (404)"
+    ],
+    "optionalSeparateLogin": "SKIPPED: no smoke credentials configured; role authentication checked separately"
+  },
+  "screenshots": [
+    {
+      "role": "student",
+      "path": "docs/labs/lab-05/evidence/C05-restart-student.png",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "sha256": "e78951b253c2c38a4499b549697c789add6e995aae67dff910b287740ad3d6d6"
+    },
+    {
+      "role": "supervisor",
+      "path": "docs/labs/lab-05/evidence/C05-restart-supervisor.png",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "sha256": "c3fed68c623394fd594800488b0e6afa52caf0508d23167ada9615346c43f56e"
+    }
+  ],
+  "limits": [
+    "Original C04 contexts were closed before this experiment; their continuity was NOT RUN.",
+    "The two newly baselined sessions survived this measured restart only; no eight-hour survival claim.",
+    "No exact SIGTERM or process-exit timestamp is exposed; explicit total-zero metric precedes the distinct new same-revision instance startup.",
+    "Manual scaling transiently returned 503; the first post-auto health probe returned 500 before a cold-start recovery to 200.",
+    "Only the restart half is complete; B review, later visible-change release/redeploy and whole-task acceptance remain pending.",
+    "Page viewport screenshots have no address bar; exact origin/route/source are provided in the accompanying record."
+  ],
+  "userAuthorization": {
+    "source": "User reply to concrete five-minute-window request after B merged PR #97",
+    "releaseHold": "User reports B is not deploying; no direct B restart witness claimed",
+    "approvedPreparationHead": "ab555a31a87bcc3597a6f86329cc729591425f7a",
+    "stagingMerge": "e1db7854e2338a33983199d99a69070c97ef5f50",
+    "restoreAttemptDeadlineSeconds": 120,
+    "recoveryDeadlineSeconds": 300
+  }
+}
