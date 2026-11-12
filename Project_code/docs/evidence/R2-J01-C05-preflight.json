@@ -1,0 +1,355 @@
+{
+  "runId": "C05-PREFLIGHT-20261112",
+  "mode": "read-only preparation",
+  "observedAt": "2026-11-12T04:50:27.859038+00:00",
+  "owner": "A / zerotwobook",
+  "restartProof": "INCOMPLETE",
+  "controlledRestart": "NOT RUN",
+  "laterRedeploy": "NOT RUN",
+  "cloudMutationsPerformed": false,
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "baseline": {
+    "path": "Project_code/docs/evidence/R2-J01-C04-baseline.json",
+    "fileSha256": "a54074ae9a07a0ce3138193245fd16c9ff2fc2800568f02f3f6e010cd86eb114",
+    "comparisonKeys": [
+      "team",
+      "milestone",
+      "submission",
+      "feedback",
+      "submissionCount",
+      "feedbackCount"
+    ],
+    "recordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e"
+  },
+  "actorObservations": [
+    {
+      "sessionReference": "ft-c04-student",
+      "observedAt": "2026-11-12T04:45:16.686Z",
+      "actor": {
+        "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+        "displayName": "Student A1",
+        "role": "student"
+      },
+      "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+      "matchesOriginalRecords": true,
+      "recordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e",
+      "cookieAttributes": [
+        {
+          "name": "fasttrack_session",
+          "secure": true,
+          "httpOnly": true,
+          "sameSite": "Lax",
+          "expires": 1794485199.354929,
+          "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+          "path": "/"
+        }
+      ],
+      "newLoginPerformed": false
+    },
+    {
+      "sessionReference": "ft-c04-supervisor",
+      "observedAt": "2026-11-12T04:49:36.604Z",
+      "actor": {
+        "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+        "displayName": "Supervisor A",
+        "role": "supervisor"
+      },
+      "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+      "matchesOriginalRecords": true,
+      "recordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e",
+      "cookieAttributes": [
+        {
+          "name": "fasttrack_session",
+          "secure": true,
+          "httpOnly": true,
+          "sameSite": "Lax",
+          "expires": 1794484964.939924,
+          "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+          "path": "/"
+        }
+      ],
+      "newLoginPerformed": false
+    }
+  ],
+  "runtime": {
+    "project": "fasttrack-se-002",
+    "region": "asia-southeast1",
+    "service": "fasttrack-app",
+    "generation": 2,
+    "readyRevision": "fasttrack-app-00002-f75",
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100,
+        "revisionName": "fasttrack-app-00002-f75"
+      }
+    ],
+    "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+    "serviceMax": "3",
+    "serviceMin": null,
+    "scalingMode": null,
+    "manualInstanceCount": null,
+    "revisionMax": "2",
+    "revisionMin": null,
+    "concurrency": 8,
+    "cloudSqlAttachment": "fasttrack-se-002:asia-southeast1:fasttrack-db",
+    "probes": {
+      "/api/health": {
+        "httpStatus": 200,
+        "status": "ok",
+        "version": "16ec6d268ac087f3834be7da55dda29e589847ce"
+      },
+      "/api/ready": {
+        "httpStatus": 200,
+        "status": "ready",
+        "database": "connected",
+        "version": "16ec6d268ac087f3834be7da55dda29e589847ce"
+      }
+    }
+  },
+  "instanceProvenance": {
+    "queryStart": "2026-11-12T04:08:00Z",
+    "queryEnd": "2026-11-12T04:46:00Z",
+    "morePages": false,
+    "instances": [
+      {
+        "instanceId": "00e8a408bd8def5865e91f2b638a529535ad85508fde4944d19a12f9cda692ad03dc2d33faa1fb09f21b4b6baf3ce99fdc35f8de8c5717492bf6c6f97cd7f68c0fb2c92933e3f2e7ee0b2fc474e44221defb12fd400106478ac8bf7d",
+        "firstObservedInQuery": "2026-11-12T04:08:02.906702Z",
+        "lastObservedInQuery": "2026-11-12T04:28:44.453609Z",
+        "entryCount": 156,
+        "startupEvents": [],
+        "terminationSignals": []
+      },
+      {
+        "instanceId": "00e8a408bdc3914fe6b4bc61d0dfacdbb3603460fdc2b2b359672e4ce9c3c757537ad7698784b5ddc8ed94f0e1528d46ad5bac80bd6803e4fbfb9082e9b24b1fb9599e9f279456afcc9f310ab183bb171dfcada3a512e30555dc84fc",
+        "firstObservedInQuery": "2026-11-12T04:44:53.545227Z",
+        "lastObservedInQuery": "2026-11-12T04:45:15.387473Z",
+        "entryCount": 33,
+        "startupEvents": [
+          {
+            "timestamp": "2026-11-12T04:44:53.571345Z",
+            "instanceId": "00e8a408bdc3914fe6b4bc61d0dfacdbb3603460fdc2b2b359672e4ce9c3c757537ad7698784b5ddc8ed94f0e1528d46ad5bac80bd6803e4fbfb9082e9b24b1fb9599e9f279456afcc9f310ab183bb171dfcada3a512e30555dc84fc",
+            "revision": "fasttrack-app-00002-f75",
+            "logName": "projects/fasttrack-se-002/logs/run.googleapis.com%2Fvarlog%2Fsystem",
+            "lifecycleSignals": [],
+            "startupMessage": "Starting new instance. Reason: AUTOSCALING - Instance started due to configured scaling factors (e.g. CPU utilization, request throughput, etc.) or no existing capacity for current traffic."
+          },
+          {
+            "timestamp": "2026-11-12T04:44:55.036185Z",
+            "instanceId": "00e8a408bdc3914fe6b4bc61d0dfacdbb3603460fdc2b2b359672e4ce9c3c757537ad7698784b5ddc8ed94f0e1528d46ad5bac80bd6803e4fbfb9082e9b24b1fb9599e9f279456afcc9f310ab183bb171dfcada3a512e30555dc84fc",
+            "revision": "fasttrack-app-00002-f75",
+            "logName": "projects/fasttrack-se-002/logs/run.googleapis.com%2Fstdout",
+            "lifecycleSignals": [],
+            "startupMessage": "fastTrack API listening on port 8080."
+          }
+        ],
+        "terminationSignals": []
+      }
+    ]
+  },
+  "instanceCountMetric": {
+    "observedAt": "2026-11-12T04:47:18.261091+00:00",
+    "metric": "run.googleapis.com/container/instance_count",
+    "series": [
+      {
+        "state": "active",
+        "revision": "fasttrack-app-00002-f75",
+        "points": [
+          {
+            "endTime": "2026-11-12T04:47:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:46:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:45:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:44:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:43:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:42:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:41:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:40:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:39:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:38:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:37:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:36:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:35:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:34:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:33:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          }
+        ]
+      },
+      {
+        "state": "idle",
+        "revision": "fasttrack-app-00002-f75",
+        "points": [
+          {
+            "endTime": "2026-11-12T04:47:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:46:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:45:00Z",
+            "value": {
+              "int64Value": "0"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:44:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:43:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:42:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:41:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:40:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:39:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:38:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:37:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:36:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:35:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:34:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          },
+          {
+            "endTime": "2026-11-12T04:33:00Z",
+            "value": {
+              "int64Value": "1"
+            }
+          }
+        ]
+      }
+    ],
+    "morePages": false
+  },
+  "limits": [
+    "No explicit old-instance termination signal found in the inspected interval.",
+    "Zero active/idle sample at 04:45:00Z is later than new startup at 04:44:53.571345Z; no unambiguous pre-start zero interval established.",
+    "Cookie attributes and current authentication do not establish eight-hour survival.",
+    "No current B release hold or exact maintenance-window authorization recorded."
+  ]
+}

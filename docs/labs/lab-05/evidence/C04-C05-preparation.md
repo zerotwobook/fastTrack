@@ -110,7 +110,9 @@ Before any disruptive operation, use the now-frozen [actual original-record ledg
 
 Keep one baseline session private and separate from short-lived smoke/logout sessions. Only claim survival while within its original eight-hour absolute TTL. Natural expiry is not data loss. On unknown create outcome, read back before retry; never duplicate/reseed to hide a missing record.
 
-## 4. Distinct restart proposal: not yet authorized
+## 4. Distinct restart proposal: current bounded packet
+
+The follow-up [C05 restart packet](C05-persistence.md) now specifies a five-minute maintenance window, restoration by T+120 seconds, recovery deadline T+300 seconds, fresh two-role equality results and the actual limits of natural-turnover telemetry. Its concrete outage-window decision and current B release hold remain PENDING; no scaling command has run. The original proposal below is retained as context, not a completed restart result.
 
 After original records exist and B confirms a release hold, propose a short agreed downtime window on `fasttrack-app` only. Target revision/source/image must still match section 1. Current user confirmation and experiment authorization are **PENDING**; no restart/scaling mutation was performed here.
 
@@ -132,6 +134,6 @@ Read the exact original milestone/submission/feedback IDs after restoration and 
 
 - C-02 is independently witnessed and closed unmerged; see [C02-gate-witness.md](C02-gate-witness.md). Whole #15 remains pending for live WIF/release evidence.
 - Accounts, public/authenticated C-04 and the immutable ledger are now verified in the linked execution report. Restart, redeploy, eight-hour session survival and C-05 acceptance remain NOT RUN/PENDING.
-- Next decision: B reviews the actual ledger; prepare/authorize the distinct restart window and provenance/recovery checks. Existing seed/case authorization remains recorded and must not be requested again for completed actions.
+- B approved the actual C04 artifact head `9077d22` and merged PR #96 into staging. Next decision: confirm the concrete window and current release hold in [C05-persistence.md](C05-persistence.md), then execute only the authorized restart. Existing seed/case authorization remains recorded and must not be requested again for completed actions. B's C04 review does not establish restart witness or whole-task acceptance.
 - B reviews this staging evidence/sync PR; the later visible-change release still depends on baseline/restart acceptance. Authorized seed and individual-secret IAM changes are recorded in the execution report. No external message, protected merge, reset or service interruption was performed.
 - Other project gates still need an actual independent UAT partner and a selected/TA-approved Lab 7 change. Those decisions are separate from Lab 5 and are not fabricated by this packet.
