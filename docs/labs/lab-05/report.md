@@ -19,6 +19,11 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 
 **Contributions.** A built the container/runtime, cloud resources and first bootstrap, and ran the public business flow, the restart experiment and the post-release readback. B built the CI and release pipeline, the required-check proof, the live WIF gate and the release. Each member reviewed the other's work through pull requests. Links, without commit-count quotas, are in [evidence-index.md section 3](evidence-index.md#3-contribution-links-no-commit-count-quota). Ability-to-explain evidence is the team's own and is PENDING.
 
+| Member | Selected contribution evidence |
+|---|---|
+| A (`zerotwobook`) | [Runtime PR #84](https://github.com/zerotwobook/fastTrack/pull/84), [public flow #96](https://github.com/zerotwobook/fastTrack/pull/96), [restart #98](https://github.com/zerotwobook/fastTrack/pull/98), [post-redeploy readback #101](https://github.com/zerotwobook/fastTrack/pull/101). |
+| B (`Atip-Infa`) | [CI/release PR #85](https://github.com/zerotwobook/fastTrack/pull/85), [required-check proof #95](https://github.com/zerotwobook/fastTrack/pull/95), [release review #100](https://github.com/zerotwobook/fastTrack/pull/100#pullrequestreview-5871553249), actual `demo` approval and this report-source PR #102. |
+
 **Evidence index.** One ledger per check and requirement, with sources, actors and limits: [evidence-index.md](evidence-index.md). Summary:
 
 | Check | Result | Main limit |
@@ -39,6 +44,8 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 **Required rules.** Ruleset [26666182](https://github.com/zerotwobook/fastTrack/rules/26666182) is active on `main`. It requires one approving review and the strict up-to-date `test-and-docker` check from the GitHub Actions app, and the bypass list is empty.
 
 **C-02: a failing required test blocks the merge.** [PR #95](https://github.com/zerotwobook/fastTrack/pull/95) changed one assertion in `deploy/tests/test_smoke.py` and nothing else. Its run [43144813896](https://github.com/zerotwobook/fastTrack/actions/runs/43144813896) failed the required check (`AssertionError: 4 != 5`). While the PR was non-Draft and conflict-free, GitHub reported `mergeStateStatus: BLOCKED`. It was closed unmerged. A's [review](https://github.com/zerotwobook/fastTrack/pull/95#pullrequestreview-5868601890) is an assisted witness, not separate manual testing. Details: [C02-gate-witness.md](evidence/C02-gate-witness.md).
+
+**Capture limit.** The preserved witness records the live non-Draft blocked state and required-check failure, but this package contains no historical screenshot of the blocked merge control. B must supply a genuine retained capture if available or keep that visual-evidence gap explicit in the final submission. The now-closed PR page is not a screenshot of its earlier blocked state, and no new failing experiment is implied by this report.
 
 ## Answer Part 2: Docker and Reproducible Configuration
 
@@ -64,11 +71,29 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 
 **Limits.** The original browser sessions were closed before the restart and were already unavailable after the redeploy, so session survival is NOT ESTABLISHED and the eight-hour test is NOT RUN. B's own readback of the exact records with the private test accounts is PENDING.
 
+**Selected visual evidence.** Figures 1–3 show the original submission route `/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd` at `https://fasttrack-app-kpx7au3w2a-as.a.run.app` on 12 November 2026. These existing page-viewport captures have no browser address bar; the URL/source context is recorded here and in the linked observation records. Exact IDs and values are established by the immutable JSON comparison, not matching visible titles alone. Preserve readable figure size during the user's final export.
+
+![Original public submission and exact-version feedback](evidence/C04-student-feedback.png)
+
+*Figure 1. C-04 / C-05 (R-03, R-04): A-assisted Student A1 observation of the original submission version 1 and Supervisor A feedback before disruption, source `16ec6d2`, revision `fasttrack-app-00002-f75`. See [original baseline and action record](evidence/C04-public-flow.md).*
+
+![Original submission and feedback after the distinct restart](evidence/C05-restart-student.png)
+
+*Figure 2. C-05 (R-04): the same Student-visible submission and feedback after the distinct scale-zero/restore-auto restart, still source `16ec6d2` / `fasttrack-app-00002-f75`; A's actual [restart report](evidence/C05-persistence.md) binds the image to zero/new-instance provenance and original IDs.*
+
+![Original submission and feedback after the later pipeline redeploy](evidence/C05-redeploy-student.png)
+
+*Figure 3. C-05 (R-04): A-assisted post-redeploy Student readback at 09:13:29Z, source `8e637e5`, revision `fasttrack-app-00003-rc7`, preserving original version 1 and exact feedback. The [A/11 report](evidence/C05-redeploy.md) supplies both-role equality and the canonical hash across all three stages.*
+
 ## Answer Part 4: Repeatable Release Pipeline
 
-**Labelled chain (C-06).** Issue [#16](https://github.com/zerotwobook/fastTrack/issues/16) -> task [PR #99](https://github.com/zerotwobook/fastTrack/pull/99) with B's [approval](https://github.com/zerotwobook/fastTrack/pull/99#pullrequestreview-5913218944) -> `staging/sprint-2` as `80ad1df` -> user-authorized [release PR #100](https://github.com/zerotwobook/fastTrack/pull/100) with B's [approval](https://github.com/zerotwobook/fastTrack/pull/100#pullrequestreview-5916420833) -> `main` as `8e637e5` -> [run 43186570077](https://github.com/zerotwobook/fastTrack/actions/runs/43186570077) -> web and jobs image digests -> migration `fasttrack-migrate-dnvqn` -> revision `fasttrack-app-00003-rc7` at 100% traffic. The full table with every link is [C06-release-traceability.md](evidence/C06-release-traceability.md).
+**Labelled chain (C-06).** Issue [#16](https://github.com/zerotwobook/fastTrack/issues/16) -> task [PR #99](https://github.com/zerotwobook/fastTrack/pull/99) with B's [approval](https://github.com/zerotwobook/fastTrack/pull/99#pullrequestreview-5870807872) -> `staging/sprint-2` as `80ad1df` -> user-authorized [release PR #100](https://github.com/zerotwobook/fastTrack/pull/100) with B's [approval](https://github.com/zerotwobook/fastTrack/pull/100#pullrequestreview-5871553249) -> `main` as `8e637e5` -> [run 43186570077](https://github.com/zerotwobook/fastTrack/actions/runs/43186570077) -> web and jobs image digests -> migration `fasttrack-migrate-dnvqn` -> revision `fasttrack-app-00003-rc7` at 100% traffic. The full table with every link is [C06-release-traceability.md](evidence/C06-release-traceability.md).
 
 **Result.** `/api/health` and `/api/ready` report `8e637e537cd037d630a5fffc1b5672d1b44371a8`, and the served bundle shows the new sign-in sentence. The pipeline's own smoke step passed the four public checks; its login check was a SKIP because no smoke credentials are configured.
+
+![The deployed sign-in introduction after the accepted release](evidence/C05-redeploy-login.png)
+
+*Figure 4. C-06 (R-07, R-08): the canonical public `/login` page displays the reviewed new sentence after [run 43186570077](https://github.com/zerotwobook/fastTrack/actions/runs/43186570077), actual main source `8e637e5`, revision `fasttrack-app-00003-rc7`. A captured this anonymous page during the 12 November A/11 readback before entering credentials; the image contains no browser address bar or secret.*
 
 **Honest note on the run.** The automatic push run [43185679995](https://github.com/zerotwobook/fastTrack/actions/runs/43185679995) was initiated by B, who merged the PR, and the `demo` environment blocks self-approval, so it was cancelled with zero deploy steps. With the user's authorization, A dispatched one replacement run and B approved `demo`. This is delivery through `workflow_dispatch`, not an automatic-push success.
 
@@ -76,7 +101,7 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 
 ## Validation
 
-Checks run on this source on 12 November 2026 (about 09:35Z) before the first commit.
+Initial B checks on 12 November 2026 (about 09:35Z), before the first report-source commit, are retained as historical observations:
 
 | Check | Actual result |
 |---|---|
@@ -85,5 +110,7 @@ Checks run on this source on 12 November 2026 (about 09:35Z) before the first co
 | External links (GitHub PRs, issues, runs, jobs, ruleset) fetched without signing in, using `curl.exe` | 27 distinct URLs, all HTTP 200. A Python `urllib` attempt failed with a local certificate-verification error and was not used; certificate checking was not disabled. |
 | `git diff --check` | Run before commit; the result is in the PR description. |
 | Application test suites | Not rerun. This change edits documentation only. |
+
+**A/13 assisted correction review.** Under the user's explicit review/fix request, A verified the actual approval IDs through the PR review API, corrected the two citation targets, added the rubric-part/contribution tables and four existing captioned figures, and added the `lab5` PR label. Validation checked 92 local file/image targets and 8 Markdown anchors across all four PR files, the actual C-01 artifact counts, unchanged application/configuration scope and the retained pending items. A GitHub-GFM HTML preview showed all five report tables and four loaded figures without horizontal overflow at 1440px; representative text and figure views were visually inspected. This is Markdown/HTML review, not PDF export or a new application test run. Final corrected-head CI and review/merge status are recorded in PR #102.
 
 No PDF was generated, rebuilt or exported. No secret value, cookie or token appears in these files.
