@@ -49,3 +49,4 @@ The pipeline's own smoke step also printed `SKIP login: optional smoke credentia
 - Rollback is a `workflow_dispatch` of `Deploy demo` with the full `image_tag` of an existing compatible image. It re-points the service, skips migration and seed, and needs a fresh `demo` approval from someone other than the initiator. It does not reverse database schema or data. It was documented and covered by offline tests; **no live rollback was executed**.
 - The report-source commit is documentation only. It is not a newly built or deployed source; the serving source remains `8e637e5`.
 - No tag was created or moved.
+

@@ -6,10 +6,11 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 
 | Field | Value |
 |---|---|
-| Group number / section / group name | PENDING. Not recorded in the repository; the team supplies it. |
+| Group number / section / group name | PENDING. Not provided yet; the team supplies it. |
 | Topic | fastTrack, a milestone, submission and feedback tracker for supervisors and students. |
-| Member A | GitHub `zerotwobook`. Name and student ID: PENDING. |
-| Member B | GitHub `Atip-Infa`. Name and student ID: PENDING. |
+| Member A | Supapanya Yathip, student ID 67070503443, GitHub [`zerotwobook`](https://github.com/zerotwobook) |
+| Member B | Atip Infa-udom, student ID 67070503446, GitHub [`Atip-Infa`](https://github.com/Atip-Infa) |
+| Theme | Theme 6, eligible through B's final ID digit 6 under the group specification, as recorded in [Issue #2](https://github.com/zerotwobook/fastTrack/issues/2). |
 | Public repository | https://github.com/zerotwobook/fastTrack |
 | Submitted tag / commit | PENDING. No tag created. The report-source commit is documentation only. |
 | Serving URL | https://fasttrack-app-kpx7au3w2a-as.a.run.app |

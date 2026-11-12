@@ -53,7 +53,7 @@ Result vocabulary: PASSED, FAILED, NOT RUN, PENDING. "Assisted" means AI-assiste
 
 | Item | Owner | Type |
 |---|---|---|
-| Team name, section, student IDs, member names, Theme 6 statement for Answer Part 0 | A and B (user) | Missing facts. Left PENDING; not guessed. |
+| Group number, section and group name for Answer Part 0 (member names and student IDs are now recorded) | A and B (user) | Missing facts. Left PENDING; not guessed. |
 | B's independent exact-record readback with the private test accounts | B (user supplies the private channel) | Missing execution evidence. |
 | Optional authenticated smoke credentials in the `demo` environment, so the pipeline login check stops being a SKIP | B / A | Optional hardening. |
 | Eight-hour session survival | A / B | NOT RUN; reported as such. |
