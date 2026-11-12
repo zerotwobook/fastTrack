@@ -2,7 +2,7 @@
 
 Markdown source for the Lab 5 team report. The user assembles, exports and uploads the final document; no PDF is produced here. Every claim points to an artifact in [evidence-index.md](evidence-index.md) and keeps its own source, time and limit. Where a fact is not established, the text says NOT RUN, NOT ESTABLISHED or PENDING.
 
-**Package status:** technical behaviour has recorded passing evidence, but final submission is PENDING. The C-04 URL-visible captures and C-02 blocked-control screenshot remain visual-evidence gaps. See the [submission handoff](submission-handoff.md) for exact owners, capture steps, selected application version and final export/upload checklist.
+**Package status:** technical behaviour and the C-04 URL-visible role readbacks have recorded evidence. The [C-02 blocked-control image](evidence/C02-visual-proof.md) is now recorded in a separately authorized proof that was closed without merging. Final peer acceptance and course submission remain PENDING; see the [submission handoff](submission-handoff.md).
 
 ## Answer Part 0: Team and Evidence Index
 
@@ -31,9 +31,9 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 | Check | Result | Main limit |
 |---|---|---|
 | C-01 | PASSED | Counts read from the CI log. |
-| C-02 | Technical proof PASSED; visual evidence incomplete | Assisted witness; historical blocked-control screenshot missing; the proof PR is never merged. |
+| C-02 | Proof PASSED; deliberate CI FAILURE retained | Original #95 retained; later [native blocked-control capture](evidence/C02-visual-proof.md) from #105, closed without merging. |
 | C-03 | PASSED locally | Local Docker, not cloud. |
-| C-04 | Behaviour PASSED; visual evidence incomplete | Creation flow was A-assisted; B verified saved records and 404 denial on `8e637e5`. Existing captures omit the browser address bar required by the handout. |
+| C-04 | Behaviour PASSED; URL-visible role readbacks recorded | Original creation flow and B exact-record checks are retained; [native URL-visible screenshots](evidence/C04-native-readback.md) now supplement the earlier viewport captures. |
 | C-05 | Domain persistence PASSED | Verified by A and B across restart and redeploy; session survival NOT ESTABLISHED; eight-hour test NOT RUN. |
 | C-06 | PASSED | Delivered by a manually dispatched run; no live rollback. |
 
@@ -47,7 +47,11 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 
 **C-02: a failing required test blocks the merge.** [PR #95](https://github.com/zerotwobook/fastTrack/pull/95) changed one assertion in `deploy/tests/test_smoke.py` and nothing else. Its run [43144813896](https://github.com/zerotwobook/fastTrack/actions/runs/43144813896) failed the required check (`AssertionError: 4 != 5`). While the PR was non-Draft and conflict-free, GitHub reported `mergeStateStatus: BLOCKED`. It was closed unmerged. A's [review](https://github.com/zerotwobook/fastTrack/pull/95#pullrequestreview-5868601890) is an assisted witness, not separate manual testing. Details: [C02-gate-witness.md](evidence/C02-gate-witness.md).
 
-**Capture limit.** The preserved witness records the live non-Draft blocked state and required-check failure, but this package contains no historical screenshot of the blocked merge control. B must supply a genuine retained capture if available or keep that visual-evidence gap explicit in the final submission. The now-closed PR page is not a screenshot of its earlier blocked state, and no new failing experiment is implied by this report.
+**Later authorized visual proof.** The original #95 historical blocked-control image was not retained. A prepared [PR #105](https://github.com/zerotwobook/fastTrack/pull/105) from current main `8e637e5` with one harmless mocked assertion, then obtained explicit exact-head/base authorization before lifting Draft. [Run 43258714014](https://github.com/zerotwobook/fastTrack/actions/runs/43258714014) failed the actual required check. The native image below shows the normal PR, failed required context and disabled blocked merge. It was closed without merging at `2026-11-12T16:35:23Z`, preserving main and all history. The missing peer review is also visible; effective required-check policy establishes that the test failure independently blocks merging. Full controls and limits: [C02-visual-proof.md](evidence/C02-visual-proof.md).
+
+![Actual failed required check and disabled merge on PR 105](evidence/C02-blocked-pr105.png)
+
+*Figure C02-1. C-02 (R-06): real Chrome window at <https://github.com/zerotwobook/fastTrack/pull/105> shows `test-and-docker` FAILURE marked Required, `Merging is blocked` and the disabled merge button. Head `485928918b684ea2de51af3ab4df42607a190b57` against main `8e637e537cd037d630a5fffc1b5672d1b44371a8`; captured before closure at the time/hash in [the capture ledger](../../../Project_code/docs/evidence/R2-J01-C02-visual-proof.json). This is a later controlled proof, not the historical #95 image.*
 
 ## Answer Part 2: Docker and Reproducible Configuration
 
@@ -74,7 +78,7 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 
 **Limits and completed peer cross-check.** The original browser sessions were closed before the restart and were already unavailable after the redeploy, so session survival is NOT ESTABLISHED and the eight-hour test is NOT RUN. A completed the [assisted artifact review](https://github.com/zerotwobook/fastTrack/pull/103#issuecomment-6827507476) and [user-authorized approval](https://github.com/zerotwobook/fastTrack/pull/103#pullrequestreview-5877064197) of B's witness in [PR #103](https://github.com/zerotwobook/fastTrack/pull/103), merged into staging as `5b1757afac3bb92cd41d76169071507db941c018`. This reviews B's recorded observations; it is not another authenticated execution. The handout's C-05 checks domain-record persistence; it does not separately require an eight-hour session experiment. That remaining project/session limitation is retained without treating it as a completed test.
 
-**C-04 screenshot requirement remains open.** Handout section 8 asks for screenshots with the URL visible. The current page-viewport images and written URL captions establish useful context but do not contain the browser address bar. Additional genuine browser-window captures of the role journey and foreign-team rejection are still needed. Do not add a simulated address bar or relabel existing images as new execution.
+**C-04 URL-visible supplement recorded.** Handout section 8 asks for screenshots with the URL visible. The later [native Chrome readback](evidence/C04-native-readback.md) now shows the actual public URL, original Version 1/feedback in Student A1 and Supervisor A views, and generic foreign Supervisor B denial. Images are unedited native window captures. They supplement the original creation/API evidence; they are not relabelled as the historical creation, restart or redeploy experiment.
 
 **Selected visual evidence.** Figures 1–3 show the original submission route `/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd` at `https://fasttrack-app-kpx7au3w2a-as.a.run.app` on 12 November 2026. These existing page-viewport captures have no browser address bar; the URL/source context is recorded here and in the linked observation records. Exact IDs and values are established by the immutable JSON comparison, not matching visible titles alone. Preserve readable figure size during the user's final export.
 
@@ -120,4 +124,6 @@ Initial B checks on 12 November 2026 (about 09:35Z), before the first report-sou
 
 No PDF was generated, rebuilt or exported. No secret value, cookie or token appears in these files.
 
-**Closure follow-up:** the fresh [anonymous HTTP readback](../../../Project_code/docs/evidence/R2-J01-closure-readback.json) passed four public checks and confirmed the accepted sign-in copy at `2026-11-12T15:37:42Z`-`15:37:46Z`. This is separate from the earlier CI/browser observations and does not establish new authenticated execution or current Cloud traffic allocation. PR #104 records the final documentation checks and exact candidate; its peer review and the missing images must not be inferred from this paragraph.
+**Closure follow-up:** the fresh [anonymous HTTP readback](../../../Project_code/docs/evidence/R2-J01-closure-readback.json) passed four public checks and confirmed the accepted sign-in copy at `2026-11-12T15:37:42Z`-`15:37:46Z`. This is separate from the earlier CI/browser observations and does not establish new authenticated execution or current Cloud traffic allocation. PR #104 records the final documentation checks and exact candidate; its peer review and acceptance of the completed C-02 visual evidence must not be inferred from this paragraph.
+
+**URL-visible role supplement.** [Figure N-2 (Student)](evidence/C04-native-student.png), [Figure N-3 (Supervisor A)](evidence/C04-native-supervisor.png) and [Figure N-4 (foreign denial)](evidence/C04-native-foreign.png) show the actual browser origin and original submission route in the later native readback. Full numbered captions, times, provenance, cleanup and limits are in [C04-native-readback.md](evidence/C04-native-readback.md). The earlier persistence figures above remain unchanged historical evidence.
