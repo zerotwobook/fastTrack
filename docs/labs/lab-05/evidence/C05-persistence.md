@@ -2,7 +2,9 @@
 
 Owner: A (`zerotwobook`), R2-J01 / [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16). B (`Atip-Infa`) is the independent reviewer. This phase follows B's accepted staging merge of PR #96 at `95a541927726d8a5fe599b68bf20b05ff0fc586a`.
 
-**Restart proof: INCOMPLETE. Later redeploy: NOT RUN.** This document does not approve a cloud interruption or a main release. The user's continuation instruction starts preparation; the previously proposed restart still lacks an agreed outage window and B's current release hold. No scaling command has been executed.
+**Execution checkpoint: AUTHORIZED, not yet performed. Later redeploy: NOT RUN.** After B approved preparation head `ab555a3` and merged PR #97 as `e1db7854e2338a33983199d99a69070c97ef5f50`, the user explicitly instructed continuation in direct response to the five-minute-window request and reported that B is not deploying. This authorizes the unchanged service-only scale-zero/restore-auto operation below, with restoration by T+120 and recovery deadline T+300. It does not authorize a main release or additional cloud/DB changes. The original natural-turnover observation remains INCOMPLETE.
+
+The new execution phase uses A's `docs/s2-a-restart-execution` branch from that staging merge. Issue #16 was changed/read back Started / NOT RUN / PENDING before edits. Fresh runtime identity remains source `16ec6d2`, revision `fasttrack-app-00002-f75`, 100% traffic; no open release PR or active main deployment was found. The release hold is user-reported, not a fabricated direct B witness. Previous C04 browser contexts are closed; new isolated role logins will establish this experiment's session baseline. C04-original-session continuity is NOT RUN because those contexts are unavailable.
 
 ## Original records and current observations
 
@@ -22,7 +24,7 @@ Cloud Logging also recorded a new same-revision instance starting for `AUTOSCALI
 
 ## Concrete proposed operation
 
-This proposal narrows [A/09 sections 7–8](../../../../prompt_project/prompt_lab5/A/09_R2-J01_PRE_RELEASE_BUSINESS_AND_RESTART.md#7-prepare-a-distinct-supported-restart-experiment). It requires an actual user decision on the window and a current B release hold before execution.
+This operation narrows [A/09 sections 7–8](../../../../prompt_project/prompt_lab5/A/09_R2-J01_PRE_RELEASE_BUSINESS_AND_RESTART.md#7-prepare-a-distinct-supported-restart-experiment). The user has now supplied the actual window decision and current release-hold report. Recheck the unchanged target immediately before execution.
 
 | Field | Exact scope |
 |---|---|
@@ -31,8 +33,8 @@ This proposal narrows [A/09 sections 7–8](../../../../prompt_project/prompt_la
 | Origin | `https://fasttrack-app-kpx7au3w2a-as.a.run.app` |
 | Persistent DB | Existing `fasttrack-db` / `fasttrack_prod`; no DB mutation belongs to this experiment |
 | Availability window | One agreed five-minute maintenance window starting immediately after fresh preflight. Expected disabled period at most two minutes; start restoration by T+120 seconds even if proof is absent. Recovery/readiness deadline T+300 seconds. These are operator deadlines, not a platform recovery guarantee. |
-| User decision | PENDING for this concrete outage window and both commands below |
-| B coordination | PENDING: no later deployment during the experiment. Absence of an open PR is not a confirmed release hold. |
+| User decision | AUTHORIZED in direct response to the concrete five-minute-window request; recorded in Issue #16 before execution |
+| B coordination | User reports B is not deploying and instructs continuation. No direct B restart witness is claimed. |
 | Preservation | Same source, image, revision, traffic and DB; automatic min 0, service max 3, revision max 2, concurrency 8 |
 | Scope exclusions | No seed, migration, reset, image/env update, resource deletion, IAM change or main merge |
 
