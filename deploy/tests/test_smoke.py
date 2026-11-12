@@ -30,7 +30,7 @@ class SmokeTests(unittest.TestCase):
     def test_public_checks_pass_and_skip_optional_login(self):
         with patch.object(smoke, 'request', side_effect=self.response) as req:
             smoke.check('https://demo.example.test')
-            self.assertEqual(req.call_count, 4)
+            self.assertEqual(req.call_count, 5, 'C-02 controlled proof: deliberate failing assertion to verify required check test-and-docker blocks merge')
 
     @patch.dict('os.environ', {'EXPECTED_RELEASE_SHA': '2222222222222222222222222222222222222222'}, clear=True)
     def test_version_mismatch_fails(self):
