@@ -1,0 +1,135 @@
+{
+  "task": "R2-J01 / C06-VIS-01",
+  "owner": "A / zerotwobook",
+  "recordedAt": "2026-11-12T07:31:05.692430+00:00",
+  "builtAppSourceCommit": "b772af40456a348c50b7e30364849c17f428caa3",
+  "stagingBase": "692d3704ab098235dfa84826f48d2005b13964b7",
+  "introBefore": "Keep track of your team's work and feedback.",
+  "introAfter": "Track your team's milestones, submissions, and feedback.",
+  "observations": [
+    {
+      "observedAt": "2026-11-12T07:26:17.299Z",
+      "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/login",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "layout": {
+        "introText": "Keep track of your team's work and feedback.",
+        "viewportWidth": 1280,
+        "documentWidth": 1280,
+        "formBounds": {
+          "left": 408,
+          "right": 872,
+          "width": 464
+        },
+        "fontFamily": "Inter, \"Noto Sans Thai\", Tahoma, sans-serif",
+        "introColor": "rgb(89, 89, 89)"
+      },
+      "controls": {
+        "email": true,
+        "password": true,
+        "submit": true,
+        "passwordToggle": true,
+        "help": true
+      },
+      "healthSource": "16ec6d268ac087f3834be7da55dda29e589847ce",
+      "authFlowTested": false,
+      "screenshot": "docs/labs/lab-05/evidence/C06-login-public-before.png",
+      "screenshotSha256": "91defdd994a01c656994ffaae4b4b394974313cdb5216bb8372afb7f1992e8c7",
+      "mode": "actual public before-state",
+      "result": "PASS"
+    },
+    {
+      "observedAt": "2026-11-12T07:26:20.127Z",
+      "url": "http://127.0.0.1:4175/login",
+      "viewport": {
+        "width": 1280,
+        "height": 720
+      },
+      "layout": {
+        "introText": "Track your team's milestones, submissions, and feedback.",
+        "viewportWidth": 1280,
+        "documentWidth": 1280,
+        "formBounds": {
+          "left": 408,
+          "right": 872,
+          "width": 464
+        },
+        "fontFamily": "Inter, \"Noto Sans Thai\", Tahoma, sans-serif",
+        "introColor": "rgb(89, 89, 89)"
+      },
+      "controls": {
+        "email": true,
+        "password": true,
+        "submit": true,
+        "passwordToggle": true,
+        "help": true
+      },
+      "healthSource": null,
+      "authFlowTested": false,
+      "screenshot": "docs/labs/lab-05/evidence/C06-login-local-desktop.png",
+      "screenshotSha256": "4d443c89692671da4ca992c520d6565f753f7838ed8a2bdfdf6a22e516ba407c",
+      "mode": "local built client with anonymous-session fixture; no real auth/DB",
+      "result": "PASS"
+    },
+    {
+      "observedAt": "2026-11-12T07:26:22.821Z",
+      "url": "http://127.0.0.1:4175/login",
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "layout": {
+        "introText": "Track your team's milestones, submissions, and feedback.",
+        "viewportWidth": 390,
+        "documentWidth": 390,
+        "formBounds": {
+          "left": 16,
+          "right": 374,
+          "width": 358
+        },
+        "fontFamily": "Inter, \"Noto Sans Thai\", Tahoma, sans-serif",
+        "introColor": "rgb(89, 89, 89)"
+      },
+      "controls": {
+        "email": true,
+        "password": true,
+        "submit": true,
+        "passwordToggle": true,
+        "help": true
+      },
+      "healthSource": null,
+      "authFlowTested": false,
+      "screenshot": "docs/labs/lab-05/evidence/C06-login-local-mobile.png",
+      "screenshotSha256": "7276d1e143bcef4fb6de326316240cefd86478d35377b5940c10b51c7966674e",
+      "mode": "local built client with anonymous-session fixture; no real auth/DB",
+      "result": "PASS"
+    }
+  ],
+  "localChecks": {
+    "toolchain": {
+      "node": "26.13.0",
+      "npm": "11.20.0"
+    },
+    "sessionRegression": {
+      "command": "npx --no-install vitest run client/src/features/auth/session.test.ts",
+      "files": 1,
+      "passed": 37,
+      "failed": 0
+    },
+    "clientTypecheckAndBuild": {
+      "command": "npm run build --workspace @fasttrack/client",
+      "result": "PASS"
+    }
+  },
+  "release": "NOT RUN",
+  "liveWIF": "NOT RUN",
+  "cloudMutations": false,
+  "limits": [
+    "Local visual preview has GET /api/auth/me=401 fixture and no application API/database.",
+    "No authenticated browser business flow or full accessibility suite is claimed for this copy-only task.",
+    "Public before-state is accepted source 16ec6d2; local candidate has not been deployed.",
+    "Current-head CI and peer acceptance are recorded separately in the PR/Issue."
+  ]
+}
