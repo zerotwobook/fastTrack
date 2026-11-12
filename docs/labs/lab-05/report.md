@@ -31,8 +31,8 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 | C-01 | PASSED | Counts read from the CI log. |
 | C-02 | PASSED | Assisted witness; the proof PR is never merged. |
 | C-03 | PASSED locally | Local Docker, not cloud. |
-| C-04 | PASSED (assisted) | B's independent readback PENDING. |
-| C-05 | Domain persistence PASSED | Session survival NOT ESTABLISHED; eight-hour test NOT RUN. |
+| C-04 | PASSED | Creation flow was A-assisted; B verified saved records and 404 denial on `8e637e5`. |
+| C-05 | Domain persistence PASSED | Verified by A and B across restart and redeploy; session survival NOT ESTABLISHED; eight-hour test NOT RUN. |
 | C-06 | PASSED | Delivered by a manually dispatched run; no live rollback. |
 
 ## Answer Part 1: CI and Quality Gate
@@ -67,9 +67,10 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 |---|---|---|
 | Baseline, 04:08Z | `16ec6d2` / `fasttrack-app-00002-f75` | Canonical SHA-256 `c5396255…0f4e` |
 | After distinct restart, 06:13-06:15Z | Same revision; scale to zero, platform sample active=0 and idle=0 at 06:14:00Z, then a new instance | Same records, same hash ([C05-persistence.md](evidence/C05-persistence.md)) |
-| After later redeploy, 09:12Z | `8e637e5` / `fasttrack-app-00003-rc7` | Same records, same hash, both roles; wrong-team read still 404 ([C05-redeploy.md](evidence/C05-redeploy.md)) |
+| After later redeploy (A), 09:12Z | `8e637e5` / `fasttrack-app-00003-rc7` | Same records, same hash, both roles; wrong-team read still 404 ([C05-redeploy.md](evidence/C05-redeploy.md)) |
+| After later redeploy (B witness), 14:55Z | `8e637e5` / `fasttrack-app-00003-rc7` | Same records, same hash `c5396255…0f4e`, both roles (`Student A1`, `Supervisor A`); Supervisor B still 404 `NOT_FOUND` (`Submission unavailable`); all 3 sessions logged out (`/api/auth/me` -> 401) ([B-post-release-readback.md](evidence/B-post-release-readback.md)) |
 
-**Limits.** The original browser sessions were closed before the restart and were already unavailable after the redeploy, so session survival is NOT ESTABLISHED and the eight-hour test is NOT RUN. B's own readback of the exact records with the private test accounts is PENDING.
+**Limits.** The original browser sessions were closed before the restart and were already unavailable after the redeploy, so session survival is NOT ESTABLISHED and the eight-hour test is NOT RUN. Peer cross-check of B's new post-release witness artifact is pending review on its branch PR.
 
 **Selected visual evidence.** Figures 1–3 show the original submission route `/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd` at `https://fasttrack-app-kpx7au3w2a-as.a.run.app` on 12 November 2026. These existing page-viewport captures have no browser address bar; the URL/source context is recorded here and in the linked observation records. Exact IDs and values are established by the immutable JSON comparison, not matching visible titles alone. Preserve readable figure size during the user's final export.
 
