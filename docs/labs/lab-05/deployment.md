@@ -106,7 +106,29 @@ Remove-Item Env:CONFIRM_RATE_LIMIT_CLEANUP
 
 It deletes at most 100 expired limiter rows in a bounded indexed transaction with `SKIP LOCKED`, preserving active windows/locks and every session/domain table. It prints only count/status. The flag is an acknowledgement, not independent cloud-mutation permission. Schedule further batches only through the reviewed maintenance plan; nothing runs automatically at HTTP startup.
 
-## 6. Cloud provisioning review plan (not executed by R2-A01)
+## 6. Cloud resources: verified inventory and original review plan
+
+### 6.1 Verified deployed inventory (read 12 November 2026)
+
+Each row is corroborated by an existing evidence record. A resource name alone is not proof; follow the link.
+
+| Item | Verified value | Evidence |
+|---|---|---|
+| Project / number / region | `fasttrack-se-002` / `970128017651` / `asia-southeast1` | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Cloud Run service | `fasttrack-app`; canonical URL `https://fasttrack-app-kpx7au3w2a-as.a.run.app`; automatic min 0, service max 3, revision max 2, concurrency 8 | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Serving source | Main `8e637e537cd037d630a5fffc1b5672d1b44371a8`, revision `fasttrack-app-00003-rc7`, one 100% traffic assignment | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Registry images | `fasttrack-docker`: web `fasttrack-app@sha256:d7606d79…cb99`, jobs `fasttrack-jobs@sha256:5e94cc94…f4d4`, both tagged with the full SHA | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Persistent database | Cloud SQL `fasttrack-se-002:asia-southeast1:fasttrack-db`, attached to the service and migration job | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Connection secret | One Secret Manager reference `fasttrack-database-url` (version 1); payload never read | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Migration job | `fasttrack-migrate`; latest execution `fasttrack-migrate-dnvqn`, one task, max retries 0, succeeded 1 | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Runtime identity | `sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com` | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Deployer identity | `sa-fasttrack-deployer@fasttrack-se-002.iam.gserviceaccount.com`, reached by keyless WIF (pool `github-pool`, provider `github-provider`); no JSON key | [Run 43186570077](https://github.com/zerotwobook/fastTrack/actions/runs/43186570077) |
+| GitHub environment | `demo`, main only, independent approval (self-review prevented) | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Demo seed | Job `fasttrack-seed-c04`, one execution, add-only seed; synthetic password secret `fasttrack-demo-password` | [C04-public-flow.md](evidence/C04-public-flow.md) |
+
+Access for graders: the public URL and the public repository. Test account passwords are never committed; the team shares them privately. Cost and availability: the service scales to zero when idle. It must stay available until grading ends, so do not pause it or tear it down; teardown is a separate, explicitly authorized destructive operation.
+
+### 6.2 Original provisioning review plan (historical, proposed before execution)
 
 Recorded proposed inputs: project `fasttrack-se-002`, number `970128017651`, region `asia-southeast1`; service `fasttrack-app`; registry `fasttrack-docker`; SQL `fasttrack-db`, database `fasttrack_prod`; runtime/deployer identities `sa-fasttrack-runtime` / `sa-fasttrack-deployer`. Cloud existence, billing/credits, current costs, IAM, connection and public URL require read-only verification by the account holder. No resource is certified present from its name alone.
 
