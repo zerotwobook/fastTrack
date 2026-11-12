@@ -1,0 +1,576 @@
+{
+  "runId": "A11-20261112",
+  "owner": "A / zerotwobook",
+  "observedAt": "2026-11-12T09:14:40.884885+00:00",
+  "domainPersistence": "PASS across baseline, distinct restart and later redeploy",
+  "wrongTeamRead": "PASS",
+  "visibleChange": "PASS (actual public login screenshot and observed snapshot)",
+  "releaseIdentityCrossCheck": "PASS",
+  "retainedSessionSurvival": "NOT ESTABLISHED: restart-specific contexts were already closed before observation",
+  "fullEightHourSurvival": "NOT RUN",
+  "humanAcceptance": "PENDING",
+  "baseline": {
+    "path": "Project_code/docs/evidence/R2-J01-C04-baseline.json",
+    "evidenceCommit": "9077d22386fcb4dc7eb8adb66017e3c26f1b6878",
+    "fileSha256": "a54074ae9a07a0ce3138193245fd16c9ff2fc2800568f02f3f6e010cd86eb114",
+    "comparisonKeys": [
+      "team",
+      "milestone",
+      "submission",
+      "feedback",
+      "submissionCount",
+      "feedbackCount"
+    ],
+    "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e"
+  },
+  "runtime": {
+    "observedAt": "2026-11-12T09:11:45.204632+00:00",
+    "project": "fasttrack-se-002",
+    "region": "asia-southeast1",
+    "service": "fasttrack-app",
+    "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "revision": "fasttrack-app-00003-rc7",
+    "traffic": [
+      {
+        "latestRevision": true,
+        "percent": 100,
+        "revisionName": "fasttrack-app-00003-rc7"
+      }
+    ],
+    "serviceImage": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:d7606d79c068f7e86796e33f2f0872a02954f1c7a7d5b2d2253a43a1a334cb99",
+    "registryWebDigest": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:d7606d79c068f7e86796e33f2f0872a02954f1c7a7d5b2d2253a43a1a334cb99",
+    "registryJobsDigest": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-jobs@sha256:5e94cc946c3ec00353048ec598d082eed0fa1814b24e08e3ea057fdeca5df4d4",
+    "revisionResolvedImageDigest": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:d7606d79c068f7e86796e33f2f0872a02954f1c7a7d5b2d2253a43a1a334cb99",
+    "runtimeSA": "sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com",
+    "cloudSqlAttachment": "fasttrack-se-002:asia-southeast1:fasttrack-db",
+    "secretRefs": {
+      "DATABASE_URL": {
+        "key": "1",
+        "name": "fasttrack-database-url"
+      }
+    },
+    "safeRuntimeEnv": {
+      "NODE_ENV": "production",
+      "APP_ORIGIN": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+      "RELEASE_SHA": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+    },
+    "limits": {
+      "mode": "automatic",
+      "serviceMax": "3",
+      "revisionMax": "2",
+      "min": "0",
+      "concurrency": 8
+    },
+    "migration": {
+      "name": "fasttrack-migrate-dnvqn",
+      "createdAt": "2026-11-12T09:04:49.316621Z",
+      "startedAt": "2026-11-12T09:05:13.168151Z",
+      "completedAt": "2026-11-12T09:05:39.568704Z",
+      "succeededCount": 1,
+      "failedCount": 0,
+      "taskCount": 1,
+      "parallelism": 1,
+      "maxRetries": 0,
+      "runtimeSA": "sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com",
+      "image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-jobs@sha256:5e94cc946c3ec00353048ec598d082eed0fa1814b24e08e3ea057fdeca5df4d4",
+      "command": [
+        "npm"
+      ],
+      "args": [
+        "run",
+        "db:migrate",
+        "--workspace",
+        "@fasttrack/server"
+      ],
+      "secretRefs": {
+        "DATABASE_URL": {
+          "key": "1",
+          "name": "fasttrack-database-url"
+        }
+      }
+    },
+    "allowlistedDeploymentLogLines": [
+      "deploy\tVerify image, migrate and deploy\t2026-11-12T09:05:41.4417866Z Database migration completed successfully.",
+      "deploy\tSmoke test public URL\t2026-11-12T09:06:19.9185210Z PASS /api/health",
+      "deploy\tSmoke test public URL\t2026-11-12T09:06:19.9186052Z PASS /api/ready",
+      "deploy\tSmoke test public URL\t2026-11-12T09:06:19.9186363Z PASS /",
+      "deploy\tSmoke test public URL\t2026-11-12T09:06:19.9186649Z PASS /api/nonexistent",
+      "deploy\tSmoke test public URL\t2026-11-12T09:06:19.9187060Z SKIP login: optional smoke credentials not configured"
+    ],
+    "workflow": {
+      "headSha": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+      "status": "completed",
+      "conclusion": "success",
+      "event": "workflow_dispatch",
+      "runId": 43186570077,
+      "jobs": [
+        {
+          "name": "test / test-and-docker",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-12T08:52:50Z",
+          "completedAt": "2026-11-12T08:54:47Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout repository",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Setup Node.js 26.13.0",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Setup Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Check deployment scripts without accessing GCP",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Install workspace dependencies",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Generate Prisma client",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "TypeScript typecheck",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "FastTrack unit and contract tests",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Client and server production build",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Isolated DB, migration, S1 and Lab 5 runtime regressions",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Upload sanitized runtime regression report",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify production Docker builds (runner and jobs targets)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Setup Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Setup Node.js 26.13.0",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Checkout repository",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        },
+        {
+          "name": "deploy",
+          "status": "completed",
+          "conclusion": "success",
+          "startedAt": "2026-11-12T09:02:12Z",
+          "completedAt": "2026-11-12T09:06:24Z",
+          "steps": [
+            {
+              "name": "Set up job",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Checkout repository",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Validate deployment settings",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Authenticate to Google Cloud (WIF)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Set up Cloud SDK",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Build and push production web and jobs images",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Verify image, migrate and deploy",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Setup Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Smoke test public URL",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Record deployment summary",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Setup Python 3.12",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Authenticate to Google Cloud (WIF)",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Post Checkout repository",
+              "status": "completed",
+              "conclusion": "success"
+            },
+            {
+              "name": "Complete job",
+              "status": "completed",
+              "conclusion": "success"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "environmentApprovals": [
+    {
+      "state": "approved",
+      "user": "Atip-Infa",
+      "environments": [
+        "demo"
+      ]
+    }
+  ],
+  "roles": [
+    {
+      "role": "student",
+      "observation": {
+        "observedAt": "2026-11-12T09:12:36.422Z",
+        "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+        "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+        "actor": {
+          "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+          "displayName": "Student A1",
+          "role": "student"
+        },
+        "team": {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        },
+        "milestone": {
+          "id": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "title": "C04 baseline 2026-11-12 0404 UTC",
+          "description": "Synthetic public verification baseline. Preserve the original milestone, submission and exact feedback for distinct restart and later redeploy checks.",
+          "dueAt": "2026-11-19T04:04:00.000Z",
+          "cancelledAt": null,
+          "createdAt": "2026-11-12T04:04:50.033Z",
+          "latestSubmission": {
+            "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "version": 1,
+            "submittedAt": "2026-11-12T04:07:08.322Z",
+            "feedbackCount": 1
+          }
+        },
+        "submission": {
+          "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+          "milestoneId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "submittedBy": {
+            "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+            "displayName": "Student A1"
+          },
+          "version": 1,
+          "title": "C04 initial submission",
+          "description": "Synthetic work record created through the public Student UI for the approved C04 case.",
+          "url": "https://example.com/fasttrack-c04",
+          "submittedAt": "2026-11-12T04:07:08.322Z"
+        },
+        "feedback": [
+          {
+            "id": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+            "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "C04 verified feedback on the exact original submission version. Preserve this record through restart and redeploy.",
+            "clientRequestId": "d8e93c8b-3968-4c54-b5a7-e0ebaed367ad",
+            "createdAt": "2026-11-12T04:08:02.974Z"
+          }
+        ],
+        "submissionCount": 1,
+        "feedbackCount": 1,
+        "cookies": [
+          {
+            "name": "fasttrack_session",
+            "secure": true,
+            "httpOnly": true,
+            "sameSite": "Lax",
+            "expires": 1794503534.717611,
+            "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+            "path": "/"
+          }
+        ]
+      },
+      "baselineAndRestartAndRedeployEqual": true,
+      "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e"
+    },
+    {
+      "role": "supervisor",
+      "observation": {
+        "observedAt": "2026-11-12T09:12:39.660Z",
+        "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+        "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+        "actor": {
+          "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+          "displayName": "Supervisor A",
+          "role": "supervisor"
+        },
+        "team": {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        },
+        "milestone": {
+          "id": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "title": "C04 baseline 2026-11-12 0404 UTC",
+          "description": "Synthetic public verification baseline. Preserve the original milestone, submission and exact feedback for distinct restart and later redeploy checks.",
+          "dueAt": "2026-11-19T04:04:00.000Z",
+          "cancelledAt": null,
+          "createdAt": "2026-11-12T04:04:50.033Z",
+          "latestSubmission": {
+            "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "version": 1,
+            "submittedAt": "2026-11-12T04:07:08.322Z",
+            "feedbackCount": 1
+          }
+        },
+        "submission": {
+          "id": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+          "milestoneId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+          "submittedBy": {
+            "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+            "displayName": "Student A1"
+          },
+          "version": 1,
+          "title": "C04 initial submission",
+          "description": "Synthetic work record created through the public Student UI for the approved C04 case.",
+          "url": "https://example.com/fasttrack-c04",
+          "submittedAt": "2026-11-12T04:07:08.322Z"
+        },
+        "feedback": [
+          {
+            "id": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+            "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "C04 verified feedback on the exact original submission version. Preserve this record through restart and redeploy.",
+            "clientRequestId": "d8e93c8b-3968-4c54-b5a7-e0ebaed367ad",
+            "createdAt": "2026-11-12T04:08:02.974Z"
+          }
+        ],
+        "submissionCount": 1,
+        "feedbackCount": 1,
+        "cookies": [
+          {
+            "name": "fasttrack_session",
+            "secure": true,
+            "httpOnly": true,
+            "sameSite": "Lax",
+            "expires": 1794503534.807722,
+            "domain": "fasttrack-app-kpx7au3w2a-as.a.run.app",
+            "path": "/"
+          }
+        ]
+      },
+      "baselineAndRestartAndRedeployEqual": true,
+      "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e"
+    }
+  ],
+  "denial": {
+    "case": "C05-05",
+    "result": "PASS",
+    "status": 404,
+    "actor": {
+      "id": "a5ab1c3e-eac4-49ba-ba48-02009692b0df",
+      "displayName": "Supervisor B",
+      "role": "supervisor"
+    },
+    "teamIds": [
+      "cd27932d-72db-41b2-99c7-3dcee3929aae"
+    ],
+    "protectedSubmissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "The requested resource was not found.",
+      "fields": {}
+    },
+    "observedAt": "2026-11-12T09:12:42.315Z"
+  },
+  "uiObservations": [
+    {
+      "observedAt": "2026-11-12T09:13:29.096Z",
+      "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "role": "student",
+      "heading": "C04 initial submission",
+      "feedbackVisible": true,
+      "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+      "screenshot": "docs/labs/lab-05/evidence/C05-redeploy-student.png"
+    },
+    {
+      "observedAt": "2026-11-12T09:13:31.496Z",
+      "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "role": "supervisor",
+      "heading": "C04 initial submission",
+      "feedbackVisible": true,
+      "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+      "screenshot": "docs/labs/lab-05/evidence/C05-redeploy-supervisor.png"
+    },
+    {
+      "observedAt": "2026-11-12T09:13:34.546Z",
+      "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "role": "foreign",
+      "heading": "Submission unavailable",
+      "feedbackVisible": false,
+      "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+      "screenshot": "docs/labs/lab-05/evidence/C05-redeploy-foreign.png"
+    }
+  ],
+  "screenshots": [
+    {
+      "roleOrPage": "login",
+      "path": "docs/labs/lab-05/evidence/C05-redeploy-login.png",
+      "sha256": "4d443c89692671da4ca992c520d6565f753f7838ed8a2bdfdf6a22e516ba407c",
+      "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+      "route": "/login"
+    },
+    {
+      "roleOrPage": "student",
+      "path": "docs/labs/lab-05/evidence/C05-redeploy-student.png",
+      "sha256": "e78951b253c2c38a4499b549697c789add6e995aae67dff910b287740ad3d6d6",
+      "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd"
+    },
+    {
+      "roleOrPage": "supervisor",
+      "path": "docs/labs/lab-05/evidence/C05-redeploy-supervisor.png",
+      "sha256": "c3fed68c623394fd594800488b0e6afa52caf0508d23167ada9615346c43f56e",
+      "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd"
+    },
+    {
+      "roleOrPage": "foreign",
+      "path": "docs/labs/lab-05/evidence/C05-redeploy-foreign.png",
+      "sha256": "37c5056ec96423e7d57ae6565d2968682863716da9bcf923557b1ada16a268c1",
+      "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd"
+    }
+  ],
+  "temporarySessionCleanup": [
+    {
+      "context": "ft-a11-student",
+      "observedAt": "2026-11-12T09:13:51.725Z",
+      "authMeStatus": 401,
+      "temporarySessionLoggedOut": true
+    },
+    {
+      "context": "ft-a11-supervisor",
+      "observedAt": "2026-11-12T09:13:53.257Z",
+      "authMeStatus": 401,
+      "temporarySessionLoggedOut": true
+    },
+    {
+      "context": "ft-a11-foreign",
+      "observedAt": "2026-11-12T09:13:53.082Z",
+      "authMeStatus": 401,
+      "temporarySessionLoggedOut": true
+    }
+  ],
+  "limits": [
+    "Successful delivery event is workflow_dispatch, replacing the cancelled zero-step push run with separate user authorization.",
+    "B deployment approval and earlier evidence reviews do not establish independent post-redeploy record readback; that witness remains pending.",
+    "Cookie attributes only; no cookie values/CSRF/password/session export retained.",
+    "New role logins establish domain reads only, not survival of closed pre-release sessions.",
+    "Desktop viewport captures have no address bar; exact origin/routes/source accompany them.",
+    "No domain records, schema, seed, runtime settings, deployment, migration or traffic were mutated by A11.",
+    "Read-only DB continuity is supported by unchanged Cloud SQL attachment and DATABASE_URL secret name/version, not a secret-payload dump."
+  ]
+}

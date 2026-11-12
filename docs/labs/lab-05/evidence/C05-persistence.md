@@ -2,6 +2,8 @@
 
 **Restart half: PASS. Later redeploy: NOT RUN. Whole C-05 and human acceptance: PENDING.** A (`zerotwobook`) executed one authorized service-only scale-zero/restore-auto experiment on 12 November 2026. B (`Atip-Infa`) must independently review this result. This is R2-J01 / [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16), execution [PR #98](https://github.com/zerotwobook/fastTrack/pull/98), branch `docs/s2-a-restart-execution`.
 
+**Later checkpoint:** B accepted this exact restart evidence at `b1a8357` and merged PR #98. The separate [A/11 post-redeploy report](C05-redeploy.md) now verifies the same original IDs/values after actual source `8e637e5` on `fasttrack-app-00003-rc7`. Its domain comparison passes; B's post-release cross-check and whole acceptance remain pending. The NOT RUN cells below describe this preserved restart-stage observation, not the later experiment's current outcome; use the linked three-stage table and separate JSON for after-redeploy values. Closed earlier browser contexts do not establish session survival.
+
 The service recovered with the same source, image, revision, traffic and revision-template hash. Both roles read the exact original C04 records afterward without logging in again between the experiment's before/after checks. No seed, migration, DB write, image/env update, IAM change, new revision, protected merge or main release was performed.
 
 ## 1. Authorization and experiment boundary
