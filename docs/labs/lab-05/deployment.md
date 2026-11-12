@@ -151,7 +151,7 @@ B implements and maintains root CI/deploy workflows, deployment scripts, offline
 
 Every main-targeted candidate follows [the user gate](../../../workflow/MAIN_RELEASE_GATE.md). Queue releases without cancelling migrations. On migration failure stop before rollout and inspect partial schema state. Rollback deploys a known compatible existing image and skips migration/seed; it does not undo DB data/schema. Do not blindly retry or assume automatic rollback after smoke failure.
 
-Version proof compares actual built main SHA (possibly different from PR head), web/jobs tag/digest, migration execution, serving revision/traffic and health version. A report-only commit can differ from the serving source; record both. C-04 public domain flow, C-05 distinct cloud restart/redeploy and C-06 main pipeline trace remain later joint checks, not local-container claims.
+Version proof compares actual built main SHA (possibly different from PR head), web/jobs tag/digest, migration execution, serving revision/traffic and health version. A report-only commit can differ from the serving source; record both. Public cloud evidence is separate from local-container checks: [C-04 business/access verification](evidence/C04-public-flow.md) records the accepted original ledger; [C-05 controlled restart](evidence/C05-persistence.md) records one authorized same-revision zero/new-instance experiment and unchanged original records on source `16ec6d2` / `fasttrack-app-00002-f75`. Its restart half passed, with B execution review pending. The later visible-change redeploy half and C-06 live main/WIF pipeline trace remain pending; neither a staging evidence merge nor this restart completes those gates.
 
 ## 8. Diagnosis and evidence
 
