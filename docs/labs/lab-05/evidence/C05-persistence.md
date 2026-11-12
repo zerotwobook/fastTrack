@@ -14,7 +14,9 @@ The immutable [C04 baseline](../../../../Project_code/docs/evidence/R2-J01-C04-b
 | Submission | `baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd`, version 1 |
 | Feedback | `b9ebf7f7-a542-4b89-95a8-8f1de22a5357` |
 
-At `2026-11-12T04:45:16.686Z` (11:45:16 Asia/Bangkok), the retained original Student browser context successfully read the original journey without a new login. Source remained `16ec6d268ac087f3834be7da55dda29e589847ce`. This is a new preflight observation, not a completed controlled restart or an eight-hour survival test.
+At `2026-11-12T04:45:16.686Z` (11:45:16 Asia/Bangkok), the retained original Student browser context successfully read the original journey without a new login. The retained Supervisor context did the same at `04:49:36.604Z`. Both observations exactly matched the frozen team, milestone, submission, feedback and counts; the canonical comparison SHA-256 remained `c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e`. Source remained `16ec6d268ac087f3834be7da55dda29e589847ce`. These are new preflight observations, not a completed controlled restart or an eight-hour survival test.
+
+The separate [machine-readable preflight](../../../../Project_code/docs/evidence/R2-J01-C05-preflight.json) retains exact observation times, original-session references and cookie attributes without values, runtime identity, old/new instance IDs, safe startup events and raw metric points. It does not replace the original baseline. Fresh public smoke passed `/api/health`, `/api/ready` (database connected), `/` and unknown-API 404; optional separate smoke login was skipped because no smoke credentials were configured. Authenticated record reads above were independently performed in both retained browser contexts.
 
 Cloud Logging also recorded a new same-revision instance starting for `AUTOSCALING` at `04:44:53.571345Z`, followed by the application listening at `04:44:55.036185Z`. Monitoring reported active=0 and idle=0 at `04:45:00Z`, then active=1 at `04:46:00Z`. The zero point is later than startup, so it cannot establish an unambiguous interval with no old process before the new process began. No old-instance termination signal was found in the inspected log interval. **Do not promote this natural turnover observation to restart PASS.** Detailed sanitized observations and equality checks will accompany the completed preparation handoff.
 
@@ -58,9 +60,11 @@ gcloud run services update fasttrack-app --project=fasttrack-se-002 --region=asi
 
 | Check | Baseline | Current preflight | After authorized restart | After later redeploy | Result |
 |---|---|---|---|---|---|
-| Original milestone/submission/feedback | Frozen C04 ledger | Read successfully; equality validation pending in this draft | NOT RUN | NOT RUN | Pending |
+| Original milestone/submission/feedback | Frozen C04 ledger | Exact equality in both retained roles, counts 1 submission / 1 feedback | NOT RUN | NOT RUN | Preflight PASS |
 | Source/revision | `16ec6d2` / `fasttrack-app-00002-f75` | Unchanged | NOT RUN | NOT RUN | Preflight only |
-| Original Student session | C04 retained browser context | Authenticated without new login at 04:45:16Z | NOT RUN | NOT RUN | No full-TTL claim |
+| Original role sessions | C04 retained Student / Supervisor contexts | Authenticated without new login at 04:45:16Z / 04:49:36Z | NOT RUN | NOT RUN | No full-TTL claim |
 | Old process stopped / new process served | Not applicable | Natural turnover observed; temporal proof insufficient | NOT RUN | NOT RUN | INCOMPLETE |
 
 The next B/10 visible-change release and A/11 redeploy comparison remain separate. Keep their dependency pending while the required restart proof is incomplete. A main candidate still needs the user's review and authorization under [the main-release gate](../../../../workflow/MAIN_RELEASE_GATE.md). This staging preparation does not complete #16 or authorize an external message, protected merge or release.
+
+B approved the C04 artifact head `9077d22386fcb4dc7eb8adb66017e3c26f1b6878` and merged PR #96 into staging. That accepted baseline review is separate from a current execution hold or witnessing this future restart. The current packet is [PR #97](https://github.com/zerotwobook/fastTrack/pull/97); its initial plan commit was `80854de2535202406d68261c144c116e3f7278b7`. No production scaling, data mutation, session export or release occurred while preparing it. Two CLI log-filter quoting errors produced no data or mutation; the successful read-only Logging API query supplied the sanitized provenance instead.
