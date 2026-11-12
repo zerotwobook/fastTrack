@@ -1,0 +1,141 @@
+{
+  "seed": {
+    "authorization_plan": "e1fa3a140357c53e78ad9c4a3c6404aef7c5f9e8",
+    "secret_created_at": "2026-11-12T03:58:45.546711+00:00",
+    "secret_version": "1",
+    "secret_ready_at": "2026-11-12T03:58:53.163847+00:00",
+    "iam_ready_at": "2026-11-12T03:59:09.331183+00:00",
+    "job_ready_at": "2026-11-12T04:00:21.106924+00:00",
+    "job_image": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-jobs@sha256:b5c911962827b063eac223dc1910aeaf0f4e121a34e925747d8f950a2440478a",
+    "execution_started_at": "2026-11-12T04:00:33.278289+00:00",
+    "execution_name": "fasttrack-seed-c04-x9crb",
+    "execution_completed_at": "2026-11-12T04:00:48.956602Z",
+    "execution_result": "SUCCEEDED"
+  },
+  "wrongTeam": {
+    "case": "C04-04",
+    "result": "PASS",
+    "status": 404,
+    "actor": {
+      "id": "a5ab1c3e-eac4-49ba-ba48-02009692b0df",
+      "displayName": "Supervisor B",
+      "role": "supervisor"
+    },
+    "teamIds": [
+      "cd27932d-72db-41b2-99c7-3dcee3929aae"
+    ],
+    "protectedSubmissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+    "error": {
+      "code": "NOT_FOUND",
+      "message": "The requested resource was not found.",
+      "fields": {}
+    },
+    "observedAt": "2026-11-12T04:10:21.784Z"
+  },
+  "sourceAndCsrf": {
+    "case": "C04-05 source/CSRF",
+    "result": "PASS",
+    "checks": [
+      {
+        "name": "foreign origin",
+        "status": 403,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "This request source is not allowed.",
+          "fields": {}
+        }
+      },
+      {
+        "name": "missing CSRF",
+        "status": 403,
+        "error": {
+          "code": "FORBIDDEN",
+          "message": "The security token is invalid. Reload and try again.",
+          "fields": {}
+        }
+      }
+    ],
+    "feedbackCount": 1,
+    "unchangedFeedbackId": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+    "observedAt": "2026-11-12T04:11:55.137Z"
+  },
+  "authenticatedSmoke": {
+    "source": "16ec6d268ac087f3834be7da55dda29e589847ce",
+    "observedAt": "2026-11-12T04:14:42.655323+00:00",
+    "result": "PASS",
+    "checks": [
+      "PASS /api/health",
+      "PASS /api/ready",
+      "PASS /",
+      "PASS /api/nonexistent",
+      "PASS login, /api/auth/me, and read-only scoped /api/teams",
+      "PASS logout"
+    ],
+    "usesSeparateShortLivedSession": true
+  },
+  "uiCreates": {
+    "milestone": {
+      "status": 201,
+      "recordId": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+      "provenance": "Observed CLI requests entry 23 after real Create milestone click, before later deep navigation reset the request list; subsequent scoped GET 200.",
+      "captureLimit": "Initial response.json capture unavailable after navigation; no create retry."
+    },
+    "submission": {
+      "status": 201,
+      "recordId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "provenance": "Retained Student requests entry 19 after Submit work UI operation"
+    },
+    "feedback": {
+      "status": 201,
+      "recordId": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+      "provenance": "Retained Supervisor requests entry 40 after Save feedback UI operation"
+    }
+  },
+  "originalStateComparison": {
+    "result": "PASS",
+    "baselineObservedAt": "2026-11-12T04:08:48.655Z",
+    "readbacks": [
+      {
+        "actor": "Student A1",
+        "observedAt": "2026-11-12T04:14:02.869Z"
+      },
+      {
+        "actor": "Supervisor A",
+        "observedAt": "2026-11-12T04:12:00.480Z"
+      }
+    ],
+    "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e",
+    "equalFields": [
+      "team",
+      "milestone",
+      "submission",
+      "feedback",
+      "submissionCount",
+      "feedbackCount"
+    ],
+    "canonicalization": "Python json.dumps projection of equalFields with sort_keys=True and separators=(comma,colon), UTF-8; observation/actor/cookie metadata excluded."
+  },
+  "sessionCredentialExport": {
+    "result": "NOT RUN",
+    "reason": "Automatic approval review rejected browser-state export; live isolated contexts used instead. No cookie/token values exported."
+  },
+  "restart": {
+    "result": "NOT RUN",
+    "approval": "PENDING"
+  },
+  "redeploy": {
+    "result": "NOT RUN",
+    "approval": "PENDING"
+  },
+  "runId": "C04-20261112T040407Z",
+  "runtimeReadback": {
+    "source": "read-only gcloud service description after C04/authenticated smoke",
+    "project": "fasttrack-se-002",
+    "region": "asia-southeast1",
+    "service": "fasttrack-app",
+    "readyRevision": "fasttrack-app-00002-f75",
+    "trafficPercent": 100,
+    "webIndexDigest": "sha256:7eadbc226af98dd0231513ada70a33f1fb2c59a19ebcca301430221a836eb2e0",
+    "servedSource": "16ec6d268ac087f3834be7da55dda29e589847ce"
+  }
+}

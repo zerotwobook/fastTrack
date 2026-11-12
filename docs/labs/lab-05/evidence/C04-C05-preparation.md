@@ -1,6 +1,8 @@
 # C-04 / C-05 public-flow preparation and account gate
 
-Task R2-J01 / [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16), A/09 Prepare. Owner A (`zerotwobook`); peer B (`Atip-Infa`). Prepared on 12 November 2026 after the user requested continuation and confirmed **no synthetic test accounts are available**. This is a preparation record with fresh public/read-only checks. It is not an executed business-flow or persistence baseline.
+Task R2-J01 / [Issue #16](https://github.com/zerotwobook/fastTrack/issues/16), A/09. Owner A (`zerotwobook`); peer B (`Atip-Infa`). Originally prepared on 12 November 2026 when no synthetic accounts were available.
+
+**Execution update:** the user subsequently authorized A09-SEED-01..04 and A09-CASE-01 at preparation head `e1fa3a1`. They completed successfully; see [actual C-04 execution and immutable ledger](C04-public-flow.md). The inventory/command proposal below retains the reviewed preparation context. Do not repeat its create/seed commands to resume. Restart and later redeploy remain NOT RUN / authorization PENDING.
 
 ## 1. Verified entry state
 
@@ -31,9 +33,9 @@ PASS /api/nonexistent
 SKIP login: optional smoke credentials not configured
 ```
 
-Additional anonymous GETs with the canonical Origin/custom request header returned **401** for `/api/auth/me` and `/api/teams`. No login, credential guess or business mutation occurred. These observations verify public source/DB readiness and unauthenticated denial only. Rendered UI, cookie attributes, independent CSRF, wrong-team denial and C-04/C-05 remain NOT RUN.
+Additional anonymous GETs with the canonical Origin/custom request header returned **401** for `/api/auth/me` and `/api/teams`. This preparation checkpoint involved no login or business mutation. Subsequent rendered UI, cookie, source/CSRF and wrong-team results are recorded in the execution report; these early anonymous checks are not substituted for them.
 
-## 2. Exact synthetic-account proposal: approval pending
+## 2. Retained synthetic-account proposal: authorized and executed
 
 The existing accepted `Project_code/server/prisma/seed.ts` is add-only. With a private `DEMO_SEED_PASSWORD` it creates up to **five users** (two supervisors, three students), **two teams** and **three memberships**. Existing names/passwords/membership/history are preserved. The user's lack of available credentials is not authoritative proof that these emails do not exist in the DB. No DB user enumeration, password reset or secret payload read was performed.
 
@@ -45,7 +47,7 @@ The existing accepted `Project_code/server/prisma/seed.ts` is add-only. With a p
 | Supervisor B | `supervisor.b@fasttrack.local`, Team B | Genuine wrong-team read denial for Team A's saved submission. |
 | Student B1 | `student.b1@fasttrack.local`, Team B | Optional alternate wrong-team fixture; no extra writes required. |
 
-All following actions are **PROPOSED / NOT EXECUTED / AUTHORIZATION PENDING**. Approval for the earlier bootstrap did not include seed execution. The current request permits independent preparation; it does not silently authorize new DB/IAM/secret changes.
+These actions were originally proposed with approval pending. The user then explicitly approved the concrete subset in response to the PR #96 request. The [execution record](C04-public-flow.md#2-actual-account-preparation) identifies actual resources, private generated credential input, verified job configuration and its single successful execution. The earlier bootstrap approval was not reused as seed permission.
 
 | Action | Exact proposed change | Impact / verification / failure boundary |
 |---|---|---|
@@ -57,15 +59,15 @@ All following actions are **PROPOSED / NOT EXECUTED / AUTHORIZATION PENDING**. A
 
 No automatic deletion/revocation is included. Unused job/secret/IAM cleanup can be a separately reviewed follow-up after verification; retaining them incurs their normal resource/secret costs. An existing account whose password differs must be handled explicitly, not overwritten to make a test pass.
 
-### Future commands for the reviewed subset
+### Retained commands for the reviewed subset
 
-These Bash commands are **review material only**. Use the intended authenticated project, recheck absence and obtain selected action-ID authorization first. Do not run `deploy/deploy.sh --demo`: that would combine unrelated provisioning/migration/rollout with this account task.
+These approved commands were executed once and are retained for audit, **not as a resume recipe**. The selected secret/job now exist. Do not repeat them or run `deploy/deploy.sh --demo`, which would combine unrelated provisioning/migration/rollout with this account task.
 
 ```bash
 gcloud secrets create fasttrack-demo-password --replication-policy=automatic --project=fasttrack-se-002
 ```
 
-The account holder adds a strong synthetic-only password as version 1 directly in Secret Manager's private input, outside chat/screenshots. Alternatively, they may use a private local stdin channel. Never print/access the payload. Confirm enabled version 1 metadata before the job references it; if the version differs, amend and review the command first.
+For this execution, a strong synthetic-only value was generated and passed through private stdin as version 1, with its local copy protected by Windows DPAPI. No payload was printed or read back from Secret Manager. Enabled version 1 metadata was verified before configuring the job. Credentials remain outside Git/chat/screenshots.
 
 ```bash
 gcloud secrets versions list fasttrack-demo-password --project=fasttrack-se-002 --format='table(name,state,createTime)'
@@ -79,7 +81,7 @@ gcloud run jobs create fasttrack-seed-c04 \
   --set-secrets=DATABASE_URL=fasttrack-database-url:1,DEMO_SEED_PASSWORD=fasttrack-demo-password:1 \
   --command=npm --args=run,db:seed,--workspace,@fasttrack/server \
   --tasks=1 --parallelism=1 --max-retries=0 --task-timeout=600s --cpu=1 --memory=512Mi
-gcloud run jobs describe fasttrack-seed-c04 --project=fasttrack-se-002 --region=asia-southeast1 --format='json(spec.template.spec.template.spec.containers,spec.template.spec.template.spec.serviceAccountName,spec.template.spec.template.spec.maxRetries,spec.template.spec.template.spec.timeoutSeconds,spec.template.spec.taskCount,spec.template.spec.parallelism)'
+gcloud run jobs describe fasttrack-seed-c04 --project=fasttrack-se-002 --region=asia-southeast1 --format='json(spec.template.metadata.annotations,spec.template.spec.template.spec.containers,spec.template.spec.template.spec.serviceAccountName,spec.template.spec.template.spec.maxRetries,spec.template.spec.template.spec.timeoutSeconds,spec.template.spec.taskCount,spec.template.spec.parallelism)'
 ```
 
 Confirm the job has only the intended secret references; do not print any actual credential env value. Only after the specification readback matches:
@@ -98,13 +100,13 @@ Choose one run-specific English title and a due time seven days after actual exe
 
 | Case | Steps / expected result | Required saved evidence | Actual |
 |---|---|---|---|
-| C04-01 | Assigned Supervisor A creates one Team A milestone through `/teams/:id/milestones/new`, reloads detail; API create 201, subsequent scoped read 200 | Actual team/milestone IDs, title, dueAt, creator and source/time | NOT RUN: accounts unavailable. |
-| C04-02 | Student A1 submits one title/description/URL through `/milestones/:id/submissions/new`; 201 version 1, reload `/submissions/:id` | Actual submission ID, milestone, author, version, accepted timestamp and values | NOT RUN. |
-| C04-03 | Supervisor A opens that exact submission and adds one feedback intent/UUID; first create 201, Student A1 reads it | Actual feedback ID and exact submission/version association; content/author/time | NOT RUN. |
-| C04-04 | Supervisor B requests `GET /api/submissions/:savedTeamASubmissionId` using its own real session | 404 `NOT_FOUND`, generic message, no Team A data; Team A's original records remain unchanged | NOT RUN. Anonymous 401 above is not this case. |
-| C04-05 | Student A1 and Supervisor A refresh/deep-link the saved journey; check HTTPS cookie attributes/source/CSRF through accepted flow | Real UI/API consistency and role-scoped values, attributes/status only; no tokens/headers | NOT RUN. |
+| C04-01 | Assigned Supervisor A creates one Team A milestone through `/teams/:id/milestones/new`, reloads detail; API create 201, subsequent scoped read 200 | Actual team/milestone IDs, title, dueAt, creator and source/time | PASS; actual execution report/ledger. |
+| C04-02 | Student A1 submits one title/description/URL through `/milestones/:id/submissions/new`; 201 version 1, reload `/submissions/:id` | Actual submission ID, milestone, author, version, accepted timestamp and values | PASS; actual execution report/ledger. |
+| C04-03 | Supervisor A opens that exact submission and adds one feedback intent/UUID; first create 201, Student A1 reads it | Actual feedback ID and exact submission/version association; content/author/time | PASS; both role screenshots and saved identity. |
+| C04-04 | Supervisor B requests `GET /api/submissions/:savedTeamASubmissionId` using its own real session | 404 `NOT_FOUND`, generic message, no Team A data; Team A's original records remain unchanged | PASS; genuine wrong-team actor, 404 and unchanged original records. |
+| C04-05 | Student A1 and Supervisor A refresh/deep-link the saved journey; check HTTPS cookie attributes/source/CSRF through accepted flow | Real UI/API consistency and role-scoped values, attributes/status only; no tokens/headers | PASS; cookie flags, independent 403 source/CSRF probes and equal final records. |
 
-Before any disruptive operation, commit a sanitized **actual** ledger with milestone ID -> team, submission ID -> milestone/team/author/version, feedback ID -> exact submission, saved values/timestamps, environment/source/image/revision and evidence time. No original record IDs exist for this run yet; do not substitute placeholder or seed IDs for this ledger.
+Before any disruptive operation, use the now-frozen [actual original-record ledger](C04-public-flow.md#4-immutable-original-record-ledger) and its machine-readable baseline. Preserve the exact milestone/submission/feedback identities and values. Later restart/redeploy observations must be separate records, not replacements or reseeded lookalikes.
 
 Keep one baseline session private and separate from short-lived smoke/logout sessions. Only claim survival while within its original eight-hour absolute TTL. Natural expiry is not data loss. On unknown create outcome, read back before retry; never duplicate/reseed to hide a missing record.
 
@@ -129,7 +131,7 @@ Read the exact original milestone/submission/feedback IDs after restoration and 
 ## 5. Handoff and next actions
 
 - C-02 is independently witnessed and closed unmerged; see [C02-gate-witness.md](C02-gate-witness.md). Whole #15 remains pending for live WIF/release evidence.
-- Current public/runtime checks passed. Accounts, authenticated C-04, immutable record ledger, restart, redeploy and C-05 acceptance remain NOT RUN/PENDING.
-- First decision: review/authorize A09-SEED-01..04 and the bounded synthetic cases A09-CASE-01. The account holder supplies the password privately; no password belongs in the approval response. Restart authorization is a later decision after the baseline is reviewable.
-- B reviews this staging preparation/sync PR and keeps the later visible-change release on hold until baseline/restart evidence is complete. No external message, protected merge, seed/reset, cloud IAM write or service interruption occurred in this preparation.
+- Accounts, public/authenticated C-04 and the immutable ledger are now verified in the linked execution report. Restart, redeploy, eight-hour session survival and C-05 acceptance remain NOT RUN/PENDING.
+- Next decision: B reviews the actual ledger; prepare/authorize the distinct restart window and provenance/recovery checks. Existing seed/case authorization remains recorded and must not be requested again for completed actions.
+- B reviews this staging evidence/sync PR; the later visible-change release still depends on baseline/restart acceptance. Authorized seed and individual-secret IAM changes are recorded in the execution report. No external message, protected merge, reset or service interruption was performed.
 - Other project gates still need an actual independent UAT partner and a selected/TA-approved Lab 7 change. Those decisions are separate from Lab 5 and are not fabricated by this packet.
