@@ -6,7 +6,8 @@ Markdown source for the Lab 5 team report. The user assembles, exports and uploa
 
 | Field | Value |
 |---|---|
-| Group number / section / group name | PENDING. Not provided yet; the team supplies it. |
+| Group number | EN-028 |
+| Section / group name | Section 31 / InfaCompany |
 | Topic | fastTrack, a milestone, submission and feedback tracker for supervisors and students. |
 | Member A | Supapanya Yathip, student ID 67070503443, GitHub [`zerotwobook`](https://github.com/zerotwobook) |
 | Member B | Atip Infa-udom, student ID 67070503446, GitHub [`Atip-Infa`](https://github.com/Atip-Infa) |
