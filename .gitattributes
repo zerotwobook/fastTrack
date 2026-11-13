@@ -3,3 +3,6 @@ Project_code/docs/evidence/excerpts/*.txt text eol=lf
 
 # Preserve generated PDF bytes across Windows and Linux checkouts.
 *.pdf binary
+
+# Keep received evidence bytes identical to its supplied checksum manifest.
+docs/labs/lab-06/received/** -text whitespace=cr-at-eol

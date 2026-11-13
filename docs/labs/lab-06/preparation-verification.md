@@ -2,6 +2,8 @@
 
 Task R2-A04 / Issue #22; A prepares, B reviews. This record separates document preparation, anonymous service checks, owner access/dry-run, independent execution and release acceptance. Only actual observations are labelled as completed.
 
+**Historical preparation scope:** the ledger below describes preparation through accepted PR #108. Subsequent authenticated AI-operated evidence is indexed in [current-status.md](current-status.md), the [received fastTrack intake](sessions/2026-11-13-fasttrack-received.md) and [outgoing CoursePMS session](sessions/2026-11-13-coursepms-live.md). Historical NOT RUN/NOT CREATED entries are not current global execution status. Current evidence integration and its exact-head checks/review are tracked on PR #110; personal student execution and final independent decisions remain pending.
+
 ## Sources and preparation scope
 
 The instructor handout at [Lab 6](../../../lab_file/Lab6/Lab_6_Sprint_1_UAT.pdf) sections 2-5 is the assessment source. It requires delivered Sprint 1 UAT, both teams' Product/UAT roles, at least four cases/categories, traceable findings/correction/retest and an independent decision. The repository's earlier workflow predates the standalone handout; its unqualified one-defect wording is read with the handout's explicit no-legitimate-defect controlled-exercise path.

@@ -1,0 +1,379 @@
+[
+  {
+    "evidenceId": "L6-CPMS-HTTP-001",
+    "caseId": "READINESS",
+    "actor": "ANONYMOUS",
+    "startedUtc": "2026-11-13T12:46:36.078099+00:00",
+    "finishedUtc": "2026-11-13T12:46:36.240646+00:00",
+    "method": "GET",
+    "path": "/api/health",
+    "action": "Read serving source and readiness",
+    "input": null,
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "status": "ok",
+      "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-002",
+    "caseId": "READINESS",
+    "actor": "ANONYMOUS",
+    "startedUtc": "2026-11-13T12:46:36.244732+00:00",
+    "finishedUtc": "2026-11-13T12:46:36.988852+00:00",
+    "method": "GET",
+    "path": "/api/ready",
+    "action": "Read serving source and readiness",
+    "input": null,
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "status": "ready",
+      "database": "connected",
+      "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-003",
+    "caseId": "SETUP",
+    "actor": "SA",
+    "startedUtc": "2026-11-13T12:46:37.003268+00:00",
+    "finishedUtc": "2026-11-13T12:46:37.448523+00:00",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "action": "Authenticate supplied test alias",
+    "input": {
+      "emailAlias": "SA",
+      "password": "[OMITTED]"
+    },
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "data": {
+        "user": {
+          "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+          "displayName": "Supervisor A",
+          "role": "supervisor"
+        }
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-004",
+    "caseId": "SETUP",
+    "actor": "A1",
+    "startedUtc": "2026-11-13T12:46:37.463346+00:00",
+    "finishedUtc": "2026-11-13T12:46:37.761349+00:00",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "action": "Authenticate supplied test alias",
+    "input": {
+      "emailAlias": "A1",
+      "password": "[OMITTED]"
+    },
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "data": {
+        "user": {
+          "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+          "displayName": "Student A1",
+          "role": "student"
+        }
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-005",
+    "caseId": "SETUP",
+    "actor": "A2",
+    "startedUtc": "2026-11-13T12:46:37.775421+00:00",
+    "finishedUtc": "2026-11-13T12:46:38.074526+00:00",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "action": "Authenticate supplied test alias",
+    "input": {
+      "emailAlias": "A2",
+      "password": "[OMITTED]"
+    },
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "data": {
+        "user": {
+          "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+          "displayName": "Student A2",
+          "role": "student"
+        }
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-006",
+    "caseId": "SETUP",
+    "actor": "SB",
+    "startedUtc": "2026-11-13T12:46:38.088791+00:00",
+    "finishedUtc": "2026-11-13T12:46:38.297989+00:00",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "action": "Authenticate supplied test alias",
+    "input": {
+      "emailAlias": "SB",
+      "password": "[OMITTED]"
+    },
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "data": {
+        "user": {
+          "id": "a5ab1c3e-eac4-49ba-ba48-02009692b0df",
+          "displayName": "Supervisor B",
+          "role": "supervisor"
+        }
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-007",
+    "caseId": "SETUP",
+    "actor": "B1",
+    "startedUtc": "2026-11-13T12:46:38.311661+00:00",
+    "finishedUtc": "2026-11-13T12:46:38.501653+00:00",
+    "method": "POST",
+    "path": "/api/auth/login",
+    "action": "Authenticate supplied test alias",
+    "input": {
+      "emailAlias": "B1",
+      "password": "[OMITTED]"
+    },
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "data": {
+        "user": {
+          "id": "19025609-51af-453b-882c-44ccd0a25e78",
+          "displayName": "Student B1",
+          "role": "student"
+        }
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-008",
+    "caseId": "UAT-01",
+    "actor": "SA",
+    "startedUtc": "2026-11-13T12:46:38.506247+00:00",
+    "finishedUtc": "2026-11-13T12:46:38.684249+00:00",
+    "method": "GET",
+    "path": "/api/teams",
+    "action": "Supervisor assigned teams",
+    "input": null,
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "data": [
+        {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "serverTime": "2026-11-13T12:46:38.682Z"
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-009",
+    "caseId": "UAT-01",
+    "actor": "A1",
+    "startedUtc": "2026-11-13T12:46:38.687050+00:00",
+    "finishedUtc": "2026-11-13T12:46:38.811835+00:00",
+    "method": "GET",
+    "path": "/api/teams",
+    "action": "Student assigned teams",
+    "input": null,
+    "status": 200,
+    "cacheControl": "no-store",
+    "body": {
+      "data": [
+        {
+          "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "name": "Team A",
+          "supervisor": {
+            "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+            "displayName": "Supervisor A"
+          },
+          "members": [
+            {
+              "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+              "displayName": "Student A1"
+            },
+            {
+              "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+              "displayName": "Student A2"
+            }
+          ]
+        }
+      ],
+      "meta": {
+        "serverTime": "2026-11-13T12:46:38.808Z"
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-010",
+    "caseId": "UAT-04",
+    "actor": "SA",
+    "startedUtc": "2026-11-13T12:46:38.814243+00:00",
+    "finishedUtc": "2026-11-13T12:46:38.973313+00:00",
+    "method": "POST",
+    "path": "/api/teams/7c600ee0-a595-4c52-a093-f0ed5e08fded/milestones",
+    "action": "Create synthetic milestone",
+    "input": {
+      "title": "L6-CPMS-20261113-194636-DEADLINE",
+      "description": "Synthetic independent UAT late-submission rejection.",
+      "dueAt": "2026-11-13T12:52:00+00:00"
+    },
+    "status": 201,
+    "cacheControl": "no-store",
+    "body": {
+      "data": {
+        "id": "111b7369-53f6-44e4-a0a6-5cb64ad2d52a",
+        "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+        "title": "L6-CPMS-20261113-194636-DEADLINE",
+        "description": "Synthetic independent UAT late-submission rejection.",
+        "dueAt": "2026-11-13T12:52:00.000Z",
+        "cancelledAt": null,
+        "createdAt": "2026-11-13T12:46:38.946Z",
+        "latestSubmission": null
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-011",
+    "caseId": "UAT-01",
+    "actor": "SA",
+    "startedUtc": "2026-11-13T12:46:38.976029+00:00",
+    "finishedUtc": "2026-11-13T12:46:39.097383+00:00",
+    "method": "POST",
+    "path": "/api/teams/7c600ee0-a595-4c52-a093-f0ed5e08fded/milestones",
+    "action": "Create synthetic milestone",
+    "input": {
+      "title": "L6-CPMS-20261113-194636-NORMAL",
+      "description": "Synthetic independent UAT normal journey.",
+      "dueAt": "2026-11-15T12:46:38.975968+00:00"
+    },
+    "status": 400,
+    "cacheControl": "no-store",
+    "body": {
+      "error": {
+        "code": "INVALID_INPUT",
+        "message": "Check the highlighted milestone fields.",
+        "fields": {
+          "dueAt": "Enter a valid date with a timezone and at most three fractional digits."
+        }
+      }
+    },
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-012",
+    "caseId": "CLEANUP",
+    "actor": "SA",
+    "startedUtc": "2026-11-13T12:46:39.099828+00:00",
+    "finishedUtc": "2026-11-13T12:46:39.220199+00:00",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "action": "Sign out temporary API session",
+    "input": {},
+    "status": 204,
+    "cacheControl": "no-store",
+    "body": null,
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-013",
+    "caseId": "CLEANUP",
+    "actor": "A1",
+    "startedUtc": "2026-11-13T12:46:39.222855+00:00",
+    "finishedUtc": "2026-11-13T12:46:39.357312+00:00",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "action": "Sign out temporary API session",
+    "input": {},
+    "status": 204,
+    "cacheControl": "no-store",
+    "body": null,
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-014",
+    "caseId": "CLEANUP",
+    "actor": "A2",
+    "startedUtc": "2026-11-13T12:46:39.359856+00:00",
+    "finishedUtc": "2026-11-13T12:46:39.466018+00:00",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "action": "Sign out temporary API session",
+    "input": {},
+    "status": 204,
+    "cacheControl": "no-store",
+    "body": null,
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-015",
+    "caseId": "CLEANUP",
+    "actor": "SB",
+    "startedUtc": "2026-11-13T12:46:39.468742+00:00",
+    "finishedUtc": "2026-11-13T12:46:39.564192+00:00",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "action": "Sign out temporary API session",
+    "input": {},
+    "status": 204,
+    "cacheControl": "no-store",
+    "body": null,
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  },
+  {
+    "evidenceId": "L6-CPMS-HTTP-016",
+    "caseId": "CLEANUP",
+    "actor": "B1",
+    "startedUtc": "2026-11-13T12:46:39.567207+00:00",
+    "finishedUtc": "2026-11-13T12:46:39.665624+00:00",
+    "method": "POST",
+    "path": "/api/auth/logout",
+    "action": "Sign out temporary API session",
+    "input": {},
+    "status": 204,
+    "cacheControl": "no-store",
+    "body": null,
+    "testedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+  }
+]

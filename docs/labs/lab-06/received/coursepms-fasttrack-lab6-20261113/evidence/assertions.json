@@ -1,0 +1,1163 @@
+[
+  {
+    "assertionId": "L6-CPMS-A-001",
+    "caseId": "READINESS",
+    "action": "Read serving source and readiness",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:06.798731+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-001"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-002",
+    "caseId": "READINESS",
+    "action": "Selected source matches public service",
+    "status": "PASS",
+    "expected": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "actual": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "timeUtc": "2026-11-13T12:47:06.801799+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-001"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-003",
+    "caseId": "READINESS",
+    "action": "Read serving source and readiness",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:06.948219+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-002"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-004",
+    "caseId": "READINESS",
+    "action": "Selected source matches public service",
+    "status": "PASS",
+    "expected": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "actual": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "timeUtc": "2026-11-13T12:47:06.950399+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-002"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-005",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:07.142558+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-003"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-006",
+    "caseId": "SETUP",
+    "action": "SA supplied role",
+    "status": "PASS",
+    "expected": "supervisor",
+    "actual": "supervisor",
+    "timeUtc": "2026-11-13T12:47:07.145174+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-007",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:07.317433+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-004"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-008",
+    "caseId": "SETUP",
+    "action": "A1 supplied role",
+    "status": "PASS",
+    "expected": "student",
+    "actual": "student",
+    "timeUtc": "2026-11-13T12:47:07.319633+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-009",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:07.528803+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-005"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-010",
+    "caseId": "SETUP",
+    "action": "A2 supplied role",
+    "status": "PASS",
+    "expected": "student",
+    "actual": "student",
+    "timeUtc": "2026-11-13T12:47:07.531318+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-011",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:07.737602+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-006"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-012",
+    "caseId": "SETUP",
+    "action": "SB supplied role",
+    "status": "PASS",
+    "expected": "supervisor",
+    "actual": "supervisor",
+    "timeUtc": "2026-11-13T12:47:07.740043+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-013",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:07.946184+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-007"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-014",
+    "caseId": "SETUP",
+    "action": "B1 supplied role",
+    "status": "PASS",
+    "expected": "student",
+    "actual": "student",
+    "timeUtc": "2026-11-13T12:47:07.948788+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-015",
+    "caseId": "UAT-01",
+    "action": "Supervisor assigned teams",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:08.077279+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-008"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-016",
+    "caseId": "UAT-01",
+    "action": "Student assigned teams",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:08.180383+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-009"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-017",
+    "caseId": "UAT-04",
+    "action": "Create synthetic milestone",
+    "status": "PASS",
+    "expected": "HTTP 201",
+    "actual": "HTTP 201",
+    "timeUtc": "2026-11-13T12:47:08.311805+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-010"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-018",
+    "caseId": "UAT-01",
+    "action": "Create synthetic milestone",
+    "status": "PASS",
+    "expected": "HTTP 201",
+    "actual": "HTTP 201",
+    "timeUtc": "2026-11-13T12:47:08.439302+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-011"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-019",
+    "caseId": "UAT-01",
+    "action": "Student rereads newly created milestone",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:08.575196+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-012"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-020",
+    "caseId": "UAT-01",
+    "action": "Student sees persisted milestone fields",
+    "status": "PASS",
+    "expected": "Same saved ID/team/title/description/deadline",
+    "actual": "All fields match",
+    "timeUtc": "2026-11-13T12:47:08.577889+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-011",
+      "L6-CPMS-HTTP-012"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-021",
+    "caseId": "UAT-01",
+    "action": "Reread saved milestone list",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:08.717670+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-013"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-022",
+    "caseId": "UAT-01",
+    "action": "NORMAL milestone appears exactly once",
+    "status": "PASS",
+    "expected": "Exactly one run-specific NORMAL",
+    "actual": "1",
+    "timeUtc": "2026-11-13T12:47:08.721539+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-013"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-023",
+    "caseId": "UAT-02",
+    "action": "Student submits work before deadline",
+    "status": "PASS",
+    "expected": "HTTP 201",
+    "actual": "HTTP 201",
+    "timeUtc": "2026-11-13T12:47:08.845421+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-014"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-024",
+    "caseId": "UAT-02",
+    "action": "Student reloads saved work",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:09.200062+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-015"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-025",
+    "caseId": "UAT-02",
+    "action": "Version-1 saved content persists",
+    "status": "PASS",
+    "expected": "Same persisted version 1 and work fields",
+    "actual": "Canonical DTO equality: True",
+    "timeUtc": "2026-11-13T12:47:09.202642+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-014",
+      "L6-CPMS-HTTP-015"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-026",
+    "caseId": "UAT-02",
+    "action": "Initial feedback count",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:09.338491+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-016"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-027",
+    "caseId": "UAT-02",
+    "action": "Supervisor appends feedback",
+    "status": "PASS",
+    "expected": "HTTP 201",
+    "actual": "HTTP 201",
+    "timeUtc": "2026-11-13T12:47:09.464349+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-017"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-028",
+    "caseId": "UAT-02",
+    "action": "Supervisor appends feedback",
+    "status": "PASS",
+    "expected": "HTTP 201",
+    "actual": "HTTP 201",
+    "timeUtc": "2026-11-13T12:47:09.608800+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-018"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-029",
+    "caseId": "UAT-02",
+    "action": "Supervisor reloads exact-version feedback",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:09.711211+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-019"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-030",
+    "caseId": "UAT-02",
+    "action": "Student reads the same feedback",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:09.839077+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-020"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-031",
+    "caseId": "UAT-02",
+    "action": "Two messages appended once in order for exact saved version",
+    "status": "PASS",
+    "expected": "Two distinct ordered messages bound to same submission ID",
+    "actual": "Matching lists: True; count=2",
+    "timeUtc": "2026-11-13T12:47:09.842156+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-019",
+      "L6-CPMS-HTTP-020"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-032",
+    "caseId": "UAT-03",
+    "action": "A1 duplicate first submission rejected",
+    "status": "PASS",
+    "expected": "HTTP 409 / ALREADY_SUBMITTED",
+    "actual": "HTTP 409 / ALREADY_SUBMITTED",
+    "timeUtc": "2026-11-13T12:47:09.958326+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-021"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-033",
+    "caseId": "UAT-03",
+    "action": "A2 duplicate first submission rejected",
+    "status": "PASS",
+    "expected": "HTTP 409 / ALREADY_SUBMITTED",
+    "actual": "HTTP 409 / ALREADY_SUBMITTED",
+    "timeUtc": "2026-11-13T12:47:10.103268+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-022"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-034",
+    "caseId": "UAT-03",
+    "action": "Read work after duplicate attempts",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:10.232712+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-023"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-035",
+    "caseId": "UAT-03",
+    "action": "Duplicate attempts preserve one unchanged saved work",
+    "status": "PASS",
+    "expected": "One unchanged version-1 work",
+    "actual": "Count=1; unchanged=True",
+    "timeUtc": "2026-11-13T12:47:10.235517+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-023"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-036",
+    "caseId": "UAT-05",
+    "action": "SB foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:10.364418+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-024"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-037",
+    "caseId": "UAT-05",
+    "action": "SB foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:10.461442+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-025"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-038",
+    "caseId": "UAT-05",
+    "action": "SB foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:10.565639+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-026"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-039",
+    "caseId": "UAT-05",
+    "action": "SB foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:10.687368+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-027"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-040",
+    "caseId": "UAT-05",
+    "action": "SB foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:10.816091+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-028"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-041",
+    "caseId": "UAT-05",
+    "action": "SB foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:10.964968+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-029"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-042",
+    "caseId": "UAT-05",
+    "action": "SB own team list",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:11.095110+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-030"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-043",
+    "caseId": "UAT-05",
+    "action": "SB list hides Team A",
+    "status": "PASS",
+    "expected": "No Team A in foreign list",
+    "actual": "Team A absent: True",
+    "timeUtc": "2026-11-13T12:47:11.098113+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-030"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-044",
+    "caseId": "UAT-05",
+    "action": "B1 foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:11.218491+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-031"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-045",
+    "caseId": "UAT-05",
+    "action": "B1 foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:11.334991+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-032"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-046",
+    "caseId": "UAT-05",
+    "action": "B1 foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:11.460551+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-033"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-047",
+    "caseId": "UAT-05",
+    "action": "B1 foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:11.580183+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-034"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-048",
+    "caseId": "UAT-05",
+    "action": "B1 foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:11.702482+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-035"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-049",
+    "caseId": "UAT-05",
+    "action": "B1 foreign resource denial",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:12.033938+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-036"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-050",
+    "caseId": "UAT-05",
+    "action": "B1 own team list",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:12.134255+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-037"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-051",
+    "caseId": "UAT-05",
+    "action": "B1 list hides Team A",
+    "status": "PASS",
+    "expected": "No Team A in foreign list",
+    "actual": "Team A absent: True",
+    "timeUtc": "2026-11-13T12:47:12.137262+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-037"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-052",
+    "caseId": "UAT-05",
+    "action": "Authorized control after foreign reads",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:12.240051+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-038"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-053",
+    "caseId": "UAT-05",
+    "action": "Authorized feedback control after foreign reads",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:12.364656+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-039"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-054",
+    "caseId": "UAT-05",
+    "action": "Foreign requests preserve protected work and feedback",
+    "status": "PASS",
+    "expected": "Original work/feedback unchanged",
+    "actual": "Canonical snapshots unchanged: True",
+    "timeUtc": "2026-11-13T12:47:12.368021+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-038",
+      "L6-CPMS-HTTP-039"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-055",
+    "caseId": "UAT-06",
+    "action": "Create synthetic milestone",
+    "status": "PASS",
+    "expected": "HTTP 201",
+    "actual": "HTTP 201",
+    "timeUtc": "2026-11-13T12:47:12.475084+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-040"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-056",
+    "caseId": "UAT-06",
+    "action": "Count milestones before denied writes",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:12.604371+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-041"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-057",
+    "caseId": "UAT-06",
+    "action": "Student cannot create milestones",
+    "status": "PASS",
+    "expected": "HTTP 403 / FORBIDDEN",
+    "actual": "HTTP 403 / FORBIDDEN",
+    "timeUtc": "2026-11-13T12:47:12.694251+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-042"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-058",
+    "caseId": "UAT-06",
+    "action": "Whitespace-only milestone rejected",
+    "status": "PASS",
+    "expected": "HTTP 400",
+    "actual": "HTTP 400 / INVALID_INPUT",
+    "timeUtc": "2026-11-13T12:47:12.805765+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-043"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-059",
+    "caseId": "UAT-06",
+    "action": "Count milestones after denied writes",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:12.933557+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-044"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-060",
+    "caseId": "UAT-06",
+    "action": "Denied milestone writes do not alter saved list",
+    "status": "PASS",
+    "expected": "Unchanged authorized milestone list",
+    "actual": "Unchanged: True",
+    "timeUtc": "2026-11-13T12:47:12.936947+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-044"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-061",
+    "caseId": "UAT-06",
+    "action": "Whitespace-only submission title rejected",
+    "status": "PASS",
+    "expected": "HTTP 400",
+    "actual": "HTTP 400 / INVALID_INPUT",
+    "timeUtc": "2026-11-13T12:47:13.233579+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-045"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-062",
+    "caseId": "UAT-06",
+    "action": "Non-HTTP work link rejected",
+    "status": "PASS",
+    "expected": "HTTP 400",
+    "actual": "HTTP 400 / INVALID_INPUT",
+    "timeUtc": "2026-11-13T12:47:13.335888+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-046"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-063",
+    "caseId": "UAT-06",
+    "action": "Read submissions after input rejection",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:13.463551+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-047"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-064",
+    "caseId": "UAT-06",
+    "action": "Invalid submissions create no work",
+    "status": "PASS",
+    "expected": "Empty submission list",
+    "actual": "[]",
+    "timeUtc": "2026-11-13T12:47:13.467836+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-047"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-065",
+    "caseId": "UAT-06",
+    "action": "Whitespace-only feedback rejected",
+    "status": "PASS",
+    "expected": "HTTP 400",
+    "actual": "HTTP 400 / INVALID_INPUT",
+    "timeUtc": "2026-11-13T12:47:13.580487+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-048"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-066",
+    "caseId": "UAT-06",
+    "action": "Student cannot write supervisor feedback",
+    "status": "PASS",
+    "expected": "HTTP 403 / FORBIDDEN",
+    "actual": "HTTP 403 / FORBIDDEN",
+    "timeUtc": "2026-11-13T12:47:13.690567+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-049"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-067",
+    "caseId": "UAT-06",
+    "action": "Read feedback after rejected writes",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:13.820698+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-050"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-068",
+    "caseId": "UAT-06",
+    "action": "Rejected feedback does not append/change existing messages",
+    "status": "PASS",
+    "expected": "Original two messages unchanged",
+    "actual": "Unchanged: True",
+    "timeUtc": "2026-11-13T12:47:13.824619+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-050"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-069",
+    "caseId": "UAT-07",
+    "action": "Anonymous private read rejected",
+    "status": "PASS",
+    "expected": "HTTP 401",
+    "actual": "HTTP 401 / UNAUTHENTICATED",
+    "timeUtc": "2026-11-13T12:47:13.933694+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-051"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-070",
+    "caseId": "UAT-07",
+    "action": "Single wrong-password attempt rejected",
+    "status": "PASS",
+    "expected": "HTTP 401",
+    "actual": "HTTP 401 / INVALID_CREDENTIALS",
+    "timeUtc": "2026-11-13T12:47:14.111483+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-052"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-071",
+    "caseId": "UAT-07",
+    "action": "Failed sign-in creates no usable session",
+    "status": "PASS",
+    "expected": "HTTP 401",
+    "actual": "HTTP 401 / UNAUTHENTICATED",
+    "timeUtc": "2026-11-13T12:47:14.220036+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-053"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-072",
+    "caseId": "UAT-07",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:47:14.324547+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-054"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-073",
+    "caseId": "UAT-07",
+    "action": "Signed-out private read rejected",
+    "status": "PASS",
+    "expected": "HTTP 401",
+    "actual": "HTTP 401 / UNAUTHENTICATED",
+    "timeUtc": "2026-11-13T12:47:14.423842+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-055"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-074",
+    "caseId": "UAT-07",
+    "action": "Revoked session replay rejected",
+    "status": "PASS",
+    "expected": "HTTP 401",
+    "actual": "HTTP 401 / UNAUTHENTICATED",
+    "timeUtc": "2026-11-13T12:47:14.527735+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-056"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-075",
+    "caseId": "UAT-07",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:14.710230+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-057"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-076",
+    "caseId": "UAT-07",
+    "action": "Same cookie jar switched to SB cannot read Team A",
+    "status": "PASS",
+    "expected": "HTTP 404 / NOT_FOUND",
+    "actual": "HTTP 404 / NOT_FOUND",
+    "timeUtc": "2026-11-13T12:47:14.830484+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-058"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-077",
+    "caseId": "UAT-07",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:47:14.941893+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-059"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-078",
+    "caseId": "UAT-08",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:15.150763+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-060"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-079",
+    "caseId": "UAT-08",
+    "action": "Student rereads work after logout and relogin",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:15.276485+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-061"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-080",
+    "caseId": "UAT-08",
+    "action": "Student rereads exact-version feedback after relogin",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:15.460310+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-062"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-081",
+    "caseId": "UAT-08",
+    "action": "Second team student reads shared saved work",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:15.612402+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-063"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-082",
+    "caseId": "UAT-08",
+    "action": "Supervisor independently rereads saved work",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:47:15.740759+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-064"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-083",
+    "caseId": "UAT-08",
+    "action": "Work and feedback survive new session and role reads",
+    "status": "PASS",
+    "expected": "Identical saved ID/content/version/author/time and feedback",
+    "actual": "All canonical snapshots unchanged: True",
+    "timeUtc": "2026-11-13T12:47:15.744718+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-061",
+      "L6-CPMS-HTTP-062",
+      "L6-CPMS-HTTP-063",
+      "L6-CPMS-HTTP-064"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-084",
+    "caseId": "UAT-04",
+    "action": "Fresh server clock after deadline",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:54:05.952099+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-065"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-085",
+    "caseId": "UAT-04",
+    "action": "Fresh server time is beyond saved deadline plus 60 seconds",
+    "status": "PASS",
+    "expected": "Server time >= dueAt + 60 seconds",
+    "actual": "2026-11-13 12:54:05.954000+00:00 >= 2026-11-13 12:54:00+00:00",
+    "timeUtc": "2026-11-13T12:54:05.956904+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-065"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-086",
+    "caseId": "UAT-04",
+    "action": "Late first submission rejected",
+    "status": "PASS",
+    "expected": "HTTP 409 / DEADLINE_PASSED",
+    "actual": "HTTP 409 / DEADLINE_PASSED",
+    "timeUtc": "2026-11-13T12:54:06.117280+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-066"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-087",
+    "caseId": "UAT-04",
+    "action": "Authorized read after late rejection",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:54:06.248362+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-067"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-088",
+    "caseId": "UAT-04",
+    "action": "Late rejection creates no work",
+    "status": "PASS",
+    "expected": "Empty saved work list",
+    "actual": "[]",
+    "timeUtc": "2026-11-13T12:54:06.253420+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-067"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-089",
+    "caseId": "READINESS",
+    "action": "End-of-run serving source check",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:54:06.354563+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-068"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-090",
+    "caseId": "READINESS",
+    "action": "Serving source unchanged at completion",
+    "status": "PASS",
+    "expected": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "actual": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "timeUtc": "2026-11-13T12:54:06.359119+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-068"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-091",
+    "caseId": "READINESS",
+    "action": "End-of-run serving source check",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:54:06.447472+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-069"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-092",
+    "caseId": "READINESS",
+    "action": "Serving source unchanged at completion",
+    "status": "PASS",
+    "expected": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "actual": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "timeUtc": "2026-11-13T12:54:06.451936+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-069"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-093",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:54:06.564258+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-070"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-094",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:54:06.680537+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-071"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-095",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:54:06.784387+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-072"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-096",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:54:06.901908+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-073"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-097",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:54:07.055991+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-074"
+    ]
+  }
+]

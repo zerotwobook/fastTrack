@@ -2,6 +2,8 @@
 
 **Current decision: PENDING. No independent acceptance or signature has been recorded.** Only the UAT Team may confirm independent acceptance. Copy this template for the actual tested release and preserve previous decisions if the release changes.
 
+Actual AI-operated evidence is now available in both directions; see [current-status.md](current-status.md), the [received fastTrack intake](sessions/2026-11-13-fasttrack-received.md) and [outgoing CoursePMS session](sessions/2026-11-13-coursepms-live.md). The fields below remain a blank student-decision template. Their NOT RECORDED values do not erase the dated AI observations, which cannot establish personal student execution or acceptance. Current Cloud Run revisions/traffic and final decisions remain unconfirmed.
+
 ## 1. FastTrack decision by the independent partner
 
 | Field | Actual entry |
@@ -42,7 +44,7 @@ Never infer acceptance from silence, a green CI run, a peer PR approval, a devel
 
 Record a separate decision after Supapanya Yathip and Atip Infa-udom independently execute the partner's agreed cases. Copy section 1 with the partner product/URL/scope/version, actual A/B execution, all finding dispositions and retests, decision, reasons, conditions and real confirmations. Do not reuse fastTrack's decision or its planned test cases as the partner's execution.
 
-Current partner-product decision: **PENDING / NOT RUN**. Partner product is CoursePMS (Course Project Management System, CPE334 1/2026), Section 31 / EN-022_P6. Public URL: <https://course-pms-859617270560.asia-southeast1.run.app>; repository: <https://github.com/Magiciancat9/Course_management>. The user-reported selected main/release commit `150dc5db3de5c829a7d9ef1adb545191cc37542d` matches the anonymous health observation in [partner-public-readback.json](evidence/partner-public-readback.json). Actual partner cases/accepted scope, private access, session execution and deployed revision remain pending. Anonymous health/readiness is not independent business acceptance.
+Current partner-product decision: **PENDING**. Partner product is CoursePMS (Course Project Management System, CPE334 1/2026), Section 31 / EN-022_P6. Public URL: <https://course-pms-859617270560.asia-southeast1.run.app>; repository: <https://github.com/Magiciancat9/Course_management>. The [outgoing dated session](sessions/2026-11-13-coursepms-live.md) records actual AI-operated authenticated exploratory observations at `150dc5db3de5c829a7d9ef1adb545191cc37542d`, including a stale private draft after account switch. Three supplied accounts authenticated; the official partner cases, suitable new lifecycle fixtures, actual A/B personal execution, current deployed revision and Product Team triage/retest remain pending. Neither anonymous readiness nor this bounded exploratory run establishes independent acceptance.
 
 ## 3. Final report assembly checks
 

@@ -1,0 +1,268 @@
+[
+  {
+    "assertionId": "L6-CPMS-A-001",
+    "caseId": "READINESS",
+    "action": "Read serving source and readiness",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:36.240667+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-001"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-002",
+    "caseId": "READINESS",
+    "action": "Selected source matches public service",
+    "status": "PASS",
+    "expected": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "actual": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "timeUtc": "2026-11-13T12:46:36.243590+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-001"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-003",
+    "caseId": "READINESS",
+    "action": "Read serving source and readiness",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:36.988872+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-002"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-004",
+    "caseId": "READINESS",
+    "action": "Selected source matches public service",
+    "status": "PASS",
+    "expected": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "actual": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "timeUtc": "2026-11-13T12:46:36.991159+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-002"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-005",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:37.448546+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-003"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-006",
+    "caseId": "SETUP",
+    "action": "SA supplied role",
+    "status": "PASS",
+    "expected": "supervisor",
+    "actual": "supervisor",
+    "timeUtc": "2026-11-13T12:46:37.450937+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-007",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:37.761375+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-004"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-008",
+    "caseId": "SETUP",
+    "action": "A1 supplied role",
+    "status": "PASS",
+    "expected": "student",
+    "actual": "student",
+    "timeUtc": "2026-11-13T12:46:37.763635+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-009",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:38.074550+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-005"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-010",
+    "caseId": "SETUP",
+    "action": "A2 supplied role",
+    "status": "PASS",
+    "expected": "student",
+    "actual": "student",
+    "timeUtc": "2026-11-13T12:46:38.076810+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-011",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:38.298016+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-006"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-012",
+    "caseId": "SETUP",
+    "action": "SB supplied role",
+    "status": "PASS",
+    "expected": "supervisor",
+    "actual": "supervisor",
+    "timeUtc": "2026-11-13T12:46:38.300299+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-013",
+    "caseId": "SETUP",
+    "action": "Authenticate supplied test alias",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:38.501678+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-007"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-014",
+    "caseId": "SETUP",
+    "action": "B1 supplied role",
+    "status": "PASS",
+    "expected": "student",
+    "actual": "student",
+    "timeUtc": "2026-11-13T12:46:38.504839+00:00",
+    "evidence": []
+  },
+  {
+    "assertionId": "L6-CPMS-A-015",
+    "caseId": "UAT-01",
+    "action": "Supervisor assigned teams",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:38.684287+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-008"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-016",
+    "caseId": "UAT-01",
+    "action": "Student assigned teams",
+    "status": "PASS",
+    "expected": "HTTP 200",
+    "actual": "HTTP 200",
+    "timeUtc": "2026-11-13T12:46:38.811857+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-009"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-017",
+    "caseId": "UAT-04",
+    "action": "Create synthetic milestone",
+    "status": "PASS",
+    "expected": "HTTP 201",
+    "actual": "HTTP 201",
+    "timeUtc": "2026-11-13T12:46:38.973334+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-010"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-018",
+    "caseId": "UAT-01",
+    "action": "Create synthetic milestone",
+    "status": "FAIL",
+    "expected": "HTTP 201",
+    "actual": "HTTP 400 / INVALID_INPUT",
+    "timeUtc": "2026-11-13T12:46:39.097403+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-011"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-019",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:46:39.220216+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-012"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-020",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:46:39.357331+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-013"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-021",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:46:39.466036+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-014"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-022",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:46:39.564210+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-015"
+    ]
+  },
+  {
+    "assertionId": "L6-CPMS-A-023",
+    "caseId": "CLEANUP",
+    "action": "Sign out temporary API session",
+    "status": "PASS",
+    "expected": "HTTP 204",
+    "actual": "HTTP 204",
+    "timeUtc": "2026-11-13T12:46:39.665645+00:00",
+    "evidence": [
+      "L6-CPMS-HTTP-016"
+    ]
+  }
+]

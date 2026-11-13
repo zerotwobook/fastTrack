@@ -1,6 +1,6 @@
 # Executable Sprint 1 UAT cases
 
-Status of every case: **NOT RUN**. The independent testers enter actual results in [execution-results.md](execution-results.md). Read [partner-handoff.md](partner-handoff.md) for account aliases, exact versions, run IDs, dates, private access, setup and cleanup.
+This is the executable specification, not a result ledger. The [received fastTrack session](sessions/2026-11-13-fasttrack-received.md) contains API and selected browser evidence for all eight groups, with explicit unexecuted UI steps. Full student execution and independent acceptance remain incomplete/unrecorded; see [current-status.md](current-status.md). Independent testers copy [execution-results.md](execution-results.md) into a dated record and enter their actual results. Read [partner-handoff.md](partner-handoff.md) for account aliases, exact versions, run IDs, dates, private access, setup and cleanup.
 
 ## Scope and traceability
 
