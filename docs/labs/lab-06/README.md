@@ -30,7 +30,7 @@ The user supplied the partner names, session start and account preference. No in
 5. [Acceptance record](acceptance-record.md): the independent team's exact-version decision, including unresolved limitations.
 6. [Preparation verification](preparation-verification.md): actual document/service checks and remaining readiness items.
 
-This first checkpoint establishes the package structure during Started. Remaining documents and final verification are still being prepared. No result field is prefilled as PASS. Record future test observations in a dated session copy rather than overwriting these blank templates.
+The seven Markdown documents and anonymous readback are prepared for B's review in [PR #108](https://github.com/zerotwobook/fastTrack/pull/108). Structural/source checks passed; credentials, B's written-procedure dry-run, current revision confirmation and independent execution remain separate readiness steps. No UAT result field is prefilled as PASS. Record future test observations in a dated session copy rather than overwriting these blank templates.
 
 ## Completion and submission
 
