@@ -1,0 +1,37 @@
+{
+  "actor": "A / Codex-assisted anonymous partner preparation check",
+  "origin": "https://course-pms-859617270560.asia-southeast1.run.app",
+  "partnerTeam": "Section 31 / EN-022_P6",
+  "partnerApplication": "CoursePMS (Course Project Management System, CPE334 1/2026)",
+  "repository": "https://github.com/Magiciancat9/Course_management",
+  "userReportedMainReleaseCommit": "150dc5db3de5c829a7d9ef1adb545191cc37542d",
+  "method": "curl.exe GET with normal TLS verification; no credentials",
+  "observations": [
+    {
+      "route": "/api/health",
+      "observedAtUtc": "2026-11-13T07:27:43.375522+00:00",
+      "httpStatus": 200,
+      "response": {
+        "status": "ok",
+        "service": "course-pms-api",
+        "commitSha": "150dc5db3de5c829a7d9ef1adb545191cc37542d",
+        "timestamp": "2026-11-13T07:27:42.820Z"
+      }
+    },
+    {
+      "route": "/api/ready",
+      "observedAtUtc": "2026-11-13T07:27:44.072844+00:00",
+      "httpStatus": 200,
+      "response": {
+        "status": "ready",
+        "db": "connected"
+      }
+    }
+  ],
+  "healthCommitMatchesUserReport": true,
+  "authenticatedUat": "NOT RUN",
+  "repositoryMainAncestryInspection": "NOT RUN",
+  "currentRevisionInspection": "NOT RUN",
+  "domainWrites": false,
+  "cloudMutations": false
+}
