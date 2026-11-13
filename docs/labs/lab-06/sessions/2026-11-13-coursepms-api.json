@@ -1,0 +1,560 @@
+{
+  "product": "CoursePMS",
+  "operator": "Codex AI at user request; human A/B participation not inferred",
+  "origin": "https://course-pms-859617270560.asia-southeast1.run.app",
+  "kind": "Actual live HTTP observations; no business write endpoints invoked",
+  "completedAtUtc": "2026-11-13T12:09:51.454632+00:00",
+  "results": [
+    {
+      "id": "API-HEALTH",
+      "observedAtUtc": "2026-11-13T12:09:47.019617+00:00",
+      "method": "GET",
+      "path": "/api/health",
+      "httpStatus": 200,
+      "expected": "200 and selected release/readiness",
+      "status": "PASS",
+      "observation": {
+        "status": "ok",
+        "commitSha": "150dc5db3de5c829a7d9ef1adb545191cc37542d"
+      }
+    },
+    {
+      "id": "API-READY",
+      "observedAtUtc": "2026-11-13T12:09:47.123382+00:00",
+      "method": "GET",
+      "path": "/api/ready",
+      "httpStatus": 200,
+      "expected": "200 and selected release/readiness",
+      "status": "PASS",
+      "observation": {
+        "status": "ready",
+        "db": "connected"
+      }
+    },
+    {
+      "id": "API-NOAUTH-1",
+      "observedAtUtc": "2026-11-13T12:09:47.228279+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED",
+      "status": "PASS",
+      "observation": {
+        "code": "UNAUTHORIZED"
+      }
+    },
+    {
+      "id": "API-NOAUTH-2",
+      "observedAtUtc": "2026-11-13T12:09:47.328320+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED",
+      "status": "PASS",
+      "observation": {
+        "code": "UNAUTHORIZED"
+      }
+    },
+    {
+      "id": "API-NOAUTH-3",
+      "observedAtUtc": "2026-11-13T12:09:47.407683+00:00",
+      "method": "GET",
+      "path": "/api/teams/1/proposal",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED",
+      "status": "PASS",
+      "observation": {
+        "code": "UNAUTHORIZED"
+      }
+    },
+    {
+      "id": "API-NOAUTH-4",
+      "observedAtUtc": "2026-11-13T12:09:47.523813+00:00",
+      "method": "GET",
+      "path": "/api/proposals",
+      "httpStatus": 200,
+      "expected": "401 UNAUTHORIZED",
+      "status": "FAIL",
+      "observation": {
+        "code": null,
+        "nonJsonResponse": true,
+        "contentType": "text/html; charset=UTF-8",
+        "looksLikeHtml": true
+      }
+    },
+    {
+      "id": "API-MALFORMED",
+      "observedAtUtc": "2026-11-13T12:09:47.603257+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED",
+      "status": "PASS",
+      "observation": {
+        "code": "UNAUTHORIZED"
+      }
+    },
+    {
+      "id": "API-LOGIN-EMPTY",
+      "observedAtUtc": "2026-11-13T12:09:47.681655+00:00",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "httpStatus": 400,
+      "expected": "400 VALIDATION_ERROR",
+      "status": "PASS",
+      "observation": {
+        "code": "VALIDATION_ERROR",
+        "error": "Email and password are required.",
+        "tokenIssued": false,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-LOGIN-WRONG",
+      "observedAtUtc": "2026-11-13T12:09:47.993201+00:00",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "httpStatus": 401,
+      "expected": "401 INVALID_CREDENTIALS",
+      "status": "PASS",
+      "observation": {
+        "code": "INVALID_CREDENTIALS",
+        "error": "Invalid email or password.",
+        "tokenIssued": false,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-LOGIN-UNKNOWN",
+      "observedAtUtc": "2026-11-13T12:09:48.114530+00:00",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "httpStatus": 401,
+      "expected": "401 INVALID_CREDENTIALS",
+      "status": "PASS",
+      "observation": {
+        "code": "INVALID_CREDENTIALS",
+        "error": "Invalid email or password.",
+        "tokenIssued": false,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-GENERIC-ERROR",
+      "observedAtUtc": "2026-11-13T12:09:48.114544+00:00",
+      "method": "COMPARE",
+      "path": "/api/auth/login",
+      "httpStatus": null,
+      "expected": "same generic wrong/unknown message",
+      "status": "PASS",
+      "observation": {
+        "messagesEqual": true
+      }
+    },
+    {
+      "id": "API-P-LOGIN",
+      "observedAtUtc": "2026-11-13T12:09:48.316235+00:00",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "httpStatus": 200,
+      "expected": "200 matching role and sanitized identity",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "P",
+        "role": "STUDENT",
+        "userId": 2,
+        "tokenIssued": true,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-P-ME",
+      "observedAtUtc": "2026-11-13T12:09:48.436389+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 200,
+      "expected": "200 same identity",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "P",
+        "identityMatches": true,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-P-TEAMS",
+      "observedAtUtc": "2026-11-13T12:09:48.627937+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 200,
+      "expected": "200 teams available",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "P",
+        "teamsCount": 3,
+        "ownTeams": [
+          {
+            "id": 1,
+            "name": "Team Alpha",
+            "memberCount": 1,
+            "proposalStatus": "DRAFT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "API-P-FOREIGN-LIST",
+      "observedAtUtc": "2026-11-13T12:09:48.627961+00:00",
+      "method": "INSPECT",
+      "path": "/api/teams",
+      "httpStatus": 200,
+      "expected": "foreign proposal private fields omitted",
+      "status": "FAIL",
+      "observation": {
+        "foreignProposalPrivateFieldExposure": [
+          {
+            "teamId": 2,
+            "proposalId": 2,
+            "nonemptyPrivateFields": [
+              "title"
+            ]
+          }
+        ],
+        "privateValuesRetained": false
+      }
+    },
+    {
+      "id": "API-P-FOREIGN-2",
+      "observedAtUtc": "2026-11-13T12:09:48.757295+00:00",
+      "method": "GET",
+      "path": "/api/teams/2/proposal",
+      "httpStatus": 403,
+      "expected": "403 BR06_FORBIDDEN_TEAM_ACCESS without proposal",
+      "status": "PASS",
+      "observation": {
+        "code": "BR06_FORBIDDEN_TEAM_ACCESS",
+        "proposalReturned": false
+      }
+    },
+    {
+      "id": "API-P-LOGOUT",
+      "observedAtUtc": "2026-11-13T12:09:48.896225+00:00",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "httpStatus": 200,
+      "expected": "200 logout",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "P",
+        "message": "Logged out successfully"
+      }
+    },
+    {
+      "id": "API-P-REPLAY-1",
+      "observedAtUtc": "2026-11-13T12:09:49.026421+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "P",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-P-REPLAY-2",
+      "observedAtUtc": "2026-11-13T12:09:49.129188+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "P",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-P-REPLAY-3",
+      "observedAtUtc": "2026-11-13T12:09:49.242485+00:00",
+      "method": "GET",
+      "path": "/api/teams/1/proposal",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "P",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-S-LOGIN",
+      "observedAtUtc": "2026-11-13T12:09:49.462820+00:00",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "httpStatus": 200,
+      "expected": "200 matching role and sanitized identity",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "S",
+        "role": "STUDENT",
+        "userId": 5,
+        "tokenIssued": true,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-S-ME",
+      "observedAtUtc": "2026-11-13T12:09:49.555401+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 200,
+      "expected": "200 same identity",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "S",
+        "identityMatches": true,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-S-TEAMS",
+      "observedAtUtc": "2026-11-13T12:09:49.682147+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 200,
+      "expected": "200 teams available",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "S",
+        "teamsCount": 3,
+        "ownTeams": [
+          {
+            "id": 3,
+            "name": "Lab5-Persistence-20261112",
+            "memberCount": 1,
+            "proposalStatus": "NO_DRAFT"
+          }
+        ]
+      }
+    },
+    {
+      "id": "API-S-FOREIGN-LIST",
+      "observedAtUtc": "2026-11-13T12:09:49.682168+00:00",
+      "method": "INSPECT",
+      "path": "/api/teams",
+      "httpStatus": 200,
+      "expected": "foreign proposal private fields omitted",
+      "status": "FAIL",
+      "observation": {
+        "foreignProposalPrivateFieldExposure": [
+          {
+            "teamId": 1,
+            "proposalId": 1,
+            "nonemptyPrivateFields": [
+              "title"
+            ]
+          },
+          {
+            "teamId": 2,
+            "proposalId": 2,
+            "nonemptyPrivateFields": [
+              "title"
+            ]
+          }
+        ],
+        "privateValuesRetained": false
+      }
+    },
+    {
+      "id": "API-S-FOREIGN-1",
+      "observedAtUtc": "2026-11-13T12:09:49.793321+00:00",
+      "method": "GET",
+      "path": "/api/teams/1/proposal",
+      "httpStatus": 403,
+      "expected": "403 BR06_FORBIDDEN_TEAM_ACCESS without proposal",
+      "status": "PASS",
+      "observation": {
+        "code": "BR06_FORBIDDEN_TEAM_ACCESS",
+        "proposalReturned": false
+      }
+    },
+    {
+      "id": "API-S-FOREIGN-2",
+      "observedAtUtc": "2026-11-13T12:09:49.917863+00:00",
+      "method": "GET",
+      "path": "/api/teams/2/proposal",
+      "httpStatus": 403,
+      "expected": "403 BR06_FORBIDDEN_TEAM_ACCESS without proposal",
+      "status": "PASS",
+      "observation": {
+        "code": "BR06_FORBIDDEN_TEAM_ACCESS",
+        "proposalReturned": false
+      }
+    },
+    {
+      "id": "API-S-LOGOUT",
+      "observedAtUtc": "2026-11-13T12:09:50.029902+00:00",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "httpStatus": 200,
+      "expected": "200 logout",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "S",
+        "message": "Logged out successfully"
+      }
+    },
+    {
+      "id": "API-S-REPLAY-1",
+      "observedAtUtc": "2026-11-13T12:09:50.131288+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "S",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-S-REPLAY-2",
+      "observedAtUtc": "2026-11-13T12:09:50.242152+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "S",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-S-REPLAY-3",
+      "observedAtUtc": "2026-11-13T12:09:50.405800+00:00",
+      "method": "GET",
+      "path": "/api/teams/1/proposal",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "S",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-I-LOGIN",
+      "observedAtUtc": "2026-11-13T12:09:50.709484+00:00",
+      "method": "POST",
+      "path": "/api/auth/login",
+      "httpStatus": 200,
+      "expected": "200 matching role and sanitized identity",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "I",
+        "role": "INSTRUCTOR",
+        "userId": 1,
+        "tokenIssued": true,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-I-ME",
+      "observedAtUtc": "2026-11-13T12:09:50.831203+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 200,
+      "expected": "200 same identity",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "I",
+        "identityMatches": true,
+        "passwordHashPresent": false
+      }
+    },
+    {
+      "id": "API-I-TEAMS",
+      "observedAtUtc": "2026-11-13T12:09:50.955024+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 200,
+      "expected": "200 teams available",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "I",
+        "teamsCount": 3,
+        "ownTeams": []
+      }
+    },
+    {
+      "id": "API-I-LOGOUT",
+      "observedAtUtc": "2026-11-13T12:09:51.090722+00:00",
+      "method": "POST",
+      "path": "/api/auth/logout",
+      "httpStatus": 200,
+      "expected": "200 logout",
+      "status": "PASS",
+      "observation": {
+        "accountLabel": "I",
+        "message": "Logged out successfully"
+      }
+    },
+    {
+      "id": "API-I-REPLAY-1",
+      "observedAtUtc": "2026-11-13T12:09:51.213924+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "I",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-I-REPLAY-2",
+      "observedAtUtc": "2026-11-13T12:09:51.339701+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "I",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    },
+    {
+      "id": "API-I-REPLAY-3",
+      "observedAtUtc": "2026-11-13T12:09:51.454618+00:00",
+      "method": "GET",
+      "path": "/api/teams/1/proposal",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED after logout",
+      "status": "FAIL",
+      "observation": {
+        "accountLabel": "I",
+        "code": "TOKEN_REVOKED",
+        "reusedSameToken": true
+      }
+    }
+  ],
+  "counts": {
+    "PASS": 25,
+    "FAIL": 12,
+    "BLOCKED": 0
+  },
+  "secretHandling": "Credentials and tokens used in memory only; no response token, authorization header or password retained."
+}

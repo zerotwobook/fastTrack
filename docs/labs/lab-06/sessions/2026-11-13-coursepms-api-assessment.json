@@ -1,0 +1,241 @@
+{
+  "kind": "Source-informed assessment of retained actual API observations; no new test execution",
+  "assessedAtUtc": "2026-11-13T12:12:47.025376+00:00",
+  "rawEvidence": "2026-11-13-coursepms-api.json",
+  "rawCounts": {
+    "PASS": 25,
+    "FAIL": 12,
+    "BLOCKED": 0
+  },
+  "reviewedCounts": {
+    "PASS": 34,
+    "FAIL": 0,
+    "NEEDS CLARIFICATION": 2,
+    "CONTRACT MISMATCH": 1
+  },
+  "results": [
+    {
+      "id": "API-HEALTH",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-READY",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-NOAUTH-1",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-NOAUTH-2",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-NOAUTH-3",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-NOAUTH-4",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "CONTRACT MISMATCH",
+      "reason": "Auth contract names /api/proposals as protected, but the endpoint inventory defines proposal resources under /api/teams/:id/proposal and /api/proposals/:id/review. Bare GET /api/proposals returned HTTP 200 HTML through SPA fallback. Clarify contract/routing; no private data was observed."
+    },
+    {
+      "id": "API-MALFORMED",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-LOGIN-EMPTY",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-LOGIN-WRONG",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-LOGIN-UNKNOWN",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-GENERIC-ERROR",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-P-LOGIN",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-P-ME",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-P-TEAMS",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-P-FOREIGN-LIST",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "NEEDS CLARIFICATION",
+      "reason": "Observed foreign summaries include title but no problemStatement, techStack, repoUrl or reviewFeedback. Tested server source explicitly exposes a title/status summary. Confirm intended public-title policy with Product Team; do not call this a private-body leak or a confirmed defect."
+    },
+    {
+      "id": "API-P-FOREIGN-2",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-P-LOGOUT",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-P-REPLAY-1",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-P-REPLAY-2",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-P-REPLAY-3",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-S-LOGIN",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-S-ME",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-S-TEAMS",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-S-FOREIGN-LIST",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "NEEDS CLARIFICATION",
+      "reason": "Observed foreign summaries include title but no problemStatement, techStack, repoUrl or reviewFeedback. Tested server source explicitly exposes a title/status summary. Confirm intended public-title policy with Product Team; do not call this a private-body leak or a confirmed defect."
+    },
+    {
+      "id": "API-S-FOREIGN-1",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-S-FOREIGN-2",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-S-LOGOUT",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-S-REPLAY-1",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-S-REPLAY-2",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-S-REPLAY-3",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-I-LOGIN",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-I-ME",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-I-TEAMS",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-I-LOGOUT",
+      "originalAssertionStatus": "PASS",
+      "reviewedStatus": "PASS",
+      "reason": "Original assertion matches the recorded result."
+    },
+    {
+      "id": "API-I-REPLAY-1",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-I-REPLAY-2",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    },
+    {
+      "id": "API-I-REPLAY-3",
+      "originalAssertionStatus": "FAIL",
+      "reviewedStatus": "PASS",
+      "reason": "AC-03 requires logged-out token rejection with HTTP 401; it does not require UNAUTHORIZED instead of the more specific TOKEN_REVOKED. Original exact-code oracle was overly strict."
+    }
+  ],
+  "acceptance": "PENDING; assessment does not certify human participation, official CPMS cases or independent acceptance"
+}
