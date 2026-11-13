@@ -1,6 +1,6 @@
 # Findings, correction chains and independent retests
 
-Working templates for both teams. No finding, bug count, correction, RED/GREEN run or retest exists merely because this file is prepared. Link each actual record to [execution-results.md](execution-results.md) and the exact Sprint 1 contract.
+Working templates for both teams. Current actual findings are indexed in [current-status.md](current-status.md): the [outgoing session](sessions/2026-11-13-coursepms-live.md) records proposed Major L6-OUT-EXP-001, contract discrepancy L6-OUT-EXP-002 and two visibility-policy questions, all pending Product Team disposition. The [incoming fastTrack intake](sessions/2026-11-13-fasttrack-received.md) reports no confirmed product defect in its bounded AI run, not a final completed-UAT zero-findings result. No correction, RED/GREEN run or independent retest is supplied. The blank rows below are templates, not a competing current ledger.
 
 ## 1. Finding report template
 

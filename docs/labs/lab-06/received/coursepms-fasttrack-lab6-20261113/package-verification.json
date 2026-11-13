@@ -1,0 +1,61 @@
+{
+  "checkedUtc": "2026-11-13T13:03:06.170942+00:00",
+  "operator": "Codex AI",
+  "scope": "Export/evidence integrity, not UAT acceptance",
+  "checks": [
+    {
+      "check": "Main actual assertion count: 97 PASS, zero FAIL",
+      "result": "PASS"
+    },
+    {
+      "check": "Main actual HTTP observation count: 74",
+      "result": "PASS"
+    },
+    {
+      "check": "HTTP evidence IDs unique and every assertion reference resolves",
+      "result": "PASS"
+    },
+    {
+      "check": "All eight supplied case groups have actual API assertions",
+      "result": "PASS"
+    },
+    {
+      "check": "Seven separate post-UI assertions passed",
+      "result": "PASS"
+    },
+    {
+      "check": "Eleven original screenshot PNGs decode successfully",
+      "result": "PASS"
+    },
+    {
+      "check": "All retained JSON files parse",
+      "result": "PASS"
+    },
+    {
+      "check": "All 15 source exports match their disclosed export hashes",
+      "result": "PASS"
+    },
+    {
+      "check": "All 40 exported local Markdown links resolve",
+      "result": "PASS"
+    },
+    {
+      "check": "Exact supplied password absent from every exported file",
+      "result": "PASS"
+    },
+    {
+      "check": "No environment, cookie-store, HAR or PDF file included",
+      "result": "PASS"
+    },
+    {
+      "check": "Session HTTP bodies contain no raw authentication values",
+      "result": "PASS"
+    }
+  ],
+  "localMarkdownLinkCount": 40,
+  "brokenLinks": [],
+  "pdfExported": false,
+  "externalMessageSent": false,
+  "githubStateChanged": false,
+  "independentAcceptance": "PENDING"
+}

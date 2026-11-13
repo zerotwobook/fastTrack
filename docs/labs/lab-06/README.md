@@ -2,6 +2,8 @@
 
 Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). Owner A: Supapanya Yathip (`zerotwobook`); peer reviewer B: Atip Infa-udom (`Atip-Infa`). This package covers the delivered Sprint 1 product only.
 
+Start with [current evidence and next actions](current-status.md). It reconciles the outgoing CoursePMS session and newly received fastTrack evidence, while keeping student participation, peer review and independent acceptance separate.
+
 ## Session and current readiness
 
 | Item | Recorded value |
@@ -20,9 +22,9 @@ Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). O
 | Selected application commit | `8e637e537cd037d630a5fffc1b5672d1b44371a8` |
 | Historical Sprint 1 baseline | Tag `v1.0.0-sprint-1`, peeled application commit `ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8` |
 | Preparation branch baseline | `staging/sprint-2` at `057825105cbae7247b33f5319a9947a2c2edd0f1`; this is documentation identity, not serving application identity |
-| Execution / independent acceptance | NOT RUN / PENDING |
+| Execution / independent acceptance | AI-operated evidence exists in both directions; full student UAT and both independent decisions remain PENDING. See current-status.md. |
 
-The user supplied the partner identity/release details, session start, account preference and proposed retest time. The partner's public health/readiness were checked anonymously; no independent case execution, credential delivery, partner signature or partner confirmation of the retest is inferred. Partner cases/accepted Sprint 1 scope, safe access and exact deployed revision still need their handoff.
+The user supplied the partner identity/release details, session start, account preference, proposed retest time and subsequently the received CoursePMS evidence package. The received run records successful use of five fastTrack test accounts, but actual private credential delivery and both students' personal execution are not independently documented. CoursePMS's official case packet, suitable new lifecycle fixtures and both products' exact current deployed revisions remain pending. Partner confirmation of the proposed retest and acceptance are not inferred.
 
 ## Package contents and working order
 
@@ -32,14 +34,20 @@ The user supplied the partner identity/release details, session start, account p
 4. [Findings and retests](findings-and-retest.md): report, triage, correction chain and independent retest templates.
 5. [Acceptance record](acceptance-record.md): the independent team's exact-version decision, including unresolved limitations.
 6. [Preparation verification](preparation-verification.md): actual document/service checks and remaining readiness items.
+7. [Current status](current-status.md): consolidated versions, findings, responsibilities and next actions.
+8. [Received fastTrack session](sessions/2026-11-13-fasttrack-received.md): scoped intake and per-case API/UI limits, linking to the unchanged received archive.
 
-The seven Markdown documents and anonymous readbacks for both products are prepared for B's review in [PR #108](https://github.com/zerotwobook/fastTrack/pull/108). Structural/source checks passed; credentials, B's written-procedure dry-run, current revision confirmation and independent execution remain separate readiness steps. No UAT result field is prefilled as PASS. Record future test observations in a dated session copy rather than overwriting these blank templates.
+The preparation package in [PR #108](https://github.com/zerotwobook/fastTrack/pull/108) was approved and merged by B at `9ddb033` on 13 November 2026. Its blank execution/finding/acceptance forms remain reusable templates; the dated sessions contain actual observations. The current evidence/intake increment continues in [PR #110](https://github.com/zerotwobook/fastTrack/pull/110), pending substantive B review and protected staging integration. Do not interpret template NOT RUN fields as absence of the dated AI evidence, or that evidence as completed student UAT.
 
-## CoursePMS exploratory observations ? 13 November 2026
+## CoursePMS exploratory observations - 13 November 2026
 
 The user requested actual CoursePMS testing and supplied three test accounts. An AI-operated [dated session record](sessions/2026-11-13-coursepms-live.md) now separates observed browser outcomes, a cross-account stale-draft finding, live HTTP evidence and contract clarifications from the unexecuted official CPMS cases. All three accounts authenticated; immediate API token revocation and specific foreign-proposal read denials were observed. The existing no-draft fixture was preserved for reproduction.
 
 This is not personal A/B participation or independent acceptance. The official case packet, suitable unassigned synthetic fixtures, current deployed revision/traffic confirmation, human execution and Product Team triage remain pending. Original blank templates and the accepted preparation PR #108 remain historical preparation evidence. The new evidence increment is [PR #110](https://github.com/zerotwobook/fastTrack/pull/110), targeting staging only.
+
+## Received fastTrack observations - 13 November 2026
+
+The [received snapshot](received/coursepms-fasttrack-lab6-20261113/README.md) records Codex AI testing fastTrack for CoursePMS at source `8e637e5`: 97 PASS / 0 FAIL main assertions across 74 HTTP observations, seven separate passing post-UI controls and 11 narrow browser observations with original PNGs. It reports no confirmed fastTrack defect within that scope. The [dated intake](sessions/2026-11-13-fasttrack-received.md) explains the incomplete UI steps and separate stopped setup attempt. Both CoursePMS students' personal participation and final decision remain unrecorded/PENDING. The archive is immutable received evidence; its `from-fasttrack/` files are historical exports, not current editable sources.
 
 ## Completion and submission
 

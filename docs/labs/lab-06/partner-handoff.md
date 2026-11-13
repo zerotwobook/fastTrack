@@ -2,6 +2,8 @@
 
 Read this document before the [eight cases](uat-cases.md). Product owners A/B answer access or setup questions; the independent testers execute the cases and record their own observations.
 
+For current evidence and outstanding actions, read [current-status.md](current-status.md). The [received fastTrack intake](sessions/2026-11-13-fasttrack-received.md) records five successful test-account logins, new API-created synthetic fixtures and selected browser observations, all operated by Codex AI for CoursePMS. It does not complete the personal student UAT or independent decision. Existing setup instructions below describe a fresh run; use a new suffix and preserve the received run's records. Retest confirmation and both current deployed revisions remain pending.
+
 ## 1. Participants and appointments
 
 | Role | Participants / arrangement |

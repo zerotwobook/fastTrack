@@ -1,0 +1,108 @@
+{
+  "checkedUtc": "2026-11-13T13:23:08.752161+00:00",
+  "operator": "Codex AI",
+  "scope": "Document intake and evidence integrity; no new live UAT or acceptance",
+  "checks": [
+    {
+      "check": "Received archive equals source byte-for-byte",
+      "result": "PASS",
+      "detail": {
+        "files": 56,
+        "archiveFiles": 56
+      }
+    },
+    {
+      "check": "Original SHA-256 manifest",
+      "result": "PASS",
+      "detail": {
+        "entries": 55
+      }
+    },
+    {
+      "check": "Retained JSON parses",
+      "result": "PASS",
+      "detail": {
+        "files": 18
+      }
+    },
+    {
+      "check": "Main incoming counts and references",
+      "result": "PASS",
+      "detail": {
+        "assertions": 97,
+        "httpObservations": 74,
+        "caseGroups": {
+          "READINESS": 8,
+          "SETUP": 10,
+          "UAT-01": 7,
+          "UAT-04": 6,
+          "UAT-02": 9,
+          "UAT-03": 4,
+          "UAT-05": 19,
+          "UAT-06": 14,
+          "UAT-07": 9,
+          "UAT-08": 6,
+          "CLEANUP": 5
+        }
+      }
+    },
+    {
+      "check": "Post-UI and browser denominators remain separate",
+      "result": "PASS",
+      "detail": {
+        "postUi": 7,
+        "browser": 11
+      }
+    },
+    {
+      "check": "Disclosed exported-source hashes",
+      "result": "PASS",
+      "detail": {
+        "exports": 15,
+        "mismatches": []
+      }
+    },
+    {
+      "check": "Current and archived Markdown local links",
+      "result": "PASS",
+      "detail": {
+        "files": 41,
+        "links": 160,
+        "broken": []
+      }
+    },
+    {
+      "check": "Markdown fences",
+      "result": "PASS",
+      "detail": []
+    },
+    {
+      "check": "Text credential patterns and raw JSON authentication fields",
+      "result": "PASS",
+      "detail": {
+        "matchingPaths": [],
+        "rawAuthFieldPaths": [],
+        "limit": "Pattern and structured-field inspection; no claim to know privately supplied passwords."
+      }
+    },
+    {
+      "check": "Archived runner syntax only",
+      "result": "PASS",
+      "detail": {
+        "files": 2,
+        "executed": false
+      }
+    },
+    {
+      "check": "Original PNGs decode",
+      "result": "PASS",
+      "detail": {
+        "files": 11
+      }
+    }
+  ],
+  "applicationChanged": false,
+  "independentAcceptance": "PENDING",
+  "pdfGenerated": false,
+  "externalMessageSent": false
+}

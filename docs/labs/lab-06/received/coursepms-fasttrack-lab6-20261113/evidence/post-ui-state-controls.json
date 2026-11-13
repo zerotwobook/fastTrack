@@ -1,0 +1,126 @@
+{
+  "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "operator": "Codex AI",
+  "observations": [
+    {
+      "id": "POST-UI-01",
+      "action": "Serving source still matches selected source",
+      "timeUtc": "2026-11-13T12:59:34.437427+00:00",
+      "status": "PASS",
+      "httpStatus": 200,
+      "body": {
+        "status": "ok",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      }
+    },
+    {
+      "id": "POST-UI-02",
+      "action": "Authenticate supervisor control session",
+      "timeUtc": "2026-11-13T12:59:34.652585+00:00",
+      "status": "PASS",
+      "httpStatus": 200,
+      "body": {
+        "role": "supervisor"
+      }
+    },
+    {
+      "id": "POST-UI-03",
+      "action": "UI invalid-title and FTP-link attempts created no work",
+      "timeUtc": "2026-11-13T12:59:34.794831+00:00",
+      "status": "PASS",
+      "httpStatus": 200,
+      "body": {
+        "data": [],
+        "meta": {
+          "serverTime": "2026-11-13T12:59:34.801Z"
+        }
+      }
+    },
+    {
+      "id": "POST-UI-04",
+      "action": "Saved normal work unchanged after browser checks",
+      "timeUtc": "2026-11-13T12:59:34.948598+00:00",
+      "status": "PASS",
+      "httpStatus": 200,
+      "body": {
+        "data": {
+          "id": "7e290379-cb6c-40e4-a22f-1f2073e3fe6c",
+          "milestoneId": "646bf021-20f6-49e0-9296-7b6da18556f3",
+          "submittedBy": {
+            "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+            "displayName": "Student A1"
+          },
+          "version": 1,
+          "title": "L6-CPMS-20261113-194706-WORK",
+          "description": "Synthetic Sprint 1 UAT submission.",
+          "url": "https://example.com/?run=L6-CPMS-20261113-194706",
+          "submittedAt": "2026-11-13T12:47:08.830Z"
+        },
+        "meta": {
+          "serverTime": "2026-11-13T12:59:34.955Z"
+        }
+      }
+    },
+    {
+      "id": "POST-UI-05",
+      "action": "UI blank-feedback rejection preserves the original two messages",
+      "timeUtc": "2026-11-13T12:59:35.077243+00:00",
+      "status": "PASS",
+      "httpStatus": 200,
+      "body": {
+        "data": [
+          {
+            "id": "807aba3c-085c-475b-a00e-8addf9a191f3",
+            "submissionId": "7e290379-cb6c-40e4-a22f-1f2073e3fe6c",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "L6-CPMS-20261113-194706: Please explain the test evidence.",
+            "clientRequestId": "0b4c269b-862e-44ac-be13-89b34545bafb",
+            "createdAt": "2026-11-13T12:47:09.451Z"
+          },
+          {
+            "id": "0aaeb0aa-4c73-434a-93bb-2df36cfa106f",
+            "submissionId": "7e290379-cb6c-40e4-a22f-1f2073e3fe6c",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "content": "L6-CPMS-20261113-194706: Add the acceptance result.",
+            "clientRequestId": "b6d9f287-cfe4-4e3b-b543-13798f1799c1",
+            "createdAt": "2026-11-13T12:47:09.597Z"
+          }
+        ],
+        "meta": {
+          "serverTime": "2026-11-13T12:59:35.086Z"
+        }
+      }
+    },
+    {
+      "id": "POST-UI-06",
+      "action": "Late milestone remains without work",
+      "timeUtc": "2026-11-13T12:59:35.204269+00:00",
+      "status": "PASS",
+      "httpStatus": 200,
+      "body": {
+        "data": [],
+        "meta": {
+          "serverTime": "2026-11-13T12:59:35.211Z"
+        }
+      }
+    },
+    {
+      "id": "POST-UI-07",
+      "action": "Control API session signed out",
+      "timeUtc": "2026-11-13T12:59:35.320679+00:00",
+      "status": "PASS",
+      "httpStatus": 204,
+      "body": null
+    }
+  ],
+  "totals": {
+    "PASS": 7,
+    "FAIL": 0
+  }
+}

@@ -1,6 +1,6 @@
 # Independent UAT execution records
 
-Blank working templates. **No case has been executed or passed by this preparation.** Copy this file to a dated session record when the actual testers begin. Preserve original failed/blocked observations when a later retest is added.
+Blank working templates retained from the preparation increment. **The rows below are not the current execution ledger.** Actual AI-operated evidence now exists in both directions: [incoming fastTrack intake](sessions/2026-11-13-fasttrack-received.md) and [outgoing CoursePMS session](sessions/2026-11-13-coursepms-live.md). Use [current-status.md](current-status.md) for the consolidated status. Full personal student UAT remains incomplete/unrecorded. Copy this template to a new dated record when students execute; preserve prior failed/blocked observations and actual operator attribution.
 
 ## A. Partner team testing fastTrack (incoming evidence)
 
