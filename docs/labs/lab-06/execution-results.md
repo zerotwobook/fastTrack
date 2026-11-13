@@ -18,7 +18,7 @@ Blank working templates. **No case has been executed or passed by this preparati
 | Browser / OS / viewport | NOT RECORDED |
 | Run ID | L6-20261113-1730, or agreed rerun suffix |
 | Credential delivery / correct role-team verification | NOT RECORDED; labels and delivery confirmation only |
-| Actual retest appointment | NOT AGREED |
+| Proposed retest / partner confirmation | 14 November 2026 at 13:30 Asia/Bangkok (06:30 UTC), user-proposed; partner confirmation NOT RECORDED |
 
 ### Case summary
 

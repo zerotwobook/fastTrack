@@ -12,7 +12,7 @@ Read this document before the [eight cases](uat-cases.md). Product owners A/B an
 | Independent UAT tester 1 | Tatchakorn Thamnimitr, 67070503415, GitHub Magiciancat9 |
 | Independent UAT tester 2 | Pawarit Wongdaeng, 67070503466, GitHub martinvadre |
 | Initial testing | 13 November 2026 from 17:30 Asia/Bangkok (10:30 UTC), user-provided plan |
-| Retest | PENDING agreement; reserve time before 22 November 2026, 23:59 Asia/Bangkok |
+| Proposed retest | 14 November 2026 at 13:30 Asia/Bangkok (06:30 UTC), proposed by the user; partner confirmation pending |
 | Partner team | Section 31, Group EN-022_P6 |
 | Partner product | CoursePMS (Course Project Management System, CPE334 1/2026) |
 | Partner public URL | https://course-pms-859617270560.asia-southeast1.run.app |

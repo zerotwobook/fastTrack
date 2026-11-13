@@ -14,7 +14,7 @@ Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). O
 | Partner public application | <https://course-pms-859617270560.asia-southeast1.run.app> |
 | Partner repository | <https://github.com/Magiciancat9/Course_management> |
 | Partner-reported main / running source | `150dc5db3de5c829a7d9ef1adb545191cc37542d`; matched anonymous `/api/health` at 07:27 UTC on 13 November 2026 |
-| Retest appointment | Not yet supplied; agree before closing the initial session |
+| Proposed retest | 14 November 2026 at 13:30 Asia/Bangkok (06:30 UTC), proposed by the user; partner confirmation pending |
 | Account plan | Reuse the existing Lab 5 test accounts and create new synthetic UAT records through the cases |
 | Public application | <https://fasttrack-app-kpx7au3w2a-as.a.run.app> |
 | Selected application commit | `8e637e537cd037d630a5fffc1b5672d1b44371a8` |
@@ -22,7 +22,7 @@ Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). O
 | Preparation branch baseline | `staging/sprint-2` at `057825105cbae7247b33f5319a9947a2c2edd0f1`; this is documentation identity, not serving application identity |
 | Execution / independent acceptance | NOT RUN / PENDING |
 
-The user supplied the partner identity/release details, session start and account preference. The partner's public health/readiness were checked anonymously; no independent case execution, credential delivery, partner signature or appointment for retest is inferred from those details. Partner cases/accepted Sprint 1 scope, safe access and exact deployed revision still need their handoff.
+The user supplied the partner identity/release details, session start, account preference and proposed retest time. The partner's public health/readiness were checked anonymously; no independent case execution, credential delivery, partner signature or partner confirmation of the retest is inferred. Partner cases/accepted Sprint 1 scope, safe access and exact deployed revision still need their handoff.
 
 ## Package contents and working order
 
