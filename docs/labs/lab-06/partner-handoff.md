@@ -9,14 +9,20 @@ Read this document before the [eight cases](uat-cases.md). Product owners A/B an
 | Product team | EN-028 / Section 31 / InfaCompany |
 | A | Supapanya Yathip, 67070503443, GitHub zerotwobook |
 | B | Atip Infa-udom, 67070503446, GitHub Atip-Infa |
-| Independent UAT tester 1 | Tatchakorn Thamnimitr, 67070503415 |
-| Independent UAT tester 2 | Pawarit Wongdaeng, 67070503466 |
+| Independent UAT tester 1 | Tatchakorn Thamnimitr, 67070503415, GitHub Magiciancat9 |
+| Independent UAT tester 2 | Pawarit Wongdaeng, 67070503466, GitHub martinvadre |
 | Initial testing | 13 November 2026 from 17:30 Asia/Bangkok (10:30 UTC), user-provided plan |
 | Retest | PENDING agreement; reserve time before 22 November 2026, 23:59 Asia/Bangkok |
-| Partner team number, product and URL | PENDING partner handoff; needed before A/B execute reciprocal testing |
+| Partner team | Section 31, Group EN-022_P6 |
+| Partner product | CoursePMS (Course Project Management System, CPE334 1/2026) |
+| Partner public URL | https://course-pms-859617270560.asia-southeast1.run.app |
+| Partner repository | https://github.com/Magiciancat9/Course_management |
+| Partner-reported main / running source | 150dc5db3de5c829a7d9ef1adb545191cc37542d |
 | Private coordination / credential channel | PENDING user selection and actual delivery confirmation |
 
 Both teams exchange Product Team and UAT Team roles. Both fastTrack developers must participate in testing the partner product. Record actual tester participation, not a planned allocation as completed work.
+
+For CoursePMS, anonymously open `/api/health` and read `commitSha`; `/api/ready` reports database connectivity under `db`. On 13 November 2026 at approximately 07:27 UTC (14:27 Asia/Bangkok), actual HTTP 200 responses reported the supplied commit, `status: ok` / `service: course-pms-api`, and `status: ready` / `db: connected`. The [partner readback](evidence/partner-public-readback.json) retains the exact observation times and response fields. This confirms anonymous source/readiness at that time, not authenticated business behavior, repository main ancestry, deployed revision/traffic or independent acceptance. Repeat the version check at the session start and obtain the partner's actual Sprint 1 cases/scope, private test access, setup/cleanup and revision before reciprocal execution.
 
 ## 2. Fixed release and assessed scope
 
@@ -92,7 +98,8 @@ Do not restart/redeploy the service merely to perform this package. UAT-08 verif
 - [ ] SA/A1/SB credentials have been privately delivered and their current assignment checked.
 - [ ] Current deployed revision and unchanged selected source have been confirmed and recorded.
 - [ ] Tester names, access/evidence channel, new run ID and synthetic-data setup are confirmed.
-- [ ] Partner app URL/version/cases are available for reciprocal A/B testing.
+- [x] Partner team, app URL, repository and reported source are supplied; anonymous source/readiness were checked with actual observations retained.
+- [ ] Partner's actual cases/accepted Sprint 1 scope, private accounts, setup/cleanup and deployed revision are available for reciprocal A/B testing.
 - [ ] Retest appointment and final-decision contact are agreed.
 
 Source details and preparation checks: [README](README.md) and [preparation verification](preparation-verification.md).

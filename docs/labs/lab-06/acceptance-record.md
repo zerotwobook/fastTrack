@@ -7,8 +7,8 @@
 | Field | Actual entry |
 | --- | --- |
 | Product | fastTrack / InfaCompany / EN-028 / Section 31 |
-| Independent UAT team identifier | NOT SUPPLIED |
-| Planned independent testers | Tatchakorn Thamnimitr, 67070503415; Pawarit Wongdaeng, 67070503466 |
+| Independent UAT team identifier | Section 31, Group EN-022_P6 |
+| Planned independent testers | Tatchakorn Thamnimitr, 67070503415 (Magiciancat9); Pawarit Wongdaeng, 67070503466 (martinvadre) |
 | Actual decision-makers and participating testers | NOT RECORDED |
 | Tested URL | https://fasttrack-app-kpx7au3w2a-as.a.run.app |
 | Actual accepted-for-test Sprint 1 scope / contract version | NOT CONFIRMED; proposed scope in partner-handoff.md |
@@ -42,7 +42,7 @@ Never infer acceptance from silence, a green CI run, a peer PR approval, a devel
 
 Record a separate decision after Supapanya Yathip and Atip Infa-udom independently execute the partner's agreed cases. Copy section 1 with the partner product/URL/scope/version, actual A/B execution, all finding dispositions and retests, decision, reasons, conditions and real confirmations. Do not reuse fastTrack's decision or its planned test cases as the partner's execution.
 
-Current partner-product decision: **PENDING / NOT RUN**. Partner product/URL/version/cases have not been supplied in this preparation.
+Current partner-product decision: **PENDING / NOT RUN**. Partner product is CoursePMS (Course Project Management System, CPE334 1/2026), Section 31 / EN-022_P6. Public URL: <https://course-pms-859617270560.asia-southeast1.run.app>; repository: <https://github.com/Magiciancat9/Course_management>. The user-reported selected main/release commit `150dc5db3de5c829a7d9ef1adb545191cc37542d` matches the anonymous health observation in [partner-public-readback.json](evidence/partner-public-readback.json). Actual partner cases/accepted scope, private access, session execution and deployed revision remain pending. Anonymous health/readiness is not independent business acceptance.
 
 ## 3. Final report assembly checks
 

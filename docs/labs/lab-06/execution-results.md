@@ -7,7 +7,7 @@ Blank working templates. **No case has been executed or passed by this preparati
 | Session field | Value / entry to complete |
 | --- | --- |
 | Product team | InfaCompany / EN-028 / Section 31 |
-| Planned independent testers | Tatchakorn Thamnimitr, 67070503415; Pawarit Wongdaeng, 67070503466 |
+| Planned independent testers | Section 31 / EN-022_P6: Tatchakorn Thamnimitr, 67070503415 (Magiciancat9); Pawarit Wongdaeng, 67070503466 (martinvadre) |
 | Planned start | 13 November 2026, 17:30 Asia/Bangkok |
 | Actual start / end | NOT RECORDED |
 | Actual participating testers and roles | NOT RECORDED; identify who performed each action |
@@ -71,16 +71,20 @@ This is a separate obligation. Both Supapanya Yathip and Atip Infa-udom must par
 
 | Session field | Value / entry to complete |
 | --- | --- |
-| Partner team number / product / members | Team number/product PENDING; members supplied in incoming session above |
-| Partner repository / deployed URL | NOT SUPPLIED |
+| Partner team number / product / members | Section 31, EN-022_P6 / CoursePMS (Course Project Management System, CPE334 1/2026); Tatchakorn Thamnimitr (Magiciancat9) and Pawarit Wongdaeng (martinvadre) |
+| Partner repository | https://github.com/Magiciancat9/Course_management |
+| Partner deployed URL | https://course-pms-859617270560.asia-southeast1.run.app |
 | Partner Sprint 1 scope / requirement and AC reference | NOT SUPPLIED |
-| Partner tested source / revision / release | NOT SUPPLIED |
+| Partner selected source / actual tested revision | User-reported main/release 150dc5db3de5c829a7d9ef1adb545191cc37542d, matched anonymous health at 07:27 UTC on 13 November 2026; actual session version/revision NOT RECORDED |
+| Anonymous preparation check | Health HTTP 200, commitSha matches selected source; ready HTTP 200, status ready and db connected. See partner-public-readback.json; not an executed partner UAT case. |
 | Partner case sheet and safe private account delivery | NOT SUPPLIED |
 | Actual start / end / timezone | NOT RECORDED |
 | Actual testers / roles | NOT RECORDED; record both InfaCompany members' participation |
 | Setup / cleanup / limitations | NOT SUPPLIED |
 
 Use the partner's actual case IDs, steps and expected results; do not substitute fastTrack cases. Execute all agreed cases with at least the four required categories, adding rows as necessary.
+
+At actual session start, repeat CoursePMS `/api/health` (`commitSha`) and `/api/ready` (`db`) checks, record the time/observed source and confirm the exact deployed revision with the partner. If the source changes from the selected value, agree and record a new tested baseline before execution. The prior anonymous preparation check does not fill any actual case-result row below.
 
 | Partner case ID / category | Actual tester / role | Time / exact version | Actual inputs and observations | Status | Evidence / outgoing finding |
 | --- | --- | --- | --- | --- | --- |

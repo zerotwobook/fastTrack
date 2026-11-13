@@ -8,9 +8,12 @@ Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). O
 | --- | --- |
 | Product team | EN-028, Section 31, InfaCompany |
 | Product team members | Supapanya Yathip, 67070503443; Atip Infa-udom, 67070503446 |
-| Independent partner testers | Tatchakorn Thamnimitr, 67070503415; Pawarit Wongdaeng, 67070503466 |
+| Independent partner testers | Tatchakorn Thamnimitr, 67070503415 (`Magiciancat9`); Pawarit Wongdaeng, 67070503466 (`martinvadre`) |
 | Initial session | 13 November 2026, from 17:30 Asia/Bangkok (10:30 UTC), supplied by the user |
-| Partner team number / application | Not supplied; complete in the handoff before reciprocal execution |
+| Partner team / application | Section 31, Group EN-022_P6 / CoursePMS (Course Project Management System, CPE334 1/2026) |
+| Partner public application | <https://course-pms-859617270560.asia-southeast1.run.app> |
+| Partner repository | <https://github.com/Magiciancat9/Course_management> |
+| Partner-reported main / running source | `150dc5db3de5c829a7d9ef1adb545191cc37542d`; matched anonymous `/api/health` at 07:27 UTC on 13 November 2026 |
 | Retest appointment | Not yet supplied; agree before closing the initial session |
 | Account plan | Reuse the existing Lab 5 test accounts and create new synthetic UAT records through the cases |
 | Public application | <https://fasttrack-app-kpx7au3w2a-as.a.run.app> |
@@ -19,7 +22,7 @@ Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). O
 | Preparation branch baseline | `staging/sprint-2` at `057825105cbae7247b33f5319a9947a2c2edd0f1`; this is documentation identity, not serving application identity |
 | Execution / independent acceptance | NOT RUN / PENDING |
 
-The user supplied the partner names, session start and account preference. No independent execution, credential delivery, partner signature or appointment for retest is inferred from those details.
+The user supplied the partner identity/release details, session start and account preference. The partner's public health/readiness were checked anonymously; no independent case execution, credential delivery, partner signature or appointment for retest is inferred from those details. Partner cases/accepted Sprint 1 scope, safe access and exact deployed revision still need their handoff.
 
 ## Package contents and working order
 
@@ -30,7 +33,7 @@ The user supplied the partner names, session start and account preference. No in
 5. [Acceptance record](acceptance-record.md): the independent team's exact-version decision, including unresolved limitations.
 6. [Preparation verification](preparation-verification.md): actual document/service checks and remaining readiness items.
 
-The seven Markdown documents and anonymous readback are prepared for B's review in [PR #108](https://github.com/zerotwobook/fastTrack/pull/108). Structural/source checks passed; credentials, B's written-procedure dry-run, current revision confirmation and independent execution remain separate readiness steps. No UAT result field is prefilled as PASS. Record future test observations in a dated session copy rather than overwriting these blank templates.
+The seven Markdown documents and anonymous readbacks for both products are prepared for B's review in [PR #108](https://github.com/zerotwobook/fastTrack/pull/108). Structural/source checks passed; credentials, B's written-procedure dry-run, current revision confirmation and independent execution remain separate readiness steps. No UAT result field is prefilled as PASS. Record future test observations in a dated session copy rather than overwriting these blank templates.
 
 ## Completion and submission
 
