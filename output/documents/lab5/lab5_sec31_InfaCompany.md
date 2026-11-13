@@ -8,10 +8,8 @@ We deployed fastTrack on Google Cloud with reviewed releases, required CI and a 
 
 | Member | Name and student ID | GitHub |
 | --- | --- | --- |
-| A | Supapanya Yathip
-67070503443 | [zerotwobook](https://github.com/zerotwobook) |
-| B | Atip Infa-udom
-67070503446 | [Atip-Infa](https://github.com/Atip-Infa) |
+| A | Supapanya Yathip, 67070503443 | [zerotwobook](https://github.com/zerotwobook) |
+| B | Atip Infa-udom, 67070503446 | [Atip-Infa](https://github.com/Atip-Infa) |
 
 [Public repository](https://github.com/zerotwobook/fastTrack)  |  [Live application](https://fasttrack-app-kpx7au3w2a-as.a.run.app)  |  [Team project board](https://github.com/users/zerotwobook/projects/3)
 
