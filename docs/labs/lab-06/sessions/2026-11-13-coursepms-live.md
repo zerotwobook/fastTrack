@@ -117,7 +117,7 @@ The following remain BLOCKED or NOT RUN, rather than PASS:
 - New draft/submission/revision/approval journey and boundary/write-lock checks: preserve existing partner records and the observed no-draft reproduction fixture until suitable synthetic fixtures are agreed.
 - Cross-team write denial, student review denial, restart durability and 8-hour expiry: not executed in this bounded session.
 - Current Cloud Run revision/traffic confirmation: partner deployment-time report only; commit identity was independently verified.
-- Human A/B participation, Product Team triage/acknowledgement, partner contact, independent retest and acceptance: not supplied or inferred. User was asked for an eligible unassigned test account; no reply was received during the bounded checks.
+- Human A/B participation, Product Team triage/acknowledgement, partner contact, independent retest and acceptance: not supplied or inferred. The user confirmed that no additional unassigned test account is available. The existing shared/historical records and the no-draft finding fixture remain preserved.
 
 **Acceptance: PENDING.** This AI-operated session found one concrete client-state defect and one contract discrepancy; it does not replace the required personal A/B reciprocal UAT or authorize an acceptance signature. B should reproduce EXP-06 against the same source and preserve the original failing observation. The user can send the two finding sections privately to the Product Team. No external message has been sent by the agent.
 
