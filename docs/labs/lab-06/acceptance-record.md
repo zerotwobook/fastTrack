@@ -1,64 +1,57 @@
-# Independent Sprint 1 acceptance record
+# Independent Sprint 1 decision records
 
-**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
+Updated after accepted evidence PR #113, merged at 01f61a9 on 17 November 2026. **Both actual human decisions remain PENDING.** The tables below contain dated evidence and explicit missing decision inputs; they are not signatures. AI operations, account-level PR review and integration approval do not establish personally executed UAT or independent acceptance.
 
+## 1. fastTrack: decision reserved for CoursePMS
 
-**Current decision: PENDING. No independent acceptance or signature has been recorded.** Only the UAT Team may confirm independent acceptance. Copy this template for the actual tested release and preserve previous decisions if the release changes.
-
-Actual AI-operated evidence and a partner correction candidate are available in both directions; see [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md). The fields below remain a blank student-decision template. Their NOT RECORDED values do not erase dated observations. CoursePMS technical accepted-Major triage, RED/GREEN and exact-head CI are recorded; no fixed deployed source or independent retest is established. The 14 November fastTrack revision readback is dated evidence, not a fresh cloud check. Both actual human decisions remain PENDING; simulation supplies no participation/signature.
-
-## 1. FastTrack decision by the independent partner
-
-| Field | Actual entry |
+| Field | Current factual record |
 | --- | --- |
-| Product | fastTrack / InfaCompany / EN-028 / Section 31 |
-| Independent UAT team identifier | Section 31, Group EN-022_P6 |
-| Planned independent testers | Tatchakorn Thamnimitr, 67070503415 (Magiciancat9); Pawarit Wongdaeng, 67070503466 (martinvadre) |
-| Actual decision-makers and participating testers | NOT RECORDED |
-| Tested URL | https://fasttrack-app-kpx7au3w2a-as.a.run.app |
-| Actual accepted-for-test Sprint 1 scope / contract version | NOT CONFIRMED; proposed scope in partner-handoff.md |
-| Exact tested source / deployed revision / release | NOT RECORDED; recheck at execution, not only planned values |
-| Execution dates / evidence record | NOT RECORDED |
-| Cases executed and PASS/FAIL/BLOCKED/NOT RUN totals | NOT COUNTED |
-| All received finding dispositions / evidence | NOT TRIAGED |
-| Critical/Major open or unverified defects | NOT ASSESSED |
-| Corrected release-blocking defects / independent retests | NOT PERFORMED |
-| Minor limitations explicitly accepted by UAT Team | NONE ACCEPTED; do not infer there are no limitations |
-| No-defect controlled exercise, if applicable | NOT REQUESTED / NOT APPROVED / NOT RUN |
-| Decision | PENDING; select one actual decision below after review |
-| Reason, evidence and conditions | NOT PROVIDED |
-| Actual confirming names / date / channel or signature reference | NOT PROVIDED |
+| Product / independent team | fastTrack / CoursePMS |
+| Recorded tested scope | Sprint 1 F-01 sign-in/scoped teams; F-02 milestones; F-03 one shared version-1 submission before deadline; F-04 private append-only exact-version feedback |
+| Recorded tested source | 8e637e537cd037d630a5fffc1b5672d1b44371a8 |
+| Baseline distinction | Original v1.0.0-sprint-1 peels to ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8; later tested source does not move that tag |
+| Serving metadata | Dated 14 November readback: fasttrack-app-00003-rc7, 100% traffic; not a fresh serving observation |
+| Actual incoming AI evidence | 97 main API PASS assertions across 74 HTTP observations; seven separate post-UI controls; follow-up 26 UI observations, 25 final controls and 11 saved-state comparisons |
+| Coverage / limitations | No confirmed product defect in bounded evidence; sequential profiles and other documented procedural limits still require actual tester review |
+| Actual personal execution/review | Per-member case/time/result confirmation PENDING; account-level events and AI logs do not fill it |
+| Independent final decision | PENDING: CoursePMS's actual decision-makers select and confirm for the exact tested release |
+| Accepted minor limitations | None personally confirmed; do not infer that no limitations exist |
+| Own-product defect workflow | No legitimate fastTrack defect established by bounded evidence. Complete human UAT; if none arises, obtain TA-approved isolated own-product exercise. No approval/exercise currently supplied |
 
-Available decisions:
+Sources: [initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [reciprocal follow-up summary](sessions/2026-11-13-fasttrack-followup-summary.md), [contributions and AI attribution](contributions-and-ai.md).
 
-- **Accepted:** the recorded Sprint 1 scope passes and all required conditions are met.
-- **Accepted with minor limitations:** the UAT Team explicitly lists and accepts the remaining minor limitations; no Critical/Major or required blocked acceptance work remains.
-- **Not Accepted:** state unresolved release-blocking defects, required blocked cases or other unmet conditions and the next retest step.
+## 2. CoursePMS: decision reserved for fastTrack
 
-Never infer acceptance from silence, a green CI run, a peer PR approval, a developer demonstration or an elapsed appointment. A corrected code version does not automatically inherit acceptance of another release. A separate approved controlled exercise must not be confused with the healthy release's decision.
+| Field | Current factual record |
+| --- | --- |
+| Product / independent team | CoursePMS / fastTrack |
+| Original assessed run | Eight official CPMS-UAT-01-08 paths, 14 November, source 9c22735995c985aaa0622b6b179de1ac9c1f80ca |
+| Original evidence totals | 36 core PASS; actual complete ledger 56 PASS / 1 FAIL / 57. Original 58-total narrative and Back-navigation deviation preserved |
+| Partner dispositions | #71 Major client-state isolation; #74 Major roster privacy; #75 Minor protected JSON routing. This does not establish API body bypass or saved copying |
+| Reviewed correction / release | Corrections #72/#73 integrated; release #76 merged as aeb804ea5bc667399b00cf54df10046a6ded46e0; deploy run 44074859743 succeeded |
+| Identified corrected serving target | course-pms-00009-mk2, 100% traffic, digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0 per dated workflow CLI; no fresh console screenshot claimed |
+| Actual corrected AI execution | 17 November 19:11-19:15 Asia/Bangkok. Source matches at start/end. Original same-document A -> logout -> B reproduction PASS; reverse/reload, observed revocation, foreign GET, directory roles and routing results recorded |
+| Retest mapping | 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY; seven anonymous observations and eight authenticated records are separate denominators |
+| Required remaining subchecks | No-team/unassigned Student fixture absent; student-review write target unagreed. RT-07 is evidence review, not a new deployed race test |
+| Preservation | Read back Team 5, three members, Proposal 3 APPROVED revision 2; A canonical proposal and bounded instructor directory unchanged; no business writes |
+| Human contribution / decision | Actual personal per-member cases/time/results and exact-version decision remain PENDING |
 
-### Explicit minor-limitation record, if needed
+Sources: [original case summary](sessions/2026-11-14-coursepms-case-summary.md), [targeted actual results](sessions/2026-11-17-coursepms-retest-results.md), [remaining-input handoff](handoffs/2026-11-17-remaining-lab6-inputs.md).
 
-| Finding / severity | Actual user impact and workaround | Why no release-blocking impact | Independent tester explicitly accepting / date / evidence |
-| --- | --- | --- | --- |
-| TO BE RECORDED IF APPLICABLE | NOT ASSESSED | NOT ASSESSED | NOT ACCEPTED |
+## 3. Uncompleted decision form: one actual decision per product
 
-## 2. Partner product decision by InfaCompany
+| Required field | Current state |
+| --- | --- |
+| Product / exact tested scope / source / serving revision | Use the dated evidence above; reverify if another session/release is chosen |
+| Actual deciding people and real confirming identity | PENDING; names/student IDs recorded privately in the identified report |
+| Actual decision date/time / timezone / channel | PENDING; no backdating to an AI run |
+| Cases executed/reviewed personally and evidence references | PENDING actual per-member confirmation |
+| Outstanding findings, blocked cases and minor conditions | Record explicitly; do not mark a blocked requirement as an accepted minor product limitation without an actual justified decision |
+| Decision and reason | PENDING; no option selected |
+| Actual personal confirmation | PENDING; no AI signature |
 
-Record a separate decision after Supapanya Yathip and Atip Infa-udom independently execute the partner's agreed cases. Copy section 1 with the partner product/URL/scope/version, actual A/B execution, all finding dispositions and retests, decision, reasons, conditions and real confirmations. Do not reuse fastTrack's decision or its planned test cases as the partner's execution.
+Available outcomes: Accepted; Accepted with explicitly documented minor limitations; Not Accepted. Required blocked work or unresolved Critical/Major findings prevent an unsupported Accepted result. Only the independent UAT team for the product decides. A partner's own-product decision cannot sign for the opposite direction.
 
-Current partner-product decision: **PENDING**. CoursePMS is Section 31 / EN-022_P6, URL <https://course-pms-859617270560.asia-southeast1.run.app>, repository <https://github.com/Magiciancat9/Course_management>. The [14 November report](sessions/2026-11-14-coursepms-case-summary.md) records eight-case paths at source `9c22735995c985aaa0622b6b179de1ac9c1f80ca`, 36 core PASS and a separate stale-draft FAIL. Use the actual JSON totals 56 PASS / 1 FAIL / 57, preserving original arithmetic/procedural limits. The [17 November intake](sessions/2026-11-17-coursepms-return.md) records the partner's accepted-Major correction candidate, passing CI and fresh unchanged public source. Reviewed fixed deployment, independent retest and actual A/B confirmation remain pending/blocked. No acceptance is inferred.
+## 4. Assembly and submission state
 
-## 3. Final report assembly checks
-
-- [ ] Part A contains complete cases, requirement/AC references, scope, version and safe handoff/setup/cleanup.
-- [ ] Part B contains all actual reciprocal cases/results, participating tester identities and readable normal/negative evidence.
-- [ ] Part C contains all outgoing/received findings, classification/reasons/severity/disposition, duplicates and explicit minor limitations, or an evidence-backed zero-findings record.
-- [ ] Part D contains applicable RED/GREEN/regression/code/review/CI/release/deployment/retest chains and the actual independent decision. Record controlled-exercise or tester dependencies honestly.
-- [ ] Short version table distinguishes original Sprint 1 baseline, defective/test/fix commits, main release and deployed revision, including legitimate merge-commit differences.
-- [ ] Contribution table, AI-use declaration and known limitations reflect actual work. AI document preparation is not independent UAT.
-- [ ] The user has assembled the single self-contained PDF with contents/Parts A-D/page ranges/evidence IDs; relevant cases/contracts/review text/results are inside, not only linked externally.
-- [ ] Safe credentials are delivered privately, no secrets appear in the report/repository, and the assessed service/repository remain available for grading.
-- [ ] Actual LEB2 upload filename/time/receipt recorded by 22 November 2026 at 23:59 Asia/Bangkok.
-
-No PDF export, course upload, contribution sign-off, independent decision or test execution is performed by creating this template.
+The [public outline](report-draft.md) and [evidence index](evidence-index.md) support a separate private identified Markdown assembly kit. It includes original case/contract/output excerpts and selected private images. User export/assembly/page ranges, actual contributions/decisions, any applicable TA exercise and the actual LEB2 submission receipt are still incomplete. Deadline: 22 November 2026, 23:59 Asia/Bangkok. No PDF, course upload, main release or decision is performed by this record.

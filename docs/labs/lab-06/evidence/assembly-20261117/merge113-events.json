@@ -1,0 +1,16 @@
+{
+    "pr":  "https://github.com/zerotwobook/fastTrack/pull/113",
+    "head":  "baab0b2c0912ff70f3c9c763301399cfaf73672b",
+    "merge":  "01f61a9e2b3c0dde02e6acf8c5e4231086dbba2b",
+    "mergedAt":  "2026-11-17T13:07:44Z",
+    "mergerRole":  "B-associated GitHub account",
+    "reviews":  [
+                    {
+                        "role":  "B-associated GitHub account",
+                        "state":  "APPROVED",
+                        "submittedAt":  "2026-11-17T13:05:56Z",
+                        "head":  "baab0b2c0912ff70f3c9c763301399cfaf73672b"
+                    }
+                ],
+    "scope":  "Actual account events; no personal browser-execution or UAT acceptance inferred"
+}

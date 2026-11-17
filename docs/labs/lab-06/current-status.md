@@ -1,6 +1,6 @@
 # Lab 6 current evidence and next actions
 
-Updated 17 November 2026 after the corrected CoursePMS release. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A (`zerotwobook`), reviewer B (`Atip-Infa`). [PR #112](https://github.com/zerotwobook/fastTrack/pull/112) merged into staging at 9a8f6d8. Current evidence continuation: [PR #113](https://github.com/zerotwobook/fastTrack/pull/113), isolated `docs/s2-a-lab6-corrected-retest`, staging-only. Inspect live checks/review state; document integration does not close whole Lab 6.
+Updated 17 November 2026 after the corrected CoursePMS release. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A (`zerotwobook`), reviewer B (`Atip-Infa`). [PR #112](https://github.com/zerotwobook/fastTrack/pull/112) merged into staging at 9a8f6d8. PR #113 is approved/merged by the B-associated account at 01f61a9, 17 November 20:07:44 Asia/Bangkok. Current report/closure preparation is [PR #114](https://github.com/zerotwobook/fastTrack/pull/114), isolated `docs/s2-a-lab6-report-assembly`, staging-only. Whole Lab 6 remains OPEN/PENDING.
 
 ## Current verified delivery and retest state
 
@@ -34,10 +34,10 @@ These are now partner-resolved dispositions/corrections rather than still-open p
 
 ## Remaining actions
 
-1. B reviews PR #113's current evidence and exact-head checks. Prior PR #112 is already merged; only this current task branch is updated. Evidence integration review is separate from personal student UAT.
+1. Use [the Parts A-D outline](report-draft.md), [evidence index](evidence-index.md), current [decision record](acceptance-record.md) and [contribution/AI record](contributions-and-ai.md). B reviews PR #114 assembly reconciliation; PR #113 evidence integration is already accepted/merged and is separate from personal student UAT.
 2. Reconcile no-team/unassigned Student and student-review-denial requirements with actual testers. Supply an eligible safe account and explicit safe write-denial target if execution is required. Do not mutate historical proposals or create memberships to manufacture fixtures. PARTIAL/BLOCKED is not PASS.
 3. Team 5/Proposal 3 is read back as three members / APPROVED revision 2; A's canonical saved proposal is unchanged. No business writes performed. Temporary sessions signed out and browser closed. Private source/screenshot payloads stay private.
-4. Use [the updated unsent reply](handoffs/2026-11-17-corrected-release-reply.md) and private results ZIP to exchange actual outcomes. Earlier credential-confirmation draft is superseded. External delivery/channel/time and proposed appointment are not inferred.
+4. Use [the concrete remaining-input request](handoffs/2026-11-17-remaining-lab6-inputs.md), [actual-result reply](handoffs/2026-11-17-corrected-release-reply.md) and private results ZIP to exchange actual outcomes. Earlier credential-confirmation draft is superseded. External delivery/channel/time and proposed appointment are not inferred.
 5. Actual human testers must record per-member execution/review and exact-version decisions in both directions. The successful original-bug AI retest does not select or sign acceptance. Both decisions PENDING. If complete fastTrack own-product UAT finds no legitimate defect, its own TA-approved isolated exercise remains a separate dependency.
 6. User assembles/submits Parts A-D by 22 November 2026, 23:59 Asia/Bangkok. No PDF, course upload, main release or human signature is performed here.
 
