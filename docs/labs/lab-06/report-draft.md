@@ -76,7 +76,7 @@ Passing original guarded paths do not cancel the separate stale-client-memory fa
 | Finding / issue | Original impact and assessment | Partner disposition / current independent state |
 | --- | --- | --- |
 | L6-OUT-EXP-001 / #71 | Four prior-account private draft fields visible in the next account's empty editor without reload. Client-side exposure; no API bypass or saved copying established. Reload was only a workaround | Major accepted defect; reviewed/deployed correction. Original A -> B reproduction now passes in actual AI retest; final human closure pending |
-| Directory summary visibility / #74 | Foreign proposal title/status/revision/time metadata conflicted with roster-only privacy | Partner resolved roster-only contract; Major accepted privacy defect. Observed assigned Student/Instructor paths pass; unassigned path still blocked |
+| Directory summary visibility / #74 | Foreign proposal title/status/revision/time metadata conflicted with roster-only privacy | Partner resolved roster-only contract; Major accepted privacy defect. Assigned/own, foreign, unassigned Student and Instructor paths pass in the completed targeted checks; human closure pending |
 | L6-OUT-EXP-002 / #75 | Unsupported proposal namespace returned SPA HTML rather than intended protected JSON semantics; no private body disclosure shown | Minor routing defect; auth then JSON 404, other unknown API JSON 404. Recorded anonymous/authenticated routing passes |
 | Original report arithmetic | Source narrative differs from actual 57-entry JSON ledger | Evidence correction acknowledged; not a product defect |
 | Received fastTrack findings | No confirmed defect in bounded AI evidence | Not a final exhaustive zero-findings decision; complete actual human independent UAT/decision |
@@ -97,11 +97,10 @@ AI-operated run: 17 November 19:11-19:15 Asia/Bangkok, source aeb804ea at start/
 
 | RT cases | Current status |
 | --- | --- |
-| RT-01, RT-02, RT-04, RT-05, RT-09 | 5 PASS within each recorded path |
-| RT-03, RT-06, RT-08 | 3 PARTIAL: no-team/unassigned Student fixture absent; student-review write target unagreed |
-| RT-07 | EVIDENCE REVIEW ONLY; no new local/deployed race test |
+| RT-01-06, RT-08-09 | Eight deployed targeted case PASS, including later no-team destination and bounded review denial |
+| RT-07 | PASS by exact-source evidence inspection plus independent isolated local replay; no live race claim |
 
-Seven anonymous observations and eight sanitized authenticated records are separate evidence sets, not a combined assertion count. PARTIAL includes unexecuted required subchecks and is not complete PASS. No new confirmed product failure is observed, but exhaustive acceptance is not claimed.
+The later 21:30-21:33 follow-up resolves no-team/unassigned privacy and safe Student-review denial. A -> R -> A without refresh restores original A data; invalid-input POST to ID 0 returns 403 BR06_INSTRUCTOR_ROLE_REQUIRED, and the complete authorized directory is unchanged. Team 5 / Proposal 3 APPROVED revision 2 is retained. [Latest detailed results](sessions/2026-11-17-coursepms-remaining-checks.md) distinguish eight deployed PASS from RT-07 evidence/local PASS. Independent isolated replay passes 16 client and 19 selected/mocked server tests; initial Node 26 localStorage runner failures are retained, followed by unchanged client-suite PASS on Node 20. Seven anonymous, eight earlier authenticated and fourteen additional records remain separate evidence sets. No new confirmed product failure is observed; exhaustive product acceptance and human signatures are not claimed.
 
 ### fastTrack own-product correction workflow: unresolved dependency
 
@@ -111,7 +110,7 @@ CoursePMS's defect chain belongs to CoursePMS. It does not satisfy the assessed 
 
 [Verified account events and proposed remaining allocation](contributions-and-ai.md) distinguish actual B-associated review/merge from personally operated cases. Actual A/B/Partner 1/2 case/action/time confirmations remain pending; assignments are prospective, not retroactive. AI assistance covers browser/API operation, evidence checks, source/release inspection and drafting. Neither AI output nor integration approval signs the human decisions.
 
-Both exact-version independent decisions remain PENDING in [current decision records](acceptance-record.md). No minor limitations are personally accepted by inference. Final required scope/blocked cases must be reconciled by actual testers, followed by actual decision-maker/time/reasons/conditions. Do not substitute a positive label for an unavailable prerequisite.
+Both exact-version independent decisions remain PENDING in [current decision records](acceptance-record.md). No minor limitations are personally accepted by inference. Final required scope, the recorded bounded denial procedure and case results must be reviewed by actual testers, followed by actual decision-maker/time/reasons/conditions. Do not substitute a positive label for an unavailable prerequisite.
 
 ## Final assembly state
 

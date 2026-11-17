@@ -31,12 +31,12 @@ Sources: [initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fa
 | Reviewed correction / release | Corrections #72/#73 integrated; release #76 merged as aeb804ea5bc667399b00cf54df10046a6ded46e0; deploy run 44074859743 succeeded |
 | Identified corrected serving target | course-pms-00009-mk2, 100% traffic, digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0 per dated workflow CLI; no fresh console screenshot claimed |
 | Actual corrected AI execution | 17 November 19:11-19:15 Asia/Bangkok. Source matches at start/end. Original same-document A -> logout -> B reproduction PASS; reverse/reload, observed revocation, foreign GET, directory roles and routing results recorded |
-| Retest mapping | 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY; seven anonymous observations and eight authenticated records are separate denominators |
-| Required remaining subchecks | No-team/unassigned Student fixture absent; student-review write target unagreed. RT-07 is evidence review, not a new deployed race test |
+| Retest mapping | Eight deployed targeted case PASS; RT-07 PASS by evidence review plus isolated automated replay. Seven anonymous / eight earlier authenticated / fourteen additional records and local 16 client / 19 server PASS remain separate sets |
+| Later technical completion | 21:30-21:33 follow-up verifies no-team Student and safe invalid-input review denial on ID 0 with unchanged authorized directory. RT-07 independently replayed in isolation. No pending technical prerequisite in the requested targeted plan; human suitability/decision still pending |
 | Preservation | Read back Team 5, three members, Proposal 3 APPROVED revision 2; A canonical proposal and bounded instructor directory unchanged; no business writes |
 | Human contribution / decision | Actual personal per-member cases/time/results and exact-version decision remain PENDING |
 
-Sources: [original case summary](sessions/2026-11-14-coursepms-case-summary.md), [targeted actual results](sessions/2026-11-17-coursepms-retest-results.md), [remaining-input handoff](handoffs/2026-11-17-remaining-lab6-inputs.md).
+Sources: [original case summary](sessions/2026-11-14-coursepms-case-summary.md), [initial targeted results](sessions/2026-11-17-coursepms-retest-results.md), [later completion](sessions/2026-11-17-coursepms-remaining-checks.md), [remaining-input handoff](handoffs/2026-11-17-remaining-lab6-inputs.md).
 
 ## 3. Uncompleted decision form: one actual decision per product
 

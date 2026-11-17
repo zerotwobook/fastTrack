@@ -35,3 +35,7 @@ All temporary role sessions were signed out; final token replay is rejected, loc
 The original L6-OUT-EXP-001 no-refresh reproduction now passes on the corrected deployment. Foreign GET denial, directory paths and API routing pass within the limits above. Do not sign off unexecuted no-team/unassigned/review-write subchecks or RT-07 as deployed execution. The real human UAT team must reconcile those remaining requirements and record its exact-version decision. Both independent human decisions remain PENDING; no acceptance, signature or attendance is selected by this report.
 
 The previously proposed 20 November slot remains unconfirmed; this actual AI run occurred at the times above. User receipt in this conversation and a prepared reply do not establish external delivery channel/time or earlier notification. No external message was sent by the assistant.
+
+## Later completion addendum
+
+The 21:30-21:33 deployed follow-up and independent isolated replay resolve the formerly blocked subchecks. See [actual later results](2026-11-17-coursepms-remaining-checks.md): eight deployed targeted case PASS and one evidence-review/local-replay PASS. The dated observations/mapping above are retained as history, not the current completion state. Both human decisions remain pending.

@@ -1,0 +1,26 @@
+{
+  "verifiedAtUtc": "2026-11-17T14:41:44.916286+00:00",
+  "public_role_alias_markdown_files": 12,
+  "public_local_links_verified": 117,
+  "public_tables_verified": 29,
+  "private_report_local_links_verified": 60,
+  "private_narrative_table_shapes_verified": 25,
+  "private_original_and_additional_pngs_decoded": 17,
+  "original_extracted_source_files_byte_matched": 30,
+  "client_local_pass": 16,
+  "server_selected_local_pass": 19,
+  "additional_sanitized_records": 14,
+  "current_targeted_cases": {
+    "deployed_pass": 8,
+    "evidence_review_and_local_replay_pass": 1,
+    "pending_technical_prerequisites": []
+  },
+  "personal_case_entries": "PENDING actual confirmation",
+  "both_human_decisions": "PENDING",
+  "own_fasttrack_defect_or_controlled_exercise": "PENDING completed human UAT and applicable TA-approved own-product workflow",
+  "initial_node26_client_failures_retained": true,
+  "external_message_sent": false,
+  "pdf_generated": false,
+  "main_or_application_change": false,
+  "compact_package_local_links_verified": 6
+}

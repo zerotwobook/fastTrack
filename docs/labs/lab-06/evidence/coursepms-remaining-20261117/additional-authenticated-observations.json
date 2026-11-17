@@ -1,0 +1,170 @@
+[
+  {
+    "id": "ADD-01",
+    "phase": "A_BASELINE",
+    "timeUtc": "2026-11-17T14:30:06.377Z",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "role": "STUDENT",
+    "ownTeamId": 1,
+    "proposalStatus": "DRAFT",
+    "fourFieldsNonempty": true,
+    "fourFieldsMatchCanonical": true,
+    "foreignTeamCount": 3,
+    "allForeignProposalsNull": true,
+    "ownProposalRetained": true,
+    "privateStatusRows": 3
+  },
+  {
+    "id": "ADD-02",
+    "phase": "A_LOGOUT_REPLAY",
+    "timeUtc": "2026-11-17T14:30:09.764Z",
+    "signedOut": true,
+    "replayHttp": 401,
+    "replayCode": "TOKEN_REVOKED",
+    "sameDocumentBaselinePreserved": true
+  },
+  {
+    "id": "ADD-03",
+    "phase": "NO_TEAM_DESTINATION_NO_REFRESH",
+    "timeUtc": "2026-11-17T14:30:43.683Z",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "role": "STUDENT",
+    "ownTeamCount": 0,
+    "sameDocumentBaselinePreserved": true,
+    "allFourEditorFieldsAbsent": true,
+    "noTeamGuidanceVisible": true,
+    "allForeignProposalsNull": true,
+    "directoryTeamCount": 4,
+    "privateStatusRows": 4,
+    "oldPrivateFieldTextFound": false,
+    "createTeamFormEmpty": true,
+    "businessMutationsPerformed": false
+  },
+  {
+    "id": "ADD-04",
+    "phase": "R_LOGOUT",
+    "timeUtc": "2026-11-17T14:30:46.497Z",
+    "signedOut": true,
+    "sameDocumentBaselinePreserved": true
+  },
+  {
+    "id": "ADD-05",
+    "phase": "R_TO_A_NO_REFRESH",
+    "timeUtc": "2026-11-17T14:31:23.414Z",
+    "reverseWithoutReloadMatchedOriginal": true,
+    "canonicalSavedProposalUnchanged": true,
+    "fourFieldsNonempty": true
+  },
+  {
+    "id": "ADD-06",
+    "phase": "A_LOGOUT_BEFORE_PRESERVATION",
+    "timeUtc": "2026-11-17T14:31:26.415Z",
+    "signedOut": true,
+    "sameDocumentBaselinePreserved": true
+  },
+  {
+    "id": "ADD-07",
+    "phase": "INSTRUCTOR_AND_PRESERVATION",
+    "timeUtc": "2026-11-17T14:31:42.332Z",
+    "role": "INSTRUCTOR",
+    "noStudentEditor": true,
+    "priorSameDocumentMarker": true,
+    "teamCount": 4,
+    "authorizedAProposalRetained": true,
+    "noProposalTeamRemainsNull": true,
+    "authorizedProposalCount": 3,
+    "beforeTableRows": 5,
+    "approvedFilterRows": 2,
+    "retainedTeamSelected": true,
+    "approvedReviewInputDisabled": true,
+    "retainedTeam": {
+      "id": 5,
+      "memberCount": 3,
+      "proposalId": 3,
+      "status": "APPROVED",
+      "revision": 2
+    },
+    "canonicalDirectoryUnchangedAcrossFilterAndSelection": true
+  },
+  {
+    "id": "ADD-08",
+    "phase": "FINAL_LOGOUT_AND_HEALTH",
+    "timeUtc": "2026-11-17T14:31:46.283Z",
+    "signedOut": true,
+    "replayHttp": 401,
+    "replayCode": "TOKEN_REVOKED",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "localTokenRemoved": true
+  },
+  {
+    "id": "GUARD-01",
+    "phase": "INSTRUCTOR_BEFORE",
+    "timeUtc": "2026-11-17T14:33:09.179Z",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "role": "INSTRUCTOR",
+    "proposalZeroAbsentFromAuthorizedDirectory": true,
+    "preserved": {
+      "teamId": 5,
+      "proposalId": 3,
+      "status": "APPROVED",
+      "revision": 2
+    },
+    "baselineRecorded": true
+  },
+  {
+    "id": "GUARD-LOGOUT",
+    "timeUtc": "2026-11-17T14:33:13.311Z",
+    "signedOut": true,
+    "baselinePreserved": true
+  },
+  {
+    "id": "GUARD-02",
+    "phase": "STUDENT_REVIEW_ROLE_DENIAL",
+    "timeUtc": "2026-11-17T14:33:22.396Z",
+    "role": "STUDENT",
+    "method": "POST",
+    "path": "/api/proposals/0/review",
+    "payload": {
+      "decision": "NOT_A_DECISION",
+      "reviewFeedback": ""
+    },
+    "http": 403,
+    "code": "BR06_INSTRUCTOR_ROLE_REQUIRED",
+    "responseKeys": [
+      "code",
+      "error"
+    ],
+    "proposalReturned": false,
+    "sameDocumentBaselinePreserved": true
+  },
+  {
+    "id": "GUARD-LOGOUT",
+    "timeUtc": "2026-11-17T14:33:26.014Z",
+    "signedOut": true,
+    "baselinePreserved": true
+  },
+  {
+    "id": "GUARD-03",
+    "phase": "INSTRUCTOR_AFTER",
+    "timeUtc": "2026-11-17T14:33:48.174Z",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "completeAuthorizedDirectoryUnchanged": true,
+    "preserved": {
+      "teamId": 5,
+      "memberCount": 3,
+      "proposalId": 3,
+      "status": "APPROVED",
+      "revision": 2
+    }
+  },
+  {
+    "id": "GUARD-04",
+    "phase": "FINAL_LOGOUT_AND_HEALTH",
+    "timeUtc": "2026-11-17T14:33:52.452Z",
+    "signedOut": true,
+    "replayHttp": 401,
+    "replayCode": "TOKEN_REVOKED",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "localTokenRemoved": true
+  }
+]
