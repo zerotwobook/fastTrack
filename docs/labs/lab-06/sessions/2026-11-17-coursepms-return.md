@@ -28,6 +28,16 @@ These are fresh source/readiness observations, not a fresh Cloud Run revision/di
 
 Both exact-version independent human acceptance decisions remain **PENDING**. The partner's supplied acceptance template still contains older baseline/NOT RECORDED fields; its newer return narrative and dated evidence must be reconciled before report assembly. Fictional simulation remains excluded from result counts, contributions, signatures and acceptance.
 
-## Remaining intake work
+## Retained evidence and review handoff
 
-Preserve the supplied snapshot unchanged, reconcile the canonical Lab 6 status with the 14 November eight-case evidence and reciprocal follow-up, retain the actual readbacks, prepare a private response and executable retest checklist, and verify the evidence/document increment for B. The whole Issue remains OPEN/blocked/PENDING regardless of document CI.
+- [Private returned snapshot reference](https://github.com/Magiciancat9/Course_management/pull/73) and [public candidate PR](https://github.com/Magiciancat9/Course_management/pull/73).
+- [14 November original outgoing report](2026-11-14-coursepms-case-summary.md), [actual assertion ledger](2026-11-14-coursepms-case-summary.md) summarized without source payloads; its 32 original screenshots and original ledgers remain in the private original ZIP. Actual ledger is 56 PASS / 1 FAIL / 57; the original report's 58-row narrative and missing CPMS-A-058 remain preserved.
+- [Reciprocal UI follow-up](2026-11-13-fasttrack-followup-summary.md), with original attribution and deviations.
+- [Public preflight](../evidence/coursepms-return-20261117/public-preflight.json), [snapshot inventory](../evidence/coursepms-return-20261117/source-retention.md), exact-head live GitHub/CI readbacks in the same evidence directory.
+- [Private reply draft](../handoffs/2026-11-17-reply-to-coursepms.md), [retest plan](../handoffs/2026-11-17-coursepms-retest-plan.md) and [next-step prompt](../handoffs/2026-11-17-prompt-for-coursepms.md).
+
+Bounded source review of PR #73 confirms proposal/session clearing, generation guards, dashboard cancellation and same-session editor preservation are addressed in the proposed implementation and tested with synthetic fixtures. This is an AI evidence/source inspection, not a CoursePMS human PR approval or independent deployed retest. No new confirmed product defect is asserted from that inspection.
+
+The returned acceptance-record.md remains an older template while return-to-fasttrack.md acknowledges later versions/results. Its stale baseline/NOT RECORDED fields are a documentation reconciliation item, not evidence that the dated tests did not occur. Both original files remain unchanged. The simulation is explicitly fictional; it supplies no actual student record.
+
+B reviews the current PR #112 integrity/status/case and version distinctions. Whole Issue #22 remains OPEN/blocked/PENDING. Author checks/CI and B evidence integration acceptance do not close the Major finding, establish personal independent UAT or authorize main/deployment.
