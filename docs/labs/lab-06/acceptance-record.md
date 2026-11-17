@@ -1,6 +1,6 @@
 # Independent Sprint 1 product decisions
 
-Updated from the user's current confirmation on 17 November 2026. **CoursePMS is ACCEPTED by the user's instruction; fastTrack acceptance by CoursePMS is reported by the user.** [Confirmation and provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Existing test evidence is reused. This is not a claim that the assistant obtained an external signature or completed the whole Lab 6 assessment.
+Updated with the user's latest reported partner confirmation on 18 November 2026; the earlier 17 November record remains linked below. **CoursePMS is ACCEPTED by the user's instruction; fastTrack acceptance by CoursePMS is reported by the user.** [Confirmation and provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Existing test evidence is reused. This is not a claim that the assistant obtained an external signature or completed the whole Lab 6 assessment.
 
 **Latest TA evidence requirement:** the reported decisions below remain recorded, but do not certify completed independent human web-UI execution. The TA requests that actual record before coordinating section3.5. See [the feedback and current handoff](sessions/2026-11-17-ta-human-ui-feedback.md). No planned names or historical AI times are promoted into human results.
 
@@ -15,12 +15,14 @@ Updated from the user's current confirmation on 17 November 2026. **CoursePMS is
 | Dated serving metadata | fasttrack-app-00003-rc7, 100% on 14 November; not a fresh cloud observation |
 | Existing execution evidence | 97 main API PASS / 74 HTTP observations; seven separate post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons |
 | Decision | ACCEPTED, as reported by the user from CoursePMS |
-| Provenance | Current user confirmation; original partner decision message/time/channel/signers not supplied here. Current record time is not backdated into those fields |
+| Provenance | Latest partner acceptance confirmation reported by user for 18 November 2026, Asia/Bangkok. Exact time/channel/original statement and individual signers not supplied; earlier reports retained |
 | Coverage and deviations | Existing bounded results and documented procedural deviations retained; no confirmed legitimate fastTrack defect in this evidence; no new test run inferred |
 | Original operator attribution | Actual AI operation retained. Individual partner-member case/time details are not invented |
-| TA dependency | User plans to ask how to satisfy the own-product defect workflow with no confirmed legitimate defect. TA guidance/approval/exercise not yet supplied |
+| TA dependency | TA requests actual independent human web-UI results before coordinating section3.5 if no legitimate defect is found; no specific scenario/exercise supplied |
 
 Sources: [initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [reciprocal UI follow-up](sessions/2026-11-13-fasttrack-followup-summary.md), [current confirmation](sessions/2026-11-17-user-acceptance-confirmation.md).
+
+[Latest reported member roles, work period and partner confirmation date](sessions/2026-11-18-reported-partner-participation.md). These are user-reported data, separate from the original AI execution attribution.
 
 ## 2. CoursePMS: accepted using the existing completed evidence
 

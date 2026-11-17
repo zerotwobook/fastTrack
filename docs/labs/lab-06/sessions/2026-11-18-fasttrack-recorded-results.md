@@ -74,6 +74,9 @@ All times below are on 13 November 2026 in Asia/Bangkok. Each ID resolves to the
 
 ## Human participation provenance and the TA request
 
+**Latest 18 November user update:** [CoursePMS Partner 1/Partner 2 participation](2026-11-18-reported-partner-participation.md) is reported for 13-18 November, with Partner 1 preparing/planning and helping check, Partner 2 checking primarily, and approximately shared responsibility. The user reports acceptance confirmed on 18 November. These broad statements do not assign individual UI log entries or personal case times.
+
+
 The earlier private participation record preserves a direct user statement that the two known CoursePMS members participated on 13 November 2026 at 17:30 Asia/Bangkok. It explicitly does not supply individual case allocation or per-case actual results, and states that the later 19:47 API run and UI follow-up were operated by Codex. That reported 17:30 session is not relabelled as the recorded 21:37-22:00 browser session. Personal names/student IDs remain in the private participation record.
 
 [Current product decisions](../acceptance-record.md) retain direct versus user-reported confirmation provenance. Those decisions and the reported participation are available information, but they do not create missing individual action records.

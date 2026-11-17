@@ -2,6 +2,12 @@
 
 This public record uses role aliases. The identified report and any personal confirming data belong in the private assembly kit. Do not convert an account event, planned assignment or AI action into personally executed student work.
 
+## Latest reported independent-team participation
+
+The user clarifies that their latest A/B labels refer to CoursePMS Partner 1/Partner 2, not the fastTrack developer roles below. Reported work period: 13-18 November 2026, Asia/Bangkok. Partner 1 handled test preparation/planning and some checking; Partner 2 handled most checking, with responsibility approximately shared. The user also reports CoursePMS confirmed fastTrack acceptance on 18 November. See [the dated reported information](sessions/2026-11-18-reported-partner-participation.md).
+
+These are broad user-reported roles and dates. They do not fill individual case/action/time fields or replace Codex in the recorded evidence. The existing fastTrack A/B allocation below remains a separate product-team record.
+
 ## Verified account-level work
 
 | Role / account context | Actual event | Evidence / time | What it establishes |
@@ -31,8 +37,8 @@ This split is recorded on 17 November after the work and is a current responsibi
 | Individual historical case/step/date allocation | Not individually supplied; not inferred from the responsibility mapping |
 | B-account PR #113 review/merge | Verified account events above |
 | CoursePMS product decision | Accepted by the user's current instruction |
-| fastTrack reciprocal product decision | CoursePMS acceptance reported by the user; original external metadata not attached |
-| TA contact/guidance | User plans to ask; no answer/approval supplied |
+| fastTrack reciprocal product decision | Latest CoursePMS confirmation reported for 18 November 2026; exact time/channel/original statement not attached |
+| TA contact/guidance | Latest user-relayed TA feedback requires actual independent human UI results before coordinating section3.5; no specific scenario supplied |
 
 ## AI-use statement
 

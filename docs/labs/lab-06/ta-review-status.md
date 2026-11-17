@@ -26,6 +26,8 @@ Those declarations do not establish that named partner members personally perfor
 
 The outgoing CoursePMS technical retest is complete within its requested plan: [eight deployed targeted PASS plus RT-07 evidence-review/isolated-replay PASS](sessions/2026-11-17-coursepms-remaining-checks.md). That is a separate testing direction and does not replace the incoming fastTrack human execution record.
 
+**Latest reported participation/decision update:** [CoursePMS member roles and 13-18 November work period](sessions/2026-11-18-reported-partner-participation.md), with partner acceptance reported as confirmed on 18 November. This records the newly supplied broad roles/date and leaves original machine attribution and the per-case human criterion distinct.
+
 ## Prepared response to the TA's latest feedback
 
 1. [Complete human web-UI runbook](handoffs/2026-11-17-fasttrack-human-ui-run.md): all eight original cases, positive UI actions, safe new fixtures, role profiles, required guard subchecks and evidence capture.
