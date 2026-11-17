@@ -1,5 +1,7 @@
 # Lab 6 independent UAT evidence and report assembly
 
+For a shareable interim review, start with [the TA review status page](ta-review-status.md). It links the available results and prepared human UI completion steps without presenting the blank human record as a completed result.
+
 R2-A04 / Issue #22. Owner A, reviewer B. Scope: the delivered Sprint 1 product, with product-owner and independent-tester responsibilities recorded separately. This public navigation page uses role aliases; full identified report and private images remain in the local assembly kit.
 
 ## Current state after PR #113 merge
