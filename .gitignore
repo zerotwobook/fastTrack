@@ -25,3 +25,8 @@ tmp/pdfs/
 __pycache__/
 *.pyc
 
+# Local Lab 6 credentials and received partner evidence
+PasswordcoursePMS
+/PasswordcoursePMS.md
+/coursepms-fasttrack-lab6-20261113/
+/coursepms-fasttrack-lab6-followup-20261113/
