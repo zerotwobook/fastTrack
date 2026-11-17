@@ -1,40 +1,33 @@
-# Lab 6 completed targeted retest and reciprocal handoff
+# Lab 6 acceptance receipt and TA clarification
 
-Ready for the user to send privately with the combined completion package. NOT SENT. No actual delivery/channel/receipt time is inferred.
+Prepared for the user. NOT SENT by the assistant. The user confirms both sides have accepted, with CoursePMS acceptance of fastTrack reported through the user. Existing API/UI results are already available and are reused; no duplicate full test run is requested.
 
-## Message and action prompt for CoursePMS
+## Optional partner receipt message
 
 Hi CoursePMS team,
 
-fastTrack has completed the requested targeted retest on your deployed source aeb804ea5bc667399b00cf54df10046a6ded46e0. Original execution was 17 November 19:11-19:15 Asia/Bangkok; additional no-team and safely bounded review-denial checks ran 21:30-21:33. RT-01-06 and RT-08-09 pass on the deployed service. RT-07 passes by exact-source evidence inspection plus independent isolated replay (16 client tests and 19 selected/mocked server tests, separate counts). It is not a live-race claim or a replacement for actual human acceptance.
+Thank you for accepting fastTrack, as relayed to us. We retain the existing fastTrack API/UI evidence on source 8e637e537cd037d630a5fffc1b5672d1b44371a8, including the recorded follow-up and procedural limits; we are not requesting a repeat of the completed tests.
 
-The newly supplied unassigned Student sees no old A draft and only PRIVATE/null foreign proposals; switching back restores A unchanged. Student POST /api/proposals/0/review with invalid decision NOT_A_DECISION and empty feedback returns 403 BR06_INSTRUCTOR_ROLE_REQUIRED. ID 0 was absent from the authorized directory, and source/local tests establish role rejection before proposal access. This was an AI-selected safe denial procedure under our user's request, not an externally acknowledged target agreement. Please review its suitability with the evidence. No request targeted Proposal 3. The complete Instructor-authorized directory before/after is identical; Team 5 / three members / Proposal 3 APPROVED revision 2 is preserved. No successful business write or fixture mutation occurred.
+fastTrack accepts CoursePMS on corrected source aeb804ea5bc667399b00cf54df10046a6ded46e0 using the completed targeted plan: eight deployed case PASS plus RT-07 exact-source evidence review/isolated replay PASS. Local replay results are 16 client and 19 selected/mocked server PASS, with separate counts. Original execution was 17 November 19:11-19:15 Asia/Bangkok and additional no-team/safe-denial checks 21:30-21:33.
 
-Please use the updated combined completion ZIP rather than the old blocked preflight package. It contains the earlier original-bug results, later sanitized observations, local commands/results including initial runner diagnostics, private selected screenshots and checksums. Credentials/tokens/dependencies/source archives/runtime binaries are excluded.
+Team 5 / three members / Proposal 3 APPROVED revision 2 remains unchanged. The safe Student-review denial used invalid input against ID 0 and returned403; no request targeted Proposal 3, no successful business writes occurred, and the full authorized directory before/after is identical. The combined completion ZIP preserves the actual results, private selected screenshots, local logs including initial runner diagnostics and checksums. Actual AI operation and documented scope limits remain explicit.
 
-Please complete the reciprocal fastTrack handoff:
-
-1. Review the existing fastTrack plan and incoming execution/follow-up evidence for exact tested source 8e637e537cd037d630a5fffc1b5672d1b44371a8. Its dated serving revision is fasttrack-app-00003-rc7; confirm the current source before any new session. Original v1.0.0-sprint-1 remains a separate immutable baseline.
-2. Have each real member personally execute or review the assigned applicable cases and procedural deviations. Record actual role, case/steps, date/time/timezone, exact source, result and evidence personally produced/reviewed. Do not backdate a later review or relabel AI operation as student attendance.
-3. Return genuine fastTrack findings with reproducible expected/actual evidence and severity, or the actual completed bounded no-findings outcome. Do not create a finding merely to satisfy a count.
-4. Return CoursePMS's independent exact-version fastTrack decision with actual deciding people/time, covered cases, reviewed deviations, rationale and explicit conditions. It is currently PENDING in our record. Do not sign for fastTrack's decision on CoursePMS.
-5. Acknowledge the outgoing CoursePMS technical result and safe denial procedure, and return any evidence-based concern. We will make our actual human CoursePMS decision separately. Record actual receipt/reply/next appointment only when it happens.
-
-Our own-product defect/correction requirement remains separate: if completed fastTrack UAT finds no legitimate defect, we will request the applicable TA-approved isolated exercise. The CoursePMS correction chain cannot substitute for fastTrack's own chain. No TA approval is currently claimed.
+If convenient, please share the original acceptance reference/time for our evidence archive. We will record its real metadata when supplied. We are checking with the TA about the own-product defect workflow because the existing independent fastTrack evidence has no confirmed legitimate defect. This message does not claim a TA answer or a completed final course submission.
 
 fastTrack
 
-## Internal A/B actions
-
-- Personally review/execute the [prospective allocation](../contributions-and-ai.md), including latest no-team/role-denial evidence, and record real actions afterwards.
-- Confirm scope/procedure suitability and make the exact-version CoursePMS decision; both actual human decisions remain PENDING until the people decide.
-- B reviews PR #114 evidence integration; this does not replace personal UAT or acceptance.
-- Complete private report contribution/decision forms, any applicable own-product exercise, final user export/page ranges and course submission.
-
-## Conditional TA request: prepare only, not sent or approved
+## TA question for the user to send
 
 Dear instructor/TA,
 
-We are preparing the Lab 6 submission for our existing project. Current bounded AI-assisted independent evidence has not established a legitimate defect in fastTrack, while full personal tester completion/decision is still pending. The opposite team's defects and correction trace belong to that product. If completed independent fastTrack UAT confirms a healthy release, please advise/approve a controlled defect exercise on an isolated version of fastTrack under Lab 6 section 3.5, including scope and independent retester arrangement. We will retain meaningful RED/GREEN, review, CI/release and independent-retest evidence separately from the healthy assessed release. We will not deliberately break the live release or invent a defect.
+Our Lab 6 independent testing evidence is available in both directions. CoursePMS has accepted fastTrack according to the confirmation relayed to our project representative, and fastTrack has accepted the corrected CoursePMS release using the completed targeted evidence. Existing fastTrack results include 97 main API PASS, separate post-UI checks and a UI follow-up; no legitimate fastTrack defect is confirmed in this bounded evidence. We retain actual AI assistance, procedural deviations and user-confirmed shared A/B checking explicitly.
 
-Current exercise approval/scope/version/implementation/retest: PENDING. Actual contact time/channel/response must be recorded only after a real request. This is a conditional draft; it does not claim completed human UAT or approval.
+We did identify accepted CoursePMS defects and independently retested its reviewed/deployed correction. Please clarify what fastTrack must additionally provide for the Lab 6 defect-resolution requirement when its own independent testing has no confirmed defect. Is the existing cross-team correction/retest evidence sufficient for our assessed role, or must we complete a controlled exercise on an isolated fastTrack version under section 3.5? If an exercise is required, please approve its scope and independent retester arrangement before we proceed. We will retain meaningful failure, correction, review, CI and retest evidence and preserve the healthy live service.
+
+Current TA guidance/approval/exercise: NOT PROVIDED. The user plans to ask. Actual contact time/channel and response are recorded only after real contact; no external message has been sent by the assistant.
+
+## Current A/B next actions
+
+- A: maintain plan/normal/state evidence, coordinate the user's TA question and incorporate the actual answer.
+- B: review rule/access/privacy and correction/retest evidence plus the current PR #114 documentation candidate.
+- Both: use the recorded shared responsibility split, verify report facts and complete final export/page references/submission after TA disposition. Do not invent historical individual case times or signatures.

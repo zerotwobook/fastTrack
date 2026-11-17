@@ -1,57 +1,46 @@
-# Independent Sprint 1 decision records
+# Independent Sprint 1 product decisions
 
-Updated after accepted evidence PR #113, merged at 01f61a9 on 17 November 2026. **Both actual human decisions remain PENDING.** The tables below contain dated evidence and explicit missing decision inputs; they are not signatures. AI operations, account-level PR review and integration approval do not establish personally executed UAT or independent acceptance.
+Updated from the user's current confirmation on 17 November 2026. **CoursePMS is ACCEPTED by the user's instruction; fastTrack acceptance by CoursePMS is reported by the user.** [Confirmation and provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Existing test evidence is reused. This is not a claim that the assistant obtained an external signature or completed the whole Lab 6 assessment.
 
-## 1. fastTrack: decision reserved for CoursePMS
+## 1. fastTrack: CoursePMS acceptance reported by the user
 
 | Field | Current factual record |
 | --- | --- |
 | Product / independent team | fastTrack / CoursePMS |
-| Recorded tested scope | Sprint 1 F-01 sign-in/scoped teams; F-02 milestones; F-03 one shared version-1 submission before deadline; F-04 private append-only exact-version feedback |
+| Assessed scope | Delivered Sprint 1 F-01 sign-in/scoped teams, F-02 milestones, F-03 shared version-1 submission, F-04 private append-only exact-version feedback |
 | Recorded tested source | 8e637e537cd037d630a5fffc1b5672d1b44371a8 |
-| Baseline distinction | Original v1.0.0-sprint-1 peels to ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8; later tested source does not move that tag |
-| Serving metadata | Dated 14 November readback: fasttrack-app-00003-rc7, 100% traffic; not a fresh serving observation |
-| Actual incoming AI evidence | 97 main API PASS assertions across 74 HTTP observations; seven separate post-UI controls; follow-up 26 UI observations, 25 final controls and 11 saved-state comparisons |
-| Coverage / limitations | No confirmed product defect in bounded evidence; sequential profiles and other documented procedural limits still require actual tester review |
-| Actual personal execution/review | Per-member case/time/result confirmation PENDING; account-level events and AI logs do not fill it |
-| Independent final decision | PENDING: CoursePMS's actual decision-makers select and confirm for the exact tested release |
-| Accepted minor limitations | None personally confirmed; do not infer that no limitations exist |
-| Own-product defect workflow | No legitimate fastTrack defect established by bounded evidence. Complete human UAT; if none arises, obtain TA-approved isolated own-product exercise. No approval/exercise currently supplied |
+| Original baseline | v1.0.0-sprint-1 peels to ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8; not moved |
+| Dated serving metadata | fasttrack-app-00003-rc7, 100% on 14 November; not a fresh cloud observation |
+| Existing execution evidence | 97 main API PASS / 74 HTTP observations; seven separate post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons |
+| Decision | ACCEPTED, as reported by the user from CoursePMS |
+| Provenance | Current user confirmation; original partner decision message/time/channel/signers not supplied here. Current record time is not backdated into those fields |
+| Coverage and deviations | Existing bounded results and documented procedural deviations retained; no confirmed legitimate fastTrack defect in this evidence; no new test run inferred |
+| Original operator attribution | Actual AI operation retained. Individual partner-member case/time details are not invented |
+| TA dependency | User plans to ask how to satisfy the own-product defect workflow with no confirmed legitimate defect. TA guidance/approval/exercise not yet supplied |
 
-Sources: [initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [reciprocal follow-up summary](sessions/2026-11-13-fasttrack-followup-summary.md), [contributions and AI attribution](contributions-and-ai.md).
+Sources: [initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [reciprocal UI follow-up](sessions/2026-11-13-fasttrack-followup-summary.md), [current confirmation](sessions/2026-11-17-user-acceptance-confirmation.md).
 
-## 2. CoursePMS: decision reserved for fastTrack
+## 2. CoursePMS: accepted using the existing completed evidence
 
 | Field | Current factual record |
 | --- | --- |
 | Product / independent team | CoursePMS / fastTrack |
 | Original assessed run | Eight official CPMS-UAT-01-08 paths, 14 November, source 9c22735995c985aaa0622b6b179de1ac9c1f80ca |
-| Original evidence totals | 36 core PASS; actual complete ledger 56 PASS / 1 FAIL / 57. Original 58-total narrative and Back-navigation deviation preserved |
-| Partner dispositions | #71 Major client-state isolation; #74 Major roster privacy; #75 Minor protected JSON routing. This does not establish API body bypass or saved copying |
-| Reviewed correction / release | Corrections #72/#73 integrated; release #76 merged as aeb804ea5bc667399b00cf54df10046a6ded46e0; deploy run 44074859743 succeeded |
-| Identified corrected serving target | course-pms-00009-mk2, 100% traffic, digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0 per dated workflow CLI; no fresh console screenshot claimed |
-| Actual corrected AI execution | 17 November 19:11-19:15 Asia/Bangkok. Source matches at start/end. Original same-document A -> logout -> B reproduction PASS; reverse/reload, observed revocation, foreign GET, directory roles and routing results recorded |
-| Retest mapping | Eight deployed targeted case PASS; RT-07 PASS by evidence review plus isolated automated replay. Seven anonymous / eight earlier authenticated / fourteen additional records and local 16 client / 19 server PASS remain separate sets |
-| Later technical completion | 21:30-21:33 follow-up verifies no-team Student and safe invalid-input review denial on ID 0 with unchanged authorized directory. RT-07 independently replayed in isolation. No pending technical prerequisite in the requested targeted plan; human suitability/decision still pending |
-| Preservation | Read back Team 5, three members, Proposal 3 APPROVED revision 2; A canonical proposal and bounded instructor directory unchanged; no business writes |
-| Human contribution / decision | Actual personal per-member cases/time/results and exact-version decision remain PENDING |
+| Original results | 36 core PASS; actual full ledger 56 PASS / 1 FAIL / 57. Original arithmetic discrepancy and Back-navigation deviation retained |
+| Corrected tested source | aeb804ea5bc667399b00cf54df10046a6ded46e0, release #76 / deploy 44074859743 |
+| Dated serving identity | course-pms-00009-mk2, 100%, digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0 per workflow CLI |
+| Actual technical execution | 17 November 19:11-19:15 and 21:30-21:33 Asia/Bangkok; source verified; original no-refresh isolation, no-team privacy, safe Student denial and other recorded paths pass |
+| Retest modes | Eight deployed targeted PASS plus RT-07 evidence-review/isolated-replay PASS. Local 16 client / 19 selected server PASS, separate from live case and partner CI counts |
+| Decision | ACCEPTED by the user's instruction using these existing completed results |
+| Basis and limits | Requested targeted plan complete, no new confirmed failure; review-endpoint denial uses ID 0 and invalid input, not historical Proposal 3. No live race injection/exhaustive acceptance claimed |
+| Preservation | A saved proposal and authorized directory unchanged; Team 5 / three members / Proposal 3 APPROVED revision 2 retained. One rejected endpoint POST; no successful business writes |
+| Participation | Joint A/B checking confirmed by the user; current responsibility allocation recorded separately. Actual AI operation remains attributed |
+| Decision metadata | Direct user confirmation recorded now; no earlier decision date, separate B signature or external send time invented |
 
-Sources: [original case summary](sessions/2026-11-14-coursepms-case-summary.md), [initial targeted results](sessions/2026-11-17-coursepms-retest-results.md), [later completion](sessions/2026-11-17-coursepms-remaining-checks.md), [remaining-input handoff](handoffs/2026-11-17-remaining-lab6-inputs.md).
+Sources: [original case summary](sessions/2026-11-14-coursepms-case-summary.md), [initial retest](sessions/2026-11-17-coursepms-retest-results.md), [completed targeted plan](sessions/2026-11-17-coursepms-remaining-checks.md), [current confirmation](sessions/2026-11-17-user-acceptance-confirmation.md).
 
-## 3. Uncompleted decision form: one actual decision per product
+## 3. Assessment and submission remain separate
 
-| Required field | Current state |
-| --- | --- |
-| Product / exact tested scope / source / serving revision | Use the dated evidence above; reverify if another session/release is chosen |
-| Actual deciding people and real confirming identity | PENDING; names/student IDs recorded privately in the identified report |
-| Actual decision date/time / timezone / channel | PENDING; no backdating to an AI run |
-| Cases executed/reviewed personally and evidence references | PENDING actual per-member confirmation |
-| Outstanding findings, blocked cases and minor conditions | Record explicitly; do not mark a blocked requirement as an accepted minor product limitation without an actual justified decision |
-| Decision and reason | PENDING; no option selected |
-| Actual personal confirmation | PENDING; no AI signature |
+The [contribution record](contributions-and-ai.md) includes user-confirmed shared participation and current A/B responsibilities, without retroactive individual case/time claims. The original partner acceptance message may be attached later with its real metadata. It is not requested as a reason to repeat valid existing execution.
 
-Available outcomes: Accepted; Accepted with explicitly documented minor limitations; Not Accepted. Required blocked work or unresolved Critical/Major findings prevent an unsupported Accepted result. Only the independent UAT team for the product decides. A partner's own-product decision cannot sign for the opposite direction.
-
-## 4. Assembly and submission state
-
-The [public outline](report-draft.md) and [evidence index](evidence-index.md) support a separate private identified Markdown assembly kit. It includes original case/contract/output excerpts and selected private images. User export/assembly/page ranges, actual contributions/decisions, any applicable TA exercise and the actual LEB2 submission receipt are still incomplete. Deadline: 22 November 2026, 23:59 Asia/Bangkok. No PDF, course upload, main release or decision is performed by this record.
+Still open: B's actual PR #114 review/integration, TA guidance and any required own-fastTrack correction/exercise evidence, then user final report export/page references and LEB2 submission. No TA answer, course receipt, PDF, main release, separate human signature or whole-task completion is fabricated. Deadline: 22 November 2026, 23:59 Asia/Bangkok.

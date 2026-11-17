@@ -49,3 +49,7 @@ Node 20 ZIP SHA256 dc3700fdd57a63eedb8fd7e3c7baaa32e6a740a1b904167ff4204bc68ed8b
 The safe technical prerequisites previously blocking the outgoing targeted retest are resolved. Send the private combined completion package using the [updated draft](../handoffs/2026-11-17-remaining-lab6-inputs.md). No external message has been sent. Actual students must review the evidence/procedure, record their real personal actions and make the exact-version CoursePMS decision. CoursePMS must return its actual fastTrack decision and member evidence. Both human decisions remain PENDING.
 
 Complete fastTrack's own-product defect workflow if a legitimate finding arises; if complete UAT finds none, the applicable TA-approved isolated exercise remains a separate dependency. The opposite product's defect chain does not replace it. Final report export/page ranges/course receipt remain the user's work. No PDF, course submission, TA approval, main release or human signature is claimed.
+
+## Later user confirmation of product decisions
+
+The user subsequently accepts CoursePMS using this completed evidence, reports CoursePMS acceptance of fastTrack, and confirms shared A/B checking. See [the current confirmation record](2026-11-17-user-acceptance-confirmation.md) for direct versus user-reported provenance and the current responsibility split. Earlier PENDING statements above describe the time of execution; they are superseded for current decision status. Test facts and original operator attribution are unchanged. TA disposition and final assessment submission remain open.

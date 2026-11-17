@@ -1,6 +1,6 @@
 # Lab 6 current evidence and next actions
 
-Updated 17 November 2026 after remaining CoursePMS checks. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as 01f61a9. Current increment is [PR #114](https://github.com/zerotwobook/fastTrack/pull/114), staging-only. Whole Lab 6 remains OPEN/PENDING for real human decisions/activity and applicable own-product assessment work.
+Updated 17 November 2026 after remaining CoursePMS checks. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as 01f61a9. Current increment is [PR #114](https://github.com/zerotwobook/fastTrack/pull/114), staging-only. Whole Lab 6 remains OPEN/PENDING for documentation review, TA disposition and final submission. Product decisions and shared participation have now been confirmed as recorded below.
 
 ## Outgoing CoursePMS technical retest is complete within the requested plan
 
@@ -10,16 +10,16 @@ The [19:11-19:15 targeted run](sessions/2026-11-17-coursepms-retest-results.md) 
 
 **Current RT-01-09 mapping: eight deployed targeted case PASS; RT-07 PASS by exact-source evidence review plus independent isolated automated replay.** RT-07's specified mode does not require racing historical live writes. Local replay: 16 client PASS and 19 selected/mocked server PASS; counts are separate from live cases and partner CI. Initial Node 26 client runner failures are retained as compatibility diagnostics; unchanged client suite passed on checksum-verified Node 20. No live race injection, full partner backend rerun or exhaustive acceptance is claimed.
 
-Seven earlier anonymous observations, eight earlier authenticated records and fourteen additional sanitized records remain separate sets. No new confirmed product failure was found in the bounded checks. Former no-team/unassigned and safe-denial technical blockers are resolved; both actual human decisions remain PENDING.
+Seven earlier anonymous observations, eight earlier authenticated records and fourteen additional sanitized records remain separate sets. No new confirmed product failure was found in the bounded checks. Former no-team/unassigned and safe-denial technical blockers are resolved; CoursePMS is now ACCEPTED by the user; CoursePMS acceptance of fastTrack is reported by the user. [Confirmation provenance](sessions/2026-11-17-user-acceptance-confirmation.md).
 
 ## Evidence in both directions
 
 | Direction | Actual evidence | Remaining limit |
 | --- | --- | --- |
-| CoursePMS testing fastTrack | 97 main API PASS / separate seven post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons | Bounded AI evidence, separate counts; no confirmed defect. Actual people must review/finish applicable scope and return exact-version decision |
+| CoursePMS testing fastTrack | 97 main API PASS / separate seven post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons | Bounded AI evidence, separate counts; no confirmed defect. Existing independent evidence reused; CoursePMS acceptance reported by the user, original external metadata not attached |
 | fastTrack testing CoursePMS originally | Eight official paths; 36 core PASS; actual full ledger 56 PASS / 1 FAIL / 57 | Preserve original arithmetic discrepancy and Back-navigation deviation |
-| Corrected CoursePMS targeted completion | [Latest case map](sessions/2026-11-17-coursepms-remaining-checks.md), [additional records](evidence/coursepms-remaining-20261117/additional-authenticated-observations.json), [local replay](evidence/coursepms-remaining-20261117/local-replay-summary.json) | Eight deployed PASS plus RT-07 evidence/local PASS; actual human closure/decision pending |
-| Both human decisions | [Decision records](acceptance-record.md), [activity/AI attribution](contributions-and-ai.md) | PENDING actual personal confirmations; no AI signature or invented attendance |
+| Corrected CoursePMS targeted completion | [Latest case map](sessions/2026-11-17-coursepms-remaining-checks.md), [additional records](evidence/coursepms-remaining-20261117/additional-authenticated-observations.json), [local replay](evidence/coursepms-remaining-20261117/local-replay-summary.json) | Eight deployed PASS plus RT-07 evidence/local PASS; accepted by the user using this bounded evidence |
+| Product decisions and participation | [Decision records](acceptance-record.md), [shared responsibility/AI attribution](contributions-and-ai.md) | CoursePMS directly accepted by user; reciprocal fastTrack acceptance reported by user. Shared A/B checking confirmed; historical individual case times/signatures not inferred |
 
 ## Findings and preservation
 
@@ -33,8 +33,8 @@ No API body bypass or copied saved draft was established by the original finding
 
 ## Remaining owners and actions
 
-1. User sends the [ready partner message](handoffs/2026-11-17-remaining-lab6-inputs.md) with the private combined result package. It reports the completed outgoing checks and requests CoursePMS's actual fastTrack member evidence and independent decision. No assistant message/delivery/appointment is claimed.
-2. A/B personally review or execute their assigned evidence and record real role/cases/time/results, then decide on the exact CoursePMS version. CoursePMS does the reciprocal human work/decision for fastTrack. AI operation and PR integration do not supply these decisions.
-3. If complete independent fastTrack UAT finds no legitimate own-product defect, obtain the applicable TA-approved isolated exercise and retain its full own-product correction/retest chain. CoursePMS's chain cannot substitute. The conditional request is prepared, not sent/approved.
-4. B reviews this actual evidence increment in PR #114. Whole Issue #22 stays OPEN/PENDING until its criteria are met; past completed cards are unchanged.
-5. Use [Parts A-D outline](report-draft.md), [evidence index](evidence-index.md) and private identified Markdown kit; user completes actual decisions/contributions, final export/page ranges and LEB2 submission by 22 November 2026, 23:59 Asia/Bangkok. No PDF/main release/course upload/signature is performed here.
+1. Reuse existing fastTrack API/UI evidence and completed CoursePMS targeted results. Both product decisions are recorded with [their actual confirmation provenance](sessions/2026-11-17-user-acceptance-confirmation.md); no duplicate full execution or renewed decision request is a default prerequisite.
+2. A owns plan/normal/state evidence and TA coordination; B owns rule/access/privacy/correction/retest evidence and report review. The user confirms joint checking. See [the current allocation](contributions-and-ai.md); it does not assign historical individual case executors/times.
+3. The user plans to ask the TA how to handle the own-fastTrack defect requirement with no confirmed legitimate finding. Use [the ready question](handoffs/2026-11-17-remaining-lab6-inputs.md). Await the actual answer; do not assume approval or create an artificial live defect. Any required isolated exercise follows the approved scope.
+4. B reviews PR #114. Whole Issue #22 stays OPEN/PENDING until remaining criteria are met; no acceptance of the PR or main release follows automatically from product UAT acceptance.
+5. Complete final report after the TA disposition: [Parts A-D outline](report-draft.md), [evidence index](evidence-index.md), private identified Markdown kit, actual final export/page references and LEB2 receipt. Deadline 22 November 2026, 23:59 Asia/Bangkok. No PDF/main release/course upload is performed here.

@@ -1,9 +1,9 @@
 {
-  "verifiedAtUtc": "2026-11-17T14:41:44.916286+00:00",
-  "public_role_alias_markdown_files": 12,
-  "public_local_links_verified": 117,
+  "verifiedAtUtc": "2026-11-17T15:14:10.471626+00:00",
+  "public_role_alias_markdown_files": 13,
+  "public_local_links_verified": 129,
   "public_tables_verified": 29,
-  "private_report_local_links_verified": 60,
+  "private_report_local_links_verified": 62,
   "private_narrative_table_shapes_verified": 25,
   "private_original_and_additional_pngs_decoded": 17,
   "original_extracted_source_files_byte_matched": 30,
@@ -15,12 +15,17 @@
     "evidence_review_and_local_replay_pass": 1,
     "pending_technical_prerequisites": []
   },
-  "personal_case_entries": "PENDING actual confirmation",
-  "both_human_decisions": "PENDING",
-  "own_fasttrack_defect_or_controlled_exercise": "PENDING completed human UAT and applicable TA-approved own-product workflow",
+  "participation": "Joint A/B checking confirmed by user; individual historical case executors/times not supplied",
+  "product_decisions": {
+    "CoursePMS": "ACCEPTED by user",
+    "fastTrack": "ACCEPTED reported by user; original external metadata not attached",
+    "confirmationRecordedAtUtc": "2026-11-17T15:13:04.101576+00:00"
+  },
+  "own_fasttrack_defect_workflow": "AWAITING actual TA guidance; user plans to ask",
+  "new_product_test_run_for_this_confirmation": false,
   "initial_node26_client_failures_retained": true,
   "external_message_sent": false,
   "pdf_generated": false,
   "main_or_application_change": false,
-  "compact_package_local_links_verified": 6
+  "compact_package_local_links_verified": 12
 }

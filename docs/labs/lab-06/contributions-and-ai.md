@@ -1,4 +1,4 @@
-# Contributions, proposed allocation and AI use
+# Contributions, shared responsibility and AI use
 
 This public record uses role aliases. The identified report and any personal confirming data belong in the private assembly kit. Do not convert an account event, planned assignment or AI action into personally executed student work.
 
@@ -11,24 +11,28 @@ This public record uses role aliases. The identified report and any personal con
 | A task context | User requested partner evidence intake, corrected-release verification and retry after private account update | Conversation requests and R2-A04 progress log | Requested coordination; no unsupported claim of personal execution/witnessing |
 | Codex AI | Browser/API execution, field/canonical comparisons, sanitized records, document/kit preparation and author checks | Dated session/verification records | Actual AI assistance, explicitly attributed |
 
-## Proposed remaining split: not a completed-work record
+## User-confirmed shared participation and responsibility split
 
-| Role | Prospective action | Confirmation required after real work |
+The user confirms that A and B helped with checking and requests this allocation. [Current confirmation](sessions/2026-11-17-user-acceptance-confirmation.md) records that statement now. The table assigns responsibility for the evidence and remaining work; it does not invent who personally operated each earlier automated case.
+
+| Role | Assigned responsibility and coverage | Evidence / next action |
 | --- | --- | --- |
-| A | Personally execute or review RT-01/02/04 and the normal/state original-case evidence; coordinate partner fixture/procedure response; complete Part A/B factual checks | Real case/steps, executor or reviewer role, date/time, exact source and evidence personally produced/reviewed |
-| B | Personally execute or review the observed auth/privacy/routing checks RT-05/06/08/09 and the partner correction/release trace; peer-review report and Part C/D facts | Same actual record; prior GitHub review is already separately recorded |
-| Both | Review each other's actual entries, reconcile blocked requirements, request any required own-product controlled exercise, then make/obtain exact-version independent decisions | Actual confirmations and decisions from the people involved; no preselected outcome |
+| A | UAT planning and version/access coordination; normal journey and state/persistence evidence; Part A/B; TA coordination | CPMS-UAT-01/02/04/05/08 and RT-01/02/03/04 as evidence ownership; use existing records, coordinate the user's TA question |
+| B | Business rules, ownership/access/privacy; defect triage/correction/retest and CI/release trace; Part C/D evidence review | CPMS-UAT-03/06/07 and RT-05/06/07/08/09 as evidence ownership; actual PR #113 review/merge already recorded; PR #114 review remains open |
+| Both | Joint checking/support, result reconciliation and final report preparation | Shared participation confirmed by the user; product decisions recorded with direct-user versus user-reported provenance; no separate individual signature inferred |
 
-These assignments are prospective. They do not establish attendance at the 13/14/17 November AI-operated sessions or a past allocation. A later evidence review uses its real later time and reviewer role.
+This split is recorded on 17 November after the work and is a current responsibility mapping, not a reconstructed historical execution schedule. Individual past case executors, personal attendance times and witness signatures were not specified. Original automated logs keep Codex attribution. No new personal test execution is manufactured to fill those details.
 
-## Per-action record to complete truthfully
+## Confirmation scope
 
-| Role | Product / case / exact steps | Executor / witness / reviewer | Real date/time / timezone | Exact source/revision | Actual result / evidence personally produced or reviewed | Confirmation |
-| --- | --- | --- | --- | --- | --- | --- |
-| A | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
-| B | PENDING | PENDING | PENDING | PENDING | PENDING | PENDING |
-| Partner 1 | PENDING supplied record | PENDING | PENDING | PENDING | PENDING | PENDING |
-| Partner 2 | PENDING supplied record | PENDING | PENDING | PENDING | PENDING | PENDING |
+| Record | Current state |
+| --- | --- |
+| A/B joint assistance with checking | Confirmed by the user |
+| Individual historical case/step/date allocation | Not individually supplied; not inferred from the responsibility mapping |
+| B-account PR #113 review/merge | Verified account events above |
+| CoursePMS product decision | Accepted by the user's current instruction |
+| fastTrack reciprocal product decision | CoursePMS acceptance reported by the user; original external metadata not attached |
+| TA contact/guidance | User plans to ask; no answer/approval supplied |
 
 ## AI-use statement
 

@@ -39,3 +39,7 @@ The previously proposed 20 November slot remains unconfirmed; this actual AI run
 ## Later completion addendum
 
 The 21:30-21:33 deployed follow-up and independent isolated replay resolve the formerly blocked subchecks. See [actual later results](2026-11-17-coursepms-remaining-checks.md): eight deployed targeted case PASS and one evidence-review/local-replay PASS. The dated observations/mapping above are retained as history, not the current completion state. Both human decisions remain pending.
+
+## Later user confirmation of product decisions
+
+The user subsequently accepts CoursePMS using this completed evidence, reports CoursePMS acceptance of fastTrack, and confirms shared A/B checking. See [the current confirmation record](2026-11-17-user-acceptance-confirmation.md) for direct versus user-reported provenance and the current responsibility split. Earlier PENDING statements above describe the time of execution; they are superseded for current decision status. Test facts and original operator attribution are unchanged. TA disposition and final assessment submission remain open.

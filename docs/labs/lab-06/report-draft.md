@@ -1,6 +1,6 @@
 # Lab 6: independent UAT and defect management
 
-**Status: evidence-based draft, incomplete human decision/contribution and assessment dependencies.** R2-A04 / Issue #22. This public outline uses roles A/B and Partner 1/2. Full student identities, original private evidence and selected figures are confined to the separate private identified Markdown kit. No submitted PDF or acceptance is claimed.
+**Status: product decisions recorded from current user confirmation; TA disposition, peer integration and final submission remain open.** R2-A04 / Issue #22. This public outline uses roles A/B and Partner 1/2. Full student identities, original private evidence and selected figures are confined to the separate private identified Markdown kit. No submitted PDF or acceptance is claimed.
 
 ## Contents and version control
 
@@ -52,7 +52,7 @@ fastTrack's delivered Sprint 1 scope is F-01 sign-in/out and scoped teams, F-02 
 
 Original incoming source 8e637e5: 97 PASS / 0 FAIL main API assertions across 74 HTTP observations. Seven post-UI controls are a separate set. Later UI follow-up: 26 observations, 25 final controls and 11 saved-state comparisons, all with original operator attribution. No confirmed fastTrack product defect is established in this bounded evidence. Initial setup attempts are separate, not added to completed totals.
 
-The follow-up performs meaningful UI writes/readbacks and a stale-form deadline path, while preserving disclosed procedural differences: sequential role profiles, isolated API denial checks outside the DevTools recipe, approximately 4m10s deadline lead rather than the proposed five minutes, validation on the normal fixture, and limited browser-history/session-replay coverage. Human testers must review whether any exact procedure remains required. AI logs do not prove either person's attendance or decision.
+The follow-up performs meaningful UI writes/readbacks and a stale-form deadline path, while preserving disclosed procedural differences: sequential role profiles, isolated API denial checks outside the DevTools recipe, approximately 4m10s deadline lead rather than the proposed five minutes, validation on the normal fixture, and limited browser-history/session-replay coverage. Existing results are reused. The user reports CoursePMS acceptance of fastTrack and confirms shared A/B checking; original partner metadata and historical individual case times/signatures are not inferred from AI logs.
 
 ### fastTrack testing CoursePMS
 
@@ -75,11 +75,11 @@ Passing original guarded paths do not cancel the separate stale-client-memory fa
 
 | Finding / issue | Original impact and assessment | Partner disposition / current independent state |
 | --- | --- | --- |
-| L6-OUT-EXP-001 / #71 | Four prior-account private draft fields visible in the next account's empty editor without reload. Client-side exposure; no API bypass or saved copying established. Reload was only a workaround | Major accepted defect; reviewed/deployed correction. Original A -> B reproduction now passes in actual AI retest; final human closure pending |
-| Directory summary visibility / #74 | Foreign proposal title/status/revision/time metadata conflicted with roster-only privacy | Partner resolved roster-only contract; Major accepted privacy defect. Assigned/own, foreign, unassigned Student and Instructor paths pass in the completed targeted checks; human closure pending |
+| L6-OUT-EXP-001 / #71 | Four prior-account private draft fields visible in the next account's empty editor without reload. Client-side exposure; no API bypass or saved copying established. Reload was only a workaround | Major accepted defect; reviewed/deployed correction. Original A -> B reproduction now passes in actual AI retest; accepted by the user using completed targeted evidence |
+| Directory summary visibility / #74 | Foreign proposal title/status/revision/time metadata conflicted with roster-only privacy | Partner resolved roster-only contract; Major accepted privacy defect. Assigned/own, foreign, unassigned Student and Instructor paths pass in the completed targeted checks; accepted by the user within recorded scope |
 | L6-OUT-EXP-002 / #75 | Unsupported proposal namespace returned SPA HTML rather than intended protected JSON semantics; no private body disclosure shown | Minor routing defect; auth then JSON 404, other unknown API JSON 404. Recorded anonymous/authenticated routing passes |
 | Original report arithmetic | Source narrative differs from actual 57-entry JSON ledger | Evidence correction acknowledged; not a product defect |
-| Received fastTrack findings | No confirmed defect in bounded AI evidence | Not a final exhaustive zero-findings decision; complete actual human independent UAT/decision |
+| Received fastTrack findings | No confirmed defect in bounded AI evidence | Existing independent evidence retained; user reports CoursePMS acceptance. No exhaustive zero-defect guarantee inferred |
 
 The original raw exploratory 25 PASS / 12 FAIL checker results were source-reviewed as 34 matching outcomes, two policy questions and one routing discrepancy. Nine strict TOKEN_REVOKED expectation mismatches were successful rejections, not nine defects. Those historical denominators/interpretations remain separate from official cases and later dispositions.
 
@@ -102,16 +102,16 @@ AI-operated run: 17 November 19:11-19:15 Asia/Bangkok, source aeb804ea at start/
 
 The later 21:30-21:33 follow-up resolves no-team/unassigned privacy and safe Student-review denial. A -> R -> A without refresh restores original A data; invalid-input POST to ID 0 returns 403 BR06_INSTRUCTOR_ROLE_REQUIRED, and the complete authorized directory is unchanged. Team 5 / Proposal 3 APPROVED revision 2 is retained. [Latest detailed results](sessions/2026-11-17-coursepms-remaining-checks.md) distinguish eight deployed PASS from RT-07 evidence/local PASS. Independent isolated replay passes 16 client and 19 selected/mocked server tests; initial Node 26 localStorage runner failures are retained, followed by unchanged client-suite PASS on Node 20. Seven anonymous, eight earlier authenticated and fourteen additional records remain separate evidence sets. No new confirmed product failure is observed; exhaustive product acceptance and human signatures are not claimed.
 
-### fastTrack own-product correction workflow: unresolved dependency
+### TA clarification: no confirmed legitimate fastTrack defect
 
-CoursePMS's defect chain belongs to CoursePMS. It does not satisfy the assessed correction workflow for fastTrack's own product. Complete actual independent human fastTrack UAT; if no legitimate defect arises, obtain TA-approved controlled exercise scope on an isolated fastTrack version and retain its report/triage/RED/GREEN/review/CI/release/independent-retest chain separately. No approval, exercise, notification or completed own-product correction is supplied yet. A conditional request is prepared, not sent or approved.
+The user plans to ask the TA what fastTrack must provide for the defect-resolution requirement given its existing independent API/UI evidence and reported acceptance without a confirmed legitimate defect. CoursePMS has a genuine defect/correction/independent-retest chain; the question asks whether that satisfies the assessed role or whether an approved isolated fastTrack exercise is required. No TA answer, approved exercise or deliberate live defect is supplied. Incorporate the actual guidance and resulting evidence before final submission.
 
-### Contributions, AI use and decisions
+### Shared contributions, AI use and product decisions
 
-[Verified account events and proposed remaining allocation](contributions-and-ai.md) distinguish actual B-associated review/merge from personally operated cases. Actual A/B/Partner 1/2 case/action/time confirmations remain pending; assignments are prospective, not retroactive. AI assistance covers browser/API operation, evidence checks, source/release inspection and drafting. Neither AI output nor integration approval signs the human decisions.
+[Current responsibility and AI record](contributions-and-ai.md) records user-confirmed joint A/B checking. A owns plan/normal/state/coordination and TA follow-up; B owns rule/access/privacy/defect/retest evidence and report review. These are responsibility assignments recorded now, not invented historical individual case executions or dates. Actual AI browser/API operation and verified B-account PR #113 review/merge remain separately attributed.
 
-Both exact-version independent decisions remain PENDING in [current decision records](acceptance-record.md). No minor limitations are personally accepted by inference. Final required scope, the recorded bounded denial procedure and case results must be reviewed by actual testers, followed by actual decision-maker/time/reasons/conditions. Do not substitute a positive label for an unavailable prerequisite.
+[Product decisions](acceptance-record.md): CoursePMS ACCEPTED by the user's instruction; CoursePMS acceptance of fastTrack is reported by the user. [Confirmation provenance](sessions/2026-11-17-user-acceptance-confirmation.md) records the current confirmation time separately from unsupplied original partner metadata. No separate B/partner signature, external delivery or exhaustive coverage is inferred.
 
 ## Final assembly state
 
-[Evidence index](evidence-index.md) maps complete original case/contract sources, findings, outputs, review/delivery facts and private figures to Parts A-D. [Remaining-input handoff](handoffs/2026-11-17-remaining-lab6-inputs.md) supplies concrete unsent partner/human/conditional-TA requests. The private identified report embeds applicable material; the public outline omits all student names/IDs and private source/images. Final page ranges, real activity/decisions, any applicable own-product exercise and actual LEB2 receipt remain to complete. No PDF, course upload, external message, application change, main release or human signature is performed by this assembly.
+[Evidence index](evidence-index.md) maps complete original case/contract sources, findings, outputs, review/delivery facts and private figures to Parts A-D. [Remaining-input handoff](handoffs/2026-11-17-remaining-lab6-inputs.md) supplies concrete unsent partner/human/conditional-TA requests. The private identified report embeds applicable material; the public outline omits all student names/IDs and private source/images. Remaining: B peer review/integration, actual TA guidance and any resulting approved work, final export/page ranges and actual LEB2 receipt. Shared participation/product decisions are recorded with their confirmation scope. No PDF, course upload, external message, application change, main release or human signature is performed by this assembly.
