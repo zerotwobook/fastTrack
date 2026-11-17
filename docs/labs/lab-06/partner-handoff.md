@@ -1,5 +1,8 @@
 # Partner handoff: fastTrack Sprint 1
 
+**Latest 17 November update:** CoursePMS corrected release aeb804ea is deployed and freshly source/DB verified; the old undeployed-source blocker is resolved. Seven anonymous checks pass, but the public demo login is rejected and valid private test access remains pending. Read [corrected-release retest results](sessions/2026-11-17-coursepms-retest-results.md) and [current status](current-status.md) for the current ledger. Earlier same-day Draft/unreleased/policy-pending statements below retain their earlier context. Both actual human decisions remain PENDING.
+
+
 Read this document before the [eight cases](uat-cases.md). Product owners A/B answer access or setup questions; the independent testers execute the cases and record their own observations.
 
 For current evidence and outstanding actions, read [current-status.md](current-status.md) and the [17 November returned-candidate intake](sessions/2026-11-17-coursepms-return.md). Later outgoing evidence and reciprocal UI follow-up are summarized canonically; the full originals remain in the private local review export. Both actual human decisions remain PENDING; CoursePMS corrected-deployment retest is BLOCKED until release identity is supplied. The scheduling, fixture and readiness tables below retain original 13 November preparation context. Reagree current dates, source/revision and fixture eligibility before any new run; preserve prior records.

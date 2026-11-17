@@ -1,5 +1,8 @@
 # Findings, correction chains and independent retests
 
+**Latest 17 November update:** CoursePMS corrected release aeb804ea is deployed and freshly source/DB verified; the old undeployed-source blocker is resolved. Seven anonymous checks pass, but the public demo login is rejected and valid private test access remains pending. Read [corrected-release retest results](sessions/2026-11-17-coursepms-retest-results.md) and [current status](current-status.md) for the current ledger. Earlier same-day Draft/unreleased/policy-pending statements below retain their earlier context. Both actual human decisions remain PENDING.
+
+
 Working templates for both teams. Current actual evidence is indexed in [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md). CoursePMS now records technical accepted-Major L6-OUT-EXP-001 under Issue #71 and supplied RED/GREEN/CI evidence for Draft PRs #72/#73. The correction is not established as deployed; independent retest is BLOCKED. Bare-route and title-summary clarifications remain open. Incoming fastTrack observations report no confirmed defect in their bounded AI scope; actual human decisions remain PENDING. Blank rows below are reusable templates, not competing current ledgers.
 
 ## 1. Finding report template

@@ -1,5 +1,8 @@
 # Lab 6 independent UAT partner package
 
+**Latest 17 November update:** CoursePMS corrected release aeb804ea is deployed and freshly source/DB verified; the old undeployed-source blocker is resolved. Seven anonymous checks pass, but the public demo login is rejected and valid private test access remains pending. Read [corrected-release retest results](sessions/2026-11-17-coursepms-retest-results.md) and [current status](current-status.md) for the current ledger. Earlier same-day Draft/unreleased/policy-pending statements below retain their earlier context. Both actual human decisions remain PENDING.
+
+
 Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). Owner A: Supapanya Yathip (`zerotwobook`); peer reviewer B: Atip Infa-udom (`Atip-Infa`). This package covers the delivered Sprint 1 product only.
 
 Start with [current evidence and next actions](current-status.md) and the [17 November returned-candidate intake](sessions/2026-11-17-coursepms-return.md). The canonical evidence now includes the 14 November eight-case CoursePMS run, reciprocal fastTrack UI follow-up and partner correction candidate PR #73. PR #110 is already merged; current evidence integration is [PR #112](https://github.com/zerotwobook/fastTrack/pull/112). CoursePMS candidate CI passes, but fresh public health still reports the original defective source, so corrected-deployment retest is BLOCKED and both human decisions remain PENDING.

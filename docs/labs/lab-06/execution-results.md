@@ -1,5 +1,8 @@
 # Independent UAT execution records
 
+**Latest 17 November update:** CoursePMS corrected release aeb804ea is deployed and freshly source/DB verified; the old undeployed-source blocker is resolved. Seven anonymous checks pass, but the public demo login is rejected and valid private test access remains pending. Read [corrected-release retest results](sessions/2026-11-17-coursepms-retest-results.md) and [current status](current-status.md) for the current ledger. Earlier same-day Draft/unreleased/policy-pending statements below retain their earlier context. Both actual human decisions remain PENDING.
+
+
 Blank working templates retained from preparation. **The rows below are not the current execution ledger.** Read [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md) for the actual 14 November eight-case CoursePMS run, reciprocal fastTrack follow-up and returned correction candidate. The actual outgoing ledger is 56 PASS / 1 FAIL / 57, with 36 core PASS; preserve the original report discrepancy and procedural limits. Partner RED/GREEN/CI are correction evidence, not a new independent deployed retest. Current retest is BLOCKED; personal student activity and both decisions remain incomplete/unrecorded. Copy this template only for real new execution, preserving operator attribution.
 
 ## A. Partner team testing fastTrack (incoming evidence)

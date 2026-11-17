@@ -1,0 +1,21 @@
+{
+  "verifiedAtUtc": "2026-11-17T11:59:45.063322+00:00",
+  "authored_markdown_files": 11,
+  "local_links_verified": 111,
+  "private_archive_manifest_entries_verified": 24,
+  "public_checks": {
+    "PASS": 7,
+    "FAIL": 0
+  },
+  "release_merge_matches_deploy_source": true,
+  "dated_deploy_identity_log_verified": true,
+  "credential_preflight": "BLOCKED: public local/demo Quick Fill rejected; valid private account access pending",
+  "authenticated_switch_executed": false,
+  "rt09": "Anonymous portion PASS; authenticated portion BLOCKED",
+  "rt07": "Evidence review only; no new local/live race test",
+  "business_record_writes": 0,
+  "received_payloads_published": false,
+  "notification": "User provided release message; external actual time/channel/acknowledgement not fabricated",
+  "both_human_decisions": "PENDING",
+  "scan_limit": "JWT/private-key marker and explicit file-scope review; not exhaustive secret audit"
+}
