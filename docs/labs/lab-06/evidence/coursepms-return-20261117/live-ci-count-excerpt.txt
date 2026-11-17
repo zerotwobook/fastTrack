@@ -1,0 +1,2 @@
+test-and-docker	Check deployment scripts without accessing GCP	2026-11-17T05:56:49.8996061Z Ran 10 tests in 0.007s
+test-and-docker	Run end-to-end tests	2026-11-17T05:57:33.8537057Z   3 passed (14.0s)

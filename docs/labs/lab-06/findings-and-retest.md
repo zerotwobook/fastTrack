@@ -1,6 +1,6 @@
 # Findings, correction chains and independent retests
 
-Working templates for both teams. Current actual findings are indexed in [current-status.md](current-status.md): the [outgoing session](sessions/2026-11-13-coursepms-live.md) records proposed Major L6-OUT-EXP-001, contract discrepancy L6-OUT-EXP-002 and two visibility-policy questions, all pending Product Team disposition. The [incoming fastTrack intake](sessions/2026-11-13-fasttrack-received.md) reports no confirmed product defect in its bounded AI run, not a final completed-UAT zero-findings result. No correction, RED/GREEN run or independent retest is supplied. The blank rows below are templates, not a competing current ledger.
+Working templates for both teams. Current actual evidence is indexed in [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md). CoursePMS now records technical accepted-Major L6-OUT-EXP-001 under Issue #71 and supplied RED/GREEN/CI evidence for Draft PRs #72/#73. The correction is not established as deployed; independent retest is BLOCKED. Bare-route and title-summary clarifications remain open. Incoming fastTrack observations report no confirmed defect in their bounded AI scope; actual human decisions remain PENDING. Blank rows below are reusable templates, not competing current ledgers.
 
 ## 1. Finding report template
 
@@ -35,7 +35,9 @@ Use the same finding template. The partner owns triage/correction; A/B independe
 
 | Finding / partner case | Reporter / date / tested version | Expected versus actual / evidence | Proposed severity and impact | Partner disposition / owner | Corrected release / retest result |
 | --- | --- | --- | --- | --- | --- |
-| NOT YET REPORTED | NOT RECORDED | NOT OBSERVED | NOT ASSESSED | NOT RECEIVED | NOT RUN |
+| L6-OUT-EXP-001 / account switch | AI evidence, 13-14 November; 9c227359 reproduced on 14 November | Prior private draft fields remain in another identity; UI-24/25/26 and dated intake | Major proposed and technically accepted by CoursePMS | Issue #71, original owner Pawarit; human disposition/review pending | Draft #72/#73, exact #73 CI succeeds; no fixed serving version, independent retest BLOCKED |
+| L6-OUT-EXP-002 / bare GET | 13 November, 150dc5d | HTML fallback rather than literal protected collection expectation; no private body disclosure | Contract clarification | CoursePMS interpretation/disposition pending | No correction/closure claimed |
+| Directory title summaries | 13 November, 150dc5d | Summary metadata versus roster-only/privacy wording | Policy clarification | CoursePMS requirement reconciliation pending | No correction/closure claimed |
 
 ## 4. Traceable correction chain for each accepted defect fixed by fastTrack
 

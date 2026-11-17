@@ -2,7 +2,9 @@
 
 Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). Owner A: Supapanya Yathip (`zerotwobook`); peer reviewer B: Atip Infa-udom (`Atip-Infa`). This package covers the delivered Sprint 1 product only.
 
-Start with [current evidence and next actions](current-status.md). It reconciles the outgoing CoursePMS session and newly received fastTrack evidence, while keeping student participation, peer review and independent acceptance separate.
+Start with [current evidence and next actions](current-status.md) and the [17 November returned-candidate intake](sessions/2026-11-17-coursepms-return.md). The canonical evidence now includes the 14 November eight-case CoursePMS run, reciprocal fastTrack UI follow-up and partner correction candidate PR #73. PR #110 is already merged; current evidence integration is [PR #112](https://github.com/zerotwobook/fastTrack/pull/112). CoursePMS candidate CI passes, but fresh public health still reports the original defective source, so corrected-deployment retest is BLOCKED and both human decisions remain PENDING.
+
+The session/readiness table and dated sections below retain the original 13 November preparation context. Their older pending packet/fixture/PR fields are historical, not the current ledger. Use current-status.md for later actual evidence, versions and remaining owner actions.
 
 ## Session and current readiness
 

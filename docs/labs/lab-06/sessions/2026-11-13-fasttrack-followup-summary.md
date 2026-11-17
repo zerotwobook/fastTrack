@@ -1,0 +1,7 @@
+# Reciprocal fastTrack UI follow-up: public summary
+
+Newly authored summary of the private 13 November reciprocal follow-up; original observations, screenshot payloads, participant context and raw saved-state data are retained privately. This summary does not establish either student's personal execution or a final acceptance decision.
+
+Recorded fastTrack source: 8e637e537cd037d630a5fffc1b5672d1b44371a8. Earlier evidence contains 97 main API assertions and seven separate post-UI controls. The follow-up contains 26 UI observations, 25 passing final controls and 11 passing saved-state comparisons. Denominators are separate. No confirmed fastTrack product defect was established in this bounded evidence.
+
+Actual procedural differences include sequential role sessions rather than simultaneous profiles; isolated API duplicate controls rather than a DevTools recipe; deadline setup approximately four minutes ten seconds rather than the proposed five-minute lead; validation on the normal unsubmitted fixture rather than a separate fixture; Back/reload after the later role session; and no new browser-cookie-replay or eight-hour-expiry test. Original attribution and details are available in the private original archive. Human testers must review whether any remaining exact procedure is required and record their actual activity and exact-version decision. Fictional example allocation in the returned correction packet is excluded from these results.

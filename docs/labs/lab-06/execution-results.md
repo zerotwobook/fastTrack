@@ -1,6 +1,6 @@
 # Independent UAT execution records
 
-Blank working templates retained from the preparation increment. **The rows below are not the current execution ledger.** Actual AI-operated evidence now exists in both directions: [incoming fastTrack intake](sessions/2026-11-13-fasttrack-received.md) and [outgoing CoursePMS session](sessions/2026-11-13-coursepms-live.md). Use [current-status.md](current-status.md) for the consolidated status. Full personal student UAT remains incomplete/unrecorded. Copy this template to a new dated record when students execute; preserve prior failed/blocked observations and actual operator attribution.
+Blank working templates retained from preparation. **The rows below are not the current execution ledger.** Read [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md) for the actual 14 November eight-case CoursePMS run, reciprocal fastTrack follow-up and returned correction candidate. The actual outgoing ledger is 56 PASS / 1 FAIL / 57, with 36 core PASS; preserve the original report discrepancy and procedural limits. Partner RED/GREEN/CI are correction evidence, not a new independent deployed retest. Current retest is BLOCKED; personal student activity and both decisions remain incomplete/unrecorded. Copy this template only for real new execution, preserving operator attribution.
 
 ## A. Partner team testing fastTrack (incoming evidence)
 
