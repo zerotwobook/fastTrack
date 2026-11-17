@@ -1,39 +1,37 @@
-# Corrected CoursePMS retest: actual status
+# Corrected CoursePMS targeted retest: actual results
 
-Date: 17 November 2026, Asia/Bangkok. Operator: Codex AI for fastTrack R2-A04. This is bounded verification with actual outcomes, not personal A/B attendance or human acceptance. The user confirmed reuse of the existing test-account set and supplied its private file location. One A sign-in using that designated file was rejected with INVALID_CREDENTIALS. The user selected CoursePMS confirmation/update of the private file; valid access remains pending.
+R2-A04 / Issue #22. Operator: Codex AI for fastTrack, 17 November 2026, Asia/Bangkok. The user updated the designated private credential file and requested retry. A/B/Instructor sign-in now succeeds. Earlier rejected demo/file preflights are historical attempts, superseded by this successful access; they are not product regressions or part of the current observation totals. This report is not either student's personal execution or a human acceptance signature.
 
-## Release entry
+## Identified release and execution
 
-Source aeb804ea5bc667399b00cf54df10046a6ded46e0 is freshly observed through health; readiness is connected. Release PR #76 is merged; deploy 44074859743 succeeded. Dated workflow CLI verifies digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0 and course-pms-00009-mk2 at 100% traffic. No fresh owner-console screenshot is claimed. Original archive hashes: 24/24 match. Full archive stays private.
+Source `aeb804ea5bc667399b00cf54df10046a6ded46e0`; URL https://course-pms-859617270560.asia-southeast1.run.app. Release PR #76 merged and deploy 44074859743 succeeded. Dated public workflow CLI verifies digest `sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0`, serving revision `course-pms-00009-mk2`, 100% traffic at 18:35:30. This is not a fresh owner-console screenshot.
 
-The reported old-source blocker is resolved. This does not establish authenticated fixture eligibility, preserved historical records or successful account switching.
+Fresh anonymous checks at 18:53:47-48: seven PASS observations, retained in [public observations](../evidence/coursepms-corrected-20261117/public-observations.json). Successful authenticated run starts with A sign-in at 19:11:25 and ends with final logout/health at 19:15:50. Source matches at authenticated baseline and end. [Eight sanitized authenticated observation records](../evidence/coursepms-corrected-20261117/authenticated-observations.json) retain their own times; they are observation records, not eight case PASS claims or a denominator to combine with original UAT/partner CI.
 
-## Actual independent checks
+The fresh corrected frontend was loaded before A login. A -> logout -> B -> logout -> A occurred in the same browser document without reload. An in-memory baseline survived the transitions, and all four field values were compared without exporting the private text. Reload occurred only afterwards for RT-04. Four private screenshots support A-before, B-empty, A-restored and the instructor approved view; they remain in the local private evidence folder and sendable private ZIP, not this public PR.
 
-[Anonymous observations](../evidence/coursepms-corrected-20261117/public-observations.json) retain exact times/status/content type/sanitized bodies. Seven checks PASS at 18:53:47-48 Asia/Bangkok: health, readiness, unauthenticated bare and unsupported proposal namespaces, other unknown API, root HTML and frontend navigation HTML. These seven observations are separate from partner CI, eight original cases and the RT case statuses below.
+## RT-01-09 results
 
-A freshly loaded isolated browser used the public Team Alpha Quick Fill and Sign In controls once. Actual result: INVALID_CREDENTIALS; no workspace loaded. The subsequent Logout wait timed out because sign-in failed. The precondition is BLOCKED; it is not an account-switch product FAIL. No password guessing followed. After the user supplied the private credential file, one A sign-in with that file was also rejected at 19:03:10 Asia/Bangkok. Both attempts are recorded as precondition failures; no authenticated workspace or token was obtained. Credential fields were cleared and the isolated browser closed. No reusable token, raw login response or credential screenshot enters deliverables.
-
-## RT-01-09 record
-
-| Case | Actual execution / evidence | Status and limit |
+| Case | Actual execution and expected/actual comparison | Status / limit |
 | --- | --- | --- |
-| RT-01 A -> logout -> B, no refresh | Fresh browser loaded corrected frontend; demo A sign-in and the later designated-file A sign-in were both rejected. No A or B workspace loaded; switch not attempted. | BLOCKED: CoursePMS must confirm/update designated-file credentials; current A/B eligibility still needed |
-| RT-02 reverse/own-proposal | Not executed; credential prerequisite absent. | BLOCKED |
-| RT-03 no-team/instructor | Not executed; eligible fixtures/access unverified. | BLOCKED |
-| RT-04 reload/relogin saved state | Not executed; canonical authorized values unavailable. | BLOCKED |
-| RT-05 logout replay | Not executed; no authenticated temporary token existed. | BLOCKED |
-| RT-06 foreign GET/student review | Not executed; auth absent. Review-write target also requires an explicit safe agreement. | BLOCKED; no unsafe write attempted |
-| RT-07 delayed response/unsaved editing | Reviewed supplied historical RED/GREEN excerpts, current release trace and CI. No local test rerun or live race/mutation performed. | EVIDENCE REVIEW ONLY; not a deployed-case PASS |
-| RT-08 own/foreign/instructor directories | Not executed; authenticated role fixtures unavailable. | BLOCKED |
-| RT-09 protected JSON routing/frontend fallback | Anonymous portion observed JSON 401 for proposal namespace, JSON 404 for unknown API and HTML outside API. Authenticated namespace 404 unexecuted. | PARTIAL; overall BLOCKED until authenticated subcheck |
+| RT-01 original no-refresh switch | A is Student/Team 1 with a four-field DRAFT matching canonical data. Logout and B login in the same document. B is Student/Team 3 with no proposal; all four fields empty and no old private field text found. AUTH-01/02/03; private A/B screenshots. | PASS for the original supplied A -> B reproduction |
+| RT-02 reverse/own-proposal | B logout -> A login without reload. All four A fields match original; canonical saved proposal exactly unchanged. AUTH-04/05; private restored screenshot. A is the available own-proposal destination. | PASS for these observed destinations; no separate additional own-proposal account claimed |
+| RT-03 no-team/instructor destinations | A logout -> Instructor login without reload; no student proposal editor, proper instructor workspace. Legitimate instructor-authorized proposal detail is not classified as stale leakage. AUTH-06/07. | PARTIAL: instructor PASS; no-team Student BLOCKED because the supplied three accounts are assigned A/B and Instructor |
+| RT-04 reload/relogin persistence | Reverse A relogin restores saved fields; subsequent explicit reload keeps all four values and canonical state. AUTH-05. No save performed. | PASS for saved-draft persistence; unsaved editing persistence not claimed |
+| RT-05 logout replay | A logout and final Instructor logout each followed by isolated replay of only that temporary token against current-user endpoint: HTTP 401 TOKEN_REVOKED. Tokens never exported; final browser token removed. AUTH-02/08. | PASS for observed temporary-session revocation; no expiry/restart claim |
+| RT-06 foreign GET/student review denial | B GET of A private proposal returns 403 BR06_FORBIDDEN_TEAM_ACCESS with only error/code, no proposal. AUTH-03. | PARTIAL: foreign GET PASS; review-write denial BLOCKED because no safe write target agreed; no review/POST attempted |
+| RT-07 races/unsaved editing | Reviewed partner's supplied RED/GREEN, release trace and exact-head CI evidence. No live race/write or local automated rerun performed. | EVIDENCE REVIEW ONLY; not a deployed-case PASS |
+| RT-08 student/instructor directories | A/B API responses have all three foreign proposals null; own A proposal retained. Student UI shows PRIVATE. Instructor retains three authorized proposals, four team rosters and correct NONE/APPROVED behavior. Approved filter yields one team and proper review-disabled state. AUTH-01/03/07. | PARTIAL: observed own/foreign/instructor paths PASS; unassigned-student path BLOCKED because no eligible account supplied |
+| RT-09 API/frontend routing | Anonymous proposal namespace JSON 401; valid B session bare namespace JSON 404 API_ROUTE_NOT_FOUND. Other unknown API JSON 404; frontend/root HTML retained. PUB-03-07 and AUTH-03. | PASS for the recorded requested routing paths |
 
-No case-level RT PASS total is asserted. Seven anonymous checks passed; the original defect and authenticated privacy paths remain unverified independently. Partner's 41 backend / 16 frontend / 3 E2E CI counts are supporting correction evidence, not added to independent observation totals.
+Case mapping: **5 PASS, 3 PARTIAL, 1 EVIDENCE REVIEW ONLY**. PARTIAL includes required blocked subchecks and is not a complete case PASS. No confirmed product FAIL in these bounded observations. This is not exhaustive Sprint 1 acceptance, all session race coverage or personal student execution. Seven anonymous observations and eight authenticated records retain separate denominators; partner CI counts are not added.
 
-## Preservation and next action
+## Preservation, cleanup and remaining work
 
-No business write endpoint, create team, membership change, proposal save/submit/review, seed/reset/delete, cloud mutation or partner message was performed. Team 5 and Proposal 3 were not accessed or changed; current state retention cannot be independently asserted without authorized reads.
+A's canonical saved proposal exactly matches its initial authorized baseline. Instructor readback confirms Team 5, three members, Proposal 3, APPROVED revision 2. The complete instructor directory response is identical before/after read-only filtering/selection. This is bounded canonical readback, not a full DB audit or proof of unobserved history. No business record creation, membership edit, proposal save/submit/review, reset/seed/delete, release or cloud change was performed. Login/logout session changes are expected test actions.
 
-CoursePMS must confirm/update valid credentials in the designated private file, as selected by the user after the rejected A login. Do not send passwords in public messages or reports. Reopen a fresh corrected browser and execute only the safe affected cases after verifying source/roles/preconditions. Never reload between the original A/B sessions during RT-01. Obtain actual human tester contribution records and exact-version decisions separately. Both decisions remain PENDING; no case result or signature is fabricated.
+All temporary role sessions were signed out; final token replay is rejected, local browser token removed, in-memory private baseline deleted and isolated browser closed. The temporary credential-input file was removed. Supplied private email/password values are excluded from authored public text/JSON. Private screenshots show synthetic test identities/proposal data and must be shared only with the two teams.
 
-The ZIP's proposed 20 November 19:00-19:45 slot is not confirmed by this intake. The supplied release records acknowledge that predeployment notification was missed; release PR checklist wording does not establish an earlier message. Actual external channel/time/response remain unverified. No backdated notification or external acknowledgement is created.
+The original L6-OUT-EXP-001 no-refresh reproduction now passes on the corrected deployment. Foreign GET denial, directory paths and API routing pass within the limits above. Do not sign off unexecuted no-team/unassigned/review-write subchecks or RT-07 as deployed execution. The real human UAT team must reconcile those remaining requirements and record its exact-version decision. Both independent human decisions remain PENDING; no acceptance, signature or attendance is selected by this report.
+
+The previously proposed 20 November slot remains unconfirmed; this actual AI run occurred at the times above. User receipt in this conversation and a prepared reply do not establish external delivery channel/time or earlier notification. No external message was sent by the assistant.

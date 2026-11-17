@@ -1,5 +1,8 @@
 # CoursePMS corrected deployed-release intake and bounded retest
 
+**Later same-day outcome (19:11-19:15 Asia/Bangkok):** the user updated the private file; A/B/Instructor now authenticate. The original no-refresh reproduction passes. Read [actual targeted retest results](2026-11-17-coursepms-retest-results.md). Earlier blocked preflights below remain historical; no credentials or human decision is inferred.
+
+
 R2-A04 / Issue #22. Owner A (`zerotwobook`); evidence reviewer B (`Atip-Infa`). Date: 17 November 2026, Asia/Bangkok. This is actual AI-operated intake/preflight evidence, not either student's personal execution or final acceptance.
 
 ## Verified release and archive

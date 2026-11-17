@@ -1,17 +1,19 @@
-# Draft reply to CoursePMS: corrected release verified, credential precondition blocked
+# Draft reply to CoursePMS: targeted deployed retest results
 
-Prepared for the user to send privately. NOT SENT by the assistant. This is not a UAT acceptance or a booked appointment.
+Prepared for the user to send privately. NOT SENT by the assistant. This is evidence reporting, not a human acceptance signature or a booked appointment.
 
 Hi CoursePMS team,
 
-We received the corrected-release package through our user. All 24 supplied manifest entries match. We verified merged PR #76 / source aeb804ea5bc667399b00cf54df10046a6ded46e0 and successful deploy 44074859743. Dated public workflow CLI confirms digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0, course-pms-00009-mk2 and 100% traffic. Fresh checks at 18:53 Asia/Bangkok report the same source and connected DB.
+After our user updated the private access file, A/B/Instructor sign-in succeeded. We completed a bounded AI-operated retest on deployed source aeb804ea5bc667399b00cf54df10046a6ded46e0 on 17 November, 19:11-19:15 Asia/Bangkok. Source matched at the start and end; dated workflow CLI confirms course-pms-00009-mk2 at 100% traffic and the supplied immutable digest. Earlier rejected preflights are preserved as historical access attempts, superseded by the updated account access.
 
-Seven new anonymous source/readiness/routing/frontend checks passed. The old-deployment blocker is resolved. We started a fresh isolated browser preflight, but the public Team Alpha Quick Fill demo login returned INVALID_CREDENTIALS. We stopped, cleared credential fields and closed the unauthenticated browser; no account switch or authenticated-case PASS is claimed. This does not establish a regression in the corrected account-switch behavior.
+The original L6-OUT-EXP-001 reproduction now passes: A's four-field saved draft -> logout -> B without refresh in the same document gives the correct B identity/team and four empty fields, with no prior private field text. Reverse B -> A restores exactly A's original fields; subsequent reload preserves them and canonical saved data is unchanged.
 
-Please privately reconfirm current access/eligibility for the existing A saved-draft, B no-proposal, own-proposal/no-team and instructor aliases, or provide an assisted-login route. Do not post passwords in GitHub or reports. Our user confirmed reuse of the old account set and supplied its private file. One A login using that file was also rejected at 19:03 Asia/Bangkok. Our user selected CoursePMS confirmation/update of that file. Please confirm or update the actual deployed test-account access privately; no passwords should be posted in chat, GitHub or reports. No reset/seed or new membership is requested.
+Observed additional checks passed: A and Instructor temporary-token revocation (401 TOKEN_REVOKED), B foreign private GET denial (403, no proposal), authenticated bare namespace JSON 404/API_ROUTE_NOT_FOUND, student foreign-proposal null/PRIVATE with authorized own data retained, and instructor authorized directory/filter behavior. Team 5 remains three members with Proposal 3 APPROVED revision 2. No business writes, save/submit/review, new membership or reset/seed/delete occurred. All temporary sessions were signed out and the browser closed.
 
-After valid access is available, we can arrange the actual tester/time and continue RT-01-09. RT-09's anonymous portion passes; its authenticated portion and RT-01-06/08 remain blocked. RT-07 is evidence review only. The proposed 20 November slot remains unconfirmed. Please retain Team 5 and Proposal 3 at APPROVED revision 2. We have made no business-record writes.
+The report maps RT cases as 5 PASS, 3 PARTIAL and 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student subchecks remain BLOCKED because only the three existing A/B/Instructor accounts were supplied. Student-review write denial was not attempted because no safe target was agreed. RT-07 reviews supplied race/regression evidence; it is not a new deployed race test. Seven anonymous checks and eight authenticated records have separate denominators. We do not claim exhaustive coverage or count partial cases as complete passes.
 
-Both actual human decisions remain PENDING. We will record the real independent results and personal confirmations separately from AI actions and candidate CI. No earlier notification time, external acknowledgement or signature is inferred from preparing this reply.
+Please review these remaining subchecks with the actual human testers and supply a safe eligible fixture/procedure if they require execution. No new fixture or account mutation is requested without agreement. Both teams still need actual student contribution records and exact-version human decisions. The original bug's successful AI retest does not supply a human signature or final acceptance by itself.
+
+We will share the four screenshots and report privately because they show synthetic test identities/proposal data. This draft has not been sent; external delivery/acknowledgement times and the proposed appointment must not be fabricated.
 
 InfaCompany / fastTrack

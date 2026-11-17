@@ -1,6 +1,6 @@
 # Independent Sprint 1 acceptance record
 
-**Latest 17 November update:** CoursePMS corrected release aeb804ea is deployed and freshly source/DB verified; the old undeployed-source blocker is resolved. Seven anonymous checks pass, but the public demo login is rejected and valid private test access remains pending. Read [corrected-release retest results](sessions/2026-11-17-coursepms-retest-results.md) and [current status](current-status.md) for the current ledger. Earlier same-day Draft/unreleased/policy-pending statements below retain their earlier context. Both actual human decisions remain PENDING.
+**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
 
 
 **Current decision: PENDING. No independent acceptance or signature has been recorded.** Only the UAT Team may confirm independent acceptance. Copy this template for the actual tested release and preserve previous decisions if the release changes.
