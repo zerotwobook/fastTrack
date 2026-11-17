@@ -12,6 +12,8 @@ CoursePMS corrected source aeb804ea is deployed through release #76. The actual 
 
 **Latest TA follow-up:** incoming fastTrack acceptance still needs the partner's actual complete human web-UI evidence. Use [the human runbook](handoffs/2026-11-17-fasttrack-human-ui-run.md), [actual-result template](templates/fasttrack-human-ui-execution.md) and [feedback record](sessions/2026-11-17-ta-human-ui-feedback.md). Reported product decisions and earlier AI results do not fill those personal execution rows.
 
+For the filled earlier API/UI outcomes by case, read [the consolidated recorded-results page](sessions/2026-11-18-fasttrack-recorded-results.md). It reuses actual records with their original operator/time and keeps human attestation separate.
+
 ## Read in this order
 
 1. [Current evidence and owners](current-status.md).

@@ -4,6 +4,8 @@ Updated 18 November 2026, Asia/Bangkok. Group **InfaCompany / fastTrack, EN-028,
 
 **Purpose: review the available evidence and prepared completion steps. This is not a completed independent human web-UI resubmission.** The TA's request for actual tester names, personal actions, results and tested version remains open. The links below are available on the documentation branch; a main release is not needed to view them.
 
+**Filled existing results are now consolidated:** [recorded API and UI outcomes for UAT-01-08](sessions/2026-11-18-fasttrack-recorded-results.md), including 26 timestamped browser observations, the actual normal UI writes, guard/state results and disclosed deviations. These historical observations are usable evidence; the separately required individual-human execution record and assessment of the documented deviations remain open.
+
 ## Available fastTrack evidence
 
 Tested Sprint 1 source: `8e637e537cd037d630a5fffc1b5672d1b44371a8`. Scope: F-01 sign-in/scoped teams, F-02 milestones, F-03 shared version-1 submission and F-04 private append-only exact-version feedback.
