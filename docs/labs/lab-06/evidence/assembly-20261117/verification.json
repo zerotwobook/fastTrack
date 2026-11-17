@@ -1,13 +1,13 @@
 {
-  "verifiedAtUtc": "2026-11-17T13:28:18.468852+00:00",
+  "verifiedAtUtc": "2026-11-17T13:33:40.226884+00:00",
   "public_role_alias_markdown_files": 9,
   "public_local_links_verified": 109,
   "public_tables_verified": 26,
   "public_student_names_ids_and_designated_credentials": "ABSENT",
   "private_report_local_links_verified": 51,
   "private_original_pngs_decoded": 13,
-  "private_source_files": 42,
-  "private_source_files_matching_original_archive_bytes": 35,
+  "private_source_files": 43,
+  "private_source_files_matching_original_archive_bytes": 36,
   "private_narrative_account_redactions": 0,
   "actual_b_review_merge": "Account-recorded PR113 review13:05:56Z/merge13:07:44Z exactheadbaab0b2/merge01f61a9",
   "personal_case_entries": "PENDING; prospective assignments not fabricated history",
@@ -20,5 +20,6 @@
   "new_application_tests_run": false,
   "pdf_generated": false,
   "external_message_sent": false,
-  "private_narrative_table_shapes_verified": 23
+  "private_narrative_table_shapes_verified": 23,
+  "incoming_outgoing_http_sources": "Separate correctly linked original ledgers; no cross-product reference substitution"
 }
