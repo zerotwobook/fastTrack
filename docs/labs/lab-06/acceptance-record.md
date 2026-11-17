@@ -1,5 +1,8 @@
 # Independent Sprint 1 acceptance record
 
+**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
+
+
 **Current decision: PENDING. No independent acceptance or signature has been recorded.** Only the UAT Team may confirm independent acceptance. Copy this template for the actual tested release and preserve previous decisions if the release changes.
 
 Actual AI-operated evidence and a partner correction candidate are available in both directions; see [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md). The fields below remain a blank student-decision template. Their NOT RECORDED values do not erase dated observations. CoursePMS technical accepted-Major triage, RED/GREEN and exact-head CI are recorded; no fixed deployed source or independent retest is established. The 14 November fastTrack revision readback is dated evidence, not a fresh cloud check. Both actual human decisions remain PENDING; simulation supplies no participation/signature.

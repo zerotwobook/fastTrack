@@ -1,5 +1,8 @@
 # Findings, correction chains and independent retests
 
+**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
+
+
 Working templates for both teams. Current actual evidence is indexed in [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md). CoursePMS now records technical accepted-Major L6-OUT-EXP-001 under Issue #71 and supplied RED/GREEN/CI evidence for Draft PRs #72/#73. The correction is not established as deployed; independent retest is BLOCKED. Bare-route and title-summary clarifications remain open. Incoming fastTrack observations report no confirmed defect in their bounded AI scope; actual human decisions remain PENDING. Blank rows below are reusable templates, not competing current ledgers.
 
 ## 1. Finding report template

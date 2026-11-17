@@ -1,5 +1,8 @@
 # Partner handoff: fastTrack Sprint 1
 
+**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
+
+
 Read this document before the [eight cases](uat-cases.md). Product owners A/B answer access or setup questions; the independent testers execute the cases and record their own observations.
 
 For current evidence and outstanding actions, read [current-status.md](current-status.md) and the [17 November returned-candidate intake](sessions/2026-11-17-coursepms-return.md). Later outgoing evidence and reciprocal UI follow-up are summarized canonically; the full originals remain in the private local review export. Both actual human decisions remain PENDING; CoursePMS corrected-deployment retest is BLOCKED until release identity is supplied. The scheduling, fixture and readiness tables below retain original 13 November preparation context. Reagree current dates, source/revision and fixture eligibility before any new run; preserve prior records.

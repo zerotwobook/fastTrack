@@ -1,0 +1,42 @@
+{
+  "verifiedAtUtc": "2026-11-17T12:19:03.873921+00:00",
+  "authored_markdown_files": 11,
+  "local_links_verified": 109,
+  "private_archive_manifest_entries_verified": 24,
+  "public_checks": {
+    "PASS": 7,
+    "FAIL": 0
+  },
+  "release_merge_matches_deploy_source": true,
+  "dated_deploy_identity_log_verified": true,
+  "credential_preflight": "Updated user-designated file authenticates A/B/Instructor; earlier rejected attempts historical",
+  "authenticated_switch_executed": true,
+  "rt09": "PASS observed anonymous/authenticated bare routing and frontend paths",
+  "rt07": "Evidence review only; no local/live race rerun",
+  "business_record_writes": 0,
+  "received_payloads_published": false,
+  "notification": "User provided release message; external actual time/channel/acknowledgement not fabricated",
+  "both_human_decisions": "PENDING",
+  "scan_limit": "JWT/private-key marker and explicit file-scope review; not exhaustive secret audit",
+  "credential_file_supplied": true,
+  "actual_authenticated_workspaces_opened": 4,
+  "further_login_attempts": "None after designated-file rejection",
+  "designated_credentials_exact_value_public_scan": "PASS for updated private file values",
+  "original_no_refresh_reproduction": "PASS",
+  "authenticated_observation_records": 8,
+  "rt_case_mapping": {
+    "PASS": 5,
+    "PARTIAL": 3,
+    "EVIDENCE_REVIEW_ONLY": 1
+  },
+  "blocked_subchecks": [
+    "no-team/unassigned Student role fixture absent",
+    "student-review write target not agreed"
+  ],
+  "retained_team5_proposal3": "Read back: 3 members, proposal3 APPROVED revision2; unchanged across bounded read-only inspection",
+  "all_test_sessions_signed_out": true,
+  "final_local_token_removed": true,
+  "private_screenshots": 4,
+  "private_pngs_decoded": 4,
+  "screenshots_visually_inspected": 2
+}

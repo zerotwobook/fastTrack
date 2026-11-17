@@ -1,5 +1,8 @@
 # Independent UAT execution records
 
+**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
+
+
 Blank working templates retained from preparation. **The rows below are not the current execution ledger.** Read [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md) for the actual 14 November eight-case CoursePMS run, reciprocal fastTrack follow-up and returned correction candidate. The actual outgoing ledger is 56 PASS / 1 FAIL / 57, with 36 core PASS; preserve the original report discrepancy and procedural limits. Partner RED/GREEN/CI are correction evidence, not a new independent deployed retest. Current retest is BLOCKED; personal student activity and both decisions remain incomplete/unrecorded. Copy this template only for real new execution, preserving operator attribution.
 
 ## A. Partner team testing fastTrack (incoming evidence)

@@ -1,5 +1,8 @@
 # Lab 6 independent UAT partner package
 
+**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
+
+
 Task R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). Owner A: Supapanya Yathip (`zerotwobook`); peer reviewer B: Atip Infa-udom (`Atip-Infa`). This package covers the delivered Sprint 1 product only.
 
 Start with [current evidence and next actions](current-status.md) and the [17 November returned-candidate intake](sessions/2026-11-17-coursepms-return.md). The canonical evidence now includes the 14 November eight-case CoursePMS run, reciprocal fastTrack UI follow-up and partner correction candidate PR #73. PR #110 is already merged; current evidence integration is [PR #112](https://github.com/zerotwobook/fastTrack/pull/112). CoursePMS candidate CI passes, but fresh public health still reports the original defective source, so corrected-deployment retest is BLOCKED and both human decisions remain PENDING.

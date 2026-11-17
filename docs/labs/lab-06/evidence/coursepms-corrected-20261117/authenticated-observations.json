@@ -1,0 +1,110 @@
+[
+  {
+    "id": "AUTH-01",
+    "phase": "A_BASELINE",
+    "timeUtc": "2026-11-17T12:13:22.476Z",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "role": "STUDENT",
+    "ownTeamId": 1,
+    "proposalStatus": "DRAFT",
+    "fourFieldsNonempty": true,
+    "fourFieldsMatchCanonical": true,
+    "foreignTeamCount": 3,
+    "allForeignProposalsNull": true,
+    "ownProposalRetained": true,
+    "privateStatusRows": 3
+  },
+  {
+    "id": "AUTH-02",
+    "phase": "A_LOGOUT_REPLAY",
+    "timeUtc": "2026-11-17T12:13:59.658Z",
+    "signedOut": true,
+    "replayHttp": 401,
+    "replayCode": "TOKEN_REVOKED",
+    "sameDocumentBaselinePreserved": true
+  },
+  {
+    "id": "AUTH-03",
+    "phase": "B_NO_REFRESH",
+    "timeUtc": "2026-11-17T12:14:05.853Z",
+    "role": "STUDENT",
+    "ownTeamId": 3,
+    "ownProposalNull": true,
+    "sameDocumentBaselinePreserved": true,
+    "differentFromA": true,
+    "allFourFieldsEmpty": true,
+    "oldPrivateFieldTextFound": false,
+    "allForeignProposalsNull": true,
+    "foreignTeamCount": 3,
+    "authenticatedBareRoute": {
+      "status": 404,
+      "code": "API_ROUTE_NOT_FOUND",
+      "json": true
+    },
+    "foreignRead": {
+      "status": 403,
+      "code": "BR06_FORBIDDEN_TEAM_ACCESS",
+      "hasProposal": false,
+      "keys": [
+        "error",
+        "code"
+      ]
+    }
+  },
+  {
+    "id": "AUTH-04",
+    "phase": "B_LOGOUT",
+    "timeUtc": "2026-11-17T12:14:53.902Z",
+    "signedOut": true,
+    "sameDocumentBaselinePreserved": true
+  },
+  {
+    "id": "AUTH-05",
+    "phase": "A_REVERSE_AND_RELOAD",
+    "timeUtc": "2026-11-17T12:14:59.734Z",
+    "reverseWithoutReloadMatchedOriginal": true,
+    "canonicalSavedProposalUnchanged": true,
+    "reloadPreservesAllFourSavedFields": true,
+    "fourFieldsNonemptyAfterReload": true
+  },
+  {
+    "id": "AUTH-06",
+    "phase": "A_LOGOUT_BEFORE_INSTRUCTOR",
+    "timeUtc": "2026-11-17T12:15:02.265Z",
+    "signedOut": true
+  },
+  {
+    "id": "AUTH-07",
+    "phase": "INSTRUCTOR_AND_PRESERVATION",
+    "timeUtc": "2026-11-17T12:15:48.091Z",
+    "role": "INSTRUCTOR",
+    "noStudentEditor": true,
+    "priorSameDocumentMarker": true,
+    "teamCount": 4,
+    "authorizedAProposalRetained": true,
+    "noProposalTeamRemainsNull": true,
+    "authorizedProposalCount": 3,
+    "beforeTableRows": 5,
+    "approvedFilterRows": 2,
+    "retainedTeamSelected": true,
+    "approvedReviewInputDisabled": true,
+    "retainedTeam": {
+      "id": 5,
+      "memberCount": 3,
+      "proposalId": 3,
+      "status": "APPROVED",
+      "revision": 2
+    },
+    "canonicalDirectoryUnchangedAcrossFilterAndSelection": true
+  },
+  {
+    "id": "AUTH-08",
+    "phase": "FINAL_LOGOUT_AND_HEALTH",
+    "timeUtc": "2026-11-17T12:15:50.833Z",
+    "signedOut": true,
+    "replayHttp": 401,
+    "replayCode": "TOKEN_REVOKED",
+    "source": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "localTokenRemoved": true
+  }
+]

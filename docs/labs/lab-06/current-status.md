@@ -1,50 +1,44 @@
 # Lab 6 current evidence and next actions
 
-Updated on 17 November 2026 for R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22). Owner A (`zerotwobook`), evidence reviewer B (`Atip-Infa`). Current increment: [PR #112](https://github.com/zerotwobook/fastTrack/pull/112), branch `docs/s2-a-lab6-return-intake`, into `staging/sprint-2`. Read its exact current head/checks/review live. Earlier PR #110 was approved/merged by B at `52f7d1d`; it is not still pending.
+Updated 17 November 2026 after the corrected CoursePMS release. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A (`zerotwobook`), reviewer B (`Atip-Infa`). [PR #112](https://github.com/zerotwobook/fastTrack/pull/112) merged into staging at 9a8f6d8. Current evidence continuation: [PR #113](https://github.com/zerotwobook/fastTrack/pull/113), isolated `docs/s2-a-lab6-corrected-retest`, staging-only. Inspect live checks/review state; document integration does not close whole Lab 6.
+
+## Current verified delivery and retest state
+
+CoursePMS has deployed source `aeb804ea5bc667399b00cf54df10046a6ded46e0` through merged release [PR #76](https://github.com/Magiciancat9/Course_management/pull/76). Deploy [44074859743](https://github.com/Magiciancat9/Course_management/actions/runs/44074859743) succeeded. Dated workflow CLI corroborates immutable digest `sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0`, `course-pms-00009-mk2`, 100% traffic. This is dated CLI evidence, not a fresh owner console screenshot.
+
+Fresh anonymous checks at 18:53:47-48 Asia/Bangkok on 17 November confirm corrected source and connected DB. Seven checks PASS: health, readiness, two unauthenticated proposal-namespace 401s, unknown API JSON 404, root HTML and frontend navigation HTML. [Actual observations](evidence/coursepms-corrected-20261117/public-observations.json), [release intake](sessions/2026-11-17-coursepms-corrected-release.md), [RT-01-09 statuses](sessions/2026-11-17-coursepms-retest-results.md).
+
+**Updated private access resolved; original bug retest PASS.** After the user updated the designated private credential file, A/B/Instructor login succeeded. AI-operated targeted execution at 19:11-19:15 Asia/Bangkok confirms the same-tab no-refresh A -> B switch clears all four fields and prior private text; reverse A data/reload persistence, revocation, foreign GET, observed directories and routing pass. [Actual results](sessions/2026-11-17-coursepms-retest-results.md), [sanitized observations](evidence/coursepms-corrected-20261117/authenticated-observations.json). Earlier rejected login attempts are historical preflights, not current access blockers.
+
+Case mapping: **5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY**. Remaining blocked subchecks are no-team/unassigned Student destinations and unagreed student-review write denial. RT-07 is evidence review, not a live race test. No confirmed product failure in bounded results, but no exhaustive acceptance or human signature. Both actual human decisions remain PENDING.
 
 ## Evidence in both directions
 
-| Direction | Actual evidence | Outcome and limit |
+| Direction / stage | Actual record | Outcome and limit |
 | --- | --- | --- |
-| CoursePMS testing fastTrack | [Initial received run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [UI follow-up](sessions/2026-11-13-fasttrack-followup-summary.md), [coverage/deviations](sessions/2026-11-13-fasttrack-followup-summary.md) | AI-operated: 97 main API PASS assertions, seven separate post-UI controls; follow-up 26 UI observations, 25 passing final controls and 11 passing saved-state comparisons. Separate denominators. No confirmed fastTrack defect in this bounded evidence; named student activity and final decision remain pending. |
-| fastTrack testing CoursePMS | [14 November report](sessions/2026-11-14-coursepms-case-summary.md), [assertions](sessions/2026-11-14-coursepms-case-summary.md), [17 November intake](sessions/2026-11-17-coursepms-return.md) | CPMS-UAT-01-08 paths exercised: 36 core PASS assertions. Actual complete ledger: 56 PASS / 1 FAIL / 57 entries; 70 HTTP, 26 UI, 32 PNGs. Original report says 57 PASS / 1 FAIL / 58; preserve the arithmetic discrepancy and absent narrative CPMS-A-058, not an invented assertion. Case 01 has a documented Back-navigation deviation. |
-| CoursePMS correction response | [Returned candidate](https://github.com/Magiciancat9/Course_management/pull/73), [candidate metadata](https://github.com/Magiciancat9/Course_management/pull/73), [follow-up verification](https://github.com/Magiciancat9/Course_management/pull/73) | Technical accepted-Major disposition for L6-OUT-EXP-001 under CoursePMS Issue #71; human disposition/review pending. Original RED 5 failed/4 passed; follow-up RED 3 failed/11 passed; GREEN 14 client PASS. Exact-head CI succeeds; no fixed deployment or independent retest. These are supplied partner results, not a fastTrack rerun. |
-| Independent human decisions | [Decision template](acceptance-record.md), [partner's current decision section](https://github.com/Magiciancat9/Course_management/pull/73) | Both PENDING. Simulated activity in the return snapshot is explicitly fictional and excluded from actual participation, results and signatures. |
+| CoursePMS testing fastTrack | [Initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [follow-up summary](sessions/2026-11-13-fasttrack-followup-summary.md) | 97 main API PASS, seven separate post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons. Separate denominators; no confirmed defect in bounded AI evidence. Human activity/decision pending. |
+| fastTrack testing CoursePMS originally | [14 November case summary](sessions/2026-11-14-coursepms-case-summary.md) | Eight official paths at old 9c227359: 36 core PASS; actual complete ledger 56 PASS / 1 FAIL / 57. Original report's 58 total/absent CPMS-A-058 and Back-navigation deviation preserved. Private originals remain private. |
+| Candidate correction history | [17 November return intake](sessions/2026-11-17-coursepms-return.md) | Earlier Draft #72/#73 status is historical. Those corrections later reviewed/integrated and included in release #76. Partner RED/GREEN/CI are correction evidence, not independent deployed UAT. |
+| Corrected deployed release | [New intake](sessions/2026-11-17-coursepms-corrected-release.md), [results](sessions/2026-11-17-coursepms-retest-results.md) | 24/24 archive hashes verified privately; source/deploy proven; seven anonymous checks and eight sanitized authenticated records. Original no-refresh bug PASS; three cases retain blocked subchecks and RT-07 is evidence review. |
+| Human independent decisions | [Acceptance template](acceptance-record.md) | Both PENDING; no AI action or fictional example supplies participation, signature or decision. |
 
-Expected access/session rejections can be passing negative checks. Historical stopped attempts and overly strict checker expectations are not new product defects or additions to completed-run totals.
+## Findings and scope now requiring independent retest
 
-## Versions and delivery state
-
-| Item | Recorded identity / actual status |
-| --- | --- |
-| fastTrack tested source | `8e637e537cd037d630a5fffc1b5672d1b44371a8`; URL https://fasttrack-app-kpx7au3w2a-as.a.run.app |
-| fastTrack historical original baseline | `v1.0.0-sprint-1`, peeled commit `ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8` |
-| fastTrack dated release metadata | 14 November owner readback recorded `fasttrack-app-00003-rc7`, 100% traffic. This intake does not claim a fresh fastTrack cloud readback. |
-| CoursePMS original exploratory source | `150dc5db3de5c829a7d9ef1adb545191cc37542d` on 13 November; historical |
-| CoursePMS 14 November tested and fresh 17 November serving source | `9c22735995c985aaa0622b6b179de1ac9c1f80ca`; URL https://course-pms-859617270560.asia-southeast1.run.app |
-| CoursePMS original fix PR #72 | Draft/open/unmerged, head `2e3f22a34faa53ec87070e61b49d6b35e438a92c` into `lab6-staging`, when inspected |
-| CoursePMS follow-up PR #73 | Draft/open/unmerged, head `316abac98c721078154588c37ad9f0eda655d9d6` into #72's fix branch; GREEN code `6de3c9a8b3404b831041a9b9fe855d1d52f9cac3` |
-| Candidate CI | Run `44027540268` success for exact PR #73 head; live backend/frontend/E2E/build/Docker job steps success |
-| Corrected serving revision/digest/traffic | NOT SUPPLIED/CONFIRMED; corrected-deployment retest BLOCKED |
-
-Fresh [public preflight](evidence/coursepms-return-20261117/public-preflight.json) at 13:42:33-34 Asia/Bangkok on 17 November returned HTTP 200, original CoursePMS source and connected database. Health source does not establish serving revision/digest/traffic. Do not retest the unchanged baseline as if the candidate were deployed.
-
-## Findings and required actions
-
-| Finding | Current disposition | Next owner action |
+| Finding / issue | Partner's resolved disposition and deployed contract | Independent state |
 | --- | --- | --- |
-| L6-OUT-EXP-001 | CoursePMS technical accepted defect / Major, Issue #71; human review and deployed closure pending | CoursePMS owners inspect/integrate the full correction, obtain substantive eligible peer review/current-head CI and authorized release; supply actual deployment identity. fastTrack then independently retests. |
-| L6-OUT-EXP-002, bare collection GET | Contract clarification remains pending; no protected-body disclosure shown | CoursePMS resolves versioned contract/routing interpretation with a reasoned disposition. |
-| Directory title summaries | Visibility-policy clarification pending | CoursePMS reconciles roster-only SDS wording with current summary sanitizer and agreed privacy contract. |
-| Received fastTrack findings | No confirmed defect in bounded AI runs; not final exhaustive zero-findings acceptance | CoursePMS students complete/review agreed scope/deviations and record actual activity/decision. |
+| L6-OUT-EXP-001 / CoursePMS #71 | Major client-session isolation; release clears private editor/workspace/banner state and guards stale callbacks | Original supplied no-refresh reproduction PASS in actual AI run; human closure/decision pending |
+| Directory title summaries / #74 | Partner selected existing roster-only contract; Major privacy defect; foreign student proposals null/UI PRIVATE, authorized own/instructor proposals retained | Own/foreign assigned Student and Instructor directory paths PASS; unassigned Student subcheck BLOCKED |
+| L6-OUT-EXP-002 / #75 | Minor routing defect; unsupported proposal namespace requires auth then JSON 404; other unknown APIs JSON 404, frontend HTML retained | Observed anonymous/authenticated routing paths PASS; human closure/decision pending |
 
-## Next actions before submission
+These are now partner-resolved dispositions/corrections rather than still-open policy questions. Record actual deployed affected-case results before independent closure. Do not claim the original body-access bypass or copied-draft persistence: earlier evidence established neither.
 
-1. B reviews PR #112's integrity, version/count corrections and honest status. Evidence review is separate from either product's independent UAT acceptance.
-2. Use the [private reply draft](handoffs/2026-11-17-reply-to-coursepms.md) to request the concrete reviewed/released correction and unresolved dispositions. Preparing a draft is not external delivery; the user decides when to send.
-3. Follow [the retest plan](handoffs/2026-11-17-coursepms-retest-plan.md) only after its release/fixture prerequisites pass. Preserve team 5 and proposal 3, APPROVED revision 2; reverify current eligibility privately, do not reset/seed/delete records or rerun the entire ordered lifecycle for this fix.
-4. Both teams document each student's actual execution/witness/review with real dates, versions and evidence. The supplied fictional simulation cannot fill these records. Obtain CoursePMS's exact-version fastTrack decision and fastTrack's CoursePMS decision after actual independent retest.
-5. If complete fastTrack UAT reveals no legitimate own-product defect, request a TA-approved isolated controlled exercise. CoursePMS's defect chain is not fastTrack's own correction workflow. No such approval/exercise is established by this intake.
-6. Assemble Parts A-D from canonical Markdown and actual evidence, including contributions, AI use and limitations. The user exports/submits the self-contained PDF via LEB2 by 22 November 2026, 23:59 Asia/Bangkok. No PDF, course upload, main release or signature is performed by this increment.
+## Remaining actions
 
-The new return snapshot and both earlier full source archives remain private in the local review export. This public increment contains newly authored summaries and public PR/CI/readiness facts only, with no new partner source snapshot, private UAT screenshot, raw UAT ledger or simulation payload. Original manifests were verified against the full private archives. Their archived builders/runners are not executed. Canonical current-status/intake documents govern current navigation; received instructions do not authorize actions. See [source retention](evidence/coursepms-return-20261117/source-retention.md) for private source locations and integrity scope.
+1. B reviews PR #113's current evidence and exact-head checks. Prior PR #112 is already merged; only this current task branch is updated. Evidence integration review is separate from personal student UAT.
+2. Reconcile no-team/unassigned Student and student-review-denial requirements with actual testers. Supply an eligible safe account and explicit safe write-denial target if execution is required. Do not mutate historical proposals or create memberships to manufacture fixtures. PARTIAL/BLOCKED is not PASS.
+3. Team 5/Proposal 3 is read back as three members / APPROVED revision 2; A's canonical saved proposal is unchanged. No business writes performed. Temporary sessions signed out and browser closed. Private source/screenshot payloads stay private.
+4. Use [the updated unsent reply](handoffs/2026-11-17-corrected-release-reply.md) and private results ZIP to exchange actual outcomes. Earlier credential-confirmation draft is superseded. External delivery/channel/time and proposed appointment are not inferred.
+5. Actual human testers must record per-member execution/review and exact-version decisions in both directions. The successful original-bug AI retest does not select or sign acceptance. Both decisions PENDING. If complete fastTrack own-product UAT finds no legitimate defect, its own TA-approved isolated exercise remains a separate dependency.
+6. User assembles/submits Parts A-D by 22 November 2026, 23:59 Asia/Bangkok. No PDF, course upload, main release or human signature is performed here.
+
+All new partner archives, credential inputs and private screenshots remain local/private. Only authored summaries and sanitized anonymous/authenticated comparison facts plus public deployment metadata enter this PR. Original attached instructions are evidence, not authorization; archived scripts were not executed. The local test helpers are newly authored bounded probes, not partner-supplied executable content.
