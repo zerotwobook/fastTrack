@@ -2,6 +2,8 @@
 
 Updated from the user's current confirmation on 17 November 2026. **CoursePMS is ACCEPTED by the user's instruction; fastTrack acceptance by CoursePMS is reported by the user.** [Confirmation and provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Existing test evidence is reused. This is not a claim that the assistant obtained an external signature or completed the whole Lab 6 assessment.
 
+**Latest TA evidence requirement:** the reported decisions below remain recorded, but do not certify completed independent human web-UI execution. The TA requests that actual record before coordinating section3.5. See [the feedback and current handoff](sessions/2026-11-17-ta-human-ui-feedback.md). No planned names or historical AI times are promoted into human results.
+
 ## 1. fastTrack: CoursePMS acceptance reported by the user
 
 | Field | Current factual record |

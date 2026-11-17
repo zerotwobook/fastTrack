@@ -1,6 +1,6 @@
 # Executable Sprint 1 UAT cases
 
-This is the executable specification, not a result ledger. The [received fastTrack session](sessions/2026-11-13-fasttrack-received.md) contains API and selected browser evidence for all eight groups, with explicit unexecuted UI steps. Full student execution and independent acceptance remain incomplete/unrecorded; see [current-status.md](current-status.md). Independent testers copy [execution-results.md](execution-results.md) into a dated record and enter their actual results. Read [partner-handoff.md](partner-handoff.md) for account aliases, exact versions, run IDs, dates, private access, setup and cleanup.
+This is the executable specification, not a result ledger. The original API/selected-browser and subsequent AI UI evidence remain separately recorded. The latest TA request requires actual independent human completion through the web UI, with real people/time/outcomes/version. Follow [the current human handoff](handoffs/2026-11-17-fasttrack-human-ui-run.md) and [new actual-result template](templates/fasttrack-human-ui-execution.md). User-reported product acceptance does not fill personal execution rows. Original13November fixture examples below must be adapted consistently to the real new run; no historical data is overwritten.
 
 ## Scope and traceability
 

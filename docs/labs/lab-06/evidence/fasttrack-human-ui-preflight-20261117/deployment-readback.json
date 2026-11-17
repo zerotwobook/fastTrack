@@ -1,0 +1,10 @@
+{
+  "observedAtUtc": "2026-11-17T16:28:59.948212+00:00",
+  "readOnly": true,
+  "project": "fasttrack-se-002",
+  "region": "asia-southeast1",
+  "service": "fasttrack-app",
+  "exitCode": 1,
+  "diagnostic": "Readback unavailable; stderr retained only in process memory and not published",
+  "diagnosticCategory": "No usable active account"
+}

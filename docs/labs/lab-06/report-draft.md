@@ -54,6 +54,8 @@ Original incoming source 8e637e5: 97 PASS / 0 FAIL main API assertions across 74
 
 The follow-up performs meaningful UI writes/readbacks and a stale-form deadline path, while preserving disclosed procedural differences: sequential role profiles, isolated API denial checks outside the DevTools recipe, approximately 4m10s deadline lead rather than the proposed five minutes, validation on the normal fixture, and limited browser-history/session-replay coverage. Existing results are reused. The user reports CoursePMS acceptance of fastTrack and confirms shared A/B checking; original partner metadata and historical individual case times/signatures are not inferred from AI logs.
 
+The latest [TA feedback](sessions/2026-11-17-ta-human-ui-feedback.md) requires complete independent human web-UI execution with actual names/results/version. That human record is not supplied by the AI-operated initial/follow-up logs or reported acceptance. A new [runbook/template](handoffs/2026-11-17-fasttrack-human-ui-run.md) is prepared; it is NOT RUN until the partner actually performs it.
+
 ### fastTrack testing CoursePMS
 
 The official CPMS-UAT-01-08 packet was exercised on 14 November, approximately 22:54-23:14 Asia/Bangkok, source 9c227359. Core official assertions: 36 PASS. Actual full machine ledger: 56 PASS / 1 FAIL / 57 records, 70 HTTP and 26 UI observations; 32 original screenshots. The original narrative says 57 PASS / 1 FAIL / 58 and includes absent CPMS-A-058. Preserve source bytes and document the discrepancy; do not invent another assertion or product bug.
@@ -102,9 +104,9 @@ AI-operated run: 17 November 19:11-19:15 Asia/Bangkok, source aeb804ea at start/
 
 The later 21:30-21:33 follow-up resolves no-team/unassigned privacy and safe Student-review denial. A -> R -> A without refresh restores original A data; invalid-input POST to ID 0 returns 403 BR06_INSTRUCTOR_ROLE_REQUIRED, and the complete authorized directory is unchanged. Team 5 / Proposal 3 APPROVED revision 2 is retained. [Latest detailed results](sessions/2026-11-17-coursepms-remaining-checks.md) distinguish eight deployed PASS from RT-07 evidence/local PASS. Independent isolated replay passes 16 client and 19 selected/mocked server tests; initial Node 26 localStorage runner failures are retained, followed by unchanged client-suite PASS on Node 20. Seven anonymous, eight earlier authenticated and fourteen additional records remain separate evidence sets. No new confirmed product failure is observed; exhaustive product acceptance and human signatures are not claimed.
 
-### TA clarification: no confirmed legitimate fastTrack defect
+### TA feedback and conditional section3.5 coordination
 
-The user plans to ask the TA what fastTrack must provide for the defect-resolution requirement given its existing independent API/UI evidence and reported acceptance without a confirmed legitimate defect. CoursePMS has a genuine defect/correction/independent-retest chain; the question asks whether that satisfies the assessed role or whether an approved isolated fastTrack exercise is required. No TA answer, approved exercise or deliberate live defect is supplied. Incorporate the actual guidance and resulting evidence before final submission.
+The TA has replied and asks the partner to finish human web-UI testing with actual people/results/version before a new result is sent. If that completed run finds no legitimate defect, the TA will coordinate the simulated section3.5 task. No specific task/scope/version is supplied yet. Preserve user-reported product decisions and original AI operator attribution separately from the missing human execution record.
 
 ### Shared contributions, AI use and product decisions
 

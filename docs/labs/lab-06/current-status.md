@@ -2,6 +2,12 @@
 
 Updated 17 November 2026 after remaining CoursePMS checks. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as 01f61a9. Current increment is [PR #114](https://github.com/zerotwobook/fastTrack/pull/114), staging-only. Whole Lab 6 remains OPEN/PENDING for documentation review, TA disposition and final submission. Product decisions and shared participation have now been confirmed as recorded below.
 
+## Latest TA requirement: independent human fastTrack UI record
+
+The TA has now asked for the partner to complete the web-UI test cases and record actual people, results and version. [Feedback and scope](sessions/2026-11-17-ta-human-ui-feedback.md). The13November API/selected-UI and later AI UI follow-up are preserved; they do not establish named-human completion. User-declared product acceptance remains recorded separately. Human session results are not yet supplied.
+
+Use [the complete human UI handoff](handoffs/2026-11-17-fasttrack-human-ui-run.md) and [actual-result template](templates/fasttrack-human-ui-execution.md). Health/readiness freshly match8e637e5; current revision/traffic still needs an owner readback because the read-only CLI had no usable active account. The same roster is planned, not retrospectively marked present. No new human case PASS, booked slot or external message is claimed.
+
 ## Outgoing CoursePMS technical retest is complete within the requested plan
 
 Corrected source aeb804ea5bc667399b00cf54df10046a6ded46e0 is deployed through CoursePMS release #76 / deploy 44074859743. Dated serving identity: course-pms-00009-mk2, 100% traffic; immutable digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0. This is dated workflow CLI evidence, not a new owner-console screenshot. Fresh source checks match at both additional live sessions' start/end.
@@ -33,8 +39,8 @@ No API body bypass or copied saved draft was established by the original finding
 
 ## Remaining owners and actions
 
-1. Reuse existing fastTrack API/UI evidence and completed CoursePMS targeted results. Both product decisions are recorded with [their actual confirmation provenance](sessions/2026-11-17-user-acceptance-confirmation.md); no duplicate full execution or renewed decision request is a default prerequisite.
-2. A owns plan/normal/state evidence and TA coordination; B owns rule/access/privacy/correction/retest evidence and report review. The user confirms joint checking. See [the current allocation](contributions-and-ai.md); it does not assign historical individual case executors/times.
-3. The user plans to ask the TA how to handle the own-fastTrack defect requirement with no confirmed legitimate finding. Use [the ready question](handoffs/2026-11-17-remaining-lab6-inputs.md). Await the actual answer; do not assume approval or create an artificial live defect. Any required isolated exercise follows the approved scope.
-4. B reviews PR #114. Whole Issue #22 stays OPEN/PENDING until remaining criteria are met; no acceptance of the PR or main release follows automatically from product UAT acceptance.
-5. Complete final report after the TA disposition: [Parts A-D outline](report-draft.md), [evidence index](evidence-index.md), private identified Markdown kit, actual final export/page references and LEB2 receipt. Deadline 22 November 2026, 23:59 Asia/Bangkok. No PDF/main release/course upload is performed here.
+1. Actual CoursePMS testers complete the human web-UI cases and return real names/roles/time/version/actual outcomes/evidence using the linked record. Product owners prepare private access/current revision and safe fixtures. Existing AI evidence may support, but does not fill personal execution rows.
+2. A/B keep the user-confirmed outgoing CoursePMS decision and shared responsibility record. Planned allocations/historical AI timestamps do not establish a human fastTrack session.
+3. After the required human UI record is complete, send the new result to the TA. If no legitimate defect is found, await the specific section3.5 scenario/scope the TA will coordinate. No exercise is supplied/approved by the present message.
+4. B reviews the current PR114 documentation candidate; an earlier-head account approval does not approve subsequent heads. WholeIssue22 remainsOPEN/PENDING for human UI evidence, TA disposition, real peer integration and final submission.
+5. Assemble actual new results into PartsA-D and submit by22November2026,23:59Asia/Bangkok. Historical reports/declared decisions retain their dates and provenance; no PDF/main release/course upload is performed here.

@@ -8,6 +8,8 @@ B-associated account approved PR #113 head baab0b2 and merged into staging at 01
 
 CoursePMS corrected source aeb804ea is deployed through release #76. The actual AI-operated 19:11-19:15 retest passes the original no-refresh account-switch path. Later 21:30-21:33 execution resolves the no-team/unassigned and safe review-denial subchecks. Current mapping: eight deployed targeted case PASS; RT-07 PASS by evidence review and isolated automated replay (16 client / 19 selected server PASS). See [completion details](sessions/2026-11-17-coursepms-remaining-checks.md). The user now accepts CoursePMS, reports CoursePMS acceptance of fastTrack, and confirms shared A/B checking; see [decision provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Individual historical case times/signatures are not inferred. Earlier dated preflights/candidate statuses are historical.
 
+**Latest TA follow-up:** incoming fastTrack acceptance still needs the partner's actual complete human web-UI evidence. Use [the human runbook](handoffs/2026-11-17-fasttrack-human-ui-run.md), [actual-result template](templates/fasttrack-human-ui-execution.md) and [feedback record](sessions/2026-11-17-ta-human-ui-feedback.md). Reported product decisions and earlier AI results do not fill those personal execution rows.
+
 ## Read in this order
 
 1. [Current evidence and owners](current-status.md).
