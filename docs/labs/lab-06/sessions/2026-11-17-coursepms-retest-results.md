@@ -1,6 +1,6 @@
 # Corrected CoursePMS retest: actual status
 
-Date: 17 November 2026, Asia/Bangkok. Operator: Codex AI for fastTrack R2-A04. This is bounded verification with actual outcomes, not personal A/B attendance or human acceptance. The user confirmed reuse of the existing test-account set; actual private credential location remains requested and unprovided.
+Date: 17 November 2026, Asia/Bangkok. Operator: Codex AI for fastTrack R2-A04. This is bounded verification with actual outcomes, not personal A/B attendance or human acceptance. The user confirmed reuse of the existing test-account set and supplied its private file location. One A sign-in using that designated file was rejected with INVALID_CREDENTIALS. The user selected CoursePMS confirmation/update of the private file; valid access remains pending.
 
 ## Release entry
 
@@ -12,13 +12,13 @@ The reported old-source blocker is resolved. This does not establish authenticat
 
 [Anonymous observations](../evidence/coursepms-corrected-20261117/public-observations.json) retain exact times/status/content type/sanitized bodies. Seven checks PASS at 18:53:47-48 Asia/Bangkok: health, readiness, unauthenticated bare and unsupported proposal namespaces, other unknown API, root HTML and frontend navigation HTML. These seven observations are separate from partner CI, eight original cases and the RT case statuses below.
 
-A freshly loaded isolated browser used the public Team Alpha Quick Fill and Sign In controls once. Actual result: INVALID_CREDENTIALS; no workspace loaded. The subsequent Logout wait timed out because sign-in failed. The precondition is BLOCKED; it is not an account-switch product FAIL. No password guessing or repeated request followed. Credential fields were cleared and the isolated browser closed. No reusable token, raw login response or credential screenshot enters deliverables.
+A freshly loaded isolated browser used the public Team Alpha Quick Fill and Sign In controls once. Actual result: INVALID_CREDENTIALS; no workspace loaded. The subsequent Logout wait timed out because sign-in failed. The precondition is BLOCKED; it is not an account-switch product FAIL. No password guessing followed. After the user supplied the private credential file, one A sign-in with that file was also rejected at 19:03:10 Asia/Bangkok. Both attempts are recorded as precondition failures; no authenticated workspace or token was obtained. Credential fields were cleared and the isolated browser closed. No reusable token, raw login response or credential screenshot enters deliverables.
 
 ## RT-01-09 record
 
 | Case | Actual execution / evidence | Status and limit |
 | --- | --- | --- |
-| RT-01 A -> logout -> B, no refresh | Fresh browser loaded corrected frontend; A sign-in precondition rejected demo credentials. No A or B workspace loaded; switch not attempted. | BLOCKED: valid A/B access and current eligibility needed |
+| RT-01 A -> logout -> B, no refresh | Fresh browser loaded corrected frontend; demo A sign-in and the later designated-file A sign-in were both rejected. No A or B workspace loaded; switch not attempted. | BLOCKED: CoursePMS must confirm/update designated-file credentials; current A/B eligibility still needed |
 | RT-02 reverse/own-proposal | Not executed; credential prerequisite absent. | BLOCKED |
 | RT-03 no-team/instructor | Not executed; eligible fixtures/access unverified. | BLOCKED |
 | RT-04 reload/relogin saved state | Not executed; canonical authorized values unavailable. | BLOCKED |
@@ -34,6 +34,6 @@ No case-level RT PASS total is asserted. Seven anonymous checks passed; the orig
 
 No business write endpoint, create team, membership change, proposal save/submit/review, seed/reset/delete, cloud mutation or partner message was performed. Team 5 and Proposal 3 were not accessed or changed; current state retention cannot be independently asserted without authorized reads.
 
-Supply the private location of the existing A/B/instructor/eligible fixture credentials or arrange assisted login. Reopen a fresh corrected browser and execute only the safe affected cases after verifying source/roles/preconditions. Never reload between the original A/B sessions during RT-01. Obtain actual human tester contribution records and exact-version decisions separately. Both decisions remain PENDING; no case result or signature is fabricated.
+CoursePMS must confirm/update valid credentials in the designated private file, as selected by the user after the rejected A login. Do not send passwords in public messages or reports. Reopen a fresh corrected browser and execute only the safe affected cases after verifying source/roles/preconditions. Never reload between the original A/B sessions during RT-01. Obtain actual human tester contribution records and exact-version decisions separately. Both decisions remain PENDING; no case result or signature is fabricated.
 
 The ZIP's proposed 20 November 19:00-19:45 slot is not confirmed by this intake. The supplied release records acknowledge that predeployment notification was missed; release PR checklist wording does not establish an earlier message. Actual external channel/time/response remain unverified. No backdated notification or external acknowledgement is created.

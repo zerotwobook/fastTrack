@@ -9,7 +9,7 @@
   },
   "release_merge_matches_deploy_source": true,
   "dated_deploy_identity_log_verified": true,
-  "credential_preflight": "BLOCKED: public local/demo Quick Fill rejected; valid private account access pending",
+  "credential_preflight": "BLOCKED: one demo login and one designated-private-file A login rejected INVALID_CREDENTIALS; user selected CoursePMS confirmation/update",
   "authenticated_switch_executed": false,
   "rt09": "Anonymous portion PASS; authenticated portion BLOCKED",
   "rt07": "Evidence review only; no new local/live race test",
@@ -17,5 +17,9 @@
   "received_payloads_published": false,
   "notification": "User provided release message; external actual time/channel/acknowledgement not fabricated",
   "both_human_decisions": "PENDING",
-  "scan_limit": "JWT/private-key marker and explicit file-scope review; not exhaustive secret audit"
+  "scan_limit": "JWT/private-key marker and explicit file-scope review; not exhaustive secret audit",
+  "credential_file_supplied": true,
+  "actual_authenticated_workspaces_opened": 0,
+  "further_login_attempts": "None after designated-file rejection",
+  "designated_credentials_exact_value_public_scan": "PASS: supplied email/password values absent from authored summary/public metadata files"
 }

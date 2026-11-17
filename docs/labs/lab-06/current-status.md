@@ -8,7 +8,7 @@ CoursePMS has deployed source `aeb804ea5bc667399b00cf54df10046a6ded46e0` through
 
 Fresh anonymous checks at 18:53:47-48 Asia/Bangkok on 17 November confirm corrected source and connected DB. Seven checks PASS: health, readiness, two unauthenticated proposal-namespace 401s, unknown API JSON 404, root HTML and frontend navigation HTML. [Actual observations](evidence/coursepms-corrected-20261117/public-observations.json), [release intake](sessions/2026-11-17-coursepms-corrected-release.md), [RT-01-09 statuses](sessions/2026-11-17-coursepms-retest-results.md).
 
-**Old-source blocker resolved. Authenticated independent retest remains BLOCKED.** One public Quick Fill demo login returned INVALID_CREDENTIALS, no authenticated workspace loaded, fields were cleared and browser closed. The user confirmed the old test-account set; actual private access/fixture eligibility is still requested. This is a blocked precondition, not a product FAIL or retest PASS. RT-09 is partial/overall blocked; RT-07 is evidence review only. Both actual human decisions remain PENDING.
+**Old-source blocker resolved. Authenticated independent retest remains BLOCKED.** One public Quick Fill demo login and one A login using the user-designated private account file returned INVALID_CREDENTIALS; no authenticated workspace loaded. Fields were cleared and browser closed. The user selected CoursePMS confirmation/update of the private file; no further guessing or account attempt is performed. This is a blocked precondition, not a product FAIL or retest PASS. RT-09 is partial/overall blocked; RT-07 is evidence review only. Both actual human decisions remain PENDING.
 
 ## Evidence in both directions
 
@@ -32,7 +32,7 @@ These are now partner-resolved dispositions/corrections rather than still-open p
 
 ## Remaining actions
 
-1. Obtain the private location or assisted use of the existing valid test accounts and verify current role/team/draft eligibility. Do not read unrelated secrets or guess passwords. Public local-demo Quick Fill is not proof of deployed credential validity.
+1. Obtain CoursePMS confirmation/update of the user-designated private account file and verify current role/team/draft eligibility. The file was supplied, but its A login was rejected. Do not read unrelated secrets or guess passwords. Public local-demo Quick Fill is not proof of deployed credential validity.
 2. Resume [RT-01-09](sessions/2026-11-17-coursepms-retest-results.md) with actual operator/time/source and sanitized evidence. Fresh-load the corrected frontend once before RT-01; no reload between A and B. No historical proposal save/submit/review, new team/membership, reset/seed/delete. Unagreed review-write target stays BLOCKED.
 3. Preserve Team 5 / Proposal 3 APPROVED revision 2. No business writes were performed; their current state has not been independently read back without access.
 4. The [reply draft](handoffs/2026-11-17-corrected-release-reply.md) is prepared, not sent. Proposed 20 November 19:00-19:45 appointment remains unconfirmed. Supplied release evidence acknowledges missed predeployment notice; do not infer/backdate delivery from a checked PR checkbox.
