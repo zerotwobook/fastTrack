@@ -1,0 +1,24 @@
+{
+  "operator": "Codex AI-operated browser verification",
+  "source": "1bbe187c088b86d104a16e420058f17425f18828",
+  "milestoneId": "207d2957-ea2c-444c-b6aa-f456b94dc51b",
+  "dueAt": "2026-11-18T18:06:32.142Z",
+  "formOpenedSnapshot": "2026-11-18T18:05:34.292Z",
+  "latePostStatus": 409,
+  "error": {
+    "code": "DEADLINE_PASSED",
+    "message": "The deadline has passed. Your work was not saved.",
+    "fields": {}
+  },
+  "savedList": {
+    "data": [],
+    "meta": {
+      "serverTime": "2026-11-18T18:06:56.847Z"
+    }
+  },
+  "databaseSubmissionCount": 0,
+  "databaseExecution": "fasttrack-lab6-migrate-mf8xh",
+  "draftRetained": true,
+  "signedOutAndBrowserClosed": true,
+  "independentCoursePMSRetest": "PENDING"
+}

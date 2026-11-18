@@ -1,0 +1,37 @@
+{
+  "fixtures": {
+    "before": {
+      "id": "639a705c-7851-4a14-8282-1d86335ea374",
+      "teamId": "4cdfe241-0c43-4870-b98e-1ee69e4fa796",
+      "title": "L6-S35-AI-BEFORE-20261118T180305Z",
+      "description": "Synthetic exercise fixture.",
+      "dueAt": "2026-11-18T18:08:05.631Z",
+      "cancelledAt": null,
+      "createdAt": "2026-11-18T18:03:04.803Z",
+      "latestSubmission": null
+    },
+    "late": {
+      "id": "9cae7283-98e6-41f2-98c7-a0c52085942a",
+      "teamId": "4cdfe241-0c43-4870-b98e-1ee69e4fa796",
+      "title": "L6-S35-AI-LATE-20261118T180305Z",
+      "description": "Synthetic exercise fixture.",
+      "dueAt": "2026-11-18T18:03:25.741Z",
+      "cancelledAt": null,
+      "createdAt": "2026-11-18T18:03:04.903Z",
+      "latestSubmission": null
+    }
+  },
+  "control": {
+    "id": "6dcbecd0-e154-4b0a-9d4a-098b34aff798",
+    "milestoneId": "639a705c-7851-4a14-8282-1d86335ea374",
+    "submittedBy": {
+      "id": "ef626ccf-188d-43b0-842a-3e3f1a1e287e",
+      "displayName": "Student A1"
+    },
+    "version": 1,
+    "title": "L6-S35 AI synthetic work",
+    "description": "Controlled exercise section 3.5.",
+    "url": "https://example.edu/lab6/section-3-5",
+    "submittedAt": "2026-11-18T18:03:05.049Z"
+  }
+}

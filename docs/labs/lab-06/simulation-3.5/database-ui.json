@@ -1,0 +1,37 @@
+{
+  "observedAt": "2026-11-18T18:08:52.971271+00:00",
+  "execution": "fasttrack-lab6-migrate-mf8xh",
+  "snapshot": {
+    "database": "fasttrack_lab6",
+    "databaseTime": "2026-11-18T18:08:43.034Z",
+    "instance": "fasttrack-lab6-db",
+    "milestones": [
+      {
+        "dueAt": "2026-11-18T18:06:32.142Z",
+        "id": "207d2957-ea2c-444c-b6aa-f456b94dc51b",
+        "submissions": [],
+        "title": "L6-S35-AI-UI stale form"
+      },
+      {
+        "dueAt": "2026-11-18T18:08:05.631Z",
+        "id": "639a705c-7851-4a14-8282-1d86335ea374",
+        "submissions": [
+          {
+            "id": "6dcbecd0-e154-4b0a-9d4a-098b34aff798",
+            "submittedAt": "2026-11-18T18:03:05.049Z",
+            "title": "L6-S35 AI synthetic work",
+            "url": "https://example.edu/lab6/section-3-5",
+            "version": 1
+          }
+        ],
+        "title": "L6-S35-AI-BEFORE-20261118T180305Z"
+      },
+      {
+        "dueAt": "2026-11-18T18:03:25.741Z",
+        "id": "9cae7283-98e6-41f2-98c7-a0c52085942a",
+        "submissions": [],
+        "title": "L6-S35-AI-LATE-20261118T180305Z"
+      }
+    ]
+  }
+}

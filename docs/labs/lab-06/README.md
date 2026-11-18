@@ -1,5 +1,7 @@
 # Lab 6 independent UAT partner package
 
+The user-relayed TA simulated deadline exercise section 3.5 is tracked separately in [Issue #23 / PR #115](simulation-3.5/README.md). Use its [CoursePMS independent retest instructions](simulation-3.5/coursepms-retest.md) for the new isolated deadline scenario.
+
 **Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
 
 
