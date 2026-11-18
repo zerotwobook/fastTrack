@@ -1,4 +1,4 @@
-import { Prisma } from '../../db/generated/client/index.js';
+﻿import { Prisma } from '../../db/generated/client/index.js';
 import type { PrismaClient } from '../../db/generated/client/index.js';
 import { AppError } from '../../http/errors.js';
 import { requireTeamAccess, requireUuid, scopedTeamWhere } from '../teams/index.js';
@@ -75,7 +75,9 @@ export class SubmissionService {
           if (milestone.cancelledAt) throw new AppError(409, 'MILESTONE_CANCELLED', 'This milestone was cancelled and cannot receive work.');
           if (await tx.submission.findFirst({ where: { milestoneId: id }, select: { id: true } })) throw duplicate();
           const acceptedAt = await this.clock(tx);
-          // Lab 6 section 3.5 deliberately defective isolated exercise: deadline rejection omitted.
+          if (acceptedAt.getTime() > milestone.dueAt.getTime()) {
+            throw new AppError(409, 'DEADLINE_PASSED', 'The deadline has passed. Your work was not saved.');
+          }
           const saved = await tx.submission.create({ data: { milestoneId: id, submittedById: auth.userId, version: 1,
             ...input, submittedAt: acceptedAt }, select: submissionSelect });
           return submissionDto(saved);
