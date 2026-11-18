@@ -1,4 +1,4 @@
-﻿import { Prisma } from '../../db/generated/client/index.js';
+import { Prisma } from '../../db/generated/client/index.js';
 import type { PrismaClient } from '../../db/generated/client/index.js';
 import { AppError } from '../../http/errors.js';
 import { requireTeamAccess, requireUuid, scopedTeamWhere } from '../teams/index.js';
