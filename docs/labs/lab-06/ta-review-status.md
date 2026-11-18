@@ -1,45 +1,39 @@
-# Lab 6: interim status for TA review
+# Lab 6 evidence for TA review
 
-Updated 18 November 2026, Asia/Bangkok. Group **InfaCompany / fastTrack, EN-028, Section 31**. Repository: [zerotwobook/fastTrack](https://github.com/zerotwobook/fastTrack).
+Updated 18 November 2026, Asia/Bangkok. **InfaCompany / fastTrack, EN-028, Section 31.** This page presents the returned partner results, confirmed reviewer responsibilities, AI attribution and current deployment identity for TA assessment.
 
-**Purpose: review the available evidence and prepared completion steps. This is not a completed independent human web-UI resubmission.** The TA's request for actual tester names, personal actions, results and tested version remains open. The links below are available on the documentation branch; a main release is not needed to view them.
+## Latest returned results
 
-**Filled existing results are now consolidated:** [recorded API and UI outcomes for UAT-01-08](sessions/2026-11-18-fasttrack-recorded-results.md), including 26 timestamped browser observations, the actual normal UI writes, guard/state results and disclosed deviations. These historical observations are usable evidence; the separately required individual-human execution record and assessment of the documented deviations remain open.
+**CoursePMS returned all eight fastTrack cases as PASS** on source `8e637e537cd037d630a5fffc1b5672d1b44371a8`, run `L6-CPMS-AI-20261118-144203`. The recorded session spans **18 November 2026, 14:37:42.827-14:50:33.231 UTC+07:00**. The evidence includes **28 screenshots, nine JSON ledgers, 18 active PASS observations and one retained invalidated automation observation**. All 40 checksum entries in the 41-file received archive match the original bytes.
 
-## Available fastTrack evidence
+[Read the complete eight-case result and screenshot record](sessions/2026-11-18-coursepms-fasttrack-returned-results.md).
 
-Tested Sprint 1 source: `8e637e537cd037d630a5fffc1b5672d1b44371a8`. Scope: F-01 sign-in/scoped teams, F-02 milestones, F-03 shared version-1 submission and F-04 private append-only exact-version feedback.
-
-| Record | Actual result | Attribution and limits |
+| User-confirmed reviewer | Responsible cases | Assistance and attribution |
 | --- | --- | --- |
-| [Initial UAT, 13 November](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md) | 97 main API assertions PASS / 0 FAIL across 74 HTTP observations; eight UAT case groups plus readiness/setup/cleanup | Codex-operated in the partner testing context; selected UI and explicit incomplete UI procedures. This is not 97 manual cases or eight complete human UI cases |
-| [Later UI follow-up](sessions/2026-11-13-fasttrack-followup-summary.md) | 26 UI observations, 25 passing final controls and 11 passing saved-state comparisons | Separate AI-assisted evidence set with documented procedural differences; not a named-human execution ledger |
-| [Last recorded public preflight](evidence/fasttrack-human-ui-preflight-20261117/public-preflight.json) | 17 November, 23:25:58-23:25:59 Asia/Bangkok: health/readiness HTTP 200, database connected, matching source | Read-only owner-side machine check; repeat at the actual human session start/end |
+| Tatchakorn Thamnimitr | UAT-01 through UAT-04 | Milestone/student matching view, submission/feedback, duplicate prevention, deadline rejection |
+| Pawarit Wongdang | UAT-05 through UAT-08 | Cross-team access, role/input validation, sign-out/account switch, saved-state persistence |
 
-No confirmed legitimate fastTrack defect was established within the recorded scope. This is bounded evidence, not an exhaustive zero-defect guarantee. Original reports retain their actual dates, operators and historical PENDING statements.
+The user confirms AI assistance in test execution and evidence collection. The returned archive identifies Codex as the recorded browser operator and leaves human review pending at archive creation. The subsequent user confirmation supplies the reviewers and case responsibilities. Individual human action/review times and a new explicit final decision for this particular run have no additional details in that update. Existing user-reported partner acceptance is retained in the [product decision record](acceptance-record.md).
 
-## Product decisions and the separate human-execution criterion
+## Current deployed application
 
-[Current product decision record](acceptance-record.md) distinguishes direct user acceptance of CoursePMS from CoursePMS acceptance of fastTrack reported through the project representative. [Confirmation provenance](sessions/2026-11-17-user-acceptance-confirmation.md) and [contribution/AI attribution](contributions-and-ai.md) preserve what was actually supplied.
+At **18 November 2026, 15:19:49 UTC+07:00**, authenticated service/revision reads confirm **fasttrack-app-00003-rc7 at 100% traffic**, ready conditions True, and the matching immutable image digest. Public health/readiness return HTTP 200, source `8e637e5` and database connected. The readback occurred after the UAT session and retains its actual observation time. [Deployment readback and command evidence](sessions/2026-11-18-fasttrack-cloud-run-readback.md).
 
-Those declarations do not establish that named partner members personally performed all required fastTrack UI actions. Planned allocations and historical AI run times are not entered as human results. Personal identities and any actual returned confirmations belong in the private report evidence.
+Assessed scope is Sprint 1 F-01 sign-in/scoped teams, F-02 milestone creation/read, F-03 shared version-1 submission and F-04 private append-only feedback. No confirmed legitimate fastTrack defect is recorded within this returned scope.
 
-The outgoing CoursePMS technical retest is complete within its requested plan: [eight deployed targeted PASS plus RT-07 evidence-review/isolated-replay PASS](sessions/2026-11-17-coursepms-remaining-checks.md). That is a separate testing direction and does not replace the incoming fastTrack human execution record.
+## Prior evidence and reciprocal testing
 
-**Latest reported participation/decision update:** [CoursePMS member roles and 13-18 November work period](sessions/2026-11-18-reported-partner-participation.md), with partner acceptance reported as confirmed on 18 November. This records the newly supplied broad roles/date and leaves original machine attribution and the per-case human criterion distinct.
+| Record | Actual retained outcome |
+| --- | --- |
+| [13 November incoming API/selected UI](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md) | 97 main API PASS across 74 HTTP observations, separate seven post-UI controls |
+| [13 November later UI follow-up](sessions/2026-11-13-fasttrack-followup-summary.md) | 26 UI observations, 25 final controls, 11 saved-state comparisons |
+| [Consolidated historical case results](sessions/2026-11-18-fasttrack-recorded-results.md) | Original operator/times and procedural differences retained |
+| [Outgoing corrected CoursePMS checks](sessions/2026-11-17-coursepms-remaining-checks.md) | Eight deployed targeted PASS plus RT-07 exact-source evidence/isolated replay PASS, source `aeb804ea` |
 
-## Prepared response to the TA's latest feedback
+These are separate runs and denominators. [Contribution/AI attribution](contributions-and-ai.md), [evidence index](evidence-index.md) and [Parts A-D report outline](report-draft.md) provide the wider assessment context.
 
-1. [Complete human web-UI runbook](handoffs/2026-11-17-fasttrack-human-ui-run.md): all eight original cases, positive UI actions, safe new fixtures, role profiles, required guard subchecks and evidence capture.
-2. [Actual-result template](templates/fasttrack-human-ui-execution.md): actual names/student IDs, app roles, date/time in Asia/Bangkok, source/revision, steps, observations, evidence and findings. All eight human rows are currently NOT RUN.
-3. [TA feedback and current disposition](sessions/2026-11-17-ta-human-ui-feedback.md): records the user-relayed request without claiming an assigned or completed section 3.5 exercise.
+## Requested TA disposition
 
-## What must be added before the completed result is sent
+Please assess the returned web-UI results, reviewer responsibility confirmation and disclosed AI operation against the [previously relayed participation feedback](sessions/2026-11-17-ta-human-ui-feedback.md). Identify any specific additional human participation or evidence needed. If the required coverage is sufficient and no legitimate defect is found, please provide the section 3.5 scenario, version and scope.
 
-- Genuine partner human UI execution records, or genuine earlier human records identifying the actual people/actions/times and evidence. No completed human session record has been supplied in this update.
-- Current owner-confirmed serving revision/traffic for that session. The [read-only Cloud Run lookup](evidence/fasttrack-human-ui-preflight-20261117/deployment-readback.json) could not authenticate; historical revision metadata is not substituted as current.
-- Case-level actual outcomes and deviations, then the independent team's exact-version decision after reconciling the required coverage.
-
-The TA has offered to coordinate a section 3.5 simulated defect task if the required human testing is complete and no legitimate defect is found. A specific scenario, version and scope have not yet been supplied. Once the genuine human result is available, it can be added as a new dated record and linked here for the TA's next review.
-
-Whole Lab 6 remains open. This preview does not claim a new human PASS, course submission, main release, human signature or completed defect exercise. No external message was sent by the assistant.
+Whole Lab 6 is open for TA disposition, any resulting work, peer integration and final user submission. PR #114 remains the staging-targeted documentation candidate. This page is available on its branch for review. The final submission deadline is 22 November 2026, 23:59 Asia/Bangkok.

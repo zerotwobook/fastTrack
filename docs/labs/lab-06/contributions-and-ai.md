@@ -1,6 +1,10 @@
 # Contributions, shared responsibility and AI use
 
-This public record uses role aliases. The identified report and any personal confirming data belong in the private assembly kit. Do not convert an account event, planned assignment or AI action into personally executed student work.
+This public record includes the user-confirmed independent reviewer names and latest case responsibilities. Student IDs and the original identified report are retained in the private assembly kit. Do not convert an account event, planned assignment or AI action into personally executed student work.
+
+## Latest user-confirmed case responsibilities
+
+After receiving the 18 November results, the user confirms Tatchakorn Thamnimitr is responsible for UAT-01-04 and Pawarit Wongdang for UAT-05-08, with AI assistance in test execution and evidence collection. The [returned result record](sessions/2026-11-18-coursepms-fasttrack-returned-results.md) maps each responsibility to actual evidence. Codex remains the browser operator in the original ledgers. The confirmation supplies responsibility and assistance attribution; individual human click/review times and a new explicit final decision for that run have no additional details.
 
 ## Latest reported independent-team participation
 

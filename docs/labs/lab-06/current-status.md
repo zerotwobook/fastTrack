@@ -1,12 +1,14 @@
 # Lab 6 current evidence and next actions
 
-Updated 17 November 2026 after remaining CoursePMS checks. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as 01f61a9. Current increment is [PR #114](https://github.com/zerotwobook/fastTrack/pull/114), staging-only. Whole Lab 6 remains OPEN/PENDING for documentation review, TA disposition and final submission. Product decisions and shared participation have now been confirmed as recorded below.
+Updated 18 November 2026 after returned CoursePMS fastTrack results and authenticated Cloud Run readback. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as 01f61a9. Current increment is [PR #114](https://github.com/zerotwobook/fastTrack/pull/114), staging-only. Whole Lab 6 remains OPEN/PENDING for documentation review, TA disposition and final submission. Product decisions and shared participation have now been confirmed as recorded below.
 
-## Latest TA requirement: independent human fastTrack UI record
+## Latest incoming fastTrack evidence
 
-The TA has now asked for the partner to complete the web-UI test cases and record actual people, results and version. [Feedback and scope](sessions/2026-11-17-ta-human-ui-feedback.md). The13November API/selected-UI and later AI UI follow-up are preserved; they do not establish named-human completion. User-declared product acceptance remains recorded separately. Human session results are not yet supplied.
+The user supplied the CoursePMS return for run L6-CPMS-AI-20261118-144203 on source `8e637e5`. It records eight case PASS, 18 active PASS observations, one invalidated automation record, 28 screenshots and 9 JSON ledgers. The user confirms Tatchakorn Thamnimitr owns UAT-01-04 and Pawarit Wongdang owns UAT-05-08, with AI assistance in execution/evidence collection. The archive attributes browser operation to Codex and records human review pending at creation. [Complete returned results](sessions/2026-11-18-coursepms-fasttrack-returned-results.md).
 
-Use [the complete human UI handoff](handoffs/2026-11-17-fasttrack-human-ui-run.md) and [actual-result template](templates/fasttrack-human-ui-execution.md). Health/readiness freshly match8e637e5; current revision/traffic still needs an owner readback because the read-only CLI had no usable active account. The same roster is planned, not retrospectively marked present. No new human case PASS, booked slot or external message is claimed.
+Authenticated owner-side readback at 18 November 2026, 15:19:49 UTC+07:00 confirms fasttrack-app-00003-rc7 at 100% traffic, all ready conditions True and matching image digest/source. Its actual observation is later than the returned UAT session. [Current Cloud Run evidence](sessions/2026-11-18-fasttrack-cloud-run-readback.md).
+
+The [TA review page](ta-review-status.md) presents these results and confirmed responsibilities for assessment against the earlier requested participation coverage. Actual individual human action/review times and a new explicit final decision for this run have no additional details in the user's confirmation. Original operator/time and earlier reported product decisions retain their provenance.
 
 ## Outgoing CoursePMS technical retest is complete within the requested plan
 
@@ -22,7 +24,7 @@ Seven earlier anonymous observations, eight earlier authenticated records and fo
 
 | Direction | Actual evidence | Remaining limit |
 | --- | --- | --- |
-| CoursePMS testing fastTrack | 97 main API PASS / separate seven post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons | Bounded AI evidence, separate counts; no confirmed defect. Existing independent evidence reused; CoursePMS acceptance reported by the user, original external metadata not attached |
+| CoursePMS testing fastTrack | New 18 November return: eight case PASS, 18 active PASS observations, one invalidated automation record, 28 PNG and 9 JSON; prior 97 API / 26 UI / 25 controls / 11 comparisons remain separate | User confirms named reviewer ownership and AI assistance; original Codex operation and pending review fields preserved. TA participation assessment open |
 | fastTrack testing CoursePMS originally | Eight official paths; 36 core PASS; actual full ledger 56 PASS / 1 FAIL / 57 | Preserve original arithmetic discrepancy and Back-navigation deviation |
 | Corrected CoursePMS targeted completion | [Latest case map](sessions/2026-11-17-coursepms-remaining-checks.md), [additional records](evidence/coursepms-remaining-20261117/additional-authenticated-observations.json), [local replay](evidence/coursepms-remaining-20261117/local-replay-summary.json) | Eight deployed PASS plus RT-07 evidence/local PASS; accepted by the user using this bounded evidence |
 | Product decisions and participation | [Decision records](acceptance-record.md), [shared responsibility/AI attribution](contributions-and-ai.md) | CoursePMS directly accepted by user; reciprocal fastTrack acceptance reported by user. Shared A/B checking confirmed; historical individual case times/signatures not inferred |
@@ -39,8 +41,8 @@ No API body bypass or copied saved draft was established by the original finding
 
 ## Remaining owners and actions
 
-1. Actual CoursePMS testers complete the human web-UI cases and return real names/roles/time/version/actual outcomes/evidence using the linked record. Product owners prepare private access/current revision and safe fixtures. Existing AI evidence may support, but does not fill personal execution rows.
-2. A/B keep the user-confirmed outgoing CoursePMS decision and shared responsibility record. Planned allocations/historical AI timestamps do not establish a human fastTrack session.
-3. After the required human UI record is complete, send the new result to the TA. If no legitimate defect is found, await the specific section3.5 scenario/scope the TA will coordinate. No exercise is supplied/approved by the present message.
-4. B reviews the current PR114 documentation candidate; an earlier-head account approval does not approve subsequent heads. WholeIssue22 remainsOPEN/PENDING for human UI evidence, TA disposition, real peer integration and final submission.
-5. Assemble actual new results into PartsA-D and submit by22November2026,23:59Asia/Bangkok. Historical reports/declared decisions retain their dates and provenance; no PDF/main release/course upload is performed here.
+1. A/B provide the [TA review link](ta-review-status.md) with the returned results, user-confirmed responsibilities and authenticated deployment readback. The user sends the external message.
+2. TA assesses participation/coverage and identifies any additional evidence. Individual human actions and decisions are recorded only when actually supplied or performed.
+3. If the coverage is sufficient and no legitimate defect is found, obtain the TA's specific section 3.5 scenario/version/scope and perform the resulting approved work.
+4. B reviews the current PR #114 candidate. Whole Issue #22 remains OPEN/PENDING for TA disposition, real peer integration and final submission.
+5. Assemble actual new results into Parts A-D and submit by 22 November 2026, 23:59 Asia/Bangkok. Historical records keep their original dates and provenance.

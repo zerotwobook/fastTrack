@@ -2,7 +2,7 @@
 
 Updated with the user's latest reported partner confirmation on 18 November 2026; the earlier 17 November record remains linked below. **CoursePMS is ACCEPTED by the user's instruction; fastTrack acceptance by CoursePMS is reported by the user.** [Confirmation and provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Existing test evidence is reused. This is not a claim that the assistant obtained an external signature or completed the whole Lab 6 assessment.
 
-**Latest TA evidence requirement:** the reported decisions below remain recorded, but do not certify completed independent human web-UI execution. The TA requests that actual record before coordinating section3.5. See [the feedback and current handoff](sessions/2026-11-17-ta-human-ui-feedback.md). No planned names or historical AI times are promoted into human results.
+**Latest 18 November evidence:** the [returned run](sessions/2026-11-18-coursepms-fasttrack-returned-results.md) reports eight case PASS and 28 screenshots, with user-confirmed Tatchakorn/Pawarit case responsibilities and AI assistance. The original run declares Codex operation and pending human review. Earlier user-reported product acceptance remains recorded below. TA assessment of the coverage/participation and any section 3.5 scenario remains open. [Authenticated current deployment identity](sessions/2026-11-18-fasttrack-cloud-run-readback.md) is verified at 15:19:49 UTC+07:00.
 
 ## 1. fastTrack: CoursePMS acceptance reported by the user
 
@@ -12,12 +12,12 @@ Updated with the user's latest reported partner confirmation on 18 November 2026
 | Assessed scope | Delivered Sprint 1 F-01 sign-in/scoped teams, F-02 milestones, F-03 shared version-1 submission, F-04 private append-only exact-version feedback |
 | Recorded tested source | 8e637e537cd037d630a5fffc1b5672d1b44371a8 |
 | Original baseline | v1.0.0-sprint-1 peels to ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8; not moved |
-| Dated serving metadata | fasttrack-app-00003-rc7, 100% on 14 November; not a fresh cloud observation |
-| Existing execution evidence | 97 main API PASS / 74 HTTP observations; seven separate post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons |
+| Dated serving metadata | Authenticated 18 November 2026, 15:19:49 UTC+07:00 readback: fasttrack-app-00003-rc7, 100% traffic, matching image/source; later than the returned UAT session |
+| Existing execution evidence | New 18 November return:8 case PASS, 18 active PASS observations, 1 invalidated automation record, 28 PNG. Earlier 97 main API / 7 post-UI / 26 UI / 25 controls / 11 comparisons remain separate |
 | Decision | ACCEPTED, as reported by the user from CoursePMS |
 | Provenance | Latest partner acceptance confirmation reported by user for 18 November 2026, Asia/Bangkok. Exact time/channel/original statement and individual signers not supplied; earlier reports retained |
 | Coverage and deviations | Existing bounded results and documented procedural deviations retained; no confirmed legitimate fastTrack defect in this evidence; no new test run inferred |
-| Original operator attribution | Actual AI operation retained. Individual partner-member case/time details are not invented |
+| Original operator attribution | Codex browser operation retained. User confirms Tatchakorn UAT-01 through UAT-04 and Pawarit UAT-05 through UAT-08 responsibilities with AI assistance; individual human action/review times not additionally supplied |
 | TA dependency | TA requests actual independent human web-UI results before coordinating section3.5 if no legitimate defect is found; no specific scenario/exercise supplied |
 
 Sources: [initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [reciprocal UI follow-up](sessions/2026-11-13-fasttrack-followup-summary.md), [current confirmation](sessions/2026-11-17-user-acceptance-confirmation.md).

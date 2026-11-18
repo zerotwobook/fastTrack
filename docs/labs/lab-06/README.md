@@ -1,8 +1,8 @@
 # Lab 6 independent UAT evidence and report assembly
 
-For a shareable interim review, start with [the TA review status page](ta-review-status.md). It links the available results and prepared human UI completion steps without presenting the blank human record as a completed result.
+Start with [the TA review page](ta-review-status.md) for the latest returned eight-case results, named reviewer responsibilities, AI attribution and authenticated Cloud Run revision/traffic evidence.
 
-R2-A04 / Issue #22. Owner A, reviewer B. Scope: the delivered Sprint 1 product, with product-owner and independent-tester responsibilities recorded separately. This public navigation page uses role aliases; full identified report and private images remain in the local assembly kit.
+R2-A04 / Issue #22. Owner A, reviewer B. Scope: the delivered Sprint 1 product, with product-owner and independent-tester responsibilities recorded separately. This public navigation links the user-confirmed reviewer names and reviewed synthetic-data screenshots for the latest return. Student IDs, credentials and earlier private source/report payloads remain in the local kit.
 
 ## Current state after PR #113 merge
 
@@ -10,9 +10,9 @@ B-associated account approved PR #113 head baab0b2 and merged into staging at 01
 
 CoursePMS corrected source aeb804ea is deployed through release #76. The actual AI-operated 19:11-19:15 retest passes the original no-refresh account-switch path. Later 21:30-21:33 execution resolves the no-team/unassigned and safe review-denial subchecks. Current mapping: eight deployed targeted case PASS; RT-07 PASS by evidence review and isolated automated replay (16 client / 19 selected server PASS). See [completion details](sessions/2026-11-17-coursepms-remaining-checks.md). The user now accepts CoursePMS, reports CoursePMS acceptance of fastTrack, and confirms shared A/B checking; see [decision provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Individual historical case times/signatures are not inferred. Earlier dated preflights/candidate statuses are historical.
 
-**Latest TA follow-up:** incoming fastTrack acceptance still needs the partner's actual complete human web-UI evidence. Use [the human runbook](handoffs/2026-11-17-fasttrack-human-ui-run.md), [actual-result template](templates/fasttrack-human-ui-execution.md) and [feedback record](sessions/2026-11-17-ta-human-ui-feedback.md). Reported product decisions and earlier AI results do not fill those personal execution rows.
+**Latest 18 November update:** [CoursePMS returned fastTrack results](sessions/2026-11-18-coursepms-fasttrack-returned-results.md) report all eight cases PASS, with 28 screenshots and user-confirmed named responsibilities/AI assistance. [Authenticated Cloud Run readback](sessions/2026-11-18-fasttrack-cloud-run-readback.md) at 15:19:49 UTC+07:00 confirms fasttrack-app-00003-rc7 at 100% traffic. The [TA review page](ta-review-status.md) requests assessment of the actual coverage and participation and the next section 3.5 scope if applicable.
 
-For the filled earlier API/UI outcomes by case, read [the consolidated recorded-results page](sessions/2026-11-18-fasttrack-recorded-results.md). It reuses actual records with their original operator/time and keeps human attestation separate.
+Earlier API/UI outcomes retain their original operators, dates and separate counts in [the consolidated historical result](sessions/2026-11-18-fasttrack-recorded-results.md).
 
 ## Read in this order
 
@@ -27,7 +27,7 @@ For the filled earlier API/UI outcomes by case, read [the consolidated recorded-
 
 | Direction | Actual retained evidence | Remaining limit |
 | --- | --- | --- |
-| CoursePMS testing fastTrack | Initial 97 main API PASS, separate seven post-UI controls; follow-up 26 UI observations, 25 final controls, 11 state comparisons | Separate denominators; no confirmed defect in bounded evidence; acceptance reported by user; original partner metadata not attached |
+| CoursePMS testing fastTrack | Latest 18 November return reports eight case PASS, 18 active PASS observations and 28 screenshots; earlier API/UI totals remain separate | Named reviewer responsibilities/AI assistance confirmed by user; recorded Codex operator retained; TA participation disposition open |
 | fastTrack testing CoursePMS | 14 November eight official paths: 36 core PASS; actual full ledger 56 PASS / 1 FAIL / 57. Corrected deployed 17 November retest recorded | Original arithmetic/Back deviation retained; eight deployed targeted PASS plus RT-07 evidence/local PASS; accepted by the user within recorded evidence scope |
 | Evidence integration | PRs #108/#110/#112/#113 integrated through actual B-associated reviews/merges | Integration does not sign either product's independent human decision |
 
@@ -35,4 +35,4 @@ For the filled earlier API/UI outcomes by case, read [the consolidated recorded-
 
 Prepare English Markdown; the user assembles/exports the single self-contained PDF and submits via LEB2 by 22 November 2026, 23:59 Asia/Bangkok. Include Parts A-D, full applicable cases/contracts, readable original/negative/correction evidence, actual contributions, AI use, limitations and exact-version decisions. Page ranges and submission receipt are filled after actual export/submission. No fixed video or page-count requirement is invented.
 
-The private kit retains source hashes and selected private images; new source/screenshot/credential payloads are not published with this increment. Actual later live and isolated test execution is recorded separately from assembly. No PDF, external message, main release or human signature is performed. Preserve historical instructor artifacts and original ledgers unchanged.
+The private kit retains original source archives, credentials, student IDs and earlier private images. The latest reviewed synthetic-data PNGs and JSON evidence are published with explicit source hashes and transformations. Actual later live and isolated test execution is recorded separately from assembly. No PDF, external message, main release or human signature is performed. Preserve historical instructor artifacts and original ledgers unchanged.
