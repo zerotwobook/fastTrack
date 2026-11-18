@@ -1,4 +1,5 @@
 {
+  "contentBasis": "Canonical committed Git blob bytes with repository line-ending normalization",
   "files": [
     {
       "path": "assets/ui-before-main.png",
@@ -27,8 +28,8 @@
     },
     {
       "path": "browser-observations.json",
-      "sha256": "268518753cc2cf6ae5c2ce51b8096d31effaf0b3279fba7206a4692120125be7",
-      "bytes": 743
+      "sha256": "3fcac4c967de62c70a9a8a75c382d4f3ef5ac28958de6d86e390322a4d1b65fb",
+      "bytes": 719
     },
     {
       "path": "coursepms-retest.md",
@@ -37,28 +38,28 @@
     },
     {
       "path": "database-after.json",
-      "sha256": "04be5325d65bea514a12c3bbbc6828be1c0f6285db79f00a9af0c42ce310a5dd",
-      "bytes": 965
+      "sha256": "481c34c76c3adad451bb1a8f99c6bcc47a451d059ef05e8d95874272b0b35129",
+      "bytes": 935
     },
     {
       "path": "database-before.json",
-      "sha256": "9e79770a8742e6ad4f3a58eb91baffa1006270bc9adfa6d290c56c318335971f",
-      "bytes": 965
+      "sha256": "3618bc8f4c6e3eca85a371276a3812367ffc817e775488ea35cee49596b19e56",
+      "bytes": 935
     },
     {
       "path": "database-comparison.json",
-      "sha256": "ab7b614744252329abf5ed657f20a0782ec3c14d0bcdaac889a6cf004e412bd8",
-      "bytes": 361
+      "sha256": "9208f303203654283962e80706f8b9e9ca6be6813ccd67d5c7716ee2a35f4e97",
+      "bytes": 351
     },
     {
       "path": "database-ui.json",
-      "sha256": "23bc2c4c054d0de9c596a2464017d683956c5e6e906de138e3f6f966bbb2717d",
-      "bytes": 1157
+      "sha256": "40493a272a3bcd7884173c74d8238fe22869fe822d1b68d94288fb930b7126d2",
+      "bytes": 1121
     },
     {
       "path": "deployment.json",
-      "sha256": "fc6c5e332c87f55edfca746bf887b1a6b586a18993c434d37254993298e195a3",
-      "bytes": 921
+      "sha256": "f1e86f69f13b78121344ed66227f38ac6df8991d583bbd7051b7fe7dc77eb2d2",
+      "bytes": 903
     },
     {
       "path": "evidence.pdf",
@@ -92,13 +93,13 @@
     },
     {
       "path": "online-fixtures.json",
-      "sha256": "9e6f1808928cfe7210b33024cadbb07002a0b27c13b4e0cae055c63168e9781d",
-      "bytes": 1274
+      "sha256": "48d3347e00afb70c1c3cf17d08eecd5202aed64d130b9a8586bbfe4d11c8e44e",
+      "bytes": 1238
     },
     {
       "path": "online-observations.json",
-      "sha256": "05cc8237ce7d990f5fa433406992cc1c84888ad6e3ae9c00c3a2aa713fe8ca07",
-      "bytes": 2527
+      "sha256": "20ffd8d4af7131dadb76ee7f3cee57cc3e338740f9e2b1f960934a39c7969f4b",
+      "bytes": 2449
     },
     {
       "path": "README.md",
@@ -117,8 +118,8 @@
     },
     {
       "path": "snapshot-safety-results.json",
-      "sha256": "a03c26a9b574bea8dd36d3e8b05d09d18f693bca45019dc21227fa95f69c1e5f",
-      "bytes": 580
+      "sha256": "a3cdd928df9e60b63c861c45a458b9a9d7f79d5013b88474c90169022ae1397b",
+      "bytes": 556
     }
   ]
 }
