@@ -7,6 +7,7 @@ import request from 'supertest';
 import { createApp } from '../app.js';
 import { loadConfig } from '../config.js';
 import { createApplicationRouters } from '../modules/index.js';
+import { lockScopedMilestone, lockScopedTeam, runDomainTransaction } from '../modules/shared/transactions.js';
 import { SubmissionService, isRolledBackContention, isSubmissionUniqueConflict, requireSubmissionAccess } from '../modules/submissions/service.js';
 import { createSubmissionRouter } from '../modules/submissions/router.js';
 import { createBaseFixtures, createTestPrisma, cleanTestDatabase, TEST_PASSWORD } from './fixtures.js';
@@ -306,6 +307,23 @@ describe('F-03 real lock barriers and bounded technical recovery', () => {
     const pending=post(body()).then(result => result);
     try {await waitForLock();}finally{release();await blocker;}
     const result=await pending;expect(result.status).toBe(404);expect(await prisma.submission.count()).toBe(0);
+  });
+
+  it('scopes the shared locks to the supervisor and the same team', async () => {
+    const actor = { userId: fixtures.users.supA.id, role: 'supervisor' as const };
+    const { teamA, teamB } = fixtures.teams;
+    const { milestoneFuture, milestoneBTeam } = fixtures.milestones;
+
+    await expect(runDomainTransaction(prisma, tx => lockScopedTeam(tx, actor, teamB.id)))
+      .rejects.toMatchObject({ status: 404, code: 'NOT_FOUND' });
+    await runDomainTransaction(prisma, async tx => {
+      expect(await lockScopedTeam(tx, actor, teamA.id)).toEqual({ id: teamA.id });
+      await expect(lockScopedMilestone(tx, actor, teamA.id, milestoneBTeam.id))
+        .rejects.toMatchObject({ status: 404, code: 'NOT_FOUND' });
+      expect(await lockScopedMilestone(tx, actor, teamA.id, milestoneFuture.id)).toEqual({
+        id: milestoneFuture.id, teamId: teamA.id, dueAt: milestoneFuture.dueAt, cancelledAt: null,
+      });
+    });
   });
 
   it('retries confirmed rolled-back contention with fresh transactions and one final stored timestamp', async () => {

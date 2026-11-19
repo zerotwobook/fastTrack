@@ -1,7 +1,8 @@
 import { Prisma } from '../../db/generated/client/index.js';
 import type { PrismaClient } from '../../db/generated/client/index.js';
 import { AppError } from '../../http/errors.js';
-import { requireTeamAccess, requireUuid, scopedTeamWhere } from '../teams/index.js';
+import { lockScopedMilestone, lockScopedTeam, readDatabaseTimeMs as submissionDatabaseClock, runDomainTransaction } from '../shared/transactions.js';
+import { requireUuid, scopedTeamWhere } from '../teams/index.js';
 import type { TeamActor } from '../teams/index.js';
 import { parseSubmissionInput, SubmissionInputError } from '../../../../shared/submissions.mjs';
 import { submissionDto, submissionSelect } from './dto.js';
@@ -11,10 +12,8 @@ const duplicate = () => new AppError(409, 'ALREADY_SUBMITTED', 'Your team has al
 const unavailable = () => new AppError(503, 'TEMPORARILY_UNAVAILABLE', 'The result could not be confirmed. Check saved submissions before trying again.');
 export type SubmissionClock = (tx: Prisma.TransactionClient) => Promise<Date>;
 
-export async function submissionDatabaseClock(tx: Prisma.TransactionClient): Promise<Date> {
-  const rows = await tx.$queryRaw<{ now: Date }[]>`SELECT date_trunc('milliseconds',clock_timestamp()) AS now`;
-  return rows[0]!.now;
-}
+export { submissionDatabaseClock };
+export { isRolledBackContention } from '../shared/transactions.js';
 
 export function scopedSubmissionWhere(auth: TeamActor): Prisma.SubmissionWhereInput {
   return { milestone: { team: scopedTeamWhere(auth) } };
@@ -27,13 +26,6 @@ export async function requireSubmissionAccess(db: Pick<PrismaClient, 'submission
     select: { id: true, milestoneId: true, milestone: { select: { teamId: true } } } });
   if (!row) throw notFound();
   return { id: row.id, milestoneId: row.milestoneId, teamId: row.milestone.teamId };
-}
-
-export function isRolledBackContention(error: unknown): boolean {
-  if (!(error instanceof Prisma.PrismaClientKnownRequestError)) return false;
-  if (error.code === 'P2034') return true;
-  const driver = error.meta?.['driverAdapterError'] as { cause?: { kind?: string } } | undefined;
-  return error.code === 'P2010' && driver?.cause?.kind === 'TransactionWriteConflict';
 }
 
 export function isSubmissionUniqueConflict(error: unknown): boolean {
@@ -62,34 +54,21 @@ export class SubmissionService {
       if (error instanceof SubmissionInputError) throw new AppError(400, 'INVALID_INPUT', error.message, error.fields);
       throw error;
     }
-    for (let attempt = 0; attempt < 3; attempt++) {
-      try {
-        return await this.prisma.$transaction(async tx => {
-          const initial = await tx.milestone.findFirst({ where: { id, team: scopedTeamWhere(auth) }, select: { teamId: true } });
-          if (!initial) throw notFound();
-          await tx.$queryRaw`SELECT id FROM teams WHERE id=${initial.teamId}::uuid FOR UPDATE`;
-          await tx.$queryRaw`SELECT id FROM milestones WHERE id=${id}::uuid AND team_id=${initial.teamId}::uuid FOR UPDATE`;
-          await requireTeamAccess(tx, auth, initial.teamId);
-          const milestone = await tx.milestone.findFirst({ where: { id, teamId: initial.teamId, team: scopedTeamWhere(auth) }, select: { dueAt: true, cancelledAt: true } });
-          if (!milestone) throw notFound();
-          if (milestone.cancelledAt) throw new AppError(409, 'MILESTONE_CANCELLED', 'This milestone was cancelled and cannot receive work.');
-          if (await tx.submission.findFirst({ where: { milestoneId: id }, select: { id: true } })) throw duplicate();
-          const acceptedAt = await this.clock(tx);
-          if (acceptedAt.getTime() > milestone.dueAt.getTime()) {
-            throw new AppError(409, 'DEADLINE_PASSED', 'The deadline has passed. Your work was not saved.');
-          }
-          const saved = await tx.submission.create({ data: { milestoneId: id, submittedById: auth.userId, version: 1,
-            ...input, submittedAt: acceptedAt }, select: submissionSelect });
-          return submissionDto(saved);
-        }, { maxWait: 5_000, timeout: 10_000 });
-      } catch (error) {
-        if (error instanceof AppError) throw error;
-        if (isSubmissionUniqueConflict(error)) throw duplicate();
-        if (attempt < 2 && isRolledBackContention(error)) continue;
-        throw unavailable();
+    return runDomainTransaction(this.prisma, async tx => {
+      const initial = await tx.milestone.findFirst({ where: { id, team: scopedTeamWhere(auth) }, select: { teamId: true } });
+      if (!initial) throw notFound();
+      await lockScopedTeam(tx, auth, initial.teamId);
+      const milestone = await lockScopedMilestone(tx, auth, initial.teamId, id);
+      if (milestone.cancelledAt) throw new AppError(409, 'MILESTONE_CANCELLED', 'This milestone was cancelled and cannot receive work.');
+      if (await tx.submission.findFirst({ where: { milestoneId: id }, select: { id: true } })) throw duplicate();
+      const acceptedAt = await this.clock(tx);
+      if (acceptedAt.getTime() > milestone.dueAt.getTime()) {
+        throw new AppError(409, 'DEADLINE_PASSED', 'The deadline has passed. Your work was not saved.');
       }
-    }
-    throw unavailable();
+      const saved = await tx.submission.create({ data: { milestoneId: id, submittedById: auth.userId, version: 1,
+        ...input, submittedAt: acceptedAt }, select: submissionSelect });
+      return submissionDto(saved);
+    }, error => isSubmissionUniqueConflict(error) ? duplicate() : unavailable());
   }
 
   async list(id: string, auth: TeamActor) {
