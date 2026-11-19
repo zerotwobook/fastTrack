@@ -2,7 +2,7 @@
 // These are primitive building blocks; feature components import from here.
 // All copy is in English; styles use CSS custom properties from global.css.
 
-import { type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
+import { type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode, type Ref } from 'react';
 import styles from './components.module.css';
 
 // ---------------------------------------------------------------------------
@@ -13,6 +13,7 @@ export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   loading?: boolean;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 export function Button({
@@ -21,10 +22,12 @@ export function Button({
   disabled,
   children,
   className,
+  ref,
   ...rest
 }: ButtonProps) {
   return (
     <button
+      ref={ref}
       className={[styles.btn, styles[`btn--${variant}`], className].filter(Boolean).join(' ')}
       disabled={disabled ?? loading}
       aria-busy={loading || undefined}

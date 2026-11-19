@@ -111,9 +111,9 @@ export class SessionStore {
   async readDomain<T>(path: string): Promise<DomainRead<T>> {
     return this.privateRequest<DomainRead<T>>(path, {}, true);
   }
-  async mutate<T>(path: string, value: unknown): Promise<T> {
+  async mutate<T>(path: string, value: unknown, method: 'POST' | 'PATCH' | 'PUT' = 'POST'): Promise<T> {
     const csrf = this.snapshot.auth?.csrfToken;
-    return this.privateRequest<T>(path, { method: 'POST', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf ?? '' }, body: JSON.stringify(value) });
+    return this.privateRequest<T>(path, { method, headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': csrf ?? '' }, body: JSON.stringify(value) });
   }
   private waitUntilReady(version: number): Promise<void> {
     return new Promise((resolve, reject) => {

@@ -10,3 +10,34 @@ export function groupStudentMilestones(items: readonly MilestoneItem[], serverTi
   }
   return groups;
 }
+
+export interface MilestonePlanningState {
+  readonly canEdit: boolean;
+  readonly canCancel: boolean;
+  readonly lockedReason: string | null;
+  readonly canCreateAnother: boolean;
+}
+
+/** Derive supervisor edit/cancel eligibility and honest locked reasons from saved state. */
+export function describeMilestonePlanning(item: MilestoneItem, userRole: 'student' | 'supervisor'): MilestonePlanningState {
+  if (userRole !== 'supervisor') {
+    return { canEdit: false, canCancel: false, lockedReason: null, canCreateAnother: false };
+  }
+  if (item.cancelledAt) {
+    return {
+      canEdit: false,
+      canCancel: false,
+      lockedReason: 'This milestone was cancelled and cannot be edited or cancelled again.',
+      canCreateAnother: true,
+    };
+  }
+  if (item.latestSubmission) {
+    return {
+      canEdit: false,
+      canCancel: false,
+      lockedReason: 'A submission already exists for this milestone, so it cannot be edited or cancelled.',
+      canCreateAnother: true,
+    };
+  }
+  return { canEdit: true, canCancel: true, lockedReason: null, canCreateAnother: false };
+}

@@ -37,9 +37,19 @@
 .rail { display: grid; align-content: start; gap: 16px; min-width: 0; border: 1px solid var(--color-divider); border-radius: var(--radius-panel); padding: 24px; background: var(--color-wash); overflow-wrap: anywhere; }
 .rail h2 { margin-bottom: 0; }
 .rail time { font-variant-numeric: tabular-nums; }
-.cancelled { color: var(--color-muted); }
+.cancelled { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border: 1px solid var(--color-control); border-radius: 9999px; background: var(--color-wash); color: var(--color-muted); font-size: 14px; font-weight: 500; line-height: 1.6; }
+.cancelled svg { flex: 0 0 auto; }
+.railActions { display: grid; gap: 12px; padding-top: 12px; border-top: 1px solid var(--color-divider); }
+.lockedReason { font-size: 14px; line-height: 1.6; color: var(--color-muted); padding-top: 12px; border-top: 1px solid var(--color-divider); }
+.editPanel { display: grid; gap: 24px; min-width: 0; }
+.inlineActions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 12px; }
+.statusNotice { margin-top: 24px; padding: 16px; border: 1px solid var(--color-control); border-left: 3px solid var(--color-ink); border-radius: var(--radius-md); background: var(--color-wash); line-height: 1.65; }
+.confirmDialog { margin: auto; width: min(480px, calc(100% - 32px)); padding: 24px; border: 1px solid var(--color-control); border-radius: var(--radius-panel); background: var(--color-paper); color: var(--color-ink); box-shadow: var(--shadow-overlay); }
+.confirmDialog::backdrop { background: rgb(0 0 0 / .35); }
+.confirmCopy { margin-top: 16px; line-height: 1.65; color: var(--color-ink); overflow-wrap: anywhere; }
+.confirmActions { display: flex; flex-wrap: wrap; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--color-divider); }
 @media(max-width:1199px) { .detail { grid-template-columns: minmax(0, 1fr); gap: 32px; } }
-@media(max-width:767px) { .row { grid-template-columns: 12px minmax(0, 1fr); gap: 12px; } .date { grid-column: 2; } .marker { grid-column: 1; grid-row: 1 / 3; } .row:not(:last-child)::before { left: 6px; } .item { grid-column: 2; } .primaryLink { width: 100%; } .form button[type=submit] { width: 100%; justify-content: center; } }
+@media(max-width:767px) { .row { grid-template-columns: 12px minmax(0, 1fr); gap: 12px; } .date { grid-column: 2; } .marker { grid-column: 1; grid-row: 1 / 3; } .row:not(:last-child)::before { left: 6px; } .item { grid-column: 2; } .primaryLink { width: 100%; } .form button[type=submit] { width: 100%; justify-content: center; } .confirmDialog { padding: 16px; } .confirmActions { flex-direction: column; align-items: stretch; } }
 .primaryLink { max-width: 100%; text-align: center; overflow-wrap: anywhere; }
 .primaryLink:hover { box-shadow: inset 0 0 0 2px var(--color-paper); }
 @media(max-width:767px) { .container { margin-top: 24px; } .rail { padding: 16px; } .header { align-items: stretch; } .actions { align-items: stretch; flex-direction: column; } }
