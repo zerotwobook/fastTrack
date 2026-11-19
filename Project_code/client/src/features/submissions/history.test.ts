@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { describeSubmissionHistory } from './history';
+import { MAX_SUBMISSION_VERSION } from '../../../../shared/submissions.mjs';
+import { describeRevisionRestriction, describeSubmissionHistory } from './history';
 import type { SubmissionRecord } from './Submission';
 
 const entry = (id: string, version: number): SubmissionRecord => ({
@@ -14,6 +15,16 @@ const entry = (id: string, version: number): SubmissionRecord => ({
 });
 
 describe('F-06 submission history helpers', () => {
+  it('preserves terminal restrictions and allows a revision exactly at the deadline', () => {
+    const milestone = { dueAt: '2030-01-01T12:00:00.000Z', cancelledAt: null };
+    const afterDeadline = '2030-01-01T12:00:00.001Z';
+
+    expect(describeRevisionRestriction(milestone, milestone.dueAt, 1)).toBeNull();
+    expect(describeRevisionRestriction(milestone, afterDeadline, 1)).toContain('deadline');
+    expect(describeRevisionRestriction(milestone, afterDeadline, MAX_SUBMISSION_VERSION)).toContain('maximum');
+    expect(describeRevisionRestriction({ ...milestone, cancelledAt: milestone.dueAt }, afterDeadline, MAX_SUBMISSION_VERSION)).toContain('cancelled');
+  });
+
   it('identifies old-version views without mutating the source array and exposes the latest entry', () => {
     const v1 = entry('sub-1', 1);
     const v2 = entry('sub-2', 2);

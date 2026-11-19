@@ -1,3 +1,5 @@
+import { MAX_SUBMISSION_VERSION } from '../../../../shared/submissions.mjs';
+import type { MilestoneItem } from '../milestones/MilestoneTrack';
 import type { SubmissionRecord } from './Submission';
 
 export interface SubmissionHistorySummary {
@@ -18,4 +20,15 @@ export function describeSubmissionHistory(
     latest,
     isOldVersion: latest !== null && current.id !== latest.id,
   };
+}
+
+export function describeRevisionRestriction(
+  milestone: Pick<MilestoneItem, 'cancelledAt' | 'dueAt'>,
+  serverTime: string,
+  latestVersion: number,
+): string | null {
+  if (milestone.cancelledAt) return 'This milestone was cancelled and cannot receive revisions.';
+  if (latestVersion >= MAX_SUBMISSION_VERSION) return 'This milestone has reached the maximum supported submission version.';
+  if (Date.parse(serverTime) > Date.parse(milestone.dueAt)) return 'The deadline has passed. New revisions cannot be submitted.';
+  return null;
 }
