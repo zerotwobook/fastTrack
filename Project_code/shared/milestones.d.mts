@@ -5,4 +5,6 @@ export class MilestoneInputError extends Error {
 export function codePointLength(value: string): number;
 export function parseTimestamp(value: unknown): Date;
 export function parseMilestoneInput(value: unknown): { title: string; description: string; dueAt: string };
+export function parseCancelMilestoneInput(value: unknown): void;
+export function isoToBangkokInput(value: string): string;
 export function bangkokInputToIso(value: string): string;

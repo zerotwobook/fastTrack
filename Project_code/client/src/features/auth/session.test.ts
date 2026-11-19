@@ -15,6 +15,12 @@ describe('F-01 account isolation and recovery', () => {
     expect(fetcher.mock.calls[1]?.[1]).toMatchObject({ method: 'POST', credentials: 'same-origin', cache: 'no-store', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': 'a'.repeat(43) } });
     expect(await store.readDomain('/teams/team/milestones')).toEqual({ data: [], meta: { serverTime: '2030-01-01T00:00:00.000Z' } });
   });
+  it('supports explicit PATCH mutations with current CSRF and no-store options', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockResolvedValueOnce(json({ id: 'updated' }));
+    const store = new SessionStore(fetcher); await store.login('a', 'synthetic');
+    expect(await store.mutate('/milestones/m1', { title: 'Updated' }, 'PATCH')).toEqual({ id: 'updated' });
+    expect(fetcher.mock.calls[1]?.[1]).toMatchObject({ method: 'PATCH', credentials: 'same-origin', cache: 'no-store', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': 'a'.repeat(43) } });
+  });
   it('drops a late mutation result after account change', async () => {
     const pending = deferred<Response>();
     const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(pending.promise).mockResolvedValueOnce(json(auth('b')));

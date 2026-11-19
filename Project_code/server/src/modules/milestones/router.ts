@@ -23,6 +23,16 @@ export function createMilestoneRouter(deps: MilestoneRouterDependencies): Router
       const result = await service.createMilestone(String(req.params.teamId), req.body, await deps.getAuthContext(req));
       res.status(201).json({ data: result });
     });
+  router.patch('/milestones/:id', deps.requireSession, deps.requireSupervisor, deps.requireMutation,
+    requireJsonBody, parseJsonBody, async (req, res) => {
+      const result = await service.updateMilestone(String(req.params.id), req.body, await deps.getAuthContext(req));
+      res.status(200).json({ data: result });
+    });
+  router.post('/milestones/:id/cancel', deps.requireSession, deps.requireSupervisor, deps.requireMutation,
+    requireJsonBody, parseJsonBody, async (req, res) => {
+      const result = await service.cancelMilestone(String(req.params.id), req.body, await deps.getAuthContext(req));
+      res.status(200).json({ data: result });
+    });
   router.get('/teams/:teamId/milestones', deps.requireSession, async (req, res) => {
     res.json(await service.listMilestones(String(req.params.teamId), await deps.getAuthContext(req)));
   });
