@@ -37,6 +37,7 @@ export async function lockScopedTeam(tx: Prisma.TransactionClient, actor: TeamAc
 export async function lockScopedMilestone(
   tx: Prisma.TransactionClient, actor: TeamActor, teamId: string, milestoneId: string,
 ): Promise<LockedMilestone> {
+  requireUuid(teamId);
   requireUuid(milestoneId);
   const [locked] = await tx.$queryRaw<{ id: string }[]>`
     SELECT m.id FROM milestones AS m
