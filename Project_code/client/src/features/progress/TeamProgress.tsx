@@ -47,7 +47,9 @@ export function TeamProgress({ teamId }: { teamId: string }) {
   }, [teamPath, attempt]);
 
   const progress = result?.progress;
-  const refresh = () => setAttempt(attempt => attempt + 1);
+  const refresh = () => {
+    if (!loading) setAttempt(attempt => attempt + 1);
+  };
 
   return <>
     <p className="breadcrumb"><a href="/">Overview</a>{result && <> / <a href={teamPath}>{result.team.name}</a></>}</p>
@@ -64,7 +66,7 @@ export function TeamProgress({ teamId }: { teamId: string }) {
         <p className={styles.note}>This measures submission completion only. Each active milestone with a saved submission counts once.</p>
         <div className={styles.refresh}>
           <p className={styles.note}>Status as of <time dateTime={progress.asOf}>{formatBangkok(progress.asOf)}</time>.</p>
-          <Button variant="secondary" disabled={loading} onClick={refresh}>Refresh progress</Button>
+          <Button variant="secondary" aria-disabled={loading} onClick={refresh}>Refresh progress</Button>
         </div>
       </section>
       {progress.milestones.length === 0 ? <EmptyState title="No milestones yet" />
