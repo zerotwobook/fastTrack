@@ -396,6 +396,7 @@ describe('F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30)', () 
 
     // Also verify edit-extending-overdue-milestone vs submit: submit rechecks updated dueAt or fails 409 DEADLINE_PASSED cleanly
     const pastId = fixtures.milestones.milestonePast.id;
+    await prisma.milestone.update({ where: { id: pastId }, data: { dueAt: new Date(Date.now() - 60_000) } });
     const extendedDue = futureIso(4 * 86_400_000);
     const [pastEditRes, pastSubmitRes] = await Promise.all([
       patchMilestone(pastId, { title: 'Extended past milestone', description: 'Extended window', dueAt: extendedDue }),
@@ -408,6 +409,8 @@ describe('F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30)', () 
         .send(JSON.stringify({ title: 'Submit extended', description: 'Window race', url: 'https://example.edu/ext' })),
     ]);
     expect(pastEditRes.status).toBe(200);
+    const extended = await prisma.milestone.findUniqueOrThrow({ where: { id: pastId } });
+    expect(extended.dueAt.toISOString()).toBe(extendedDue);
     if (pastSubmitRes.status === 201) {
       expect(await prisma.submission.count({ where: { milestoneId: pastId } })).toBe(1);
     } else {
