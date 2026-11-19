@@ -113,7 +113,7 @@ npm ci
 npm run test:auth:isolated
 ```
 
-This includes the ordinary/build/G1/migration checks above plus 28 real-DB auth/team cases. The expected exit is 0. `npm run test:auth` runs only those DB cases and requires a prepared reserved test database and the same guards; use the isolated wrapper by default.
+This includes the ordinary, build, G1 and migration checks above plus real-database authentication and team planning cases. The team planning cases cover ownership, paginated candidate privacy, membership uniqueness, and both lock orders for membership changes racing the first submission. `npm run test:auth` runs the authentication and team cases against a prepared reserved test database. Use the isolated wrapper by default.
 
 For local browser review without changing your existing database:
 
@@ -133,6 +133,8 @@ npm run review:auth:stop
 Wait for the original terminal's cleanup report. This graceful stop was verified on Windows and removes the newly created container, temporary credential file and review state file. Interrupting the entire process tree can interrupt report writing; use the stop command for review. The state file contains only the local URL/container/stop-marker identifiers, not credentials.
 
 Authentication uses the existing scrypt seed format, a random opaque cookie token stored only as a hash, and independent in-memory CSRF tokens. Cookies are host-only, HttpOnly, SameSite=Lax and Secure for an HTTPS APP_ORIGIN. Source checks reject foreign/missing Origin/Referer; login also requires `X-fastTrack-Request: 1`. Logout validates CSRF for a valid session, revokes only that session and prevents replay. Team queries derive identity/scope from the database. Browser private state is memory-only and invalidated on logout, expiry, account changes and history restoration. See [the module contract](docs/contracts/sprint-1-auth.md).
+
+For F-05A, a signed-in supervisor opens **Create team** from the overview or **Team settings** from an owned team. Settings allow renaming and assigning or removing students. Once a team has submission history, settings keep renaming available and explain the membership lock. Unassigned students are available in pages. The API enforces the supervisor's team scope and serializes membership changes against first submissions. See the [team planning contract](docs/contracts/sprint-2-feature-interfaces.md#5-team-planning-and-minimal-candidates-f-05a).
 
 ## Milestone checks and browser review
 
@@ -217,4 +219,4 @@ Project_code/
   docs/evidence/           Actual verification and unresolved findings
 ```
 
-Login/team/milestone/submission/feedback screens are implemented. Inter and Noto Sans Thai are bundled locally with their [licenses, pinned provenance and hashes](client/src/design/fonts/README.md); the app no longer imports Google Fonts at runtime. Preserve the Project_code workspace layout when running the compiled API: server/dist imports the tracked shared/milestones.mjs, shared/submissions.mjs and shared/feedback.mjs modules, which the browser build bundles separately. Return to the [application overview](../README.md). Team/task/branch instructions remain in [the development guide](../DEVELOPMENT_README.md).
+Login, team settings, milestone, submission and feedback screens are implemented. Inter and Noto Sans Thai are bundled locally with their [licenses, pinned provenance and hashes](client/src/design/fonts/README.md); the app no longer imports Google Fonts at runtime. Preserve the Project_code workspace layout when running the compiled API. The server imports the tracked modules in `shared/`, which the browser build bundles separately. Return to the [application overview](../README.md). Team and branch instructions are in [the development guide](../DEVELOPMENT_README.md).

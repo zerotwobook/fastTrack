@@ -1,48 +1,54 @@
 import { Router } from 'express';
-import type { Prisma, PrismaClient } from '../../db/generated/client/index.js';
-import { AppError } from '../../http/errors.js';
+import { AppError, parseJsonBody, requireJsonBody } from '../../http/errors.js';
 import { database } from '../auth/security.js';
-import type { AuthContext, AuthDependencies, SessionProtection } from '../auth/index.js';
+import type { AuthDependencies, SessionProtection } from '../auth/index.js';
+import { requireUuid, scopedTeamWhere, teamDto, teamNotFound, teamSelect } from './model.js';
+import { addTeamMember, createTeam, listAvailableStudents, removeTeamMember, renameTeam } from './planning.js';
 
-export type TeamActor = Pick<AuthContext, 'userId' | 'role'>;
-export function scopedTeamWhere(auth: TeamActor): Prisma.TeamWhereInput {
-  return auth.role === 'supervisor' ? { supervisorId: auth.userId } : { members: { some: { studentId: auth.userId } } };
-}
-export function requireUuid(value: string): void {
-  if (!/^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$/i.test(value)) {
-    throw new AppError(400, 'INVALID_INPUT', 'Provide a valid resource identifier.');
-  }
-}
-/** Pass the operation's transaction client when rechecking mutation scope. */
-export async function requireTeamAccess(db: Pick<PrismaClient, 'team'>, auth: TeamActor, id: string) {
-  requireUuid(id);
-  const team = await database(() => db.team.findFirst({ where: { id, ...scopedTeamWhere(auth) }, select: { id: true } }));
-  if (!team) throw new AppError(404, 'NOT_FOUND', 'The requested resource was not found.');
-  return team;
-}
-const select = {
-  id: true, name: true, supervisor: { select: { id: true, name: true } },
-  members: { select: { student: { select: { id: true, name: true } } }, orderBy: [{ student: { name: 'asc' } }, { studentId: 'asc' }] },
-} satisfies Prisma.TeamSelect;
-type Team = Prisma.TeamGetPayload<{ select: typeof select }>;
-const dto = (team: Team) => ({ id: team.id, name: team.name,
-  supervisor: { id: team.supervisor.id, displayName: team.supervisor.name },
-  members: team.members.map(({ student }) => ({ id: student.id, displayName: student.name })) });
+export { requireTeamAccess, requireUuid, scopedTeamWhere } from './model.js';
+export type { TeamActor } from './model.js';
 
 export function createTeamsRouter({ prisma, protection, now = () => new Date() }: AuthDependencies & { readonly protection: SessionProtection }): Router {
   const router = Router();
+  const supervisor = [protection.requireSession, protection.requireRole('supervisor')];
+  const mutation = [...supervisor, protection.requireMutation];
+  const jsonMutation = [...mutation, requireJsonBody, parseJsonBody];
   router.get('/teams', protection.requireSession, async (req, res) => {
     const auth = await protection.getAuthContext(req);
-    const teams = await database(() => prisma.team.findMany({ where: scopedTeamWhere(auth), select, orderBy: [{ name: 'asc' }, { id: 'asc' }] }));
-    res.json({ data: teams.map(dto), meta: { serverTime: now().toISOString() } });
+    const teams = await database(() => prisma.team.findMany({
+      where: scopedTeamWhere(auth), select: teamSelect, orderBy: [{ name: 'asc' }, { id: 'asc' }],
+    }));
+    res.json({ data: teams.map(teamDto), meta: { serverTime: now().toISOString() } });
   });
   router.get('/teams/:id', protection.requireSession, async (req, res) => {
     const auth = await protection.getAuthContext(req);
     const id = String(req.params.id);
     requireUuid(id);
-    const team = await database(() => prisma.team.findFirst({ where: { id, ...scopedTeamWhere(auth) }, select }));
-    if (!team) throw new AppError(404, 'NOT_FOUND', 'The requested resource was not found.');
-    res.json({ data: dto(team), meta: { serverTime: now().toISOString() } });
+    const team = await database(() => prisma.team.findFirst({ where: { id, ...scopedTeamWhere(auth) }, select: teamSelect }));
+    if (!team) throw teamNotFound();
+    res.json({ data: teamDto(team), meta: { serverTime: now().toISOString() } });
+  });
+  router.post('/teams', ...jsonMutation, async (req, res) => {
+    const data = await createTeam(prisma, await protection.getAuthContext(req), req.body);
+    res.status(201).json({ data });
+  });
+  router.patch('/teams/:id', ...jsonMutation, async (req, res) => {
+    const data = await renameTeam(prisma, await protection.getAuthContext(req), String(req.params.id), req.body);
+    res.json({ data });
+  });
+  router.get('/students/available', ...supervisor, async (req, res) => {
+    res.json(await listAvailableStudents(prisma, req.query));
+  });
+  router.post('/teams/:id/members', ...jsonMutation, async (req, res) => {
+    const data = await addTeamMember(prisma, await protection.getAuthContext(req), String(req.params.id), req.body);
+    res.json({ data });
+  });
+  router.delete('/teams/:id/members/:studentId', ...mutation, async (req, res) => {
+    if (Number(req.get('Content-Length')) > 0 || req.get('Transfer-Encoding')) {
+      throw new AppError(400, 'INVALID_INPUT', 'Remove the request body before removing a member.');
+    }
+    await removeTeamMember(prisma, await protection.getAuthContext(req), String(req.params.id), String(req.params.studentId));
+    res.status(204).end();
   });
   return router;
 }
