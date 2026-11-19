@@ -11,6 +11,13 @@ export interface SubmissionDto {
   submittedAt: string;
 }
 
+export interface CreateRevisionInput {
+  title: string;
+  description: string;
+  url: string;
+  expectedVersion: number;
+}
+
 export const submissionSelect = {
   id: true, milestoneId: true, version: true, title: true, description: true, url: true, submittedAt: true,
   submittedBy: { select: { id: true, name: true } },

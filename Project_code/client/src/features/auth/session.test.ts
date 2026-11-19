@@ -96,7 +96,7 @@ describe('F-01 account isolation and recovery', () => {
 });
 describe('F-01 internal return-to destinations', () => {
   it.each(['/milestones/11111111-1111-1111-1111-111111111111', '/teams/11111111-1111-1111-1111-111111111111/milestones/new',
-    '/milestones/11111111-1111-1111-1111-111111111111/submissions/new', '/submissions/11111111-1111-1111-1111-111111111111'])('permits implemented milestone/submission destination %s with server-side scope still required', path => {
+    '/milestones/11111111-1111-1111-1111-111111111111/submissions/new', '/milestones/11111111-1111-1111-1111-111111111111/revisions/new', '/submissions/11111111-1111-1111-1111-111111111111'])('permits implemented milestone/submission destination %s with server-side scope still required', path => {
     expect(safeReturnTo(path)).toBe(path);
   });
   it('preserves a team progress destination after sign-in', () => {

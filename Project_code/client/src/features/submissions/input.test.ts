@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { isWorkUrl, parseSubmissionInput, SubmissionInputError } from '../../../../shared/submissions.mjs';
+import { isWorkUrl, MAX_SUBMISSION_VERSION, parseRevisionInput, parseSubmissionInput, SubmissionInputError } from '../../../../shared/submissions.mjs';
 
 const valid = { title: 'Work', description: 'Required details', url: 'https://example.edu/work' };
 describe('Shared first-submission input contracts', () => {
@@ -25,5 +25,33 @@ describe('Shared first-submission input contracts', () => {
     const prefix = 'https://example.edu/'; const url = prefix + 'x'.repeat(2048 - prefix.length);
     expect(parseSubmissionInput({ ...valid, url }).url).toBe(url);
     expect(() => parseSubmissionInput({ ...valid, url: url+'x' })).toThrow(SubmissionInputError);
+  });
+});
+
+describe('F-06 revision input contracts', () => {
+  it('accepts valid content fields paired with an integer expectedVersion in 1..2147483647', () => {
+    expect(parseRevisionInput({ ...valid, expectedVersion: 1 })).toEqual({ ...valid, expectedVersion: 1 });
+    expect(parseRevisionInput({ ...valid, expectedVersion: MAX_SUBMISSION_VERSION })).toEqual({
+      ...valid,
+      expectedVersion: 2_147_483_647,
+    });
+  });
+
+  it.each(['1', 0, -1, 1.5, Number.NaN, MAX_SUBMISSION_VERSION + 1, null, undefined])(
+    'rejects non-integer, string, or out-of-range expectedVersion %j',
+    expectedVersion => {
+      expect(() => parseRevisionInput({ ...valid, expectedVersion })).toThrow(SubmissionInputError);
+      try {
+        parseRevisionInput({ ...valid, expectedVersion });
+      } catch (error) {
+        expect((error as SubmissionInputError).fields).toHaveProperty('expectedVersion');
+      }
+    },
+  );
+
+  it('rejects missing expectedVersion or authoritative/extra keys on revision payload', () => {
+    expect(() => parseRevisionInput(valid)).toThrow(SubmissionInputError);
+    expect(() => parseRevisionInput({ ...valid, expectedVersion: 1, version: 2 })).toThrow(SubmissionInputError);
+    expect(() => parseRevisionInput({ ...valid, expectedVersion: 1, acceptedAt: '2030-01-01T00:00:00Z' })).toThrow(SubmissionInputError);
   });
 });

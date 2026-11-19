@@ -3,6 +3,7 @@ import type { FormEvent, KeyboardEvent } from 'react';
 import { Button, EmptyState, Field, Input, StatusBadge, Textarea } from '../../design/components';
 import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import type { Team } from '../auth/session';
+import { describeRevisionRestriction } from '../submissions/history';
 import { bangkokInputToIso, codePointLength, isoToBangkokInput, MilestoneInputError, parseMilestoneInput } from '../../../../shared/milestones.mjs';
 import styles from './milestones.module.css';
 import { describeMilestonePlanning, groupStudentMilestones } from './overview';
@@ -270,6 +271,9 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
     }
   };
 
+  const revisionRestriction = result.item.latestSubmission
+    ? describeRevisionRestriction(result.item, result.serverTime, result.item.latestSubmission.version)
+    : null;
   return <><p className={styles.meta}><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
     {statusNotice && <div ref={statusNoticeRef} tabIndex={-1} role="status" className={styles.statusNotice}><p>{statusNotice}</p></div>}
     {error && <Failure message={error} retry={() => setAttempt(value => value + 1)} />}
@@ -287,7 +291,9 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
       : <section><h2>Description</h2><p className={styles.description}>{result.item.description}</p></section>}
       <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><State item={result.item} serverTime={result.serverTime} />
         {result.item.cancelledAt && <p className={styles.meta}>Cancelled on {formatBangkok(result.item.cancelledAt)}.</p>}
-        {result.item.latestSubmission ? <><p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p><a className={styles.primaryLink} href={`/submissions/${result.item.latestSubmission.id}`}>Open saved submission</a></>
+        {result.item.latestSubmission ? <><p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p><a className={styles.primaryLink} href={`/submissions/${result.item.latestSubmission.id}`}>Open saved submission</a>
+          {userRole === 'student' && (revisionRestriction ? <p>{revisionRestriction}</p>
+            : <a className={styles.detailLink} href={`/milestones/${id}/revisions/new`}>Submit revision</a>)}</>
           : userRole === 'student' && (result.item.cancelledAt ? <p>This milestone was cancelled and cannot receive work.</p>
             : Date.parse(result.serverTime) > Date.parse(result.item.dueAt) ? <p>The deadline has passed. Work cannot be submitted.</p>
             : <a className={styles.primaryLink} href={`/milestones/${id}/submissions/new`}>Submit work</a>)}

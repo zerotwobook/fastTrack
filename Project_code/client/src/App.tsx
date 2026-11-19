@@ -4,7 +4,7 @@ import { Button, EmptyState, Field, Input } from './design/components';
 import { safeReturnTo, sessionStore, StaleSessionError } from './features/auth/session';
 import type { SessionSnapshot, Team } from './features/auth/session';
 import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/milestones';
-import { SubmissionCreate, SubmissionDetail } from './features/submissions';
+import { RevisionCreate, SubmissionCreate, SubmissionDetail } from './features/submissions';
 import { FeedbackPanel } from './features/feedback';
 import { TeamProgress } from './features/progress/TeamProgress';
 import { TeamCreate, TeamSettings } from './features/teams/TeamPlanning';
@@ -82,9 +82,10 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   const settingsId = /^\/teams\/([a-f0-9-]{36})\/settings$/i.exec(path)?.[1];
   const progressId = /^\/teams\/([a-f0-9-]{36})\/progress$/i.exec(path)?.[1];
   const creatingTeam = path === '/teams/new';
-  const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/submissions\/new)?$/i.exec(path)?.[1];
+  const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/(?:submissions|revisions)\/new)?$/i.exec(path)?.[1];
   const submissionId = /^\/submissions\/([a-f0-9-]{36})$/i.exec(path)?.[1];
   const submitting = path.endsWith('/submissions/new');
+  const revising = path.endsWith('/revisions/new');
   const creating = path.endsWith('/milestones/new');
   const validPath = path === '/' || detailId !== undefined || milestoneId !== undefined || submissionId !== undefined;
   useEffect(() => {
@@ -111,7 +112,7 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
         ? (settingsId ? <TeamSettings key={settingsId} teamId={settingsId} /> : <TeamCreate />)
         : <EmptyState title="Team settings are restricted to supervisors" action={<a href="/">Back to overview</a>} />
         : progressId ? <TeamProgress key={progressId} teamId={progressId} />
-        : submissionId ? <SubmissionDetail id={submissionId} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
+        : submissionId ? <SubmissionDetail id={submissionId} userRole={user.role} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? revising ? <RevisionCreate key={milestoneId} milestoneId={milestoneId} userRole={user.role} /> : submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
       <h1>{creating ? 'Create milestone' : detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
       <p className="intro">{creating ? `Set the work and deadline${teams?.[0] ? ` for ${teams[0].name}` : ' for this team'}.` : detailId ? 'Your team members, deadlines and submitted work.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
       {user.role === 'supervisor' && !creating && !error && (path === '/' || (detailId && teams?.[0])) &&
