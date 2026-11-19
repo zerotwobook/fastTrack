@@ -1,8 +1,8 @@
 import { Prisma } from '../../db/generated/client/index.js';
 import type { PrismaClient } from '../../db/generated/client/index.js';
 import { AppError } from '../../http/errors.js';
-import { requireTeamAccess, requireUuid, scopedTeamWhere } from '../teams/index.js';
-import type { TeamActor } from '../teams/index.js';
+import { requireTeamAccess, requireUuid, scopedTeamWhere } from '../teams/model.js';
+import type { TeamActor } from '../teams/model.js';
 
 type LockedTeam = Readonly<{ id: string }>;
 type LockedMilestone = Readonly<{
