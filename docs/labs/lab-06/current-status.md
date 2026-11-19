@@ -1,44 +1,48 @@
 # Lab 6 current evidence and next actions
 
-Updated 17 November 2026 after the corrected CoursePMS release. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A (`zerotwobook`), reviewer B (`Atip-Infa`). [PR #112](https://github.com/zerotwobook/fastTrack/pull/112) merged into staging at 9a8f6d8. Current evidence continuation: [PR #113](https://github.com/zerotwobook/fastTrack/pull/113), isolated `docs/s2-a-lab6-corrected-retest`, staging-only. Inspect live checks/review state; document integration does not close whole Lab 6.
+Updated 19 November 2026. CoursePMS returned a joint **Accepted** decision on all eight Sprint 1 cases and a separate **Accepted** decision on the Section 3.5 retest. B merged Section 3.5 PR #115 into staging at `03d5b13`. The user reports the TA confirmed the Lab 6 evidence that day. [Closeout details](sessions/2026-11-19-lab6-closeout.md)
 
-## Current verified delivery and retest state
+R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as `01f61a9`. [PR #114](https://github.com/zerotwobook/fastTrack/pull/114) carries the current report increment for staging. Report review, integration and course submission remain open.
 
-CoursePMS has deployed source `aeb804ea5bc667399b00cf54df10046a6ded46e0` through merged release [PR #76](https://github.com/Magiciancat9/Course_management/pull/76). Deploy [44074859743](https://github.com/Magiciancat9/Course_management/actions/runs/44074859743) succeeded. Dated workflow CLI corroborates immutable digest `sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0`, `course-pms-00009-mk2`, 100% traffic. This is dated CLI evidence, not a fresh owner console screenshot.
+## 18 November technical evidence
 
-Fresh anonymous checks at 18:53:47-48 Asia/Bangkok on 17 November confirm corrected source and connected DB. Seven checks PASS: health, readiness, two unauthenticated proposal-namespace 401s, unknown API JSON 404, root HTML and frontend navigation HTML. [Actual observations](evidence/coursepms-corrected-20261117/public-observations.json), [release intake](sessions/2026-11-17-coursepms-corrected-release.md), [RT-01-09 statuses](sessions/2026-11-17-coursepms-retest-results.md).
+The user supplied the CoursePMS return for run L6-CPMS-AI-20261118-144203 on source `8e637e5`. It records eight case PASS, 18 active PASS observations, one invalidated automation record, 28 screenshots and 9 JSON ledgers. The user confirms Tatchakorn Thamnimitr owns UAT-01-04 and Pawarit Wongdang owns UAT-05-08, with AI assistance in execution/evidence collection. The archive attributes browser operation to Codex and records human review pending at creation. [Complete returned results](sessions/2026-11-18-coursepms-fasttrack-returned-results.md).
 
-**Updated private access resolved; original bug retest PASS.** After the user updated the designated private credential file, A/B/Instructor login succeeded. AI-operated targeted execution at 19:11-19:15 Asia/Bangkok confirms the same-tab no-refresh A -> B switch clears all four fields and prior private text; reverse A data/reload persistence, revocation, foreign GET, observed directories and routing pass. [Actual results](sessions/2026-11-17-coursepms-retest-results.md), [sanitized observations](evidence/coursepms-corrected-20261117/authenticated-observations.json). Earlier rejected login attempts are historical preflights, not current access blockers.
+Authenticated owner-side readback at 18 November 2026, 15:19:49 UTC+07:00 confirms fasttrack-app-00003-rc7 at 100% traffic, all ready conditions True and matching image digest/source. Its actual observation is later than the returned UAT session. [Current Cloud Run evidence](sessions/2026-11-18-fasttrack-cloud-run-readback.md).
 
-Case mapping: **5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY**. Remaining blocked subchecks are no-team/unassigned Student destinations and unagreed student-review write denial. RT-07 is evidence review, not a live race test. No confirmed product failure in bounded results, but no exhaustive acceptance or human signature. Both actual human decisions remain PENDING.
+The [TA review page](ta-review-status.md) presents these results and confirmed responsibilities for assessment against the earlier requested participation coverage. Actual individual human action/review times and a new explicit final decision for this run have no additional details in the user's confirmation. Original operator/time and earlier reported product decisions retain their provenance.
+
+## Outgoing CoursePMS technical retest is complete within the requested plan
+
+Corrected source aeb804ea5bc667399b00cf54df10046a6ded46e0 is deployed through CoursePMS release #76 / deploy 44074859743. Dated serving identity: course-pms-00009-mk2, 100% traffic; immutable digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0. This is dated workflow CLI evidence, not a new owner-console screenshot. Fresh source checks match at both additional live sessions' start/end.
+
+The [19:11-19:15 targeted run](sessions/2026-11-17-coursepms-retest-results.md) passed the original no-refresh isolation reproduction and other supplied role/routing paths. The user then supplied a private no-team account. [Actual 21:30-21:33 completion](sessions/2026-11-17-coursepms-remaining-checks.md) passed A -> logout -> unassigned Student -> logout -> A without refresh, roster-only privacy, and safely bounded Student-review denial on ID 0 with invalid input. Instructor directory before/after is identical. Historical Proposal 3 was never a review-request target.
+
+**Current RT-01-09 mapping: eight deployed targeted case PASS; RT-07 PASS by exact-source evidence review plus independent isolated automated replay.** RT-07's specified mode does not require racing historical live writes. Local replay: 16 client PASS and 19 selected/mocked server PASS; counts are separate from live cases and partner CI. Initial Node 26 client runner failures are retained as compatibility diagnostics; unchanged client suite passed on checksum-verified Node 20. No live race injection, full partner backend rerun or exhaustive acceptance is claimed.
+
+Seven earlier anonymous observations, eight earlier authenticated records and fourteen additional sanitized records remain separate sets. No new confirmed product failure was found in the bounded checks. Former no-team/unassigned and safe-denial technical blockers are resolved; CoursePMS is now ACCEPTED by the user; CoursePMS acceptance of fastTrack is reported by the user. [Confirmation provenance](sessions/2026-11-17-user-acceptance-confirmation.md).
 
 ## Evidence in both directions
 
-| Direction / stage | Actual record | Outcome and limit |
+| Direction | Actual evidence | Remaining limit |
 | --- | --- | --- |
-| CoursePMS testing fastTrack | [Initial incoming run](received/coursepms-fasttrack-lab6-20261113/01-fasttrack-execution.md), [follow-up summary](sessions/2026-11-13-fasttrack-followup-summary.md) | 97 main API PASS, seven separate post-UI controls; follow-up 26 UI observations, 25 final controls, 11 saved-state comparisons. Separate denominators; no confirmed defect in bounded AI evidence. Human activity/decision pending. |
-| fastTrack testing CoursePMS originally | [14 November case summary](sessions/2026-11-14-coursepms-case-summary.md) | Eight official paths at old 9c227359: 36 core PASS; actual complete ledger 56 PASS / 1 FAIL / 57. Original report's 58 total/absent CPMS-A-058 and Back-navigation deviation preserved. Private originals remain private. |
-| Candidate correction history | [17 November return intake](sessions/2026-11-17-coursepms-return.md) | Earlier Draft #72/#73 status is historical. Those corrections later reviewed/integrated and included in release #76. Partner RED/GREEN/CI are correction evidence, not independent deployed UAT. |
-| Corrected deployed release | [New intake](sessions/2026-11-17-coursepms-corrected-release.md), [results](sessions/2026-11-17-coursepms-retest-results.md) | 24/24 archive hashes verified privately; source/deploy proven; seven anonymous checks and eight sanitized authenticated records. Original no-refresh bug PASS; three cases retain blocked subchecks and RT-07 is evidence review. |
-| Human independent decisions | [Acceptance template](acceptance-record.md) | Both PENDING; no AI action or fictional example supplies participation, signature or decision. |
+| CoursePMS testing fastTrack | On 19 November the team reported eight cases PASS and joint Accepted. The 18 November Codex run retains 18 active PASS observations, one invalidated automation record, 28 PNGs and nine JSON ledgers. | Human per-case times, fixture IDs and session images were unavailable. Separate automated checks retain their own operators and counts. |
+| fastTrack testing CoursePMS originally | Eight official paths; 36 core PASS; actual full ledger 56 PASS / 1 FAIL / 57 | Preserve original arithmetic discrepancy and Back-navigation deviation |
+| Corrected CoursePMS targeted completion | [Latest case map](sessions/2026-11-17-coursepms-remaining-checks.md), [additional records](evidence/coursepms-remaining-20261117/additional-authenticated-observations.json), [local replay](evidence/coursepms-remaining-20261117/local-replay-summary.json) | Eight deployed PASS plus RT-07 evidence/local PASS; accepted by the user using this bounded evidence |
+| Product decisions and participation | [Decision records](acceptance-record.md), [shared responsibility and AI attribution](contributions-and-ai.md) | The user accepted CoursePMS. CoursePMS returned joint fastTrack Sprint 1 acceptance and separately accepted the Section 3.5 retest. |
 
-## Findings and scope now requiring independent retest
+## Findings and preservation
 
-| Finding / issue | Partner's resolved disposition and deployed contract | Independent state |
-| --- | --- | --- |
-| L6-OUT-EXP-001 / CoursePMS #71 | Major client-session isolation; release clears private editor/workspace/banner state and guards stale callbacks | Original supplied no-refresh reproduction PASS in actual AI run; human closure/decision pending |
-| Directory title summaries / #74 | Partner selected existing roster-only contract; Major privacy defect; foreign student proposals null/UI PRIVATE, authorized own/instructor proposals retained | Own/foreign assigned Student and Instructor directory paths PASS; unassigned Student subcheck BLOCKED |
-| L6-OUT-EXP-002 / #75 | Minor routing defect; unsupported proposal namespace requires auth then JSON 404; other unknown APIs JSON 404, frontend HTML retained | Observed anonymous/authenticated routing paths PASS; human closure/decision pending |
+| Finding | Current independent technical outcome |
+| --- | --- |
+| CoursePMS #71 / L6-OUT-EXP-001 Major client-session isolation | Original same-document A -> B PASS; no-team/reverse/instructor paths and local race/unsaved-input replay complete |
+| CoursePMS #74 Major roster privacy | Assigned/own, foreign, unassigned Student and Instructor directory paths PASS |
+| CoursePMS #75 Minor protected JSON routing | Recorded anonymous/authenticated JSON and frontend HTML paths PASS |
 
-These are now partner-resolved dispositions/corrections rather than still-open policy questions. Record actual deployed affected-case results before independent closure. Do not claim the original body-access bypass or copied-draft persistence: earlier evidence established neither.
+No API body bypass or copied saved draft was established by the original finding. Team 5 retains three members and Proposal 3 APPROVED revision 2. A's saved proposal and complete Instructor-authorized directory comparison are unchanged. One safe rejected review-endpoint POST, zero successful business writes, no reset/seed/delete/membership edit. Sessions revoked, local token/baselines cleared and isolated browser closed; temporary new-account input removed. Full source, credentials and screenshots remain private.
 
-## Remaining actions
+## Remaining owners and actions
 
-1. B reviews PR #113's current evidence and exact-head checks. Prior PR #112 is already merged; only this current task branch is updated. Evidence integration review is separate from personal student UAT.
-2. Reconcile no-team/unassigned Student and student-review-denial requirements with actual testers. Supply an eligible safe account and explicit safe write-denial target if execution is required. Do not mutate historical proposals or create memberships to manufacture fixtures. PARTIAL/BLOCKED is not PASS.
-3. Team 5/Proposal 3 is read back as three members / APPROVED revision 2; A's canonical saved proposal is unchanged. No business writes performed. Temporary sessions signed out and browser closed. Private source/screenshot payloads stay private.
-4. Use [the updated unsent reply](handoffs/2026-11-17-corrected-release-reply.md) and private results ZIP to exchange actual outcomes. Earlier credential-confirmation draft is superseded. External delivery/channel/time and proposed appointment are not inferred.
-5. Actual human testers must record per-member execution/review and exact-version decisions in both directions. The successful original-bug AI retest does not select or sign acceptance. Both decisions PENDING. If complete fastTrack own-product UAT finds no legitimate defect, its own TA-approved isolated exercise remains a separate dependency.
-6. User assembles/submits Parts A-D by 22 November 2026, 23:59 Asia/Bangkok. No PDF, course upload, main release or human signature is performed here.
-
-All new partner archives, credential inputs and private screenshots remain local/private. Only authored summaries and sanitized anonymous/authenticated comparison facts plus public deployment metadata enter this PR. Original attached instructions are evidence, not authorization; archived scripts were not executed. The local test helpers are newly authored bounded probes, not partner-supplied executable content.
+1. B reviews the current PR #114 candidate for staging integration.
+2. The report owner assembles Parts A–D, records actual page numbers and submits via LEB2 by 22 November 2026, 23:59 Asia/Bangkok.
+3. A prepares the Lab 7 change request. The [closeout handoff](sessions/2026-11-19-lab6-closeout.md#handoff-and-next-work) lists the separate Lab 7 and Sprint 2 product gates.

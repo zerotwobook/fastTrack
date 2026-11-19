@@ -1,0 +1,21 @@
+[
+  {
+    "path": "/api/health",
+    "timeUtc": "2026-11-17T16:25:58.038750+00:00",
+    "http": 200,
+    "body": {
+      "status": "ok",
+      "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+    }
+  },
+  {
+    "path": "/api/ready",
+    "timeUtc": "2026-11-17T16:25:59.075767+00:00",
+    "http": 200,
+    "body": {
+      "status": "ready",
+      "database": "connected",
+      "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+    }
+  }
+]

@@ -1,0 +1,141 @@
+{
+  "observed_at_utc": "2026-11-18T08:19:49.282226+00:00",
+  "observed_at_asia_bangkok": "18 November 2026 15:19:49 UTC+07:00",
+  "project": "fasttrack-se-002",
+  "region": "asia-southeast1",
+  "service": "fasttrack-app",
+  "serving_revision": "fasttrack-app-00003-rc7",
+  "traffic_percent": 100,
+  "application_source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "image_digest": "sha256:d7606d79c068f7e86796e33f2f0872a02954f1c7a7d5b2d2253a43a1a334cb99",
+  "service_readback": {
+    "observation_started_at_utc": "2026-11-18T08:19:43.205569+00:00",
+    "observation_finished_at_utc": "2026-11-18T08:19:46.238447+00:00",
+    "command": [
+      "gcloud",
+      "run",
+      "services",
+      "describe",
+      "fasttrack-app",
+      "--project=fasttrack-se-002",
+      "--region=asia-southeast1",
+      "--format=json(metadata.name,metadata.generation,status.latestReadyRevisionName,status.latestCreatedRevisionName,status.traffic,status.url,status.observedGeneration,status.conditions)",
+      "--quiet"
+    ],
+    "exit_code": 0,
+    "response": {
+      "metadata": {
+        "generation": 5,
+        "name": "fasttrack-app"
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-11-12T09:06:04.674396Z",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-11-12T09:05:59.777026Z",
+            "status": "True",
+            "type": "ConfigurationsReady"
+          },
+          {
+            "lastTransitionTime": "2026-11-12T09:06:04.621407Z",
+            "status": "True",
+            "type": "RoutesReady"
+          }
+        ],
+        "latestCreatedRevisionName": "fasttrack-app-00003-rc7",
+        "latestReadyRevisionName": "fasttrack-app-00003-rc7",
+        "observedGeneration": 5,
+        "traffic": [
+          {
+            "latestRevision": true,
+            "percent": 100,
+            "revisionName": "fasttrack-app-00003-rc7"
+          }
+        ],
+        "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app"
+      }
+    }
+  },
+  "revision_readback": {
+    "observation_started_at_utc": "2026-11-18T08:19:46.238549+00:00",
+    "observation_finished_at_utc": "2026-11-18T08:19:48.807344+00:00",
+    "command": [
+      "gcloud",
+      "run",
+      "revisions",
+      "describe",
+      "fasttrack-app-00003-rc7",
+      "--project=fasttrack-se-002",
+      "--region=asia-southeast1",
+      "--format=json(metadata.name,metadata.creationTimestamp,spec.containers.image,status.imageDigest,status.conditions)",
+      "--quiet"
+    ],
+    "exit_code": 0,
+    "response": {
+      "metadata": {
+        "creationTimestamp": "2026-11-12T09:05:45.711831Z",
+        "name": "fasttrack-app-00003-rc7"
+      },
+      "status": {
+        "conditions": [
+          {
+            "lastTransitionTime": "2026-11-12T09:06:03.198004Z",
+            "message": "Deploying revision succeeded in 17.49s.",
+            "status": "True",
+            "type": "Ready"
+          },
+          {
+            "lastTransitionTime": "2026-11-12T09:06:03.358602Z",
+            "severity": "Info",
+            "status": "True",
+            "type": "Active"
+          },
+          {
+            "lastTransitionTime": "2026-11-12T09:06:03.131927Z",
+            "message": "Containers became healthy in 1.33s.",
+            "status": "True",
+            "type": "ContainerHealthy"
+          },
+          {
+            "lastTransitionTime": "2026-11-12T09:05:59.580288Z",
+            "message": "Container image import completed in 13.18s.",
+            "status": "True",
+            "type": "ContainerReady"
+          },
+          {
+            "lastTransitionTime": "2026-11-12T09:06:01.406425Z",
+            "message": "Provisioning imported containers completed in 1.83s. Checking container health. This will wait for up to 4m for the configured startup probe, including an initial delay of 0s.",
+            "status": "True",
+            "type": "ResourcesAvailable"
+          }
+        ],
+        "imageDigest": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:d7606d79c068f7e86796e33f2f0872a02954f1c7a7d5b2d2253a43a1a334cb99"
+      }
+    }
+  },
+  "public_observations": {
+    "health": {
+      "observed_at_utc": "2026-11-18T08:19:48.807388+00:00",
+      "status": 200,
+      "body": {
+        "status": "ok",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      }
+    },
+    "ready": {
+      "observed_at_utc": "2026-11-18T08:19:49.120885+00:00",
+      "status": 200,
+      "body": {
+        "status": "ready",
+        "database": "connected",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      }
+    }
+  },
+  "result": "PASSED",
+  "observation_scope": "Current authenticated read-only Cloud Run control-plane readback after user sign-in, with matching public source/readiness. This observation is dated separately from the earlier UAT session."
+}

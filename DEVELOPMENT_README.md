@@ -33,9 +33,7 @@ For tracked PRs, the enabled native Project workflow moves the card to Done afte
 
 ## Current delivery and Lab 6 checkpoint
 
-As of 17 November 2026 after CoursePMS release, accepted evidence PR #112 is merged at 9a8f6d8. Continue R2-A04 / Issue #22 through PR #113, owner A / reviewer B, staging-only. CoursePMS source aeb804ea is deployed through PR #76/run44074859743; fresh anonymous source/readiness/routing checks pass. Updated private access now works; the original same-tab draft-isolation reproduction passes in the actual 19:11-19:15 AI retest. No-team/unassigned Student and unagreed review-write subchecks remain blocked; case mapping is 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY, and both human decisions remain PENDING. Read [current Lab 6 status](docs/labs/lab-06/current-status.md) for exact versions, RT case status, preservation and remaining owners. No main release, business write, PDF, external reply or acceptance is authorized by evidence integration.
-
-[Lab 6 current status](docs/labs/lab-06/current-status.md) now records the 14 November official CoursePMS paths, reciprocal fastTrack UI follow-up and returned CoursePMS Draft fix #72/#73 with RED/GREEN and successful exact-head CI. Fresh 17 November public CoursePMS source is still original `9c227359`, database connected: corrected-deployment retest is BLOCKED. Both human decisions/actual student activity, release metadata and remaining policy/contract dispositions are pending. Received simulations remain explicitly fictional. Preserve original snapshots and distinguish document review/CI from UAT acceptance. The user handles final export/submission; no main release, PDF or signature is inferred.
+On 19 November 2026, CoursePMS returned an Accepted decision on the eight Sprint 1 UAT cases and separately accepted the isolated Section 3.5 retest. The user reported that the TA confirmed the Lab 6 evidence that day. B merged PR #115 into `staging/sprint-2` at `03d5b13`. R2-A04 continues in staging-targeted PR #114 for report review. The report owner submits through LEB2. [Lab 6 closeout and next work](docs/labs/lab-06/sessions/2026-11-19-lab6-closeout.md)
 
 ## First-day allocation
 

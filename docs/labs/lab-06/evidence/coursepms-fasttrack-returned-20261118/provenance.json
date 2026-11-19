@@ -1,0 +1,273 @@
+{
+  "prepared_at_utc": "2026-11-18T08:25:39.970295+00:00",
+  "task": "R2-A04",
+  "issue": 22,
+  "source_archive_name": "FastTrack-CoursePMS-UAT-Results-20261118.zip",
+  "source_archive_sha256": "f5a5ba663ddf4bab7fedca7f4c8140d722dfb8b14c34059bd4d395980b849485",
+  "source_archive_entries": 41,
+  "original_manifest_entries_verified": 40,
+  "original_json_files_parsed": 9,
+  "original_png_files_decoded": 28,
+  "local_report_links_verified": 33,
+  "case_results": {
+    "PASS": 8
+  },
+  "observations": {
+    "PASS": 18,
+    "INVALIDATED_AUTOMATION_ERROR": 1
+  },
+  "persistence_snapshots_matching": 4,
+  "deadline_server_seconds_after_due": 71.629,
+  "signed_out_profiles_returning_401": 6,
+  "browser_operator": "Codex AI acting for the CoursePMS reviewing team",
+  "user_confirmed_responsibilities": [
+    {
+      "reviewer": "Tatchakorn Thamnimitr",
+      "cases": [
+        "UAT-01",
+        "UAT-02",
+        "UAT-03",
+        "UAT-04"
+      ]
+    },
+    {
+      "reviewer": "Pawarit Wongdang",
+      "cases": [
+        "UAT-05",
+        "UAT-06",
+        "UAT-07",
+        "UAT-08"
+      ]
+    }
+  ],
+  "confirmation_scope": "User supplied reviewer responsibilities and AI assistance in execution/evidence collection. Individual human action timestamps and a new explicit final decision for this run were not additionally supplied.",
+  "current_revision_traffic_evidence": "cloud-run-current.json",
+  "cloud_readback_time_asia_bangkok": "18 November 2026 15:19:49 UTC+07:00",
+  "files": [
+    {
+      "path": "account-scope-checks.json",
+      "original_sha256": "0ddf36a05f75b06083ed36576c87d590e498b2987cac13aeda2e93820feff1f7",
+      "published_sha256": "0ddf36a05f75b06083ed36576c87d590e498b2987cac13aeda2e93820feff1f7",
+      "transformations": []
+    },
+    {
+      "path": "case-summary.json",
+      "original_sha256": "e26de3b0038327fd167308b50e35769a66dcfdb81aa851fb383a9db401322e0f",
+      "published_sha256": "79279b80b9bdf0a509aedba954bfa611f83a2059977d66b341df542b6cfb0991",
+      "transformations": [
+        "Translated case titles into English",
+        "Omitted student IDs from owner labels; retained user-confirmed reviewer names"
+      ]
+    },
+    {
+      "path": "deadline-observation.json",
+      "original_sha256": "d27df76d4ff626862335e9f7b16603b0c3c734690b11e2fc5c7711b680c20186",
+      "published_sha256": "d27df76d4ff626862335e9f7b16603b0c3c734690b11e2fc5c7711b680c20186",
+      "transformations": []
+    },
+    {
+      "path": "fixture-ledger.json",
+      "original_sha256": "4d47b30f52f6fd2593cf06a96fa2b0585e70dbee12e061d341fdc3c61a065d17",
+      "published_sha256": "4d47b30f52f6fd2593cf06a96fa2b0585e70dbee12e061d341fdc3c61a065d17",
+      "transformations": []
+    },
+    {
+      "path": "observations.json",
+      "original_sha256": "9f6a72287b5af3861b1360ab4eb870a26c8ccf36d9cc780e793be1454e86db20",
+      "published_sha256": "9f6a72287b5af3861b1360ab4eb870a26c8ccf36d9cc780e793be1454e86db20",
+      "transformations": []
+    },
+    {
+      "path": "persistence-comparisons.json",
+      "original_sha256": "9024b0f84558c01cb05eee11598999ed0431368f7f154cc7ae1693a5313f57c9",
+      "published_sha256": "9024b0f84558c01cb05eee11598999ed0431368f7f154cc7ae1693a5313f57c9",
+      "transformations": []
+    },
+    {
+      "path": "preflight-start.json",
+      "original_sha256": "46e08b74a8853f766b9bcd37ed4448e7489db135a9451a73dfd87a1034151329",
+      "published_sha256": "46e08b74a8853f766b9bcd37ed4448e7489db135a9451a73dfd87a1034151329",
+      "transformations": []
+    },
+    {
+      "path": "saved-work-ledger.json",
+      "original_sha256": "4a38cdfd30ac5b6a734404093e6866e0392d9c958a2bb9512235ff14ba6acf4e",
+      "published_sha256": "4a38cdfd30ac5b6a734404093e6866e0392d9c958a2bb9512235ff14ba6acf4e",
+      "transformations": []
+    },
+    {
+      "path": "session-closeout.json",
+      "original_sha256": "70c08d38d344eb20cb140199211c60789f5ca239cf37fef34d67e05e742b06f3",
+      "published_sha256": "70c08d38d344eb20cb140199211c60789f5ca239cf37fef34d67e05e742b06f3",
+      "transformations": []
+    },
+    {
+      "path": "images/setup-deadline.png",
+      "original_sha256": "5d14f80ea8381e3bfb2557c6e347f7150126c94089665a9451330de8d443502d",
+      "published_sha256": "5d14f80ea8381e3bfb2557c6e347f7150126c94089665a9451330de8d443502d",
+      "transformations": []
+    },
+    {
+      "path": "images/setup-normal.png",
+      "original_sha256": "5d479c029ea48d85a5d2633c547f9293fc2656e3b83e6611fcfa5512adbed88e",
+      "published_sha256": "5d479c029ea48d85a5d2633c547f9293fc2656e3b83e6611fcfa5512adbed88e",
+      "transformations": []
+    },
+    {
+      "path": "images/setup-validation.png",
+      "original_sha256": "73388f4ff5e28b3f5d9865ace852f99aa51db33b93970d1ccd7780dd77770f68",
+      "published_sha256": "73388f4ff5e28b3f5d9865ace852f99aa51db33b93970d1ccd7780dd77770f68",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-01-student-normal.png",
+      "original_sha256": "7981a0a25d1c991ecc1febe02cb12df3d5a75f6ac5a472df693c27a8a09bc559",
+      "published_sha256": "7981a0a25d1c991ecc1febe02cb12df3d5a75f6ac5a472df693c27a8a09bc559",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-01-supervisor-normal.png",
+      "original_sha256": "5d479c029ea48d85a5d2633c547f9293fc2656e3b83e6611fcfa5512adbed88e",
+      "published_sha256": "5d479c029ea48d85a5d2633c547f9293fc2656e3b83e6611fcfa5512adbed88e",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-01-team-list.png",
+      "original_sha256": "cf1f49e7ad63f6244f7852511fb78fa5954e9176ed170e6473a8215d4011126d",
+      "published_sha256": "cf1f49e7ad63f6244f7852511fb78fa5954e9176ed170e6473a8215d4011126d",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-02-saved-work-initial.png",
+      "original_sha256": "cceb1fba7d52b2adf951f6efbcf5757c8d88dfe58900af53e12103e7a0103525",
+      "published_sha256": "cceb1fba7d52b2adf951f6efbcf5757c8d88dfe58900af53e12103e7a0103525",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-02-student-two-feedback.png",
+      "original_sha256": "5f2fec5faadc1bd9866da4aa6559cce36f00aa18a7cf0850a74b35bc61842862",
+      "published_sha256": "5f2fec5faadc1bd9866da4aa6559cce36f00aa18a7cf0850a74b35bc61842862",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-02-supervisor-two-feedback.png",
+      "original_sha256": "f2cf16d564c3384a990ff297667cd25d5b23e053c47c45b2d4dae4e404b1de2b",
+      "published_sha256": "f2cf16d564c3384a990ff297667cd25d5b23e053c47c45b2d4dae4e404b1de2b",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-03-existing-submission.png",
+      "original_sha256": "48d19e91622ab5d65bfa0abcf74dd7fe9e4d5391f751b933875aa708f56d55dc",
+      "published_sha256": "48d19e91622ab5d65bfa0abcf74dd7fe9e4d5391f751b933875aa708f56d55dc",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-03-second-student-shared-submission.png",
+      "original_sha256": "571f49696b9cc0c941df1191823a9405cc4604b1f0b9acb86e01ada04ada4aae",
+      "published_sha256": "571f49696b9cc0c941df1191823a9405cc4604b1f0b9acb86e01ada04ada4aae",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-04-no-late-work-saved.png",
+      "original_sha256": "e4083c715f2f577b48cf427d08390cf11db7354ea125f816cb2e6dee3f3428b2",
+      "published_sha256": "e4083c715f2f577b48cf427d08390cf11db7354ea125f816cb2e6dee3f3428b2",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-04-stale-form-after-deadline.png",
+      "original_sha256": "46febeb0dc412304ee44d658cf308514ae0dc34ca98c1e5317551e9a1f43e4e5",
+      "published_sha256": "46febeb0dc412304ee44d658cf308514ae0dc34ca98c1e5317551e9a1f43e4e5",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-04-stale-form-before-deadline.png",
+      "original_sha256": "a57984ed0ac5978d2a28742ac2bf166cc471aadbd66480b4c3fef92d35819351",
+      "published_sha256": "a57984ed0ac5978d2a28742ac2bf166cc471aadbd66480b4c3fef92d35819351",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-05-foreign-milestone.png",
+      "original_sha256": "8fcffe90dd44c83983eba0715755377bedfcbffade4354c94dadd32d6fec1f98",
+      "published_sha256": "8fcffe90dd44c83983eba0715755377bedfcbffade4354c94dadd32d6fec1f98",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-05-foreign-submission.png",
+      "original_sha256": "13584d0a2f6fd49bac3a7eaa150b1a08ae9fe859672588293fd8724a9737e34f",
+      "published_sha256": "13584d0a2f6fd49bac3a7eaa150b1a08ae9fe859672588293fd8724a9737e34f",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-05-foreign-team.png",
+      "original_sha256": "dad850d1c7188724123321af35b3521ca186957a3452ca3d02f7745e2969b319",
+      "published_sha256": "dad850d1c7188724123321af35b3521ca186957a3452ca3d02f7745e2969b319",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-05-own-team-overview.png",
+      "original_sha256": "daa3304b2a3f1c7be83d4ad388c338d67ca76d57c98a68ccdcf4afac6572daa5",
+      "published_sha256": "daa3304b2a3f1c7be83d4ad388c338d67ca76d57c98a68ccdcf4afac6572daa5",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-05-team-B-student-denied.png",
+      "original_sha256": "10e52a30236a06e8950a623c447062c783882304786b53e1cc48daf6a5080974",
+      "published_sha256": "10e52a30236a06e8950a623c447062c783882304786b53e1cc48daf6a5080974",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-06-ftp-link.png",
+      "original_sha256": "033e20c3eaf011ffc5a04a481b09a3659341017e65c905e29b2f3693511f4b10",
+      "published_sha256": "033e20c3eaf011ffc5a04a481b09a3659341017e65c905e29b2f3693511f4b10",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-06-student-create-denied.png",
+      "original_sha256": "a0974919f57a404502528450ed510440557f3008bee916a07622a0796a3970cb",
+      "published_sha256": "a0974919f57a404502528450ed510440557f3008bee916a07622a0796a3970cb",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-06-whitespace-feedback.png",
+      "original_sha256": "f139f94d107209e7b0fbf1989eac87101d77b2a164c15362f2b08d34a53b5291",
+      "published_sha256": "f139f94d107209e7b0fbf1989eac87101d77b2a164c15362f2b08d34a53b5291",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-06-whitespace-milestone.png",
+      "original_sha256": "6f384d8b461ee2b8f58e5bdeab508e96ef0ac90634c3c4ce74db6e86873da5b7",
+      "published_sha256": "6f384d8b461ee2b8f58e5bdeab508e96ef0ac90634c3c4ce74db6e86873da5b7",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-06-whitespace-work.png",
+      "original_sha256": "cf747412cee23fae2232afd41ebb28dfbddc8c0be72e0b818738252b1a4edc24",
+      "published_sha256": "cf747412cee23fae2232afd41ebb28dfbddc8c0be72e0b818738252b1a4edc24",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-07-same-profile-switched-to-SB.png",
+      "original_sha256": "13584d0a2f6fd49bac3a7eaa150b1a08ae9fe859672588293fd8724a9737e34f",
+      "published_sha256": "13584d0a2f6fd49bac3a7eaa150b1a08ae9fe859672588293fd8724a9737e34f",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-08-student-reload.png",
+      "original_sha256": "5f2fec5faadc1bd9866da4aa6559cce36f00aa18a7cf0850a74b35bc61842862",
+      "published_sha256": "5f2fec5faadc1bd9866da4aa6559cce36f00aa18a7cf0850a74b35bc61842862",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-08-student-relogin.png",
+      "original_sha256": "5f2fec5faadc1bd9866da4aa6559cce36f00aa18a7cf0850a74b35bc61842862",
+      "published_sha256": "5f2fec5faadc1bd9866da4aa6559cce36f00aa18a7cf0850a74b35bc61842862",
+      "transformations": []
+    },
+    {
+      "path": "images/UAT-08-supervisor-reload.png",
+      "original_sha256": "f2cf16d564c3384a990ff297667cd25d5b23e053c47c45b2d4dae4e404b1de2b",
+      "published_sha256": "f2cf16d564c3384a990ff297667cd25d5b23e053c47c45b2d4dae4e404b1de2b",
+      "transformations": []
+    }
+  ]
+}

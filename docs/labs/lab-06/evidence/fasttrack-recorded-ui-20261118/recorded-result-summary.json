@@ -1,0 +1,29 @@
+{
+  "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "operator": "Codex AI",
+  "dataStatus": "Historical actual execution; not a new run or personal student execution",
+  "initialMainAPI": {
+    "assertionsPassed": 97,
+    "failed": 0,
+    "httpObservations": 74
+  },
+  "separateInitialPostUIControls": 7,
+  "followupUI": {
+    "observations": 26,
+    "recordedStatus": "PASS for observed subcheck",
+    "firstObservationAsiaBangkok": "2026-11-13 21:37:47",
+    "lastObservationAsiaBangkok": "2026-11-13 22:00:11"
+  },
+  "finalAPIControls": {
+    "PASS": 25,
+    "FAIL": 0,
+    "ERROR": 0,
+    "CLEANUP ERROR": 0
+  },
+  "savedStateChecks": {
+    "PASS": 11,
+    "FAIL": 0
+  },
+  "independentHumanPerCaseAllocation": "Not supplied in the earlier user-reported participation record",
+  "currentServingRevisionTraffic": "Not independently confirmed by these historical source observations"
+}

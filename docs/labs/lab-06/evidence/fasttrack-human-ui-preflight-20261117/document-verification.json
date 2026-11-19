@@ -1,0 +1,16 @@
+{
+  "verifiedAtUtc": "2026-11-17T16:35:45.776408+00:00",
+  "changedAndNewPublicFilesBeforeVerification": 14,
+  "markdownFilesVerified": 12,
+  "localLinksVerified": 127,
+  "tableShapesVerified": 36,
+  "newPublicLinesPrivateCredentialsNamesIDs": "ABSENT; existing legacy roster lines unchanged",
+  "actualHumanCasesClaimed": 0,
+  "humanTemplateCasesNotRun": 8,
+  "machinePreflight": "health/ready200 exact8e637e5",
+  "currentRevisionTraffic": "Owner readback required: no usable active gcloud account",
+  "newBusinessWrites": false,
+  "externalMessageSent": false,
+  "TAExerciseAssigned": false,
+  "pdfGenerated": false
+}

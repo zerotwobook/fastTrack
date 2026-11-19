@@ -1,0 +1,161 @@
+[
+  {
+    "alias": "SA",
+    "as": "SA",
+    "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/",
+    "text": "Skip to content\nfastTrack\nOverview\nSupervised teams\n\nSupervisor A\nSupervisor\n\nSign out\n\nOverview\n\nYour teams\n\nChoose a team to view its workspace.\n\nTeam A ↗\nSupervisor\nSupervisor A\nTeam members\nStudent A1\nStudent A2\nOpen team",
+    "teams": {
+      "status": 200,
+      "body": {
+        "data": [
+          {
+            "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+            "name": "Team A",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "members": [
+              {
+                "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+                "displayName": "Student A1"
+              },
+              {
+                "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+                "displayName": "Student A2"
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "serverTime": "2026-11-18T07:39:49.915Z"
+        }
+      }
+    }
+  },
+  {
+    "alias": "A1",
+    "teams": {
+      "status": 200,
+      "body": {
+        "data": [
+          {
+            "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+            "name": "Team A",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "members": [
+              {
+                "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+                "displayName": "Student A1"
+              },
+              {
+                "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+                "displayName": "Student A2"
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "serverTime": "2026-11-18T07:41:34.388Z"
+        }
+      }
+    }
+  },
+  {
+    "alias": "A2",
+    "as": "A2",
+    "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/",
+    "text": "Skip to content\nfastTrack\nOverview\nMy team\n\nStudent A2\nStudent\n\nSign out\n\nOverview\n\nYour team\n\nYour project team and supervisor.\n\nTeam A ↗\nMilestones\n\nLoading milestones…\n\nOpen team",
+    "teams": {
+      "status": 200,
+      "body": {
+        "data": [
+          {
+            "id": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+            "name": "Team A",
+            "supervisor": {
+              "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+              "displayName": "Supervisor A"
+            },
+            "members": [
+              {
+                "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+                "displayName": "Student A1"
+              },
+              {
+                "id": "b0f6490c-227f-4170-ab12-0bd0b72673ba",
+                "displayName": "Student A2"
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "serverTime": "2026-11-18T07:41:35.690Z"
+        }
+      }
+    }
+  },
+  {
+    "alias": "SB",
+    "as": "SB",
+    "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/",
+    "text": "Skip to content\nfastTrack\nOverview\nSupervised teams\n\nSupervisor B\nSupervisor\n\nSign out\n\nOverview\n\nYour teams\n\nChoose a team to view its workspace.\n\nTeam B ↗\nSupervisor\nSupervisor B\nTeam members\nStudent B1\nOpen team",
+    "teams": {
+      "status": 200,
+      "body": {
+        "data": [
+          {
+            "id": "cd27932d-72db-41b2-99c7-3dcee3929aae",
+            "name": "Team B",
+            "supervisor": {
+              "id": "a5ab1c3e-eac4-49ba-ba48-02009692b0df",
+              "displayName": "Supervisor B"
+            },
+            "members": [
+              {
+                "id": "19025609-51af-453b-882c-44ccd0a25e78",
+                "displayName": "Student B1"
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "serverTime": "2026-11-18T07:41:36.934Z"
+        }
+      }
+    }
+  },
+  {
+    "alias": "B1",
+    "as": "B1",
+    "url": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/",
+    "text": "Skip to content\nfastTrack\nOverview\nMy team\n\nStudent B1\nStudent\n\nSign out\n\nOverview\n\nYour team\n\nYour project team and supervisor.\n\nTeam B ↗\nMilestones\n\nLoading milestones…\n\nOpen team",
+    "teams": {
+      "status": 200,
+      "body": {
+        "data": [
+          {
+            "id": "cd27932d-72db-41b2-99c7-3dcee3929aae",
+            "name": "Team B",
+            "supervisor": {
+              "id": "a5ab1c3e-eac4-49ba-ba48-02009692b0df",
+              "displayName": "Supervisor B"
+            },
+            "members": [
+              {
+                "id": "19025609-51af-453b-882c-44ccd0a25e78",
+                "displayName": "Student B1"
+              }
+            ]
+          }
+        ],
+        "meta": {
+          "serverTime": "2026-11-18T07:41:38.314Z"
+        }
+      }
+    }
+  }
+]
