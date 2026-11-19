@@ -1,0 +1,24 @@
+{
+  "source": "1bbe187c088b86d104a16e420058f17425f18828",
+  "observedAt": "2026-11-18T18:00:15.685688+00:00",
+  "checks": [
+    {
+      "case": "reject production database name",
+      "exitCode": 1,
+      "passed": true,
+      "expectedErrorObserved": true
+    },
+    {
+      "case": "reject production SQL instance",
+      "exitCode": 1,
+      "passed": true,
+      "expectedErrorObserved": true
+    },
+    {
+      "case": "require explicit valid fixture UUIDs",
+      "exitCode": 1,
+      "passed": true,
+      "expectedErrorObserved": true
+    }
+  ]
+}

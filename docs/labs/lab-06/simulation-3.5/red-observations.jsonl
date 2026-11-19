@@ -1,0 +1,5 @@
+{"observedAt":"2026-11-18T17:47:23.107Z","caseId":"L6-S35-01","statuses":[201,409],"codes":[null,"ALREADY_SUBMITTED"],"submissionCountBefore":1,"submissionCountAfter":2,"lateMilestoneRows":1,"allRowsUnchanged":false,"controlId":"23a41e40-e880-493a-bff6-528a34a29102"}
+{"observedAt":"2026-11-18T17:47:23.307Z","caseId":"L6-S35-02","status":201,"persistedRows":1,"version":1}
+{"observedAt":"2026-11-18T17:47:23.450Z","caseId":"L6-S35-03","offsetMs":-1,"status":201,"code":null,"persistedRows":1}
+{"observedAt":"2026-11-18T17:47:23.572Z","caseId":"L6-S35-03","offsetMs":0,"status":201,"code":null,"persistedRows":1}
+{"observedAt":"2026-11-18T17:47:23.698Z","caseId":"L6-S35-03","offsetMs":1,"status":201,"code":null,"persistedRows":1}

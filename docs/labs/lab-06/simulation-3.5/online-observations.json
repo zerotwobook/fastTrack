@@ -1,0 +1,79 @@
+{
+  "operator": "Codex AI-operated verification",
+  "independentCoursePMSRetest": "PENDING",
+  "records": [
+    {
+      "caseId": "ONLINE-PREFLIGHT",
+      "observedAt": "2026-11-18T18:03:04.511478+00:00",
+      "url": "https://fasttrack-lab6-970128017651.asia-southeast1.run.app",
+      "source": "1bbe187c088b86d104a16e420058f17425f18828",
+      "health": {
+        "status": "ok",
+        "version": "1bbe187c088b86d104a16e420058f17425f18828"
+      },
+      "readiness": {
+        "status": "ready",
+        "database": "connected",
+        "version": "1bbe187c088b86d104a16e420058f17425f18828"
+      }
+    },
+    {
+      "caseId": "ONLINE-BEFORE",
+      "observedAt": "2026-11-18T18:03:06.181276+00:00",
+      "status": 201,
+      "submission": {
+        "id": "6dcbecd0-e154-4b0a-9d4a-098b34aff798",
+        "milestoneId": "639a705c-7851-4a14-8282-1d86335ea374",
+        "submittedBy": {
+          "id": "ef626ccf-188d-43b0-842a-3e3f1a1e287e",
+          "displayName": "Student A1"
+        },
+        "version": 1,
+        "title": "L6-S35 AI synthetic work",
+        "description": "Controlled exercise section 3.5.",
+        "url": "https://example.edu/lab6/section-3-5",
+        "submittedAt": "2026-11-18T18:03:05.049Z"
+      },
+      "deadline": "2026-11-18T18:08:05.631Z",
+      "freshReadMatches": true
+    },
+    {
+      "caseId": "ONLINE-LATE",
+      "observedAt": "2026-11-18T18:04:32.120875+00:00",
+      "attempt": 1,
+      "status": 409,
+      "response": {
+        "error": {
+          "code": "DEADLINE_PASSED",
+          "message": "The deadline has passed. Your work was not saved.",
+          "fields": {}
+        }
+      },
+      "lateRows": 0,
+      "deadline": "2026-11-18T18:03:25.741Z",
+      "serverTimeBeforeAttempt": "2026-11-18T18:04:31.007Z"
+    },
+    {
+      "caseId": "ONLINE-LATE",
+      "observedAt": "2026-11-18T18:04:32.320785+00:00",
+      "attempt": 2,
+      "status": 409,
+      "response": {
+        "error": {
+          "code": "DEADLINE_PASSED",
+          "message": "The deadline has passed. Your work was not saved.",
+          "fields": {}
+        }
+      },
+      "lateRows": 0,
+      "deadline": "2026-11-18T18:03:25.741Z",
+      "serverTimeBeforeAttempt": "2026-11-18T18:04:31.007Z"
+    },
+    {
+      "caseId": "ONLINE-CONTROL",
+      "observedAt": "2026-11-18T18:04:32.402934+00:00",
+      "savedControlUnchanged": true,
+      "savedControlId": "6dcbecd0-e154-4b0a-9d4a-098b34aff798"
+    }
+  ]
+}
