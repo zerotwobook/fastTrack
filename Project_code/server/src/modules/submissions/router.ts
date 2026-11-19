@@ -3,6 +3,7 @@ import type { Request, RequestHandler } from 'express';
 import type { PrismaClient } from '../../db/generated/client/index.js';
 import { parseJsonBody, requireJsonBody } from '../../http/errors.js';
 import type { TeamActor } from '../teams/index.js';
+import { RevisionService } from './revisions.js';
 import { SubmissionService } from './service.js';
 
 export interface SubmissionRouterDependencies {
@@ -18,10 +19,16 @@ export function createSubmissionRouter(deps: SubmissionRouterDependencies): Rout
     if (typeof deps[key] !== 'function') throw new TypeError(`Submission protection dependency ${key} is required.`);
   }
   const service = new SubmissionService(deps.prisma);
+  const revisions = new RevisionService(deps.prisma);
   const router = Router();
   router.post('/milestones/:id/submissions', deps.requireSession, deps.requireStudent, deps.requireMutation,
     requireJsonBody, parseJsonBody, async (req, res) => {
       const saved = await service.submit(String(req.params.id), req.body, await deps.getAuthContext(req));
+      res.status(201).json({ data: saved });
+    });
+  router.post('/milestones/:id/revisions', deps.requireSession, deps.requireStudent, deps.requireMutation,
+    requireJsonBody, parseJsonBody, async (req, res) => {
+      const saved = await revisions.revise(String(req.params.id), req.body, await deps.getAuthContext(req));
       res.status(201).json({ data: saved });
     });
   router.get('/milestones/:id/submissions', deps.requireSession, async (req, res) => {
