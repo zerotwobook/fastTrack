@@ -6,7 +6,8 @@ import type { Team } from '../auth/session';
 import { formatBangkok } from '../milestones/MilestoneTrack';
 import type { MilestoneItem } from '../milestones/MilestoneTrack';
 import { codePointLength } from '../../../../shared/milestones.mjs';
-import { isWorkUrl, parseSubmissionInput, SubmissionInputError } from '../../../../shared/submissions.mjs';
+import { isWorkUrl, parseRevisionInput, parseSubmissionInput, SubmissionInputError } from '../../../../shared/submissions.mjs';
+import { describeSubmissionHistory } from './history';
 import styles from './submissions.module.css';
 
 export interface SubmissionRecord {
@@ -15,12 +16,52 @@ export interface SubmissionRecord {
 }
 interface Context { id: string; milestone: MilestoneItem; team: Team; serverTime: string }
 
-function Existing({ item }: { item: SubmissionRecord }) {
+function Existing({ item, milestoneId, canRevise }: { item: SubmissionRecord; milestoneId: string; canRevise: boolean }) {
   return <section className={styles.notice} aria-label="Existing team submission">
     <h2>Your team has already submitted work</h2>
     <p>Submitted by {item.submittedBy.displayName}, version {item.version}, {formatBangkok(item.submittedAt)}.</p>
     <a href={`/submissions/${item.id}`}>Open saved submission</a>
+    {canRevise && <a href={`/milestones/${milestoneId}/revisions/new`}>Submit revision</a>}
   </section>;
+}
+
+interface SubmissionFormFieldsProps {
+  prefix: string;
+  title: string; setTitle: (value: string) => void;
+  description: string; setDescription: (value: string) => void;
+  url: string; setUrl: (value: string) => void;
+  fields: Readonly<Record<string, string>>;
+  disabled: boolean;
+}
+function SubmissionFormFields({ prefix, title, setTitle, description, setDescription, url, setUrl, fields, disabled }: SubmissionFormFieldsProps) {
+  const described = (key: string) => `${prefix}-${key}-${fields[key] ? 'error' : 'hint'}`;
+  return <>
+    <Field id={`${prefix}-title`} label="Title" hint={`${codePointLength(title.trim())}/120 characters`} {...(fields.title ? { error: fields.title } : {})}>
+      <Input id={`${prefix}-title`} name="title" required value={title} disabled={disabled} onChange={event => setTitle(event.target.value)} aria-invalid={!!fields.title} aria-describedby={described('title')} />
+    </Field>
+    <Field id={`${prefix}-description`} label="Description" hint={`${codePointLength(description.trim())}/4,000 characters`} {...(fields.description ? { error: fields.description } : {})}>
+      <Textarea id={`${prefix}-description`} name="description" required value={description} disabled={disabled} onChange={event => setDescription(event.target.value)} aria-invalid={!!fields.description} aria-describedby={described('description')} />
+    </Field>
+    <Field id={`${prefix}-url`} label="Work link" hint="Use a complete http:// or https:// link your supervisor can open. Check its sharing permissions before submitting." {...(fields.url ? { error: fields.url } : {})}>
+      <Input id={`${prefix}-url`} name="url" type="url" required value={url} disabled={disabled} onChange={event => setUrl(event.target.value)} aria-invalid={!!fields.url} aria-describedby={described('url')} />
+    </Field>
+  </>;
+}
+
+function VersionHistoryList({ items, currentId, latestId }: { items: readonly SubmissionRecord[]; currentId?: string | undefined; latestId?: string | undefined }) {
+  return <ul className={styles.historyList}>{items.map(row => {
+    const isCurrent = row.id === currentId;
+    const isLatest = row.id === latestId;
+    return <li key={row.id} className={styles.historyItem} data-current={isCurrent ? 'true' : undefined}>
+      <div>
+        <strong>Version {row.version}</strong>
+        {isLatest && <span className={styles.historyBadge}>Latest</span>}
+        {isCurrent && <span className={styles.historyBadge}>Current</span>}
+        <p className={styles.historyMeta}>{row.title} &mdash; submitted by {row.submittedBy.displayName}, <time dateTime={row.submittedAt}>{formatBangkok(row.submittedAt)}</time></p>
+      </div>
+      <a href={`/submissions/${row.id}`} aria-current={isCurrent ? 'page' : undefined}>{isCurrent ? 'Viewing version' : `Open version ${row.version}`}</a>
+    </li>;
+  })}</ul>;
 }
 
 export function SubmissionCreate({ milestoneId, userRole }: { milestoneId: string; userRole: 'student' | 'supervisor' }) {
@@ -112,7 +153,6 @@ export function SubmissionCreate({ milestoneId, userRole }: { milestoneId: strin
     : <p role="status">Loading milestone and saved submissions...</p>}</section>;
   const closed = !!context.milestone.cancelledAt || Date.parse(context.serverTime) > Date.parse(context.milestone.dueAt);
   const disabled = saving || checking || uncertain || !!existing || closed;
-  const described = (key: string) => `submission-${key}-${fields[key] ? 'error' : 'hint'}`;
   return <>
     <p className={styles.breadcrumb}><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a></p>
     <h1>Submit work</h1>
@@ -121,50 +161,203 @@ export function SubmissionCreate({ milestoneId, userRole }: { milestoneId: strin
     {error && <div ref={summary} role="alert" tabIndex={-1} className={styles.notice}><p>{error}</p>
       {uncertain && <Button variant="secondary" disabled={checking || saving} onClick={() => { void recover('Checking saved submissions...'); }}>{checking ? 'Checking saved work...' : 'Check saved submissions'}</Button>}
     </div>}
-    {existing && <Existing item={existing} />}
+    {existing && <Existing item={existing} milestoneId={milestoneId} canRevise={!closed} />}
     {closed && !existing && <p className={styles.notice}>{context.milestone.cancelledAt ? 'This milestone was cancelled and cannot receive work.' : 'The deadline has passed. Work cannot be submitted.'}</p>}
     <form className={styles.form} noValidate onSubmit={event => { void submit(event); }}>
-      <Field id="submission-title" label="Title" hint={`${codePointLength(title.trim())}/120 characters`} {...(fields.title ? { error: fields.title } : {})}>
-        <Input id="submission-title" name="title" required value={title} disabled={saving || checking} onChange={event => setTitle(event.target.value)} aria-invalid={!!fields.title} aria-describedby={described('title')} />
-      </Field>
-      <Field id="submission-description" label="Description" hint={`${codePointLength(description.trim())}/4,000 characters`} {...(fields.description ? { error: fields.description } : {})}>
-        <Textarea id="submission-description" name="description" required value={description} disabled={saving || checking} onChange={event => setDescription(event.target.value)} aria-invalid={!!fields.description} aria-describedby={described('description')} />
-      </Field>
-      <Field id="submission-url" label="Work link" hint="Use a complete http:// or https:// link your supervisor can open. Check its sharing permissions before submitting." {...(fields.url ? { error: fields.url } : {})}>
-        <Input id="submission-url" name="url" type="url" required value={url} disabled={saving || checking} onChange={event => setUrl(event.target.value)} aria-invalid={!!fields.url} aria-describedby={described('url')} />
-      </Field>
+      <SubmissionFormFields prefix="submission" title={title} setTitle={setTitle} description={description} setDescription={setDescription} url={url} setUrl={setUrl} fields={fields} disabled={saving || checking} />
       <div className={styles.actions}><Button type="submit" loading={saving} disabled={disabled}>{saving ? 'Submitting work...' : 'Submit work'}</Button><a href={`/milestones/${milestoneId}`}>Back to milestone</a></div>
     </form>
   </>;
 }
 
-export function SubmissionDetail({ id, renderFeedback }: { id: string; renderFeedback?: (submission: SubmissionRecord) => ReactNode }) {
-  const [result, setResult] = useState<{ id: string; item: SubmissionRecord; milestone: MilestoneItem; team: Team } | null>(null);
+export function RevisionCreate({ milestoneId, userRole }: { milestoneId: string; userRole: 'student' | 'supervisor' }) {
+  const [context, setContext] = useState<{ id: string; milestone: MilestoneItem; team: Team; serverTime: string; history: SubmissionRecord[] } | null>(null);
+  const [expectedVersion, setExpectedVersion] = useState<number | null>(null);
+  const [title, setTitle] = useState('');
+  const [description, setDescription] = useState('');
+  const [url, setUrl] = useState('');
+  const [error, setError] = useState<string | null>(null);
+  const [fields, setFields] = useState<Readonly<Record<string, string>>>({});
+  const [saving, setSaving] = useState(false);
+  const [checking, setChecking] = useState(false);
+  const [uncertain, setUncertain] = useState(false);
+  const [needsReviewAck, setNeedsReviewAck] = useState(false);
+  const [attempt, setAttempt] = useState(0);
+  const initialized = useRef(false);
+  const busy = useRef(false);
+  const alive = useRef(true);
+  const summary = useRef<HTMLDivElement>(null);
+  useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
+  useEffect(() => { if (error) summary.current?.focus(); }, [error, fields, needsReviewAck, uncertain]);
+  useEffect(() => {
+    initialized.current = false;
+    setExpectedVersion(null);
+    setTitle(''); setDescription(''); setUrl('');
+    setError(null); setFields({}); setUncertain(false); setNeedsReviewAck(false);
+  }, [milestoneId]);
+  useEffect(() => {
+    let active = true;
+    setError(null);
+    if (context?.id !== milestoneId) setContext(null);
+    void (async () => {
+      const response = await sessionStore.readDomain<MilestoneItem>(`/milestones/${milestoneId}`);
+      const [team, saved] = await Promise.all([
+        sessionStore.read<Team>(`/teams/${response.data.teamId}`),
+        sessionStore.readDomain<SubmissionRecord[]>(`/milestones/${milestoneId}/submissions`),
+      ]);
+      if (!active) return;
+      const latest = saved.data[0] ?? null;
+      setContext({ id: milestoneId, milestone: response.data, team, serverTime: saved.meta.serverTime, history: saved.data });
+      if (!initialized.current && latest) {
+        initialized.current = true;
+        setExpectedVersion(latest.version);
+        setTitle(latest.title);
+        setDescription(latest.description);
+        setUrl(latest.url);
+      }
+    })().catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
+    return () => { active = false; };
+  }, [milestoneId, attempt]);
+
+  const inspectHistory = async (reasonMessage: string, kind: 'conflict' | 'timeout') => {
+    setChecking(true);
+    if (kind === 'timeout') setUncertain(true);
+    else setNeedsReviewAck(true);
+    setError(reasonMessage);
+    try {
+      const [milestone, saved] = await Promise.all([
+        sessionStore.readDomain<MilestoneItem>(`/milestones/${milestoneId}`),
+        sessionStore.readDomain<SubmissionRecord[]>(`/milestones/${milestoneId}/submissions`),
+      ]);
+      if (!alive.current) return;
+      setContext(current => current ? { ...current, milestone: milestone.data, serverTime: saved.meta.serverTime, history: saved.data } : current);
+      const latest = saved.data[0] ?? null;
+      if (kind === 'timeout') {
+        setError(latest
+          ? 'The save result could not be confirmed. Check saved versions below (version, author, and time); matching version or content alone does not prove your request succeeded. Do not retry automatically.'
+          : 'No saved submission was found. Your draft is still preserved below.');
+      } else if (latest) {
+        setError(`A newer version (version ${latest.version}) exists. Review the latest saved version below before submitting your revision again.`);
+      }
+    } catch (reason) {
+      if (alive.current && !(reason instanceof StaleSessionError)) {
+        setError('Saved versions could not be checked right now. Check the milestone history before trying again. Your draft is kept.');
+      }
+    } finally {
+      if (alive.current) setChecking(false);
+    }
+  };
+
+  const submit = async (event: FormEvent) => {
+    event.preventDefault();
+    if (busy.current || uncertain || needsReviewAck || !context || expectedVersion === null) return;
+    setError(null); setFields({});
+    let input;
+    try { input = parseRevisionInput({ title, description, url, expectedVersion }); }
+    catch (reason) {
+      if (reason instanceof SubmissionInputError) { setFields(reason.fields); setError(reason.message); }
+      return;
+    }
+    busy.current = true; setSaving(true);
+    try {
+      const saved = await sessionStore.mutate<SubmissionRecord>(`/milestones/${milestoneId}/revisions`, input);
+      if (alive.current) location.assign(`/submissions/${saved.id}`);
+    } catch (reason) {
+      if (!alive.current || reason instanceof StaleSessionError) return;
+      if (reason instanceof ApiError) {
+        setFields(reason.fields);
+        if (reason.status === 0 || reason.status >= 500) {
+          await inspectHistory(reason.message, 'timeout');
+          return;
+        }
+        if (reason.status === 409) {
+          await inspectHistory(reason.message, 'conflict');
+          return;
+        }
+      }
+      setError((reason as Error).message);
+    } finally { busy.current = false; if (alive.current) setSaving(false); }
+  };
+
+  if (userRole !== 'student') return <section className={styles.notice} role="alert"><h1>Student revision only</h1><p>Only a student on this team can submit revisions.</p><a href={`/milestones/${milestoneId}`}>Back to milestone</a></section>;
+  if (!context || context.id !== milestoneId) return <section><h1>Submit revision</h1>{error
+    ? <div role="alert" className={styles.notice}><p>{error}</p><Button onClick={() => setAttempt(v => v + 1)}>Try again</Button><a href="/">Back to overview</a></div>
+    : <p role="status">Loading milestone and version history...</p>}</section>;
+
+  const latest = context.history[0] ?? null;
+  const closed = !!context.milestone.cancelledAt || Date.parse(context.serverTime) > Date.parse(context.milestone.dueAt);
+  const disabled = saving || checking || uncertain || needsReviewAck || !latest || expectedVersion === null || closed;
+  return <>
+    <p className={styles.breadcrumb}><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a> / Submit revision</p>
+    <h1>Submit revision</h1>
+    <p className={styles.context}>Deadline: <time dateTime={context.milestone.dueAt}>{formatBangkok(context.milestone.dueAt)}</time>.</p>
+    {latest ? <p className={styles.context}>Latest saved version: version {latest.version}, submitted by {latest.submittedBy.displayName}, {formatBangkok(latest.submittedAt)}. <a href={`/submissions/${latest.id}`}>Open version {latest.version}</a></p>
+      : <div className={styles.notice} role="alert"><p>A first submission is required before submitting a revision.</p><a href={`/milestones/${milestoneId}/submissions/new`}>Submit initial work</a></div>}
+    {closed && latest && <p className={styles.notice}>{context.milestone.cancelledAt ? 'This milestone was cancelled and cannot receive revisions.' : 'The deadline has passed. New revisions cannot be submitted.'}</p>}
+    {error && <div ref={summary} role="alert" tabIndex={-1} className={styles.notice}><p>{error}</p>
+      {(uncertain || needsReviewAck) && latest && <div className={styles.recoveryButtons}>
+        <Button type="button" variant="secondary" disabled={checking || saving} onClick={() => { void inspectHistory('Checking saved versions...', uncertain ? 'timeout' : 'conflict'); }}>
+          {checking ? 'Checking saved versions...' : 'Check saved versions'}
+        </Button>
+        <Button type="button" variant="secondary" disabled={checking || saving} onClick={() => { setExpectedVersion(latest.version); setNeedsReviewAck(false); setUncertain(false); setError(null); }}>
+          Use version {latest.version} as base (keep my draft)
+        </Button>
+      </div>}
+    </div>}
+    {latest && <form className={styles.form} noValidate onSubmit={event => { void submit(event); }}>
+      <SubmissionFormFields prefix="revision" title={title} setTitle={setTitle} description={description} setDescription={setDescription} url={url} setUrl={setUrl} fields={fields} disabled={saving || checking} />
+      <p className={styles.historyMeta}>Submitting based on expected version {expectedVersion ?? latest.version}. Prior versions and their feedback remain unchanged.</p>
+      <div className={styles.actions}><Button type="submit" loading={saving} disabled={disabled}>{saving ? 'Submitting revision...' : 'Submit revision'}</Button><a href={`/submissions/${latest.id}`}>Back to version {latest.version}</a></div>
+    </form>}
+    {context.history.length > 0 && <section className={styles.historySection} aria-label="Saved version history">
+      <h2>Saved versions</h2>
+      <VersionHistoryList items={context.history} latestId={latest?.id} />
+    </section>}
+  </>;
+}
+
+export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string; userRole?: 'student' | 'supervisor'; renderFeedback?: (submission: SubmissionRecord) => ReactNode }) {
+  const [result, setResult] = useState<{ id: string; item: SubmissionRecord; milestone: MilestoneItem; team: Team; history: SubmissionRecord[]; serverTime: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     let active = true; setResult(null); setError(null);
     void (async () => {
       const item = await sessionStore.read<SubmissionRecord>(`/submissions/${id}`);
-      const milestone = await sessionStore.read<MilestoneItem>(`/milestones/${item.milestoneId}`);
-      const team = await sessionStore.read<Team>(`/teams/${milestone.teamId}`);
-      if (active) setResult({ id, item, milestone, team });
+      const [milestoneDomain, historyDomain] = await Promise.all([
+        sessionStore.readDomain<MilestoneItem>(`/milestones/${item.milestoneId}`),
+        sessionStore.readDomain<SubmissionRecord[]>(`/milestones/${item.milestoneId}/submissions`),
+      ]);
+      const team = await sessionStore.read<Team>(`/teams/${milestoneDomain.data.teamId}`);
+      if (active) setResult({ id, item, milestone: milestoneDomain.data, team, history: historyDomain.data, serverTime: historyDomain.meta.serverTime });
     })().catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
   }, [id, attempt]);
   if (error) return <><h1>Submission unavailable</h1><div role="alert" className={styles.notice}><p>{error}</p><Button onClick={() => setAttempt(v => v + 1)}>Try again</Button><a href="/">Back to overview</a></div></>;
   if (!result || result.id !== id) return <p role="status">Loading saved submission...</p>;
-  const { item, milestone, team } = result;
+  const { item, milestone, team, history, serverTime } = result;
+  const { orderedHistory, latest, isOldVersion } = describeSubmissionHistory(item, history);
+  const canRevise = userRole === 'student' && !milestone.cancelledAt && Date.parse(serverTime) <= Date.parse(milestone.dueAt);
   return <>
     <p className={styles.breadcrumb}><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={`/milestones/${milestone.id}`}>{milestone.title}</a> / Saved submission</p>
     <h1>{item.title}</h1>
     <p className={styles.context}>Version {item.version}, submitted by {item.submittedBy.displayName}.</p>
     <p className={styles.context}><time dateTime={item.submittedAt}>{formatBangkok(item.submittedAt)}</time></p>
+    {isOldVersion && latest && <div className={styles.notice} role="region" aria-label="Older version notice">
+      <p>Viewing version {item.version}; the latest version is version {latest.version}.</p>
+      <a href={`/submissions/${latest.id}`}>View latest version</a>
+    </div>}
     <div className={renderFeedback ? styles.withFeedback : styles.content}>
       <section aria-label="Saved work"><h2>Description</h2><p className={styles.description}>{item.description}</p>
         <h2>Work link</h2>{isWorkUrl(item.url)
           ? <><a className={styles.workLink} href={item.url} target="_blank" rel="noopener noreferrer">Open work link</a><p className={styles.url}>{item.url}</p></>
           : <p className={styles.notice}>This saved link cannot be opened safely. Contact the submitting team member.</p>}
+        <section className={styles.historySection} aria-label="Version history">
+          <h2>Version history</h2>
+          <VersionHistoryList items={orderedHistory} currentId={item.id} latestId={latest?.id} />
+          {canRevise ? <a className={styles.detailActionLink} href={`/milestones/${milestone.id}/revisions/new`}>Submit new revision</a>
+            : userRole === 'student' && <p className={styles.historyMeta}>{milestone.cancelledAt ? 'This milestone was cancelled and cannot receive new revisions.' : 'The deadline has passed. New revisions cannot be submitted.'}</p>}
+        </section>
       </section>
       {renderFeedback && <aside aria-label={`Feedback for version ${item.version}`}>{renderFeedback(item)}</aside>}
     </div>
