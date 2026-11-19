@@ -206,7 +206,6 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
   const [statusNotice, setStatusNotice] = useState<string | null>(null);
   const [cancelling, setCancelling] = useState(false);
   const [cancelError, setCancelError] = useState<string | null>(null);
-  const [cancelOpen, setCancelOpen] = useState(false);
   const editTriggerRef = useRef<HTMLButtonElement>(null);
   const cancelTriggerRef = useRef<HTMLButtonElement>(null);
   const cancelDialogRef = useRef<HTMLDialogElement>(null);
@@ -215,7 +214,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
   const restoreFocusTarget = useRef<'edit' | 'cancel' | null>(null);
   const alive = useRef(true);
   useEffect(() => { alive.current = true; return () => { alive.current = false; }; }, []);
-  useEffect(() => { setEditing(false); setStatusNotice(null); setCancelError(null); cancelDialogRef.current?.close(); setCancelOpen(false); }, [id]);
+  useEffect(() => { setEditing(false); setStatusNotice(null); setCancelError(null); cancelDialogRef.current?.close(); }, [id]);
   useEffect(() => {
     let active = true; setError(null);
     if (result?.id !== id) setResult(null);
@@ -242,7 +241,6 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
   const openCancelDialog = () => {
     setCancelError(null);
     restoreFocusTarget.current = 'cancel';
-    setCancelOpen(true);
     cancelDialogRef.current?.showModal();
     cancelBackRef.current?.focus();
   };
@@ -258,7 +256,6 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
       const updated = await sessionStore.mutate<MilestoneItem>(`/milestones/${id}/cancel`, {}, 'POST');
       if (!alive.current) return;
       restoreFocusTarget.current = null;
-      setCancelOpen(false);
       cancelDialogRef.current?.close();
       setResult(current => current ? { ...current, item: updated } : current);
       setStatusNotice('Milestone cancelled.');
@@ -304,10 +301,10 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
       </aside>
     </div>
     <dialog ref={cancelDialogRef} className={styles.confirmDialog} aria-labelledby="cancel-milestone-title" aria-describedby="cancel-milestone-description"
-      aria-modal="true" open={cancelOpen ? undefined : false}
+      aria-modal="true"
       onKeyDown={trapDialogFocus}
       onCancel={event => { if (cancelling) { event.preventDefault(); return; } restoreFocusTarget.current = 'cancel'; }}
-      onClose={() => { setCancelOpen(false); setCancelError(null); if (restoreFocusTarget.current === 'cancel') { restoreFocusTarget.current = null; cancelTriggerRef.current?.focus(); } }}>
+      onClose={() => { setCancelError(null); if (restoreFocusTarget.current === 'cancel') { restoreFocusTarget.current = null; cancelTriggerRef.current?.focus(); } }}>
       <h2 id="cancel-milestone-title">Cancel milestone</h2>
       <p id="cancel-milestone-description" className={styles.confirmCopy}>
         Cancel milestone &ldquo;{result.item.title}&rdquo;? Cancelled milestones stay visible in history, cannot receive submissions, and cannot be reopened or edited.
