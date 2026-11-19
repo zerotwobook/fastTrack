@@ -6,6 +6,7 @@ import type { SessionSnapshot, Team } from './features/auth/session';
 import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/milestones';
 import { SubmissionCreate, SubmissionDetail } from './features/submissions';
 import { FeedbackPanel } from './features/feedback';
+import { TeamCreate, TeamSettings } from './features/teams/TeamPlanning';
 import './app.css';
 
 function Login({ state }: { state: SessionSnapshot }) {
@@ -77,6 +78,8 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
     return () => desktop.removeEventListener('change', closeOnDesktop);
   }, []);
   const detailId = /^\/teams\/([a-f0-9-]{36})(?:\/milestones\/new)?$/i.exec(path)?.[1];
+  const settingsId = /^\/teams\/([a-f0-9-]{36})\/settings$/i.exec(path)?.[1];
+  const creatingTeam = path === '/teams/new';
   const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/submissions\/new)?$/i.exec(path)?.[1];
   const submissionId = /^\/submissions\/([a-f0-9-]{36})$/i.exec(path)?.[1];
   const submitting = path.endsWith('/submissions/new');
@@ -84,13 +87,13 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   const validPath = path === '/' || detailId !== undefined || milestoneId !== undefined || submissionId !== undefined;
   useEffect(() => {
     let active = true; setError(null); setResult(null);
-    if (milestoneId || submissionId) return;
+    if (milestoneId || submissionId || settingsId || creatingTeam) return;
     if (!validPath) { setError('This page could not be found. Return to your overview.'); return; }
     void sessionStore.read<Team | Team[]>(detailId ? `/teams/${detailId}` : '/teams').then(data => {
       if (active) setResult({ revision: state.revision, path, teams: Array.isArray(data) ? data : [data] });
     }).catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
-  }, [state.revision, path, attempt, detailId, milestoneId, submissionId, validPath]);
+  }, [state.revision, path, attempt, detailId, milestoneId, submissionId, settingsId, creatingTeam, validPath]);
   const teams = result?.revision === state.revision && result.path === path ? result.teams : null;
   return <div className="application-shell">
     <aside className="sidebar"><a className="wordmark" href="/">fastTrack</a><Navigation role={user.role} /></aside>
@@ -102,12 +105,17 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
       <p className="account-summary"><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
       <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
     </header><main id={state.phase === 'ready' ? 'main-content' : undefined} className="workspace-content">
-      {submissionId ? <SubmissionDetail id={submissionId} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
+      {creatingTeam || settingsId ? user.role === 'supervisor'
+        ? (settingsId ? <TeamSettings key={settingsId} teamId={settingsId} /> : <TeamCreate />)
+        : <EmptyState title="Team settings are restricted to supervisors" action={<a href="/">Back to overview</a>} />
+        : submissionId ? <SubmissionDetail id={submissionId} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
       <h1>{creating ? 'Create milestone' : detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
       <p className="intro">{creating ? `Set the work and deadline${teams?.[0] ? ` for ${teams[0].name}` : ' for this team'}.` : detailId ? 'Your team members, deadlines and submitted work.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
+      {user.role === 'supervisor' && !creating && !error && (path === '/' || (detailId && teams?.[0])) &&
+        <p className="team-planning-action"><a className={detailId ? 'team-link' : 'team-link team-link--primary'} href={detailId ? `/teams/${detailId}/settings` : '/teams/new'}>{detailId ? 'Team settings' : 'Create team'}</a></p>}
       {error ? <section className="notice" role="alert"><p>{error}</p><div className="recovery-actions"><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}>Try again</Button><a href="/">Back to overview</a></div></section>
       : teams === null ? <p role="status">Loading your team workspace…</p>
-      : teams.length === 0 ? <EmptyState title={user.role === 'student' ? 'No team assigned yet' : 'No supervised teams yet'} description="Contact your course supervisor to arrange your team." />
+      : teams.length === 0 ? <EmptyState title={user.role === 'student' ? 'No team assigned yet' : 'No supervised teams yet'} description={user.role === 'student' ? 'Contact your course supervisor to arrange your team.' : 'Create a team to start planning its milestones.'} />
       : <section id="teams" aria-label="Teams" className={`team-list${!detailId && user.role === 'supervisor' ? ' team-list--supervisor' : ''}`}>{teams.map(team => <article className="team-row" key={team.id}>
         {!detailId && <h2><a href={`/teams/${team.id}`}>{team.name}<span aria-hidden="true"> ↗</span></a></h2>}
         {!creating && (detailId || user.role === 'supervisor') && <dl><div><dt>Supervisor</dt><dd>{team.supervisor.displayName}</dd></div><div><dt>Team members</dt><dd>{team.members.length ? <ul>{team.members.map(member => <li key={member.id}>{member.displayName}</li>)}</ul> : 'No members assigned yet'}</dd></div></dl>}
