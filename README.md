@@ -4,7 +4,7 @@ A course-project tracking application for students and supervisors, covering mil
 
 ## Application
 
-Students sign in, view their team's milestones, submit one immutable version of work before the deadline, and read the saved work and supervisor feedback. Assigned supervisors create milestones, read submissions and append feedback to the exact submission version. Other teams' records remain outside the caller's scope.
+Students sign in, view their team's milestones, submit one immutable version of work before the deadline, and read the saved work and supervisor feedback. Supervisors create teams, rename teams they own, and manage membership before the team has submission history. They create milestones, read submissions, and append feedback to the exact submission version. Other teams' records remain outside the caller's scope.
 
 The React/TypeScript client and Express/TypeScript API use PostgreSQL/Prisma, DB-backed eight-hour sessions and source/CSRF protection. The monochrome interface includes role-aware navigation, mobile layouts, validation and recovery for uncertain feedback saves. Submission and feedback records persist across application restarts.
 
