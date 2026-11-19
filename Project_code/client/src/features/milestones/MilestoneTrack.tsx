@@ -40,8 +40,9 @@ interface MilestoneFormFieldsProps {
   dueAt: string; setDueAt: (value: string) => void;
   fields: Readonly<Record<string, string>>;
   saving: boolean;
+  deadlineStep?: number;
 }
-function MilestoneFormFields({ title, setTitle, description, setDescription, dueAt, setDueAt, fields, saving }: MilestoneFormFieldsProps) {
+function MilestoneFormFields({ title, setTitle, description, setDescription, dueAt, setDueAt, fields, saving, deadlineStep = 60 }: MilestoneFormFieldsProps) {
   const described = (id: string) => `${id}-${fields[id] ? 'error' : 'hint'}`;
   return <>
     <Field id="title" label="Title" hint={`${codePointLength(title.trim())}/120 characters`} {...(fields.title ? { error: fields.title } : {})}>
@@ -51,7 +52,7 @@ function MilestoneFormFields({ title, setTitle, description, setDescription, due
       <Textarea id="description" name="description" required value={description} onChange={event => setDescription(event.target.value)} disabled={saving} aria-invalid={!!fields.description} aria-describedby={described('description')} />
     </Field>
     <Field id="dueAt" label="Deadline in Asia/Bangkok" hint="A time entered as HH:mm uses seconds 00, not the end of that minute." {...(fields.dueAt ? { error: fields.dueAt } : {})}>
-      <Input id="dueAt" name="dueAt" type="datetime-local" step="60" required value={dueAt} onChange={event => setDueAt(event.target.value)} disabled={saving} aria-invalid={!!fields.dueAt} aria-describedby={described('dueAt')} />
+      <Input id="dueAt" name="dueAt" type="datetime-local" step={deadlineStep} required value={dueAt} onChange={event => setDueAt(event.target.value)} disabled={saving} aria-invalid={!!fields.dueAt} aria-describedby={described('dueAt')} />
     </Field>
   </>;
 }
@@ -190,7 +191,7 @@ function MilestoneEdit({ item, onBack, onReload, onSaved }: MilestoneEditProps) 
       <div className={styles.inlineActions}><Button type="button" variant="secondary" onClick={onReload}>Reload milestone</Button></div>
     </div>}
     <form className={styles.form} onSubmit={event => { void submit(event); }}>
-      <MilestoneFormFields title={title} setTitle={setTitle} description={description} setDescription={setDescription} dueAt={dueAt} setDueAt={setDueAt} fields={fields} saving={saving} />
+      <MilestoneFormFields title={title} setTitle={setTitle} description={description} setDescription={setDescription} dueAt={dueAt} setDueAt={setDueAt} fields={fields} saving={saving} deadlineStep={0.001} />
       <div className={styles.actions}>
         <Button type="submit" loading={saving} disabled={saving || uncertain}>{saving ? 'Saving changes…' : 'Save changes'}</Button>
         <Button type="button" variant="secondary" disabled={saving} onClick={onBack}>Go back</Button>
