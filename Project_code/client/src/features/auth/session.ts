@@ -13,7 +13,7 @@ export function safeReturnTo(value: string | null): string {
   if (!value || !value.startsWith('/') || value.startsWith('//') || /[\u0000-\u0020\\]/.test(value)) return '/';
   try {
     const url = new URL(value, 'https://fasttrack.invalid');
-    if (url.origin !== 'https://fasttrack.invalid' || !(url.pathname === '/' || url.pathname === '/teams/new' || /^\/teams\/[a-f0-9-]{36}(?:\/milestones\/new|\/settings)?$/i.test(url.pathname) || /^\/milestones\/[a-f0-9-]{36}(?:\/(?:submissions|revisions)\/new)?$/i.test(url.pathname) || /^\/submissions\/[a-f0-9-]{36}$/i.test(url.pathname))) return '/';
+    if (url.origin !== 'https://fasttrack.invalid' || !(url.pathname === '/' || url.pathname === '/teams/new' || /^\/teams\/[a-f0-9-]{36}(?:\/milestones\/new|\/settings|\/progress)?$/i.test(url.pathname) || /^\/milestones\/[a-f0-9-]{36}(?:\/(?:submissions|revisions)\/new)?$/i.test(url.pathname) || /^\/submissions\/[a-f0-9-]{36}$/i.test(url.pathname))) return '/';
     return url.pathname + url.search + url.hash;
   } catch { return '/'; }
 }

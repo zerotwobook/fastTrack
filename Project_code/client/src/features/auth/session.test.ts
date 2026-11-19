@@ -99,6 +99,10 @@ describe('F-01 internal return-to destinations', () => {
     '/milestones/11111111-1111-1111-1111-111111111111/submissions/new', '/milestones/11111111-1111-1111-1111-111111111111/revisions/new', '/submissions/11111111-1111-1111-1111-111111111111'])('permits implemented milestone/submission destination %s with server-side scope still required', path => {
     expect(safeReturnTo(path)).toBe(path);
   });
+  it('preserves a team progress destination after sign-in', () => {
+    const path = '/teams/11111111-1111-1111-1111-111111111111/progress';
+    expect(safeReturnTo(path)).toBe(path);
+  });
   it.each(['https://foreign.example', '//foreign.example', '/\\foreign.example', '/%2f%2fforeign.example', '/login', '/teams/invalid', '/\n/foreign.example', null])('T-27 rejects unsafe/unimplemented destination %j', value => {
     expect(safeReturnTo(value)).toBe('/');
   });

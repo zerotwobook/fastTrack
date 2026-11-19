@@ -148,6 +148,12 @@ For the compiled milestone app, set a synthetic AUTH_REVIEW_PASSWORD as above an
 
 [Independent B01 review/results](docs/evidence/R1-B01-A-review.md) and [the integration contract](docs/contracts/sprint-1-milestones.md) identify actual coverage and subsequent milestone acceptance. No inert submission/revision/feedback actions are exposed in this increment.
 
+## Team progress
+
+Students and supervisors can open **View progress** in a team workspace. The page displays the server's submission count, completion percentage, and each milestone's status at the shown Bangkok time. Cancelled milestones remain visible in the list. The calculation counts each active milestone with a saved submission once and uses the latest submission's own feedback to derive its status.
+
+`GET /api/teams/:id/progress` uses the same scoped milestone projection as the team workspace. It returns the count, percentage, and ordered milestones from one PostgreSQL snapshot. The pure calculation is available in `server/src/modules/progress/calculation.ts` for later reuse. Run `npm run test:auth:isolated` for the real-session progress cases. See [the F-07 contract](docs/contracts/sprint-2-feature-interfaces.md#8-progress-projection-and-shared-calculation-f-07).
+
 ## Feedback checks and browser review
 
 ```powershell
