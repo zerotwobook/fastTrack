@@ -1,0 +1,19 @@
+{
+  "url": "https://fasttrack-lab6-970128017651.asia-southeast1.run.app",
+  "source": "1bbe187c088b86d104a16e420058f17425f18828",
+  "appImage": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-lab6@sha256:3e9656d4ef08446aa78056f1ef9258db22be90a723c06a36a34656250ed49253",
+  "jobsImage": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-lab6-jobs@sha256:dc6534458fb8f0eb349a2de8e34d444f42975148adfc120d4583f9090a34efdb",
+  "revision": "fasttrack-lab6-00001-74k",
+  "traffic": [
+    {
+      "latestRevision": true,
+      "percent": 100,
+      "revisionName": "fasttrack-lab6-00001-74k"
+    }
+  ],
+  "instance": "fasttrack-lab6-db",
+  "database": "fasttrack_lab6",
+  "serviceAccount": "sa-fasttrack-lab6@fasttrack-se-002.iam.gserviceaccount.com",
+  "migrateExecution": "fasttrack-lab6-migrate-gwprh",
+  "seedExecution": "fasttrack-lab6-migrate-cpv7p"
+}

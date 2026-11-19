@@ -2,7 +2,7 @@
 
 Updated with the user's latest reported partner confirmation on 18 November 2026; the earlier 17 November record remains linked below. **CoursePMS is ACCEPTED by the user's instruction; fastTrack acceptance by CoursePMS is reported by the user.** [Confirmation and provenance](sessions/2026-11-17-user-acceptance-confirmation.md). Existing test evidence is reused. This is not a claim that the assistant obtained an external signature or completed the whole Lab 6 assessment.
 
-**Latest 18 November evidence:** the [returned run](sessions/2026-11-18-coursepms-fasttrack-returned-results.md) reports eight case PASS and 28 screenshots, with user-confirmed Tatchakorn/Pawarit case responsibilities and AI assistance. The original run declares Codex operation and pending human review. Earlier user-reported product acceptance remains recorded below. TA assessment of the coverage/participation and any section 3.5 scenario remains open. [Authenticated current deployment identity](sessions/2026-11-18-fasttrack-cloud-run-readback.md) is verified at 15:19:49 UTC+07:00.
+**Latest decision, 19 November 2026.** CoursePMS returned its joint **Accepted** decision, with UAT-01–08 PASS and no outstanding defects in the tested Sprint 1 scope. It also separately accepted the simulated Section 3.5 retest. The user reported that the TA confirmed the Lab 6 evidence was OK that day. The [closeout record](sessions/2026-11-19-lab6-closeout.md) gives provenance, dates and evidence limits. The [18 November technical run](sessions/2026-11-18-coursepms-fasttrack-returned-results.md) retains its Codex attribution and original pending review field.
 
 ## 1. fastTrack: CoursePMS acceptance reported by the user
 
@@ -47,4 +47,4 @@ Sources: [original case summary](sessions/2026-11-14-coursepms-case-summary.md),
 
 The [contribution record](contributions-and-ai.md) includes user-confirmed shared participation and current A/B responsibilities, without retroactive individual case/time claims. The original partner acceptance message may be attached later with its real metadata. It is not requested as a reason to repeat valid existing execution.
 
-Still open: B's actual PR #114 review/integration, TA guidance and any required own-fastTrack correction/exercise evidence, then user final report export/page references and LEB2 submission. No TA answer, course receipt, PDF, main release, separate human signature or whole-task completion is fabricated. Deadline: 22 November 2026, 23:59 Asia/Bangkok.
+B reviews and integrates [PR #114](https://github.com/zerotwobook/fastTrack/pull/114) according to the staging workflow. The report owner assembles the report, records its final page references and submits via LEB2 by 22 November 2026, 23:59 Asia/Bangkok. The submission receipt remains pending.

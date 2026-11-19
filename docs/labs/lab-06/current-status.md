@@ -1,8 +1,10 @@
 # Lab 6 current evidence and next actions
 
-Updated 18 November 2026 after returned CoursePMS fastTrack results and authenticated Cloud Run readback. R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as 01f61a9. Current increment is [PR #114](https://github.com/zerotwobook/fastTrack/pull/114), staging-only. Whole Lab 6 remains OPEN/PENDING for documentation review, TA disposition and final submission. Product decisions and shared participation have now been confirmed as recorded below.
+Updated 19 November 2026. CoursePMS returned a joint **Accepted** decision on all eight Sprint 1 cases and a separate **Accepted** decision on the Section 3.5 retest. B merged Section 3.5 PR #115 into staging at `03d5b13`. The user reports the TA confirmed the Lab 6 evidence that day. [Closeout details](sessions/2026-11-19-lab6-closeout.md)
 
-## Latest incoming fastTrack evidence
+R2-A04 / [Issue #22](https://github.com/zerotwobook/fastTrack/issues/22), owner A, reviewer B. Accepted evidence PR #113 merged as `01f61a9`. [PR #114](https://github.com/zerotwobook/fastTrack/pull/114) carries the current report increment for staging. Report review, integration and course submission remain open.
+
+## 18 November technical evidence
 
 The user supplied the CoursePMS return for run L6-CPMS-AI-20261118-144203 on source `8e637e5`. It records eight case PASS, 18 active PASS observations, one invalidated automation record, 28 screenshots and 9 JSON ledgers. The user confirms Tatchakorn Thamnimitr owns UAT-01-04 and Pawarit Wongdang owns UAT-05-08, with AI assistance in execution/evidence collection. The archive attributes browser operation to Codex and records human review pending at creation. [Complete returned results](sessions/2026-11-18-coursepms-fasttrack-returned-results.md).
 
@@ -24,10 +26,10 @@ Seven earlier anonymous observations, eight earlier authenticated records and fo
 
 | Direction | Actual evidence | Remaining limit |
 | --- | --- | --- |
-| CoursePMS testing fastTrack | New 18 November return: eight case PASS, 18 active PASS observations, one invalidated automation record, 28 PNG and 9 JSON; prior 97 API / 26 UI / 25 controls / 11 comparisons remain separate | User confirms named reviewer ownership and AI assistance; original Codex operation and pending review fields preserved. TA participation assessment open |
+| CoursePMS testing fastTrack | On 19 November the team reported eight cases PASS and joint Accepted. The 18 November Codex run retains 18 active PASS observations, one invalidated automation record, 28 PNGs and nine JSON ledgers. | Human per-case times, fixture IDs and session images were unavailable. Separate automated checks retain their own operators and counts. |
 | fastTrack testing CoursePMS originally | Eight official paths; 36 core PASS; actual full ledger 56 PASS / 1 FAIL / 57 | Preserve original arithmetic discrepancy and Back-navigation deviation |
 | Corrected CoursePMS targeted completion | [Latest case map](sessions/2026-11-17-coursepms-remaining-checks.md), [additional records](evidence/coursepms-remaining-20261117/additional-authenticated-observations.json), [local replay](evidence/coursepms-remaining-20261117/local-replay-summary.json) | Eight deployed PASS plus RT-07 evidence/local PASS; accepted by the user using this bounded evidence |
-| Product decisions and participation | [Decision records](acceptance-record.md), [shared responsibility/AI attribution](contributions-and-ai.md) | CoursePMS directly accepted by user; reciprocal fastTrack acceptance reported by user. Shared A/B checking confirmed; historical individual case times/signatures not inferred |
+| Product decisions and participation | [Decision records](acceptance-record.md), [shared responsibility and AI attribution](contributions-and-ai.md) | The user accepted CoursePMS. CoursePMS returned joint fastTrack Sprint 1 acceptance and separately accepted the Section 3.5 retest. |
 
 ## Findings and preservation
 
@@ -41,8 +43,6 @@ No API body bypass or copied saved draft was established by the original finding
 
 ## Remaining owners and actions
 
-1. A/B provide the [TA review link](ta-review-status.md) with the returned results, user-confirmed responsibilities and authenticated deployment readback. The user sends the external message.
-2. TA assesses participation/coverage and identifies any additional evidence. Individual human actions and decisions are recorded only when actually supplied or performed.
-3. If the coverage is sufficient and no legitimate defect is found, obtain the TA's specific section 3.5 scenario/version/scope and perform the resulting approved work.
-4. B reviews the current PR #114 candidate. Whole Issue #22 remains OPEN/PENDING for TA disposition, real peer integration and final submission.
-5. Assemble actual new results into Parts A-D and submit by 22 November 2026, 23:59 Asia/Bangkok. Historical records keep their original dates and provenance.
+1. B reviews the current PR #114 candidate for staging integration.
+2. The report owner assembles Parts A–D, records actual page numbers and submits via LEB2 by 22 November 2026, 23:59 Asia/Bangkok.
+3. A prepares the Lab 7 change request. The [closeout handoff](sessions/2026-11-19-lab6-closeout.md#handoff-and-next-work) lists the separate Lab 7 and Sprint 2 product gates.

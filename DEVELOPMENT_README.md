@@ -33,9 +33,7 @@ For tracked PRs, the enabled native Project workflow moves the card to Done afte
 
 ## Current delivery and Lab 6 checkpoint
 
-Current checkpoint (17 November2026, TA human-UI feedback): R2-A04/Issue22 continues through staging-only PR114. CoursePMS targeted technical checks are complete (eight deployedPASS plus RT07 evidence/localPASS), and user-declared product decisions are recorded. The TA now requires actual independent partner fastTrack web-UI execution with real names/results/version; old AI runs do not establish that completion. Human handoff/template are prepared, not executed. If that completed human run finds no legitimate defect, await the specific section3.5 scenario the TA will coordinate. Read [current Lab6 status](docs/labs/lab-06/current-status.md) for scope, preflight and remaining actors. No main release, human result or final submission is inferred.
-
-[Lab 6 current status](docs/labs/lab-06/current-status.md) now records the 14 November official CoursePMS paths, reciprocal fastTrack UI follow-up and returned CoursePMS Draft fix #72/#73 with RED/GREEN and successful exact-head CI. Fresh 17 November public CoursePMS source is still original `9c227359`, database connected: corrected-deployment retest is BLOCKED. Both human decisions/actual student activity, release metadata and remaining policy/contract dispositions are pending. Received simulations remain explicitly fictional. Preserve original snapshots and distinguish document review/CI from UAT acceptance. The user handles final export/submission; no main release, PDF or signature is inferred.
+On 19 November 2026, CoursePMS returned an Accepted decision on the eight Sprint 1 UAT cases and separately accepted the isolated Section 3.5 retest. The user reported that the TA confirmed the Lab 6 evidence that day. B merged PR #115 into `staging/sprint-2` at `03d5b13`. R2-A04 continues in staging-targeted PR #114 for report review. The report owner submits through LEB2. [Lab 6 closeout and next work](docs/labs/lab-06/sessions/2026-11-19-lab6-closeout.md)
 
 ## First-day allocation
 

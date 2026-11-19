@@ -1,6 +1,6 @@
 # Lab 6: independent UAT and defect management
 
-**Status: product decisions recorded from current user confirmation; TA disposition, peer integration and final submission remain open.** R2-A04 / Issue #22. This public outline links the user-confirmed reviewer names and reviewed synthetic-data figures for the latest return. Student IDs and original private evidence remain in the local identified Markdown kit. No submitted PDF or acceptance is claimed.
+**Status:** CoursePMS accepted the tested Sprint 1 scope and separately accepted the Section 3.5 retest. The user reported that the TA confirmed the Lab 6 evidence on 19 November 2026. R2-A04 / Issue #22 remains open for peer integration and final submission. Student IDs and the original private evidence remain in the identified Markdown kit. [Closeout evidence](sessions/2026-11-19-lab6-closeout.md)
 
 ## Contents and version control
 
@@ -28,6 +28,7 @@ The private kit embeds assessed source material and selected images in its Markd
 | Corrected main/deployed source | aeb804ea5bc667399b00cf54df10046a6ded46e0 | Normal merge of reviewed release #76; differs legitimately from staging head |
 | Corrected serving identity | course-pms-00009-mk2, 100%; digest sha256:e5cb29a0cf687cdda01110434528d627cd09057d94e9ab028510e5ad090a89e0 | Dated deploy 44074859743 CLI output |
 | Accepted fastTrack evidence integration | PR #113 head baab0b2, staging merge 01f61a9 | Account-reviewed evidence integration; no main release or UAT signature |
+| Section 3.5 isolated preview and integration | Preview source `1bbe187c088b86d104a16e420058f17425f18828`, revision `fasttrack-lab6-00001-74k`, staging merge `03d5b13` | Dedicated preview used for the accepted deadline retest; B reviewed and merged PR #115 |
 
 ## Part A: UAT preparation and handoff
 
@@ -54,7 +55,9 @@ Original incoming source 8e637e5: 97 PASS / 0 FAIL main API assertions across 74
 
 The follow-up performs meaningful UI writes/readbacks and a stale-form deadline path, while preserving disclosed procedural differences: sequential role profiles, isolated API denial checks outside the DevTools recipe, approximately 4m10s deadline lead rather than the proposed five minutes, validation on the normal fixture, and limited browser-history/session-replay coverage. Existing results are reused. The user reports CoursePMS acceptance of fastTrack and confirms shared A/B checking; original partner metadata and historical individual case times/signatures are not inferred from AI logs.
 
-The new [18 November returned run](sessions/2026-11-18-coursepms-fasttrack-returned-results.md) reports all eight case PASS, 18 active PASS observations, 1 retained invalidated automation entry and 28 screenshots. The user confirms Tatchakorn Thamnimitr owns UAT-01 through UAT-04 and Pawarit Wongdang owns UAT-05 through UAT-08, with AI assistance in execution/evidence collection. The original Codex browser operator and machine times remain attributed. The [current deployment readback](sessions/2026-11-18-fasttrack-cloud-run-readback.md) verifies revision/traffic/source after the session. TA assessment of this participation/coverage and any additional required human evidence remains open.
+The [18 November returned run](sessions/2026-11-18-coursepms-fasttrack-returned-results.md) reports all eight cases PASS, 18 active PASS observations, one retained invalidated automation entry and 28 screenshots. The original Codex browser operation and machine timestamps remain attributed. The [dated deployment readback](sessions/2026-11-18-fasttrack-cloud-run-readback.md) verifies revision, traffic and source after that session.
+
+CoursePMS reported a separate joint human session on 19 November, approximately 09:00–11:44 Asia/Bangkok. Partner 1 covered UAT-01–04 and Partner 2 covered UAT-05–08. All eight cases were reported PASS with no outstanding defects and a joint Accepted decision. Per-case times, human-session screenshots and fixture IDs were unavailable. The expected Sprint 1 source was verified at 11:24:56 and 11:45:02. [19 November UAT record](sessions/2026-11-19-lab6-closeout.md#sprint-1-fasttrack-uat)
 
 ### fastTrack testing CoursePMS
 
@@ -104,9 +107,11 @@ AI-operated run: 17 November 19:11-19:15 Asia/Bangkok, source aeb804ea at start/
 
 The later 21:30-21:33 follow-up resolves no-team/unassigned privacy and safe Student-review denial. A -> R -> A without refresh restores original A data; invalid-input POST to ID 0 returns 403 BR06_INSTRUCTOR_ROLE_REQUIRED, and the complete authorized directory is unchanged. Team 5 / Proposal 3 APPROVED revision 2 is retained. [Latest detailed results](sessions/2026-11-17-coursepms-remaining-checks.md) distinguish eight deployed PASS from RT-07 evidence/local PASS. Independent isolated replay passes 16 client and 19 selected/mocked server tests; initial Node 26 localStorage runner failures are retained, followed by unchanged client-suite PASS on Node 20. Seven anonymous, eight earlier authenticated and fourteen additional records remain separate evidence sets. No new confirmed product failure is observed; exhaustive product acceptance and human signatures are not claimed.
 
-### TA feedback and conditional section 3.5 coordination
+### TA-directed Section 3.5 exercise and closure
 
-The latest returned results, named responsibility confirmation and authenticated deployment readback are presented on [the TA review page](ta-review-status.md). The TA assesses the supplied UI coverage and human/AI participation against the earlier request and identifies any specific remaining evidence. If the coverage is sufficient and no legitimate defect is found, obtain the specific section 3.5 scenario/version/scope. A specific exercise and a completed TA acceptance are not recorded yet.
+The simulated defect let a student submit past a milestone deadline. The isolated exercise records RED on the intentionally defective revision, GREEN after restoring the deadline guard, 379 passing regression cases, required CI success and deployment to a dedicated preview. B approved and merged [PR #115](https://github.com/zerotwobook/fastTrack/pull/115) into staging on 19 November.
+
+CoursePMS accepted the scoped retest after reviewing 16 passing checks. The on-time request returned `201`. The late request and retry each returned `409 DEADLINE_PASSED`. The original Cloud Logging projections show the same version 1 submission and zero late rows in both snapshots. The user reported that the TA confirmed the Lab 6 evidence on 19 November. [Retest and original JSON](sessions/2026-11-19-lab6-closeout.md#section-35-simulated-deadline-exercise) · [TA evidence summary](ta-review-status.md)
 
 ### Shared contributions, AI use and product decisions
 
@@ -116,4 +121,4 @@ The latest returned results, named responsibility confirmation and authenticated
 
 ## Final assembly state
 
-[Evidence index](evidence-index.md) maps complete original case/contract sources, findings, outputs, review/delivery facts and private figures to Parts A-D. [Remaining-input handoff](handoffs/2026-11-17-remaining-lab6-inputs.md) supplies concrete unsent partner/human/conditional-TA requests. The private identified report embeds applicable material; the public outline includes the user-confirmed reviewer names and latest reviewed synthetic-data PNGs, while student IDs and earlier private source/images remain in the local kit. Remaining: B peer review/integration, actual TA guidance and any resulting approved work, final export/page ranges and actual LEB2 receipt. Shared participation/product decisions are recorded with their confirmation scope. No PDF, course upload, external message, application change, main release or human signature is performed by this assembly.
+[Evidence index](evidence-index.md) maps the cases, contracts, findings, outputs and review evidence to Parts A–D. The identified Markdown kit contains the supporting material for the report. B reviews and integrates the closeout through [PR #114](https://github.com/zerotwobook/fastTrack/pull/114). The report owner sets final page ranges and records the LEB2 submission receipt. The submission deadline is 22 November 2026, 23:59 Asia/Bangkok.

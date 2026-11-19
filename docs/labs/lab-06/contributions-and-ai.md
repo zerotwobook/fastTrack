@@ -42,7 +42,7 @@ This split is recorded on 17 November after the work and is a current responsibi
 | B-account PR #113 review/merge | Verified account events above |
 | CoursePMS product decision | Accepted by the user's current instruction |
 | fastTrack reciprocal product decision | Latest CoursePMS confirmation reported for 18 November 2026; exact time/channel/original statement not attached |
-| TA contact/guidance | Latest user-relayed TA feedback requires actual independent human UI results before coordinating section3.5; no specific scenario supplied |
+| TA contact and guidance | The user relayed the Section 3.5 deadline scenario and reported on 19 November that the TA confirmed the Lab 6 evidence was OK. See the [closeout](sessions/2026-11-19-lab6-closeout.md). |
 
 ## AI-use statement
 

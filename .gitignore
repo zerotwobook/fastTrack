@@ -26,6 +26,7 @@ __pycache__/
 *.pyc
 
 # Local Lab 6 credentials and received partner evidence
+/Passwordfasttrack.md
 PasswordcoursePMS
 /PasswordcoursePMS.md
 /coursepms-fasttrack-lab6-20261113/

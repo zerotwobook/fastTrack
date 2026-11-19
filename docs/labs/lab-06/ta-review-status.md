@@ -2,7 +2,9 @@
 
 Updated 18 November 2026, Asia/Bangkok. **InfaCompany / fastTrack, EN-028, Section 31.** This page presents the returned partner results, confirmed reviewer responsibilities, AI attribution and current deployment identity for TA assessment.
 
-## Latest returned results
+The user reported on **19 November 2026** that the TA confirmed the Lab 6 evidence was OK that day. The original TA message, channel and exact time were not supplied. The [19 November closeout](sessions/2026-11-19-lab6-closeout.md) records the reported joint UAT result and the separately accepted Section 3.5 retest.
+
+## 18 November technical results
 
 **CoursePMS returned all eight fastTrack cases as PASS** on source `8e637e537cd037d630a5fffc1b5672d1b44371a8`, run `L6-CPMS-AI-20261118-144203`. The recorded session spans **18 November 2026, 14:37:42.827-14:50:33.231 UTC+07:00**. The evidence includes **28 screenshots, nine JSON ledgers, 18 active PASS observations and one retained invalidated automation observation**. All 40 checksum entries in the 41-file received archive match the original bytes.
 
@@ -32,8 +34,6 @@ Assessed scope is Sprint 1 F-01 sign-in/scoped teams, F-02 milestone creation/re
 
 These are separate runs and denominators. [Contribution/AI attribution](contributions-and-ai.md), [evidence index](evidence-index.md) and [Parts A-D report outline](report-draft.md) provide the wider assessment context.
 
-## Requested TA disposition
+## Remaining report actions
 
-Please assess the returned web-UI results, reviewer responsibility confirmation and disclosed AI operation against the [previously relayed participation feedback](sessions/2026-11-17-ta-human-ui-feedback.md). Identify any specific additional human participation or evidence needed. If the required coverage is sufficient and no legitimate defect is found, please provide the section 3.5 scenario, version and scope.
-
-Whole Lab 6 is open for TA disposition, any resulting work, peer integration and final user submission. PR #114 remains the staging-targeted documentation candidate. This page is available on its branch for review. The final submission deadline is 22 November 2026, 23:59 Asia/Bangkok.
+The [earlier TA feedback](sessions/2026-11-17-ta-human-ui-feedback.md) records the original request. B reviews staging-targeted [PR #114](https://github.com/zerotwobook/fastTrack/pull/114). The report owner submits by 22 November 2026, 23:59 Asia/Bangkok and records the actual receipt.
