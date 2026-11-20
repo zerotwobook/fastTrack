@@ -7,8 +7,14 @@
 }
 
 .form {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
   max-width: 28rem;
 }
+
+.form > div { width: 100%; }
+.form > :global(.notice) { margin: 0; }
 
 .section {
   border-top: 1px solid var(--color-divider);

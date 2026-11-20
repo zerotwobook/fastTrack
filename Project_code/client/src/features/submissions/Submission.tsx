@@ -159,7 +159,7 @@ export function SubmissionCreate({ milestoneId, userRole }: { milestoneId: strin
   const closed = !!context.milestone.cancelledAt || Date.parse(context.serverTime) > Date.parse(context.milestone.dueAt);
   const disabled = saving || checking || uncertain || !!existing || closed;
   return <>
-    <p className={styles.breadcrumb}><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a></p>
+    <p className="breadcrumb"><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a></p>
     <h1>Submit work</h1>
     <p className={styles.context}>Deadline: <time dateTime={context.milestone.dueAt}>{formatBangkok(context.milestone.dueAt)}</time>.</p>
     <p className={styles.context}>One submission is shared by your team for this milestone.</p>
@@ -295,7 +295,7 @@ export function RevisionCreate({ milestoneId, userRole }: { milestoneId: string;
 
   const disabled = saving || checking || recovery !== null || !latest || expectedVersion === null || blocked;
   return <>
-    <p className={styles.breadcrumb}><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a> / Submit revision</p>
+    <p className="breadcrumb"><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a> / Submit revision</p>
     <h1>Submit revision</h1>
     <p className={styles.context}>Deadline: <time dateTime={context.milestone.dueAt}>{formatBangkok(context.milestone.dueAt)}</time>.</p>
     {latest ? <p className={styles.context}>Latest saved version: version {latest.version}, submitted by {latest.submittedBy.displayName}, {formatBangkok(latest.submittedAt)}. <a href={`/submissions/${latest.id}`} target="_blank" rel="noopener noreferrer">Review version {latest.version} in a new tab</a></p>
@@ -351,7 +351,7 @@ export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string;
   const { orderedHistory, latest, isOldVersion } = describeSubmissionHistory(item, history);
   const restriction = describeRevisionRestriction(milestone, serverTime, latest?.version ?? item.version);
   return <>
-    <p className={styles.breadcrumb}><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={`/milestones/${milestone.id}`}>{milestone.title}</a> / Saved submission</p>
+    <p className="breadcrumb"><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={`/milestones/${milestone.id}`}>{milestone.title}</a> / Saved submission</p>
     <h1>{item.title}</h1>
     <p className={styles.context}>Version {item.version}, submitted by {item.submittedBy.displayName}.</p>
     <p className={styles.context}><time dateTime={item.submittedAt}>{formatBangkok(item.submittedAt)}</time></p>

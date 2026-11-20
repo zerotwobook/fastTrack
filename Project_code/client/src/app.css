@@ -107,16 +107,27 @@ a:hover { text-decoration-color: var(--color-ink); }
 }
 .sidebar nav a:hover, .navigation-dialog nav a:hover { color: var(--color-ink); background: var(--color-wash); }
 .sidebar nav a[aria-current="page"], .navigation-dialog nav a[aria-current="page"] { color: var(--color-ink); background: var(--color-wash); border-color: var(--color-edge); font-weight: 600; }
-.workspace { min-width: 0; }
+.workspace {
+  --workspace-gutter: clamp(16px, 3.4vw, 40px);
+  min-width: 0;
+}
 .app-header {
-  min-height: 72px;
-  padding: 10px clamp(12px, 3vw, 36px);
+  border-bottom: 1px solid var(--color-divider);
+  background: var(--color-paper);
+}
+.app-header-inner, .workspace-content {
+  width: 100%;
+  max-width: 1220px;
+  margin-inline: auto;
+  padding-inline: var(--workspace-gutter);
+}
+.app-header-inner {
+  min-height: 71px;
+  padding-block: 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 12px 20px;
-  border-bottom: 1px solid var(--color-divider);
-  background: var(--color-paper);
 }
 .compact-brand { display: none; }
 .account-controls { display: flex; align-items: center; gap: 18px; min-width: 0; margin-inline-start: auto; }
@@ -133,14 +144,15 @@ a:hover { text-decoration-color: var(--color-ink); }
 .profile-icon { width: 36px; height: 36px; border-radius: 50%; }
 .role-label { display: block; color: var(--color-muted); font-size: 13px; margin-top: 2px; }
 
-.workspace-content { width: 100%; max-width: 1220px; margin-inline: auto; padding: clamp(16px, 3.4vw, 40px); }
+.workspace-content { padding-block: var(--workspace-gutter); }
 .workspace-heading { display: flex; align-items: flex-end; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; margin-bottom: 26px; }
 .workspace-heading > div:first-child { flex: 1 1 18rem; min-width: 0; }
 .workspace-heading .intro { margin-bottom: 0; }
 .workspace-actions, .team-card-actions { display: flex; flex-wrap: wrap; gap: 10px; }
-.breadcrumb { font-size: 14px; color: var(--color-muted); margin-bottom: 20px; overflow-wrap: anywhere; }
+.breadcrumb { font-size: 14px; line-height: 1.7; color: var(--color-muted); margin-bottom: 20px; overflow-wrap: anywhere; }
 .breadcrumb a { color: var(--color-muted); }
-.team-list { display: grid; gap: 20px; min-width: 0; scroll-margin-top: 24px; }
+#teams { scroll-margin-top: 16px; }
+.team-list { display: grid; gap: 20px; min-width: 0; }
 .team-row { min-width: 0; padding: clamp(16px, 2.6vw, 28px); border: 1px solid var(--color-divider); border-radius: var(--radius-panel); background: var(--color-paper); box-shadow: var(--shadow-panel); overflow-wrap: anywhere; }
 .team-card-heading { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 .team-icon { width: 46px; height: 46px; border-radius: 14px; }
@@ -209,14 +221,18 @@ a:hover { text-decoration-color: var(--color-ink); }
   .sidebar { display: none; }
   .compact-brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
 }
-@media (max-width: 719px) {
-  .login-page { align-items: start; padding: 16px; }
+@media (max-width: 899px) {
+  .breadcrumb { display: flex; align-items: center; flex-wrap: wrap; column-gap: 8px; margin-bottom: 12px; }
+  .breadcrumb a { display: inline-flex; align-items: center; min-width: 44px; min-height: 44px; }
   .login-shell { grid-template-columns: minmax(0, 1fr); max-width: 500px; border-radius: var(--radius-panel); }
   .login-brand { gap: 14px; min-height: 0; padding: 20px; }
   .login-brand p { max-width: 38ch; font-size: 1rem; line-height: 1.5; letter-spacing: 0; font-weight: 400; color: var(--color-muted); }
   .login-track { display: none; }
   .login-form { padding: 22px 20px; }
-  .workspace-content { padding: 16px; }
+}
+@media (max-width: 719px) {
+  .login-page { align-items: start; padding: 16px; }
+  .workspace { --workspace-gutter: 16px; }
   .team-row dl { gap: 12px; }
 }
 @media (max-width: 599px) {
@@ -227,7 +243,7 @@ a:hover { text-decoration-color: var(--color-ink); }
   .recovery-actions { align-items: stretch; flex-direction: column; }
 }
 @media (max-width: 479px) {
-  .app-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 8px; }
+  .app-header-inner { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 6px 8px; }
   .compact-brand, .wordmark { gap: 7px; }
   .wordmark { font-size: 21px; }
   .brand-mark { width: 32px; height: 32px; border-radius: 9px; }

@@ -1,4 +1,4 @@
-.breadcrumb, .context { color: var(--color-muted); line-height: 1.7; overflow-wrap: anywhere; margin-bottom: 12px; }
+.context { color: var(--color-muted); line-height: 1.7; overflow-wrap: anywhere; margin-bottom: 12px; }
 .form { display: grid; gap: 22px; max-width: 680px; margin-top: 24px; padding: clamp(16px, 3vw, 28px); border: 1px solid var(--color-divider); border-radius: var(--radius-panel); background: var(--color-paper); box-shadow: var(--shadow-panel); }
 .form > div { gap: 8px; }
 .form input, .form textarea { font-size: 16px; line-height: 1.65; border-color: var(--color-control); border-radius: 8px; min-height: 48px; }

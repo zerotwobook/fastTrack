@@ -284,7 +284,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
   const revisionRestriction = result.item.latestSubmission
     ? describeRevisionRestriction(result.item, result.serverTime, result.item.latestSubmission.version)
     : null;
-  return <><p className={styles.meta}><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
+  return <><p className="breadcrumb"><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
     {statusNotice && <div ref={statusNoticeRef} tabIndex={-1} role="status" className={styles.statusNotice}><p>{statusNotice}</p></div>}
     {error && <Failure message={error} retry={() => setAttempt(value => value + 1)} />}
     <div className={styles.detail}>
