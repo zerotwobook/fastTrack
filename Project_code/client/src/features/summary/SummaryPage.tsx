@@ -73,19 +73,22 @@ function TeamCompletion({ data }: { data: SummaryData }) {
       <div><dt>Pending</dt><dd>{totals.pending}</dd></div>
       <div><dt>Overdue</dt><dd>{totals.overdue}</dd></div>
     </dl>
-    {teams.length > 0 && <div className={styles.tableFrame} role="region" aria-label="Completion by team" tabIndex={0}>
-      <table className={styles.teamTable} aria-label="Team completion breakdown">
-        <thead><tr>
-          <th scope="col">Team</th>
-          <th scope="col">Submitted</th>
-          <th scope="col">Active</th>
-          <th scope="col">Progress</th>
-          <th scope="col">Pending</th>
-          <th scope="col">Overdue</th>
-        </tr></thead>
-        <tbody>{teams.map(team => <TeamRow key={team.teamId} team={team} filters={filters} />)}</tbody>
-      </table>
-    </div>}
+    {teams.length > 0 && <>
+      <p id="completion-scroll-hint" className={styles.scrollHint}>Scroll the table horizontally to compare all columns on smaller screens.</p>
+      <div className={styles.tableFrame} role="region" aria-label="Completion by team" aria-describedby="completion-scroll-hint" tabIndex={0}>
+        <table className={styles.teamTable} aria-label="Team completion breakdown">
+          <thead><tr>
+            <th scope="col">Team</th>
+            <th scope="col">Submitted</th>
+            <th scope="col">Active</th>
+            <th scope="col">Progress</th>
+            <th scope="col">Pending</th>
+            <th scope="col">Overdue</th>
+          </tr></thead>
+          <tbody>{teams.map(team => <TeamRow key={team.teamId} team={team} filters={filters} />)}</tbody>
+        </table>
+      </div>
+    </>}
   </section>;
 }
 
@@ -135,7 +138,7 @@ export function SummaryPage({ search }: { search: string }) {
   return <div className={styles.page}>
     <div>
       <p className="breadcrumb"><a href="/">Overview</a> / Summary</p>
-      <header className="workspace-heading">
+      <header className={`workspace-heading ${styles.heading}`}>
         <h1>Summary</h1>
         <Button type="button" variant="secondary" disabled={!path || loading} onClick={refresh}>
           <Icon name="refresh" size={18} />Refresh summary
