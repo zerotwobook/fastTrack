@@ -22,8 +22,9 @@ async function login(email: string) {
   return { cookie: String(res.headers['set-cookie']?.[0]).split(';')[0]!, csrf: String(res.body.data.csrfToken) };
 }
 const input = () => ({ content: 'Review the immutable first version.', clientRequestId: randomUUID() });
-const post = (body: unknown, target = id, actor = supervisor) => request(app()).post(`/api/submissions/${target}/feedback`)
-  .set('Cookie', actor.cookie).set('Origin', origin).set('X-CSRF-Token', actor.csrf).set('Content-Type', 'application/json').send(JSON.stringify(body));
+const postJson = (body: string, target = id, actor = supervisor) => request(app()).post(`/api/submissions/${target}/feedback`)
+  .set('Cookie', actor.cookie).set('Origin', origin).set('X-CSRF-Token', actor.csrf).set('Content-Type', 'application/json').send(body);
+const post = (body: unknown, target = id, actor = supervisor) => postJson(JSON.stringify(body), target, actor);
 const get = (target = id, actor = supervisor) => request(app()).get(`/api/submissions/${target}/feedback`).set('Cookie', actor.cookie);
 beforeEach(async () => {
   fixtures = await createBaseFixtures(prisma);
@@ -35,6 +36,61 @@ beforeEach(async () => {
   id = saved.body.data.id;
 });
 afterAll(async () => { await cleanTestDatabase(prisma); await prisma.$disconnect(); });
+
+describe('Lab 7 approved feedback length', () => {
+  const limit = 6000;
+  const emoji = '\u{1F680}';
+  const cases = [5999, limit, 6001].flatMap(length => {
+    const spaced = 'a'.repeat(length - 2) + ' b';
+    const plain = 'a'.repeat(length);
+    const astral = emoji.repeat(length);
+    return [
+      { length, shape: 'plain text', content: plain, expected: plain },
+      { length, shape: 'astral emoji', content: astral, expected: astral },
+      { length, shape: 'trimmed whitespace with an interior space', content: '\t\u00a0' + spaced + '\n ', expected: spaced },
+    ];
+  });
+
+  it.each(cases)('L7-STS-01/02 checks $length code points of $shape', async ({ length, content, expected }) => {
+    expect([...expected]).toHaveLength(length);
+    const response = await post({ ...input(), content });
+    if (length > limit) {
+      expect(response.status).toBe(400);
+      expect(response.body.error).toMatchObject({ code: 'INVALID_INPUT', fields: { content: expect.any(String) } });
+      expect(await prisma.feedback.count({ where: { submissionId: id } })).toBe(0);
+      return;
+    }
+
+    expect(response.status, 'Expected feedback to be saved. API error: ' + JSON.stringify(response.body.error)).toBe(201);
+    const saved = response.body.data;
+    const row = await prisma.feedback.findUniqueOrThrow({ where: { id: saved.id } });
+    expect(row).toMatchObject({ content: expected, submissionId: id, supervisorId: fixtures.users.supA.id });
+    expect(saved.content).toBe(expected);
+    const student = await login('stu-a1@test.local');
+    expect((await get(id, student).expect(200)).body.data).toEqual([saved]);
+  });
+
+  it('L7-STS-03 accepts 6000 emoji encoded as JSON surrogate pairs', async () => {
+    const clientRequestId = randomUUID();
+    const body = '{"content":"' + '\\uD83D\\uDE80'.repeat(limit) + '","clientRequestId":"' + clientRequestId + '"}';
+    expect(Buffer.byteLength(body, 'utf8')).toBeGreaterThan(64 * 1024);
+    const response = await postJson(body);
+    expect(response.status, 'Expected escaped feedback to be saved. API error: ' + JSON.stringify(response.body.error)).toBe(201);
+    const saved = await prisma.feedback.findUniqueOrThrow({ where: { id: response.body.data.id } });
+    expect(saved.content).toBe(emoji.repeat(limit));
+    expect(saved.submissionId).toBe(id);
+  });
+
+  it('L7-STS-03 stores 6000 astral points in the migrated schema', async () => {
+    const content = emoji.repeat(limit);
+    const row = await prisma.feedback.create({
+      data: { submissionId: id, supervisorId: fixtures.users.supA.id, clientRequestId: randomUUID(), content },
+    });
+    const actual = await prisma.feedback.findUniqueOrThrow({ where: { id: row.id } });
+    expect(actual.content).toBe(content);
+    expect([...actual.content]).toHaveLength(limit);
+  });
+});
 
 describe('F-04 real sessions, immutable versions and idempotent retries', () => {
   it('T-17/T-20 persists server identity/time and returns only the DTO after application recreation', async () => {
