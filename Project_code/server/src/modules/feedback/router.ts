@@ -2,7 +2,7 @@
 // Paths declared relative to /api per sprint-1-module-boundaries.md.
 //
 // Pipeline order for mutations:
-//   requireSession → requireSupervisor → requireMutation → requireJsonBody → parseJsonBody → controller
+//   requireSession → requireSupervisor → requireMutation → requireJsonBody → parseFeedbackJsonBody → controller
 // Pipeline order for reads:
 //   requireSession → controller (scoped team check enforced in FeedbackService)
 

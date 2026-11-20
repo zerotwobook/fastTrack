@@ -252,21 +252,31 @@ describe('F-04 transaction boundaries and actual driver conflicts', () => {
 });
 
 describe('Lab 7 GREEN scoped transport, authorization, replay and version-retention controls (L7-STS-03/04)', () => {
-  it('keeps the feedback parser bounded at 96 KiB while preserving the 64 KiB shared transport cap on other routes', async () => {
-    const oversizedFeedback = JSON.stringify({ content: 'a'.repeat(100_000), clientRequestId: randomUUID() });
-    const fbRes = await postJson(oversizedFeedback).expect(400);
-    expect(fbRes.body.error.code).toBe('INVALID_INPUT');
+  it('rejects valid JSON payloads above the 96 KiB feedback cap and the 64 KiB shared cap', async () => {
+    const parserError = {
+      code: 'INVALID_INPUT',
+      message: 'Provide a valid JSON body within the size limit.',
+      fields: {},
+    };
+    const feedbackJson = JSON.stringify(input()) + ' '.repeat(96 * 1024);
+    const feedbackResponse = await postJson(feedbackJson).expect(400);
+    expect(feedbackResponse.body.error).toEqual(parserError);
     expect(await prisma.feedback.count()).toBe(0);
 
-    const milestoneRes = await request(app())
+    const milestoneJson = JSON.stringify({
+      title: 'Cap check',
+      description: 'An otherwise valid milestone.',
+      dueAt: '2035-05-01T00:00:00Z',
+    }) + ' '.repeat(64 * 1024);
+    const milestoneResponse = await request(app())
       .post(`/api/teams/${fixtures.teams.teamA.id}/milestones`)
       .set('Cookie', supervisor.cookie)
       .set('Origin', origin)
       .set('X-CSRF-Token', supervisor.csrf)
       .set('Content-Type', 'application/json')
-      .send(JSON.stringify({ title: 'Cap check', description: 'd'.repeat(70_000), dueAt: '2035-05-01T00:00:00Z' }))
+      .send(milestoneJson)
       .expect(400);
-    expect(milestoneRes.body.error.code).toBe('INVALID_INPUT');
+    expect(milestoneResponse.body.error).toEqual(parserError);
   });
 
   it('enforces role/foreign-team scope, idempotent replay, and original v1 binding for 6000-code-point feedback', async () => {
