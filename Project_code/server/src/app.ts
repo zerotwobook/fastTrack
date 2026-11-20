@@ -13,6 +13,7 @@ export interface AppRouters {
   readonly submissions?: DomainRouter;
   readonly feedback?: DomainRouter;
   readonly progress?: DomainRouter;
+  readonly summary?: DomainRouter;
 }
 export interface AppOptions {
   readonly routers?: AppRouters;
