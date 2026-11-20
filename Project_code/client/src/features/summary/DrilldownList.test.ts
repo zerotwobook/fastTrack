@@ -121,4 +121,3 @@ describe('F-08B DrilldownList states, semantics, and recovery navigation', () =>
     expect(zeroMatchHtml).toContain('Clear filters');
   });
 });
-

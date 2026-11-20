@@ -9,6 +9,7 @@ import { describeRevisionRestriction } from '../submissions/history';
 import { SummaryDetailBreadcrumb, SummaryRecoveryLinks } from '../summary/DrilldownList';
 import {
   buildSubmissionDetailHref,
+  readSummaryReturnTo,
   resolveDetailSummaryNavigation,
 } from '../summary/navigation';
 import { bangkokInputToIso, codePointLength, isoToBangkokInput, MilestoneInputError, parseMilestoneInput } from '../../../../shared/milestones.mjs';
@@ -219,7 +220,7 @@ function MilestoneEdit({ item, onBack, onReload, onSaved }: MilestoneEditProps) 
 export function MilestoneDetail({ id, userRole, returnTo }: { id: string; userRole: 'student' | 'supervisor'; returnTo?: string | null | undefined }) {
   const rawReturnTo = returnTo !== undefined
     ? returnTo
-    : (typeof location !== 'undefined' ? new URLSearchParams(location.search).get('returnTo') : null);
+    : (typeof location !== 'undefined' ? readSummaryReturnTo(location.search) : null);
   const summaryNav = resolveDetailSummaryNavigation(rawReturnTo, userRole);
   const [result, setResult] = useState<{ id: string; item: MilestoneItem; team: Team; serverTime: string } | null>(null);
   const [error, setError] = useState<string | null>(null); const [attempt, setAttempt] = useState(0);

@@ -198,4 +198,3 @@ export async function readSummaryItems(snapshot: SummarySnapshot): Promise<Summa
     })),
   };
 }
-

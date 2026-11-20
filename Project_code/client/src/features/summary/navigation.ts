@@ -146,22 +146,18 @@ export function buildSummaryUrl(filters: Partial<SummaryFilters>): string {
  * backslash, control characters, hash fragment, or unsupported/invalid query parameters).
  */
 export function sanitizeSummaryReturnTo(value: string | null): string | null {
-  if (!value || !value.startsWith('/') || value.startsWith('//') || /[\u0000-\u0020\\]/.test(value)) {
+  const summaryPath = '/summary';
+  if (!value || (value !== summaryPath && !value.startsWith(summaryPath + '?')) || /[\u0000-\u0020\\#]/.test(value)) {
     return null;
   }
-  try {
-    const parsedUrl = new URL(value, 'https://fasttrack.invalid');
-    if (parsedUrl.origin !== 'https://fasttrack.invalid' || parsedUrl.pathname !== '/summary' || parsedUrl.hash !== '') {
-      return null;
-    }
-    const parsedQuery = parseSummarySearch(parsedUrl.search);
-    if (!parsedQuery.ok) {
-      return null;
-    }
-    return buildSummaryUrl(parsedQuery.filters);
-  } catch {
-    return null;
-  }
+  const parsedQuery = parseSummarySearch(value.slice(summaryPath.length));
+  return parsedQuery.ok ? buildSummaryUrl(parsedQuery.filters) : null;
+}
+
+export function readSummaryReturnTo(search: string): string | null {
+  const values = new URLSearchParams(search).getAll('returnTo');
+  if (values.length > 1) return ''; // Treat multiple destinations as an invalid return parameter.
+  return values[0] ?? null;
 }
 
 export function buildMilestoneDetailHref(milestoneId: string, summaryReturnTo?: string | null): string {
@@ -201,4 +197,3 @@ export function totalSummaryPages(matchedCount: number, pageSize: number): numbe
   if (matchedCount <= 0 || pageSize <= 0) return 0;
   return Math.ceil(matchedCount / pageSize);
 }
-

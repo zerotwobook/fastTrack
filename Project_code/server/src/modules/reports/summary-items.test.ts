@@ -82,4 +82,3 @@ describe('F-08B summary-items validation and scoping', () => {
     expect(queryRaw).not.toHaveBeenCalled();
   });
 });
-

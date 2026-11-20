@@ -4,6 +4,7 @@ import {
   buildSubmissionDetailHref,
   buildSummaryUrl,
   parseSummarySearch,
+  readSummaryReturnTo,
   resolveDetailSummaryNavigation,
   sanitizeSummaryReturnTo,
   totalSummaryPages,
@@ -72,6 +73,8 @@ describe('F-08B summary URL search and returnTo navigation', () => {
       '/\\foreign.example/summary',
       '/%2f%2fforeign.example',
       '/summary#fragment',
+      '/summary#',
+      '/other/../summary?status=PENDING',
       '/teams/11111111-1111-4111-8111-111111111111',
       '/summary?unknown=1',
       '/summary?page=0',
@@ -110,6 +113,18 @@ describe('F-08B summary URL search and returnTo navigation', () => {
       hasReturnParam: false,
       summaryHref: null,
       fallbackHref: null,
+    });
+  });
+
+  it('only accepts a single return parameter on a detail URL', () => {
+    const query = '?returnTo=%2Fsummary%3Fstatus%3DPENDING%26page%3D2';
+    expect(readSummaryReturnTo('')).toBeNull();
+    expect(readSummaryReturnTo(query)).toBe('/summary?status=PENDING&page=2');
+    const duplicate = readSummaryReturnTo(query + '&returnTo=%2Fsummary');
+    expect(resolveDetailSummaryNavigation(duplicate, 'supervisor')).toEqual({
+      hasReturnParam: true,
+      summaryHref: null,
+      fallbackHref: '/summary',
     });
   });
 
