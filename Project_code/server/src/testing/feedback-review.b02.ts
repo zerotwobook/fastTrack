@@ -160,7 +160,7 @@ describe('F-04 real sessions, immutable versions and idempotent retries', () => 
     supervisor = await login('sup-a@test.local'); await prisma.session.updateMany({ data: { revokedAt: new Date() } }); await get().expect(401);
     expect(await prisma.feedback.count()).toBe(0);
   });
-  it.each(['bad\u0000text','bad\ud800text','bad\udffftext', '', '  ', 'a'.repeat(4001)])('rejects invalid content %# with a field error and no write', async content => {
+  it.each(['bad\u0000text','bad\ud800text','bad\udffftext', '', '  ', 'a'.repeat(6001)])('rejects invalid content %# with a field error and no write', async content => {
     const result = await post({ ...input(), content }).expect(400);
     expect(result.body.error.code).toBe('INVALID_INPUT'); expect(result.body.error.fields.content).toBeTruthy();
     expect(await prisma.feedback.count()).toBe(0);
@@ -248,5 +248,64 @@ describe('F-04 transaction boundaries and actual driver conflicts', () => {
       expect(waiting).toBe(true);
     } finally { release(); await blocker; }
     expect((await pending).status).toBe(404); expect(await prisma.feedback.count()).toBe(0);
+  });
+});
+
+describe('Lab 7 GREEN scoped transport, authorization, replay and version-retention controls (L7-STS-03/04)', () => {
+  it('keeps the feedback parser bounded at 96 KiB while preserving the 64 KiB shared transport cap on other routes', async () => {
+    const oversizedFeedback = JSON.stringify({ content: 'a'.repeat(100_000), clientRequestId: randomUUID() });
+    const fbRes = await postJson(oversizedFeedback).expect(400);
+    expect(fbRes.body.error.code).toBe('INVALID_INPUT');
+    expect(await prisma.feedback.count()).toBe(0);
+
+    const milestoneRes = await request(app())
+      .post(`/api/teams/${fixtures.teams.teamA.id}/milestones`)
+      .set('Cookie', supervisor.cookie)
+      .set('Origin', origin)
+      .set('X-CSRF-Token', supervisor.csrf)
+      .set('Content-Type', 'application/json')
+      .send(JSON.stringify({ title: 'Cap check', description: 'd'.repeat(70_000), dueAt: '2035-05-01T00:00:00Z' }))
+      .expect(400);
+    expect(milestoneRes.body.error.code).toBe('INVALID_INPUT');
+  });
+
+  it('enforces role/foreign-team scope, idempotent replay, and original v1 binding for 6000-code-point feedback', async () => {
+    const longContent = '\u{1F680}'.repeat(6000);
+    const key = randomUUID();
+
+    // Foreign supervisor and student cannot save valid 6000-point feedback
+    const foreignSup = await login('sup-b@test.local');
+    await post({ content: longContent, clientRequestId: key }, id, foreignSup).expect(404);
+    const stuA1 = await login('stu-a1@test.local');
+    await post({ content: longContent, clientRequestId: key }, id, stuA1).expect(403);
+    expect(await prisma.feedback.count()).toBe(0);
+
+    // Submit v2 revision first, then add 6000-point feedback onto original v1
+    const v2Res = await request(app())
+      .post(`/api/milestones/${fixtures.milestones.milestoneFuture.id}/revisions`)
+      .set('Cookie', stuA1.cookie)
+      .set('Origin', origin)
+      .set('X-CSRF-Token', stuA1.csrf)
+      .send({
+        title: 'Version two',
+        description: 'Revision before late v1 feedback.',
+        url: 'https://example.com/work-v2',
+        expectedVersion: 1,
+      })
+      .expect(201);
+    const v2Id = v2Res.body.data.id as string;
+
+    const firstSave = await post({ content: longContent, clientRequestId: key }, id).expect(201);
+    const replaySame = await post({ content: longContent, clientRequestId: key.toUpperCase() }, id).expect(200);
+    expect(replaySame.body.data.id).toBe(firstSave.body.data.id);
+
+    const replayChanged = await post({ content: 'Changed ' + '\u{1F680}'.repeat(5992), clientRequestId: key }, id).expect(409);
+    expect(replayChanged.body.error.code).toBe('REQUEST_KEY_REUSED');
+
+    const v1Feedback = (await get(id, stuA1).expect(200)).body.data;
+    const v2Feedback = (await get(v2Id, stuA1).expect(200)).body.data;
+    expect(v1Feedback).toHaveLength(1);
+    expect(v1Feedback[0].submissionId).toBe(id);
+    expect(v2Feedback).toEqual([]);
   });
 });

@@ -10,7 +10,7 @@ export class FeedbackInputError extends Error {
 
 export const FEEDBACK_LIMITS = Object.freeze({
   CONTENT_MIN_CHARS: 1,
-  CONTENT_MAX_CHARS: 4000,
+  CONTENT_MAX_CHARS: 6000,
 });
 
 const UUID_REGEX = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -26,7 +26,7 @@ export function countCodePoints(text) {
 /**
  * Validates feedback content:
  * - Must be a string
- * - Trimmed length must be between 1 and 4,000 code points
+ * - Trimmed length must be between 1 and 6,000 code points
  */
 export function validateFeedbackContent(content) {
   if (typeof content !== 'string') {
@@ -70,7 +70,7 @@ export function validateSubmissionId(id) {
  * Parses and validates feedback creation payload:
  * - Rejects non-objects and arrays
  * - Rejects unknown keys
- * - Validates trimmed content bounds (1-4,000 code points)
+ * - Validates trimmed content bounds (1-6,000 code points)
  * - Validates clientRequestId format (UUID)
  */
 export function parseFeedbackInput(value) {
