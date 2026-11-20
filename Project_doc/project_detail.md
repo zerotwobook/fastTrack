@@ -612,9 +612,9 @@ Creating a milestone opens with a task-specific page heading and fields rather t
 
 ### 8.13 Sprint 2 status colors and responsive review
 
-The Sprint 2 UI review extends the neutral fastTrack palette with semantic color. Green identifies submitted work, submission actions and completed progress. Blue identifies feedback and the current version in history. Amber identifies pending work, red identifies overdue work and validation errors, and cancelled milestones use a neutral treatment. Status labels and icons remain visible.
+The Sprint 2 UI uses white reading surfaces, a warm neutral canvas, a charcoal navigation rail, and orange for the brand, active navigation, and primary workspace actions. Green identifies submitted work and submission actions, blue identifies feedback status, amber identifies pending work, and red identifies overdue work, validation errors and destructive confirmation. Cancelled work uses a neutral label. Status text and icons carry the meaning independently of color.
 
-Phone layouts use a compact branded menu, stacked timeline dates, and full-width primary form actions. Portrait tablets retain a single reading column. Landscape tablets with enough width can display work and feedback side by side. The desktop sidebar, existing typography, and Asia/Bangkok deadline display remain part of the design.
+Team cards provide direct links to the workspace and progress. The progress screen groups the percentage, meter and refresh action. Milestone rows place the title and status before the actions. Phones use a compact branded app bar, a keyboard-accessible menu, and full-width primary form controls. Portrait tablets stack work and feedback. Wider tablets and desktop screens can show both side by side. The existing Inter and Noto Sans Thai typography and Asia/Bangkok deadline display carry through the design.
 
 ## 9. API design
 

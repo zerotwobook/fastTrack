@@ -1,10 +1,11 @@
 .container { margin-top: 32px; display: grid; gap: 24px; min-width: 0; }
 .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--color-divider); }
-.primaryLink { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 16px; background: var(--color-ink); color: var(--color-paper); border: 1px solid var(--color-ink); border-radius: 8px; text-decoration: none; }
-.submitLink { background: var(--color-success); border-color: var(--color-success); }
+.primaryLink { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 16px; background: var(--color-accent); color: var(--color-ink); border: 1px solid var(--color-accent); border-radius: var(--radius-md); font-weight: 550; text-decoration: none; }
+.submitLink { background: var(--color-success); border-color: var(--color-success); color: var(--color-paper); }
 .track { --track-date: clamp(8rem, 15vw, 11rem); --track-gap: clamp(12px, 2vw, 24px); list-style: none; padding: 0; }
 .row { display: grid; grid-template-columns: var(--track-date) 12px minmax(0, 1fr); gap: var(--track-gap); position: relative; padding-bottom: 24px; }
-.date { font-size: 14px; line-height: 1.6; color: var(--color-muted); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.date { display: flex; align-items: flex-start; gap: 8px; font-size: 14px; line-height: 1.6; color: var(--color-muted); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+.date svg { margin-top: 3px; }
 .marker { position: relative; width: 12px; height: 12px; margin-top: 6px; border: 2px solid var(--color-ink); border-radius: 50%; }
 .row[data-status="pending"] .marker { border-color: var(--color-warning); background: var(--color-warning-surface); }
 .row[data-status="submitted"] .marker { border-color: var(--color-success); background: var(--color-success); }
@@ -16,15 +17,18 @@
 .row:last-child { padding-bottom: 0; }
 .row:last-child .item { border-bottom: 0; padding-bottom: 0; }
 .item > * { max-width: 100%; }
-.detailLink { display: inline-flex; align-items: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--color-control); border-radius: var(--radius-md); text-decoration: none; }
+.itemHeading { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 8px 16px; width: 100%; min-width: 0; }
+.itemHeading a { text-decoration: none; }
+.itemHeading a:hover { color: var(--color-accent-ink); text-decoration: underline; }
+.itemActions { display: flex; flex-wrap: wrap; gap: 8px; }
+.detailLink { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 12px; text-align: center; border: 1px solid var(--color-control); border-radius: var(--radius-md); text-decoration: none; }
 .detailLink:hover { background: var(--color-wash); border-color: var(--color-ink); }
 .detailLink.submitLink { background: var(--color-success); border-color: var(--color-success); color: var(--color-paper); }
 .detailLink.submitLink:hover { box-shadow: inset 0 0 0 2px var(--color-paper); }
-.item > .primaryLink { justify-self: start; }
-.item h3, .item h4 { font-size: 18px; font-weight: 500; }
+.item h3, .item h4 { font-size: 18px; font-weight: 625; }
 .groups { display: grid; gap: 32px; }
 .group { display: grid; gap: 24px; min-width: 0; }
-.group > h3 { padding: 12px 16px; border-left: 3px solid var(--color-ink); background: var(--color-wash); font-size: 20px; font-weight: var(--font-weight-heading); }
+.group > h3 { padding: 12px 16px; border-left: 3px solid var(--color-accent); background: var(--color-wash); border-radius: var(--radius-md); font-size: 20px; font-weight: var(--font-weight-heading); }
 .item p { line-height: 1.75; white-space: pre-wrap; }
 .meta { color: var(--color-muted); font-size: 14px; line-height: 1.6; overflow-wrap: anywhere; }
 .refresh { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding-top: 24px; border-top: 1px solid var(--color-divider); }
@@ -67,5 +71,6 @@
   .rail, .confirmDialog { padding: 16px; }
   .header { align-items: stretch; }
   .primaryLink, .form button[type="submit"] { width: 100%; }
+  .itemActions { display: grid; width: 100%; grid-template-columns: minmax(0, 1fr); }
   .actions, .confirmActions { flex-direction: column; align-items: stretch; }
 }

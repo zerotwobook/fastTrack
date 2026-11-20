@@ -1,5 +1,5 @@
 .breadcrumb, .context { color: var(--color-muted); line-height: 1.7; overflow-wrap: anywhere; margin-bottom: 12px; }
-.form { display: grid; gap: 24px; max-width: 680px; margin-top: 32px; }
+.form { display: grid; gap: 22px; max-width: 680px; margin-top: 24px; padding: clamp(16px, 3vw, 28px); border: 1px solid var(--color-divider); border-radius: var(--radius-panel); background: var(--color-paper); box-shadow: var(--shadow-panel); }
 .form > div { gap: 8px; }
 .form input, .form textarea { font-size: 16px; line-height: 1.65; border-color: var(--color-control); border-radius: 8px; min-height: 48px; }
 .form label { font-size: 16px; }
@@ -8,29 +8,30 @@
 .actions > a { display: inline-flex; align-items: center; min-height: 44px; }
 .notice { padding: 16px; border: 1px solid var(--color-control); border-left: 3px solid var(--color-ink); border-radius: var(--radius-md); background: var(--color-wash); line-height: 1.7; margin: 24px 0; overflow-wrap: anywhere; }
 .notice[role="alert"] { border-left-color: var(--color-danger); background: var(--color-danger-surface); }
-.notice[aria-label="Older version notice"] { border-left-color: var(--color-info); background: var(--color-info-surface); }
+.notice[aria-label="Older version notice"] { border-left-color: var(--color-info); background: var(--color-wash); }
 .notice > * + * { margin-top: 12px; }
 .notice a { display: inline-flex; align-items: center; min-height: 44px; margin-right: 16px; }
 .content, .withFeedback { margin-top: 32px; min-width: 0; }
 .content { max-width: 75ch; }
 .withFeedback { display: grid; grid-template-columns: minmax(0, 3fr) minmax(300px, 2fr); align-items: start; gap: clamp(20px, 3vw, 32px); padding-top: 32px; border-top: 1px solid var(--color-divider); }
-.withFeedback > section { min-width: 0; }
-.withFeedback > aside { min-width: 0; padding: clamp(16px, 2.5vw, 24px); border: 1px solid var(--color-divider); border-radius: var(--radius-panel); background: var(--color-info-surface); }
+.withFeedback > section { min-width: 0; padding: clamp(16px, 2.5vw, 24px); border: 1px solid var(--color-divider); border-radius: var(--radius-panel); background: var(--color-paper); box-shadow: var(--shadow-panel); }
+.withFeedback > aside { min-width: 0; padding: clamp(16px, 2.5vw, 24px); border: 1px solid var(--color-divider); border-radius: var(--radius-panel); background: var(--color-wash); }
 .content h2, .withFeedback h2 { margin: 24px 0 16px; }
 .withFeedback > section > h2:first-child, .withFeedback > aside h2 { margin-top: 0; }
 .description { white-space: pre-wrap; line-height: 1.75; overflow-wrap: anywhere; }
-.workLink { display: inline-flex; min-height: 48px; padding: 8px 16px; align-items: center; color: var(--color-paper); background: var(--color-ink); border: 1px solid var(--color-ink); border-radius: 8px; text-decoration: none; }
+.workLink { display: inline-flex; min-height: 48px; padding: 8px 16px; align-items: center; gap: 8px; color: var(--color-paper); background: var(--color-ink); border: 1px solid var(--color-ink); border-radius: 8px; text-decoration: none; }
 .url { margin-top: 12px; color: var(--color-muted); line-height: 1.6; overflow-wrap: anywhere; }
 .workLink { max-width: 100%; justify-content: center; text-align: center; overflow-wrap: anywhere; }
 .workLink:hover { box-shadow: inset 0 0 0 2px var(--color-paper); }
 .historySection { margin-top: 32px; padding-top: 24px; border-top: 1px solid var(--color-divider); display: grid; gap: 16px; }
+.iconHeading { display: flex; align-items: center; gap: 10px; }
 .historyList { list-style: none; padding: 0; display: grid; gap: 12px; }
 .historyItem { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 12px; padding: 12px 16px; border: 1px solid var(--color-divider); border-radius: var(--radius-md); background: var(--color-paper); }
-.historyItem[data-current="true"] { border-color: var(--color-info); background: var(--color-info-surface); }
+.historyItem[data-current="true"] { border-color: var(--color-accent-ink); background: var(--color-accent-surface); }
 .historyItem > div { min-width: 0; overflow-wrap: anywhere; }
 .historyMeta { font-size: 14px; color: var(--color-muted); line-height: 1.5; }
 .historyBadge { display: inline-flex; align-items: center; padding: 2px 8px; margin-left: 8px; border: 1px solid var(--color-control); border-radius: 9999px; font-size: 12px; font-weight: 500; color: var(--color-ink); background: var(--color-wash); }
-.detailActionLink { display: inline-flex; align-items: center; justify-content: center; justify-self: start; min-height: 44px; padding: 8px 16px; border: 1px solid var(--color-control); border-radius: var(--radius-md); text-decoration: none; }
+.detailActionLink { display: inline-flex; align-items: center; justify-content: center; justify-self: start; gap: 8px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--color-control); border-radius: var(--radius-md); text-decoration: none; }
 .detailActionLink:hover { background: var(--color-wash); border-color: var(--color-ink); }
 .detailActionLink.submitLink { background: var(--color-success); border-color: var(--color-success); color: var(--color-paper); }
 .detailActionLink.submitLink:hover { box-shadow: inset 0 0 0 2px var(--color-paper); }

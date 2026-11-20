@@ -1,6 +1,7 @@
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
 import type { FormEvent, KeyboardEvent } from 'react';
 import { Button, EmptyState, Field, Input } from './design/components';
+import { Icon } from './design/Icon';
 import { safeReturnTo, sessionStore, StaleSessionError } from './features/auth/session';
 import type { SessionSnapshot, Team } from './features/auth/session';
 import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/milestones';
@@ -9,6 +10,11 @@ import { FeedbackPanel } from './features/feedback';
 import { TeamProgress } from './features/progress/TeamProgress';
 import { TeamCreate, TeamSettings } from './features/teams/TeamPlanning';
 import './app.css';
+
+function Brand({ linked = true }: { linked?: boolean }) {
+  const content = <><span className="brand-mark"><Icon name="brand" size={22} /></span><span>fastTrack</span></>;
+  return linked ? <a className="wordmark" href="/">{content}</a> : <span className="wordmark">{content}</span>;
+}
 
 function Login({ state }: { state: SessionSnapshot }) {
   const [email, setEmail] = useState('');
@@ -28,30 +34,49 @@ function Login({ state }: { state: SessionSnapshot }) {
     submitting.current = false;
   };
   return <main id="main-content" className="login-page">
-    <div className="login-form"><p className="wordmark">fastTrack</p><h1>Sign in</h1>
-      <p className="intro">Track your team's milestones, submissions, and feedback.</p>
-      {state.error && <p className="notice" role="alert" tabIndex={-1} ref={alert}>{state.error}</p>}
-      <form onSubmit={event => { void submit(event); }}>
-        <Field id="email" label="Email"><Input id="email" name="email" type="email" autoComplete="username" required value={email} onChange={event => setEmail(event.target.value)} disabled={state.busy} /></Field>
-        <Field id="password" label="Password">
-          <div className="password-control">
-            <Input id="password" name="password" type={visible ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} disabled={state.busy} />
-            <Button className="password-toggle" type="button" variant="ghost" disabled={state.busy} aria-controls="password" aria-label={visible ? 'Hide password' : 'Show password'} title={visible ? 'Hide password' : 'Show password'} aria-pressed={visible} onClick={() => setVisible(!visible)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
-                <circle cx="12" cy="12" r="3" />
-                {visible && <path d="m3 3 18 18" />}
-              </svg>
-            </Button>
-          </div>
-        </Field>
-        <Button className="login-submit" type="submit" loading={state.busy}>{state.busy ? 'Signing in…' : 'Sign in'}</Button>
-      </form><p className="help">Use the account provided for your course.</p>
+    <div className="login-shell">
+      <div className="login-brand">
+        <Brand linked={false} />
+        <p>Track your team's milestones, submissions, and feedback.</p>
+        <div className="login-track" aria-hidden="true">
+          <span><Icon name="calendar" size={24} /></span>
+          <span><Icon name="send" size={24} /></span>
+          <span><Icon name="check" size={24} /></span>
+        </div>
+      </div>
+      <div className="login-form">
+        <h1>Sign in</h1>
+        {state.error && <p className="notice" role="alert" tabIndex={-1} ref={alert}>{state.error}</p>}
+        <form onSubmit={event => { void submit(event); }}>
+          <Field id="email" label="Email"><Input id="email" name="email" type="email" autoComplete="username" required value={email} onChange={event => setEmail(event.target.value)} disabled={state.busy} /></Field>
+          <Field id="password" label="Password">
+            <div className="password-control">
+              <Input id="password" name="password" type={visible ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} disabled={state.busy} />
+              <Button className="password-toggle" type="button" variant="ghost" disabled={state.busy} aria-controls="password" aria-label={visible ? 'Hide password' : 'Show password'} title={visible ? 'Hide password' : 'Show password'} aria-pressed={visible} onClick={() => setVisible(!visible)}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+                  <circle cx="12" cy="12" r="3" />
+                  {visible && <path d="m3 3 18 18" />}
+                </svg>
+              </Button>
+            </div>
+          </Field>
+          <Button className="login-submit" type="submit" loading={state.busy}>
+            {state.busy ? 'Signing in…' : <><span>Sign in</span><Icon name="arrowRight" size={18} /></>}
+          </Button>
+        </form>
+        <p className="help">Use the account provided for your course.</p>
+      </div>
     </div>
   </main>;
 }
 function Navigation({ role }: { role: 'student' | 'supervisor' }) {
-  return <nav aria-label="Main navigation"><a href="/" aria-current={location.pathname === '/' ? 'page' : undefined}>Overview</a><a href="/#teams" aria-current={location.pathname !== '/' ? 'page' : undefined}>{role === 'student' ? 'My team' : 'Supervised teams'}</a></nav>;
+  return <nav aria-label="Main navigation">
+    <a href="/" aria-current={location.pathname === '/' ? 'page' : undefined}><Icon name="overview" />Overview</a>
+    <a href="/#teams" aria-current={location.pathname !== '/' ? 'page' : undefined}>
+      <Icon name="team" />{role === 'student' ? 'My team' : 'Supervised teams'}
+    </a>
+  </nav>;
 }
 function trapNavigationFocus(event: KeyboardEvent<HTMLDialogElement>) {
   if (event.key !== 'Tab') return;
@@ -99,18 +124,21 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   }, [state.revision, path, attempt, detailId, milestoneId, submissionId, settingsId, progressId, creatingTeam, validPath]);
   const teams = result?.revision === state.revision && result.path === path ? result.teams : null;
   return <div className="application-shell">
-    <aside className="sidebar"><a className="wordmark" href="/">fastTrack</a><Navigation role={user.role} /></aside>
+    <aside className="sidebar"><Brand /><Navigation role={user.role} /></aside>
     <dialog id="workspace-navigation" ref={dialog} className="navigation-dialog" aria-labelledby="navigation-title" onKeyDown={trapNavigationFocus} onClose={() => { setMenuOpen(false); if (state.phase === 'ready' && !matchMedia('(min-width: 1200px)').matches) menu.current?.focus(); }}>
-      <div className="navigation-heading"><h2 id="navigation-title">Navigation</h2><Button type="button" variant="secondary" onClick={() => dialog.current?.close()}>Close menu</Button></div><Navigation role={user.role} />
+      <div className="navigation-heading"><h2 id="navigation-title">Navigation</h2><Button className="close-menu" type="button" variant="ghost" aria-label="Close menu" onClick={() => dialog.current?.close()}><Icon name="close" /></Button></div><Navigation role={user.role} />
     </dialog>
     <div className="workspace"><header className="app-header">
       <div className="compact-brand">
-        <button ref={menu} className="menu-button" type="button" aria-controls="workspace-navigation" aria-expanded={menuOpen} onClick={() => { dialog.current?.showModal(); setMenuOpen(true); }}>Menu</button>
-        <a className="wordmark" href="/">fastTrack</a>
+        <button ref={menu} className="menu-button" type="button" aria-label="Menu" aria-controls="workspace-navigation" aria-expanded={menuOpen} onClick={() => { dialog.current?.showModal(); setMenuOpen(true); }}><Icon name="menu" /></button>
+        <Brand />
       </div>
       <div className="account-controls">
-        <p className="account-summary"><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
-        <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
+        <div className="account-summary">
+          <span className="profile-icon"><Icon name="user" size={18} /></span>
+          <p><strong>{user.displayName}</strong><span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
+        </div>
+        <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out<Icon name="signOut" size={18} /></Button>
       </div>
     </header><main id={state.phase === 'ready' ? 'main-content' : undefined} className="workspace-content">
       {creatingTeam || settingsId ? user.role === 'supervisor'
@@ -123,18 +151,29 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
           <h1>{creating ? 'Create milestone' : detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
           <p className="intro">{creating ? `Set the work and deadline${teams?.[0] ? ` for ${teams[0].name}` : ' for this team'}.` : detailId ? 'Your team members, deadlines and submitted work.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
         </div>
-        {user.role === 'supervisor' && !creating && !error && (path === '/' || (detailId && teams?.[0])) &&
-          <a className={detailId ? 'team-link' : 'team-link team-link--primary'} href={detailId ? `/teams/${detailId}/settings` : '/teams/new'}>{detailId ? 'Team settings' : 'Create team'}</a>}
+        {!creating && !error && (detailId && teams?.[0] ? (
+          <div className="workspace-actions">
+            <a className="team-link team-link--primary" href={`/teams/${detailId}/progress`}><Icon name="chart" size={18} />View progress</a>
+            {user.role === 'supervisor' && <a className="team-link" href={`/teams/${detailId}/settings`}><Icon name="settings" size={18} />Team settings</a>}
+          </div>
+        ) : user.role === 'supervisor' && path === '/' && (
+          <a className="team-link team-link--primary" href="/teams/new"><Icon name="plus" size={18} />Create team</a>
+        ))}
       </header>
       {error ? <section className="notice" role="alert"><p>{error}</p><div className="recovery-actions"><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}>Try again</Button><a href="/">Back to overview</a></div></section>
       : teams === null ? <p role="status">Loading your team workspace…</p>
       : teams.length === 0 ? <EmptyState title={user.role === 'student' ? 'No team assigned yet' : 'No supervised teams yet'} description={user.role === 'student' ? 'Contact your course supervisor to arrange your team.' : 'Create a team to start planning its milestones.'} />
       : <section id="teams" aria-label="Teams" className={`team-list${!detailId && user.role === 'supervisor' ? ' team-list--supervisor' : ''}`}>{teams.map(team => <article className="team-row" key={team.id}>
-        {!detailId && <h2><a href={`/teams/${team.id}`}>{team.name}<span aria-hidden="true"> ↗</span></a></h2>}
+        {!detailId && <div className="team-card-heading">
+          <span className="team-icon"><Icon name="team" size={23} /></span>
+          <h2><a href={`/teams/${team.id}`}>{team.name}</a></h2>
+        </div>}
         {!creating && (detailId || user.role === 'supervisor') && <dl><div><dt>Supervisor</dt><dd>{team.supervisor.displayName}</dd></div><div><dt>Team members</dt><dd>{team.members.length ? <ul>{team.members.map(member => <li key={member.id}>{member.displayName}</li>)}</ul> : 'No members assigned yet'}</dd></div></dl>}
-        {!creating && (detailId || user.role === 'student') && <a className="team-link team-link--progress" href={`/teams/${team.id}/progress`}>View progress</a>}
+        {!detailId && <div className="team-card-actions">
+          <a className="team-link team-link--primary" href={`/teams/${team.id}`}>Open team<Icon name="arrowRight" size={18} /></a>
+          <a className="team-link" href={`/teams/${team.id}/progress`}><Icon name="chart" size={18} />View progress</a>
+        </div>}
         {(detailId || user.role === 'student') && (creating ? <MilestoneCreate teamId={team.id} userRole={user.role} /> : <MilestoneTrack teamId={team.id} userRole={user.role} />)}
-        {!detailId && <a className="team-link" href={`/teams/${team.id}`}>Open team</a>}
       </article>)}</section>}</>}
     </main></div>
   </div>;

@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Button, EmptyState, StatusBadge } from '../../design/components';
+import { Icon } from '../../design/Icon';
 import { sessionStore, StaleSessionError } from '../auth/session';
 import type { Team } from '../auth/session';
 import { formatBangkok } from '../milestones/MilestoneTrack';
@@ -62,12 +63,21 @@ export function TeamProgress({ teamId }: { teamId: string }) {
     {loading && <p className={styles.loading} role="status">Loading progress…</p>}
     {progress && <>
       <section className={styles.summary} aria-label="Submission progress">
-        <p className={styles.count} role="status">{progress.submitted} of {progress.total} active milestones submitted <strong>{progress.progressPercent.toFixed(1)}%</strong></p>
+        <div className={styles.summaryHeader}>
+          <div className={styles.summaryTitle}>
+            <span className={styles.summaryIcon}><Icon name="chart" size={22} /></span>
+            <h2>Submission progress</h2>
+          </div>
+          <p className={styles.count} role="status">
+            <span>{progress.submitted} of {progress.total} active milestones submitted</span>
+            <strong>{progress.progressPercent.toFixed(1)}%</strong>
+          </p>
+        </div>
         <progress aria-label="Team submission progress" value={progress.progressPercent} max={100} />
-        <p className={styles.note}>This measures submission completion only. Each active milestone with a saved submission counts once.</p>
+        <p className={styles.summaryNote}>Each active milestone with a saved submission counts once.</p>
         <div className={styles.refresh}>
-          <p className={styles.note}>Status as of <time dateTime={progress.asOf}>{formatBangkok(progress.asOf)}</time>.</p>
-          <Button variant="secondary" aria-disabled={loading} onClick={refresh}>Refresh progress</Button>
+          <p className={styles.summaryNote}>Status as of <time dateTime={progress.asOf}>{formatBangkok(progress.asOf)}</time>.</p>
+          <Button className={styles.refreshButton} variant="secondary" aria-disabled={loading} onClick={refresh}><Icon name="refresh" size={17} />Refresh progress</Button>
         </div>
       </section>
       {progress.milestones.length === 0 ? <EmptyState title="No milestones yet" />
@@ -76,9 +86,12 @@ export function TeamProgress({ teamId }: { teamId: string }) {
           {progress.total === 0 && <p className={styles.note}>All milestones have been cancelled.</p>}
           <ul className={styles.milestones}>
             {progress.milestones.map(item => <li key={item.id} className={styles.milestone}>
-              <div>
-                <a href={`/milestones/${item.id}`}>{item.title}</a>
-                <p className={styles.note}>Due <time dateTime={item.dueAt}>{formatBangkok(item.dueAt)}</time></p>
+              <div className={styles.info}>
+                <span className={styles.calendarIcon}><Icon name="calendar" size={18} /></span>
+                <div>
+                  <a href={`/milestones/${item.id}`}>{item.title}<Icon name="arrowRight" size={16} /></a>
+                  <p className={styles.note}>Due <time dateTime={item.dueAt}>{formatBangkok(item.dueAt)}</time></p>
+                </div>
               </div>
               <StatusBadge status={statusBadges[item.status]} />
             </li>)}

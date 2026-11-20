@@ -1,18 +1,11 @@
 /* Shared controls for both roles. */
-.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; max-width: 100%; padding: 8px 16px; font: 500 1rem/1.65 var(--font-family); border: 1px solid var(--color-control); border-radius: var(--radius-md); cursor: pointer; text-align: center; overflow-wrap: anywhere; transition: background-color .1s ease, box-shadow .1s ease; }
-.btn--primary { --button-fill: var(--color-ink); }
+.btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; max-width: 100%; padding: 8px 16px; font: 550 1rem/1.55 var(--font-family); border: 1px solid var(--color-control); border-radius: var(--radius-md); cursor: pointer; text-align: center; overflow-wrap: anywhere; transition: background-color .1s ease, box-shadow .1s ease; }
+.btn--primary { background: var(--color-accent); color: var(--color-ink); border-color: var(--color-accent); }
+.btn--primary:hover:not(:disabled) { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
 .btn--submit { --button-fill: var(--color-success); }
-.btn--feedback { --button-fill: var(--color-info); }
 .btn--danger { --button-fill: var(--color-danger); }
-.btn--primary, .btn--submit, .btn--feedback, .btn--danger {
-  background: var(--button-fill);
-  color: var(--color-paper);
-  border-color: var(--button-fill);
-}
-.btn--primary:hover:not(:disabled), .btn--submit:hover:not(:disabled),
-.btn--feedback:hover:not(:disabled), .btn--danger:hover:not(:disabled) {
-  box-shadow: inset 0 0 0 2px var(--color-paper);
-}
+.btn--submit, .btn--danger { background: var(--button-fill); color: var(--color-paper); border-color: var(--button-fill); }
+.btn--submit:hover:not(:disabled), .btn--danger:hover:not(:disabled) { box-shadow: inset 0 0 0 2px var(--color-paper); }
 .btn--secondary, .btn--ghost { background: var(--color-paper); color: var(--color-ink); }
 .btn--secondary:hover:not(:disabled), .btn--ghost:hover:not(:disabled) { background: var(--color-wash); border-color: var(--color-ink); }
 .btn:disabled { background: var(--color-wash); color: var(--color-muted); border-color: var(--color-control); cursor: not-allowed; }

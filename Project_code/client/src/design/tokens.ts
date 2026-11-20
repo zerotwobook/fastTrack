@@ -1,22 +1,23 @@
 /* fastTrack design tokens — B owns (R1-B00).
  * Import this file in any component that needs colours, typography or spacing.
- * Decisions: DEC-08 (black/white/grey theme), DEC-10 (Inter + Noto Sans Thai, weight 500 headings).
+ * Revised Sprint 2 palette and Inter typography. See the project UI brief.
  */
 
-/** Colour palette — monochrome with single semantic levels */
+/** Core UI palette. CSS defines the status colors and contextual surfaces. */
 export const colors = {
   /** Main page/card background */
   paper: '#FFFFFF',
   /** Primary text, icons and borders */
-  ink: '#000000',
+  ink: '#1A1816',
   /** Subtle background for rows, panels and hover states */
-  wash: '#F5F5F5',
+  wash: '#F5F2ED',
   /** Dividers and input borders */
-  divider: '#E5E5E5',
+  divider: '#E6E0D7',
   /** Secondary/muted text (placeholder, caption, helper) */
-  muted: '#595959',
+  muted: '#635B52',
   /** Control labels, icon-only buttons and disabled states */
-  control: '#8A8A8A',
+  control: '#877A6D',
+  accent: '#FF773B',
 } as const;
 
 export type ColorKey = keyof typeof colors;
@@ -74,6 +75,7 @@ export const cssVariables = `
   --color-divider: ${colors.divider};
   --color-muted: ${colors.muted};
   --color-control: ${colors.control};
+  --color-accent: ${colors.accent};
   --font-family: ${typography.fontFamily};
   --font-weight-heading: ${typography.headingWeight};
   --font-weight-body: ${typography.bodyWeight};

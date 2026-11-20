@@ -8,7 +8,7 @@ import styles from './components.module.css';
 // ---------------------------------------------------------------------------
 // Button
 // ---------------------------------------------------------------------------
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'submit' | 'feedback' | 'danger';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'submit' | 'danger';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
