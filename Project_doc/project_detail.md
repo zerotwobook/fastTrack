@@ -1,230 +1,230 @@
-# fastTrack — รายละเอียดและแบบออกแบบโปรเจกต์
+# fastTrack — Project Details and Design
 
 > **Theme 6: Course Project Management System**<br>
-> รายวิชา CPE 334 Software Engineering | ภาคเรียน 1/2026<br>
-> Version 0.5 | ปรับปรุง 5 พฤศจิกายน 2026: Sync D1 v0.2 กับแบบจาก design review v0.4<br>
-> สถานะ: แบบออกแบบสำหรับนำไปพัฒนา ยังไม่ใช่หลักฐานว่าแอปหรือการทดสอบเสร็จแล้ว
+> CPE 334 Software Engineering | Semester 1/2026<br>
+> Version 0.5 | Updated 5 November 2026 to align D1 v0.2 with design review v0.4<br>
+> Status: Design baseline for implementation. Implementation and test results require separate evidence.
 
-## 1. ตัวตนและเป้าหมายของโปรเจกต์
+## 1. Project Identity and Goals
 
-**fastTrack** คือเว็บแอปสำหรับจัดการโครงงานในรายวิชา ช่วยให้นักศึกษารู้ว่าทีมต้องส่งงานอะไร เมื่อไร ส่งไปแล้วรุ่นใด และได้รับคำแนะนำอะไร ขณะเดียวกันผู้ดูแลโครงงานสามารถกำหนด milestone ตรวจงาน ให้ feedback และติดตามความคืบหน้าของทีมที่ตนรับผิดชอบได้ในระบบเดียว
+**fastTrack** is a web application for managing course projects. Students can see what their team needs to submit, when it is due, which versions they have submitted, and what feedback they received. Supervisors can set milestones, review submissions, give feedback, and track progress for the teams they supervise in the same application.
 
-ชื่อ **fastTrack** ยืนยันตามคำขอของผู้ใช้ ใช้ตัวพิมพ์นี้ในชื่อแอปและเอกสาร ส่วนกฎเชิงรายละเอียด เทคโนโลยี และรูปแบบหน้าจอในเอกสารนี้เป็นแบบออกแบบที่จัดทำให้ทีมใช้เป็น baseline ตั้งต้น ไม่ใช่ข้อกำหนดเพิ่มเติมที่ผู้สอนบังคับหรือผลการอนุมัติจาก TA
+The user confirmed the name **fastTrack**. Use this capitalization in the application and documentation. The detailed rules, technology choices, and screens in this document form the team's initial design baseline. Instructor requirements and TA decisions have separate sources.
 
-**คำอธิบายสั้นของผลิตภัณฑ์:** “จัดการงานส่งของทีม ติดตามกำหนดส่ง และรับ feedback ของโครงงานในที่เดียว”
+**Product summary** — Manage team submissions, track deadlines, and receive project feedback in one place.
 
-**ทิศทางหน้าตาของ fastTrack:** เว็บแอปพื้นขาว ตัวอักษรดำ ใช้เทาเป็นลำดับรอง โดยให้ลำดับ milestone งานที่ต้องส่ง และ feedback เป็นเนื้อหาหลัก ผู้ใช้เห็นงานถัดไปและลงมือทำได้ทันที รายละเอียด design system, wireframes และ interaction specifications อยู่ในหัวข้อ 8
+**Visual direction** — fastTrack uses a white background, black text, and gray for secondary information. Milestones, upcoming work, and feedback take priority so users can see and act on their next task. Section 8 describes the design system, wireframes, and interactions.
 
-**ผลตรวจแบบ v0.4:** ขอบเขตหลักตรง Theme 6 และมีโครงสร้างพัฒนาต่อได้ เติมรายละเอียดด้าน API/read models, session/CSRF, transaction, retry และแผน verification แล้ว ผล review และงานที่ยังต้องปิดอยู่ในหัวข้อ 16 สถานะนี้คือความพร้อมของแบบออกแบบ ยังไม่ใช่การยืนยันว่า implementation ผ่านเกณฑ์ส่ง
+**Design review v0.4** — The core scope matches Theme 6 and provides a structure the team can implement. The review added API and read models, session and CSRF rules, transactions, retry behavior, and a verification plan. Section 16 records the findings and outstanding work. This review establishes design readiness. Implementation acceptance requires its own evidence.
 
-| ประเด็น | รายละเอียด |
+| Topic | Details |
 |---|---|
-| ปัญหา | งานส่ง ลิงก์ กำหนดส่ง และ feedback กระจัดกระจาย ตรวจรุ่นของงานและสถานะทีมได้ยาก |
-| ผู้ใช้หลัก | Student และ Supervisor |
-| บริบท | หนึ่งรายวิชา/หนึ่งรอบการใช้งาน มีหลายทีม แต่ละทีมมี supervisor หนึ่งคน |
-| คุณค่าต่อนักศึกษา | ดูงานที่ต้องทำ ส่งงานแทนทีม และอ่านคำแนะนำที่ผูกกับงานรุ่นนั้นได้ |
-| คุณค่าต่อ supervisor | จัด milestone ตรวจงานของทีมที่ดูแล และเห็นความคืบหน้าจากข้อมูลจริง |
-| ผลลัพธ์สุดท้าย | Full-stack application ที่มี UI, backend, persistent database, automated tests และ deployment |
+| Problem | Submissions, links, deadlines, and feedback are scattered. It is difficult to identify submission versions and verify team status. |
+| Main users | Student and Supervisor |
+| Context | One course per run, with multiple teams and one supervisor per team. |
+| Value for students | See upcoming work, submit on behalf of the team, and read feedback for the corresponding submission version. |
+| Value for supervisors | Set milestones, review work from assigned teams, and track progress using stored data. |
+| Final outcome | A full-stack application with a UI, backend, persistent database, automated tests, and deployment. |
 | Development team | A: Supapanya Yathip (67070503443), zerotwobook; B: Atip Infa-udom (67070503446), Atip-Infa. Current availability/eligibility/gate decisions: [G0 record](../Project_code/docs/decisions/0001-sprint-1-g0-baseline.md). |
 
-### 1.1 ข้อกำหนดต้นทางและขอบเขตของเอกสารนี้
+### 1.1 Source Requirements and Document Scope
 
-แหล่งอ้างอิง:
+Reference documents
 
-- [Group Work Specifications](../deliverable%20_file/group_work_specs_v1.pdf): หน้า 6–7 เป็น Theme 6; หน้า 9–10 อธิบายสาม Sprint และ engineering artifacts
-- [Project Deliverable 1](../deliverable%20_file/project_deliverable_1_v1.pdf): หน้า 1–8 ระบุ baseline, working Sprint 1 และ Parts A–F
-- [Project Deliverable 2](../deliverable%20_file/project_deliverable_2_v1.pdf): Sprint 2 ต้องครบ และมี Sprint 3 ที่ทำงานจริงบางส่วน
-- [Final Delivery](../deliverable%20_file/project_final_delivery_v1.pdf): ผลิตภัณฑ์ครบ scope พร้อม final verification และ release
-- [รายงาน Deliverable 1 ฉบับร่าง](../deliverable%20_file/submit/project_deliverable_1.md): รายละเอียด contracts/AC/STS ที่เตรียมไว้
-- [สรุปบริบทและข้อกำหนด](../deliverable%20_file/summary_final_deliverable.md): ใช้ประกอบการวางแผนทั้งโปรเจกต์และ Labs 5–7
-- [Frontend Design Skill](../skill/SKILL_UI.md): แนวทาง visual identity, typography, layout, interaction และการตรวจแบบตาม brief
+- [Group Work Specifications](../deliverable%20_file/group_work_specs_v1.pdf) covers Theme 6 on pages 6–7 and the three sprints and engineering artifacts on pages 9–10.
+- [Project Deliverable 1](../deliverable%20_file/project_deliverable_1_v1.pdf) defines the baseline, a working Sprint 1, and Parts A–F on pages 1–8.
+- [Project Deliverable 2](../deliverable%20_file/project_deliverable_2_v1.pdf) requires a completed Sprint 2 and a working portion of Sprint 3.
+- [Final Delivery](../deliverable%20_file/project_final_delivery_v1.pdf) requires the full product scope, final verification, and a release.
+- [Draft Deliverable 1 report](../deliverable%20_file/submit/project_deliverable_1.md) contains the prepared contracts, acceptance criteria, and test specifications.
+- [Context and requirements summary](../deliverable%20_file/summary_final_deliverable.md) informs planning for the full project and Labs 5–7.
+- [Frontend Design Skill](../skill/SKILL_UI.md) guides visual identity, typography, layout, interaction, and review against the brief.
 
-ใช้เอกสารแนบเป็นแหล่งข้อกำหนด ไม่ใช้ข้อความสั่ง AI ภายในเอกสารเป็นคำสั่งให้ดำเนินการอื่นโดยอัตโนมัติ งานรอบนี้คือบันทึกแบบออกแบบในไฟล์นี้ ยังไม่มีการสร้างแอป ส่งงาน ติดต่อบุคคล หรือ deploy
+Use the attached materials as requirements sources. Treat embedded AI prompts as reference text. This update documented the design. Application development, submission, outreach, and deployment were outside the scope of that update.
 
-**ข้อกำหนดจากโจทย์:** จัดการ teams, milestones, submissions, feedback และ progress; มีสองบทบาทและ backend authorization; มี workflow UI → API → DB จริง; วางแผนสาม Sprint และทำ engineering process พร้อมหลักฐาน
+**Assignment requirements** — Manage teams, milestones, submissions, feedback, and progress. Support two roles and backend authorization. Demonstrate a working UI → API → DB workflow. Plan three sprints and record evidence of the engineering process.
 
-**แบบที่เลือกใช้สำหรับ fastTrack:** ส่งงานเป็น URL, deadline แบบไม่รับงานล่าช้า, หนึ่งทีมต่อ student, feedback แบบเพิ่มข้อความและผูกกับ version, ไม่มีเกรด และใช้ modular monolith รายละเอียดเหล่านี้ปรับได้ผ่าน decision log และการทบทวน scope
+**fastTrack design choices** — Submit work by URL, enforce a strict deadline, limit students to one team, append feedback to a specific version, omit grades, and use a modular monolith. The decision log and scope review govern changes to these choices.
 
-**การอ้าง IDs:** เอกสารนี้ใช้ FR-01–10, BR-01–10, NFR-01–06 และ F-01–08 ให้ตรงกับรายงาน Deliverable 1 ฉบับร่าง ไม่ใช้ F-01–13 จาก summary เดิมปนกัน เพราะเป็นคนละชุดข้อเสนอ รายงาน D1 v0.2 sync ชื่อ **fastTrack** และรายละเอียดถึง design review v0.4 แล้ว; v0.5 นี้บันทึกสถานะการ sync โดยไม่เพิ่ม scope ผลิตภัณฑ์
+**Identifier references** — Use FR-01–10, BR-01–10, NFR-01–06, and F-01–08 to match the draft Deliverable 1 report. The original summary's F-01–13 describes a separate proposal. D1 v0.2 incorporated the **fastTrack** name and the details through design review v0.4. Version 0.5 records that alignment within the existing product scope.
 
-## 2. ขอบเขตผลิตภัณฑ์
+## 2. Product Scope
 
-### 2.1 สิ่งที่จะทำให้ครบ
+### 2.1 In Scope
 
-1. เข้าสู่ระบบ ออกจากระบบ และแสดง current user จาก session จริง
-2. จัดทีม สมาชิก และขอบเขตการดูแลของ supervisor
-3. สร้างและวางแผน milestone พร้อมรายละเอียดและกำหนดส่ง
-4. ส่งงานด้วย title, description และ URL แล้วเรียกดูข้อมูลที่บันทึกแล้ว
-5. ให้ feedback และอ่าน feedback ของ submission ที่ถูกต้อง
-6. ส่ง revision โดยคงรุ่นก่อนและ feedback เดิมไว้
-7. แสดง progress board และสถานะงานตามข้อมูลจริง
-8. สรุปภาพรวมทีมที่ supervisor ดูแล พร้อม filter และเปิดดูรายละเอียด
-9. ตรวจ input, role, ownership, deadline และ concurrency ที่ backend
-10. ทดสอบ เก็บประวัติ review/release และ deploy ระบบเดียวต่อเนื่องใน Labs 5–7
+1. Sign in, sign out, and display the current user from an authenticated session.
+2. Manage teams, membership, and supervisor scope.
+3. Create and plan milestones with descriptions and deadlines.
+4. Submit work with a title, description, and URL, then retrieve the saved submission.
+5. Give feedback and read the feedback attached to the corresponding submission.
+6. Submit a revision while retaining earlier versions and their feedback.
+7. Show the progress board and milestone statuses using stored data.
+8. Summarize assigned teams for a supervisor with filters and drill-down.
+9. Enforce input validation, roles, ownership, deadlines, and concurrency rules on the backend.
+10. Test and deploy the same application throughout Labs 5–7 and keep its review and release history.
 
-### 2.2 สิ่งที่ไม่รวมใน baseline นี้
+### 2.2 Outside the Baseline Scope
 
-ไม่ทำ file upload/storage, ระบบเกรด, plagiarism detection, AI grading, chat, payment, email/push notifications, การเชื่อม LEB2/Google Drive API, self-registration, password recovery หรือหลายรายวิชาในระบบเดียว การส่ง URL ไม่ต้องเข้าถึงบัญชีของบริการปลายทาง และ backend ไม่ดาวน์โหลด URL ที่ผู้ใช้ส่งมา
+The baseline excludes file upload and storage, grading, plagiarism detection, AI grading, chat, payments, email and push notifications, LEB2 and Google Drive API integrations, self-registration, password recovery, and multi-course support. URL submission requires no account access to the destination service. The backend leaves submitted URLs unfetched.
 
-ไม่มี Admin role เพิ่มโดยไม่จำเป็น บัญชีและ supervisor assignment เริ่มจาก seed ที่ควบคุมโดยผู้ตั้งระบบ; supervisor สร้างทีมใหม่ของตนและจัดสมาชิกได้ใน Sprint 2 แต่เปลี่ยนเจ้าของทีมไป supervisor คนอื่นไม่ได้ใน baseline นี้
+The baseline uses two roles. The system operator provisions accounts and supervisor assignments through controlled seeds. In Sprint 2, supervisors can create teams they own and manage their members. Team ownership remains with the assigned supervisor.
 
-สมาชิกในทีมผู้พัฒนา 2 คนเป็นข้อกำหนดกระบวนการเรียน ไม่ใช่กฎว่าทุกทีมที่ใช้แอปต้องมีสมาชิกสองคน ระบบไม่กำหนดจำนวนสมาชิกต่อทีมตายตัว แต่ student หนึ่งคนอยู่ได้หนึ่งทีม
+The course requires a two-person development team. Application teams can have any number of members. A student can belong to one team.
 
-## 3. ผู้ใช้งานและสิทธิ์
+## 3. Users and Permissions
 
-| การทำงาน | Student | Supervisor | ผู้ไม่ login |
+| Action | Student | Supervisor | Unauthenticated user |
 |---|---|---|---|
-| Login | บัญชีตน | บัญชีตน | ทำได้ |
-| ดู current user / logout | ตนเอง | ตนเอง | me: 401; logout: ล้าง cookie และจบได้ |
-| ดูทีม/สมาชิก/milestone | ทีมตน | ทีมที่ตนดูแล | ไม่ได้ |
-| สร้าง/แก้/ยกเลิก milestone | ไม่ได้ | ทีมที่ดูแล ภายใต้กฎประวัติ | ไม่ได้ |
-| ส่งงาน/ส่ง revision | สมาชิกทีมที่เป็นเจ้าของ milestone | ไม่ได้ | ไม่ได้ |
-| อ่าน submission/feedback | ทีมตน | ทีมที่ดูแล | ไม่ได้ |
-| เขียน feedback | ไม่ได้ | ทีมที่ดูแล | ไม่ได้ |
-| สร้างทีม/จัดสมาชิก (S2) | ไม่ได้ | ทีมตน; เลือกเฉพาะ student ที่ยังไม่มีทีม | ไม่ได้ |
-| ดู progress (S2) | ทีมตน | ทีมที่ดูแล | ไม่ได้ |
-| Summary หลายทีม (S3) | ไม่ได้ | เฉพาะทีมที่ดูแล | ไม่ได้ |
+| Sign in | Own account | Own account | Allowed |
+| View current user or sign out | Own session | Own session | Current user returns 401. Sign-out clears the cookie and can complete. |
+| View teams, members, and milestones | Own team | Assigned teams | Denied |
+| Create, edit, or cancel a milestone | Denied | Assigned teams, subject to history rules | Denied |
+| Submit work or a revision | Member of the team that owns the milestone | Denied | Denied |
+| Read submissions and feedback | Own team | Assigned teams | Denied |
+| Write feedback | Denied | Assigned teams | Denied |
+| Create a team or manage members (S2) | Denied | Own teams. Select students who have no team. | Denied |
+| View progress (S2) | Own team | Assigned teams | Denied |
+| View multi-team summary (S3) | Denied | Assigned teams only | Denied |
 
-ทุกสิทธิ์ตรวจที่ backend การซ่อนปุ่มเป็นเพียง UI behavior ไม่ใช่มาตรการป้องกันข้อมูล List, detail, mutation และ aggregate ต้องใช้ scope เดียวกัน ไม่อนุญาตให้ URL หรือ JSON body เปลี่ยนตัวตน/role ของ session
+The backend enforces every permission. Hiding a control is a UI behavior. List, detail, mutation, and aggregate requests must use the same authorization scope. The session determines the actor's identity and role regardless of URL and JSON input.
 
-## 4. เส้นทางการใช้งานหลัก
+## 4. Primary User Journeys
 
-### 4.1 Sprint 1: ตั้งงาน → ส่งงาน → รับ feedback
+### 4.1 Sprint 1 — Set a Milestone, Submit Work, and Receive Feedback
 
-1. Seed supervisor-A/B, student-A1/A2/B1 และ team-A/B โดย A1/A2 อยู่ A และ B1 อยู่ B
-2. Supervisor-A login แล้วเลือก team-A
-3. สร้าง milestone “Engineering Baseline” ใส่รายละเอียดและกำหนดส่งในอนาคต
-4. Student-A1 login เห็น milestone ของ team-A และกรอก title/description/link
-5. Backend ตรวจ session, membership, input และ deadline แล้วบันทึก submission version 1 ใน transaction
-6. เปิด submission detail จาก GET request ใหม่; refresh แล้วยังเห็นข้อมูลเดิม
-7. Supervisor-A เปิด submission นั้นและเพิ่ม feedback
-8. Student-A1 หรือ A2 เปิดงานแล้วอ่าน feedback ที่ผูกกับ submission ID เดียวกัน
-9. Restart application โดยคง DB แล้วตรวจว่างานและ feedback ยังอยู่
+1. Seed supervisor-A/B, student-A1/A2/B1, and team-A/B. Assign A1/A2 to team-A and B1 to team-B.
+2. Supervisor-A signs in and selects team-A.
+3. Create the “Engineering Baseline” milestone with a description and a future deadline.
+4. Student-A1 signs in, sees the team-A milestone, and enters a title, description, and link.
+5. The backend validates the session, membership, input, and deadline, then saves submission version 1 in a transaction.
+6. Open the saved submission through a new GET request and verify that a refresh shows the same data.
+7. Supervisor-A opens the submission and adds feedback.
+8. Student-A1 or A2 opens the submission and reads the feedback tied to the same submission ID.
+9. Restart the application with the database intact and verify that the submission and feedback are still present.
 
-### 4.2 กรณีปฏิเสธที่ต้องทำให้เห็นจริง
+### 4.2 Rejection Cases to Demonstrate
 
-- ส่งหลัง deadline: 409 `DEADLINE_PASSED` และไม่มี row ใหม่
-- ส่งครั้งที่สองใน S1: 409 `ALREADY_SUBMITTED` งานเดิมไม่เปลี่ยน
-- Student เรียก API สร้าง milestone หรือ feedback: 403
-- Student-B1 หรือ Supervisor-B เปิด submission ของ A: 404 โดยไม่เปิดเผยข้อมูลของ A
-- ไม่มี session/session หมดอายุ: 401
-- URL ไม่ถูกต้องหรือ field ว่าง: 400 พร้อม field error
-- Logout แล้วนำ cookie เดิมมาใช้อีก: 401
+- A submission after the deadline returns 409 `DEADLINE_PASSED` and creates no row.
+- A second Sprint 1 submission returns 409 `ALREADY_SUBMITTED` and leaves the original submission intact.
+- A student calling a milestone creation or feedback endpoint receives 403.
+- Student-B1 or Supervisor-B opening a team-A submission receives a generic 404 without team-A data.
+- A missing or expired session returns 401.
+- An invalid URL or blank field returns 400 with a field error.
+- Reusing the old cookie after sign-out returns 401.
 
-### 4.3 Sprint 2 และ 3
+### 4.3 Sprints 2 and 3
 
-Supervisor สร้างทีมและเลือกสมาชิกก่อนเริ่มส่งงาน วางแผน milestone และปรับรายการที่ยังไม่มี submission นักศึกษาส่ง revision ได้ก่อน deadline และเปิด version เก่าได้ เมื่อมี feedback ของ version ใหม่ UI แสดงสถานะของ version ใหม่นั้น โดย feedback เก่ายังคงอยู่ในประวัติ
+Supervisors create teams, select members before submissions begin, and plan and update milestones that have no submissions. Students can submit revisions before the deadline and open previous versions. The UI reflects feedback on a new version in that version's status and retains earlier feedback in the history.
 
-Progress board แสดงงานแต่ละ milestone และเปอร์เซ็นต์การส่ง ส่วน summary ของ supervisor รวมเฉพาะทีมที่ตนดูแล กรองตามทีม/สถานะและคลิกยอดเพื่อดูรายการต้นทางได้
+The progress board shows each milestone and the percentage submitted. The supervisor summary aggregates only assigned teams, supports team and status filters, and links counts to the underlying results.
 
-## 5. SRS — Requirements ของ fastTrack
+## 5. SRS — fastTrack Requirements
 
 ### 5.1 Functional Requirements
 
 | ID | Observable behavior | Feature | Sprint |
 |---|---|---|---|
-| FR-01 | Login, current user และ logout ด้วย identity จริง | F-01 | 1 |
-| FR-02 | ดูทีม สมาชิก และ milestone เฉพาะ scope | F-01, F-02 | 1 |
-| FR-03 | Supervisor สร้าง milestone พร้อม title/description/dueAt และอ่านกลับได้ | F-02 | 1 |
-| FR-04 | Student ส่ง title/description/url และอ่าน saved submission | F-03 | 1 |
-| FR-05 | Supervisor เพิ่ม feedback; สมาชิกทีมอ่านได้ตาม submission | F-04 | 1 |
-| FR-06 | Supervisor สร้าง/เปลี่ยนชื่อทีมและจัดสมาชิกตามกฎประวัติ | F-05 | 2 |
-| FR-07 | Supervisor แก้แผน/กำหนดส่งและยกเลิก milestone ที่ยังไม่มีงานส่ง | F-05 | 2 |
-| FR-08 | สร้าง revision โดยเก็บทุก version และ feedback เดิม | F-06 | 2 |
-| FR-09 | ดู progress board ของทีมที่มีสิทธิ์พร้อมสถานะและเปอร์เซ็นต์ | F-07 | 2 |
-| FR-10 | Supervisor ดู summary/filter/drill-down จากทีมที่ดูแล | F-08 | 3 |
+| FR-01 | Sign in, retrieve the current user, and sign out using an authenticated identity | F-01 | 1 |
+| FR-02 | View teams, members, and milestones within the actor's scope | F-01, F-02 | 1 |
+| FR-03 | A supervisor can create a milestone with a title, description, and `dueAt` and retrieve it afterward | F-02 | 1 |
+| FR-04 | A student can submit a title, description, and URL and retrieve the saved submission | F-03 | 1 |
+| FR-05 | A supervisor can append feedback, and team members can read it for the corresponding submission | F-04 | 1 |
+| FR-06 | A supervisor can create or rename a team and manage membership under the history rules | F-05 | 2 |
+| FR-07 | A supervisor can edit plans and deadlines or cancel milestones that have no submissions | F-05 | 2 |
+| FR-08 | Create a revision while retaining all earlier versions and feedback | F-06 | 2 |
+| FR-09 | View an authorized team's progress board with statuses and a completion percentage | F-07 | 2 |
+| FR-10 | A supervisor can view, filter, and drill into a summary of assigned teams | F-08 | 3 |
 
-### 5.2 Business Rules และขอบเขตที่ต้องทดสอบ
+### 5.2 Business Rules and Test Boundaries
 
-| ID | กฎ baseline ที่ออกแบบ |
+| ID | Baseline design rule |
 |---|---|
-| BR-01 | Account มี role เดียว; student อยู่ได้ไม่เกินหนึ่งทีม; ทีมมี supervisor หนึ่งคน |
-| BR-02 | Student เข้าถึงทีมตน; supervisor เข้าถึงทีมที่ assigned; ทุก query และ mutation ตรวจจาก DB |
-| BR-03 | Supervisor เท่านั้นสร้าง milestone/feedback; student สมาชิกทีมเท่านั้นส่งงาน |
-| BR-04 | รับงานเมื่อเวลาฐานข้อมูลที่ตรวจหลังได้ lock `acceptedAt <= dueAt`; หลังจากนั้นปฏิเสธ; ใช้ UTC จัดเก็บและ Asia/Bangkok แสดงผล |
-| BR-05 | S1 มี submission version 1 ได้หนึ่งรายการต่อ milestone; duplicate/concurrent request ไม่สร้างข้อมูลซ้ำ |
-| BR-06 | S2 revision เพิ่ม version อย่าง atomic ไม่ overwrite/delete รุ่นก่อน; feedback ชี้ submission ID ของรุ่นนั้น |
-| BR-07 | Feedback เพิ่มได้หลายข้อความ เป็น append-only และ private ต่อทีม/ผู้ดูแล; ไม่ใช่เกรดหรือการอนุมัติ |
-| BR-08 | Trim ข้อความก่อนตรวจ; title 1–120, description 1–4,000, feedback 1–4,000 ตัวอักษร; URL HTTP/HTTPS สมบูรณ์ไม่เกิน 2,048 ตัวอักษร |
-| BR-09 | มี submission แล้วห้ามแก้/ยกเลิก milestone นั้น และห้ามเปลี่ยน membership ของทั้งทีม; ไม่ hard-delete ประวัติหรือเปลี่ยน supervisor |
-| BR-10 | Progress นับ milestone ที่ไม่ยกเลิกและมี submission อย่างน้อยหนึ่งรายการ หารด้วย milestone ที่ไม่ยกเลิกทั้งหมด; ไม่เท่ากับคะแนนหรืออัตราผ่าน |
+| BR-01 | Each account has one role. Each student belongs to at most one team. Each team has one supervisor. |
+| BR-02 | Students access their own team and supervisors access assigned teams. Every query and mutation checks scope against the database. |
+| BR-03 | Supervisors alone can create milestones and feedback. Only student members of the team can submit work. |
+| BR-04 | Accept work when the database time captured after acquiring the lock satisfies `acceptedAt <= dueAt`. Reject later submissions. Store UTC and display Asia/Bangkok time. |
+| BR-05 | Sprint 1 allows one version 1 submission per milestone. Duplicate or concurrent requests create no extra rows. |
+| BR-06 | Sprint 2 revisions increment the version atomically and preserve earlier versions. Feedback references the submission ID of the version it concerns. |
+| BR-07 | Feedback supports multiple append-only messages and is private to the team and its supervisor. It carries no grade or approval. |
+| BR-08 | Validate after trimming. Title: 1–120 characters. Description and feedback: 1–4,000 characters each. A complete HTTP or HTTPS URL has at most 2,048 characters. |
+| BR-09 | Once a submission exists, the milestone cannot be edited or cancelled and membership is locked for the entire team. Preserve history and the assigned supervisor. |
+| BR-10 | Progress is the number of non-cancelled milestones with at least one submission divided by all non-cancelled milestones. It measures submission completion. |
 
-นโยบายเวลาใช้ “เวลาที่ server ตรวจรับใน transaction” ไม่ใช่เวลาที่ browser เริ่มส่งหรือเวลา commit สำเร็จ ห้ามรับ submittedAt/version/submittedBy จาก client หากรอ lock จนเลย deadline ต้อง reject แม้ผู้ใช้กดส่งก่อนเวลา
+The deadline check uses the server's acceptance time inside the transaction. The browser's send time and the commit time are irrelevant to that check. The server determines `submittedAt`, `version`, and `submittedBy`. If a lock wait extends beyond the deadline, reject the request even when the user clicked Submit before the deadline.
 
-**รายละเอียดเวลาและ input ที่ต้องตรงกันทุกชั้น:** precision ของ dueAt/submittedAt เป็น millisecond; timestamp ต้องมี offset และรับทศนิยมวินาทีไม่เกิน 3 ตำแหน่ง มิฉะนั้นคืน 400; `acceptedAt` เป็นชื่อค่าที่อ่านใน transaction และบันทึกลง `submissions.submitted_at` โดยไม่อ่าน clock ซ้ำระหว่างตรวจและ insert การเลือกเวลาแบบ HH:mm ใช้วินาที `00` ไม่ตีความเองเป็นสิ้นนาที หน้ารายละเอียด/ข้อความปฏิเสธแสดงเวลาถึงวินาที เช่น 23:59:00 (Asia/Bangkok) และ helper ใน form อธิบายค่าเริ่มต้นนี้
+**Time and input across layers** — `dueAt` and `submittedAt` use millisecond precision. Timestamps must include an offset and may have up to three fractional second digits. Otherwise return 400. Read `acceptedAt` once in the transaction and store it in `submissions.submitted_at` without reading the clock again between validation and insertion. An HH:mm selection uses seconds `00`. Detail screens and rejection messages display seconds, for example 23:59:00 (Asia/Bangkok). The form helper explains this default.
 
-ข้อความที่จำกัดความยาวนับ Unicode code points หลัง trim โดยใช้ utility และ validation cases เดียวกันทั้ง client/server; password ไม่ trim และไม่มีการ normalize เนื้อหางานอัตโนมัติ URL ต้อง parse ได้ มี hostname ใช้ protocol http/https และไม่มี username/password ฝังใน URL ระบบตรวจรูปแบบแต่ไม่รับประกันสิทธิ์เข้าถึงเว็บไซต์ปลายทาง จึงให้ผู้ส่งตรวจสิทธิ์ลิงก์ด้วยตนเอง
+Count Unicode code points after trimming text with a length limit. Use the same utility and cases on the client and server. Preserve passwords and submission content without trimming passwords or automatically normalizing submission content. URLs must parse, have a hostname, use HTTP or HTTPS, and contain no username or password. The system validates the URL format. Submitters check access to the destination.
 
-**รายละเอียด S2:** ทีมใหม่มีสมาชิก 0 คนได้และแสดง empty state; supervisor เลือกได้เฉพาะ student ที่ยังไม่อยู่ทีมใด โดยแสดงเฉพาะ ID/name ไม่เปิด email/password ข้อมูลประวัติของทีมอื่นไม่ปรากฏ หาก student ถูกเพิ่มเข้าทีมอื่นพร้อมกัน ให้ constraint ปฏิเสธคำขอหนึ่งรายการ การเปลี่ยนชื่อทีมยังทำได้แม้มีงานส่ง เพราะ team ID ไม่เปลี่ยนและไม่ได้ย้าย ownership
+**Sprint 2 details** — A new team can have zero members and shows an empty state. Supervisors can select only students with no current team. The picker displays IDs and names and omits email addresses, passwords, and other teams' histories. If two requests add the same student to different teams, the database constraint rejects one. Teams can still be renamed after submissions exist because the team ID and ownership stay the same.
 
-Milestone ที่ยังไม่ยกเลิกและยังไม่มี submission แก้ title/description/dueAt ได้ โดย dueAt ใหม่ต้องอยู่อนาคต; ยกเลิกได้แต่ไม่ลบ row รายการยกเลิกไม่รับงานและไม่กลับมา active ใน baseline นี้ การสร้าง milestone ใหม่เพิ่มในทีมที่มีงานแล้วทำได้ เพราะไม่ได้แก้ประวัติ milestone เดิม
+For a milestone with no submission or cancellation, a supervisor can change the title, description, or `dueAt`. A new deadline must be in the future. Cancellation preserves the row. A cancelled milestone accepts no submissions and remains terminal in this baseline. A team with previous submissions can receive a new milestone because its existing history stays intact.
 
-**Concurrency S2:** revision ใช้ `expectedVersion` จากหน้าที่ผู้ใช้เปิดอยู่ หาก latest version เปลี่ยนไปแล้วให้ 409 `VERSION_CONFLICT` และให้ reload ก่อนส่งใหม่ ไม่ทับงานเพื่อนและไม่สร้าง revision โดยไม่รู้ว่ามีงานใหม่ การเปลี่ยนนี้ต้องมี revision ของ F-03/F-06 contract เมื่อเริ่ม S2
+**Sprint 2 concurrency** — A revision sends the `expectedVersion` from the current view. If it is no longer the latest version, return 409 `VERSION_CONFLICT` and ask the user to reload before retrying. This protects a teammate's submission and makes the new version visible before another revision. Update the F-03 and F-06 contracts when Sprint 2 begins.
 
-**State transitions ที่อนุญาต:** active/no submission → first submission → additional revisions; active/no submission → cancelled; cancelled เป็น terminal state Feedback เพิ่มได้ทั้งก่อนและหลัง deadline และให้กับ version เก่าได้ตาม submission ที่เปิดอยู่ Revision ไม่เปิดใหม่หลัง deadline และไม่มี grace period/approval workflow ใน baseline นี้ `PENDING/OVERDUE/SUBMITTED/FEEDBACK_AVAILABLE` เป็น derived states ของข้อมูล ส่วน `cancelledAt` เป็นข้อมูลสถานะที่บันทึกจริง
+**Allowed state transitions** — An active milestone with no submission can receive its first submission and later revisions, or it can be cancelled. Cancellation is terminal. Supervisors can add feedback before or after the deadline and can comment on older versions. The same deadline governs revisions, with no grace period or approval workflow. `PENDING`, `OVERDUE`, `SUBMITTED`, and `FEEDBACK_AVAILABLE` are derived states. `cancelledAt` is stored.
 
 ### 5.3 Non-Functional Requirements
 
-| ID | เป้าหมาย / เกณฑ์ตรวจ | Verification |
+| ID | Objective or verification criterion | Verification |
 |---|---|---|
-| NFR-01 | Password เป็น hash; invalid/expired/revoked session ใช้งานไม่ได้; response/log ไม่มี password/password hash/raw authentication token; CSRF token ส่งได้เฉพาะ auth response ที่กำหนด | S1 API/DB และทวนทุก Sprint |
-| NFR-02 | ทุก protected endpoint ไม่คืน/แก้ข้อมูลเมื่อไม่มีสิทธิ์ รวม list และ summary | negative API matrix S1–S3 |
-| NFR-03 | Committed submission/feedback อ่านได้หลัง restart; หลัง Lab 5 ต้องคงอยู่หลัง redeploy | system/deployment check |
-| NFR-04 | Clean checkout ทำ install/migrate/seed/build/run/test ตาม README ได้โดยไม่แก้ source เฉพาะเครื่อง | S1 และ final reproduction |
-| NFR-05 | Form มี loading/error/success; invalid field มีคำอธิบาย; empty state ชัดเจน; ไม่แสดง internal error/stack trace | selected UI/E2E และ manual inspection |
-| NFR-06 | Failed required CI check block release; main commit ตรง image/deployed release; smoke ผ่าน | Lab 5 เป็นต้นไปและ final |
+| NFR-01 | Store password hashes. Reject invalid, expired, or revoked sessions. Keep passwords, password hashes, and raw authentication tokens out of responses and logs. Return CSRF tokens only in the designated authentication responses. | Sprint 1 API and database checks, with review every sprint |
+| NFR-02 | Every protected endpoint denies unauthorized reads and writes, including list and summary requests. | Negative API matrix for S1–S3 |
+| NFR-03 | Committed submissions and feedback remain readable after restart and, from Lab 5 onward, after redeployment. | System and deployment checks |
+| NFR-04 | A clean checkout can install, migrate, seed, build, run, and test using the README without machine-specific source edits. | Sprint 1 and final reproduction |
+| NFR-05 | Forms show loading, errors, and success. Invalid fields have explanations, and empty states are clear. Internal errors and stack traces stay private. | Selected UI/E2E cases and manual inspection |
+| NFR-06 | A failed required CI check blocks release. The main commit matches the image and deployed release, and smoke checks pass. | Lab 5 onward and final verification |
 
-ยังไม่มี performance SLA ที่ทีมตกลงและไม่มีค่าประสิทธิภาพที่วัดแล้ว ไม่เพิ่มตัวเลข latency หรือผลทดสอบขึ้นเอง
+The team has not agreed on a performance SLA or recorded performance measurements. Report latency and test results only after measurement.
 
-## 6. Feature inventory และแผนการพัฒนา
+## 6. Feature Inventory and Development Plan
 
-| Feature | ขอบเขต | Dependencies | Completion outcome |
+| Feature | Scope | Dependencies | Completion outcome |
 |---|---|---|---|
-| F-01 — Identity & team context | Login/logout/me, scoped teams/membership | Schema/seed | ทั้งสอง role ใช้ session จริงและอ่าน scope ถูก |
-| F-02 — Milestones | สร้าง/list/detail | F-01 | Supervisor สร้างและอ่านค่าจาก DB ได้ |
-| F-03 — First submission | ส่งครั้งแรก, deadline, duplicate, persisted detail | F-01/F-02 | บันทึกงานถูกคน/ทีมและ reject ผิดกฎ |
-| F-04 — Feedback | เขียน/อ่าน feedback ของ submission | F-01/F-03 | Feedback ผูกงานถูกต้องและไม่รั่วข้ามทีม |
-| F-05 — Team & milestone planning | สร้างทีม/จัดสมาชิก/แก้ชื่อ และแก้/ยกเลิก milestone | F-01–04 | จัดข้อมูลก่อนส่งงานได้โดยไม่ทำลายประวัติ |
-| F-06 — Revisions | version history, expectedVersion, feedback association | F-03/F-04 | รุ่นเก่าอ่านได้และไม่มี lost update |
-| F-07 — Progress board | status และ progress ของทีม | F-05/F-06 | สถานะและสูตรตรงข้อมูลจริง |
-| F-08 — Summary | scoped aggregate/filter/drill-down | F-07 | Supervisor ติดตามหลายทีมโดยไม่เห็นทีมอื่น |
+| F-01 — Identity & team context | Login/logout/me, scoped teams/membership | Schema/seed | Both roles use real sessions and read only their authorized scope. |
+| F-02 — Milestones | Create, list, and view milestones | F-01 | Supervisors can create milestones and retrieve their stored values. |
+| F-03 — First submission | Initial submission, deadline, duplicate protection, and persisted detail | F-01/F-02 | The system records the correct actor and team and rejects invalid submissions. |
+| F-04 — Feedback | Write and read feedback for a submission | F-01/F-03 | Feedback stays linked to the correct submission and within its team scope. |
+| F-05 — Team & milestone planning | Create and rename teams, manage members, and edit or cancel milestones | F-01–04 | Teams can plan work before submissions begin while preserving history. |
+| F-06 — Revisions | Version history, expectedVersion, and feedback association | F-03/F-04 | Earlier versions remain readable and concurrent requests cannot cause lost updates. |
+| F-07 — Progress board | Team status and progress | F-05/F-06 | Statuses and progress calculations match stored data. |
+| F-08 — Summary | Scoped aggregates, filters, and drill-down | F-07 | Supervisors can track multiple assigned teams within their scope. |
 
-| Sprint | Features / Goal | กำหนด checkpoint |
+| Sprint | Features / Goal | Checkpoint |
 |---|---|---|
-| 1 | F-01–F-04: เส้นทางจริงครบทั้งสอง role, DB, deadline, access, tests และ reviewed release | Deliverable 1: 8 พ.ย. 2026 เวลา 23:59 |
-| 2 | F-05–F-07: core expansion ครบ พร้อม regression ของ S1 | ต้องครบก่อน D2: 29 พ.ย. 2026 เวลา 23:59 |
-| 3 | F-08 + integration/error handling/UAT fixes/final verification | มี workflow/rule ที่รันและทดสอบจริงอย่างน้อยหนึ่งส่วน ณ 29 พ.ย.; ครบ 13 ธ.ค. 2026 เวลา 23:59 |
+| 1 | F-01–F-04: Complete the real workflow for both roles, including database persistence, deadlines, access control, tests, and a reviewed release. | Deliverable 1, 8 November 2026 at 23:59 |
+| 2 | F-05–F-07: Complete the core expansion and run Sprint 1 regression tests. | Complete before D2, 29 November 2026 at 23:59 |
+| 3 | F-08, integration, error handling, UAT fixes, and final verification | At least one working and tested workflow or rule by 29 November. Complete by 13 December 2026 at 23:59. |
 
-แผนภายในที่เสนอ: จบ S2 ก่อน checkpoint D2 เพื่อมีเวลาสร้าง F-08 progress จริง ไม่ใช้ empty screen หรือ contract อย่างเดียวเป็น Sprint 3 progress งานหลักควรใกล้ครบก่อนช่วงสอบ 1–11 ธันวาคม
+The proposed internal plan completes Sprint 2 before the D2 checkpoint to allow time for working F-08 functionality. Demonstrate executable Sprint 3 progress beyond screens or contracts alone. Aim to finish core work before the 1–11 December exam period.
 
-### 6.1 แผนส่งมอบภายในและการประเมินกำลังคน
+### 6.1 Internal Delivery Plan and Capacity Estimate
 
-ตารางวันที่ด้านล่างเป็นประมาณการตั้งต้นวันที่ 5 พ.ย. ไม่ใช่งานที่ทำเสร็จแล้ว **ลำดับปฏิบัติและเจ้าของงานล่าสุดให้ใช้ [workflow รอบ 1](../workflow/01_SPRINT1_D1.md) ข้อ 5–8 และ 12** ซึ่งปรับ dependency ของ scaffold/schema และแผน 6–8 พ.ย. แล้ว ก่อนเริ่มจริงให้ทีมประเมินเวลาคงเหลือใหม่โดยคง deadline และ required scope ตามโจทย์
+The dates below are the initial estimates from 5 November. For current sequencing and ownership, use sections 5–8 and 12 of the **[Sprint 1 workflow](../workflow/01_SPRINT1_D1.md)**, which revise the scaffold and schema dependencies and the 6–8 November plan. Reassess remaining capacity before starting while retaining the assignment deadline and required scope.
 
-| ช่วงเวลาเป้าหมาย | งานและจุดตรวจ | ผู้รับผิดชอบเสนอ |
+| Target period | Work and checkpoint | Proposed owner |
 |---|---|---|
-| 5 พ.ย. | freeze S1 contracts/response schema, repo/setup/seed, เริ่ม F-01 | A นำ auth; B เตรียม F-02 contract/DB/UI; ทั้งคู่ทบทวน |
-| 6 พ.ย. | F-01/F-02 integrated; valid/invalid login และ scoped milestone tests | A/B review สลับกัน |
-| 7 พ.ย. | F-03/F-04 integrated; normal journey + deadline/access tests | A นำ F-03; B นำ F-04 หลังตกลง submission schema |
-| 8 พ.ย. | regression/restart/clean setup, teammate review, main release, evidence/PDF | ทั้งคู่; กันเวลารวมหลักฐานก่อน deadline |
-| 9–15 พ.ย. | Lab 5 delivery; เตรียม F-05 contract และเริ่มขยายเมื่อ S1 release คงที่ | สลับคนดูแล deployment และ feature work |
-| 16–22 พ.ย. | F-05/F-06 + independent UAT/fixes; เลือก maintenance ตามกติกา Lab 7 | ทั้งคู่; เก็บเวอร์ชันทดสอบแยกจาก feature ที่กำลังพัฒนา |
-| 23–24 พ.ย. | จบ F-07 และ accepted S2 release; regression S1–S2 | ทั้งคู่ |
-| 25–28 พ.ย. | F-08 workflow จริงและ tests, Lab 7 evidence, D2 candidate | แบ่ง feature/QA แล้ว review สลับกัน |
-| 29 พ.ย. | deployed candidate + D2/Lab 7 submissions | ทั้งคู่ |
-| 30 พ.ย.–13 ธ.ค. | ปิดงานที่เหลือแบบจำกัดขอบเขต, final UAT/re-tests/video/release; เผื่อช่วงสอบ | ระบุเวลาว่างจริงก่อนรับแผน |
+| 5 November | Freeze Sprint 1 contracts and response schemas, set up the repo and seeds, and start F-01. | A leads authentication. B prepares the F-02 contract, database, and UI. Both review. |
+| 6 November | Integrate F-01 and F-02. Test valid and invalid sign-in and milestone scope. | A and B review each other's work. |
+| 7 November | Integrate F-03 and F-04. Test the normal journey, deadlines, and access. | A leads F-03. B leads F-04 after agreement on the submission schema. |
+| 8 November | Run regression, restart, and clean setup checks. Complete peer review, the main release, evidence, and PDF. | Both. Reserve time to assemble evidence before the deadline. |
+| 9–15 November | Deliver Lab 5. Prepare the F-05 contract and start expanding once the Sprint 1 release is stable. | Alternate deployment and feature responsibilities. |
+| 16–22 November | Implement F-05 and F-06, conduct independent UAT and fixes, and select maintenance work under Lab 7 rules. | Both. Keep the test version separate from features under development. |
+| 23–24 November | Finish F-07, obtain an accepted Sprint 2 release, and run Sprint 1–2 regression tests. | Both |
+| 25–28 November | Build and test the working F-08 workflow. Prepare Lab 7 evidence and the D2 candidate. | Divide feature and QA work and review each other's work. |
+| 29 November | Deploy the candidate and submit D2 and Lab 7. | Both |
+| 30 November–13 December | Finish remaining work within the agreed scope. Complete final UAT, retests, video, and release while allowing for exams. | Confirm actual availability before accepting the plan. |
 
-ประมาณ effort ตั้งต้นของ S1: setup/auth 6–8, milestones 6–8, submission/deadline 8–12, feedback 5–7, integrated QA 8–12, review/evidence/PDF 5–7 **รวม 38–54 person-hours** ตัวเลขนี้เป็นประมาณการวางแผน ไม่ใช่เวลาที่ทำจริง และยังไม่รวม contingency 20% จึงต้องมีเวลารวมราว 46–65 person-hours จากสองคนภายในช่วง 5–8 พ.ย. จึงจะรับแผนนี้ได้อย่างมีเหตุผล
+Initial Sprint 1 estimates in person-hours are setup and authentication 6–8, milestones 6–8, submissions and deadline rules 8–12, feedback 5–7, integrated QA 8–12, and review, evidence, and PDF 5–7. The **38–54 person-hour total** is a planning estimate before a 20% contingency. The two team members would need about 46–65 person-hours combined during 5–8 November to make this plan viable.
 
-ยังไม่มีข้อมูลเวลาว่างของสมาชิก จึงประเมินว่า **S1 เสี่ยงสูงด้านเวลา** ไม่ควรเพิ่ม optional functionality จนกว่าจะผ่าน journey หลัก หากช้ากว่าแผนให้ลดงานตกแต่งที่ไม่จำเป็นและรายงาน incomplete scope ตามจริง; ห้ามลด auth/access/domain tests หรือย้ายงานไป Sprint ถัดไปแล้วอ้างว่าทำครบ
+Team availability is still unknown, so **Sprint 1 carries a high schedule risk**. Defer optional functionality until the main journey passes. If work falls behind, cut unnecessary visual polish and report outstanding scope accurately. Keep authentication, access, and domain tests in scope and disclose any work that moves to a later sprint.
 
-Labs ใช้แอปและ repository เดียวกัน: Lab 5 Docker/CI/CD/GCP (15 พ.ย.), Lab 6 independent UAT/defects (22 พ.ย.), Lab 7 approved maintenance/metrics (29 พ.ย.) การเปลี่ยน deadline เป็น grace period เป็นเพียงตัวเลือก maintenance ในอนาคต ต้องมีระบบเดิมทำงานแล้วและผ่านการอนุมัติตามโจทย์ก่อน ไม่จัดฟีเจอร์ baseline ที่ยังไม่เสร็จเป็น maintenance
+The labs use the same application and repository. Lab 5 covers Docker, CI/CD, and GCP (15 November). Lab 6 covers independent UAT and defects (22 November). Lab 7 covers approved maintenance and metrics (29 November). A deadline grace period is only a candidate for future maintenance after the original system works and the assignment's approval process is complete. Unfinished baseline features remain baseline work.
 
 ## 7. System-Level Design
 
-### 7.1 Architecture และเทคโนโลยี
+### 7.1 Architecture and Technology
 
-ใช้ **modular monolith** แบ่งหน้าที่ frontend → API/application → database ชัดเจน อยู่ใน repository เดียว เหมาะกับทีมสองคนและการเชื่อม workflow ที่ใช้ข้อมูลชุดเดียวกัน
+Use a **modular monolith** with distinct frontend, API/application, and database responsibilities in one repository. This fits a two-person team and workflows that share the same data.
 
 ```mermaid
 flowchart LR
@@ -236,22 +236,22 @@ flowchart LR
     ORM --> DB[(PostgreSQL)]
 ```
 
-| ส่วน | แบบที่เสนอ | หน้าที่ |
+| Layer | Proposed choice | Responsibility |
 |---|---|---|
 | Frontend | React + TypeScript + Vite | Forms, routing, status, error states |
 | Backend | Node.js + Express + TypeScript | Auth, validation, domain rules, API |
 | Database | PostgreSQL + Prisma | Relations, migrations, transaction, constraints |
-| Unit/API tests | Vitest + Supertest | Rules และ real API/DB integration |
-| Browser tests | Playwright | Critical journeys และ UI behavior |
-| Delivery | Docker, GitHub Actions, GCP | Build/test/deploy ที่ตรวจย้อนกลับได้ |
+| Unit/API tests | Vitest + Supertest | Business rules and real API/database integration |
+| Browser tests | Playwright | Critical journeys and UI behavior |
+| Delivery | Docker, GitHub Actions, GCP | Traceable builds, tests, and deployment |
 
-เทคโนโลยีนี้สอดคล้องแนวทาง Lab 5 starter แต่ starter เป็นตัวอย่าง TokTickIT ไม่ใช่ source ของ fastTrack ต้องเลือก dependency versions และ lockfile จริงเมื่อสร้างแอป ไม่ถือว่าตารางนี้เป็นผล compatibility/build ที่ผ่านแล้ว
+The stack follows the approach in the Lab 5 starter. TokTickIT serves as a reference example. fastTrack uses its own source, dependency versions, and lockfile. Build and compatibility results require implementation and verification.
 
-### 7.2 การแบ่งโมดูลและโครงสร้างที่เสนอ
+### 7.2 Proposed Module Boundaries and Structure
 
 ```text
-Project_code/               # โค้ดแอปที่จะพัฒนา
-  README.md                 # setup/run/test จริงเมื่อมีแอป
+Project_code/               # Application source
+  README.md                 # Verified setup, run, and test instructions once the app exists
   client/
     src/
       app/                  # router, authenticated layout
@@ -272,10 +272,10 @@ Project_code/               # โค้ดแอปที่จะพัฒน�
     decisions/              # ADR / scope changes
 
 Project_doc/
-  project_detail.md         # เอกสารออกแบบฉบับนี้
+  project_detail.md         # This design document
 ```
 
-นี่เป็นโครงสร้างออกแบบ ยังไม่ได้สร้างไฟล์/โฟลเดอร์ทั้งหมด API route handler รับ/คืน HTTP; service บังคับกฎธุรกิจ; repository query scope และ transaction; UI ไม่คำนวณ authority แทน service
+This tree represents the proposed structure. API handlers manage HTTP requests and responses, services enforce business rules, and repositories implement scoped queries and transactions. The service remains authoritative for access decisions.
 
 ### 7.3 Data model
 
@@ -292,53 +292,53 @@ erDiagram
     USERS ||--o{ FEEDBACK : writes
 ```
 
-| Table | Fields หลัก | Constraints / meaning |
+| Table | Main fields | Constraints and meaning |
 |---|---|---|
 | users | id UUID PK, email, display_name, password_hash, role, created_at | normalized email UNIQUE; role STUDENT/SUPERVISOR |
-| sessions | id UUID PK, token_hash, csrf_token, user_id FK, expires_at, revoked_at | token_hash UNIQUE; ไม่เก็บ raw authentication token; csrf_token เป็น random synchronizer token คนละค่ากับ auth token |
-| teams | id UUID PK, name, supervisor_id FK, created_at | name 1–120; supervisor role ตรวจ service |
-| team_members | team_id FK, student_id FK, joined_at | PK(team_id,student_id), UNIQUE(student_id); student role ตรวจ service |
-| milestones | id UUID PK, team_id FK, title, description, due_at, created_by FK, cancelled_at nullable, created_at | timestamp with time zone; title/description ตาม BR-08 |
+| sessions | id UUID PK, token_hash, csrf_token, user_id FK, expires_at, revoked_at | token_hash is UNIQUE. Store only the authentication token hash. csrf_token is a separate random synchronizer token. |
+| teams | id UUID PK, name, supervisor_id FK, created_at | Name is 1–120 characters. The service checks the supervisor role. |
+| team_members | team_id FK, student_id FK, joined_at | PK(team_id,student_id), UNIQUE(student_id). The service checks the student role. |
+| milestones | id UUID PK, team_id FK, title, description, due_at, created_by FK, cancelled_at nullable, created_at | Timestamp with time zone. Title and description follow BR-08. |
 | submissions | id UUID PK, milestone_id FK, submitted_by FK, version, title, description, url, submitted_at | UNIQUE(milestone_id,version), CHECK version >= 1; immutable |
-| feedback | id UUID PK, submission_id FK, supervisor_id FK, client_request_id UUID, content, created_at | FK exact submission; UNIQUE(supervisor_id,client_request_id) กัน retry ซ้ำ; content ตาม BR-08; append-only |
+| feedback | id UUID PK, submission_id FK, supervisor_id FK, client_request_id UUID, content, created_at | The FK identifies the exact submission. UNIQUE(supervisor_id,client_request_id) prevents duplicate retries. Content follows BR-08 and is append-only. |
 
-ทุก domain FK ใช้ RESTRICT เมื่อลบเพื่อไม่ล้างประวัติ มี index บน supervisor_id, team_id, milestone_id, submission_id และ session user/expiry ตาม query นำทางจาก submission → milestone → team เพื่อตรวจ ownership ไม่ซ้ำ team ownership ใน request body
+Use RESTRICT on deletes for all domain foreign keys to preserve history. Index supervisor_id, team_id, milestone_id, submission_id, and session user and expiry fields as queries require. Resolve ownership from submission → milestone → team. The request body carries no redundant team ownership field.
 
-**ไม่มีตาราง grades, courses หรือ uploaded_files ใน baseline นี้** Progress/status คำนวณจาก record จริง ไม่เก็บ counter ที่แก้แยกจาก submission แล้วอาจไม่ตรงกัน
+**Grades, courses, and uploaded files are outside this baseline.** Derive progress and status from stored records to keep them consistent with submissions.
 
-Required fields ทุกตัวเป็น NOT NULL ยกเว้น cancelled_at/revoked_at; role มี DB enum/check และไม่มี endpoint เปลี่ยน role ใน baseline การตรวจ role ของ supervisor/student ที่ FK อ้างถึงทำใน service/seed พร้อม integration tests เพราะ FK เพียงอย่างเดียวไม่ยืนยัน role ขอบเขตความยาวข้อความและ CHECK version >= 1 ต้องอยู่ใน migration ด้วย
+All required fields are NOT NULL except cancelled_at and revoked_at. Enforce the role with a database enum or check. The baseline has no role-change endpoint. Services and seeds check the roles behind supervisor and student foreign keys, and integration tests verify those checks. Foreign keys alone confirm identity references. Migrations also enforce text length limits and CHECK version >= 1.
 
-**Schema evolution:** เตรียม version ใน submissions ตั้งแต่ S1 เพื่อขยาย S2 โดยไม่ย้าย feedback ไปชี้ “latest” สร้าง migrations แบบมีลำดับและ version control ห้ามแก้ migration ที่ใช้กับ assessed release แล้ว ก่อนเพิ่ม S2 ต้องทดสอบ migrate จาก DB ที่มี S1 submission/feedback และยืนยันว่า ID, version และ association เดิมยังอยู่
+**Schema evolution** — Include a version in submissions from Sprint 1 so Sprint 2 can add revisions while feedback keeps its original version reference. Keep migrations ordered and versioned. Treat migrations used in assessed releases as immutable. Before Sprint 2, test the migration on a database with Sprint 1 submissions and feedback and verify that existing IDs, versions, and associations remain intact.
 
-### 7.4 Transaction, membership และ concurrent requests
+### 7.4 Transactions, Membership, and Concurrent Requests
 
-Submission transaction: lock team → lock milestone → ตรวจ membership/สถานะ → อ่านเวลาฐานข้อมูลปัจจุบันหลังได้ lock → ตรวจ deadline/version → insert → commit ใช้ลำดับ lock เดียวกันทุก service ที่เกี่ยวข้องเพื่อลด deadlock หากผิดกฎหรือ DB error ให้ rollback ทั้งหมด
+Submission transaction order is lock the team → lock the milestone → check membership and status → read the current database time after acquiring the locks → validate the deadline and version → insert → commit. Use this lock order in every related service to reduce deadlocks. Roll back the entire transaction on a rule violation or database error.
 
-การแก้ membership ใช้ team lock เดียวกันและตรวจว่าทีมยังไม่มี submission ก่อนแก้ จึงไม่เกิดกรณีตรวจว่าไม่มีงานแล้วเปลี่ยนสมาชิกพร้อมกับคำขอส่งงานที่กำลัง commit การจัด student เข้าทีมหลายคำขอพร้อมกันมี unique constraint รองรับ และแปลง conflict เป็น 409
+Membership changes use the same team lock and check that the team has no submissions before updating. This prevents a membership change from racing with a submission commit. A unique constraint covers concurrent requests to place the same student in different teams. Return 409 for the resulting conflict.
 
-S1 ใช้ constraint `UNIQUE(milestone_id, version)` และ service กำหนด version = 1 เท่านั้น; S2 ตรวจ expectedVersion เทียบ latest ภายใต้ lock แล้วสร้าง latest+1 คำขอ stale คืน 409 Backend ไม่เลือกเวลาจาก browser และไม่ใช้ transaction-start timestamp แทนเวลาหลังรอ lock เมื่อทดสอบ boundary
+Sprint 1 uses `UNIQUE(milestone_id, version)` and the service always sets version = 1. Sprint 2 compares expectedVersion to the latest version under lock and creates latest+1. A stale request returns 409. For deadline boundary checks, use the database time after the lock wait and disregard browser and transaction-start times.
 
-ตรวจ scope รอบแรกก่อน lock แล้วตรวจ membership/rules ซ้ำภายใน transaction; ทุก query ที่เป็นส่วนหนึ่งของ operation ต้องใช้ transaction client เดียวกัน รวมทั้ง raw SQL สำหรับ row lock หาก ORM version ที่เลือกต้องใช้วิธีนี้ ห้ามเรียก HTTP ภายนอกขณะถือ lock กำหนด transaction timeout และแปลง known constraint conflict เป็น domain error ไม่เปิด SQL error ให้ client
+Check scope before locking, then recheck membership and rules inside the transaction. Every query in the operation uses the same transaction client, including raw SQL row locks if the selected ORM version requires them. Keep external HTTP calls outside the lock. Set a transaction timeout and map known constraint conflicts to domain errors without exposing SQL errors.
 
-ใช้เวลาจริงหลัง lock เช่น PostgreSQL `clock_timestamp()` แล้ว truncate เป็น millisecond หนึ่งครั้งก่อนตรวจ/บันทึก; `now()` อ้าง transaction start จึงไม่เหมาะสำหรับกรณีรอ lock ข้าม deadline ตามกติกานี้ [PostgreSQL Date/Time Functions](https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-CURRENT)
+Read the actual time after locking, for example with PostgreSQL `clock_timestamp()`, and truncate to milliseconds once before validation and storage. `now()` reflects the transaction start and cannot capture a lock wait that crosses the deadline. [PostgreSQL Date/Time Functions](https://www.postgresql.org/docs/current/functions-datetime.html#FUNCTIONS-DATETIME-CURRENT)
 
-ลำดับ domain errors หลังผ่าน auth/scope/input: cancelled → already submitted (first submission) หรือ missing base/stale expectedVersion (revision) → deadline → insert การ submit ซ้ำหลัง deadline จึงยังคืน ALREADY_SUBMITTED อย่างแน่นอน; การส่งครั้งแรกที่ยังไม่มี record หลัง deadline คืน DEADLINE_PASSED
+After authentication, scope, and input validation, check cancellation first. Then check an existing first submission, or the revision's missing base or stale expectedVersion. Finally, check the deadline and insert. A duplicate after the deadline therefore still returns ALREADY_SUBMITTED. A late first submission with no existing record returns DEADLINE_PASSED.
 
-Deadlock/serialization failure ที่ยืนยันว่า rollback แล้วให้ retry transaction แบบ bounded ไม่เกิน 3 attempts และอ่าน clock/rules ใหม่ทุกครั้ง; หากยังไม่สำเร็จคืน 503 TEMPORARILY_UNAVAILABLE เฉพาะ technical contention ห้าม retry business rejection หรือกรณีไม่รู้ว่า commit แล้วหรือยังอย่างสุ่ม การเลือก error mapping/transaction API ต้องตรวจตาม ORM version ที่ pin จริง [Prisma Transactions](https://www.prisma.io/docs/orm/fundamentals/transactions)
+Retry a confirmed rolled-back deadlock or serialization failure at most 3 times in total. Reread the clock and rules on every attempt. Return 503 TEMPORARILY_UNAVAILABLE if technical contention persists. Business rejections and unknown commit outcomes require their own recovery paths. Verify error mapping and transaction APIs against the pinned ORM version. [Prisma Transactions](https://www.prisma.io/docs/orm/fundamentals/transactions)
 
-### 7.5 Session lifecycle และ security design
+### 7.5 Session Lifecycle and Security Design
 
-Login เปรียบเทียบ password กับ hash ผ่าน library (แบบเสนอ Argon2id) สร้าง opaque random token และเก็บเฉพาะ hash ใน DB ส่ง token เป็น `HttpOnly`, `SameSite=Lax` cookie และ `Secure` เมื่อใช้ HTTPS อายุแบบ absolute 8 ชั่วโมง; ไม่มี refresh endpoint ใน baseline
+On sign-in, use a library to verify the password against its hash. Argon2id is proposed. Generate an opaque random token and store only its hash. Send the token in an `HttpOnly`, `SameSite=Lax` cookie with `Secure` over HTTPS. Sessions expire after an absolute 8 hours. The baseline has no refresh endpoint.
 
-`GET /auth/me` อ่าน identity จาก session; logout revoke ใน DB และล้าง cookie; expired/revoked/unknown token ใช้งานไม่ได้ Mutation ตรวจ CSRF token และ allowed Origin; local HTTP exception จำกัด development ไม่ใช้ cookie setting ของ local กับ production โดยอัตโนมัติ
+`GET /auth/me` reads identity from the session. Sign-out revokes the session in the database and clears the cookie. Reject expired, revoked, and unknown tokens. Mutations check the CSRF token and allowed Origin. Restrict the HTTP exception and its cookie settings to local development.
 
-**Bootstrap ที่ตกลงใช้:** local browser เรียก `/api` ผ่าน Vite proxy ไป backend และ production ใช้ origin เดียวกัน API เป็น JSON-only Login ก่อนมี session ต้องมี `X-fastTrack-Request: 1` พร้อม source origin ที่ตรวจผ่าน (ตรวจ Origin หรือ origin จาก Referer เมื่อไม่มี Origin; ไม่มีทั้งคู่หรือ origin ไม่ตรงให้ 403) ไม่เปิด wildcard credentialed CORS และไม่ยอมรับ simple form POST เป็น login หลังตรวจ credential สำเร็จสร้าง auth token/CSRF token ใหม่เสมอ พร้อม revoke session เดิมที่ผูกกับ cookie ของ browser นั้นถ้ามี
+**Agreed bootstrap** — In local development, the browser reaches the backend at `/api` through the Vite proxy. Production uses one origin. The API accepts JSON only. Before a session exists, login requires `X-fastTrack-Request: 1` and an allowed source. Check Origin first, or the Referer origin if Origin is absent. Return 403 when both are absent or the origin differs. Disable wildcard credentialed CORS and simple form POST login. On successful credentials, issue new authentication and CSRF tokens and revoke any previous session attached to that browser cookie.
 
-Authenticated mutations ส่ง `X-CSRF-Token` เทียบ `sessions.csrf_token` และตรวจ origin เช่นเดียวกัน; login/me คืน CSRF token ให้ frontend ใน memory, reload แล้วเรียก me ใหม่; auth token อยู่ HttpOnly cookie เท่านั้น `expiresAt <= server time` ถือว่าหมดอายุ; logout revoke session ปัจจุบัน ไม่ logout ทุกอุปกรณ์ เมื่อไม่มี session logout ตอบ 204 หลังตรวจ source origin และล้าง cookie การแยก pre-login protection จาก authenticated token checks อิง [OWASP CSRF Prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
+For authenticated mutations, compare `X-CSRF-Token` with `sessions.csrf_token` and apply the same origin check. Login and me return a CSRF token for in-memory frontend use. After reload, call me again. Keep the authentication token in the HttpOnly cookie. A session expires when `expiresAt <= server time`. Sign-out revokes the current session only. Without a session, sign-out checks the source origin, clears the cookie, and returns 204. [OWASP CSRF Prevention](https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html)
 
-Auth/private API responses ใช้ `Cache-Control: no-store` และล้าง client-side query cache เมื่อ logout/เปลี่ยน account; return-to หลัง login รับเฉพาะ path ภายในแอป พร้อมตรวจสิทธิ์อีกครั้ง ไม่มี open redirect ไป URL ที่ user ส่งมา
+Use `Cache-Control: no-store` for authentication and private API responses. Clear the client query cache on sign-out and account change. Accept only internal app paths as login return destinations and recheck access to the destination.
 
-ไม่ส่ง password hash, email รายชื่อทั้งระบบ หรือ raw token ผ่าน API โดยไม่จำเป็น ไม่ log credential และไม่ใช้ localStorage เป็นตัวกำหนด role/password ใช้ parameterized database access; render description/feedback เป็น text; link เปิดด้วย safe external-link attributes
+Keep password hashes, system-wide email lists, and raw tokens out of unnecessary API responses. Keep credentials out of logs and leave passwords and role authority out of localStorage. Use parameterized database access, render descriptions and feedback as text, and use safe attributes for external links.
 
 ## 8. UI/UX — fastTrack ในธีมขาวดำ
 
