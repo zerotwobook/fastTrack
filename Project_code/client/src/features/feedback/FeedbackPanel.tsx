@@ -135,7 +135,7 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
       <p className={styles.meta}>{countCodePoints(content.trim()).toLocaleString('en-US')} / {FEEDBACK_LIMITS.CONTENT_MAX_CHARS.toLocaleString('en-US')} characters</p>
       {pending && <p className={styles.meta}>Your draft is locked until this save is confirmed.</p>}
       <div className={styles.actions}>
-        <Button type="submit" loading={saving} disabled={saving || recovery === 'blocked' || recovery === 'checking'}>{saving ? recovery === 'checking' ? 'Checking saved feedback...' : 'Saving feedback...' : recovery === 'retry' ? 'Retry save' : 'Save feedback'}</Button>
+        <Button type="submit" variant="feedback" loading={saving} disabled={saving || recovery === 'blocked' || recovery === 'checking'}>{saving ? recovery === 'checking' ? 'Checking saved feedback...' : 'Saving feedback...' : recovery === 'retry' ? 'Retry save' : 'Save feedback'}</Button>
         {recovery === 'blocked' && <Button variant="secondary" type="button" disabled={saving} onClick={() => { void checkAgain(); }}>Check saved feedback</Button>}
       </div>
     </form>}

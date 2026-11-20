@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, KeyboardEvent } from 'react';
+import type { StatusVariant } from '../../design/components';
 import { Button, EmptyState, Field, Input, StatusBadge, Textarea } from '../../design/components';
 import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import type { Team } from '../auth/session';
@@ -16,20 +17,10 @@ export interface MilestoneItem {
 export const formatBangkok = (value: string) => new Intl.DateTimeFormat('en-GB', {
   timeZone: 'Asia/Bangkok', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
 }).format(new Date(value)) + ' (Asia/Bangkok)';
-function State({ item, serverTime }: { item: MilestoneItem; serverTime: string }) {
-  if (item.cancelledAt) {
-    return (
-      <span className={styles.cancelled} aria-label="Cancelled">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <circle cx="10" cy="10" r="7" />
-          <path d="m5.5 14.5 9-9" />
-        </svg>
-        Cancelled
-      </span>
-    );
-  }
-  return <StatusBadge status={item.latestSubmission ? item.latestSubmission.feedbackCount ? 'feedback' : 'submitted'
-    : new Date(item.dueAt).getTime() < new Date(serverTime).getTime() ? 'overdue' : 'pending'} />;
+function milestoneStatus(item: MilestoneItem, serverTime: string): StatusVariant {
+  if (item.cancelledAt) return 'cancelled';
+  if (item.latestSubmission) return item.latestSubmission.feedbackCount ? 'feedback' : 'submitted';
+  return Date.parse(item.dueAt) < Date.parse(serverTime) ? 'overdue' : 'pending';
 }
 function Failure({ message, retry }: { message: string; retry: () => void }) {
   return <div className={styles.error} role="alert"><p>{message}</p><Button variant="secondary" onClick={retry}>Try again</Button></div>;
@@ -70,11 +61,11 @@ function trapDialogFocus(event: KeyboardEvent<HTMLDialogElement>) {
 }
 function TrackRows({ items, serverTime, userRole }: { items: MilestoneItem[]; serverTime: string; userRole: 'student' | 'supervisor' }) {
   const Heading = userRole === 'student' ? 'h4' : 'h3';
-  return <ol className={styles.track}>{items.map(item => <li key={item.id} className={styles.row}>
+  return <ol className={styles.track}>{items.map(item => <li key={item.id} className={styles.row} data-status={milestoneStatus(item, serverTime)}>
     <time dateTime={item.dueAt} className={styles.date}>{formatBangkok(item.dueAt)}</time><span className={styles.marker} aria-hidden="true" />
-    <div className={styles.item}><Heading><a href={`/milestones/${item.id}`}>{item.title}</a></Heading><State item={item} serverTime={serverTime} />
+    <div className={styles.item}><Heading><a href={`/milestones/${item.id}`}>{item.title}</a></Heading><StatusBadge status={milestoneStatus(item, serverTime)} />
       <p>{item.description}</p>{item.latestSubmission && <p className={styles.meta}>Version {item.latestSubmission.version}, {item.latestSubmission.feedbackCount} feedback messages. <a href={`/submissions/${item.latestSubmission.id}`}>{userRole === 'supervisor' ? 'Open work and give feedback' : 'Open saved submission'}</a></p>}
-      {userRole === 'student' && !item.cancelledAt && !item.latestSubmission && Date.parse(item.dueAt) >= Date.parse(serverTime) && <a className={styles.primaryLink} href={`/milestones/${item.id}/submissions/new`}>Submit work</a>}
+      {userRole === 'student' && !item.cancelledAt && !item.latestSubmission && Date.parse(item.dueAt) >= Date.parse(serverTime) && <a className={`${styles.primaryLink} ${styles.submitLink}`} href={`/milestones/${item.id}/submissions/new`}>Submit work</a>}
       <a className={styles.detailLink} href={`/milestones/${item.id}`}>View milestone</a></div>
   </li>)}</ol>;
 }
@@ -289,14 +280,14 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
           setAttempt(value => value + 1);
         }} />
       : <section><h2>Description</h2><p className={styles.description}>{result.item.description}</p></section>}
-      <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><State item={result.item} serverTime={result.serverTime} />
+      <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><StatusBadge status={milestoneStatus(result.item, result.serverTime)} />
         {result.item.cancelledAt && <p className={styles.meta}>Cancelled on {formatBangkok(result.item.cancelledAt)}.</p>}
         {result.item.latestSubmission ? <><p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p><a className={styles.primaryLink} href={`/submissions/${result.item.latestSubmission.id}`}>Open saved submission</a>
           {userRole === 'student' && (revisionRestriction ? <p>{revisionRestriction}</p>
             : <a className={styles.detailLink} href={`/milestones/${id}/revisions/new`}>Submit revision</a>)}</>
           : userRole === 'student' && (result.item.cancelledAt ? <p>This milestone was cancelled and cannot receive work.</p>
             : Date.parse(result.serverTime) > Date.parse(result.item.dueAt) ? <p>The deadline has passed. Work cannot be submitted.</p>
-            : <a className={styles.primaryLink} href={`/milestones/${id}/submissions/new`}>Submit work</a>)}
+            : <a className={`${styles.primaryLink} ${styles.submitLink}`} href={`/milestones/${id}/submissions/new`}>Submit work</a>)}
         {userRole === 'supervisor' && <>
           {planning.canEdit && !editing && <div className={styles.railActions}>
             <Button ref={editTriggerRef} type="button" variant="secondary" onClick={() => { setStatusNotice(null); setEditing(true); }}>Edit milestone</Button>
@@ -319,7 +310,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
       {cancelError && <div role="alert" className={styles.error}><p>{cancelError}</p></div>}
       <div className={styles.confirmActions}>
         <Button ref={cancelBackRef} type="button" variant="secondary" disabled={cancelling} onClick={() => closeCancelDialog(true)}>Go back</Button>
-        <Button type="button" variant="primary" loading={cancelling} disabled={cancelling} onClick={() => { void confirmCancel(); }}>
+        <Button type="button" variant="danger" loading={cancelling} disabled={cancelling} onClick={() => { void confirmCancel(); }}>
           {cancelling ? 'Cancelling milestone…' : 'Confirm cancel milestone'}
         </Button>
       </div>

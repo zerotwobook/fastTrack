@@ -1,10 +1,16 @@
 .container { margin-top: 32px; display: grid; gap: 24px; min-width: 0; }
 .header { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; padding-bottom: 16px; border-bottom: 1px solid var(--color-divider); }
 .primaryLink { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 8px 16px; background: var(--color-ink); color: var(--color-paper); border: 1px solid var(--color-ink); border-radius: 8px; text-decoration: none; }
+.submitLink { background: var(--color-success); border-color: var(--color-success); }
 .track { list-style: none; padding: 0; }
 .row { display: grid; grid-template-columns: 176px 12px minmax(0, 1fr); gap: 24px; position: relative; padding-bottom: 24px; }
 .date { font-size: 14px; line-height: 1.6; color: var(--color-muted); font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
 .marker { position: relative; width: 12px; height: 12px; margin-top: 6px; border: 2px solid var(--color-ink); border-radius: 50%; }
+.row[data-status="pending"] .marker { border-color: var(--color-warning); background: var(--color-warning-surface); }
+.row[data-status="submitted"] .marker { border-color: var(--color-success); background: var(--color-success); }
+.row[data-status="feedback"] .marker { border-color: var(--color-info); background: var(--color-info); }
+.row[data-status="overdue"] .marker { border-color: var(--color-danger); background: var(--color-danger-surface); }
+.row[data-status="cancelled"] .marker { border-color: var(--color-control); background: var(--color-wash); }
 .row:not(:last-child)::before { content: ''; position: absolute; width: 1px; background: var(--color-control); top: 18px; bottom: -6px; left: 206px; }
 .item { display: grid; justify-items: start; gap: 12px; min-width: 0; padding-bottom: 24px; border-bottom: 1px solid var(--color-divider); overflow-wrap: anywhere; }
 .row:last-child { padding-bottom: 0; }
@@ -37,8 +43,6 @@
 .rail { display: grid; align-content: start; gap: 16px; min-width: 0; border: 1px solid var(--color-divider); border-radius: var(--radius-panel); padding: 24px; background: var(--color-wash); overflow-wrap: anywhere; }
 .rail h2 { margin-bottom: 0; }
 .rail time { font-variant-numeric: tabular-nums; }
-.cancelled { display: inline-flex; align-items: center; gap: 8px; padding: 4px 10px; border: 1px solid var(--color-control); border-radius: 9999px; background: var(--color-wash); color: var(--color-muted); font-size: 14px; font-weight: 500; line-height: 1.6; }
-.cancelled svg { flex: 0 0 auto; }
 .railActions { display: grid; gap: 12px; padding-top: 12px; border-top: 1px solid var(--color-divider); }
 .lockedReason { font-size: 14px; line-height: 1.6; color: var(--color-muted); padding-top: 12px; border-top: 1px solid var(--color-divider); }
 .editPanel { display: grid; gap: 24px; min-width: 0; }

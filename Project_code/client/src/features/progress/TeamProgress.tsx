@@ -11,9 +11,10 @@ const statusBadges = {
   OVERDUE: 'overdue',
   SUBMITTED: 'submitted',
   FEEDBACK_AVAILABLE: 'feedback',
+  CANCELLED: 'cancelled',
 } as const;
 
-type ProgressMilestone = MilestoneItem & { status: keyof typeof statusBadges | 'CANCELLED' };
+type ProgressMilestone = MilestoneItem & { status: keyof typeof statusBadges };
 
 interface Progress {
   teamId: string;
@@ -79,7 +80,7 @@ export function TeamProgress({ teamId }: { teamId: string }) {
                 <a href={`/milestones/${item.id}`}>{item.title}</a>
                 <p className={styles.note}>Due <time dateTime={item.dueAt}>{formatBangkok(item.dueAt)}</time></p>
               </div>
-              {item.status === 'CANCELLED' ? <span className={styles.cancelled}>Cancelled</span> : <StatusBadge status={statusBadges[item.status]} />}
+              <StatusBadge status={statusBadges[item.status]} />
             </li>)}
           </ul>
         </section>}

@@ -20,11 +20,22 @@
 
 :root {
   --color-paper: #ffffff;
-  --color-ink: #000000;
-  --color-wash: #f5f5f5;
-  --color-divider: #e5e5e5;
-  --color-muted: #595959;
-  --color-control: #8a8a8a;
+  --color-ink: #172b23;
+  --color-canvas: #f5f8f6;
+  --color-wash: #edf3ef;
+  --color-divider: #dce6df;
+  --color-muted: #4d6257;
+  --color-control: #798b81;
+
+  --color-success: #176343;
+  --color-success-surface: #e4f3e9;
+  --color-info: #245889;
+  --color-info-surface: #e8f1fb;
+  --color-warning: #80500a;
+  --color-warning-surface: #fff3db;
+  --color-danger: #9f3339;
+  --color-danger-surface: #fcebed;
+  --color-focus: var(--color-info);
 
   --font-family: Inter, "Noto Sans Thai", Tahoma, sans-serif;
   --font-weight-heading: 500;
@@ -53,9 +64,8 @@
 }
 
 body {
-  min-width: 320px;
   min-height: 100dvh;
-  background-color: var(--color-paper);
+  background-color: var(--color-canvas);
 }
 
 button, input, textarea { font: inherit; }
@@ -66,7 +76,7 @@ input::placeholder, textarea::placeholder { color: var(--color-muted); opacity: 
 
 /* Focus ring — visible and accessible */
 :focus-visible {
-  outline: 2px solid var(--color-ink);
+  outline: 2px solid var(--color-focus);
   outline-offset: 2px;
 }
 
