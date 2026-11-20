@@ -1,7 +1,6 @@
 import { Prisma } from '../../db/generated/client/index.js';
 import type { PrismaClient } from '../../db/generated/client/index.js';
 import type { SummaryFilters, SummaryResponse, SummaryTeam, SummaryTotals } from '../../../../shared/summary.mjs';
-import type { TeamActor } from '../teams/model.js';
 import { scopedTeamWhere, teamNotFound } from '../teams/model.js';
 import { database } from '../auth/security.js';
 import { progressStatus, submissionProgressPercent } from '../progress/calculation.js';
@@ -71,7 +70,7 @@ async function readCompletion(
 /** Resolve the supervisor's scope, completion, and paged items in one database snapshot. */
 export async function readSummary(
   prisma: PrismaClient,
-  actor: TeamActor,
+  supervisorId: string,
   filters: SummaryFilters,
 ): Promise<SummaryResponse> {
   const response = await database(() => prisma.$transaction(async tx => {
@@ -79,7 +78,7 @@ export async function readSummary(
     const asOf = await readDatabaseTimeMs(tx);
     const teams = await tx.team.findMany({
       where: {
-        ...scopedTeamWhere(actor),
+        ...scopedTeamWhere({ role: 'supervisor', userId: supervisorId }),
         ...(filters.teamId === null ? {} : { id: filters.teamId }),
       },
       select: { id: true, name: true },

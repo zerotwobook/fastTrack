@@ -12,7 +12,7 @@ export function createSummaryRouter({ prisma, protection }: Pick<AuthDependencie
     if (!query.ok) throw new AppError(400, 'INVALID_INPUT', 'Check the summary filter parameters.', query.errors);
 
     const actor = await protection.getAuthContext(req);
-    res.json(await readSummary(prisma, actor, query.filters));
+    res.json(await readSummary(prisma, actor.userId, query.filters));
   });
   return router;
 }
