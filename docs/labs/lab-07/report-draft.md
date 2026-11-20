@@ -23,7 +23,7 @@ Team and theme details match the [Lab 5 team record](../lab-05/report.md#answer-
 | C | [Objective engineering metrics](#part-c-objective-engineering-metrics) | L7-M01 to L7-M05 |
 | D | [Release readiness and retrospective](#part-d-release-readiness-and-retrospective) | L7-D01, L7-D02 |
 
-Add page ranges after final PDF layout.
+Record the page ranges for Parts A–D after laying out the team PDF.
 
 ## Version record
 
@@ -34,10 +34,10 @@ Add page ranges after final PDF layout.
 | Actual pre-change implementation | `staging/sprint-2@63e81d1a91f7f288825100b47786823460943e5c` | [Baseline CI 44663918612](https://github.com/zerotwobook/fastTrack/actions/runs/44663918612) |
 | RED test source | `e3758fb541e48716545868c6f435907b83a67aec` | [RED CI 44672187909](https://github.com/zerotwobook/fastTrack/actions/runs/44672187909) · [Local result](../../../Project_code/docs/evidence/R2-A05-lab7-red-results.json) |
 | GREEN implementation and staging integration | `2368d71813541bacc0bc9b9ecba58b3ae9ea7c86` → approved merge `7357fd2f3e172120af39e32a1ed4fd1284844aa0` | [PR #128](https://github.com/zerotwobook/fastTrack/pull/128) · [Exact-head CI 44679245716](https://github.com/zerotwobook/fastTrack/actions/runs/44679245716) |
-| Sprint 2 candidate at snapshot | `1185f3ffc3954a18dd883e451767dc6ad8a3ee6f` → `main@8e637e537cd037d630a5fffc1b5672d1b44371a8` | [Draft PR #129](https://github.com/zerotwobook/fastTrack/pull/129) · [Candidate CI 44697610558](https://github.com/zerotwobook/fastTrack/actions/runs/44697610558) |
-| Submitted Lab 7 main commit or tag and serving revision | Pending authorized release and deployment. | [G6 release record](https://github.com/zerotwobook/fastTrack/issues/26) |
+| Reviewed release candidate | `staging/sprint-2@1185f3ffc3954a18dd883e451767dc6ad8a3ee6f` against prior `main@8e637e537cd037d630a5fffc1b5672d1b44371a8` | [Release PR #129](https://github.com/zerotwobook/fastTrack/pull/129) · [Candidate CI 44697610558](https://github.com/zerotwobook/fastTrack/actions/runs/44697610558) |
+| Lab 7 assessed release | `v1.0.0-sprint-2` at `main@f3ff8d9704c6e2a3705805412f538b2b216569ad`, Cloud Run `fasttrack-app-00004-jr2` | [Accepted tag](https://github.com/zerotwobook/fastTrack/tree/v1.0.0-sprint-2) · [G6 release record](https://github.com/zerotwobook/fastTrack/issues/26) |
 
-The baseline `63e81d1` includes intervening Sprint 2 planning, revisions, progress, and integration work. The feedback validator, form, Prisma schema, and migrations matched the deployed rule in the pre-change comparison. The RED commit added the revised contract and test cases. The staging merge packages the reviewed maintenance alongside Sprint 2, and the later [PR #131](https://github.com/zerotwobook/fastTrack/pull/131) contributes UI work to the current candidate. Compare the final main merge SHA and image digests with Cloud Run in L7-B05. [Pre-change comparison and RED evidence](../../../Project_code/docs/evidence/R2-A05-lab7-red.md)
+The baseline `63e81d1` includes intervening Sprint 2 planning, revisions, progress, and integration work. The feedback validator, form, Prisma schema, and migrations matched the deployed rule in the pre-change comparison. The RED commit added the revised contract and test cases. The staging merge packages the reviewed maintenance alongside Sprint 2, and the later [PR #131](https://github.com/zerotwobook/fastTrack/pull/131) contributes UI work to the same release. The authorized merge created `f3ff8d9` with the same source tree as the reviewed candidate `1185f3f`. CI and Cloud Run identify the merge SHA. L7-B05 records the deployed revision and image digests. [Pre-change comparison and RED evidence](../../../Project_code/docs/evidence/R2-A05-lab7-red.md)
 
 ## Part A. Change impact and updated contract
 
@@ -45,7 +45,11 @@ The baseline `63e81d1` includes intervening Sprint 2 planning, revisions, progre
 
 **CR-L7-01, F-04.** The implemented Sprint 1 rule permitted the assigned supervisor to save 1–4,000 Unicode code points of feedback after trimming outer whitespace. The approved revision permits **1–6,000 Unicode code points after the same trim** so supervisors can include more detailed guidance. Interior whitespace counts. A single astral emoji counts as one code point and a compound emoji counts by its constituent code points. Empty or whitespace-only content, NUL and unpaired surrogate characters are invalid. A 6,001-point input receives a content error and produces zero rows. Existing access checks and the link to the exact submission version still apply.
 
-**Approval record.** The course TA accepted the request in chat and asked the team to verify **5,999, 6,000 and 6,001**, including emoji and surrounding whitespace. A supplied the approval screenshot on 20 November 2026, Asia/Bangkok. The image shows 10:48 AM. The visible crop leaves the approver's name and calendar date unconfirmed. Insert the original screenshot from the team conversation in the final report under L7-A01. [Approved change record](https://github.com/zerotwobook/fastTrack/issues/24) · [Approval transcription and limitations](../../../Project_code/docs/contracts/lab-7-feedback-limit.md#approval-and-baseline)
+**Approval record (L7-A01).** Course TA Tik approved CR-L7-01 on **20 November 2026 (20 November 2569 BE), Asia/Bangkok**. The project owner confirmed the approver and date. The chat screenshot shows **10:48 AM** and the TA's instruction to test the 5,999, 6,000 and 6,001 boundaries, including emoji and whitespace. The approval preceded the versioned contract, RED tests and implementation recorded below. [Approved change record](https://github.com/zerotwobook/fastTrack/issues/24) · [Versioned approval and baseline](../../../Project_code/docs/contracts/lab-7-feedback-limit.md#approval-and-baseline)
+
+> **TA reply, translated from Thai:** Go ahead. Test the 5,999, 6,000 and 6,001 boundaries, including emoji and whitespace.
+
+*Evidence L7-A01. TA Tik approved the feedback limit change and specified the boundary tests. The team retains the original chat screenshot for the grading package.*
 
 ### L7-A02 Contract and impact trace
 
@@ -131,16 +135,24 @@ A reviewed the implementation and tightened the parser-boundary test at `d2b6c16
 
 ### L7-B05 Deployed verification record
 
-At the report snapshot, the public `/api/health` and `/api/ready` readbacks still reported `8e637e5`, with `database=connected`. Draft PR #129 contains the approved maintenance on staging. Main authorization, the deployed Lab 7 revision and the following live checks are pending. [Release PR #129](https://github.com/zerotwobook/fastTrack/pull/129) · [Release authorization procedure](../../../workflow/MAIN_RELEASE_GATE.md)
+A authorized release PR #129 for the reviewed candidate on 20 November 2026 at 09:44:40 UTC. A approved the exact head, and the PR merged into `main` at 10:30:51 UTC as `f3ff8d9704c6e2a3705805412f538b2b216569ad`. The accepted tag `v1.0.0-sprint-2` resolves to that commit. A and B each recorded G6 acceptance for that deployed source. [Reviewed release](https://github.com/zerotwobook/fastTrack/pull/129) · [Acceptance record](https://github.com/zerotwobook/fastTrack/issues/26)
 
-| L7-STS-05 check | Expected deployed evidence | Actual at snapshot | Owner |
-| --- | --- | --- | --- |
-| Release identity and smoke | Main merge SHA, image digests, migration result, serving Cloud Run revision, traffic, health and readiness agree. | Previous main reachable. Lab 7 release verification pending. | B records deployment, A cross-checks. |
-| 5,999 and 6,000 with emoji and surrounding whitespace | Assigned supervisor saves. Counter reflects trimmed code points, saved text reads back in the exact version, and student can read it. | Pending deploy. Disposable preview results are in L7-B02. | A executes, B cross-checks. |
-| 6,001 with emoji and surrounding whitespace | Browser shows the content error. The authenticated API returns 400 `INVALID_INPUT` and a readback confirms zero new rows. | Pending deploy. | A executes, B cross-checks. |
-| Preserved Sprint 1 domain and access | Original saved work and v1 feedback remain readable to the assigned team after migration. The foreign supervisor receives generic 404. Saved feedback on v1 stays on v1 with v2 present. | Pending deploy. The accepted Sprint 1 UAT baseline is in L7-M04. | A and B cross-check. |
+| Deployment check | Observed evidence |
+| --- | --- |
+| Main CI | Run `44719877378` reported **458 passed, 0 failed, 0 skipped**, plus **7/7** separate legacy upgrade scenarios. Typecheck, production build and CI deployment checks passed. [Main CI and test artifact](https://github.com/zerotwobook/fastTrack/actions/runs/44719877378) |
+| Migration and Cloud Run | Deployment run `44719877524` passed. Migration execution `fasttrack-migrate-8lncs` succeeded. Revision `fasttrack-app-00004-jr2` took **100%** of traffic. [Deployment](https://github.com/zerotwobook/fastTrack/actions/runs/44719877524) |
+| Immutable images | Web `sha256:2691697231b6ed8c4eeb11910261e8b9e2826de8a5bafe6fc56a3adf60d5619a`. Jobs `sha256:a26fb84ecf6cfc37e7b273472e4d732df8844c02d42b375f0a13bb28c570bd61`. [Deployment summary](https://github.com/zerotwobook/fastTrack/issues/26) |
+| Public smoke and readback | The pipeline smoke passed. Its optional login was skipped. At 11:35:55 UTC on 20 November, public `/api/health` and `/api/ready` returned the main merge SHA, with the database connected. L7-STS-05 separately exercised authenticated roles. [Public smoke and technical verification](https://github.com/zerotwobook/fastTrack/issues/26) |
 
-For the final report, use synthetic submissions and record the time, public URL, main SHA, serving revision, actor, expected and actual outcome for each check.
+**L7-STS-05 passed.** The A-authorized, AI-assisted Playwright and API run finished on **20 November 2026 at 18:16:57 Asia/Bangkok (11:16:57 UTC)** on revision `fasttrack-app-00004-jr2`. An assigned synthetic supervisor, a student on the same team, and a foreign synthetic supervisor used separate authenticated sessions. Three test inputs each contained three single-code-point emoji, internal spaces, and leading and trailing spaces. The run used a new synthetic milestone with two saved versions and read the historical C04 records without editing them. [Production app](https://fasttrack-app-kpx7au3w2a-as.a.run.app/) · [Recorded results](https://github.com/zerotwobook/fastTrack/issues/26)
+
+| Evidence ID | Action and expected result | Actual result |
+| --- | --- | --- |
+| L7-B05a | Assigned supervisor saves 5,999 trimmed code points. Expect a successful save and exact v1 readback. | The counter showed 5,999. Browser save returned **201**. The API read back the complete trimmed input. |
+| L7-B05b | Assigned supervisor saves 6,000 trimmed code points. Expect a successful save at the maximum. | The counter showed 6,000. Browser save returned **201**. The API read back the complete trimmed input. |
+| L7-B05c | Assigned supervisor submits 6,001 trimmed code points. Expect a validation error and no new entry. | The browser showed the limit error and sent no feedback POST. A separate API request returned **400 `INVALID_INPUT`**. The list still contained two entries after reload. |
+| L7-B05d | Student inspects v1 and v2. Expect v1 feedback to stay on v1 and no editor in the student view. | Browser and API confirmed **two entries on v1, zero on v2**. The student view showed no feedback editor. |
+| L7-B05e | Read the original C04 records and request the same feedback as a foreign supervisor. Expect preserved data and scoped denial. | The original submission and feedback matched their recorded IDs and content. The foreign supervisor's feedback read returned **404**. |
 
 ## Part C. Objective engineering metrics
 
@@ -189,17 +201,16 @@ The selected Sprint 2 workstream completed five issues and merged five PRs. All 
 
 ### L7-D01 Readiness for the maintained Sprint 1 scope
 
-**NOT READY at this snapshot.** The maintained behavior has passed staging integration and the pinned candidate regression. Readiness for the approved 6,000-point rule requires an authorized main release and observed deployed L7-STS-05 results.
+**READY for the maintained Sprint 1 feedback scope.** The authorized change is serving on `v1.0.0-sprint-2`. Main CI, legacy upgrades, the forward migration, public smoke, and the deployed feedback boundary and continuity checks passed. A and B accepted the deployed release in G6. This decision covers CR-L7-01 and the preserved paths in L7-B05. [G6 acceptance](https://github.com/zerotwobook/fastTrack/issues/26)
 
 | Area | Status and evidence | Owner and next action |
 | --- | --- | --- |
-| Version and deployment | Draft release `1185f3f` passed CI. The public health and ready responses identify prior main `8e637e5`. The recorded prior revision is `fasttrack-app-00003-rc7`. | A reviews the exact release. After authorization and peer review, B records main SHA, web and migration image digests, migration, serving revision and traffic. |
-| Automated checks and manual smoke | Candidate CI reports 458 passed, 0 failed and 0 skipped, plus 7/7 upgrades. The archived RED includes eight expected failures. Disposable browser boundary and history checks passed. Lab 7 deployed change and scope smoke are pending. | A runs the deployed boundary and preserved-path cases in L7-B05. B independently cross-checks the version and result. |
-| Defects by severity and disposition | No open critical, high or lower-severity defects were observed in the accepted eight-case product UAT scope. The separate Section 3.5 simulation had one resolved defect. Current live Lab 7 behavior remains a verification item. | A and B triage any live finding by severity, attach the tested revision, and record a retest after a fix. |
-| Configuration and secrets | The previous app's pinned database role and connection settings were used for a read-only `SHOW TIME ZONE` probe. It returned UTC. The new revision's effective settings and readiness still need readback. | B verifies the release using the existing deployment procedure and records only non-secret result fields. |
-| Documentation and setup | The versioned F-04 change contract, STS, repository setup and deployment steps are available. | A and B update the version record and final smoke evidence after release. [Setup](../../../Project_code/README.md) · [Deployment guide](../lab-05/deployment.md) |
-| Technical debt | The workflow outcome summary and exact release evidence are currently gathered through separate records. The mismatch between one saved metrics count and the reproducible window shows the cost of hand-counted snapshots. | Medium priority. B saves the dated run-ID list and exact tested SHA with the release evidence, and A checks the denominator before Final Delivery. |
-| Assessment package | This Markdown has Parts A–D and the compact evidence ledgers. The original approval image, final page ranges, deployed case record, and submission receipt remain outstanding. | A and B cross-review the draft. A adds the approved final evidence and records the real submission receipt. |
+| Version and deployment | Main `f3ff8d9` is tagged `v1.0.0-sprint-2`. Cloud Run `fasttrack-app-00004-jr2` served 100% of traffic. Migration and public health and readiness checks passed. | A and B retain the accepted tag and deployed evidence for grading. |
+| Automated checks and smoke | Main CI reported 458 passed, 0 failed, 0 skipped, plus 7/7 upgrades. The retained RED run has eight expected failures. The deployment smoke skipped its optional login. Separate authenticated browser and API checks passed under L7-STS-05. | A and B retain exact-version CI and production evidence. |
+| Defects by severity and disposition | The accepted eight-case product UAT found no open defects in its tested scope. The separate Section 3.5 simulation had one resolved defect. L7-STS-05 found no issue in its verified scope. | A and B record and triage any later findings against the affected version. |
+| Configuration and secrets | The pre-release read-only database probe returned UTC. The new revision's readiness returned the deployed SHA and database connectivity. The deployment evidence records the migration and pinned images. | B maintains the release configuration and redacts credentials from grading evidence. |
+| Documentation and setup | The versioned F-04 contract and STS, repository setup, deployment steps, and post-deploy verification are documented. | A and B maintain these records with the release. [Setup](../../../Project_code/README.md) · [Deployment guide](../lab-05/deployment.md) |
+| Technical debt | The workflow outcome summary and exact release evidence are currently gathered through separate records. The mismatch between one saved metrics count and the reproducible window shows the cost of hand-counted snapshots. | Medium priority. B saves the dated run-ID list and exact tested SHA with the release evidence. A checks the denominator before Final Delivery. |
 
 ### L7-D02 Retrospective
 
@@ -213,4 +224,4 @@ The selected Sprint 2 workstream completed five issues and merged five PRs. All 
 
 - **A** recorded the TA decision, wrote the impact trace, versioned contract and STS, captured RED, and strengthened the transport-cap regression after reviewing GREEN. A supplied the initial completed-issue, merged-PR and feedback-suite evidence. [Issue #24](https://github.com/zerotwobook/fastTrack/issues/24)
 - **B** reviewed the contract and RED handoff, implemented the validator, UI, parser and migration changes, ran GREEN and upgrade checks, and supplied the UAT and CI observations. B verified the updated PR head before staging integration. [Issue #25](https://github.com/zerotwobook/fastTrack/issues/25) · [PR #128](https://github.com/zerotwobook/fastTrack/pull/128)
-- **AI use.** AI assisted with organizing this Markdown, tracing evidence to sources, recounting the dated CI run list, and checking the interpretation length. The linked team decisions, test outputs and approval records remain the sources for the report.
+- **AI use.** AI assisted with organizing this Markdown, tracing evidence to sources, recounting the dated CI run list, and checking the interpretation length. Under A’s authorization, AI ran the recorded Playwright and API checks using synthetic production accounts. A and B reviewed the resulting release evidence and separately confirmed G6 acceptance.
