@@ -1,11 +1,9 @@
 /* Shared controls for both roles. */
 .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; max-width: 100%; padding: 8px 16px; font: 550 1rem/1.55 var(--font-family); border: 1px solid var(--color-control); border-radius: var(--radius-md); cursor: pointer; text-align: center; overflow-wrap: anywhere; transition: background-color .1s ease, box-shadow .1s ease; }
-.btn--primary { background: var(--color-accent); color: var(--color-ink); border-color: var(--color-accent); }
-.btn--primary:hover:not(:disabled) { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
-.btn--submit { --button-fill: var(--color-success); }
-.btn--danger { --button-fill: var(--color-danger); }
-.btn--submit, .btn--danger { background: var(--button-fill); color: var(--color-paper); border-color: var(--button-fill); }
-.btn--submit:hover:not(:disabled), .btn--danger:hover:not(:disabled) { box-shadow: inset 0 0 0 2px var(--color-paper); }
+.btn--primary, .btn--submit { background: var(--color-primary); color: var(--color-paper); border-color: var(--color-primary); }
+.btn--primary:hover:not(:disabled), .btn--submit:hover:not(:disabled) { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
+.btn--danger { background: var(--color-danger); color: var(--color-paper); border-color: var(--color-danger); }
+.btn--danger:hover:not(:disabled) { box-shadow: inset 0 0 0 2px var(--color-paper); }
 .btn--secondary, .btn--ghost { background: var(--color-paper); color: var(--color-ink); }
 .btn--secondary:hover:not(:disabled), .btn--ghost:hover:not(:disabled) { background: var(--color-wash); border-color: var(--color-ink); }
 .btn:disabled { background: var(--color-wash); color: var(--color-muted); border-color: var(--color-control); cursor: not-allowed; }
@@ -21,13 +19,13 @@
 .input--error, .textarea.input--error, .input[aria-invalid="true"], .textarea[aria-invalid="true"] { border-color: var(--color-danger); box-shadow: inset 0 0 0 1px var(--color-danger); }
 .input:disabled, .textarea:disabled, .textarea:read-only { background: var(--color-wash); color: var(--color-muted); opacity: 1; }
 .textarea { resize: vertical; min-height: 144px; }
-.status { display: inline-flex; align-items: center; justify-self: start; gap: 8px; max-width: 100%; padding: 4px 10px; border: 1px solid var(--color-control); border-radius: 9999px; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--color-ink); }
+.status { display: inline-flex; align-items: center; justify-self: start; gap: 8px; max-width: 100%; padding: 4px 10px; border: 1px solid var(--color-edge); border-radius: 9999px; font-size: 14px; font-weight: 500; line-height: 1.6; color: var(--color-ink); background: var(--color-wash); }
 .status svg { flex: 0 0 auto; }
-.status--pending { color: var(--color-warning); background: var(--color-warning-surface); border-color: currentColor; }
-.status--submitted { color: var(--color-success); background: var(--color-success-surface); border-color: currentColor; }
-.status--feedback { color: var(--color-info); background: var(--color-info-surface); border-color: currentColor; }
-.status--overdue { color: var(--color-danger); background: var(--color-danger-surface); border-color: currentColor; }
-.status--cancelled { color: var(--color-muted); background: var(--color-wash); }
+.status--pending { color: var(--color-warning); }
+.status--submitted { color: var(--color-success); }
+.status--feedback { color: var(--color-info); }
+.status--overdue { color: var(--color-danger); }
+.status--cancelled { color: var(--color-muted); }
 .divider { border: 0; border-top: 1px solid var(--color-divider); margin: 0; }
 .emptyState { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; padding: 24px; border: 1px dashed var(--color-control); border-radius: var(--radius-panel); background: var(--color-wash); color: var(--color-muted); }
 .emptyStateTitle { font-size: 1rem; font-weight: 500; color: var(--color-ink); }

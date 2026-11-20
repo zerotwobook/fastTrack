@@ -20,29 +20,23 @@
 
 :root {
   --color-paper: #ffffff;
-  --color-ink: #1a1816;
-  --color-canvas: #f8f6f2;
-  --color-wash: #f5f2ed;
-  --color-divider: #e6e0d7;
-  --color-muted: #635b52;
-  --color-control: #877a6d;
-  --color-accent: #ff773b;
-  --color-accent-hover: #fa682c;
-  --color-accent-ink: #963910;
-  --color-accent-surface: #fff0e6;
-  --color-inverse: #211e1a;
-  --color-on-inverse: #fffaf5;
-  --color-muted-on-inverse: #d9cdc0;
+  --color-ink: #1e2229;
+  --color-canvas: #fafafa;
+  --color-wash: #f3f4f6;
+  --color-divider: #e5e7eb;
+  --color-edge: #d1d5db;
+  --color-muted: #4b5563;
+  --color-control: #6b7280;
+  --color-primary: #171717;
+  --color-primary-hover: #374151;
 
   --color-success: #176343;
   --color-success-surface: #e4f3e9;
   --color-info: #245889;
-  --color-info-surface: #e8f1fb;
   --color-warning: #80500a;
-  --color-warning-surface: #fff3db;
   --color-danger: #9f3339;
   --color-danger-surface: #fcebed;
-  --color-focus: var(--color-accent-ink);
+  --color-focus: var(--color-primary);
 
   --font-family: Inter, "Noto Sans Thai", Tahoma, sans-serif;
   --font-weight-heading: 500;
@@ -51,7 +45,7 @@
   --radius-sm: 4px;
   --radius-md: 10px;
   --radius-panel: 16px;
-  --shadow-panel: 0 2px 7px rgb(53 39 26 / .055);
+  --shadow-panel: 0 2px 7px rgb(0 0 0 / .055);
   --shadow-overlay: 0 16px 48px rgb(0 0 0 / .18);
 
   font-family: var(--font-family);

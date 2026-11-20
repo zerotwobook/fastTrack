@@ -612,7 +612,7 @@ Creating a milestone opens with a task-specific page heading and fields rather t
 
 ### 8.13 Sprint 2 status colors and responsive review
 
-The Sprint 2 UI uses white reading surfaces, a warm neutral canvas, a charcoal navigation rail, and orange for the brand, active navigation, and primary workspace actions. Green identifies submitted work and submission actions, blue identifies feedback status, amber identifies pending work, and red identifies overdue work, validation errors and destructive confirmation. Cancelled work uses a neutral label. Status text and icons carry the meaning independently of color.
+The Sprint 2 UI uses white surfaces and navigation, a #FAFAFA workspace, #F3F4F6 for softly shaded areas, and #E5E7EB and #D1D5DB for edges and dividers. Text uses #1E2229 and gray, with near-black primary actions and progress indicators. Status chips have light-gray backgrounds. Green identifies submitted work, blue identifies feedback, amber identifies pending work, and red identifies overdue work, validation errors and destructive confirmation. Cancelled work uses a neutral label. Status text and icons carry the meaning independently of color.
 
 Team cards provide direct links to the workspace and progress. The progress screen groups the percentage, meter and refresh action. Milestone rows place the title and status before the actions. Phones use a compact branded app bar, a keyboard-accessible menu, and full-width primary form controls. Portrait tablets stack work and feedback. Wider tablets and desktop screens can show both side by side. The existing Inter and Noto Sans Thai typography and Asia/Bangkok deadline display carry through the design.
 

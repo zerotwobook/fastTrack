@@ -8,16 +8,21 @@ export const colors = {
   /** Main page/card background */
   paper: '#FFFFFF',
   /** Primary text, icons and borders */
-  ink: '#1A1816',
+  ink: '#1E2229',
+  /** Workspace background */
+  canvas: '#FAFAFA',
   /** Subtle background for rows, panels and hover states */
-  wash: '#F5F2ED',
-  /** Dividers and input borders */
-  divider: '#E6E0D7',
+  wash: '#F3F4F6',
+  /** Subtle separators between surfaces */
+  divider: '#E5E7EB',
+  /** Edges for selected items and progress tracks */
+  edge: '#D1D5DB',
   /** Secondary/muted text (placeholder, caption, helper) */
-  muted: '#635B52',
+  muted: '#4B5563',
   /** Control labels, icon-only buttons and disabled states */
-  control: '#877A6D',
-  accent: '#FF773B',
+  control: '#6B7280',
+  primary: '#171717',
+  primaryHover: '#374151',
 } as const;
 
 export type ColorKey = keyof typeof colors;
@@ -71,11 +76,14 @@ export const radius = {
 export const cssVariables = `
   --color-paper: ${colors.paper};
   --color-ink: ${colors.ink};
+  --color-canvas: ${colors.canvas};
   --color-wash: ${colors.wash};
   --color-divider: ${colors.divider};
+  --color-edge: ${colors.edge};
   --color-muted: ${colors.muted};
   --color-control: ${colors.control};
-  --color-accent: ${colors.accent};
+  --color-primary: ${colors.primary};
+  --color-primary-hover: ${colors.primaryHover};
   --font-family: ${typography.fontFamily};
   --font-weight-heading: ${typography.headingWeight};
   --font-weight-body: ${typography.bodyWeight};

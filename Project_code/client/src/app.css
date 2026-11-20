@@ -16,13 +16,13 @@
   width: 36px;
   height: 36px;
   border-radius: 11px;
-  background: var(--color-accent);
-  color: var(--color-ink);
+  background: var(--color-primary);
+  color: var(--color-paper);
 }
 h1 { font-size: clamp(1.875rem, 3.5vw, 2.625rem); font-weight: 650; line-height: 1.16; letter-spacing: -.045em; overflow-wrap: anywhere; }
 h2 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 625; line-height: 1.35; letter-spacing: -.025em; overflow-wrap: anywhere; }
 a { color: var(--color-ink); text-underline-offset: 4px; }
-a:hover { text-decoration-color: var(--color-accent-ink); }
+a:hover { text-decoration-color: var(--color-ink); }
 .skip-link { position: fixed; z-index: 3; left: 16px; top: 8px; padding: 8px 16px; border: 1px solid var(--color-ink); background: var(--color-paper); transform: translateY(-160%); }
 .skip-link:focus { transform: none; }
 
@@ -46,8 +46,8 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
   gap: 40px;
   min-height: 520px;
   padding: clamp(28px, 5vw, 56px);
-  background: radial-gradient(ellipse at 95% 94%, #513022, transparent 72%), var(--color-inverse);
-  color: var(--color-on-inverse);
+  background: var(--color-wash);
+  color: var(--color-ink);
 }
 .login-brand p {
   max-width: 15ch;
@@ -57,19 +57,19 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
   line-height: 1.14;
 }
 .login-track { display: flex; align-items: center; justify-content: space-between; position: relative; width: min(100%, 260px); }
-.login-track::before { content: ''; position: absolute; inset-inline: 12px; height: 1px; background: var(--color-accent); }
+.login-track::before { content: ''; position: absolute; inset-inline: 12px; height: 1px; background: var(--color-edge); }
 .login-track span {
   position: relative;
   display: grid;
   place-items: center;
   width: 54px;
   height: 54px;
-  border: 1px solid #795341;
+  border: 1px solid var(--color-edge);
   border-radius: 16px;
-  background: var(--color-inverse);
-  color: #ffd1bc;
+  background: var(--color-paper);
+  color: var(--color-muted);
 }
-.login-track span:last-child { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-ink); }
+.login-track span:last-child { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-paper); }
 .login-form { display: grid; align-content: center; gap: 24px; min-width: 0; padding: clamp(28px, 5vw, 56px); }
 .intro { color: var(--color-muted); margin: 8px 0 24px; max-width: 65ch; line-height: 1.65; }
 .login-form form { display: grid; gap: 20px; }
@@ -80,18 +80,17 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
 .password-control .password-toggle:hover:not(:disabled) { background: var(--color-wash); }
 .login-submit { width: 100%; min-height: 48px; }
 .help { padding-top: 20px; border-top: 1px solid var(--color-divider); font-size: 14px; color: var(--color-muted); line-height: 1.6; }
-.notice { padding: 16px; border: 1px solid var(--color-divider); border-left: 3px solid var(--color-accent-ink); border-radius: var(--radius-md); background: var(--color-paper); margin: 24px 0; line-height: 1.65; overflow-wrap: anywhere; }
+.notice { padding: 16px; border: 1px solid var(--color-divider); border-left: 3px solid var(--color-control); border-radius: var(--radius-md); background: var(--color-paper); margin: 24px 0; line-height: 1.65; overflow-wrap: anywhere; }
 .notice[role="alert"] { border-left-color: var(--color-danger); background: var(--color-danger-surface); }
 .login-form .notice { margin: 0; }
 .recovery-actions { display: flex; gap: 16px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
 
 .application-shell { display: grid; grid-template-columns: 232px minmax(0, 1fr); min-height: 100dvh; }
 .sidebar, .navigation-dialog {
-  --color-focus: #ff9c70;
-  background: var(--color-inverse);
-  color: var(--color-on-inverse);
+  background: var(--color-paper);
+  color: var(--color-ink);
 }
-.sidebar { align-self: start; position: sticky; top: 0; height: 100dvh; overflow-y: auto; padding: 28px 18px; }
+.sidebar { align-self: start; position: sticky; top: 0; height: 100dvh; overflow-y: auto; padding: 28px 18px; box-shadow: inset -1px 0 0 var(--color-divider); }
 .sidebar .wordmark { margin-inline: 6px; }
 .sidebar nav, .navigation-dialog nav { display: grid; margin-top: 36px; gap: 8px; }
 .sidebar nav a, .navigation-dialog nav a {
@@ -103,12 +102,11 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
   text-decoration: none;
   border: 1px solid transparent;
   border-radius: var(--radius-md);
-  color: var(--color-muted-on-inverse);
+  color: var(--color-muted);
   overflow-wrap: anywhere;
 }
-.sidebar nav a:hover, .navigation-dialog nav a:hover { color: var(--color-on-inverse); background: #342c27; }
-.sidebar nav a[aria-current="page"], .navigation-dialog nav a[aria-current="page"] { color: #ffd6c4; background: #3f2d24; border-color: #69442e; font-weight: 600; }
-.sidebar nav a[aria-current="page"] .ui-icon, .navigation-dialog nav a[aria-current="page"] .ui-icon { color: #ff9c70; }
+.sidebar nav a:hover, .navigation-dialog nav a:hover { color: var(--color-ink); background: var(--color-wash); }
+.sidebar nav a[aria-current="page"], .navigation-dialog nav a[aria-current="page"] { color: var(--color-ink); background: var(--color-wash); border-color: var(--color-edge); font-weight: 600; }
 .workspace { min-width: 0; }
 .app-header {
   min-height: 72px;
@@ -129,8 +127,8 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
   display: grid;
   place-items: center;
   flex: 0 0 auto;
-  background: var(--color-accent-surface);
-  color: var(--color-accent-ink);
+  background: var(--color-wash);
+  color: var(--color-muted);
 }
 .profile-icon { width: 36px; height: 36px; border-radius: 50%; }
 .role-label { display: block; color: var(--color-muted); font-size: 13px; margin-top: 2px; }
@@ -169,8 +167,8 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
   text-decoration: none;
 }
 .team-link:hover { background: var(--color-wash); border-color: var(--color-ink); }
-.team-link--primary { background: var(--color-accent); border-color: var(--color-accent); color: var(--color-ink); }
-.team-link--primary:hover { background: var(--color-accent-hover); border-color: var(--color-accent-hover); }
+.team-link--primary { background: var(--color-primary); border-color: var(--color-primary); color: var(--color-paper); }
+.team-link--primary:hover { background: var(--color-primary-hover); border-color: var(--color-primary-hover); }
 .session-status { width: min(100%, 65ch); padding: 48px 24px; margin: auto; display: grid; gap: 24px; }
 .menu-button {
   display: inline-grid;
@@ -184,22 +182,22 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
   color: var(--color-ink);
   cursor: pointer;
 }
-.menu-button:hover, .menu-button[aria-expanded="true"] { background: var(--color-accent-surface); border-color: var(--color-accent-ink); }
+.menu-button:hover, .menu-button[aria-expanded="true"] { background: var(--color-wash); border-color: var(--color-control); }
 .navigation-dialog {
   margin: 12px auto 12px 12px;
   width: min(340px, calc(100% - 24px));
   max-height: calc(100dvh - 24px);
   overflow-y: auto;
   padding: 20px;
-  border: 1px solid #4d3a2e;
+  border: 1px solid var(--color-edge);
   border-radius: var(--radius-panel);
   box-shadow: var(--shadow-overlay);
 }
 .navigation-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
-.navigation-dialog .close-menu { padding: 0; width: 44px; background: #342c27; color: var(--color-on-inverse); border-color: #695142; }
-.navigation-dialog .close-menu:hover { background: #4d382e; border-color: #ff9c70; }
+.navigation-dialog .close-menu { padding: 0; width: 44px; background: var(--color-paper); color: var(--color-ink); border-color: var(--color-control); }
+.navigation-dialog .close-menu:hover { background: var(--color-wash); border-color: var(--color-ink); }
 .navigation-dialog nav { margin-top: 20px; }
-.navigation-dialog::backdrop { background: rgb(21 16 13 / .48); }
+.navigation-dialog::backdrop { background: rgb(0 0 0 / .48); }
 
 @media (min-width: 820px) {
   .team-list--supervisor { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
@@ -215,7 +213,7 @@ a:hover { text-decoration-color: var(--color-accent-ink); }
   .login-page { align-items: start; padding: 16px; }
   .login-shell { grid-template-columns: minmax(0, 1fr); max-width: 500px; border-radius: var(--radius-panel); }
   .login-brand { gap: 14px; min-height: 0; padding: 20px; }
-  .login-brand p { max-width: 38ch; font-size: 1rem; line-height: 1.5; letter-spacing: 0; font-weight: 400; color: var(--color-muted-on-inverse); }
+  .login-brand p { max-width: 38ch; font-size: 1rem; line-height: 1.5; letter-spacing: 0; font-weight: 400; color: var(--color-muted); }
   .login-track { display: none; }
   .login-form { padding: 22px 20px; }
   .workspace-content { padding: 16px; }
