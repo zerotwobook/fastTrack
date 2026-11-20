@@ -1,0 +1,44 @@
+{
+    "staging":  "fef3593ce44f722b579aaba307b5b2e4cfab9747",
+    "verifiedSource":  "0ac247b781369f2694ac96eb76176fe52813cd59",
+    "before":  {
+                   "status":  "FEEDBACK_AVAILABLE",
+                   "version":  1,
+                   "feedbackCount":  1,
+                   "submitted":  3,
+                   "total":  4,
+                   "percentage":  75
+               },
+    "revised":  {
+                    "status":  "SUBMITTED",
+                    "version":  2,
+                    "feedbackCount":  0,
+                    "submitted":  3,
+                    "total":  4,
+                    "percentage":  75
+                },
+    "afterConflict":  {
+                          "status":  "SUBMITTED",
+                          "version":  3,
+                          "feedbackCount":  0,
+                          "submitted":  3,
+                          "total":  4,
+                          "percentage":  75
+                      },
+    "oldVersionFeedbackVisible":  true,
+    "browserRevisionConflict":  409,
+    "draftRetained":  true,
+    "automaticPostRetries":  0,
+    "keyboardFocusRestored":  true,
+    "history":  [
+                    3,
+                    2,
+                    1
+                ],
+    "foreignAccessDenied":  [
+                                "submission detail",
+                                "team progress"
+                            ],
+    "mobileWidth":  375,
+    "browserErrors":  0
+}
