@@ -5,6 +5,7 @@ import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import { formatBangkok } from '../milestones/MilestoneTrack';
 import { countCodePoints, FEEDBACK_LIMITS, validateFeedbackContent } from '../../../../shared/feedback.mjs';
 import styles from './feedback.module.css';
+import { Icon } from '../../design/Icon';
 
 export interface FeedbackItem {
   id: string; submissionId: string; supervisor: { id: string; displayName: string };
@@ -114,7 +115,7 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
     finally { busy.current = false; if (active.current) setSaving(false); }
   };
   return <section className={styles.panel} aria-labelledby={`feedback-heading-${submissionId}`}>
-    <h2 id={`feedback-heading-${submissionId}`}>Feedback for version {submissionVersion}</h2>
+    <h2 id={`feedback-heading-${submissionId}`}><Icon name="feedback" />Feedback for version {submissionVersion}</h2>
     {loadError ? <div className={styles.notice} role="alert"><p>{loadError}</p><Button variant="secondary" onClick={() => setAttempt(v => v + 1)}>Retry loading feedback</Button></div>
       : items === null ? <p className={styles.meta} role="status">Loading feedback...</p>
       : items.length === 0 ? <p className={styles.meta}>No feedback for this version yet.</p>
@@ -135,7 +136,7 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
       <p className={styles.meta}>{countCodePoints(content.trim()).toLocaleString('en-US')} / {FEEDBACK_LIMITS.CONTENT_MAX_CHARS.toLocaleString('en-US')} characters</p>
       {pending && <p className={styles.meta}>Your draft is locked until this save is confirmed.</p>}
       <div className={styles.actions}>
-        <Button type="submit" loading={saving} disabled={saving || recovery === 'blocked' || recovery === 'checking'}>{saving ? recovery === 'checking' ? 'Checking saved feedback...' : 'Saving feedback...' : recovery === 'retry' ? 'Retry save' : 'Save feedback'}</Button>
+        <Button type="submit" loading={saving} disabled={saving || recovery === 'blocked' || recovery === 'checking'}>{!saving && <Icon name="feedback" size={18} />}{saving ? recovery === 'checking' ? 'Checking saved feedback...' : 'Saving feedback...' : recovery === 'retry' ? 'Retry save' : 'Save feedback'}</Button>
         {recovery === 'blocked' && <Button variant="secondary" type="button" disabled={saving} onClick={() => { void checkAgain(); }}>Check saved feedback</Button>}
       </div>
     </form>}

@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, KeyboardEvent } from 'react';
+import type { StatusVariant } from '../../design/components';
 import { Button, EmptyState, Field, Input, StatusBadge, Textarea } from '../../design/components';
+import { Icon } from '../../design/Icon';
 import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import type { Team } from '../auth/session';
 import { describeRevisionRestriction } from '../submissions/history';
@@ -16,20 +18,10 @@ export interface MilestoneItem {
 export const formatBangkok = (value: string) => new Intl.DateTimeFormat('en-GB', {
   timeZone: 'Asia/Bangkok', year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false,
 }).format(new Date(value)) + ' (Asia/Bangkok)';
-function State({ item, serverTime }: { item: MilestoneItem; serverTime: string }) {
-  if (item.cancelledAt) {
-    return (
-      <span className={styles.cancelled} aria-label="Cancelled">
-        <svg width="16" height="16" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-          <circle cx="10" cy="10" r="7" />
-          <path d="m5.5 14.5 9-9" />
-        </svg>
-        Cancelled
-      </span>
-    );
-  }
-  return <StatusBadge status={item.latestSubmission ? item.latestSubmission.feedbackCount ? 'feedback' : 'submitted'
-    : new Date(item.dueAt).getTime() < new Date(serverTime).getTime() ? 'overdue' : 'pending'} />;
+function milestoneStatus(item: MilestoneItem, serverTime: string): StatusVariant {
+  if (item.cancelledAt) return 'cancelled';
+  if (item.latestSubmission) return item.latestSubmission.feedbackCount ? 'feedback' : 'submitted';
+  return Date.parse(item.dueAt) < Date.parse(serverTime) ? 'overdue' : 'pending';
 }
 function Failure({ message, retry }: { message: string; retry: () => void }) {
   return <div className={styles.error} role="alert"><p>{message}</p><Button variant="secondary" onClick={retry}>Try again</Button></div>;
@@ -70,13 +62,31 @@ function trapDialogFocus(event: KeyboardEvent<HTMLDialogElement>) {
 }
 function TrackRows({ items, serverTime, userRole }: { items: MilestoneItem[]; serverTime: string; userRole: 'student' | 'supervisor' }) {
   const Heading = userRole === 'student' ? 'h4' : 'h3';
-  return <ol className={styles.track}>{items.map(item => <li key={item.id} className={styles.row}>
-    <time dateTime={item.dueAt} className={styles.date}>{formatBangkok(item.dueAt)}</time><span className={styles.marker} aria-hidden="true" />
-    <div className={styles.item}><Heading><a href={`/milestones/${item.id}`}>{item.title}</a></Heading><State item={item} serverTime={serverTime} />
-      <p>{item.description}</p>{item.latestSubmission && <p className={styles.meta}>Version {item.latestSubmission.version}, {item.latestSubmission.feedbackCount} feedback messages. <a href={`/submissions/${item.latestSubmission.id}`}>{userRole === 'supervisor' ? 'Open work and give feedback' : 'Open saved submission'}</a></p>}
-      {userRole === 'student' && !item.cancelledAt && !item.latestSubmission && Date.parse(item.dueAt) >= Date.parse(serverTime) && <a className={styles.primaryLink} href={`/milestones/${item.id}/submissions/new`}>Submit work</a>}
-      <a className={styles.detailLink} href={`/milestones/${item.id}`}>View milestone</a></div>
-  </li>)}</ol>;
+  return <ol className={styles.track}>{items.map(item => {
+    const status = milestoneStatus(item, serverTime);
+    const canSubmit = userRole === 'student' && !item.cancelledAt && !item.latestSubmission && Date.parse(item.dueAt) >= Date.parse(serverTime);
+    const detail = `/milestones/${item.id}`;
+    return <li key={item.id} className={styles.row} data-status={status}>
+      <time dateTime={item.dueAt} className={styles.date}><Icon name="calendar" size={17} />{formatBangkok(item.dueAt)}</time>
+      <span className={styles.marker} aria-hidden="true" />
+      <div className={styles.item}>
+        <div className={styles.itemHeading}>
+          <Heading><a href={detail}>{item.title}</a></Heading>
+          <StatusBadge status={status} />
+        </div>
+        <p>{item.description}</p>
+        {item.latestSubmission && <p className={styles.meta}>Version {item.latestSubmission.version}, {item.latestSubmission.feedbackCount} feedback messages.</p>}
+        <div className={styles.itemActions}>
+          {canSubmit && <a className={`${styles.primaryLink} ${styles.submitLink}`} href={detail + '/submissions/new'}><Icon name="send" size={18} />Submit work</a>}
+          {item.latestSubmission && <a className={styles.detailLink} href={`/submissions/${item.latestSubmission.id}`}>
+            <Icon name={userRole === 'supervisor' ? 'feedback' : 'history'} size={17} />
+            {userRole === 'supervisor' ? 'Open work and give feedback' : 'Open saved submission'}
+          </a>}
+          <a className={styles.detailLink} href={detail}>View milestone<Icon name="arrowRight" size={17} /></a>
+        </div>
+      </div>
+    </li>;
+  })}</ol>;
 }
 function StudentGroups({ items, serverTime }: { items: MilestoneItem[]; serverTime: string }) {
   const groups = groupStudentMilestones(items, serverTime);
@@ -102,13 +112,13 @@ export function MilestoneTrack({ teamId, userRole }: { teamId: string; userRole:
     return () => { active = false; };
   }, [teamId, attempt]);
   return <section className={styles.container} aria-label="Milestones">
-    <header className={styles.header}><h2>Milestones</h2>{userRole === 'supervisor' && <a className={styles.primaryLink} href={`/teams/${teamId}/milestones/new`}>Create milestone</a>}</header>
+    <header className={styles.header}><h2>Milestones</h2>{userRole === 'supervisor' && <a className={styles.primaryLink} href={`/teams/${teamId}/milestones/new`}><Icon name="plus" size={18} />Create milestone</a>}</header>
     {error ? <Failure message={error} retry={() => setAttempt(value => value + 1)} />
       : !result || result.teamId !== teamId ? <p role="status">Loading milestones…</p>
       : <>{result.items.length === 0 ? <EmptyState title="No milestones yet" description={userRole === 'supervisor' ? 'Create a milestone to set the next deadline for your team.' : 'Your supervisor has not scheduled a milestone yet.'} />
         : userRole === 'student' ? <StudentGroups items={result.items} serverTime={result.serverTime} />
         : <TrackRows items={result.items} serverTime={result.serverTime} userRole={userRole} />}
-        <div className={styles.refresh}><p className={styles.meta}>Status as of {formatBangkok(result.serverTime)}.</p><Button variant="ghost" onClick={() => setAttempt(value => value + 1)}>Refresh milestones</Button></div>
+        <div className={styles.refresh}><p className={styles.meta}>Status as of {formatBangkok(result.serverTime)}.</p><Button variant="ghost" onClick={() => setAttempt(value => value + 1)}><Icon name="refresh" size={17} />Refresh milestones</Button></div>
       </>}
   </section>;
 }
@@ -274,7 +284,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
   const revisionRestriction = result.item.latestSubmission
     ? describeRevisionRestriction(result.item, result.serverTime, result.item.latestSubmission.version)
     : null;
-  return <><p className={styles.meta}><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
+  return <><p className="breadcrumb"><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
     {statusNotice && <div ref={statusNoticeRef} tabIndex={-1} role="status" className={styles.statusNotice}><p>{statusNotice}</p></div>}
     {error && <Failure message={error} retry={() => setAttempt(value => value + 1)} />}
     <div className={styles.detail}>
@@ -289,14 +299,14 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
           setAttempt(value => value + 1);
         }} />
       : <section><h2>Description</h2><p className={styles.description}>{result.item.description}</p></section>}
-      <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><State item={result.item} serverTime={result.serverTime} />
+      <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><StatusBadge status={milestoneStatus(result.item, result.serverTime)} />
         {result.item.cancelledAt && <p className={styles.meta}>Cancelled on {formatBangkok(result.item.cancelledAt)}.</p>}
         {result.item.latestSubmission ? <><p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p><a className={styles.primaryLink} href={`/submissions/${result.item.latestSubmission.id}`}>Open saved submission</a>
           {userRole === 'student' && (revisionRestriction ? <p>{revisionRestriction}</p>
-            : <a className={styles.detailLink} href={`/milestones/${id}/revisions/new`}>Submit revision</a>)}</>
+            : <a className={`${styles.detailLink} ${styles.submitLink}`} href={`/milestones/${id}/revisions/new`}><Icon name="send" size={18} />Submit revision</a>)}</>
           : userRole === 'student' && (result.item.cancelledAt ? <p>This milestone was cancelled and cannot receive work.</p>
             : Date.parse(result.serverTime) > Date.parse(result.item.dueAt) ? <p>The deadline has passed. Work cannot be submitted.</p>
-            : <a className={styles.primaryLink} href={`/milestones/${id}/submissions/new`}>Submit work</a>)}
+            : <a className={`${styles.primaryLink} ${styles.submitLink}`} href={`/milestones/${id}/submissions/new`}><Icon name="send" size={18} />Submit work</a>)}
         {userRole === 'supervisor' && <>
           {planning.canEdit && !editing && <div className={styles.railActions}>
             <Button ref={editTriggerRef} type="button" variant="secondary" onClick={() => { setStatusNotice(null); setEditing(true); }}>Edit milestone</Button>
@@ -319,7 +329,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
       {cancelError && <div role="alert" className={styles.error}><p>{cancelError}</p></div>}
       <div className={styles.confirmActions}>
         <Button ref={cancelBackRef} type="button" variant="secondary" disabled={cancelling} onClick={() => closeCancelDialog(true)}>Go back</Button>
-        <Button type="button" variant="primary" loading={cancelling} disabled={cancelling} onClick={() => { void confirmCancel(); }}>
+        <Button type="button" variant="danger" loading={cancelling} disabled={cancelling} onClick={() => { void confirmCancel(); }}>
           {cancelling ? 'Cancelling milestone…' : 'Confirm cancel milestone'}
         </Button>
       </div>

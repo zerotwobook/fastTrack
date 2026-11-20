@@ -1,4 +1,4 @@
-﻿# fastTrack — รายละเอียดและแบบออกแบบโปรเจกต์
+# fastTrack — รายละเอียดและแบบออกแบบโปรเจกต์
 
 > **Theme 6: Course Project Management System**<br>
 > รายวิชา CPE 334 Software Engineering | ภาคเรียน 1/2026<br>
@@ -609,6 +609,12 @@ The user-requested R1-A-UI-POLISH refinement preserves the six colors, bundled t
 The content canvas remains left aligned internally and uses equal outer margins within its 1184px maximum width on wider screens. Team boundaries and reading rails use restrained 12px frames; due dates, milestone groups, form actions and feedback entries have clear separators. The desktop login frame contains a form no wider than 400px and becomes an unframed column on mobile. Shadows are reserved for the navigation overlay. Multiple supervisor teams can share balanced columns when space permits; a single team fills the available row.
 
 Creating a milestone opens with a task-specific page heading and fields rather than repeating the team roster. Mobile primary form actions fill their container. The navigation dialog announces its expanded state, cycles Tab and Shift+Tab, closes with Escape, returns focus to its trigger and closes when resized to desktop. Private-session masking and draft/recovery rules remain unchanged. Browser verification and its actual limitations are recorded in [the UI refinement handoff](../Project_code/docs/evidence/R1-A-UI-POLISH.md); this design specification alone is not a verification result.
+
+### 8.13 Sprint 2 status colors and responsive review
+
+The Sprint 2 UI uses white surfaces and navigation, a #FAFAFA workspace, #F3F4F6 for softly shaded areas, and #E5E7EB and #D1D5DB for edges and dividers. Text uses #1E2229 and gray, with near-black primary actions and progress indicators. Status chips have light-gray backgrounds. Green identifies submitted work, blue identifies feedback, amber identifies pending work, and red identifies overdue work, validation errors and destructive confirmation. Cancelled work uses a neutral label. Status text and icons carry the meaning independently of color.
+
+Team cards provide direct links to the workspace and progress. The progress screen groups the percentage, meter and refresh action. Milestone rows place the title and status before the actions. The header and workspace content share their horizontal alignment. Phones use a compact branded app bar, a keyboard-accessible menu, and full-width primary form controls. At narrow widths, breadcrumb links have at least 44px tap targets. Selecting the Teams destination closes the drawer and moves focus to the team list or its empty or recovery state. Sign-in and work with feedback stack on phones and portrait tablets. Wider tablets and desktop screens can show both columns side by side. The existing Inter and Noto Sans Thai typography and Asia/Bangkok deadline display carry through the design.
 
 ## 9. API design
 

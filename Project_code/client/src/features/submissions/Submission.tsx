@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import type { FormEvent, ReactNode } from 'react';
 import { Button, Field, Input, Textarea } from '../../design/components';
+import { Icon } from '../../design/Icon';
 import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import type { Team } from '../auth/session';
 import { formatBangkok } from '../milestones/MilestoneTrack';
@@ -158,7 +159,7 @@ export function SubmissionCreate({ milestoneId, userRole }: { milestoneId: strin
   const closed = !!context.milestone.cancelledAt || Date.parse(context.serverTime) > Date.parse(context.milestone.dueAt);
   const disabled = saving || checking || uncertain || !!existing || closed;
   return <>
-    <p className={styles.breadcrumb}><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a></p>
+    <p className="breadcrumb"><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a></p>
     <h1>Submit work</h1>
     <p className={styles.context}>Deadline: <time dateTime={context.milestone.dueAt}>{formatBangkok(context.milestone.dueAt)}</time>.</p>
     <p className={styles.context}>One submission is shared by your team for this milestone.</p>
@@ -169,7 +170,7 @@ export function SubmissionCreate({ milestoneId, userRole }: { milestoneId: strin
     {closed && !existing && <p className={styles.notice}>{context.milestone.cancelledAt ? 'This milestone was cancelled and cannot receive work.' : 'The deadline has passed. Work cannot be submitted.'}</p>}
     <form className={styles.form} noValidate onSubmit={event => { void submit(event); }}>
       <SubmissionFormFields prefix="submission" title={title} setTitle={setTitle} description={description} setDescription={setDescription} url={url} setUrl={setUrl} fields={fields} disabled={saving || checking} />
-      <div className={styles.actions}><Button type="submit" loading={saving} disabled={disabled}>{saving ? 'Submitting work...' : 'Submit work'}</Button><a href={`/milestones/${milestoneId}`}>Back to milestone</a></div>
+      <div className={styles.actions}><Button type="submit" variant="submit" loading={saving} disabled={disabled}>{!saving && <Icon name="send" size={18} />}{saving ? 'Submitting work...' : 'Submit work'}</Button><a href={`/milestones/${milestoneId}`}>Back to milestone</a></div>
     </form>
   </>;
 }
@@ -294,7 +295,7 @@ export function RevisionCreate({ milestoneId, userRole }: { milestoneId: string;
 
   const disabled = saving || checking || recovery !== null || !latest || expectedVersion === null || blocked;
   return <>
-    <p className={styles.breadcrumb}><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a> / Submit revision</p>
+    <p className="breadcrumb"><a href={`/teams/${context.team.id}`}>{context.team.name}</a> / <a href={`/milestones/${milestoneId}`}>{context.milestone.title}</a> / Submit revision</p>
     <h1>Submit revision</h1>
     <p className={styles.context}>Deadline: <time dateTime={context.milestone.dueAt}>{formatBangkok(context.milestone.dueAt)}</time>.</p>
     {latest ? <p className={styles.context}>Latest saved version: version {latest.version}, submitted by {latest.submittedBy.displayName}, {formatBangkok(latest.submittedAt)}. <a href={`/submissions/${latest.id}`} target="_blank" rel="noopener noreferrer">Review version {latest.version} in a new tab</a></p>
@@ -318,7 +319,7 @@ export function RevisionCreate({ milestoneId, userRole }: { milestoneId: string;
     {expectedVersion !== null && <form ref={revisionForm} className={styles.form} noValidate onSubmit={event => { void submit(event); }}>
       <SubmissionFormFields prefix="revision" title={title} setTitle={setTitle} description={description} setDescription={setDescription} url={url} setUrl={setUrl} fields={fields} disabled={saving || checking} />
       <p className={styles.historyMeta}>Submitting based on expected version {expectedVersion}. Prior versions and their feedback remain unchanged.</p>
-      <div className={styles.actions}><Button type="submit" loading={saving} disabled={disabled}>{saving ? 'Submitting revision...' : 'Submit revision'}</Button><a href={`/milestones/${milestoneId}`}>Back to milestone</a></div>
+      <div className={styles.actions}><Button type="submit" variant="submit" loading={saving} disabled={disabled}>{!saving && <Icon name="send" size={18} />}{saving ? 'Submitting revision...' : 'Submit revision'}</Button><a href={`/milestones/${milestoneId}`}>Back to milestone</a></div>
     </form>}
     {context.history.length > 0 && <section className={styles.historySection} aria-label="Saved version history">
       <h2>Saved versions</h2>
@@ -350,7 +351,7 @@ export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string;
   const { orderedHistory, latest, isOldVersion } = describeSubmissionHistory(item, history);
   const restriction = describeRevisionRestriction(milestone, serverTime, latest?.version ?? item.version);
   return <>
-    <p className={styles.breadcrumb}><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={`/milestones/${milestone.id}`}>{milestone.title}</a> / Saved submission</p>
+    <p className="breadcrumb"><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={`/milestones/${milestone.id}`}>{milestone.title}</a> / Saved submission</p>
     <h1>{item.title}</h1>
     <p className={styles.context}>Version {item.version}, submitted by {item.submittedBy.displayName}.</p>
     <p className={styles.context}><time dateTime={item.submittedAt}>{formatBangkok(item.submittedAt)}</time></p>
@@ -361,13 +362,13 @@ export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string;
     <div className={renderFeedback ? styles.withFeedback : styles.content}>
       <section aria-label="Saved work"><h2>Description</h2><p className={styles.description}>{item.description}</p>
         <h2>Work link</h2>{isWorkUrl(item.url)
-          ? <><a className={styles.workLink} href={item.url} target="_blank" rel="noopener noreferrer">Open work link</a><p className={styles.url}>{item.url}</p></>
+          ? <><a className={styles.workLink} href={item.url} target="_blank" rel="noopener noreferrer">Open work link<Icon name="external" size={18} /></a><p className={styles.url}>{item.url}</p></>
           : <p className={styles.notice}>This saved link cannot be opened safely. Contact the submitting team member.</p>}
         <section className={styles.historySection} aria-label="Version history">
-          <h2>Version history</h2>
+          <h2 className={styles.iconHeading}><Icon name="history" />Version history</h2>
           <VersionHistoryList items={orderedHistory} currentId={item.id} latestId={latest?.id} />
           {userRole === 'student' && (restriction ? <p className={styles.historyMeta}>{restriction}</p>
-            : <a className={styles.detailActionLink} href={`/milestones/${milestone.id}/revisions/new`}>Submit new revision</a>)}
+            : <a className={`${styles.detailActionLink} ${styles.submitLink}`} href={`/milestones/${milestone.id}/revisions/new`}><Icon name="send" size={18} />Submit new revision</a>)}
         </section>
       </section>
       {renderFeedback && <aside aria-label={`Feedback for version ${item.version}`}>{renderFeedback(item)}</aside>}
