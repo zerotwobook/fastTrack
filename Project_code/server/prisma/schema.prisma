@@ -159,7 +159,7 @@ model Feedback {
   id              String   @id @default(uuid()) @db.Uuid
   submissionId    String   @map("submission_id") @db.Uuid
   supervisorId    String   @map("supervisor_id") @db.Uuid
-  content         String   @db.VarChar(4000)
+  content         String   @db.VarChar(6000)
   clientRequestId String   @map("client_request_id") @db.Uuid
   createdAt       DateTime @default(now()) @map("created_at") @db.Timestamptz
 

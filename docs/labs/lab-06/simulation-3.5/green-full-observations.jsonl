@@ -1,0 +1,5 @@
+{"observedAt":"2026-11-18T17:53:43.186Z","caseId":"L6-S35-01","statuses":[409,409],"codes":["DEADLINE_PASSED","DEADLINE_PASSED"],"submissionCountBefore":1,"submissionCountAfter":1,"lateMilestoneRows":0,"allRowsUnchanged":true,"controlId":"c03297df-816c-4d2c-9b3e-4c32462da9f8"}
+{"observedAt":"2026-11-18T17:53:43.315Z","caseId":"L6-S35-02","status":201,"persistedRows":1,"version":1}
+{"observedAt":"2026-11-18T17:53:43.449Z","caseId":"L6-S35-03","offsetMs":-1,"status":201,"code":null,"persistedRows":1}
+{"observedAt":"2026-11-18T17:53:43.542Z","caseId":"L6-S35-03","offsetMs":0,"status":201,"code":null,"persistedRows":1}
+{"observedAt":"2026-11-18T17:53:43.633Z","caseId":"L6-S35-03","offsetMs":1,"status":409,"code":"DEADLINE_PASSED","persistedRows":0}

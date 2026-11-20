@@ -1,0 +1,161 @@
+{
+  "preparedAtUtc": "2026-11-17T18:16:55.719481+00:00",
+  "sourceFiles": [
+    {
+      "file": "02-ui-followup-execution.md",
+      "sha256": "f0fa5c5cb84b6f6f9be1bc5a642cc38b48c7d9ecef2f33a8892b0a3b0e04c7ae"
+    },
+    {
+      "file": "06-case-coverage-and-deviations.md",
+      "sha256": "a20f1f5c34d94207247e034165dc0f13c8d181eb8822aa461265f89953482265"
+    },
+    {
+      "file": "evidence/ui-observations.json",
+      "sha256": "8bf3f258d215b6dd36727502aee6a8e7901ac13cf13d9b417b0a92b33e28ef89"
+    },
+    {
+      "file": "evidence/api-controls-final.json",
+      "sha256": "8acba76c4fadd25e0f5b01daace7f2edde6af37bd570c64c4d7eeb1b671679bd"
+    },
+    {
+      "file": "evidence/saved-state-assessment.json",
+      "sha256": "6ccdf4e0079b9e276714fd92310b71397c3669237322c4ede56cd801031c58e9"
+    }
+  ],
+  "privatePNGAndSnapshotPairsVerified": 26,
+  "privateImageHashes": [
+    {
+      "evidenceId": "UI2-01-normal-form",
+      "pngSha256": "8d8dd8198b5d292ef14d27853addad6c1a057060193a5638e4448870f91293c0",
+      "snapshotSha256": "1232a2f1bd2464331f961e16f22892910ac65fb18cde08db429e409cec0023df"
+    },
+    {
+      "evidenceId": "UI2-02-normal-saved",
+      "pngSha256": "dbeaf7673e8ee4630a141c57463980543745abee12ac469747606d7812acf59b",
+      "snapshotSha256": "0758a0de894b52eb649d6d4129746880aa77d41289563574048e20fbb1e0b693"
+    },
+    {
+      "evidenceId": "UI2-03-normal-reloaded",
+      "pngSha256": "cd2c71a727b56597231baf1baa61e1af246f3d75e6d192ebb6ef19fa2c97df24",
+      "snapshotSha256": "9529b61b4afbdeb40dd3fe2496486d02f71c3139c9f1aa368b842e34f86966a5"
+    },
+    {
+      "evidenceId": "UI2-04-deadline-saved",
+      "pngSha256": "0e1cb17f120e66d3c85f48e17665b6ede73df3118a9ddbf56678f7371077f60c",
+      "snapshotSha256": "5ae7187cd0935781c7aabad483f0d0d4bf81ee60353968ff6877c41cfa4a25ff"
+    },
+    {
+      "evidenceId": "UI2-05-before-deadline-form",
+      "pngSha256": "34044e11f342866eb98fc769425fa7919880b15f10cf8dab9c5fb2cf86c1bc5c",
+      "snapshotSha256": "c13a664ac66181f383b4318b4ee47c63733cdaa9f3f2247d58113ef8a86e313d"
+    },
+    {
+      "evidenceId": "UI2-06-stale-form-rejected",
+      "pngSha256": "3afaab2b4dd1e197ba467bdc95486d63ea660efadefe41532d77818a4a23c1b2",
+      "snapshotSha256": "3511d5b5439c56701d832fc3eb68639a4ff55e37e506c57cd7833ac7322d445c"
+    },
+    {
+      "evidenceId": "UI2-07-student-normal",
+      "pngSha256": "33e999d3a02ab9a500ad6429eec4ced552fdda0151e44e97684944602051e485",
+      "snapshotSha256": "10389310d5721f13a509d35c15e7c17119a5498b4667d2b3847bd8b28f3f567f"
+    },
+    {
+      "evidenceId": "UI2-08-empty-title",
+      "pngSha256": "e712e20bd4e0b9ea91f06b66482048dc5d4ac6aa71c27e3f5ed6a314238860ef",
+      "snapshotSha256": "d23c6df6ffafff681f9e6dd183933f7f112d903ce7f4c0f0ca33098563152b6c"
+    },
+    {
+      "evidenceId": "UI2-09-invalid-link",
+      "pngSha256": "32e688ad1466500ebbc7277a303fa16902fa36170087b479fc675396cb18ee8a",
+      "snapshotSha256": "0e9aeaa035610efb1194de351e1c86f6fd3329a2e16b29ec0c3a8c10b0d2552b"
+    },
+    {
+      "evidenceId": "UI2-10-work-saved",
+      "pngSha256": "d0d2d8edd3519674e94094dd6d4ae1cff05ac6544b18002e77015de630ee7842",
+      "snapshotSha256": "73f1696f2c3be0f4354fff5f3c4eb875cadf078a1ec4f1e91d6f0166c9bcc0a5"
+    },
+    {
+      "evidenceId": "UI2-11-work-reloaded",
+      "pngSha256": "0b1dd5766b87392be274ceb0561f0cb67510b8a31330623d4b0b5e0c3c24cfba",
+      "snapshotSha256": "6a0097e6eb4a75df70bfd59ae9e43f2d816d4dff080d3c25ca87179f40d13e95"
+    },
+    {
+      "evidenceId": "UI2-12-first-feedback",
+      "pngSha256": "2a50b58acd9348d790f2d1ddb098740cb3275396972ef4de639443a215e4df39",
+      "snapshotSha256": "1a153963bd82714c23cccb8d3916b51e502bcf2321f0fdf7285f4762d167eca1"
+    },
+    {
+      "evidenceId": "UI2-13-two-feedback-messages",
+      "pngSha256": "cd15553017b858e8d229df0032f28814aa7c424553f59783235ae01211ae6543",
+      "snapshotSha256": "8a68104a4eea2a93d13cf41c95f998e0a16d852c4a86b109aeb597b1112e4f05"
+    },
+    {
+      "evidenceId": "UI2-14-blank-feedback-rejected",
+      "pngSha256": "dc0121cf39b8023c34e0116782c0ddb52227f88be3c2069220f2386aece50a0a",
+      "snapshotSha256": "8ead29e1c6c4be4c42d9b03456c17902067c2cfb8e230133d764146395ae68c5"
+    },
+    {
+      "evidenceId": "UI2-15-supervisor-reloaded-feedback",
+      "pngSha256": "22f59bcd062de308c10f2950525e1723bcb6aa9314d1a83b4877485110fd088a",
+      "snapshotSha256": "987c1bbf0d029f2e3a4f3a7f4d4f77ec1317cbaf6c697b41a336f3a6abca9ffc"
+    },
+    {
+      "evidenceId": "UI2-16-empty-milestone-title",
+      "pngSha256": "9610ddeca66658618bdf67727236a91df7d98998407809c6dcb0abfcfa00964a",
+      "snapshotSha256": "db54618e660f13818097115675888f2bfe50682bdc0fc47fecc6b9c7cbf0f62f"
+    },
+    {
+      "evidenceId": "UI2-17-team-list",
+      "pngSha256": "2ea1bb2d9a711923cf738fff8dedb270d6499c022a4464b13b6ea6e03c681354",
+      "snapshotSha256": "b01e635d4d751ab5b6aab6b7db4fc84fbcdbd4c7115c80a6c424626facaaaaba"
+    },
+    {
+      "evidenceId": "UI2-18-invalid-sign-in",
+      "pngSha256": "4ea8c6975d3b51efb96827ffb9488dcf88ec90c47475c2a268a47a2e0ec00d08",
+      "snapshotSha256": "60f7eb5d9b4839dcd0b835516665329cf6a0395d96d1f96c797a1c6776d5fdd6"
+    },
+    {
+      "evidenceId": "UI2-19-student-feedback-after-navigation",
+      "pngSha256": "b2da64046232684de01f56a50990d4ebaecff83668f77ee297025e6621985984",
+      "snapshotSha256": "68bd18e6e1da9505fb017f029f4727cff53a3a386325066e3c74a95fcd0ad8e6"
+    },
+    {
+      "evidenceId": "UI2-20-duplicate-form",
+      "pngSha256": "e776541db452dabe49a197f6d79606b879b8512f422dea9308e93e7f65bbaee9",
+      "snapshotSha256": "ad19c2e8af9cc98c6a4c0ffb98812360700d8cfba09394036a9c383988199f5c"
+    },
+    {
+      "evidenceId": "UI2-21-student-create-denial",
+      "pngSha256": "b096e98a870acffb0bc209209ecf2097360089f0254e94c154d05cb0fed58640",
+      "snapshotSha256": "9af384f8bed654ec79c60d096d91eb64f885424077a02ee29b4fe79e17817126"
+    },
+    {
+      "evidenceId": "UI2-22-anonymous-private-page",
+      "pngSha256": "1aa1b29bb2c054365ec63fe039d8d1b166b93299e3d113239a9d25ca1a0b08e6",
+      "snapshotSha256": "ef17ac4da0fb374d4d963b64d856c03b1c184292e2fcadb95aa60ed064da8866"
+    },
+    {
+      "evidenceId": "UI2-23-foreign-submission",
+      "pngSha256": "46a08849843de9a159dd6b573dbe84d043078f48804bfb6d05485ba3599962df",
+      "snapshotSha256": "6df7e6829462afeabbc867c64005acc8397743129e75dfb75579092c256818d8"
+    },
+    {
+      "evidenceId": "UI2-24-foreign-milestone",
+      "pngSha256": "f874a646d3695fe961fdc3759d438103468b6dcdf041f575e50007735f480bbb",
+      "snapshotSha256": "82c35df6576f7c79c01e23b7f788aa91b2fe5a55b41262d37cd43be16e4c092d"
+    },
+    {
+      "evidenceId": "UI2-25-foreign-team",
+      "pngSha256": "3d67f0798986d1d28106301ca9bba94e8b9ece7f5e3bc42fa3313e25f6dbaec3",
+      "snapshotSha256": "8bc3253a5e18e80f8b20894e6f98ea27e2a9c013e26f5909170e07a45f234df1"
+    },
+    {
+      "evidenceId": "UI2-26-foreign-overview",
+      "pngSha256": "f2a305a21ac2de6bd80afe18ae1777638e35737738f7826b875939c366ae8a48",
+      "snapshotSha256": "e5205923cbcb008203a63bd5f24717fba5c219b68b3ab9ce71b562aa394f2124"
+    }
+  ],
+  "newTestRun": false,
+  "operatorOrTimestampsChanged": false,
+  "rawAuthenticationResponsesPublished": false
+}

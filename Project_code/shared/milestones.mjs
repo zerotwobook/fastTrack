@@ -40,9 +40,30 @@ export function parseMilestoneInput(value) {
   return { title, description, dueAt };
 }
 
+/** Validate the empty JSON payload required by milestone cancellation. */
+export function parseCancelMilestoneInput(value) {
+  if (!value || typeof value !== 'object' || Array.isArray(value) || Object.keys(value).length > 0) {
+    throw new MilestoneInputError({ form: 'Provide an empty JSON object {}.' });
+  }
+}
+
+/** Format an ISO UTC timestamp for Asia/Bangkok datetime-local inputs. */
+export function isoToBangkokInput(value) {
+  const instant = parseTimestamp(value);
+  const bangkok = new Date(instant.getTime() + 7 * 60 * 60_000);
+  const pad = (number, width = 2) => String(number).padStart(width, '0');
+  const minutes = `${pad(bangkok.getUTCFullYear(), 4)}-${pad(bangkok.getUTCMonth() + 1)}-${pad(bangkok.getUTCDate())}`
+    + `T${pad(bangkok.getUTCHours())}:${pad(bangkok.getUTCMinutes())}`;
+  const seconds = bangkok.getUTCSeconds();
+  const milliseconds = bangkok.getUTCMilliseconds();
+  if (!seconds && !milliseconds) return minutes;
+  const withSeconds = `${minutes}:${pad(seconds)}`;
+  return milliseconds ? `${withSeconds}.${pad(milliseconds, 3)}` : withSeconds;
+}
+
 /** The input label promises Bangkok time, independent of the browser host zone. */
 export function bangkokInputToIso(value) {
-  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2})?$/.test(value)) {
+  if (typeof value !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}(?::\d{2}(?:\.\d{1,3})?)?$/.test(value)) {
     throw new MilestoneInputError({ dueAt: 'Enter the deadline in Asia/Bangkok.' });
   }
   return parseTimestamp(`${value.length === 16 ? `${value}:00` : value}+07:00`).toISOString();

@@ -1,0 +1,83 @@
+{
+  "runId": "L6-CPMS-20261113-194706",
+  "baseUrl": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "expectedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "startedUtc": "2026-11-13T12:47:06.951229+00:00",
+  "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+  "deadlineMilestone": {
+    "id": "b001b3df-25cf-4073-b418-d8fabf9b0c8c",
+    "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+    "title": "L6-CPMS-20261113-194706-DEADLINE",
+    "description": "Synthetic independent UAT late-submission rejection.",
+    "dueAt": "2026-11-13T12:53:00.000Z",
+    "cancelledAt": null,
+    "createdAt": "2026-11-13T12:47:08.299Z",
+    "latestSubmission": null
+  },
+  "deadlineNotBeforeUtc": "2026-11-13T12:54:00+00:00",
+  "normalMilestone": {
+    "id": "646bf021-20f6-49e0-9296-7b6da18556f3",
+    "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+    "title": "L6-CPMS-20261113-194706-NORMAL",
+    "description": "Synthetic independent UAT normal journey.",
+    "dueAt": "2026-11-15T12:47:08.314Z",
+    "cancelledAt": null,
+    "createdAt": "2026-11-13T12:47:08.430Z",
+    "latestSubmission": null
+  },
+  "normalSubmission": {
+    "id": "7e290379-cb6c-40e4-a22f-1f2073e3fe6c",
+    "milestoneId": "646bf021-20f6-49e0-9296-7b6da18556f3",
+    "submittedBy": {
+      "id": "03838685-bf47-4dd4-b99b-b689f863cdb3",
+      "displayName": "Student A1"
+    },
+    "version": 1,
+    "title": "L6-CPMS-20261113-194706-WORK",
+    "description": "Synthetic Sprint 1 UAT submission.",
+    "url": "https://example.com/?run=L6-CPMS-20261113-194706",
+    "submittedAt": "2026-11-13T12:47:08.830Z"
+  },
+  "initialFeedbackCount": 0,
+  "normalFeedback": [
+    {
+      "id": "807aba3c-085c-475b-a00e-8addf9a191f3",
+      "submissionId": "7e290379-cb6c-40e4-a22f-1f2073e3fe6c",
+      "supervisor": {
+        "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+        "displayName": "Supervisor A"
+      },
+      "content": "L6-CPMS-20261113-194706: Please explain the test evidence.",
+      "clientRequestId": "0b4c269b-862e-44ac-be13-89b34545bafb",
+      "createdAt": "2026-11-13T12:47:09.451Z"
+    },
+    {
+      "id": "0aaeb0aa-4c73-434a-93bb-2df36cfa106f",
+      "submissionId": "7e290379-cb6c-40e4-a22f-1f2073e3fe6c",
+      "supervisor": {
+        "id": "6d467a72-a32c-4eff-a9a5-e7897deb4fd2",
+        "displayName": "Supervisor A"
+      },
+      "content": "L6-CPMS-20261113-194706: Add the acceptance result.",
+      "clientRequestId": "b6d9f287-cfe4-4e3b-b543-13798f1799c1",
+      "createdAt": "2026-11-13T12:47:09.597Z"
+    }
+  ],
+  "validationMilestone": {
+    "id": "e2b312f8-8311-40c4-a394-ff52630a3fad",
+    "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+    "title": "L6-CPMS-20261113-194706-VALIDATION",
+    "description": "Synthetic invalid-input rejection.",
+    "dueAt": "2026-11-15T12:47:08.314Z",
+    "cancelledAt": null,
+    "createdAt": "2026-11-13T12:47:12.463Z",
+    "latestSubmission": null
+  },
+  "apiMainChecksCompletedUtc": "2026-11-13T12:47:15.746513+00:00",
+  "completedUtc": "2026-11-13T12:54:06.453652+00:00",
+  "apiSessionCleanupUtc": "2026-11-13T12:54:07.060227+00:00",
+  "assertionTotals": {
+    "PASS": 97,
+    "FAIL": 0
+  }
+}

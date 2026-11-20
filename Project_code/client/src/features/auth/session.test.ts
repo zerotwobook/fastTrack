@@ -15,6 +15,12 @@ describe('F-01 account isolation and recovery', () => {
     expect(fetcher.mock.calls[1]?.[1]).toMatchObject({ method: 'POST', credentials: 'same-origin', cache: 'no-store', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': 'a'.repeat(43) } });
     expect(await store.readDomain('/teams/team/milestones')).toEqual({ data: [], meta: { serverTime: '2030-01-01T00:00:00.000Z' } });
   });
+  it('supports explicit PATCH mutations with current CSRF and no-store options', async () => {
+    const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockResolvedValueOnce(json({ id: 'updated' }));
+    const store = new SessionStore(fetcher); await store.login('a', 'synthetic');
+    expect(await store.mutate('/milestones/m1', { title: 'Updated' }, 'PATCH')).toEqual({ id: 'updated' });
+    expect(fetcher.mock.calls[1]?.[1]).toMatchObject({ method: 'PATCH', credentials: 'same-origin', cache: 'no-store', headers: { 'Content-Type': 'application/json', 'X-CSRF-Token': 'a'.repeat(43) } });
+  });
   it('drops a late mutation result after account change', async () => {
     const pending = deferred<Response>();
     const fetcher = vi.fn<typeof fetch>().mockResolvedValueOnce(json(auth('a'))).mockReturnValueOnce(pending.promise).mockResolvedValueOnce(json(auth('b')));
@@ -90,7 +96,11 @@ describe('F-01 account isolation and recovery', () => {
 });
 describe('F-01 internal return-to destinations', () => {
   it.each(['/milestones/11111111-1111-1111-1111-111111111111', '/teams/11111111-1111-1111-1111-111111111111/milestones/new',
-    '/milestones/11111111-1111-1111-1111-111111111111/submissions/new', '/submissions/11111111-1111-1111-1111-111111111111'])('permits implemented milestone/submission destination %s with server-side scope still required', path => {
+    '/milestones/11111111-1111-1111-1111-111111111111/submissions/new', '/milestones/11111111-1111-1111-1111-111111111111/revisions/new', '/submissions/11111111-1111-1111-1111-111111111111'])('permits implemented milestone/submission destination %s with server-side scope still required', path => {
+    expect(safeReturnTo(path)).toBe(path);
+  });
+  it('preserves a team progress destination after sign-in', () => {
+    const path = '/teams/11111111-1111-1111-1111-111111111111/progress';
     expect(safeReturnTo(path)).toBe(path);
   });
   it.each(['https://foreign.example', '//foreign.example', '/\\foreign.example', '/%2f%2fforeign.example', '/login', '/teams/invalid', '/\n/foreign.example', null])('T-27 rejects unsafe/unimplemented destination %j', value => {

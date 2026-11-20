@@ -1,0 +1,28 @@
+{
+  "sourceFile": "Project Deliverable 1  Engineering baseline and working Sprint 1.pdf",
+  "sourceSha256": "d2b6eafcfcdf8947cf9c999e4fd39ab09a31cf0c0e7072a4b5553f64709e7291",
+  "sourcePageCount": 53,
+  "inspectedPages": [
+    1,
+    2,
+    3,
+    10,
+    12,
+    13,
+    37,
+    39
+  ],
+  "referenceIsReadOnly": true,
+  "fonts": {
+    "source": "Inter-variable-source.ttf",
+    "license": "OFL.txt",
+    "instances": {
+      "regular": 400,
+      "bold": 700
+    },
+    "opticalSize": 18
+  },
+  "templateKind": "personal-pdf-skill",
+  "templateGalleryRegistered": false,
+  "reason": "The artifact-template packager does not support PDF source files."
+}

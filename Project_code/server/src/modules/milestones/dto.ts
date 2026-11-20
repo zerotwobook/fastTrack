@@ -25,3 +25,5 @@ export interface CreateMilestoneInput {
   description: string;
   dueAt: string; // ISO 8601 with timezone
 }
+
+export type UpdateMilestoneInput = CreateMilestoneInput;

@@ -1,0 +1,72 @@
+{
+  "product": "CoursePMS",
+  "operator": "Codex AI at user request; human A/B participation not inferred",
+  "origin": "https://course-pms-859617270560.asia-southeast1.run.app",
+  "kind": "Actual live HTTP observations; no business write endpoints invoked",
+  "completedAtUtc": "2026-11-13T12:08:25.965454+00:00",
+  "results": [
+    {
+      "id": "API-HEALTH",
+      "observedAtUtc": "2026-11-13T12:08:25.519944+00:00",
+      "method": "GET",
+      "path": "/api/health",
+      "httpStatus": 200,
+      "expected": "200 and selected release/readiness",
+      "status": "PASS",
+      "observation": {
+        "status": "ok",
+        "commitSha": "150dc5db3de5c829a7d9ef1adb545191cc37542d"
+      }
+    },
+    {
+      "id": "API-READY",
+      "observedAtUtc": "2026-11-13T12:08:25.630696+00:00",
+      "method": "GET",
+      "path": "/api/ready",
+      "httpStatus": 200,
+      "expected": "200 and selected release/readiness",
+      "status": "PASS",
+      "observation": {
+        "status": "ready",
+        "db": "connected"
+      }
+    },
+    {
+      "id": "API-NOAUTH-1",
+      "observedAtUtc": "2026-11-13T12:08:25.758647+00:00",
+      "method": "GET",
+      "path": "/api/auth/me",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED",
+      "status": "PASS",
+      "observation": {
+        "code": "UNAUTHORIZED"
+      }
+    },
+    {
+      "id": "API-NOAUTH-2",
+      "observedAtUtc": "2026-11-13T12:08:25.858710+00:00",
+      "method": "GET",
+      "path": "/api/teams",
+      "httpStatus": 401,
+      "expected": "401 UNAUTHORIZED",
+      "status": "PASS",
+      "observation": {
+        "code": "UNAUTHORIZED"
+      }
+    },
+    {
+      "id": "API-ERROR",
+      "observedAtUtc": "2026-11-13T12:08:25.965434+00:00",
+      "status": "BLOCKED",
+      "errorType": "JSONDecodeError",
+      "detail": "Execution stopped; no request body or credential retained."
+    }
+  ],
+  "counts": {
+    "PASS": 4,
+    "FAIL": 0,
+    "BLOCKED": 1
+  },
+  "secretHandling": "Credentials and tokens used in memory only; no response token, authorization header or password retained."
+}

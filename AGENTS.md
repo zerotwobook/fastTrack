@@ -5,6 +5,7 @@
 - Author project documentation, evidence narratives and handoffs as Markdown (`.md`). The user assembles and exports the final reports. Do not generate, rebuild or export PDFs, including through PDF-rebuilding verifiers, unless the user explicitly requests it. Retain existing historical/instructor artifacts and actual machine-readable test results.
 - Read `skill/SKILL_Project.md` before project work and `workflow/README.md` plus the current sprint/task before implementation.
 - Read `skill/SKILL_Github.md` before code/Git work. Identify owner A/B, dependencies and shared-file ownership; use a separate task branch and clone/worktree for each developer.
+- Post GitHub comments only with explicit user authorization. Use the local GitHub CLI (`gh`) and verify the active GitHub account before posting. Never use the ChatGPT GitHub connector or another ChatGPT identity to publish comments. If the authorized GitHub account is unavailable through `gh`, provide the comment as a draft.
 - Keep `README.md` focused on the actual application, and `Project_code/README.md` on verified code/setup details. Put team/AI/task/branch instructions in `DEVELOPMENT_README.md`, `CONTRIBUTING.md` and `workflow/`. Do not mix planning claims into implemented-feature documentation.
 - Write application code under `Project_code/`. Keep repository configuration at its required root paths.
 - Before UI work, read `skill/SKILL_UI.md` and `Project_doc/project_detail.md` section 8. Preserve the established visual design while writing new UI copy in English.

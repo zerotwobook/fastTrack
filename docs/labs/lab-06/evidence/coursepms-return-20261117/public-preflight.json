@@ -1,0 +1,28 @@
+{
+  "kind": "Actual anonymous public source/readiness observations; no corrected-deployment retest",
+  "observations": [
+    {
+      "observedAtUtc": "2026-11-17T06:42:33.854758+00:00",
+      "url": "https://course-pms-859617270560.asia-southeast1.run.app/api/health",
+      "httpStatus": 200,
+      "body": {
+        "status": "ok",
+        "service": "course-pms-api",
+        "commitSha": "9c22735995c985aaa0622b6b179de1ac9c1f80ca",
+        "timestamp": "2026-11-17T06:42:32.985Z"
+      }
+    },
+    {
+      "observedAtUtc": "2026-11-17T06:42:34.491190+00:00",
+      "url": "https://course-pms-859617270560.asia-southeast1.run.app/api/ready",
+      "httpStatus": 200,
+      "body": {
+        "status": "ready",
+        "db": "connected"
+      }
+    }
+  ],
+  "initial_local_attempt": "Sandbox socket access denied; no product failure inferred. Normal-TLS read-only requests subsequently succeeded.",
+  "current_cloud_revision_digest_traffic": "NOT CONFIRMED",
+  "corrected_deployment_retest": "BLOCKED: public source remains original defective baseline"
+}

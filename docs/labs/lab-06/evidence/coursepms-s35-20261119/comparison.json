@@ -1,0 +1,125 @@
+{
+  "runId": "20261119-103240-7a83",
+  "result": "PASS",
+  "source": "1bbe187c088b86d104a16e420058f17425f18828",
+  "revision": "fasttrack-lab6-00001-74k",
+  "revisionProvenance": "Owner-supplied Cloud Run identity",
+  "reportingProvenance": "CoursePMS returned evidence compared with both original fastTrack Cloud Logging payloads",
+  "browserOperator": "Codex on behalf of CoursePMS",
+  "jointReview": "Reported human review with Codex assistance, approximately 2026-11-19 11:23 UTC+07:00",
+  "acceptance": "Accepted for this exact Section 3.5 retest",
+  "partnerChecks": [
+    {
+      "assertion": "recorded run source and reported revision match requested baseline",
+      "result": "PASS"
+    },
+    {
+      "assertion": "before dedicated database identity",
+      "result": "PASS"
+    },
+    {
+      "assertion": "before database timestamp is valid",
+      "result": "PASS"
+    },
+    {
+      "assertion": "before exact two milestone identities titles and deadlines",
+      "result": "PASS"
+    },
+    {
+      "assertion": "before late database row count is zero",
+      "result": "PASS"
+    },
+    {
+      "assertion": "before exact on-time ID version title URL and submitted time match 201",
+      "result": "PASS"
+    },
+    {
+      "assertion": "after dedicated database identity",
+      "result": "PASS"
+    },
+    {
+      "assertion": "after database timestamp is valid",
+      "result": "PASS"
+    },
+    {
+      "assertion": "after exact two milestone identities titles and deadlines",
+      "result": "PASS"
+    },
+    {
+      "assertion": "after late database row count is zero",
+      "result": "PASS"
+    },
+    {
+      "assertion": "after exact on-time ID version title URL and submitted time match 201",
+      "result": "PASS"
+    },
+    {
+      "assertion": "recorded on-time response is HTTP 201 for exact milestone and submission",
+      "result": "PASS"
+    },
+    {
+      "assertion": "recorded stale-form late POST and one retry both returned 409 DEADLINE_PASSED",
+      "result": "PASS"
+    },
+    {
+      "assertion": "baseline database snapshot was after saved control and before late POST",
+      "result": "PASS"
+    },
+    {
+      "assertion": "after database snapshot was after late POST retry and final saved-list read",
+      "result": "PASS"
+    },
+    {
+      "assertion": "database milestone and submission state unchanged across rejected writes",
+      "result": "PASS"
+    }
+  ],
+  "snapshots": [
+    {
+      "file": "before.json",
+      "sha256": "9923924e7a7e78b3fdcc1275ee67b6c01f9db834a264224c642280c54286e16e",
+      "databaseTime": "2026-11-19T03:42:36.820Z",
+      "execution": "fasttrack-lab6-migrate-g2b9l"
+    },
+    {
+      "file": "after.json",
+      "sha256": "c0ed1f012089a7dca6826932069f68c61789021bcc33a4e38dab75b63c12967d",
+      "databaseTime": "2026-11-19T03:51:57.192Z",
+      "execution": "fasttrack-lab6-migrate-xwqcm"
+    }
+  ],
+  "requests": [
+    {
+      "event": "on-time UI POST",
+      "clientObservedAt": "2026-11-19T03:32:49.398Z",
+      "status": 201,
+      "errorCode": null
+    },
+    {
+      "event": "late UI POST",
+      "clientObservedAt": "2026-11-19T03:49:06.307Z",
+      "status": 409,
+      "errorCode": "DEADLINE_PASSED"
+    },
+    {
+      "event": "late retry",
+      "clientObservedAt": "2026-11-19T03:49:11.407Z",
+      "status": 409,
+      "errorCode": "DEADLINE_PASSED"
+    }
+  ],
+  "lateMilestoneId": "1343a467-89fa-4969-b6ce-eb54cc1b0340",
+  "lateCounts": {
+    "before": 0,
+    "after": 0
+  },
+  "onTimeMilestoneId": "337e85e9-f190-42fb-a231-ceee30030a28",
+  "onTimeSubmissionId": "e464cfe7-3c6e-4a9d-835c-310fe20b4ede",
+  "onTimeVersion": 1,
+  "identicalSelectedMilestonesAndSubmissions": true,
+  "archiveValidation": {
+    "files": 76,
+    "topLevelHashesVerified": 75,
+    "nestedS35HashesVerified": 25
+  }
+}

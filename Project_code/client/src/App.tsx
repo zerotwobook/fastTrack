@@ -1,12 +1,20 @@
 import { useEffect, useLayoutEffect, useRef, useState, useSyncExternalStore } from 'react';
-import type { FormEvent, KeyboardEvent } from 'react';
+import type { FormEvent, KeyboardEvent, MouseEvent } from 'react';
 import { Button, EmptyState, Field, Input } from './design/components';
+import { Icon } from './design/Icon';
 import { safeReturnTo, sessionStore, StaleSessionError } from './features/auth/session';
 import type { SessionSnapshot, Team } from './features/auth/session';
 import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/milestones';
-import { SubmissionCreate, SubmissionDetail } from './features/submissions';
+import { RevisionCreate, SubmissionCreate, SubmissionDetail } from './features/submissions';
 import { FeedbackPanel } from './features/feedback';
+import { TeamProgress } from './features/progress/TeamProgress';
+import { TeamCreate, TeamSettings } from './features/teams/TeamPlanning';
 import './app.css';
+
+function Brand({ linked = true }: { linked?: boolean }) {
+  const content = <><span className="brand-mark"><Icon name="brand" size={22} /></span><span>fastTrack</span></>;
+  return linked ? <a className="wordmark" href="/">{content}</a> : <span className="wordmark">{content}</span>;
+}
 
 function Login({ state }: { state: SessionSnapshot }) {
   const [email, setEmail] = useState('');
@@ -20,36 +28,59 @@ function Login({ state }: { state: SessionSnapshot }) {
     if (state.busy || submitting.current) return;
     submitting.current = true;
     if (await sessionStore.login(email, password)) {
-      history.replaceState(null, '', safeReturnTo(new URLSearchParams(location.search).get('returnTo') ?? location.pathname));
+      history.replaceState(null, '', safeReturnTo(new URLSearchParams(location.search).get('returnTo') ?? location.pathname + location.hash));
       window.dispatchEvent(new PopStateEvent('popstate'));
     } else setPassword('');
     submitting.current = false;
   };
-  return <main id="main-content" className="login-page">
-    <div className="login-form"><p className="wordmark">fastTrack</p><h1>Sign in</h1>
-      <p className="intro">Track your team's milestones, submissions, and feedback.</p>
-      {state.error && <p className="notice" role="alert" tabIndex={-1} ref={alert}>{state.error}</p>}
-      <form onSubmit={event => { void submit(event); }}>
-        <Field id="email" label="Email"><Input id="email" name="email" type="email" autoComplete="username" required value={email} onChange={event => setEmail(event.target.value)} disabled={state.busy} /></Field>
-        <Field id="password" label="Password">
-          <div className="password-control">
-            <Input id="password" name="password" type={visible ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} disabled={state.busy} />
-            <Button className="password-toggle" type="button" variant="ghost" disabled={state.busy} aria-controls="password" aria-label={visible ? 'Hide password' : 'Show password'} title={visible ? 'Hide password' : 'Show password'} aria-pressed={visible} onClick={() => setVisible(!visible)}>
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
-                <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
-                <circle cx="12" cy="12" r="3" />
-                {visible && <path d="m3 3 18 18" />}
-              </svg>
-            </Button>
-          </div>
-        </Field>
-        <Button className="login-submit" type="submit" loading={state.busy}>{state.busy ? 'Signing in…' : 'Sign in'}</Button>
-      </form><p className="help">Use the account provided for your course.</p>
+  return <main id="main-content" className="login-page" tabIndex={-1}>
+    <div className="login-shell">
+      <div className="login-brand">
+        <Brand linked={false} />
+        <p>Track your team's milestones, submissions, and feedback.</p>
+        <div className="login-track" aria-hidden="true">
+          <span><Icon name="calendar" size={24} /></span>
+          <span><Icon name="send" size={24} /></span>
+          <span><Icon name="check" size={24} /></span>
+        </div>
+      </div>
+      <div className="login-form">
+        <h1>Sign in</h1>
+        {state.error && <p className="notice" role="alert" tabIndex={-1} ref={alert}>{state.error}</p>}
+        <form onSubmit={event => { void submit(event); }}>
+          <Field id="email" label="Email"><Input id="email" name="email" type="email" autoComplete="username" required value={email} onChange={event => setEmail(event.target.value)} disabled={state.busy} /></Field>
+          <Field id="password" label="Password">
+            <div className="password-control">
+              <Input id="password" name="password" type={visible ? 'text' : 'password'} autoComplete="current-password" required value={password} onChange={event => setPassword(event.target.value)} disabled={state.busy} />
+              <Button className="password-toggle" type="button" variant="ghost" disabled={state.busy} aria-controls="password" aria-label={visible ? 'Hide password' : 'Show password'} title={visible ? 'Hide password' : 'Show password'} aria-pressed={visible} onClick={() => setVisible(!visible)}>
+                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.75" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+                  <path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12Z" />
+                  <circle cx="12" cy="12" r="3" />
+                  {visible && <path d="m3 3 18 18" />}
+                </svg>
+              </Button>
+            </div>
+          </Field>
+          <Button className="login-submit" type="submit" loading={state.busy}>
+            {state.busy ? 'Signing in…' : <><span>Sign in</span><Icon name="arrowRight" size={18} /></>}
+          </Button>
+        </form>
+        <p className="help">Use the account provided for your course.</p>
+      </div>
     </div>
   </main>;
 }
-function Navigation({ role }: { role: 'student' | 'supervisor' }) {
-  return <nav aria-label="Main navigation"><a href="/" aria-current={location.pathname === '/' ? 'page' : undefined}>Overview</a><a href="/#teams" aria-current={location.pathname !== '/' ? 'page' : undefined}>{role === 'student' ? 'My team' : 'Supervised teams'}</a></nav>;
+function Navigation({ role, teamsActive, onNavigate }: {
+  role: 'student' | 'supervisor';
+  teamsActive: boolean;
+  onNavigate?: (event: MouseEvent<HTMLAnchorElement>) => void;
+}) {
+  return <nav aria-label="Main navigation">
+    <a href="/" aria-current={teamsActive ? undefined : 'page'} onClick={onNavigate}><Icon name="overview" />Overview</a>
+    <a href="/#teams" aria-current={teamsActive ? 'location' : undefined} onClick={onNavigate}>
+      <Icon name="team" />{role === 'student' ? 'My team' : 'Supervised teams'}
+    </a>
+  </nav>;
 }
 function trapNavigationFocus(event: KeyboardEvent<HTMLDialogElement>) {
   if (event.key !== 'Tab') return;
@@ -61,7 +92,7 @@ function trapNavigationFocus(event: KeyboardEvent<HTMLDialogElement>) {
     event.preventDefault(); first?.focus();
   }
 }
-function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
+function Workspace({ state, path, hash }: { state: SessionSnapshot; path: string; hash: string }) {
   const user = state.auth!.user;
   const [result, setResult] = useState<{ revision: number; path: string; teams: Team[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -69,6 +100,8 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const dialog = useRef<HTMLDialogElement>(null);
   const menu = useRef<HTMLButtonElement>(null);
+  const navigatingFromMenu = useRef(false);
+  const teamsSection = useRef<HTMLElement>(null);
   useLayoutEffect(() => { if (state.phase !== 'ready') dialog.current?.close(); }, [state.phase]);
   useEffect(() => {
     const desktop = matchMedia('(min-width: 1200px)');
@@ -77,62 +110,126 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
     return () => desktop.removeEventListener('change', closeOnDesktop);
   }, []);
   const detailId = /^\/teams\/([a-f0-9-]{36})(?:\/milestones\/new)?$/i.exec(path)?.[1];
-  const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/submissions\/new)?$/i.exec(path)?.[1];
+  const settingsId = /^\/teams\/([a-f0-9-]{36})\/settings$/i.exec(path)?.[1];
+  const progressId = /^\/teams\/([a-f0-9-]{36})\/progress$/i.exec(path)?.[1];
+  const creatingTeam = path === '/teams/new';
+  const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/(?:submissions|revisions)\/new)?$/i.exec(path)?.[1];
   const submissionId = /^\/submissions\/([a-f0-9-]{36})$/i.exec(path)?.[1];
   const submitting = path.endsWith('/submissions/new');
+  const revising = path.endsWith('/revisions/new');
   const creating = path.endsWith('/milestones/new');
   const validPath = path === '/' || detailId !== undefined || milestoneId !== undefined || submissionId !== undefined;
   useEffect(() => {
     let active = true; setError(null); setResult(null);
-    if (milestoneId || submissionId) return;
+    if (milestoneId || submissionId || settingsId || progressId || creatingTeam) return;
     if (!validPath) { setError('This page could not be found. Return to your overview.'); return; }
     void sessionStore.read<Team | Team[]>(detailId ? `/teams/${detailId}` : '/teams').then(data => {
       if (active) setResult({ revision: state.revision, path, teams: Array.isArray(data) ? data : [data] });
     }).catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
-  }, [state.revision, path, attempt, detailId, milestoneId, submissionId, validPath]);
+  }, [state.revision, path, attempt, detailId, milestoneId, submissionId, settingsId, progressId, creatingTeam, validPath]);
   const teams = result?.revision === state.revision && result.path === path ? result.teams : null;
+  const teamsActive = path !== '/' || hash === '#teams';
+  const teamsLoaded = teams !== null || error !== null;
+  useLayoutEffect(() => {
+    if (path === '/' && hash === '#teams' && teamsLoaded) {
+      teamsSection.current?.focus({ preventScroll: true });
+      teamsSection.current?.scrollIntoView({ block: 'start' });
+    }
+  }, [path, hash, teamsLoaded]);
+
+  const followMenuLink = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    navigatingFromMenu.current = true;
+    dialog.current?.close();
+  };
+  const onMenuClose = () => {
+    setMenuOpen(false);
+    if (!navigatingFromMenu.current && state.phase === 'ready' && !matchMedia('(min-width: 1200px)').matches) menu.current?.focus();
+    navigatingFromMenu.current = false;
+  };
+
   return <div className="application-shell">
-    <aside className="sidebar"><a className="wordmark" href="/">fastTrack</a><Navigation role={user.role} /></aside>
-    <dialog id="workspace-navigation" ref={dialog} className="navigation-dialog" aria-labelledby="navigation-title" onKeyDown={trapNavigationFocus} onClose={() => { setMenuOpen(false); if (state.phase === 'ready' && !matchMedia('(min-width: 1200px)').matches) menu.current?.focus(); }}>
-      <div className="navigation-heading"><h2 id="navigation-title">Navigation</h2><Button type="button" variant="secondary" onClick={() => dialog.current?.close()}>Close menu</Button></div><Navigation role={user.role} />
+    <aside className="sidebar"><Brand /><Navigation role={user.role} teamsActive={teamsActive} /></aside>
+    <dialog id="workspace-navigation" ref={dialog} className="navigation-dialog" aria-labelledby="navigation-title" onKeyDown={trapNavigationFocus} onClose={onMenuClose}>
+      <div className="navigation-heading"><h2 id="navigation-title">Navigation</h2><Button className="close-menu" type="button" variant="ghost" aria-label="Close menu" onClick={() => dialog.current?.close()}><Icon name="close" /></Button></div>
+      <Navigation role={user.role} teamsActive={teamsActive} onNavigate={followMenuLink} />
     </dialog>
-    <div className="workspace"><header className="app-header">
-      <button ref={menu} className="menu-button" type="button" aria-controls="workspace-navigation" aria-expanded={menuOpen} onClick={() => { dialog.current?.showModal(); setMenuOpen(true); }}>Menu</button>
-      <p className="account-summary"><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
-      <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
-    </header><main id={state.phase === 'ready' ? 'main-content' : undefined} className="workspace-content">
-      {submissionId ? <SubmissionDetail id={submissionId} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
-      <h1>{creating ? 'Create milestone' : detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
-      <p className="intro">{creating ? `Set the work and deadline${teams?.[0] ? ` for ${teams[0].name}` : ' for this team'}.` : detailId ? 'Your team members, deadlines and submitted work.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
+    <div className="workspace"><header className="app-header"><div className="app-header-inner">
+      <div className="compact-brand">
+        <button ref={menu} className="menu-button" type="button" aria-label="Menu" aria-controls="workspace-navigation" aria-expanded={menuOpen} onClick={() => { dialog.current?.showModal(); setMenuOpen(true); }}><Icon name="menu" /></button>
+        <Brand />
+      </div>
+      <div className="account-controls">
+        <div className="account-summary">
+          <span className="profile-icon"><Icon name="user" size={18} /></span>
+          <p><strong>{user.displayName}</strong><span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
+        </div>
+        <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out<Icon name="signOut" size={18} /></Button>
+      </div>
+    </div></header><main id={state.phase === 'ready' ? 'main-content' : undefined} className="workspace-content" tabIndex={-1}>
+      {creatingTeam || settingsId ? user.role === 'supervisor'
+        ? (settingsId ? <TeamSettings key={settingsId} teamId={settingsId} /> : <TeamCreate />)
+        : <EmptyState title="Team settings are restricted to supervisors" action={<a href="/">Back to overview</a>} />
+        : progressId ? <TeamProgress key={progressId} teamId={progressId} />
+        : submissionId ? <SubmissionDetail id={submissionId} userRole={user.role} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? revising ? <RevisionCreate key={milestoneId} milestoneId={milestoneId} userRole={user.role} /> : submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
+      <header className="workspace-heading">
+        <div>
+          <h1>{creating ? 'Create milestone' : detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
+          <p className="intro">{creating ? `Set the work and deadline${teams?.[0] ? ` for ${teams[0].name}` : ' for this team'}.` : detailId ? 'Your team members, deadlines and submitted work.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
+        </div>
+        {!creating && !error && (detailId && teams?.[0] ? (
+          <div className="workspace-actions">
+            <a className="team-link team-link--primary" href={`/teams/${detailId}/progress`}><Icon name="chart" size={18} />View progress</a>
+            {user.role === 'supervisor' && <a className="team-link" href={`/teams/${detailId}/settings`}><Icon name="settings" size={18} />Team settings</a>}
+          </div>
+        ) : user.role === 'supervisor' && path === '/' && (
+          <a className="team-link team-link--primary" href="/teams/new"><Icon name="plus" size={18} />Create team</a>
+        ))}
+      </header>
+      <section ref={path === '/' ? teamsSection : undefined} id={path === '/' ? 'teams' : undefined} aria-label={detailId ? 'Team workspace' : 'Teams'} tabIndex={path === '/' ? -1 : undefined}>
       {error ? <section className="notice" role="alert"><p>{error}</p><div className="recovery-actions"><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}>Try again</Button><a href="/">Back to overview</a></div></section>
       : teams === null ? <p role="status">Loading your team workspace…</p>
-      : teams.length === 0 ? <EmptyState title={user.role === 'student' ? 'No team assigned yet' : 'No supervised teams yet'} description="Contact your course supervisor to arrange your team." />
-      : <section id="teams" aria-label="Teams" className={`team-list${!detailId && user.role === 'supervisor' ? ' team-list--supervisor' : ''}`}>{teams.map(team => <article className="team-row" key={team.id}>
-        {!detailId && <h2><a href={`/teams/${team.id}`}>{team.name}<span aria-hidden="true"> ↗</span></a></h2>}
+      : teams.length === 0 ? <EmptyState title={user.role === 'student' ? 'No team assigned yet' : 'No supervised teams yet'} description={user.role === 'student' ? 'Contact your course supervisor to arrange your team.' : 'Create a team to start planning its milestones.'} />
+      : <div className={`team-list${!detailId && user.role === 'supervisor' ? ' team-list--supervisor' : ''}`}>{teams.map(team => <article className="team-row" key={team.id}>
+        {!detailId && <div className="team-card-heading">
+          <span className="team-icon"><Icon name="team" size={23} /></span>
+          <h2><a href={`/teams/${team.id}`}>{team.name}</a></h2>
+        </div>}
         {!creating && (detailId || user.role === 'supervisor') && <dl><div><dt>Supervisor</dt><dd>{team.supervisor.displayName}</dd></div><div><dt>Team members</dt><dd>{team.members.length ? <ul>{team.members.map(member => <li key={member.id}>{member.displayName}</li>)}</ul> : 'No members assigned yet'}</dd></div></dl>}
+        {!detailId && <div className="team-card-actions">
+          <a className="team-link team-link--primary" href={`/teams/${team.id}`}>Open team<Icon name="arrowRight" size={18} /></a>
+          <a className="team-link" href={`/teams/${team.id}/progress`}><Icon name="chart" size={18} />View progress</a>
+        </div>}
         {(detailId || user.role === 'student') && (creating ? <MilestoneCreate teamId={team.id} userRole={user.role} /> : <MilestoneTrack teamId={team.id} userRole={user.role} />)}
-        {!detailId && <a className="team-link" href={`/teams/${team.id}`}>Open team</a>}
-      </article>)}</section>}</>}
+      </article>)}</div>}
+      </section></>}
     </main></div>
   </div>;
 }
 export function App() {
   const state = useSyncExternalStore(sessionStore.subscribe, sessionStore.getSnapshot);
-  const [path, setPath] = useState(location.pathname);
+  const [route, setRoute] = useState(() => ({ path: location.pathname, hash: location.hash }));
   useEffect(() => {
+    let currentPath = location.pathname;
+    const syncRoute = () => {
+      const pathChanged = location.pathname !== currentPath;
+      currentPath = location.pathname;
+      setRoute({ path: currentPath, hash: location.hash });
+      return pathChanged;
+    };
     void sessionStore.restore();
-    const pop = () => { setPath(location.pathname); void sessionStore.restore(); };
+    const pop = () => { if (syncRoute()) void sessionStore.restore(); };
     const pagehide = () => sessionStore.lock();
-    const pageshow = (event: PageTransitionEvent) => { if (event.persisted) { setPath(location.pathname); void sessionStore.restore(); } };
+    const pageshow = (event: PageTransitionEvent) => { if (event.persisted) { syncRoute(); void sessionStore.restore(); } };
     const visibility = () => { if (document.visibilityState === 'hidden') sessionStore.suspend(); else void sessionStore.revalidate(); };
     window.addEventListener('popstate', pop); window.addEventListener('pagehide', pagehide); window.addEventListener('pageshow', pageshow); document.addEventListener('visibilitychange', visibility);
     return () => { window.removeEventListener('popstate', pop); window.removeEventListener('pagehide', pagehide); window.removeEventListener('pageshow', pageshow); document.removeEventListener('visibilitychange', visibility); };
   }, []);
   return <><a className="skip-link" href="#main-content">Skip to content</a>
-    {state.phase === 'loading' || state.phase === 'checking' ? <main id="main-content" className="session-status" role="status"><p className="wordmark">fastTrack</p><p>{state.recovery === 'logout' ? 'Signing out…' : 'Checking your session…'}</p></main>
-    : state.phase === 'unavailable' ? <main id="main-content" className="session-status"><h1>Unable to continue</h1><p role="alert">{state.error}</p><Button onClick={() => { void (state.recovery === 'logout' ? sessionStore.logout() : sessionStore.revalidate()); }}>{state.recovery === 'logout' ? 'Retry sign-out' : 'Try again'}</Button>{state.auth && <Button variant="ghost" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>}</main>
+    {state.phase === 'loading' || state.phase === 'checking' ? <main id="main-content" className="session-status" tabIndex={-1} role="status"><p className="wordmark">fastTrack</p><p>{state.recovery === 'logout' ? 'Signing out…' : 'Checking your session…'}</p></main>
+    : state.phase === 'unavailable' ? <main id="main-content" className="session-status" tabIndex={-1}><h1>Unable to continue</h1><p role="alert">{state.error}</p><Button onClick={() => { void (state.recovery === 'logout' ? sessionStore.logout() : sessionStore.revalidate()); }}>{state.recovery === 'logout' ? 'Retry sign-out' : 'Try again'}</Button>{state.auth && <Button variant="ghost" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>}</main>
     : !state.auth ? <Login state={state} /> : null}
-    <div hidden={state.phase !== 'ready'}>{state.auth && <Workspace key={state.revision} state={state} path={path} />}</div>
+    <div hidden={state.phase !== 'ready'}>{state.auth && <Workspace key={state.revision} state={state} path={route.path} hash={route.hash} />}</div>
   </>;
 }

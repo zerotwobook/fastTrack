@@ -1,0 +1,83 @@
+# Findings, correction chains and independent retests
+
+**Latest 17 November update (after 19:15 Asia/Bangkok):** updated private A/B/Instructor access now works. The original deployed no-refresh draft-isolation retest passes, with reverse/reload, revocation, foreign GET and observed directory/routing checks. Read [targeted results](sessions/2026-11-17-coursepms-retest-results.md): 5 PASS / 3 PARTIAL / 1 EVIDENCE REVIEW ONLY. No-team/unassigned Student and unagreed review-write subchecks remain blocked. Older same-day credential/deployment statements below are historical. Both actual human decisions remain PENDING.
+
+
+Working templates for both teams. Current actual evidence is indexed in [current-status.md](current-status.md) and the [17 November intake](sessions/2026-11-17-coursepms-return.md). CoursePMS now records technical accepted-Major L6-OUT-EXP-001 under Issue #71 and supplied RED/GREEN/CI evidence for Draft PRs #72/#73. The correction is not established as deployed; independent retest is BLOCKED. Bare-route and title-summary clarifications remain open. Incoming fastTrack observations report no confirmed defect in their bounded AI scope; actual human decisions remain PENDING. Blank rows below are reusable templates, not competing current ledgers.
+
+## 1. Finding report template
+
+- Finding / actual GitHub Issue ID:
+- Direction: received about fastTrack / sent about partner product:
+- Product owner/team; reporter name/team; report date/time/channel:
+- Tested URL, source commit and deployed revision:
+- Case ID; violated requirement/AC; relevant contract text:
+- Preconditions, safe synthetic data IDs and exact inputs:
+- Numbered reproduction steps:
+- Expected result:
+- Actual result and sanitized evidence IDs:
+- Severity and concrete user impact:
+- Proposed owner; actual disposition and reason after triage:
+- Delivery/receipt reference:
+
+Use Critical for severe loss/exposure or unusable core behavior, Major for an important required journey/rule/access failure, and Minor for a limited-impact defect. Explain the actual impact rather than selecting severity from appearance alone. A missing planned Sprint 2 feature is not automatically a Sprint 1 defect.
+
+## 2. All received findings about fastTrack
+
+Classifications: accepted defect, duplicate (link original), not-defect, enhancement. Reproduce/clarify before dismissing; tie every disposition to Sprint 1 scope and evidence. Do not relabel a failing agreed requirement as an enhancement. If independent execution finds none, explicitly record zero received findings with the completed session/tester reference; the blank row below is not a zero-findings result.
+
+| Finding / case | Reporter / tested version | Classification and evidence-based reason | Severity / impact | Module owner | Fix / disposition status | Linked original / PR / retest |
+| --- | --- | --- | --- | --- | --- | --- |
+| NOT YET REPORTED | NOT RECORDED | NOT TRIAGED | NOT ASSESSED | NOT ASSIGNED | NOT RUN | None recorded |
+
+Critical/Major defects block acceptance until corrected and independently retested. Minor defects must be fixed or explicitly accepted by the UAT Team as documented limitations. Enhancements outside the agreed scope need not be implemented for Sprint 1 acceptance.
+
+## 3. Outgoing findings about the partner product
+
+Use the same finding template. The partner owns triage/correction; A/B independently retest its corrected release and give an evidence-based decision. Record both members' actual contributions.
+
+| Finding / partner case | Reporter / date / tested version | Expected versus actual / evidence | Proposed severity and impact | Partner disposition / owner | Corrected release / retest result |
+| --- | --- | --- | --- | --- | --- |
+| L6-OUT-EXP-001 / account switch | AI evidence, 13-14 November; 9c227359 reproduced on 14 November | Prior private draft fields remain in another identity; UI-24/25/26 and dated intake | Major proposed and technically accepted by CoursePMS | Issue #71, original owner Pawarit; human disposition/review pending | Draft #72/#73, exact #73 CI succeeds; no fixed serving version, independent retest BLOCKED |
+| L6-OUT-EXP-002 / bare GET | 13 November, 150dc5d | HTML fallback rather than literal protected collection expectation; no private body disclosure | Contract clarification | CoursePMS interpretation/disposition pending | No correction/closure claimed |
+| Directory title summaries | 13 November, 150dc5d | Summary metadata versus roster-only/privacy wording | Policy clarification | CoursePMS requirement reconciliation pending | No correction/closure claimed |
+
+## 4. Traceable correction chain for each accepted defect fixed by fastTrack
+
+1. Reproduce the reported behavior at the recorded defective commit. Add a meaningful automated regression test that asserts the correct behavior and fails for that defect (RED). Preserve the actual command, test/assertion excerpt, commit, output and counts. A syntax/fixture failure is not evidence of the reported defect.
+2. Fix the owning module on a new scoped branch from synchronized sprint staging. Keep RED off protected branches. Run the same test GREEN and relevant existing regression suites; preserve actual outputs/counts/skips.
+3. Obtain substantive non-author peer review and passing CI; integrate through the normal protected staging PR. Do not invent an approval or delete a failing test to hide unrelated failures.
+4. Prepare the concrete release candidate. Follow [MAIN_RELEASE_GATE.md](../../../workflow/MAIN_RELEASE_GATE.md): the user reviews and explicitly authorizes its current head/base before lifting a main PR's Draft, and required peer/protection still apply. This preparation itself authorizes no main release or cloud operation.
+5. After the actual reviewed main release/deployment, record merge/source/image/revision and post-deploy smoke checks. Give the independent team the exact corrected version and original failed cases. Multiple fixes may share a clearly reviewed release, with each Issue traceable to its own correction.
+
+| Evidence field | Actual entry |
+| --- | --- |
+| Issue / case / requirement | NOT RECORDED |
+| Defective baseline source / deployed revision | NOT RECORDED |
+| RED commit / command / test and assertion / actual failure and counts | NOT RUN |
+| Fix commit / relevant production diff | NOT IMPLEMENTED |
+| GREEN and broader regression commands / results / counts | NOT RUN |
+| Peer review author / text / reviewed head / decision / time | NOT PERFORMED |
+| CI run / exact tested commit / result | NOT RUN |
+| Staging merge / release authorization / main PR and merge | NOT PERFORMED |
+| Corrected deployment source / image / revision / smoke outcome | NOT DEPLOYED |
+| Partner receipt / independent retest reference | NOT RECORDED |
+
+## 5. Independent retest template
+
+- Finding and original failed case(s):
+- Independent tester name/team; actual time/time zone:
+- Corrected URL/source/revision and original defective baseline:
+- Preconditions/inputs and original steps actually repeated:
+- Expected result; actual result; PASS/FAIL/BLOCKED:
+- Before/after protected state and evidence IDs:
+- Affected UAT cases rerun, actual results and unresolved findings:
+- Retest decision/conditions and actual tester confirmation:
+
+A developer saying the fix passed CI is not the independent retest. Keep an original failure, correction and later retest as separate dated observations.
+
+## 6. If no legitimate defect is found
+
+Complete independent UAT and obtain the actual decision on the healthy release. Ask the instructor/TA for a controlled defect exercise on an isolated version/branch, then apply the same report/triage/RED/GREEN/review/release/retest process to that exercise. Record the real approval/scope and keep the exercise separate from the healthy assessed release. Do not deliberately break the live release, invent findings or substitute a planned enhancement.
+
+If a controlled exercise or replacement tester is not supplied after timely notification, retain the completed work, real notification and unresolved dependency for the report; do not claim unperformed work. The independent [acceptance record](acceptance-record.md) must still reflect actual blockers and conditions.

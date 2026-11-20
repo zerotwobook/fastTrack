@@ -1,22 +1,28 @@
 /* fastTrack design tokens — B owns (R1-B00).
  * Import this file in any component that needs colours, typography or spacing.
- * Decisions: DEC-08 (black/white/grey theme), DEC-10 (Inter + Noto Sans Thai, weight 500 headings).
+ * Revised Sprint 2 palette and Inter typography. See the project UI brief.
  */
 
-/** Colour palette — monochrome with single semantic levels */
+/** Core UI palette. CSS defines the status colors and contextual surfaces. */
 export const colors = {
   /** Main page/card background */
   paper: '#FFFFFF',
   /** Primary text, icons and borders */
-  ink: '#000000',
+  ink: '#1E2229',
+  /** Workspace background */
+  canvas: '#FAFAFA',
   /** Subtle background for rows, panels and hover states */
-  wash: '#F5F5F5',
-  /** Dividers and input borders */
-  divider: '#E5E5E5',
+  wash: '#F3F4F6',
+  /** Subtle separators between surfaces */
+  divider: '#E5E7EB',
+  /** Edges for selected items and progress tracks */
+  edge: '#D1D5DB',
   /** Secondary/muted text (placeholder, caption, helper) */
-  muted: '#595959',
+  muted: '#4B5563',
   /** Control labels, icon-only buttons and disabled states */
-  control: '#8A8A8A',
+  control: '#6B7280',
+  primary: '#171717',
+  primaryHover: '#374151',
 } as const;
 
 export type ColorKey = keyof typeof colors;
@@ -70,10 +76,14 @@ export const radius = {
 export const cssVariables = `
   --color-paper: ${colors.paper};
   --color-ink: ${colors.ink};
+  --color-canvas: ${colors.canvas};
   --color-wash: ${colors.wash};
   --color-divider: ${colors.divider};
+  --color-edge: ${colors.edge};
   --color-muted: ${colors.muted};
   --color-control: ${colors.control};
+  --color-primary: ${colors.primary};
+  --color-primary-hover: ${colors.primaryHover};
   --font-family: ${typography.fontFamily};
   --font-weight-heading: ${typography.headingWeight};
   --font-weight-body: ${typography.bodyWeight};

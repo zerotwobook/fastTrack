@@ -1,0 +1,99 @@
+{
+  "runId": "A-NATIVE-C04-20261112",
+  "observer": "A / zerotwobook (AI-assisted native Chrome)",
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "accountUseAuthorization": "User explicitly authorized the three named test accounts for read-only role evidence and sign-out in this conversation.",
+  "captures": [
+    {
+      "role": "Student A1",
+      "observedAt": "2026-11-12T16:20:10.698Z",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "screenshot": "docs/labs/lab-05/evidence/C04-native-student.png",
+      "actual": "Original submission Version 1, baseline milestone and Supervisor A feedback visible; actual browser origin and route visible.",
+      "sourceOfObservation": "Native window screenshot and accessibility state; no new API response or HTTP status inferred.",
+      "sha256": "0a7429e6a311e64aa08de8af980e064f09ec819f6f6abe44ca3fe570ce162aea",
+      "width": 1920,
+      "height": 1032
+    },
+    {
+      "role": "Supervisor A",
+      "observedAt": "2026-11-12T16:21:45.115Z",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "screenshot": "docs/labs/lab-05/evidence/C04-native-supervisor.png",
+      "actual": "Original submission Version 1 and exact existing feedback visible; empty feedback form left unchanged; actual browser origin and route visible.",
+      "sha256": "5653be138e244ce175d4b4ea2534d895da569df8443f0966025a425ac4df8a55",
+      "width": 1920,
+      "height": 1032
+    },
+    {
+      "role": "Supervisor B",
+      "observedAt": "2026-11-12T16:22:49.998Z",
+      "route": "/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "screenshot": "docs/labs/lab-05/evidence/C04-native-foreign.png",
+      "actual": "Submission unavailable and generic requested-resource-not-found message; no Team A content; Supervisor B and actual browser origin/route visible.",
+      "newHttpStatusCaptured": false,
+      "historicalHttpStatusEvidence": "R2-J01-B-post-release-readback.json records 404 NOT_FOUND in its own earlier run.",
+      "sha256": "17ea54f275d81bcfa63e770b5ce00169743ed9cd5975d31b2eb94ddf7040338d",
+      "width": 1920,
+      "height": 1032
+    }
+  ],
+  "cleanup": [
+    {
+      "role": "Student A1",
+      "observedAt": "2026-11-12T16:20:45.161Z",
+      "actual": "UI Sign out returned to the public Sign in form.",
+      "apiStatusRechecked": false
+    },
+    {
+      "role": "Supervisor A",
+      "observedAt": "2026-11-12T16:21:58.346Z",
+      "actual": "UI Sign out returned to the public Sign in form.",
+      "apiStatusRechecked": false
+    },
+    {
+      "role": "Supervisor B",
+      "observedAt": "2026-11-12T16:23:04.225Z",
+      "actual": "UI Sign out returned to the public Sign in form.",
+      "apiStatusRechecked": false
+    }
+  ],
+  "domainMutations": 0,
+  "credentialValuesStored": false,
+  "screenshotEditing": "None; native window captures retained verbatim.",
+  "finishedAt": "2026-11-12T16:23:04.225Z",
+  "initialFailedAttempt": "One initial sign-in failed because the encrypted-file reference was mistakenly treated as the credential. Corrected by using the existing DPAPI clipboard helper after explicit user authorization. No credential value retained.",
+  "anonymousLoginCapture": {
+    "screenshot": "docs/labs/lab-05/evidence/C04-native-login.png",
+    "savedAt": "2026-11-12T16:15:18.718639+00:00",
+    "timeProvenance": "Original capture-file modification time; exact native screenshot call time was not separately recorded.",
+    "sha256": "6f527523331bfd32db8d5e2b2e0cee33a1306841694a51d72f553e729bd6c39a",
+    "actual": "Blank sign-in form, accepted intro sentence and real /login browser URL; captured before credential entry.",
+    "width": 1920,
+    "height": 1032
+  },
+  "postCaptureIdentityChecks": [
+    {
+      "observedAt": "2026-11-12T16:24:18.034955+00:00",
+      "path": "/api/health",
+      "httpStatus": 200,
+      "response": {
+        "status": "ok",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      },
+      "transport": "Anonymous curl.exe HTTPS, normal certificate verification; separate from native role sessions."
+    },
+    {
+      "observedAt": "2026-11-12T16:24:18.282470+00:00",
+      "path": "/api/ready",
+      "httpStatus": 200,
+      "response": {
+        "status": "ready",
+        "database": "connected",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      },
+      "transport": "Anonymous curl.exe HTTPS, normal certificate verification; separate from native role sessions."
+    }
+  ],
+  "clipboardCleanup": "Task-provided password cleared from local clipboard after all three sign-ins; value was not printed or persisted in evidence."
+}

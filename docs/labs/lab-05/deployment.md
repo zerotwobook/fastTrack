@@ -106,7 +106,29 @@ Remove-Item Env:CONFIRM_RATE_LIMIT_CLEANUP
 
 It deletes at most 100 expired limiter rows in a bounded indexed transaction with `SKIP LOCKED`, preserving active windows/locks and every session/domain table. It prints only count/status. The flag is an acknowledgement, not independent cloud-mutation permission. Schedule further batches only through the reviewed maintenance plan; nothing runs automatically at HTTP startup.
 
-## 6. Cloud provisioning review plan (not executed by R2-A01)
+## 6. Cloud resources: verified inventory and original review plan
+
+### 6.1 Verified deployed inventory (read 12 November 2026)
+
+Each row is corroborated by an existing evidence record. A resource name alone is not proof; follow the link.
+
+| Item | Verified value | Evidence |
+|---|---|---|
+| Project / number / region | `fasttrack-se-002` / `970128017651` / `asia-southeast1` | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Cloud Run service | `fasttrack-app`; canonical URL `https://fasttrack-app-kpx7au3w2a-as.a.run.app`; automatic min 0, service max 3, revision max 2, concurrency 8 | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Serving source | Main `8e637e537cd037d630a5fffc1b5672d1b44371a8`, revision `fasttrack-app-00003-rc7`, one 100% traffic assignment | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Registry images | `fasttrack-docker`: web `fasttrack-app@sha256:d7606d79…cb99`, jobs `fasttrack-jobs@sha256:5e94cc94…f4d4`, both tagged with the full SHA | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Persistent database | Cloud SQL `fasttrack-se-002:asia-southeast1:fasttrack-db`, attached to the service and migration job | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Connection secret | One Secret Manager reference `fasttrack-database-url` (version 1); payload never read | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Migration job | `fasttrack-migrate`; latest execution `fasttrack-migrate-dnvqn`, one task, max retries 0, succeeded 1 | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Runtime identity | `sa-fasttrack-runtime@fasttrack-se-002.iam.gserviceaccount.com` | [C05-redeploy.md](evidence/C05-redeploy.md) |
+| Deployer identity | `sa-fasttrack-deployer@fasttrack-se-002.iam.gserviceaccount.com`, reached by keyless WIF (pool `github-pool`, provider `github-provider`); no JSON key | [Run 43186570077](https://github.com/zerotwobook/fastTrack/actions/runs/43186570077) |
+| GitHub environment | `demo`, main only, independent approval (self-review prevented) | [C06-release-traceability.md](evidence/C06-release-traceability.md) |
+| Demo seed | Job `fasttrack-seed-c04`, one execution, add-only seed; synthetic password secret `fasttrack-demo-password` | [C04-public-flow.md](evidence/C04-public-flow.md) |
+
+Access for graders: the public URL and the public repository. Test account passwords are never committed; the team shares them privately. Cost and availability: the service scales to zero when idle. It must stay available until grading ends, so do not pause it or tear it down; teardown is a separate, explicitly authorized destructive operation.
+
+### 6.2 Original provisioning review plan (historical, proposed before execution)
 
 Recorded proposed inputs: project `fasttrack-se-002`, number `970128017651`, region `asia-southeast1`; service `fasttrack-app`; registry `fasttrack-docker`; SQL `fasttrack-db`, database `fasttrack_prod`; runtime/deployer identities `sa-fasttrack-runtime` / `sa-fasttrack-deployer`. Cloud existence, billing/credits, current costs, IAM, connection and public URL require read-only verification by the account holder. No resource is certified present from its name alone.
 
@@ -151,9 +173,11 @@ B implements and maintains root CI/deploy workflows, deployment scripts, offline
 
 Every main-targeted candidate follows [the user gate](../../../workflow/MAIN_RELEASE_GATE.md). Queue releases without cancelling migrations. On migration failure stop before rollout and inspect partial schema state. Rollback deploys a known compatible existing image and skips migration/seed; it does not undo DB data/schema. Do not blindly retry or assume automatic rollback after smoke failure.
 
-Version proof compares actual built main SHA (possibly different from PR head), web/jobs tag/digest, migration execution, serving revision/traffic and health version. A report-only commit can differ from the serving source; record both. Public cloud evidence is separate from local-container checks: [C-04 business/access verification](evidence/C04-public-flow.md) records the accepted original ledger; [C-05 controlled restart](evidence/C05-persistence.md) records one authorized same-revision zero/new-instance experiment and unchanged original records on source `16ec6d2` / `fasttrack-app-00002-f75`. Its restart half passed, with B execution review pending. The later visible-change redeploy half and C-06 live main/WIF pipeline trace remain pending; neither a staging evidence merge nor this restart completes those gates.
+Version proof compares actual built main SHA (possibly different from PR head), web/jobs tag/digest, migration execution, serving revision/traffic and health version. A report-only commit can differ from the serving source; record both. Public cloud evidence is separate from local-container checks: [C-04 business/access verification](evidence/C04-public-flow.md) records the accepted original ledger; [C-05 controlled restart](evidence/C05-persistence.md) records the B-accepted same-revision zero/new-instance experiment. The subsequent authorized replacement workflow delivered actual main `8e637e537cd037d630a5fffc1b5672d1b44371a8` through live WIF, two image uploads and successful migration to `fasttrack-app-00003-rc7` / 100% traffic. [A/11 after-redeploy verification](evidence/C05-redeploy.md) correlates that identity and verifies the exact original records in both roles plus wrong-team denial. Domain persistence and A's C-06 identity cross-check passed, and [B's independent post-release readback](evidence/B-post-release-readback.md) verified the exact same baseline records and foreign-team `404 NOT_FOUND` on the live URL (`14:55Z`); earlier closed-session survival remains not established and whole #16 acceptance/submission remain pending. The cancelled automatic push and successful separately authorized `workflow_dispatch` are recorded distinctly; no green staging card substitutes for release evidence.
 
 ## 8. Diagnosis and evidence
+
+Final Lab 5 package preparation and submission steps are tracked in [submission-handoff.md](submission-handoff.md). The selected application snapshot is `8e637e537cd037d630a5fffc1b5672d1b44371a8`; documentation source identities and the real upload receipt are recorded separately. A later anonymous [HTTP readback](../../../Project_code/docs/evidence/R2-J01-closure-readback.json) confirms that source/readiness and the served sign-in copy without another deployment. Genuine [C-04 URL-visible role images](evidence/C04-native-readback.md) have now been captured; the separately authorized [C-02 native blocked-control proof](evidence/C02-visual-proof.md) is also recorded and closed without merging. Final consolidated peer acceptance and user submission are still pending.
 
 Read the failed stage before fixing it. For missing runtime modules inspect final shared/generated layout. For unavailable readiness inspect private DB configuration/deadlines/migration state without printing URLs. For login/source failure verify canonical origin, cookie/source/CSRF and trusted proxy path; do not loosen authorization. For image/job failure verify actual tool pins/entrypoint/workspace working directory.
 

@@ -1,0 +1,33 @@
+{
+  "recordedAtUtc": "2026-11-17T18:59:44.706503+00:00",
+  "source": "User-reported information, with clarified CoursePMS member mapping",
+  "team": "CoursePMS / EN-022_P6 / Section31",
+  "workPeriod": {
+    "startDate": "2026-11-13",
+    "endDate": "2026-11-18",
+    "timezone": "Asia/Bangkok",
+    "precision": "Overall ongoing-work period; not individual case timestamps"
+  },
+  "reportedMembers": [
+    {
+      "alias": "Partner 1",
+      "userLabel": "A",
+      "broadRole": "Test preparation/planning and some checking"
+    },
+    {
+      "alias": "Partner 2",
+      "userLabel": "B",
+      "broadRole": "Main checking role"
+    }
+  ],
+  "responsibilityShare": "Approximately shared; no measured percentage, four-case split or individual case actions supplied",
+  "latestPartnerAcceptanceOfFastTrack": {
+    "decision": "ACCEPTED, as relayed by user",
+    "confirmationDateReported": "2026-11-18",
+    "timezone": "Asia/Bangkok",
+    "exactTimeChannelOriginalStatement": "Not supplied"
+  },
+  "machineEvidence": "Original Codex operator and original times unchanged",
+  "newExecution": false,
+  "individualHumanCasePassCreated": false
+}

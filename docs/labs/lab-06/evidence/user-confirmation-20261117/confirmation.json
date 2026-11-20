@@ -1,0 +1,34 @@
+{
+  "recordedAtUtc": "2026-11-17T15:13:04.101576+00:00",
+  "recordedTimezone": "Asia/Bangkok",
+  "source": "Current project representative confirmation in the working conversation; no private transcript published",
+  "fastTrack": {
+    "decision": "ACCEPTED",
+    "provenance": "CoursePMS acceptance reported by the user",
+    "recordedTestedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "originalPartnerDecisionTimeChannelAndSigners": "Not supplied; not inferred from this record time",
+    "existingEvidenceReused": true
+  },
+  "CoursePMS": {
+    "decision": "ACCEPTED",
+    "provenance": "User directly authorizes acceptance using the completed evidence",
+    "recordedTestedSource": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+    "basis": "Eight deployed targeted case PASS plus RT-07 evidence review/isolated replay PASS, with documented limits",
+    "separateBSignatureInvented": false
+  },
+  "participation": {
+    "jointABChecking": "Confirmed by the user",
+    "currentResponsibilitySplit": "A: plan, normal/state evidence, coordination and TA question. B: access/rules, defect/retest trace, evidence/report review. Shared support.",
+    "historicalIndividualCaseExecutorsAndTimes": "Not individually specified; no retroactive allocation",
+    "aiOperation": "Preserved in actual machine/browser logs"
+  },
+  "ta": {
+    "status": "AWAITING USER CONTACT / TA GUIDANCE",
+    "question": "Required fastTrack own-product defect workflow when the completed independent evidence has no confirmed legitimate defect",
+    "messageSentByAssistant": false,
+    "approvalOrExercise": "Not supplied"
+  },
+  "wholeLab6": "OPEN: documentation review, TA disposition and final submission remain",
+  "newProductTestRun": false,
+  "mainRelease": false
+}

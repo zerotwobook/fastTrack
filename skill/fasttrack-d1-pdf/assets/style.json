@@ -1,0 +1,22 @@
+{
+  "page_width": 595.5,
+  "page_height": 842.25,
+  "margin_left": 24,
+  "margin_right": 24,
+  "margin_top": 24,
+  "margin_bottom": 86,
+  "footer_right": 52,
+  "footer_y": 56,
+  "body_size": 12,
+  "body_leading": 16.5,
+  "heading_size": 18,
+  "subheading_size": 14,
+  "caption_size": 10,
+  "table_size": 10,
+  "table_grid": 0.65,
+  "table_padding": 6,
+  "cover_brand_size": 24,
+  "cover_title_top": 389,
+  "font_regular": "fonts/Inter-Regular.ttf",
+  "font_bold": "fonts/Inter-Bold.ttf"
+}

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { bangkokInputToIso, codePointLength, MilestoneInputError, parseMilestoneInput, parseTimestamp } from '../../../../shared/milestones.mjs';
+import { bangkokInputToIso, codePointLength, isoToBangkokInput, MilestoneInputError, parseCancelMilestoneInput, parseMilestoneInput, parseTimestamp } from '../../../../shared/milestones.mjs';
 const good = { title: 'Work', description: 'Complete this work.', dueAt: '2030-01-02T18:30:00+07:00' };
 describe('Canonical milestone validation shared with the API', () => {
   it.each(['title', 'description'].flatMap(field => ['\u0000', '\ud800', '\udfff'].map(invalid => [field, invalid] as const)))('rejects unsupported Unicode in %s with a field error (%j)', (field, invalid) => {
@@ -20,6 +20,27 @@ describe('Canonical milestone validation shared with the API', () => {
   });
   it('treats HH:mm as seconds 00 in Bangkok independent of host timezone', () => {
     expect(bangkokInputToIso('2030-01-02T18:30')).toBe('2030-01-02T11:30:00.000Z');
+    expect(isoToBangkokInput('2030-01-02T11:30:00.000Z')).toBe('2030-01-02T18:30');
     expect(parseTimestamp(good.dueAt).toISOString()).toBe('2030-01-02T11:30:00.000Z');
+  });
+  it.each([
+    '2030-05-10T11:30:59.000Z',
+    '2030-05-10T11:30:59.501Z',
+    '2030-05-10T18:30:00.001Z',
+  ])('preserves the saved deadline %s when editing only text', dueAt => {
+    const initialField = isoToBangkokInput(dueAt);
+    const payload = parseMilestoneInput({
+      ...good, title: 'Updated title', dueAt: bangkokInputToIso(initialField),
+    });
+    expect(payload.dueAt).toBe(dueAt);
+  });
+  it('parses an edited Bangkok deadline with fractional seconds', () => {
+    expect(bangkokInputToIso('2030-05-10T18:30:59.5')).toBe('2030-05-10T11:30:59.500Z');
+  });
+  it('accepts only an empty plain object {} for milestone cancellation', () => {
+    expect(() => parseCancelMilestoneInput({})).not.toThrow();
+    for (const invalid of [null, undefined, [], 'ok', { extra: true }]) {
+      expect(() => parseCancelMilestoneInput(invalid)).toThrow(MilestoneInputError);
+    }
   });
 });

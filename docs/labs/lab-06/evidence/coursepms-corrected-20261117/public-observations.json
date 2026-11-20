@@ -1,0 +1,88 @@
+[
+  {
+    "id": "PUB-01",
+    "timeUtc": "2026-11-17T11:53:47.773747+00:00",
+    "path": "/api/health",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "status": "ok",
+      "service": "course-pms-api",
+      "commitSha": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+      "timestamp": "2026-11-17T11:53:47.177Z"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "PUB-02",
+    "timeUtc": "2026-11-17T11:53:47.936767+00:00",
+    "path": "/api/ready",
+    "status": 200,
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "status": "ready",
+      "db": "connected"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "PUB-03",
+    "timeUtc": "2026-11-17T11:53:48.057609+00:00",
+    "path": "/api/proposals",
+    "status": 401,
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "error": "Authentication required. Please provide a valid Bearer token.",
+      "code": "UNAUTHORIZED"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "PUB-04",
+    "timeUtc": "2026-11-17T11:53:48.159021+00:00",
+    "path": "/api/proposals/unsupported-retest",
+    "status": 401,
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "error": "Authentication required. Please provide a valid Bearer token.",
+      "code": "UNAUTHORIZED"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "PUB-05",
+    "timeUtc": "2026-11-17T11:53:48.267294+00:00",
+    "path": "/api/rt-unknown-20261117",
+    "status": 404,
+    "contentType": "application/json; charset=utf-8",
+    "body": {
+      "error": "API route not found.",
+      "code": "API_ROUTE_NOT_FOUND"
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "PUB-06",
+    "timeUtc": "2026-11-17T11:53:48.361299+00:00",
+    "path": "/",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "body": {
+      "html": true,
+      "bytes": 448
+    },
+    "result": "PASS"
+  },
+  {
+    "id": "PUB-07",
+    "timeUtc": "2026-11-17T11:53:48.493373+00:00",
+    "path": "/rt-frontend-navigation-20261117",
+    "status": 200,
+    "contentType": "text/html; charset=UTF-8",
+    "body": {
+      "html": true,
+      "bytes": 448
+    },
+    "result": "PASS"
+  }
+]

@@ -1,0 +1,31 @@
+{
+  "actor": "A / Codex-assisted anonymous preparation check",
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "expectedApplicationCommit": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "method": "curl.exe GET with normal TLS verification; no credentials",
+  "observations": [
+    {
+      "route": "/api/health",
+      "observedAtUtc": "2026-11-13T07:15:00.366048+00:00",
+      "httpStatus": 200,
+      "response": {
+        "status": "ok",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      }
+    },
+    {
+      "route": "/api/ready",
+      "observedAtUtc": "2026-11-13T07:15:00.666686+00:00",
+      "httpStatus": 200,
+      "response": {
+        "status": "ready",
+        "database": "connected",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      }
+    }
+  ],
+  "authenticatedUat": "NOT RUN",
+  "currentRevisionInspection": "NOT RUN",
+  "domainWrites": false,
+  "cloudMutations": false
+}

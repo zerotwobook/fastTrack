@@ -1,0 +1,28 @@
+{
+  "runId": "L6-CPMS-20261113-194636",
+  "baseUrl": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "expectedSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "startedUtc": "2026-11-13T12:46:36.992121+00:00",
+  "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+  "deadlineMilestone": {
+    "id": "111b7369-53f6-44e4-a0a6-5cb64ad2d52a",
+    "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+    "title": "L6-CPMS-20261113-194636-DEADLINE",
+    "description": "Synthetic independent UAT late-submission rejection.",
+    "dueAt": "2026-11-13T12:52:00.000Z",
+    "cancelledAt": null,
+    "createdAt": "2026-11-13T12:46:38.946Z",
+    "latestSubmission": null
+  },
+  "deadlineNotBeforeUtc": "2026-11-13T12:53:00+00:00",
+  "runnerError": {
+    "type": "RuntimeError",
+    "message": "Synthetic milestone creation failed",
+    "timeUtc": "2026-11-13T12:46:39.099723+00:00"
+  },
+  "apiSessionCleanupUtc": "2026-11-13T12:46:39.668501+00:00",
+  "assertionTotals": {
+    "PASS": 22,
+    "FAIL": 1
+  }
+}

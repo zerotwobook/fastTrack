@@ -1,0 +1,56 @@
+{
+  "sourceCommit": "aeb804ea5bc667399b00cf54df10046a6ded46e0",
+  "operator": "Codex AI for fastTrack; not personal student execution",
+  "sourceArchiveSha256": "a90c2cf7985b93dd73734334c5296cd9e9c27f734e20a2344c81bbbc0e1cb9d6",
+  "originalFilesByteIdentical": 30,
+  "client": {
+    "runtime": "Node v20.20.2",
+    "filesPassed": 4,
+    "testsPassed": 16,
+    "failed": 0,
+    "skipped": 0,
+    "command": "node node_modules/vitest/vitest.mjs run --config vitest.config.ts --reporter=verbose",
+    "startedAtUtc": "2026-11-17T14:24:11.350062+00:00",
+    "completedAtUtc": "2026-11-17T14:24:27.150153+00:00",
+    "runtimeArchiveSha256": "dc3700fdd57a63eedb8fd7e3c7baaa32e6a740a1b904167ff4204bc68ed8bf77",
+    "runtimeChecksumSource": "https://nodejs.org/dist/latest-v20.x/SHASUMS256.txt"
+  },
+  "server": {
+    "runtime": "Node v26.13.0",
+    "filesPassed": 3,
+    "testsPassed": 19,
+    "failed": 0,
+    "skipped": 0,
+    "suppliedDomainTests": 9,
+    "suppliedMockedRoutingPrivacyTests": 8,
+    "independentMockedReviewGuardTests": 2,
+    "command": "npm test -- tests/domain.unit.test.ts tests/routing-privacy.unit.test.ts tests/fasttrack-review-guard.local.test.ts --reporter=verbose",
+    "startedAtUtc": "2026-11-17T14:22:14.332325+00:00",
+    "completedAtUtc": "2026-11-17T14:22:17.118765+00:00"
+  },
+  "initialClientRunnerAttempts": {
+    "runtime": "Node v26.13.0",
+    "attempts": 2,
+    "eachPassed": 9,
+    "eachFailed": 7,
+    "diagnostic": "global localStorage undefined before seven tests; unchanged suite passed on CI-matching Node 20 major",
+    "classification": "runner compatibility, not seven confirmed product defects",
+    "logsRetainedPrivately": true
+  },
+  "isolation": {
+    "npmInstallScriptsDisabled": true,
+    "productionEnvironmentInherited": false,
+    "realDatabaseUsed": false,
+    "liveRaceOrBusinessWritePerformedByLocalTests": false,
+    "sourceApplicationEdited": false
+  },
+  "coverage": "Existing race, stale callback/login, unsaved-editor, session, directory and routing regressions; two additional local mocked Student-role guard tests.",
+  "excludedClaims": [
+    "full 41-test partner backend suite",
+    "production build",
+    "Docker build",
+    "E2E rerun",
+    "live race injection",
+    "human acceptance"
+  ]
+}

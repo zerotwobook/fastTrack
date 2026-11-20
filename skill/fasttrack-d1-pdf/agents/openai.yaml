@@ -1,0 +1,4 @@
+interface:
+  display_name: "fastTrack D1 PDF"
+  short_description: "Create PDFs with the fastTrack D1 report layout"
+  default_prompt: "Use $fasttrack-d1-pdf to format this report as a PDF matching the retained D1 reference."

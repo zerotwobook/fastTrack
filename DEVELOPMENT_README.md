@@ -14,7 +14,7 @@ Conversation with the user may be Thai. **All newly authored or revised project 
 
 User instruction recorded on 7 November 2026: write and maintain project documentation, evidence narratives and handoffs in **Markdown (`.md`)**. The user will assemble and export the final reports. Generate or rebuild a PDF only after an explicit user request, including when a verifier would rebuild it as a side effect. Existing PDF snapshots, instructor handouts and machine-readable execution evidence retain their original identities.
 
-Use [the D1 Markdown source](deliverable%20_file/submit/d1_release/report.md) for current report content and [the current handoff](workflow/handoffs/R1-J04_REFRESH_PRE_MAIN.md) for release coordination. The instructor's required final submission format is unchanged; the user handles that final assembly/export. This preference does not authorize main integration or course submission.
+Use [the D1 Markdown source](deliverable%20_file/submit/d1_release/report.md) for D1 content and [the Lab 6 current status](docs/labs/lab-06/current-status.md) for current reciprocal UAT evidence and next actions. The [D1 pre-main handoff](workflow/handoffs/R1-J04_REFRESH_PRE_MAIN.md) retains its historical candidate context; inspect live GitHub state before any release. The instructor's required final submission format is unchanged; the user handles final assembly/export. This preference does not authorize main integration or course submission.
 
 ## Planning baseline
 
@@ -31,9 +31,9 @@ These documents define work and acceptance, not a verified working application. 
 
 For tracked PRs, the enabled native Project workflow moves the card to Done after merge. Follow [Project merge automation](workflow/GITHUB_PROJECT_AUTOMATION.md) when opening/reviewing PRs.
 
-## Current Sprint 1 checkpoint
+## Current delivery and Lab 6 checkpoint
 
-Accepted application base: staging/sprint-1 `17f4398` after B approval/merge of #71/#69/#73. F-01-F-04, G0-G4, source packages and the original #66 preparation are accepted. Current #74 / PR #75 provides the combined A-F Markdown source, current execution evidence and [pre-main handoff](workflow/handoffs/R1-J04_REFRESH_PRE_MAIN.md). The user handles final report assembly/export; the earlier PDF/QA is a historical snapshot. Main #67 remains Draft pending explicit current-candidate user authorization; final G5/main/tag/submission remain pending.
+On 19 November 2026, CoursePMS returned an Accepted decision on the eight Sprint 1 UAT cases and separately accepted the isolated Section 3.5 retest. The user reported that the TA confirmed the Lab 6 evidence that day. B merged PR #115 into `staging/sprint-2` at `03d5b13`. R2-A04 continues in staging-targeted PR #114 for report review. The report owner submits through LEB2. [Lab 6 closeout and next work](docs/labs/lab-06/sessions/2026-11-19-lab6-closeout.md)
 
 ## First-day allocation
 

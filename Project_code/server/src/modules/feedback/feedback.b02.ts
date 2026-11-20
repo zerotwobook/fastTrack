@@ -281,13 +281,25 @@ describe('Feedback Module (T-17, T-18, T-19, T-20, T-24)', () => {
     expect(res.body.error.fields.content).toBeDefined();
   });
 
-  it('rejects feedback content exceeding 4000 code points (400 Bad Request)', async () => {
+  it('rejects feedback content exceeding 6000 code points while accepting 4000 and 6000 (400 Bad Request)', async () => {
     const app = buildApp({ userId: fixtures.users.supA.id, role: 'supervisor' });
+
+    const control4000 = await request(app)
+      .post(`/api/submissions/${submissionA.id}/feedback`)
+      .set('content-type', 'application/json')
+      .send({ content: 'a'.repeat(4000), clientRequestId: randomUUID() });
+    expect(control4000.status).toBe(201);
+
+    const exact6000 = await request(app)
+      .post(`/api/submissions/${submissionA.id}/feedback`)
+      .set('content-type', 'application/json')
+      .send({ content: 'b'.repeat(6000), clientRequestId: randomUUID() });
+    expect(exact6000.status).toBe(201);
 
     const res = await request(app)
       .post(`/api/submissions/${submissionA.id}/feedback`)
       .set('content-type', 'application/json')
-      .send({ content: 'a'.repeat(4001), clientRequestId: randomUUID() });
+      .send({ content: 'a'.repeat(6001), clientRequestId: randomUUID() });
 
     expect(res.status).toBe(400);
     expect(res.body.error.code).toBe('INVALID_INPUT');

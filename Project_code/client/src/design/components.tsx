@@ -2,17 +2,18 @@
 // These are primitive building blocks; feature components import from here.
 // All copy is in English; styles use CSS custom properties from global.css.
 
-import { type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode } from 'react';
+import { type ButtonHTMLAttributes, type InputHTMLAttributes, type ReactNode, type Ref } from 'react';
 import styles from './components.module.css';
 
 // ---------------------------------------------------------------------------
 // Button
 // ---------------------------------------------------------------------------
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost';
+export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'submit' | 'danger';
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   variant?: ButtonVariant;
   loading?: boolean;
+  ref?: Ref<HTMLButtonElement>;
 }
 
 export function Button({
@@ -21,10 +22,12 @@ export function Button({
   disabled,
   children,
   className,
+  ref,
   ...rest
 }: ButtonProps) {
   return (
     <button
+      ref={ref}
       className={[styles.btn, styles[`btn--${variant}`], className].filter(Boolean).join(' ')}
       disabled={disabled ?? loading}
       aria-busy={loading || undefined}
@@ -105,15 +108,16 @@ export function Textarea({ hasError, className, ...rest }: TextareaProps) {
 }
 
 // ---------------------------------------------------------------------------
-// Status badge — text + icon only; no colour fill
+// Status badges pair meaningful color with icons and visible labels.
 // ---------------------------------------------------------------------------
-export type StatusVariant = 'pending' | 'submitted' | 'overdue' | 'feedback';
+export type StatusVariant = 'pending' | 'submitted' | 'overdue' | 'feedback' | 'cancelled';
 
 const STATUS_LABELS: Record<StatusVariant, string> = {
   pending: 'Pending',
   submitted: 'Submitted',
   overdue: 'Overdue',
   feedback: 'Feedback available',
+  cancelled: 'Cancelled',
 };
 
 interface StatusBadgeProps {
@@ -131,6 +135,7 @@ export function StatusBadge({ status, className }: StatusBadgeProps) {
         {status === 'pending' ? <circle cx="10" cy="10" r="7" />
           : status === 'submitted' ? <><circle cx="10" cy="10" r="7" /><path d="m6 10 3 3 5-6" /></>
           : status === 'overdue' ? <><circle cx="10" cy="10" r="7" /><path d="M10 6v5m0 3h.01" /></>
+          : status === 'cancelled' ? <><circle cx="10" cy="10" r="7" /><path d="m5.5 14.5 9-9" /></>
           : <path d="M3 3h14v11H8l-5 3V3Z M6 7h8M6 10h5" />}
       </svg>
       {STATUS_LABELS[status]}

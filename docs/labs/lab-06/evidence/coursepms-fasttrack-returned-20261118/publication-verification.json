@@ -1,0 +1,15 @@
+{
+  "verified_at_utc": "2026-11-18T08:27:19.877988+00:00",
+  "scope": "Offline document/evidence publication checks; no new live UAT execution",
+  "markdown_files_checked": 9,
+  "local_links_checked": 134,
+  "table_shapes_checked": 21,
+  "json_files_parsed": 11,
+  "png_files_decoded": 28,
+  "returned_source_files_hash_checked": 37,
+  "case_summary_active_observations": "PASSED",
+  "current_cloud_readback_fields": "PASSED",
+  "credential_student_id_exclusion": "PASSED",
+  "fences_whitespace": "PASSED",
+  "new_live_uat": "NOT RUN"
+}

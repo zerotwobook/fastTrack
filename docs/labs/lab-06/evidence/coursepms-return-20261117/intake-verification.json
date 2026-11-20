@@ -1,0 +1,30 @@
+{
+  "verifiedAtUtc": "2026-11-17T06:55:50.611886+00:00",
+  "scope": "Evidence/document integrity and read-only candidate/preflight verification; not independent deployed retest",
+  "private_uat_pngs_omitted": 58,
+  "original_manifest_entries_verified_in_full_archives": 171,
+  "owned_markdown_files_checked": 15,
+  "owned_local_links_verified": 106,
+  "source_text_files_scanned_for_jwt_and_private_key_patterns": 133,
+  "pattern_scan_limit": "Not exhaustive. No exact private-password list supplied. Partner unit-test tokens/passwords are labelled synthetic fixtures; private UAT screenshots excluded from public PR.",
+  "coursepms_assertions": {
+    "PASS": 56,
+    "FAIL": 1,
+    "total": 57,
+    "core_PASS": 36
+  },
+  "candidate_head": "316abac98c721078154588c37ad9f0eda655d9d6",
+  "candidate_ci": "SUCCESS; live exact-head job readback retained",
+  "pr72_and_pr73": "Draft/open/unmerged; no submitted reviews when read back",
+  "public_source": "9c22735995c985aaa0622b6b179de1ac9c1f80ca",
+  "public_readiness": "HTTP 200; db connected",
+  "independent_corrected_deployment_retest": "BLOCKED",
+  "both_human_decisions": "PENDING",
+  "source_builder_or_runner_executed": false,
+  "application_code_or_runtime_changed": false,
+  "pdf_generated": false,
+  "external_reply_sent": false,
+  "private_source_files_verified": 174,
+  "new_partner_source_payloads_in_public_pr": 0,
+  "private_source_publication": "Excluded after approval review; only newly authored summaries and narrow public PR/CI/readiness metadata remain"
+}

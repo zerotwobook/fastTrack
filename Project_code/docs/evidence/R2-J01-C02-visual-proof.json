@@ -1,0 +1,80 @@
+{
+  "proofPr": 105,
+  "head": "485928918b684ea2de51af3ab4df42607a190b57",
+  "base": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "localControls": [
+    {
+      "source": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+      "label": "accepted-main",
+      "command": "python -B -m unittest discover -s deploy/tests -p test_smoke.py",
+      "testCount": 10,
+      "failureCount": 0,
+      "exitCode": 0,
+      "result": "PASS control",
+      "network": "Existing unittest mocks; no real network calls."
+    },
+    {
+      "source": "485928918b684ea2de51af3ab4df42607a190b57",
+      "label": "never-merge-proof",
+      "command": "python -B -m unittest discover -s deploy/tests -p test_smoke.py",
+      "testCount": 10,
+      "failureCount": 1,
+      "exitCode": 1,
+      "result": "EXPECTED FAIL: AssertionError: 4 != 5",
+      "network": "Existing unittest mocks; no real network calls."
+    }
+  ],
+  "draftAuthorization": "User explicitly authorized this exact head/base to lift Draft solely for native blocked-control capture, then close without merging; recorded before action in PR105/Issue16.",
+  "scope": "One deliberately wrong mocked request-count assertion, never merge.",
+  "nativeCapture": {
+    "observedAt": "2026-11-12T16:34:20.219Z",
+    "observer": "A / zerotwobook (AI-assisted native Windows Chrome)",
+    "url": "https://github.com/zerotwobook/fastTrack/pull/105",
+    "screenshot": "docs/labs/lab-05/evidence/C02-blocked-pr105.png",
+    "actual": "Open PR #105, one failing CI & Docker Build / test-and-docker (pull_request) marked Required, All checks have failed, Review required, Merging is blocked, disabled Merge pull request button, actual URL and proof commit visible.",
+    "unedited": true,
+    "note": "The missing peer approval is also displayed. Failed required-check enforcement is established together with the effective no-bypass policy, exact check producer/context and failed named assertion; BLOCKED alone is not the proof.",
+    "sha256": "46867c0f0879e5472b0b22771dc324ca03df64825bbe141d7097689c3d7b7006",
+    "width": 960,
+    "height": 1025
+  },
+  "preClosureReadback": {
+    "observedAt": "2026-11-12T16:35:21.638509+00:00",
+    "state": "OPEN",
+    "isDraft": false,
+    "mergeable": "MERGEABLE",
+    "mergeStateStatus": "BLOCKED",
+    "autoMerge": null,
+    "head": "485928918b684ea2de51af3ab4df42607a190b57",
+    "base": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "requiredCheck": {
+      "name": "test-and-docker",
+      "conclusion": "failure",
+      "appId": 15368,
+      "run": "https://github.com/zerotwobook/fastTrack/actions/runs/43258714014",
+      "job": "https://github.com/zerotwobook/fastTrack/actions/runs/43258714014/job/131323861862",
+      "namedFailure": "SmokeTests.test_public_checks_pass_and_skip_optional_login: AssertionError: 4 != 5"
+    },
+    "rulesetId": 26666182,
+    "strictUpToDate": true,
+    "bypassActors": [],
+    "missingApprovalAlsoPresent": true
+  },
+  "closure": {
+    "baseRefOid": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "closedAt": "2026-11-12T16:35:23Z",
+    "headRefOid": "485928918b684ea2de51af3ab4df42607a190b57",
+    "mergeCommit": null,
+    "mergedAt": null,
+    "state": "CLOSED"
+  },
+  "mainUnchangedAfterClosure": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "cardStatusAfterCloseBeforeReconciliation": "Done",
+  "cardDisposition": {
+    "status": "PR Review",
+    "verification": "FAILED",
+    "acceptance": "PENDING",
+    "meaning": "Closed unmerged deliberate failure retained for consolidated evidence review; not completed implementation.",
+    "manualReconciliation": true
+  }
+}

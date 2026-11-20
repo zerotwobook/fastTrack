@@ -1,0 +1,69 @@
+{
+  "runId": "A-LAB5-CLOSURE-20261112",
+  "observer": "A / zerotwobook (AI-assisted anonymous HTTP readback)",
+  "startedAt": "2026-11-12T15:37:42.111325+00:00",
+  "finishedAt": "2026-11-12T15:37:46.229433+00:00",
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "expectedApplicationSource": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+  "documentationBase": "5b1757afac3bb92cd41d76169071507db941c018",
+  "transport": "curl.exe HTTPS with default certificate verification; no insecure flag",
+  "checks": [
+    {
+      "method": "GET",
+      "path": "/api/health",
+      "httpStatus": 200,
+      "result": "PASS",
+      "responseSummary": {
+        "status": "ok",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/ready",
+      "httpStatus": 200,
+      "result": "PASS",
+      "responseSummary": {
+        "status": "ready",
+        "database": "connected",
+        "version": "8e637e537cd037d630a5fffc1b5672d1b44371a8"
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/",
+      "httpStatus": 200,
+      "result": "PASS",
+      "responseSummary": {
+        "htmlDocument": true,
+        "fastTrackTitle": true
+      }
+    },
+    {
+      "method": "GET",
+      "path": "/api/nonexistent",
+      "httpStatus": 404,
+      "result": "PASS",
+      "responseSummary": {
+        "error": {
+          "code": "NOT_FOUND",
+          "message": "The requested resource was not found.",
+          "fields": {}
+        }
+      }
+    }
+  ],
+  "visibleCopySource": {
+    "asset": "/assets/index-BLtpMIBu.js",
+    "httpStatus": 200,
+    "newCopyPresent": true,
+    "assetSha256": "9941ed6fe3d2361ed7450da655f1c5081c72b4e82c4f4d81d75b350c6c4a2932"
+  },
+  "authenticatedReadback": "NOT RUN; no private credentials used",
+  "nativeBrowserCapture": "UNAVAILABLE: native pipe and browser access host unavailable",
+  "c04UrlVisibleScreenshots": "MISSING; existing viewport captures retained without alteration",
+  "c02BlockedControlScreenshot": "MISSING; no proof reopened and no new failing PR created",
+  "domainWrites": 0,
+  "cloudMutations": 0,
+  "deploymentTriggered": false
+}

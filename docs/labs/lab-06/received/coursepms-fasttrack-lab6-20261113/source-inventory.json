@@ -1,0 +1,152 @@
+[
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/README.md",
+    "sourceCommit": "749e5676a44b014b8c070ee2c5ba1bf4b03b245f",
+    "originalSha256": "d214c68ff21cb9fc1d9fb877fa07c9c5c85936c81d6c342e289b6e1fa5221abb",
+    "exportPath": "from-fasttrack/prepared-uat/README.md",
+    "exportSha256": "428b56a0dcf28b0b95c7a63ce6f1034e1910432b95eafd9f8d53f4a40dc6d62a",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/partner-handoff.md",
+    "sourceCommit": "749e5676a44b014b8c070ee2c5ba1bf4b03b245f",
+    "originalSha256": "b01f6d476923f41f87b43c00a5202c9b33c73051f15d3a52ebd4c10930e4855a",
+    "exportPath": "from-fasttrack/prepared-uat/partner-handoff.md",
+    "exportSha256": "6e4563031cc8dc448656ff53244fdb70386baaeec3809f09364250a587f87bb2",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/uat-cases.md",
+    "sourceCommit": "749e5676a44b014b8c070ee2c5ba1bf4b03b245f",
+    "originalSha256": "bdbb866827ae6628519b738bd1440b2bc5dd8ddeb633dac41b0784a60b8c2144",
+    "exportPath": "from-fasttrack/prepared-uat/uat-cases.md",
+    "exportSha256": "c2333f8a6538a870f352ebe0b287d3742e9f3d629f798711889bda72c0ff04c4",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/execution-results.md",
+    "sourceCommit": "749e5676a44b014b8c070ee2c5ba1bf4b03b245f",
+    "originalSha256": "4ddae44596b86211959964d9de45d1784353b64c74e7fd2fdf0295d679c034df",
+    "exportPath": "from-fasttrack/prepared-uat/execution-results.md",
+    "exportSha256": "dafaeb3fccdaf13d7272ba6c77141e8c5bf10e4db14e15762ce9656b6a557d31",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/findings-and-retest.md",
+    "sourceCommit": "749e5676a44b014b8c070ee2c5ba1bf4b03b245f",
+    "originalSha256": "60f0840b8673d826db57b545e4d37b812f6431aebb88618be1d43f5d3b84b9d2",
+    "exportPath": "from-fasttrack/prepared-uat/findings-and-retest.md",
+    "exportSha256": "19d0ad10cd58de3a6baf4c8fdc2c155aa8f432fce42cd48515f0e77a879cc467",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/acceptance-record.md",
+    "sourceCommit": "749e5676a44b014b8c070ee2c5ba1bf4b03b245f",
+    "originalSha256": "44c3a27d5a0cc604dd8d091cd058c82f028de40963f870e97b371dd0d5232464",
+    "exportPath": "from-fasttrack/prepared-uat/acceptance-record.md",
+    "exportSha256": "ea7b200dd9176ec790d6add0b50090ccad35c115acd4421e7177dcbe96e584ff",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/preparation-verification.md",
+    "sourceCommit": "749e5676a44b014b8c070ee2c5ba1bf4b03b245f",
+    "originalSha256": "5c12a049b4e6038d977b5d6ecb99f733bb1431e1d5bc567f3b40a9290d03d7ab",
+    "exportPath": "from-fasttrack/prepared-uat/preparation-verification.md",
+    "exportSha256": "f72b5581c7ae829092ef2212505ce640ad2c78cf53184f402345a6ecba2180ff",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "Project_code/docs/contracts/sprint-1-auth.md",
+    "sourceCommit": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "originalSha256": "c0979533510bf7f58291c2a3c4f61c45c294aaaf73f6a6024a5b13ac87e3a7f1",
+    "exportPath": "from-fasttrack/contracts/sprint-1-auth.md",
+    "exportSha256": "81f5028f847e6ff7188d7a33ac640d46f1e98a506f74a964cc217583c765fe66",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "Project_code/docs/contracts/sprint-1-milestones.md",
+    "sourceCommit": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "originalSha256": "be462bed8dfb725b62a4c95506059a6ba79d7a6821d936f364b6f1374bc4e97e",
+    "exportPath": "from-fasttrack/contracts/sprint-1-milestones.md",
+    "exportSha256": "105899b787c89687fcb5456bc366cce6f65c050e5b16fcfe06a56e733f0d37b7",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "Project_code/docs/contracts/sprint-1-submissions.md",
+    "sourceCommit": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "originalSha256": "cb40f35f22b4eaff6e23a88910facf74898f4efab25f78d4ad398f7230e330bf",
+    "exportPath": "from-fasttrack/contracts/sprint-1-submissions.md",
+    "exportSha256": "9df1304614c8c5a1af6e608869abecb7a4e8ceee201e9e857db470cf16d25783",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "Project_code/docs/contracts/sprint-1-feedback.md",
+    "sourceCommit": "8e637e537cd037d630a5fffc1b5672d1b44371a8",
+    "originalSha256": "23bef2321e82966291cc8450477c7641d686018c5e9435d273741968958eb99e",
+    "exportPath": "from-fasttrack/contracts/sprint-1-feedback.md",
+    "exportSha256": "806b2e1f9121423e2ebe04dd342f34909edccf9c1d5a61b3dc3e4d3c73d7d83a",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/sessions/2026-11-13-coursepms-live.md",
+    "sourceCommit": "baae1398cefc6120bc7249776f9b2e631ca58c70",
+    "originalSha256": "1eacc74c7cae94d96355d3ff0c77e9fb269155a91d8532b832310e6183feb882",
+    "exportPath": "from-fasttrack/reciprocal-testing/2026-11-13-coursepms-live.md",
+    "exportSha256": "422d02f12732ea2c06212d95b7949d84932aa5d79d58fb062dc0ad5aebcc3d09",
+    "transformation": "UTF-8 export; relative Markdown links pinned to original GitHub source",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/sessions/2026-11-13-coursepms-api.json",
+    "sourceCommit": "baae1398cefc6120bc7249776f9b2e631ca58c70",
+    "originalSha256": "613300568c359739b43b9ff617322aa41b2e604b65d535b59a6db9bb09525c70",
+    "exportPath": "from-fasttrack/reciprocal-testing/2026-11-13-coursepms-api.json",
+    "exportSha256": "613300568c359739b43b9ff617322aa41b2e604b65d535b59a6db9bb09525c70",
+    "transformation": "byte-for-byte copy",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/sessions/2026-11-13-coursepms-api-attempt1.json",
+    "sourceCommit": "baae1398cefc6120bc7249776f9b2e631ca58c70",
+    "originalSha256": "cbe88535acd4d7d615b7bb51cba0074a59c83168c20289206e225f9d670fa93e",
+    "exportPath": "from-fasttrack/reciprocal-testing/2026-11-13-coursepms-api-attempt1.json",
+    "exportSha256": "cbe88535acd4d7d615b7bb51cba0074a59c83168c20289206e225f9d670fa93e",
+    "transformation": "byte-for-byte copy",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  },
+  {
+    "repository": "zerotwobook/fastTrack",
+    "sourcePath": "docs/labs/lab-06/sessions/2026-11-13-coursepms-api-assessment.json",
+    "sourceCommit": "baae1398cefc6120bc7249776f9b2e631ca58c70",
+    "originalSha256": "47d6bad7226e0464363008c5ae35c970888da003a1c8bd0858eb4d8687472ce7",
+    "exportPath": "from-fasttrack/reciprocal-testing/2026-11-13-coursepms-api-assessment.json",
+    "exportSha256": "47d6bad7226e0464363008c5ae35c970888da003a1c8bd0858eb4d8687472ce7",
+    "transformation": "byte-for-byte copy",
+    "exportedUtc": "2026-11-13T13:03:05.380977+00:00"
+  }
+]

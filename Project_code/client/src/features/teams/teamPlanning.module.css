@@ -1,0 +1,71 @@
+.planning {
+  max-width: 48rem;
+  background: var(--color-paper);
+  border: 1px solid var(--color-divider);
+  border-radius: var(--radius-panel);
+  padding: clamp(16px, 3vw, 28px);
+}
+
+.form {
+  display: grid;
+  justify-items: start;
+  gap: 16px;
+  max-width: 28rem;
+}
+
+.form > div { width: 100%; }
+.form > :global(.notice) { margin: 0; }
+
+.section {
+  border-top: 1px solid var(--color-divider);
+  margin-top: 24px;
+  padding-top: 20px;
+}
+
+.section > h2,
+.available > h3 {
+  margin-bottom: 12px;
+}
+
+.available {
+  margin-top: 24px;
+}
+
+.muted {
+  color: var(--color-muted);
+}
+
+.people {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+}
+
+.people > li {
+  align-items: center;
+  border-bottom: 1px solid var(--color-divider);
+  display: flex;
+  gap: 12px;
+  justify-content: space-between;
+  min-height: 56px;
+  padding: 6px 0;
+}
+
+.people span {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+@media (max-width: 767px) {
+  .form > button {
+    width: 100%;
+  }
+}
+@media (max-width: 479px) {
+  .people > li {
+    align-items: stretch;
+    display: grid;
+    gap: 8px;
+    padding-block: 12px;
+  }
+}
