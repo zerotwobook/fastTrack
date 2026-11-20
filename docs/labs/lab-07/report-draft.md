@@ -141,3 +141,76 @@ At the report snapshot, the public `/api/health` and `/api/ready` readbacks stil
 | Preserved Sprint 1 domain and access | Original saved work and v1 feedback remain readable to the assigned team after migration. The foreign supervisor receives generic 404. Saved feedback on v1 stays on v1 with v2 present. | Pending deploy. The accepted Sprint 1 UAT baseline is in L7-M04. | A and B cross-check. |
 
 For the final report, use synthetic submissions and record the time, public URL, main SHA, serving revision, actor, expected and actual outcome for each check.
+
+## Part C. Objective engineering metrics
+
+Each metric uses the selected scope and historical time window below. The current release candidate's test matrix is reported in L7-B03.
+
+| ID | Definition and scope | Window or snapshot | Value | Evidence |
+| --- | --- | --- | --- | --- |
+| L7-M01 | Completed Issues in the five selected Sprint 2 product and integration tasks #17–#21. Count `CLOSED / COMPLETED` once per Issue. | As of 20 November 2026, Asia/Bangkok | **5 of 5** | Embedded Issue and PR ledger below · [A's snapshot](../../../Project_code/docs/evidence/R2-A05-lab7-red.md#as-metrics-inputs-for-the-report) |
+| L7-M02 | PRs #117, #118, #119, #120 and #123 merged into `staging/sprint-2` for the same five tasks. | As of 20 November 2026, Asia/Bangkok | **5 of 5** | Embedded Issue and PR ledger below |
+| L7-M03 | Feedback suite `test:b02` from `npm run test:runtime:isolated` at pre-change staging `63e81d1`. | CI 44663918612, completed 20 November 2026 | **48 passed, 0 failed, 0 skipped** | `ci-runtime-report` names 48 passed B02 cases · [Baseline CI artifact](https://github.com/zerotwobook/fastTrack/actions/runs/44663918612) |
+| L7-M04 | Product UAT defects opened and resolved. Count only validated application defects. Resolution requires an accepted fix and independent retest. Keep the controlled Section 3.5 exercise separate. | 18–19 November 2026, tested on `8e637e5` | **0 opened, 0 resolved, 0 open** for product UAT (8/8 passed). Controlled exercise **1 opened, 1 resolved** (16/16 retests passed). | [Independent UAT return](../lab-06/sessions/2026-11-18-coursepms-fasttrack-returned-results.md) · [Controlled exercise closeout](../lab-06/sessions/2026-11-19-lab6-closeout.md) · [Fix PR #115](https://github.com/zerotwobook/fastTrack/pull/115) |
+| L7-M05 | Repository-wide `CI & Docker Build` workflow runs, including push and pull request events on all branches. Count each completed run ID once, including cancelled runs. Use the GitHub completion record timestamp in the stated window. | 19 November 2026 00:00 to 20 November 2026 04:43 UTC, inclusive | **33/37 passed (89.2%), 2 failed, 2 cancelled** | Embedded run ledger below · [Workflow run history](https://github.com/zerotwobook/fastTrack/actions/workflows/ci-docker.yml) |
+
+### Embedded source ledger for L7-M01 and L7-M02
+
+GitHub records all five Issues as `CLOSED / COMPLETED`. All five linked PRs target `staging/sprint-2` and have a merge commit. Dates and times below are UTC.
+
+| Issue and scope | Completed at | PR | Merged at | Merge SHA |
+| --- | --- | --- | --- | --- |
+| [#17](https://github.com/zerotwobook/fastTrack/issues/17) Team planning | 19 Nov 16:24:02 | [#117](https://github.com/zerotwobook/fastTrack/pull/117) | 19 Nov 16:15:03 | `a130a9f` |
+| [#18](https://github.com/zerotwobook/fastTrack/issues/18) Milestone planning | 19 Nov 17:00:10 | [#118](https://github.com/zerotwobook/fastTrack/pull/118) | 19 Nov 16:56:25 | `09cdf9f` |
+| [#19](https://github.com/zerotwobook/fastTrack/issues/19) Progress | 20 Nov 01:57:15 | [#119](https://github.com/zerotwobook/fastTrack/pull/119) | 19 Nov 17:57:27 | `3a22d5e` |
+| [#20](https://github.com/zerotwobook/fastTrack/issues/20) Revisions | 19 Nov 18:29:10 | [#120](https://github.com/zerotwobook/fastTrack/pull/120) | 19 Nov 18:27:03 | `18e7a25` |
+| [#21](https://github.com/zerotwobook/fastTrack/issues/21) Integration | 20 Nov 03:15:07 | [#123](https://github.com/zerotwobook/fastTrack/pull/123) | 20 Nov 02:53:11 | `63e81d1` |
+
+### Embedded run ledger for L7-M05
+
+The recheck enumerated completed runs from `gh run list --repo zerotwobook/fastTrack --workflow ci-docker.yml --created 2026-11-18..2026-11-20 --limit 220 --json databaseId,status,conclusion,createdAt,updatedAt,headBranch,event`. It filtered `updatedAt` to the stated UTC window and counted distinct run IDs. The 18 November lookback covers runs that could have started before the window. B's original note recorded 34 successes in 38 runs. The dated query reproduced the two failed and two cancelled runs and found 33 successful runs, so this report uses the enumerated count. [B's original snapshot](../../../Project_code/docs/evidence/R2-B05-lab7-green.md#bs-metrics-inputs-for-the-lab-7-report)
+
+| Outcome | Run IDs |
+| --- | --- |
+| Passed (1–6 of 33) | 44457216895, 44485930297, 44533933170, 44552520434, 44555985504, 44559747424 |
+| Passed (7–12 of 33) | 44560152466, 44561392857, 44561667067, 44562686593, 44563945533, 44567224113 |
+| Passed (13–18 of 33) | 44571700672, 44575110109, 44575854739, 44575901302, 44577015287, 44577507328 |
+| Passed (19–24 of 33) | 44582680149, 44584322572, 44587929453, 44589204099, 44590514541, 44657570531 |
+| Passed (25–30 of 33) | 44658240013, 44663918612, 44668069604, 44669217984, 44671873763, 44673993297 |
+| Passed (31–33 of 33) | 44674216198, 44675390382, 44675948834 |
+| Failed (2 intentional RED) | [44672187909](https://github.com/zerotwobook/fastTrack/actions/runs/44672187909), [44672653191](https://github.com/zerotwobook/fastTrack/actions/runs/44672653191) |
+| Cancelled (2) | [44552042274](https://github.com/zerotwobook/fastTrack/actions/runs/44552042274), [44671938323](https://github.com/zerotwobook/fastTrack/actions/runs/44671938323) |
+
+### Interpretation and next action
+
+The selected Sprint 2 workstream completed five issues and merged five PRs. All 48 baseline feedback cases passed, and the independent product UAT found zero application defects. Two of the 37 CI runs failed intentionally during RED, so the raw 89.2% success rate can misstate release health. Before the Sprint 2 readiness review, B should label expected RED runs explicitly and attach the successful regression run for the exact release SHA to Issue #26.
+
+## Part D. Release readiness and retrospective
+
+### L7-D01 Readiness for the maintained Sprint 1 scope
+
+**NOT READY at this snapshot.** The maintained behavior has passed staging integration and the pinned candidate regression. Readiness for the approved 6,000-point rule requires an authorized main release and observed deployed L7-STS-05 results.
+
+| Area | Status and evidence | Owner and next action |
+| --- | --- | --- |
+| Version and deployment | Draft release `1185f3f` passed CI. The public health and ready responses identify prior main `8e637e5`. The recorded prior revision is `fasttrack-app-00003-rc7`. | A reviews the exact release. After authorization and peer review, B records main SHA, web and migration image digests, migration, serving revision and traffic. |
+| Automated checks and manual smoke | Candidate CI reports 458 passed, 0 failed and 0 skipped, plus 7/7 upgrades. The archived RED includes eight expected failures. Disposable browser boundary and history checks passed. Lab 7 deployed change and scope smoke are pending. | A runs the deployed boundary and preserved-path cases in L7-B05. B independently cross-checks the version and result. |
+| Defects by severity and disposition | No open critical, high or lower-severity defects were observed in the accepted eight-case product UAT scope. The separate Section 3.5 simulation had one resolved defect. Current live Lab 7 behavior remains a verification item. | A and B triage any live finding by severity, attach the tested revision, and record a retest after a fix. |
+| Configuration and secrets | The previous app's pinned database role and connection settings were used for a read-only `SHOW TIME ZONE` probe. It returned UTC. The new revision's effective settings and readiness still need readback. | B verifies the release using the existing deployment procedure and records only non-secret result fields. |
+| Documentation and setup | The versioned F-04 change contract, STS, repository setup and deployment steps are available. | A and B update the version record and final smoke evidence after release. [Setup](../../../Project_code/README.md) · [Deployment guide](../lab-05/deployment.md) |
+| Technical debt | The workflow outcome summary and exact release evidence are currently gathered through separate records. The mismatch between one saved metrics count and the reproducible window shows the cost of hand-counted snapshots. | Medium priority. B saves the dated run-ID list and exact tested SHA with the release evidence, and A checks the denominator before Final Delivery. |
+| Assessment package | This Markdown has Parts A–D and the compact evidence ledgers. The original approval image, final page ranges, deployed case record, and submission receipt remain outstanding. | A and B cross-review the draft. A adds the approved final evidence and records the real submission receipt. |
+
+### L7-D02 Retrospective
+
+**What helped.** The TA gave concrete Unicode boundaries. Testing plain text, emoji and whitespace on a real database exposed distinct validation, transport and schema limits early.
+
+**What hurt.** The shared request cap rejected valid escaped emoji before field validation. Intentional RED runs also appeared as ordinary CI failures in the raw metrics, which made the success rate easy to misread.
+
+**What will change.** Before the final release, B should keep one dated evidence record connecting expected RED runs, exact-head regression and the serving revision. A will cross-check the live boundary and preserved version-access results before signing off.
+
+### Contributions and AI use
+
+- **A** recorded the TA decision, wrote the impact trace, versioned contract and STS, captured RED, and strengthened the transport-cap regression after reviewing GREEN. A supplied the initial completed-issue, merged-PR and feedback-suite evidence. [Issue #24](https://github.com/zerotwobook/fastTrack/issues/24)
+- **B** reviewed the contract and RED handoff, implemented the validator, UI, parser and migration changes, ran GREEN and upgrade checks, and supplied the UAT and CI observations. B verified the updated PR head before staging integration. [Issue #25](https://github.com/zerotwobook/fastTrack/issues/25) · [PR #128](https://github.com/zerotwobook/fastTrack/pull/128)
+- **AI use.** AI assisted with organizing this Markdown, tracing evidence to sources, recounting the dated CI run list, and checking the interpretation length. The linked team decisions, test outputs and approval records remain the sources for the report.
