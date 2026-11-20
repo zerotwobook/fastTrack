@@ -104,26 +104,35 @@ function Workspace({ state, path }: { state: SessionSnapshot; path: string }) {
       <div className="navigation-heading"><h2 id="navigation-title">Navigation</h2><Button type="button" variant="secondary" onClick={() => dialog.current?.close()}>Close menu</Button></div><Navigation role={user.role} />
     </dialog>
     <div className="workspace"><header className="app-header">
-      <button ref={menu} className="menu-button" type="button" aria-controls="workspace-navigation" aria-expanded={menuOpen} onClick={() => { dialog.current?.showModal(); setMenuOpen(true); }}>Menu</button>
-      <p className="account-summary"><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
-      <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
+      <div className="compact-brand">
+        <button ref={menu} className="menu-button" type="button" aria-controls="workspace-navigation" aria-expanded={menuOpen} onClick={() => { dialog.current?.showModal(); setMenuOpen(true); }}>Menu</button>
+        <a className="wordmark" href="/">fastTrack</a>
+      </div>
+      <div className="account-controls">
+        <p className="account-summary"><span>{user.displayName}</span> <span className="role-label">{user.role === 'student' ? 'Student' : 'Supervisor'}</span></p>
+        <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>
+      </div>
     </header><main id={state.phase === 'ready' ? 'main-content' : undefined} className="workspace-content">
       {creatingTeam || settingsId ? user.role === 'supervisor'
         ? (settingsId ? <TeamSettings key={settingsId} teamId={settingsId} /> : <TeamCreate />)
         : <EmptyState title="Team settings are restricted to supervisors" action={<a href="/">Back to overview</a>} />
         : progressId ? <TeamProgress key={progressId} teamId={progressId} />
         : submissionId ? <SubmissionDetail id={submissionId} userRole={user.role} renderFeedback={submission => <FeedbackPanel key={submission.id} submissionId={submission.id} submissionVersion={submission.version} userRole={user.role} />} /> : milestoneId ? revising ? <RevisionCreate key={milestoneId} milestoneId={milestoneId} userRole={user.role} /> : submitting ? <SubmissionCreate milestoneId={milestoneId} userRole={user.role} /> : <MilestoneDetail id={milestoneId} userRole={user.role} /> : <><p className="breadcrumb"><a href="/">Overview</a>{detailId && teams?.[0] ? ` / ${teams[0].name}` : ''}</p>
-      <h1>{creating ? 'Create milestone' : detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
-      <p className="intro">{creating ? `Set the work and deadline${teams?.[0] ? ` for ${teams[0].name}` : ' for this team'}.` : detailId ? 'Your team members, deadlines and submitted work.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
-      {user.role === 'supervisor' && !creating && !error && (path === '/' || (detailId && teams?.[0])) &&
-        <p className="team-planning-action"><a className={detailId ? 'team-link' : 'team-link team-link--primary'} href={detailId ? `/teams/${detailId}/settings` : '/teams/new'}>{detailId ? 'Team settings' : 'Create team'}</a></p>}
+      <header className="workspace-heading">
+        <div>
+          <h1>{creating ? 'Create milestone' : detailId && teams?.[0] ? teams[0].name : user.role === 'supervisor' ? 'Your teams' : 'Your team'}</h1>
+          <p className="intro">{creating ? `Set the work and deadline${teams?.[0] ? ` for ${teams[0].name}` : ' for this team'}.` : detailId ? 'Your team members, deadlines and submitted work.' : user.role === 'supervisor' ? 'Choose a team to view its workspace.' : 'Your project team and supervisor.'}</p>
+        </div>
+        {user.role === 'supervisor' && !creating && !error && (path === '/' || (detailId && teams?.[0])) &&
+          <a className={detailId ? 'team-link' : 'team-link team-link--primary'} href={detailId ? `/teams/${detailId}/settings` : '/teams/new'}>{detailId ? 'Team settings' : 'Create team'}</a>}
+      </header>
       {error ? <section className="notice" role="alert"><p>{error}</p><div className="recovery-actions"><Button variant="secondary" onClick={() => setAttempt(value => value + 1)}>Try again</Button><a href="/">Back to overview</a></div></section>
       : teams === null ? <p role="status">Loading your team workspace…</p>
       : teams.length === 0 ? <EmptyState title={user.role === 'student' ? 'No team assigned yet' : 'No supervised teams yet'} description={user.role === 'student' ? 'Contact your course supervisor to arrange your team.' : 'Create a team to start planning its milestones.'} />
       : <section id="teams" aria-label="Teams" className={`team-list${!detailId && user.role === 'supervisor' ? ' team-list--supervisor' : ''}`}>{teams.map(team => <article className="team-row" key={team.id}>
         {!detailId && <h2><a href={`/teams/${team.id}`}>{team.name}<span aria-hidden="true"> ↗</span></a></h2>}
         {!creating && (detailId || user.role === 'supervisor') && <dl><div><dt>Supervisor</dt><dd>{team.supervisor.displayName}</dd></div><div><dt>Team members</dt><dd>{team.members.length ? <ul>{team.members.map(member => <li key={member.id}>{member.displayName}</li>)}</ul> : 'No members assigned yet'}</dd></div></dl>}
-        {!creating && (detailId || user.role === 'student') && <a className="team-link" href={`/teams/${team.id}/progress`}>View progress</a>}
+        {!creating && (detailId || user.role === 'student') && <a className="team-link team-link--progress" href={`/teams/${team.id}/progress`}>View progress</a>}
         {(detailId || user.role === 'student') && (creating ? <MilestoneCreate teamId={team.id} userRole={user.role} /> : <MilestoneTrack teamId={team.id} userRole={user.role} />)}
         {!detailId && <a className="team-link" href={`/teams/${team.id}`}>Open team</a>}
       </article>)}</section>}</>}

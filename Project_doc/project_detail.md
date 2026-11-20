@@ -1,4 +1,4 @@
-﻿# fastTrack — รายละเอียดและแบบออกแบบโปรเจกต์
+# fastTrack — รายละเอียดและแบบออกแบบโปรเจกต์
 
 > **Theme 6: Course Project Management System**<br>
 > รายวิชา CPE 334 Software Engineering | ภาคเรียน 1/2026<br>
@@ -609,6 +609,12 @@ The user-requested R1-A-UI-POLISH refinement preserves the six colors, bundled t
 The content canvas remains left aligned internally and uses equal outer margins within its 1184px maximum width on wider screens. Team boundaries and reading rails use restrained 12px frames; due dates, milestone groups, form actions and feedback entries have clear separators. The desktop login frame contains a form no wider than 400px and becomes an unframed column on mobile. Shadows are reserved for the navigation overlay. Multiple supervisor teams can share balanced columns when space permits; a single team fills the available row.
 
 Creating a milestone opens with a task-specific page heading and fields rather than repeating the team roster. Mobile primary form actions fill their container. The navigation dialog announces its expanded state, cycles Tab and Shift+Tab, closes with Escape, returns focus to its trigger and closes when resized to desktop. Private-session masking and draft/recovery rules remain unchanged. Browser verification and its actual limitations are recorded in [the UI refinement handoff](../Project_code/docs/evidence/R1-A-UI-POLISH.md); this design specification alone is not a verification result.
+
+### 8.13 Sprint 2 status colors and responsive review
+
+The Sprint 2 UI review extends the neutral fastTrack palette with semantic color. Green identifies submitted work, submission actions and completed progress. Blue identifies feedback and the current version in history. Amber identifies pending work, red identifies overdue work and validation errors, and cancelled milestones use a neutral treatment. Status labels and icons remain visible.
+
+Phone layouts use a compact branded menu, stacked timeline dates, and full-width primary form actions. Portrait tablets retain a single reading column. Landscape tablets with enough width can display work and feedback side by side. The desktop sidebar, existing typography, and Asia/Bangkok deadline display remain part of the design.
 
 ## 9. API design
 

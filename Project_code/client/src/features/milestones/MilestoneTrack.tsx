@@ -284,7 +284,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
         {result.item.cancelledAt && <p className={styles.meta}>Cancelled on {formatBangkok(result.item.cancelledAt)}.</p>}
         {result.item.latestSubmission ? <><p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p><a className={styles.primaryLink} href={`/submissions/${result.item.latestSubmission.id}`}>Open saved submission</a>
           {userRole === 'student' && (revisionRestriction ? <p>{revisionRestriction}</p>
-            : <a className={styles.detailLink} href={`/milestones/${id}/revisions/new`}>Submit revision</a>)}</>
+            : <a className={`${styles.detailLink} ${styles.submitLink}`} href={`/milestones/${id}/revisions/new`}>Submit revision</a>)}</>
           : userRole === 'student' && (result.item.cancelledAt ? <p>This milestone was cancelled and cannot receive work.</p>
             : Date.parse(result.serverTime) > Date.parse(result.item.dueAt) ? <p>The deadline has passed. Work cannot be submitted.</p>
             : <a className={`${styles.primaryLink} ${styles.submitLink}`} href={`/milestones/${id}/submissions/new`}>Submit work</a>)}

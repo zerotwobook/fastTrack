@@ -1,11 +1,12 @@
-﻿.wordmark { color: var(--color-ink); font-size: 24px; font-weight: 600; letter-spacing: -.025em; text-decoration: none; }
-h1 { font-size: 36px; font-weight: 500; line-height: 1.4; letter-spacing: -.025em; overflow-wrap: anywhere; }
-h2 { font-size: 24px; font-weight: 500; line-height: 1.45; overflow-wrap: anywhere; }
+.wordmark { color: var(--color-ink); font-size: 24px; font-weight: 600; letter-spacing: -.025em; text-decoration: none; }
+h1 { font-size: clamp(1.75rem, 2.6vw, 2.25rem); font-weight: 600; line-height: 1.3; letter-spacing: -.025em; overflow-wrap: anywhere; }
+h2 { font-size: clamp(1.25rem, 2vw, 1.5rem); font-weight: 600; line-height: 1.45; overflow-wrap: anywhere; }
 a { color: var(--color-ink); text-underline-offset: 4px; }
+a:hover { text-decoration-color: var(--color-success); }
 .skip-link { position: fixed; z-index: 3; left: 16px; top: 8px; padding: 8px 16px; border: 1px solid var(--color-ink); background: var(--color-paper); transform: translateY(-160%); }
 .skip-link:focus { transform: none; }
 .login-page { display: grid; min-height: 100dvh; align-items: center; padding: 48px 24px; }
-.login-form { width: 100%; max-width: 464px; margin: auto; padding: 32px; border: 1px solid var(--color-divider); border-radius: var(--radius-panel); }
+.login-form { width: 100%; max-width: 464px; margin: auto; padding: 32px; border: 1px solid var(--color-divider); border-top: 4px solid var(--color-success); border-radius: var(--radius-panel); background: var(--color-paper); }
 .login-form .wordmark { margin-bottom: 32px; padding-bottom: 24px; border-bottom: 1px solid var(--color-divider); }
 .intro { color: var(--color-muted); margin: 8px 0 32px; max-width: 65ch; line-height: 1.65; }
 .login-form form { display: grid; gap: 24px; }
@@ -17,22 +18,31 @@ a { color: var(--color-ink); text-underline-offset: 4px; }
 .login-submit { width: 100%; min-height: 48px; }
 .help { margin-top: 24px; padding-top: 24px; border-top: 1px solid var(--color-divider); font-size: 14px; color: var(--color-muted); line-height: 1.6; }
 .notice { padding: 16px; border: 1px solid var(--color-control); border-left: 3px solid var(--color-ink); border-radius: var(--radius-md); background: var(--color-wash); margin: 24px 0; line-height: 1.65; overflow-wrap: anywhere; }
+.notice[role="alert"] { border-left-color: var(--color-danger); background: var(--color-danger-surface); }
 .recovery-actions { display: flex; gap: 16px; align-items: center; margin-top: 16px; flex-wrap: wrap; }
 .application-shell { display: grid; grid-template-columns: 224px minmax(0, 1fr); min-height: 100dvh; }
-.sidebar { align-self: start; position: sticky; top: 0; height: 100dvh; overflow-y: auto; border-right: 1px solid var(--color-divider); padding: 32px 24px; }
+.sidebar { align-self: start; position: sticky; top: 0; height: 100dvh; overflow-y: auto; border-right: 1px solid var(--color-divider); padding: 28px 20px; background: var(--color-paper); }
 .sidebar nav, .navigation-dialog nav { display: grid; margin-top: 40px; gap: 8px; }
 .sidebar nav a, .navigation-dialog nav a { display: flex; align-items: center; min-height: 48px; padding: 12px; text-decoration: none; border: 1px solid transparent; border-left: 3px solid transparent; border-radius: var(--radius-md); overflow-wrap: anywhere; }
-.sidebar nav a[aria-current="page"], .navigation-dialog nav a[aria-current="page"] { background: var(--color-wash); border-color: var(--color-divider); border-left-color: var(--color-ink); font-weight: 600; }
+.sidebar nav a[aria-current="page"], .navigation-dialog nav a[aria-current="page"] { background: var(--color-success-surface); color: var(--color-success); border-color: var(--color-divider); border-left-color: var(--color-success); font-weight: 600; }
 .sidebar nav a:hover, .navigation-dialog nav a:hover { background: var(--color-wash); border-color: var(--color-control); }
 .workspace { min-width: 0; }
-.app-header { min-height: 88px; padding: 16px 32px; display: flex; align-items: center; justify-content: flex-end; gap: 24px; border-bottom: 1px solid var(--color-divider); }
-.account-summary { min-width: 0; overflow-wrap: anywhere; line-height: 1.5; }
+.app-header { min-height: 76px; padding: 12px clamp(16px, 3vw, 32px); display: flex; align-items: center; justify-content: space-between; gap: 12px 20px; border-bottom: 1px solid var(--color-divider); background: var(--color-paper); }
+.compact-brand { display: none; }
+.account-controls { display: flex; align-items: center; gap: 16px; min-width: 0; margin-inline-start: auto; }
+.account-controls button { flex: 0 0 auto; }
+.account-summary { min-width: 0; overflow-wrap: anywhere; line-height: 1.4; }
+.account-summary > span:first-child { font-weight: 500; }
 .role-label { display: block; color: var(--color-muted); font-size: 14px; }
-.workspace-content { width: 100%; max-width: 1184px; margin-inline: auto; padding: 32px; }
+.workspace-content { width: 100%; max-width: 1184px; margin-inline: auto; padding: clamp(16px, 3vw, 36px); }
+.workspace-heading { display: flex; align-items: flex-start; justify-content: space-between; flex-wrap: wrap; gap: 16px 24px; margin-bottom: 24px; }
+.workspace-heading > div { flex: 1 1 18rem; min-width: 0; }
+.workspace-heading .intro { margin-bottom: 0; }
+.workspace-heading .team-link { margin-top: 0; }
 .breadcrumb { font-size: 14px; color: var(--color-muted); margin-bottom: 24px; overflow-wrap: anywhere; }
 .breadcrumb a { color: var(--color-muted); }
 .team-list { display: grid; gap: 24px; min-width: 0; scroll-margin-top: 24px; }
-.team-row { min-width: 0; padding: 24px; border: 1px solid var(--color-divider); border-radius: var(--radius-panel); overflow-wrap: anywhere; }
+.team-row { min-width: 0; padding: clamp(16px, 2.6vw, 28px); border: 1px solid var(--color-divider); border-radius: var(--radius-panel); background: var(--color-paper); overflow-wrap: anywhere; }
 .team-row > h2 { margin-bottom: 24px; }
 .team-row > h2 a { text-decoration: none; }
 .team-row > h2 a:hover { text-decoration: underline; }
@@ -42,39 +52,47 @@ a { color: var(--color-ink); text-underline-offset: 4px; }
 .team-row ul { list-style: none; }
 .team-link { display: inline-flex; align-items: center; justify-content: center; margin-top: 24px; min-height: 44px; padding: 8px 16px; border: 1px solid var(--color-control); border-radius: var(--radius-md); text-decoration: none; }
 .team-link:hover { background: var(--color-wash); border-color: var(--color-ink); }
-.team-planning-action .team-link { margin-top: 0; }
+.team-link--progress { color: var(--color-success); border-color: var(--color-success); background: var(--color-success-surface); }
+.team-link--progress:hover { background: var(--color-wash); border-color: var(--color-success); }
 .team-link--primary { background: var(--color-ink); border-color: var(--color-ink); color: var(--color-paper); }
 .team-link--primary:hover { background: var(--color-ink); box-shadow: inset 0 0 0 1px var(--color-paper); }
 .session-status { width: min(100%, 65ch); padding: 48px 24px; margin: auto; display: grid; gap: 24px; }
-.menu-button { display: none; align-items: center; justify-content: center; min-height: 44px; padding: 8px 16px; border: 1px solid var(--color-control); border-radius: var(--radius-md); background: var(--color-paper); color: var(--color-ink); cursor: pointer; }
+.menu-button { display: inline-flex; align-items: center; justify-content: center; min-height: 44px; padding: 8px 12px; border: 1px solid var(--color-control); border-radius: var(--radius-md); background: var(--color-paper); color: var(--color-ink); cursor: pointer; }
 .menu-button:hover { background: var(--color-wash); }
 .navigation-dialog { margin: auto; width: min(440px, calc(100% - 32px)); max-height: calc(100dvh - 32px); overflow-y: auto; padding: 24px; border: 1px solid var(--color-control); border-radius: var(--radius-panel); background: var(--color-paper); color: var(--color-ink); box-shadow: var(--shadow-overlay); }
 .navigation-heading { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px; }
 .navigation-dialog nav { margin-top: 24px; }
 .navigation-dialog::backdrop { background: rgb(0 0 0 / .35); }
-@media (min-width: 1400px) {
-  .team-list--supervisor { grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); }
+@media (min-width: 820px) {
+  .team-list--supervisor { grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
   .team-list--supervisor .team-row { display: flex; flex-direction: column; align-items: flex-start; }
   .team-list--supervisor dl { width: 100%; grid-template-columns: minmax(0, 1fr); flex: 1; align-content: start; }
 }
 @media (max-width: 1199px) {
   .application-shell { grid-template-columns: minmax(0, 1fr); }
   .sidebar { display: none; }
-  .menu-button { display: inline-flex; margin-right: auto; }
+  .compact-brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
 }
 @media (max-width: 767px) {
-  h1 { font-size: 28px; }
-  h2 { font-size: 22px; }
   .wordmark { font-size: 22px; }
-  .workspace-content, .app-header { padding: 16px; }
-  .app-header { gap: 12px; flex-wrap: wrap; }
-  .account-summary { flex: 1; }
-  .app-header > button:last-child { flex: 0 0 auto; }
-  .team-row { padding: 16px; }
-  .team-row dl { grid-template-columns: minmax(0, 1fr); gap: 16px; }
+  .workspace-content { padding: 16px; }
+  .app-header { gap: 8px 12px; }
+  .account-controls { gap: 12px; }
+  .team-row dl { gap: 16px; }
   .login-page { padding: 24px 16px; }
-  .login-form { padding: 0; border: 0; border-radius: 0; max-width: 400px; }
-  .team-link { width: 100%; }
+  .login-form { padding: 0; border: 0; border-radius: 0; max-width: 400px; background: transparent; }
   .navigation-dialog { padding: 16px; }
+}
+@media (max-width: 599px) {
+  .workspace-heading { display: grid; }
+  .team-row dl { grid-template-columns: minmax(0, 1fr); }
+  .team-link { width: 100%; }
   .recovery-actions { align-items: stretch; flex-direction: column; }
+}
+@media (max-width: 479px) {
+  .app-header { display: grid; grid-template-columns: minmax(0, 1fr) auto; }
+  .compact-brand { gap: 8px; }
+  .account-controls { display: contents; }
+  .account-summary { grid-column: 1 / -1; grid-row: 2; font-size: 14px; }
+  .role-label { display: inline; margin-inline-start: 4px; }
 }
