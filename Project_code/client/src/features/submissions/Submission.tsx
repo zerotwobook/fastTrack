@@ -9,6 +9,11 @@ import type { MilestoneItem } from '../milestones/MilestoneTrack';
 import { codePointLength } from '../../../../shared/milestones.mjs';
 import { isWorkUrl, parseRevisionInput, parseSubmissionInput, SubmissionInputError } from '../../../../shared/submissions.mjs';
 import { describeRevisionRestriction, describeSubmissionHistory } from './history';
+import { SummaryDetailBreadcrumb, SummaryRecoveryLinks } from '../summary/DrilldownList';
+import {
+  buildMilestoneDetailHref,
+  resolveDetailSummaryNavigation,
+} from '../summary/navigation';
 import styles from './submissions.module.css';
 
 export interface SubmissionRecord {
@@ -328,7 +333,11 @@ export function RevisionCreate({ milestoneId, userRole }: { milestoneId: string;
   </>;
 }
 
-export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string; userRole?: 'student' | 'supervisor'; renderFeedback?: (submission: SubmissionRecord) => ReactNode }) {
+export function SubmissionDetail({ id, userRole, returnTo, renderFeedback }: { id: string; userRole?: 'student' | 'supervisor'; returnTo?: string | null | undefined; renderFeedback?: (submission: SubmissionRecord) => ReactNode }) {
+  const rawReturnTo = returnTo !== undefined
+    ? returnTo
+    : (typeof location !== 'undefined' ? new URLSearchParams(location.search).get('returnTo') : null);
+  const summaryNav = resolveDetailSummaryNavigation(rawReturnTo, userRole);
   const [result, setResult] = useState<{ id: string; item: SubmissionRecord; milestone: MilestoneItem; team: Team; history: SubmissionRecord[]; serverTime: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
@@ -345,13 +354,14 @@ export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string;
     })().catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
   }, [id, attempt]);
-  if (error) return <><h1>Submission unavailable</h1><div role="alert" className={styles.notice}><p>{error}</p><Button onClick={() => setAttempt(v => v + 1)}>Try again</Button><a href="/">Back to overview</a></div></>;
+  if (error) return <><h1>Submission unavailable</h1><div role="alert" className={styles.notice}><p>{error}</p><Button onClick={() => setAttempt(v => v + 1)}>Try again</Button><SummaryRecoveryLinks summaryNav={summaryNav} /></div></>;
   if (!result || result.id !== id) return <p role="status">Loading saved submission...</p>;
   const { item, milestone, team, history, serverTime } = result;
   const { orderedHistory, latest, isOldVersion } = describeSubmissionHistory(item, history);
   const restriction = describeRevisionRestriction(milestone, serverTime, latest?.version ?? item.version);
+  const milestoneHref = buildMilestoneDetailHref(milestone.id, summaryNav.summaryHref);
   return <>
-    <p className="breadcrumb"><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={`/milestones/${milestone.id}`}>{milestone.title}</a> / Saved submission</p>
+    <SummaryDetailBreadcrumb summaryNav={summaryNav}><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={milestoneHref}>{milestone.title}</a> / Saved submission</SummaryDetailBreadcrumb>
     <h1>{item.title}</h1>
     <p className={styles.context}>Version {item.version}, submitted by {item.submittedBy.displayName}.</p>
     <p className={styles.context}><time dateTime={item.submittedAt}>{formatBangkok(item.submittedAt)}</time></p>
