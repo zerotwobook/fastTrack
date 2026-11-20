@@ -3,7 +3,7 @@ import type { FormEvent } from 'react';
 import { Button, Field, Textarea } from '../../design/components';
 import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import { formatBangkok } from '../milestones/MilestoneTrack';
-import { countCodePoints, validateFeedbackContent } from '../../../../shared/feedback.mjs';
+import { countCodePoints, FEEDBACK_LIMITS, validateFeedbackContent } from '../../../../shared/feedback.mjs';
 import styles from './feedback.module.css';
 
 export interface FeedbackItem {
@@ -127,12 +127,12 @@ export function FeedbackPanel({ submissionId, submissionVersion, userRole }: Fee
     {notice && <p role="status" className={styles.notice}>{notice}</p>}
     {userRole === 'supervisor' && <form ref={form} className={styles.form} onSubmit={event => { void submit(event); }} noValidate aria-busy={saving}>
       {saveError && <p ref={alert} tabIndex={-1} role="alert" className={styles.notice}>{saveError}</p>}
-      <Field id={fieldId} label="Your feedback" {...(fieldError ? { error: fieldError } : {})} hint="Use 1 to 4,000 characters. Feedback stays with this version.">
+      <Field id={fieldId} label="Your feedback" {...(fieldError ? { error: fieldError } : {})} hint={`Use 1 to ${FEEDBACK_LIMITS.CONTENT_MAX_CHARS.toLocaleString('en-US')} characters. Feedback stays with this version.`}>
         <Textarea id={fieldId} value={content} onChange={event => { setContent(event.target.value); setFieldError(undefined); setNotice(null); }}
           readOnly={pending !== null} disabled={saving} rows={5} required hasError={!!fieldError}
           aria-invalid={!!fieldError} aria-describedby={`${fieldId}-${fieldError ? 'error' : 'hint'}`} />
       </Field>
-      <p className={styles.meta}>{countCodePoints(content.trim()).toLocaleString('en-US')} / 4,000 characters</p>
+      <p className={styles.meta}>{countCodePoints(content.trim()).toLocaleString('en-US')} / {FEEDBACK_LIMITS.CONTENT_MAX_CHARS.toLocaleString('en-US')} characters</p>
       {pending && <p className={styles.meta}>Your draft is locked until this save is confirmed.</p>}
       <div className={styles.actions}>
         <Button type="submit" loading={saving} disabled={saving || recovery === 'blocked' || recovery === 'checking'}>{saving ? recovery === 'checking' ? 'Checking saved feedback...' : 'Saving feedback...' : recovery === 'retry' ? 'Retry save' : 'Save feedback'}</Button>

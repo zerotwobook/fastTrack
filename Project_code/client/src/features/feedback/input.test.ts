@@ -15,7 +15,7 @@ describe('Shared Feedback Input Validation', () => {
     expect(countCodePoints('\u0e17\u0e14\u0e2a\u0e2d\u0e1a')).toBe(5);
   });
 
-  it('validates feedback content within 1 to 4000 code points', () => {
+  it('validates feedback content within 1 to 6000 code points', () => {
     expect(validateFeedbackContent('Good job!').valid).toBe(true);
     expect(validateFeedbackContent('Good job!').value).toBe('Good job!');
 
@@ -26,9 +26,11 @@ describe('Shared Feedback Input Validation', () => {
     expect(validateFeedbackContent('').valid).toBe(false);
     expect(validateFeedbackContent('   ').valid).toBe(false);
 
-    // Boundary check
+    // Boundary check (4,000 control plus 5,999 / 6,000 / 6,001 boundaries)
     expect(validateFeedbackContent('a'.repeat(4000)).valid).toBe(true);
-    expect(validateFeedbackContent('a'.repeat(4001)).valid).toBe(false);
+    expect(validateFeedbackContent('a'.repeat(5999)).valid).toBe(true);
+    expect(validateFeedbackContent('a'.repeat(6000)).valid).toBe(true);
+    expect(validateFeedbackContent('a'.repeat(6001)).valid).toBe(false);
 
     // Non-string
     expect(validateFeedbackContent(123).valid).toBe(false);
@@ -80,8 +82,10 @@ describe('Feedback PostgreSQL text boundaries', () => {
   it.each(['bad\u0000text', 'bad\ud800text', 'bad\udffftext'])('rejects invalid Unicode or null content %#', value => {
     expect(validateFeedbackContent(value).valid).toBe(false);
   });
-  it('accepts four thousand astral characters as four thousand code points', () => {
+  it('accepts up to six thousand astral characters as code points', () => {
     expect(validateFeedbackContent('\u{1F680}'.repeat(4000)).valid).toBe(true);
-    expect(validateFeedbackContent('\u{1F680}'.repeat(4001)).valid).toBe(false);
+    expect(validateFeedbackContent('\u{1F680}'.repeat(5999)).valid).toBe(true);
+    expect(validateFeedbackContent('\u{1F680}'.repeat(6000)).valid).toBe(true);
+    expect(validateFeedbackContent('\u{1F680}'.repeat(6001)).valid).toBe(false);
   });
 });
