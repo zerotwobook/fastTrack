@@ -1,0 +1,95 @@
+{
+    "command":  "npm run test:b02:isolated",
+    "exitCode":  1,
+    "testedSource":  "e3758fb541e48716545868c6f435907b83a67aec",
+    "baseline":  "63e81d1a91f7f288825100b47786823460943e5c",
+    "postgresVersion":  "postgres (PostgreSQL) 16.8 (Debian 16.8-1.pgdg120+1)",
+    "startedAt":  "2026-11-20T04:06:48.124Z",
+    "finishedAt":  "2026-11-20T04:08:43.840Z",
+    "cleanup":  "removed newly created audit container",
+    "suiteCounts":  {
+                        "ordinaryTests":  {
+                                              "passed":  198,
+                                              "failed":  0
+                                          },
+                        "g1Tests":  {
+                                        "passed":  38,
+                                        "failed":  0
+                                    },
+                        "authTests":  {
+                                          "passed":  46,
+                                          "failed":  0
+                                      },
+                        "b01Tests":  {
+                                         "passed":  48,
+                                         "failed":  0
+                                     },
+                        "a02Tests":  {
+                                         "passed":  54,
+                                         "failed":  0
+                                     },
+                        "b02Tests":  {
+                                         "passed":  51,
+                                         "failed":  8
+                                     }
+                    },
+    "upgradeCases":  7,
+    "upgradesPassed":  true,
+    "lab7Cases":  [
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 5999 code points of plain text",
+                          "status":  "failed",
+                          "evidence":  "AssertionError: Expected feedback to be saved. API error: {\"code\":\"INVALID_INPUT\",\"message\":\"Check the highlighted feedback fields.\",\"fields\":{\"content\":\"Feedback content cannot exceed 4000 characters.\"}}: expected 400 to be 201 // Object.is equality"
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 5999 code points of astral emoji",
+                          "status":  "failed",
+                          "evidence":  "AssertionError: Expected feedback to be saved. API error: {\"code\":\"INVALID_INPUT\",\"message\":\"Check the highlighted feedback fields.\",\"fields\":{\"content\":\"Feedback content cannot exceed 4000 characters.\"}}: expected 400 to be 201 // Object.is equality"
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 5999 code points of trimmed whitespace with an interior spa…",
+                          "status":  "failed",
+                          "evidence":  "AssertionError: Expected feedback to be saved. API error: {\"code\":\"INVALID_INPUT\",\"message\":\"Check the highlighted feedback fields.\",\"fields\":{\"content\":\"Feedback content cannot exceed 4000 characters.\"}}: expected 400 to be 201 // Object.is equality"
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 6000 code points of plain text",
+                          "status":  "failed",
+                          "evidence":  "AssertionError: Expected feedback to be saved. API error: {\"code\":\"INVALID_INPUT\",\"message\":\"Check the highlighted feedback fields.\",\"fields\":{\"content\":\"Feedback content cannot exceed 4000 characters.\"}}: expected 400 to be 201 // Object.is equality"
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 6000 code points of astral emoji",
+                          "status":  "failed",
+                          "evidence":  "AssertionError: Expected feedback to be saved. API error: {\"code\":\"INVALID_INPUT\",\"message\":\"Check the highlighted feedback fields.\",\"fields\":{\"content\":\"Feedback content cannot exceed 4000 characters.\"}}: expected 400 to be 201 // Object.is equality"
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 6000 code points of trimmed whitespace with an interior spa…",
+                          "status":  "failed",
+                          "evidence":  "AssertionError: Expected feedback to be saved. API error: {\"code\":\"INVALID_INPUT\",\"message\":\"Check the highlighted feedback fields.\",\"fields\":{\"content\":\"Feedback content cannot exceed 4000 characters.\"}}: expected 400 to be 201 // Object.is equality"
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 6001 code points of plain text",
+                          "status":  "passed",
+                          "evidence":  null
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 6001 code points of astral emoji",
+                          "status":  "passed",
+                          "evidence":  null
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-01/02 checks 6001 code points of trimmed whitespace with an interior spa…",
+                          "status":  "passed",
+                          "evidence":  null
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-03 accepts 6000 emoji encoded as JSON surrogate pairs",
+                          "status":  "failed",
+                          "evidence":  "AssertionError: Expected escaped feedback to be saved. API error: {\"code\":\"INVALID_INPUT\",\"message\":\"Provide a valid JSON body within the size limit.\",\"fields\":{}}: expected 400 to be 201 // Object.is equality"
+                      },
+                      {
+                          "name":  "Lab 7 approved feedback length L7-STS-03 stores 6000 astral points in the migrated schema",
+                          "status":  "failed",
+                          "evidence":  "The provided value for the column is too long for the column\u0027s type. Column: (not available)"
+                      }
+                  ]
+}
