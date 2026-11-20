@@ -2,16 +2,19 @@
 // Paths declared relative to /api per sprint-1-module-boundaries.md.
 //
 // Pipeline order for mutations:
-//   requireSession → requireSupervisor → requireMutation → requireJsonBody → parseJsonBody → controller
+//   requireSession → requireSupervisor → requireMutation → requireJsonBody → parseFeedbackJsonBody → controller
 // Pipeline order for reads:
 //   requireSession → controller (scoped team check enforced in FeedbackService)
 
-import { Router } from 'express';
+import express, { Router } from 'express';
 import type { Request, Response, NextFunction, RequestHandler } from 'express';
 import type { PrismaClient } from '../../db/generated/client/index.js';
-import { requireJsonBody, parseJsonBody } from '../../http/errors.js';
+import { requireJsonBody } from '../../http/errors.js';
 import { FeedbackService } from './service.js';
 import type { FeedbackAuthContext } from './service.js';
+
+// Allow escaped surrogate pairs for 6,000 astral code points (~72 KB + JSON envelope) without lifting the shared 64 KB cap.
+const parseFeedbackJsonBody = express.json({ limit: '96kb', strict: true });
 
 export interface FeedbackRouterDependencies {
   prisma: PrismaClient;
@@ -47,14 +50,14 @@ export function createFeedbackRouter(deps: FeedbackRouterDependencies): Router {
   const now = deps.now ?? (() => new Date());
 
   // POST /submissions/:id/feedback
-  // Order: requireSession → requireSupervisor → requireMutation → requireJsonBody → parseJsonBody → controller
+  // Order: requireSession → requireSupervisor → requireMutation → requireJsonBody → parseFeedbackJsonBody → controller
   router.post(
     '/submissions/:id/feedback',
     deps.requireSession,
     deps.requireSupervisor,
     deps.requireMutation,
     requireJsonBody,
-    parseJsonBody,
+    parseFeedbackJsonBody,
     async (req: Request, res: Response, next: NextFunction) => {
       try {
         const auth = await deps.getAuthContext(req);

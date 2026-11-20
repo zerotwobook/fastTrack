@@ -21,7 +21,7 @@ const fields = [
   { name: 'team.name', max: 120 }, { name: 'milestone.title', max: 120 },
   { name: 'milestone.description', max: 4000 }, { name: 'submission.title', max: 120 },
   { name: 'submission.description', max: 4000 }, { name: 'submission.url', max: 2048 },
-  { name: 'feedback.content', max: 4000 },
+  { name: 'feedback.content', max: 6000 },
 ] as const;
 type Field = (typeof fields)[number]['name'];
 function submissionData() {

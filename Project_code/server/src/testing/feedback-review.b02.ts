@@ -22,8 +22,9 @@ async function login(email: string) {
   return { cookie: String(res.headers['set-cookie']?.[0]).split(';')[0]!, csrf: String(res.body.data.csrfToken) };
 }
 const input = () => ({ content: 'Review the immutable first version.', clientRequestId: randomUUID() });
-const post = (body: unknown, target = id, actor = supervisor) => request(app()).post(`/api/submissions/${target}/feedback`)
-  .set('Cookie', actor.cookie).set('Origin', origin).set('X-CSRF-Token', actor.csrf).set('Content-Type', 'application/json').send(JSON.stringify(body));
+const postJson = (body: string, target = id, actor = supervisor) => request(app()).post(`/api/submissions/${target}/feedback`)
+  .set('Cookie', actor.cookie).set('Origin', origin).set('X-CSRF-Token', actor.csrf).set('Content-Type', 'application/json').send(body);
+const post = (body: unknown, target = id, actor = supervisor) => postJson(JSON.stringify(body), target, actor);
 const get = (target = id, actor = supervisor) => request(app()).get(`/api/submissions/${target}/feedback`).set('Cookie', actor.cookie);
 beforeEach(async () => {
   fixtures = await createBaseFixtures(prisma);
@@ -35,6 +36,61 @@ beforeEach(async () => {
   id = saved.body.data.id;
 });
 afterAll(async () => { await cleanTestDatabase(prisma); await prisma.$disconnect(); });
+
+describe('Lab 7 approved feedback length', () => {
+  const limit = 6000;
+  const emoji = '\u{1F680}';
+  const cases = [5999, limit, 6001].flatMap(length => {
+    const spaced = 'a'.repeat(length - 2) + ' b';
+    const plain = 'a'.repeat(length);
+    const astral = emoji.repeat(length);
+    return [
+      { length, shape: 'plain text', content: plain, expected: plain },
+      { length, shape: 'astral emoji', content: astral, expected: astral },
+      { length, shape: 'trimmed whitespace with an interior space', content: '\t\u00a0' + spaced + '\n ', expected: spaced },
+    ];
+  });
+
+  it.each(cases)('L7-STS-01/02 checks $length code points of $shape', async ({ length, content, expected }) => {
+    expect([...expected]).toHaveLength(length);
+    const response = await post({ ...input(), content });
+    if (length > limit) {
+      expect(response.status).toBe(400);
+      expect(response.body.error).toMatchObject({ code: 'INVALID_INPUT', fields: { content: expect.any(String) } });
+      expect(await prisma.feedback.count({ where: { submissionId: id } })).toBe(0);
+      return;
+    }
+
+    expect(response.status, 'Expected feedback to be saved. API error: ' + JSON.stringify(response.body.error)).toBe(201);
+    const saved = response.body.data;
+    const row = await prisma.feedback.findUniqueOrThrow({ where: { id: saved.id } });
+    expect(row).toMatchObject({ content: expected, submissionId: id, supervisorId: fixtures.users.supA.id });
+    expect(saved.content).toBe(expected);
+    const student = await login('stu-a1@test.local');
+    expect((await get(id, student).expect(200)).body.data).toEqual([saved]);
+  });
+
+  it('L7-STS-03 accepts 6000 emoji encoded as JSON surrogate pairs', async () => {
+    const clientRequestId = randomUUID();
+    const body = '{"content":"' + '\\uD83D\\uDE80'.repeat(limit) + '","clientRequestId":"' + clientRequestId + '"}';
+    expect(Buffer.byteLength(body, 'utf8')).toBeGreaterThan(64 * 1024);
+    const response = await postJson(body);
+    expect(response.status, 'Expected escaped feedback to be saved. API error: ' + JSON.stringify(response.body.error)).toBe(201);
+    const saved = await prisma.feedback.findUniqueOrThrow({ where: { id: response.body.data.id } });
+    expect(saved.content).toBe(emoji.repeat(limit));
+    expect(saved.submissionId).toBe(id);
+  });
+
+  it('L7-STS-03 stores 6000 astral points in the migrated schema', async () => {
+    const content = emoji.repeat(limit);
+    const row = await prisma.feedback.create({
+      data: { submissionId: id, supervisorId: fixtures.users.supA.id, clientRequestId: randomUUID(), content },
+    });
+    const actual = await prisma.feedback.findUniqueOrThrow({ where: { id: row.id } });
+    expect(actual.content).toBe(content);
+    expect([...actual.content]).toHaveLength(limit);
+  });
+});
 
 describe('F-04 real sessions, immutable versions and idempotent retries', () => {
   it('T-17/T-20 persists server identity/time and returns only the DTO after application recreation', async () => {
@@ -104,7 +160,7 @@ describe('F-04 real sessions, immutable versions and idempotent retries', () => 
     supervisor = await login('sup-a@test.local'); await prisma.session.updateMany({ data: { revokedAt: new Date() } }); await get().expect(401);
     expect(await prisma.feedback.count()).toBe(0);
   });
-  it.each(['bad\u0000text','bad\ud800text','bad\udffftext', '', '  ', 'a'.repeat(4001)])('rejects invalid content %# with a field error and no write', async content => {
+  it.each(['bad\u0000text','bad\ud800text','bad\udffftext', '', '  ', 'a'.repeat(6001)])('rejects invalid content %# with a field error and no write', async content => {
     const result = await post({ ...input(), content }).expect(400);
     expect(result.body.error.code).toBe('INVALID_INPUT'); expect(result.body.error.fields.content).toBeTruthy();
     expect(await prisma.feedback.count()).toBe(0);
@@ -192,5 +248,74 @@ describe('F-04 transaction boundaries and actual driver conflicts', () => {
       expect(waiting).toBe(true);
     } finally { release(); await blocker; }
     expect((await pending).status).toBe(404); expect(await prisma.feedback.count()).toBe(0);
+  });
+});
+
+describe('Lab 7 GREEN scoped transport, authorization, replay and version-retention controls (L7-STS-03/04)', () => {
+  it('rejects valid JSON payloads above the 96 KiB feedback cap and the 64 KiB shared cap', async () => {
+    const parserError = {
+      code: 'INVALID_INPUT',
+      message: 'Provide a valid JSON body within the size limit.',
+      fields: {},
+    };
+    const feedbackJson = JSON.stringify(input()) + ' '.repeat(96 * 1024);
+    const feedbackResponse = await postJson(feedbackJson).expect(400);
+    expect(feedbackResponse.body.error).toEqual(parserError);
+    expect(await prisma.feedback.count()).toBe(0);
+
+    const milestoneJson = JSON.stringify({
+      title: 'Cap check',
+      description: 'An otherwise valid milestone.',
+      dueAt: '2035-05-01T00:00:00Z',
+    }) + ' '.repeat(64 * 1024);
+    const milestoneResponse = await request(app())
+      .post(`/api/teams/${fixtures.teams.teamA.id}/milestones`)
+      .set('Cookie', supervisor.cookie)
+      .set('Origin', origin)
+      .set('X-CSRF-Token', supervisor.csrf)
+      .set('Content-Type', 'application/json')
+      .send(milestoneJson)
+      .expect(400);
+    expect(milestoneResponse.body.error).toEqual(parserError);
+  });
+
+  it('enforces role/foreign-team scope, idempotent replay, and original v1 binding for 6000-code-point feedback', async () => {
+    const longContent = '\u{1F680}'.repeat(6000);
+    const key = randomUUID();
+
+    // Foreign supervisor and student cannot save valid 6000-point feedback
+    const foreignSup = await login('sup-b@test.local');
+    await post({ content: longContent, clientRequestId: key }, id, foreignSup).expect(404);
+    const stuA1 = await login('stu-a1@test.local');
+    await post({ content: longContent, clientRequestId: key }, id, stuA1).expect(403);
+    expect(await prisma.feedback.count()).toBe(0);
+
+    // Submit v2 revision first, then add 6000-point feedback onto original v1
+    const v2Res = await request(app())
+      .post(`/api/milestones/${fixtures.milestones.milestoneFuture.id}/revisions`)
+      .set('Cookie', stuA1.cookie)
+      .set('Origin', origin)
+      .set('X-CSRF-Token', stuA1.csrf)
+      .send({
+        title: 'Version two',
+        description: 'Revision before late v1 feedback.',
+        url: 'https://example.com/work-v2',
+        expectedVersion: 1,
+      })
+      .expect(201);
+    const v2Id = v2Res.body.data.id as string;
+
+    const firstSave = await post({ content: longContent, clientRequestId: key }, id).expect(201);
+    const replaySame = await post({ content: longContent, clientRequestId: key.toUpperCase() }, id).expect(200);
+    expect(replaySame.body.data.id).toBe(firstSave.body.data.id);
+
+    const replayChanged = await post({ content: 'Changed ' + '\u{1F680}'.repeat(5992), clientRequestId: key }, id).expect(409);
+    expect(replayChanged.body.error.code).toBe('REQUEST_KEY_REUSED');
+
+    const v1Feedback = (await get(id, stuA1).expect(200)).body.data;
+    const v2Feedback = (await get(v2Id, stuA1).expect(200)).body.data;
+    expect(v1Feedback).toHaveLength(1);
+    expect(v1Feedback[0].submissionId).toBe(id);
+    expect(v2Feedback).toEqual([]);
   });
 });
