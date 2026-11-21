@@ -1,0 +1,125 @@
+{
+  "sourceCommit": "84c4a31220898957be96c9a54cff0d6e37832821",
+  "checked": [
+    "Authenticated weighted overview agrees with the 1/10 API result and the 9 matching pending milestones.",
+    "Keyboard focus is visible and horizontal overflow is contained in the tables at narrow widths.",
+    "Team change and page-size change reset the page. Back, Forward, Next, reload, and detail return preserve URL state.",
+    "Empty page, zero matches, invalid filters, and an injected summary outage have working recovery controls.",
+    "The latest submission stays in Submitted when feedback belongs to an older version, and version links preserve the Summary filter.",
+    "A real student POST moves 1/10 to 2/10, reduces Pending matches from 9 to 8, advances asOf, and recovers from the empty second page.",
+    "A delayed first-supervisor response is discarded after sign-out/account change and the first supervisor detail is denied.",
+    "A supervisor without teams sees the dedicated empty state. Student navigation and API do not expose Summary."
+  ],
+  "widths": [
+    {
+      "width": 320,
+      "pageWidth": 320,
+      "tableOverflow": [
+        true,
+        true
+      ]
+    },
+    {
+      "width": 390,
+      "pageWidth": 390,
+      "tableOverflow": [
+        true,
+        true
+      ]
+    },
+    {
+      "width": 640,
+      "pageWidth": 640,
+      "tableOverflow": [
+        true,
+        true
+      ]
+    },
+    {
+      "width": 768,
+      "pageWidth": 768,
+      "tableOverflow": [
+        false,
+        true
+      ]
+    },
+    {
+      "width": 1280,
+      "pageWidth": 1280,
+      "tableOverflow": [
+        false,
+        false
+      ]
+    }
+  ],
+  "changedData": {
+    "request": "/api/summary?status=PENDING&page=2&pageSize=8",
+    "previous": {
+      "totals": {
+        "total": 10,
+        "submitted": 1,
+        "pending": 9,
+        "overdue": 0,
+        "progressPercent": 10
+      },
+      "matchedCount": 9
+    },
+    "next": {
+      "totals": {
+        "total": 10,
+        "submitted": 2,
+        "pending": 8,
+        "overdue": 0,
+        "progressPercent": 20
+      },
+      "matchedCount": 8,
+      "items": 0
+    },
+    "newAsOfObserved": true
+  },
+  "workedExample": {
+    "request": "/api/summary?status=PENDING&page=2&pageSize=8",
+    "totals": {
+      "total": 10,
+      "submitted": 1,
+      "pending": 9,
+      "overdue": 0,
+      "progressPercent": 10
+    },
+    "matchedCount": 9,
+    "teamProgressPercent": [
+      100,
+      0
+    ],
+    "items": [
+      {
+        "title": "Pending milestone 9",
+        "status": "PENDING"
+      }
+    ],
+    "sameServerTime": true
+  },
+  "engine": "Chromium",
+  "databaseReadback": {
+    "before": {
+      "teams": 2,
+      "active": 10,
+      "submitted": 1,
+      "pending": 9,
+      "overdue": 0,
+      "cancelled": 1,
+      "olderVersionFeedback": 1,
+      "latestRevisionFeedback": 0
+    },
+    "after": {
+      "teams": 2,
+      "active": 10,
+      "submitted": 2,
+      "pending": 8,
+      "overdue": 0,
+      "cancelled": 1,
+      "olderVersionFeedback": 1,
+      "latestRevisionFeedback": 0
+    }
+  }
+}

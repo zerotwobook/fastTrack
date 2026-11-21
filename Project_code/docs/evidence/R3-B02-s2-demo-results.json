@@ -1,0 +1,126 @@
+{
+  "verifiedAt": "2026-11-21T03:09:10.396Z",
+  "targetRef": "v1.0.0-sprint-2",
+  "targetSha": "f3ff8d9704c6e2a3705805412f538b2b216569ad",
+  "postgresImage": "postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae",
+  "postgresVersion": "postgres (PostgreSQL) 16.8 (Debian 16.8-1.pgdg120+1)",
+  "automatedChecks": {
+    "sts28Targeted": {
+      "command": "npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05b.b01.ts --reporter=verbose",
+      "passed": 9,
+      "failed": 0,
+      "skipped": 0,
+      "sts28Line": "✓ server/src/testing/milestones-f05b.b01.ts > F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) > STS-28 enforces auth, role, CSRF/origin, media type, UUID validation, and equal 404 for foreign/absent milestones 404ms"
+    },
+    "testB01": {
+      "command": "npm run test:b01",
+      "passed": 48,
+      "failed": 0,
+      "skipped": 0
+    },
+    "testB02": {
+      "command": "npm run test:b02",
+      "passed": 61,
+      "failed": 0,
+      "skipped": 0
+    }
+  },
+  "demo1F05B": {
+    "teamId": "dc5ae7bd-26c3-4dd4-9737-175b54c0c608",
+    "m1Before": {
+      "id": "62d2794f-4abc-4a41-9f8e-65ff0510f5db",
+      "teamId": "dc5ae7bd-26c3-4dd4-9737-175b54c0c608",
+      "createdById": "0c4b06e5-a4d3-49e7-a263-4abe23b92ad4",
+      "title": "Demo M1 Initial",
+      "description": "Initial milestone draft before supervisor schedule refinement.",
+      "dueAt": "2030-06-15T11:00:00.000Z",
+      "cancelledAt": null,
+      "createdAt": "2026-11-21T03:09:03.764Z",
+      "updatedAt": "2026-11-21T03:09:03.764Z"
+    },
+    "m1AfterEdit": {
+      "id": "62d2794f-4abc-4a41-9f8e-65ff0510f5db",
+      "teamId": "dc5ae7bd-26c3-4dd4-9737-175b54c0c608",
+      "createdById": "0c4b06e5-a4d3-49e7-a263-4abe23b92ad4",
+      "title": "Demo M1 Revised",
+      "description": "Updated milestone scope approved after baseline check.",
+      "dueAt": "2030-06-18T10:30:00.000Z",
+      "cancelledAt": null,
+      "createdAt": "2026-11-21T03:09:03.764Z",
+      "updatedAt": "2026-11-21T03:09:05.321Z"
+    },
+    "m2Before": {
+      "id": "e75f8527-c4e5-4340-ae56-2623ac3c0ae2",
+      "title": "Demo M2 Sibling",
+      "dueAt": "2030-06-20T11:00:00.000Z",
+      "cancelledAt": null
+    },
+    "m2AfterCancel": {
+      "id": "e75f8527-c4e5-4340-ae56-2623ac3c0ae2",
+      "title": "Demo M2 Sibling",
+      "dueAt": "2030-06-20T11:00:00.000Z",
+      "cancelledAt": "2026-11-21T03:09:06.232Z"
+    },
+    "teamMemberCountBefore": 2,
+    "teamMemberCountAfter": 2,
+    "postCancelPatch": {
+      "status": 409,
+      "code": "MILESTONE_CANCELLED"
+    },
+    "postCancelSubmit": {
+      "status": 409,
+      "code": "MILESTONE_CANCELLED"
+    },
+    "postSubmitLockedPatch": {
+      "status": 409,
+      "code": "MILESTONE_HISTORY_LOCKED"
+    },
+    "editButtonsHiddenAfterSubmit": true,
+    "railTextAfterSubmit": "Deadline18 Jun 2030, 17:30:00 (Asia/Bangkok)SubmittedLatest submission: version 1, 0 feedback messages.Open saved submissionA submission already exists for this milestone, so it cannot be edited or cancelled.Create another milestone",
+    "screenshots": [
+      "Project_code/docs/evidence/assets/s3-b02/d2-demo1-f05b-edited.png",
+      "Project_code/docs/evidence/assets/s3-b02/d2-demo1-f05b-cancelled.png"
+    ]
+  },
+  "demo2F06": {
+    "milestoneId": "62d2794f-4abc-4a41-9f8e-65ff0510f5db",
+    "submissions": [
+      {
+        "id": "26aa7d8a-2712-473c-ae96-84b313b18063",
+        "milestoneId": "62d2794f-4abc-4a41-9f8e-65ff0510f5db",
+        "submittedById": "67e8b3e7-c18a-4046-9f97-c5ce1a3fd19f",
+        "version": 1,
+        "title": "Sprint 2 Architecture Draft",
+        "description": "Initial architecture submission for version 1 review.",
+        "url": "https://example.com/team-a/architecture-v1",
+        "submittedAt": "2026-11-21T03:09:07.409Z"
+      },
+      {
+        "id": "7dc92cdb-4c0d-451c-b1dc-f761d66bf901",
+        "milestoneId": "62d2794f-4abc-4a41-9f8e-65ff0510f5db",
+        "submittedById": "67e8b3e7-c18a-4046-9f97-c5ce1a3fd19f",
+        "version": 2,
+        "title": "Sprint 2 Architecture Revised",
+        "description": "Addressed supervisor feedback and clarified state diagram in v2.",
+        "url": "https://example.com/team-a/architecture-v2",
+        "submittedAt": "2026-11-21T03:09:09.734Z"
+      }
+    ],
+    "v1ImmutabilityVerified": true,
+    "feedback": [
+      {
+        "id": "68158b43-5cbe-4128-aad4-86a0c9d916d7",
+        "submissionId": "26aa7d8a-2712-473c-ae96-84b313b18063",
+        "supervisorId": "0c4b06e5-a4d3-49e7-a263-4abe23b92ad4",
+        "content": "Feedback on version 1 baseline: clarify state diagram.",
+        "clientRequestId": "97e2efe1-6a8d-40d5-a729-1fda6f30767b",
+        "createdAt": "2026-11-21T03:09:08.941Z"
+      }
+    ],
+    "v2FeedbackCount": 0,
+    "screenshots": [
+      "Project_code/docs/evidence/assets/s3-b02/d2-demo2-f06-v2-latest.png",
+      "Project_code/docs/evidence/assets/s3-b02/d2-demo2-f06-v1-retained.png"
+    ]
+  }
+}
