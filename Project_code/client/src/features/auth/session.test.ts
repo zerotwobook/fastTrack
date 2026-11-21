@@ -214,3 +214,14 @@ describe('Visibility verification without losing same-session state', () => {
     verification.resolve(json(auth('a'))); await check; expect(store.getSnapshot()).toMatchObject({ phase: 'anonymous', auth: null });
   });
 });
+
+describe('supervisor summary login return URLs', () => {
+  it('keeps validated summary filters and pagination on return from sign-in', () => {
+    expect(safeReturnTo('/summary?status=OVERDUE&page=2&pageSize=8')).toBe('/summary?status=OVERDUE&page=2&pageSize=8');
+  });
+
+  it('rejects invalid or external summary destinations', () => {
+    expect(safeReturnTo('/summary?status=OVERDUE&status=PENDING')).toBe('/');
+    expect(safeReturnTo('//example.edu/summary')).toBe('/');
+  });
+});

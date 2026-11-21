@@ -5,6 +5,7 @@ import { createSubmissionRouter } from './submissions/index.js';
 import { createMilestoneRouter } from './milestones/index.js';
 import { createFeedbackRouter } from './feedback/index.js';
 import { createProgressRouter } from './progress/router.js';
+import { createSummaryRouter } from './reports/summary-router.js';
 
 /** Real fail-closed guards are mandatory for every composed domain route. */
 export function createApplicationRouters(deps: AuthDependencies) {
@@ -13,6 +14,7 @@ export function createApplicationRouters(deps: AuthDependencies) {
     auth: createAuthRouter({ ...deps, protection }),
     teams: createTeamsRouter({ ...deps, protection }),
     progress: createProgressRouter({ prisma: deps.prisma, protection }),
+    summary: createSummaryRouter({ prisma: deps.prisma, protection }),
     milestones: createMilestoneRouter({
       prisma: deps.prisma,
       getAuthContext: protection.getAuthContext,

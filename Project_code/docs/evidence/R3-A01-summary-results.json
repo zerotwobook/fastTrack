@@ -1,0 +1,1295 @@
+{
+  "task": "R3-A01",
+  "base": "06f5e8d1ed001c13b3c97c56ac5129ed22584618",
+  "datesAreLocalTo": "Asia/Bangkok",
+  "verifiedOn": "2026-11-20",
+  "unit": {
+    "source": "9cb4997abf5d7bb248241bbf4a7ef3f8be0c4515",
+    "command": "npm test",
+    "passed": 214,
+    "failed": 0,
+    "skipped": 0,
+    "files": [
+      {
+        "path": "server/src/app.test.ts",
+        "cases": [
+          {
+            "name": "API composition and safe transport reports process liveness and version without claiming database readiness",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport generates a new correlation ID instead of trusting caller input",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport does not expose unconfigured identity/domain endpoints",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport mounts explicit full relative routes without creating listeners or changing another app",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport redacts thrown errors and logs only method, route template, status, duration and request ID",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport preserves approved public domain errors and field details",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport rejects malformed JSON without echoing the original request",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport enforces the JSON type only where a router explicitly requests it",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport leaves request parsing after route protection instead of leaking input errors first",
+            "status": "passed"
+          },
+          {
+            "name": "API composition and safe transport serves the built shell on browser routes but keeps unknown API/assets JSON 404",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/config.test.ts",
+        "cases": [
+          {
+            "name": "runtime configuration loads the agreed local defaults without connecting to a database",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects invalid PORT \"0\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects invalid PORT \"65536\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects invalid PORT \"3000abc\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects invalid PORT \"3.5\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects invalid PORT \"\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects invalid PORT \"-1\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"https://example.com/path\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"https://user:secret@example.com\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"https://example.com?token=private\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"null\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"*\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"ftp://example.com\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"https://example.com/\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects an invalid origin \"https://example.com#fragment\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration requires the production HTTPS origin and exact release commit",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects missing or invalid database configuration undefined",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects missing or invalid database configuration \"\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects missing or invalid database configuration \"file:private.db\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost/a/b\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost/%\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects missing or invalid database configuration \"postgresql://localhost/%20\"",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration does not reveal secret values in configuration errors",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unsupported runtime modes, TTL changes and unsafe release labels",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero DB_POOL_MAX",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero DB_CONNECT_TIMEOUT_MS",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero DB_STATEMENT_TIMEOUT_MS",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero DB_QUERY_TIMEOUT_MS",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero READINESS_TIMEOUT_MS",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero LOGIN_RATE_LIMIT_MAX_FAILURES",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero LOGIN_RATE_LIMIT_WINDOW_SECONDS",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero LOGIN_RATE_LIMIT_LOCK_SECONDS",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration rejects unbounded or zero LOGIN_RATE_LIMIT_RETENTION_SECONDS",
+            "status": "passed"
+          },
+          {
+            "name": "runtime configuration requires explicit bounded proxy trust, ordered deadlines and adequate retention",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/db/test-database.test.ts",
+        "cases": [
+          {
+            "name": "test database safety boundary allows a separately named test database only in the explicit test environment",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects resets in \"development\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects resets in \"production\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects resets in undefined",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects the nonreserved database name \"fasttrack_dev\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects the nonreserved database name \"postgres\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects the nonreserved database name \"_test\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects the nonreserved database name \"fasttrack_testing\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects the protected DB even when credentials, schema and host spelling differ",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects a protected production name regardless of hostname",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects connection overrides \"host=production\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects connection overrides \"database=fasttrack_dev\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects connection overrides \"dbname=fasttrack_dev\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects connection overrides \"schema=other\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary rejects connection overrides \"options=-csearch_path%3Dother\"",
+            "status": "passed"
+          },
+          {
+            "name": "test database safety boundary requires the protected runtime DB and explicit test URL instead of falling back",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/operations/readiness.test.ts",
+        "cases": [
+          {
+            "name": "A01 bounded database readiness queries the configured database probe and reports the actual release without private data",
+            "status": "passed"
+          },
+          {
+            "name": "A01 bounded database readiness returns sanitized 503 on database failure and keeps liveness independent",
+            "status": "passed"
+          },
+          {
+            "name": "A01 bounded database readiness fails closed when no database probe is configured",
+            "status": "passed"
+          },
+          {
+            "name": "A01 bounded database readiness bounds response time and shares pending work instead of exhausting a pool with probes",
+            "status": "passed"
+          },
+          {
+            "name": "A01 bounded database readiness recovers after a rejected probe without an unhandled late error",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/auth/session.test.ts",
+        "cases": [
+          {
+            "name": "F-01 account isolation and recovery sends the current session CSRF for protected mutations and retains domain serverTime",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery supports explicit PATCH mutations with current CSRF and no-store options",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery drops a late mutation result after account change",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery uses the global receiver required by the browser Fetch API",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery T-27 discards old private reads after logout/account change without changing the new account",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery T-27 does not let an old 401 clear a newly authenticated account",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery T-27 clears current private state on expiry and on a navigation lock",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery T-27 clears private data immediately on sign-out and retains a safe retry if the request fails",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery T-23 restores only the latest session and uses same-origin/no-store request options",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 account isolation and recovery T-02 exposes useful network errors without retaining failed login credentials/private identity",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /milestones/11111111-1111-1111-1111-111111111111 with server-side scope still required",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /teams/11111111-1111-1111-1111-111111111111/milestones/new with server-side scope still required",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /milestones/11111111-1111-1111-1111-111111111111/submissions/new with server-side scope still required",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /milestones/11111111-1111-1111-1111-111111111111/revisions/new with server-side scope still required",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations permits implemented milestone/submission destination /submissions/11111111-1111-1111-1111-111111111111 with server-side scope still required",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations preserves a team progress destination after sign-in",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"https://foreign.example\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"//foreign.example\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/\\\\foreign.example\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/%2f%2fforeign.example\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/login\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/teams/invalid\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination \"/\\n/foreign.example\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 rejects unsafe/unimplemented destination null",
+            "status": "passed"
+          },
+          {
+            "name": "F-01 internal return-to destinations T-27 preserves an implemented internal path, whose API still rechecks scope",
+            "status": "passed"
+          },
+          {
+            "name": "F-03 private mutation recovery information retains the actual business code and field errors for truthful duplicate/deadline recovery",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state preserves the workspace revision only after the same user, role and CSRF are verified",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state destroys the old workspace revision on a changed account",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state destroys the old workspace revision on a changed session",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state destroys the old workspace revision on a changed role",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state keeps preserved state masked during an outage and permits a same-session retry",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state expiry invalidates preserved state instead of revealing the old workspace",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state does not let a delayed session check replace a newer login",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state an older visibility check cannot reveal a workspace after another suspension",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state holds an in-flight successful mutation until the same session is verified",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state rejects a held mutation if revalidation finds a different session",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state resumes an uncertain-save recovery read after verification and uses the same CSRF for a queued retry",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state does not send a queued mutation under a replacement account",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state logout invalidates queued reads and late verification without retaining private state",
+            "status": "passed"
+          },
+          {
+            "name": "Visibility verification without losing same-session state a current 401 from an in-flight private request immediately invalidates masked state",
+            "status": "passed"
+          },
+          {
+            "name": "supervisor summary login return URLs keeps validated summary filters and pagination on return from sign-in",
+            "status": "passed"
+          },
+          {
+            "name": "supervisor summary login return URLs rejects invalid or external summary destinations",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/milestones/input.test.ts",
+        "cases": [
+          {
+            "name": "Canonical milestone validation shared with the API rejects unsupported Unicode in title with a field error (\"\\u0000\")",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects unsupported Unicode in title with a field error (\"\\ud800\")",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects unsupported Unicode in title with a field error (\"\\udfff\")",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects unsupported Unicode in description with a field error (\"\\u0000\")",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects unsupported Unicode in description with a field error (\"\\ud800\")",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects unsupported Unicode in description with a field error (\"\\udfff\")",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API counts trimmed Unicode code points and permits the full description bound",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input null",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input undefined",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":3,\"description\":\"Complete this work.\",\"dueAt\":\"2030-01-02T18:30:00+07:00\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":\"Work\",\"description\":\"\",\"dueAt\":\"2030-01-02T18:30:00+07:00\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":\"Work\",\"description\":\"Complete this work.\",\"dueAt\":\"2030-01-02T18:30:00+07:00\",\"createdById\":\"forged\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid/authoritative input {\"title\":\"xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx\",\"description\":\"Complete this work.\",\"dueAt\":\"2030-01-02T18:30:00+07:00\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-02-30T12:00:00Z",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-01-01T12:00:00.1234Z",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-01-01T12:00:00",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API rejects invalid timestamp 2030-01-01T12:00:00+24:00",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API treats HH:mm as seconds 00 in Bangkok independent of host timezone",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API preserves the saved deadline 2030-05-10T11:30:59.000Z when editing only text",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API preserves the saved deadline 2030-05-10T11:30:59.501Z when editing only text",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API preserves the saved deadline 2030-05-10T18:30:00.001Z when editing only text",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API parses an edited Bangkok deadline with fractional seconds",
+            "status": "passed"
+          },
+          {
+            "name": "Canonical milestone validation shared with the API accepts only an empty plain object {} for milestone cancellation",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/milestones/overview.test.ts",
+        "cases": [
+          {
+            "name": "Student overview prioritization from authoritative server time separates actionable, overdue, submitted and cancelled rows without dropping or duplicating work",
+            "status": "passed"
+          },
+          {
+            "name": "Student overview prioritization from authoritative server time keeps the exact deadline equality actionable and the following millisecond overdue",
+            "status": "passed"
+          },
+          {
+            "name": "Student overview prioritization from authoritative server time sorts each group by dueAt then ID without mutating the API array",
+            "status": "passed"
+          },
+          {
+            "name": "Student overview prioritization from authoritative server time never offers submitted or cancelled work as actionable even before its deadline",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B supervisor planning state and locked reasons permits edit and cancel only for supervisors on active unsubmitted milestones",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B supervisor planning state and locked reasons explains why submitted and cancelled milestones are locked and allows creating another milestone",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/feedback/input.test.ts",
+        "cases": [
+          {
+            "name": "Shared Feedback Input Validation counts Unicode code points accurately without surrogate pair splitting",
+            "status": "passed"
+          },
+          {
+            "name": "Shared Feedback Input Validation validates feedback content within 1 to 6000 code points",
+            "status": "passed"
+          },
+          {
+            "name": "Shared Feedback Input Validation validates clientRequestId as UUID",
+            "status": "passed"
+          },
+          {
+            "name": "Shared Feedback Input Validation validates submissionId as UUID",
+            "status": "passed"
+          },
+          {
+            "name": "Shared Feedback Input Validation parseFeedbackInput validates valid objects and rejects unknown keys or bad shapes",
+            "status": "passed"
+          },
+          {
+            "name": "Feedback PostgreSQL text boundaries rejects invalid Unicode or null content 0",
+            "status": "passed"
+          },
+          {
+            "name": "Feedback PostgreSQL text boundaries rejects invalid Unicode or null content 1",
+            "status": "passed"
+          },
+          {
+            "name": "Feedback PostgreSQL text boundaries rejects invalid Unicode or null content 2",
+            "status": "passed"
+          },
+          {
+            "name": "Feedback PostgreSQL text boundaries accepts up to six thousand astral characters as code points",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/submissions/history.test.ts",
+        "cases": [
+          {
+            "name": "F-06 submission history helpers preserves terminal restrictions and allows a revision exactly at the deadline",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 submission history helpers identifies old-version views without mutating the source array and exposes the latest entry",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 submission history helpers uses ascending ID tie-break if identical versions exist and handles empty history safely",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/submissions/input.test.ts",
+        "cases": [
+          {
+            "name": "Shared first-submission input contracts trims work and preserves a validated URL without silently normalizing its content",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts accepts exact Unicode code-point maxima in title and description",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input null",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input undefined",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":false,\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\" \",\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\" ﻿\",\"url\":\"https://example.edu/work\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"ddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\",\"url\":\"https://example.edu/work\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\",\"submittedAt\":\"2030-01-01T00:00:00Z\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\",\"role\":\"student\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\",\"version\":1}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"\\ud800\",\"description\":\"Required details\",\"url\":\"https://example.edu/work\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects malformed, empty, oversized or authoritative input {\"title\":\"Work\",\"description\":\"bad\\u0000value\",\"url\":\"https://example.edu/work\"}",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL javascript:alert(1)",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL //example.edu/work",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https:example.edu",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL ftp://example.edu",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://u:p@example.edu",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://example.edu/a b",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://example.edu/\\evil",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts rejects an unsafe or incomplete work URL https://example.edu/\nsecret",
+            "status": "passed"
+          },
+          {
+            "name": "Shared first-submission input contracts accepts an exact 2,048-code-point URL and rejects one extra code point",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts accepts valid content fields paired with an integer expectedVersion in 1..2147483647",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion \"1\"",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion 0",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion -1",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion 1.5",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion null",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion 2147483648",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion null",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects non-integer, string, or out-of-range expectedVersion undefined",
+            "status": "passed"
+          },
+          {
+            "name": "F-06 revision input contracts rejects missing expectedVersion or authoritative/extra keys on revision payload",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/summary/DrilldownList.test.ts",
+        "cases": [
+          {
+            "name": "F-08B DrilldownList states, semantics, and recovery navigation renders semantic table rows, matching count, asOf, encoded returnTo links, and pagination links",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B DrilldownList states, semantics, and recovery navigation renders empty requested page recovery links while preserving active team and status filters",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B DrilldownList states, semantics, and recovery navigation distinguishes loading, invalid filters, error retry, no teams, and zero matches",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "client/src/features/summary/navigation.test.ts",
+        "cases": [
+          {
+            "name": "F-08B summary URL search and returnTo navigation parses default empty query and normalizes valid parameters",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary URL search and returnTo navigation rejects unknown, repeated, empty, malformed, out-of-range, and overflowing query parameters",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary URL search and returnTo navigation builds canonical summary URLs omitting defaults while preserving active filters and page",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary URL search and returnTo navigation sanitizes returnTo strictly to local /summary URLs with allowlisted validated parameters",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary URL search and returnTo navigation resolves supervisor-only detail return navigation with safe fallback for invalid inputs",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary URL search and returnTo navigation only accepts a single return parameter on a detail URL",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary URL search and returnTo navigation builds detail links with encoded summary returnTo and ignores unsafe return targets",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary URL search and returnTo navigation calculates total pages cleanly across empty and partial datasets",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/modules/auth/rate-limit.test.ts",
+        "cases": [
+          {
+            "name": "canonical server-selected login identity equates IPv4, dotted mapped IPv6 and hexadecimal mapped IPv6",
+            "status": "passed"
+          },
+          {
+            "name": "canonical server-selected login identity normalizes IPv6 spelling without merging different client addresses",
+            "status": "passed"
+          },
+          {
+            "name": "canonical server-selected login identity fails closed on invalid selected address undefined",
+            "status": "passed"
+          },
+          {
+            "name": "canonical server-selected login identity fails closed on invalid selected address ",
+            "status": "passed"
+          },
+          {
+            "name": "canonical server-selected login identity fails closed on invalid selected address untrusted",
+            "status": "passed"
+          },
+          {
+            "name": "canonical server-selected login identity fails closed on invalid selected address 127.0.0.1, 1.2.3.4",
+            "status": "passed"
+          },
+          {
+            "name": "canonical server-selected login identity fails closed on invalid selected address 127.000.0.1",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/modules/milestones/service.test.ts",
+        "cases": [
+          {
+            "name": "MilestoneService F-05B guard rails rejects test clock overrides when NODE_ENV is not test",
+            "status": "passed"
+          },
+          {
+            "name": "MilestoneService F-05B guard rails enforces supervisor role, valid UUID, and strict input before touching the database",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/modules/progress/calculation.test.ts",
+        "cases": [
+          {
+            "name": "F-07 progress calculation counts submitted milestones once and excludes cancelled history from both totals",
+            "status": "passed"
+          },
+          {
+            "name": "F-07 progress calculation retains cancelled rows and returns a finite zero for an empty denominator",
+            "status": "passed"
+          },
+          {
+            "name": "F-07 progress calculation uses the supplied time and treats one millisecond after the deadline as overdue",
+            "status": "passed"
+          },
+          {
+            "name": "F-07 progress calculation rounds once to one decimal and uses counts when combining scoped rows for a future summary",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/modules/submissions/revisions.test.ts",
+        "cases": [
+          {
+            "name": "RevisionService F-06 guard rails and version ceiling rejects test clock overrides outside NODE_ENV=test",
+            "status": "passed"
+          },
+          {
+            "name": "RevisionService F-06 guard rails and version ceiling rejects non-student role, invalid UUID, and invalid revision input before transaction",
+            "status": "passed"
+          },
+          {
+            "name": "RevisionService F-06 guard rails and version ceiling checks expectedVersion conflict before 409 VERSION_LIMIT_REACHED at 2147483647 without inserting",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/modules/reports/summary-items.test.ts",
+        "cases": [
+          {
+            "name": "F-08B summary-items validation and scoping validates pagination bounds, status enum, and integer offsets",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary-items validation and scoping returns empty results without querying when supervisor has zero teams or selects an out-of-scope team",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B summary-items validation and scoping rejects malformed UUIDs or invalid asOf timestamps before touching SQL",
+            "status": "passed"
+          }
+        ]
+      }
+    ]
+  },
+  "database": {
+    "postgres": "16",
+    "source": "04ffd9b60c3cffa3534bdf92aaac37c3d50c6174",
+    "command": "npm run test:b01",
+    "passed": 57,
+    "failed": 0,
+    "skipped": 0,
+    "files": [
+      {
+        "path": "server/src/testing/milestones-f05b.b01.ts",
+        "cases": [
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-10 edits an active unsubmitted milestone (including overdue) and retains identity/team/createdAt",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-10 rejects incomplete, extra-key, over-bound, or invalid-Unicode PATCH payloads without writing",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-13 enforces exact DB-clock 1 ms future dueAt boundary and rechecks clock after lock wait",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-11 rejects edit and cancel once any submission exists while allowing new milestones in the same team",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-12 cancels active and overdue unsubmitted milestones, preserves rows, and enforces cancelled precedence",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-28 enforces auth, role, CSRF/origin, media type, UUID validation, and equal 404 for foreign/absent milestones",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-14 serializes concurrent cancel vs first-submit cleanly with no conflicting state",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-14 serializes concurrent edit vs first-submit so submit evaluates the committed dueAt",
+            "status": "passed"
+          },
+          {
+            "name": "F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) STS-30 retries confirmed rolled-back contention up to 3 attempts and returns sanitized 503 after exhaustion",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/testing/milestones-review.b01.ts",
+        "cases": [
+          {
+            "name": "B01 independent real-session regression requires every protection dependency at runtime",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-06 creates then reads identical persisted list/detail projections",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"tttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt\",\"description\":\"dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\"}",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 accepts exact canonical code-point maxima {\"title\":\"🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀🚀\",\"description\":\"d\"}",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression rejects unsupported Unicode in title as 400 before persistence (\"\\u0000\")",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression rejects unsupported Unicode in title as 400 before persistence (\"\\ud800\")",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression rejects unsupported Unicode in title as 400 before persistence (\"\\udfff\")",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression rejects unsupported Unicode in description as 400 before persistence (\"\\u0000\")",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression rejects unsupported Unicode in description as 400 before persistence (\"\\ud800\")",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression rejects unsupported Unicode in description as 400 before persistence (\"\\udfff\")",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 0 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 1 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 2 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 3 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 4 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 5 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 6 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 7 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 8 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 9 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 10 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects malformed/forged payload case 11 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 requires description and validates input shape before foreign scope",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-02-30T12:00:00+07:00 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00.1234Z without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T12:00:00 without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rejects invalid calendar/precision/zone 2030-01-01T25:00:00Z without writes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-07 checks session/role/CSRF before invalid JSON and rejects forged identity",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-07 conceals foreign versus missing milestone identity with equal 404 bodies",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-25 projects only latest-version feedback and preserves stable dueAt/id ordering",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-06 production composition exposes the real session-protected milestone routes",
+            "status": "passed"
+          },
+          {
+            "name": "B01 independent real-session regression T-08 rechecks database future time after waiting for the team lock",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/testing/summary-drilldown.b01.ts",
+        "cases": [
+          {
+            "name": "F-08B drill-down item query, sorting, pagination, snapshots, and scope (R3-B01) F08-STS-03 / worked example: matches cancelled-inclusive unfiltered counts and paged PENDING items",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B drill-down item query, sorting, pagination, snapshots, and scope (R3-B01) F08-STS-05: breaks tied dueAt timestamps deterministically by milestone ID across pages and handles out-of-range pages",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B drill-down item query, sorting, pagination, snapshots, and scope (R3-B01) F-07 parity: handles exact deadline equality, +1ms overdue, cancelled precedence, and ignores feedback on superseded versions",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B drill-down item query, sorting, pagination, snapshots, and scope (R3-B01) F08-STS-03: preserves repeatable-read snapshot isolation across concurrent submission commits and observes updates on later reads",
+            "status": "passed"
+          },
+          {
+            "name": "F-08B drill-down item query, sorting, pagination, snapshots, and scope (R3-B01) F08-STS-04: denies cross-team queries and milestone detail reads without revealing foreign data",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/testing/summary-overview.b01.ts",
+        "cases": [
+          {
+            "name": "F-08A real supervisor summary API uses weighted completion across assigned teams and filters matches independently",
+            "status": "passed"
+          },
+          {
+            "name": "F-08A real supervisor summary API keeps zero-team and cancelled-only results distinct and follows active/revision/feedback rules",
+            "status": "passed"
+          },
+          {
+            "name": "F-08A real supervisor summary API authenticates and checks role before input, rejects unsupported filters, and hides foreign teams",
+            "status": "passed"
+          },
+          {
+            "name": "F-08A real supervisor summary API keeps totals and items in one read-only repeatable snapshot when a submission commits between them",
+            "status": "passed"
+          }
+        ]
+      },
+      {
+        "path": "server/src/modules/milestones/milestones.b01.ts",
+        "cases": [
+          {
+            "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-06: assigned supervisor can create a milestone with future dueAt",
+            "status": "passed"
+          },
+          {
+            "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-07: student cannot create a milestone (403 Forbidden)",
+            "status": "passed"
+          },
+          {
+            "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-07: unassigned supervisor cannot create milestone for another team (404 Not Found)",
+            "status": "passed"
+          },
+          {
+            "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone with past dueAt (400 Bad Request)",
+            "status": "passed"
+          },
+          {
+            "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) rejects milestone title exceeding canonical bound of 120 chars (400 Bad Request)",
+            "status": "passed"
+          },
+          {
+            "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) T-25: student can list milestones for their assigned team",
+            "status": "passed"
+          },
+          {
+            "name": "Milestones Module (T-05, T-06, T-07, T-08, T-25) student cannot list milestones of an unassigned team (404 Not Found)",
+            "status": "passed"
+          }
+        ]
+      }
+    ]
+  },
+  "browser": {
+    "source": "9cb4997abf5d7bb248241bbf4a7ef3f8be0c4515",
+    "engine": "Chromium",
+    "checked": [
+      "Authenticated weighted overview agrees with the 1/10 API result and the 9 matching pending milestones.",
+      "Keyboard focus is visible and horizontal overflow is contained in the tables at narrow widths.",
+      "Team change and page-size change reset the page. Back, Forward, Next, reload, and detail return preserve URL state.",
+      "Empty page, zero matches, invalid filters, and an injected summary outage have working recovery controls.",
+      "A delayed first-supervisor response is discarded after sign-out/account change and the first supervisor detail is denied.",
+      "A supervisor without teams sees the dedicated empty state. Student navigation and API do not expose Summary."
+    ],
+    "widths": [
+      {
+        "width": 320,
+        "pageWidth": 320,
+        "tableOverflow": [
+          true,
+          true
+        ]
+      },
+      {
+        "width": 390,
+        "pageWidth": 390,
+        "tableOverflow": [
+          true,
+          true
+        ]
+      },
+      {
+        "width": 640,
+        "pageWidth": 640,
+        "tableOverflow": [
+          true,
+          true
+        ]
+      },
+      {
+        "width": 768,
+        "pageWidth": 768,
+        "tableOverflow": [
+          false,
+          true
+        ]
+      },
+      {
+        "width": 1280,
+        "pageWidth": 1280,
+        "tableOverflow": [
+          false,
+          false
+        ]
+      }
+    ],
+    "workedExample": {
+      "request": "/api/summary?status=PENDING&page=2&pageSize=8",
+      "totals": {
+        "total": 10,
+        "submitted": 1,
+        "pending": 9,
+        "overdue": 0,
+        "progressPercent": 10
+      },
+      "matchedCount": 9,
+      "teamProgressPercent": [
+        100,
+        0
+      ],
+      "items": [
+        {
+          "title": "Pending milestone 9",
+          "status": "PENDING"
+        }
+      ],
+      "sameServerTime": true
+    }
+  }
+}

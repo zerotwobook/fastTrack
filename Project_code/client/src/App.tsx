@@ -8,6 +8,7 @@ import { MilestoneCreate, MilestoneDetail, MilestoneTrack } from './features/mil
 import { RevisionCreate, SubmissionCreate, SubmissionDetail } from './features/submissions';
 import { FeedbackPanel } from './features/feedback';
 import { TeamProgress } from './features/progress/TeamProgress';
+import { SummaryPage } from './features/summary/SummaryPage';
 import { TeamCreate, TeamSettings } from './features/teams/TeamPlanning';
 import './app.css';
 
@@ -28,7 +29,10 @@ function Login({ state }: { state: SessionSnapshot }) {
     if (state.busy || submitting.current) return;
     submitting.current = true;
     if (await sessionStore.login(email, password)) {
-      history.replaceState(null, '', safeReturnTo(new URLSearchParams(location.search).get('returnTo') ?? location.pathname + location.hash));
+      const destination = location.pathname === '/summary'
+        ? location.pathname + location.search
+        : safeReturnTo(new URLSearchParams(location.search).get('returnTo') ?? location.pathname + location.hash);
+      history.replaceState(null, '', destination);
       window.dispatchEvent(new PopStateEvent('popstate'));
     } else setPassword('');
     submitting.current = false;
@@ -70,16 +74,20 @@ function Login({ state }: { state: SessionSnapshot }) {
     </div>
   </main>;
 }
-function Navigation({ role, teamsActive, onNavigate }: {
+function Navigation({ role, teamsActive, summaryActive, onNavigate }: {
   role: 'student' | 'supervisor';
   teamsActive: boolean;
+  summaryActive: boolean;
   onNavigate?: (event: MouseEvent<HTMLAnchorElement>) => void;
 }) {
   return <nav aria-label="Main navigation">
-    <a href="/" aria-current={teamsActive ? undefined : 'page'} onClick={onNavigate}><Icon name="overview" />Overview</a>
+    <a href="/" aria-current={teamsActive || summaryActive ? undefined : 'page'} onClick={onNavigate}><Icon name="overview" />Overview</a>
     <a href="/#teams" aria-current={teamsActive ? 'location' : undefined} onClick={onNavigate}>
       <Icon name="team" />{role === 'student' ? 'My team' : 'Supervised teams'}
     </a>
+    {role === 'supervisor' && <a href="/summary" aria-current={summaryActive ? 'page' : undefined} onClick={onNavigate}>
+      <Icon name="chart" />Summary
+    </a>}
   </nav>;
 }
 function trapNavigationFocus(event: KeyboardEvent<HTMLDialogElement>) {
@@ -92,7 +100,7 @@ function trapNavigationFocus(event: KeyboardEvent<HTMLDialogElement>) {
     event.preventDefault(); first?.focus();
   }
 }
-function Workspace({ state, path, hash }: { state: SessionSnapshot; path: string; hash: string }) {
+function Workspace({ state, path, search, hash }: { state: SessionSnapshot; path: string; search: string; hash: string }) {
   const user = state.auth!.user;
   const [result, setResult] = useState<{ revision: number; path: string; teams: Team[] } | null>(null);
   const [error, setError] = useState<string | null>(null);
@@ -113,6 +121,7 @@ function Workspace({ state, path, hash }: { state: SessionSnapshot; path: string
   const settingsId = /^\/teams\/([a-f0-9-]{36})\/settings$/i.exec(path)?.[1];
   const progressId = /^\/teams\/([a-f0-9-]{36})\/progress$/i.exec(path)?.[1];
   const creatingTeam = path === '/teams/new';
+  const summaryActive = path === '/summary';
   const milestoneId = /^\/milestones\/([a-f0-9-]{36})(?:\/(?:submissions|revisions)\/new)?$/i.exec(path)?.[1];
   const submissionId = /^\/submissions\/([a-f0-9-]{36})$/i.exec(path)?.[1];
   const submitting = path.endsWith('/submissions/new');
@@ -121,15 +130,15 @@ function Workspace({ state, path, hash }: { state: SessionSnapshot; path: string
   const validPath = path === '/' || detailId !== undefined || milestoneId !== undefined || submissionId !== undefined;
   useEffect(() => {
     let active = true; setError(null); setResult(null);
-    if (milestoneId || submissionId || settingsId || progressId || creatingTeam) return;
+    if (milestoneId || submissionId || settingsId || progressId || creatingTeam || summaryActive) return;
     if (!validPath) { setError('This page could not be found. Return to your overview.'); return; }
     void sessionStore.read<Team | Team[]>(detailId ? `/teams/${detailId}` : '/teams').then(data => {
       if (active) setResult({ revision: state.revision, path, teams: Array.isArray(data) ? data : [data] });
     }).catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
-  }, [state.revision, path, attempt, detailId, milestoneId, submissionId, settingsId, progressId, creatingTeam, validPath]);
+  }, [state.revision, path, attempt, detailId, milestoneId, submissionId, settingsId, progressId, creatingTeam, summaryActive, validPath]);
   const teams = result?.revision === state.revision && result.path === path ? result.teams : null;
-  const teamsActive = path !== '/' || hash === '#teams';
+  const teamsActive = !summaryActive && (path !== '/' || hash === '#teams');
   const teamsLoaded = teams !== null || error !== null;
   useLayoutEffect(() => {
     if (path === '/' && hash === '#teams' && teamsLoaded) {
@@ -150,10 +159,10 @@ function Workspace({ state, path, hash }: { state: SessionSnapshot; path: string
   };
 
   return <div className="application-shell">
-    <aside className="sidebar"><Brand /><Navigation role={user.role} teamsActive={teamsActive} /></aside>
+    <aside className="sidebar"><Brand /><Navigation role={user.role} teamsActive={teamsActive} summaryActive={summaryActive} /></aside>
     <dialog id="workspace-navigation" ref={dialog} className="navigation-dialog" aria-labelledby="navigation-title" onKeyDown={trapNavigationFocus} onClose={onMenuClose}>
       <div className="navigation-heading"><h2 id="navigation-title">Navigation</h2><Button className="close-menu" type="button" variant="ghost" aria-label="Close menu" onClick={() => dialog.current?.close()}><Icon name="close" /></Button></div>
-      <Navigation role={user.role} teamsActive={teamsActive} onNavigate={followMenuLink} />
+      <Navigation role={user.role} teamsActive={teamsActive} summaryActive={summaryActive} onNavigate={followMenuLink} />
     </dialog>
     <div className="workspace"><header className="app-header"><div className="app-header-inner">
       <div className="compact-brand">
@@ -168,7 +177,10 @@ function Workspace({ state, path, hash }: { state: SessionSnapshot; path: string
         <Button variant="ghost" type="button" onClick={() => { void sessionStore.logout(); }}>Sign out<Icon name="signOut" size={18} /></Button>
       </div>
     </div></header><main id={state.phase === 'ready' ? 'main-content' : undefined} className="workspace-content" tabIndex={-1}>
-      {creatingTeam || settingsId ? user.role === 'supervisor'
+      {summaryActive ? user.role === 'supervisor'
+        ? <SummaryPage search={search} />
+        : <EmptyState title="Summary is restricted to supervisors" action={<a href="/">Back to overview</a>} />
+        : creatingTeam || settingsId ? user.role === 'supervisor'
         ? (settingsId ? <TeamSettings key={settingsId} teamId={settingsId} /> : <TeamCreate />)
         : <EmptyState title="Team settings are restricted to supervisors" action={<a href="/">Back to overview</a>} />
         : progressId ? <TeamProgress key={progressId} teamId={progressId} />
@@ -209,13 +221,13 @@ function Workspace({ state, path, hash }: { state: SessionSnapshot; path: string
 }
 export function App() {
   const state = useSyncExternalStore(sessionStore.subscribe, sessionStore.getSnapshot);
-  const [route, setRoute] = useState(() => ({ path: location.pathname, hash: location.hash }));
+  const [route, setRoute] = useState(() => ({ path: location.pathname, search: location.search, hash: location.hash }));
   useEffect(() => {
     let currentPath = location.pathname;
     const syncRoute = () => {
       const pathChanged = location.pathname !== currentPath;
       currentPath = location.pathname;
-      setRoute({ path: currentPath, hash: location.hash });
+      setRoute({ path: currentPath, search: location.search, hash: location.hash });
       return pathChanged;
     };
     void sessionStore.restore();
@@ -230,6 +242,6 @@ export function App() {
     {state.phase === 'loading' || state.phase === 'checking' ? <main id="main-content" className="session-status" tabIndex={-1} role="status"><p className="wordmark">fastTrack</p><p>{state.recovery === 'logout' ? 'Signing out…' : 'Checking your session…'}</p></main>
     : state.phase === 'unavailable' ? <main id="main-content" className="session-status" tabIndex={-1}><h1>Unable to continue</h1><p role="alert">{state.error}</p><Button onClick={() => { void (state.recovery === 'logout' ? sessionStore.logout() : sessionStore.revalidate()); }}>{state.recovery === 'logout' ? 'Retry sign-out' : 'Try again'}</Button>{state.auth && <Button variant="ghost" onClick={() => { void sessionStore.logout(); }}>Sign out</Button>}</main>
     : !state.auth ? <Login state={state} /> : null}
-    <div hidden={state.phase !== 'ready'}>{state.auth && <Workspace key={state.revision} state={state} path={route.path} hash={route.hash} />}</div>
+    <div hidden={state.phase !== 'ready'}>{state.auth && <Workspace key={state.revision} state={state} path={route.path} search={route.search} hash={route.hash} />}</div>
   </>;
 }

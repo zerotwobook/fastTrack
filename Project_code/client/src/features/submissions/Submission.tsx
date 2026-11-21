@@ -9,6 +9,13 @@ import type { MilestoneItem } from '../milestones/MilestoneTrack';
 import { codePointLength } from '../../../../shared/milestones.mjs';
 import { isWorkUrl, parseRevisionInput, parseSubmissionInput, SubmissionInputError } from '../../../../shared/submissions.mjs';
 import { describeRevisionRestriction, describeSubmissionHistory } from './history';
+import { SummaryDetailBreadcrumb, SummaryRecoveryLinks } from '../summary/DrilldownList';
+import {
+  buildMilestoneDetailHref,
+  buildSubmissionDetailHref,
+  readSummaryReturnTo,
+  resolveDetailSummaryNavigation,
+} from '../summary/navigation';
 import styles from './submissions.module.css';
 
 export interface SubmissionRecord {
@@ -49,8 +56,9 @@ function SubmissionFormFields({ prefix, title, setTitle, description, setDescrip
   </>;
 }
 
-function VersionHistoryList({ items, currentId, latestId, keepDraft }: {
+function VersionHistoryList({ items, currentId, latestId, keepDraft, summaryHref }: {
   items: readonly SubmissionRecord[]; currentId?: string | undefined; latestId?: string | undefined; keepDraft?: boolean;
+  summaryHref?: string | null;
 }) {
   return <ul className={styles.historyList}>{items.map(row => {
     const isCurrent = row.id === currentId;
@@ -62,7 +70,7 @@ function VersionHistoryList({ items, currentId, latestId, keepDraft }: {
         {isCurrent && <span className={styles.historyBadge}>Current</span>}
         <p className={styles.historyMeta}>{row.title} &mdash; submitted by {row.submittedBy.displayName}, <time dateTime={row.submittedAt}>{formatBangkok(row.submittedAt)}</time></p>
       </div>
-      <a href={`/submissions/${row.id}`} target={keepDraft ? '_blank' : undefined} rel={keepDraft ? 'noopener noreferrer' : undefined} aria-current={isCurrent ? 'page' : undefined}>
+      <a href={buildSubmissionDetailHref(row.id, summaryHref)} target={keepDraft ? '_blank' : undefined} rel={keepDraft ? 'noopener noreferrer' : undefined} aria-current={isCurrent ? 'page' : undefined}>
         {isCurrent ? 'Viewing version' : `Open version ${row.version}${keepDraft ? ' in a new tab' : ''}`}
       </a>
     </li>;
@@ -328,7 +336,11 @@ export function RevisionCreate({ milestoneId, userRole }: { milestoneId: string;
   </>;
 }
 
-export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string; userRole?: 'student' | 'supervisor'; renderFeedback?: (submission: SubmissionRecord) => ReactNode }) {
+export function SubmissionDetail({ id, userRole, returnTo, renderFeedback }: { id: string; userRole?: 'student' | 'supervisor'; returnTo?: string | null | undefined; renderFeedback?: (submission: SubmissionRecord) => ReactNode }) {
+  const rawReturnTo = returnTo !== undefined
+    ? returnTo
+    : (typeof location !== 'undefined' ? readSummaryReturnTo(location.search) : null);
+  const summaryNav = resolveDetailSummaryNavigation(rawReturnTo, userRole);
   const [result, setResult] = useState<{ id: string; item: SubmissionRecord; milestone: MilestoneItem; team: Team; history: SubmissionRecord[]; serverTime: string } | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [attempt, setAttempt] = useState(0);
@@ -345,19 +357,20 @@ export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string;
     })().catch(reason => { if (active && !(reason instanceof StaleSessionError)) setError((reason as Error).message); });
     return () => { active = false; };
   }, [id, attempt]);
-  if (error) return <><h1>Submission unavailable</h1><div role="alert" className={styles.notice}><p>{error}</p><Button onClick={() => setAttempt(v => v + 1)}>Try again</Button><a href="/">Back to overview</a></div></>;
+  if (error) return <><h1>Submission unavailable</h1><div role="alert" className={styles.notice}><p>{error}</p><Button onClick={() => setAttempt(v => v + 1)}>Try again</Button><SummaryRecoveryLinks summaryNav={summaryNav} /></div></>;
   if (!result || result.id !== id) return <p role="status">Loading saved submission...</p>;
   const { item, milestone, team, history, serverTime } = result;
   const { orderedHistory, latest, isOldVersion } = describeSubmissionHistory(item, history);
   const restriction = describeRevisionRestriction(milestone, serverTime, latest?.version ?? item.version);
+  const milestoneHref = buildMilestoneDetailHref(milestone.id, summaryNav.summaryHref);
   return <>
-    <p className="breadcrumb"><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={`/milestones/${milestone.id}`}>{milestone.title}</a> / Saved submission</p>
+    <SummaryDetailBreadcrumb summaryNav={summaryNav}><a href={`/teams/${team.id}`}>{team.name}</a> / <a href={milestoneHref}>{milestone.title}</a> / Saved submission</SummaryDetailBreadcrumb>
     <h1>{item.title}</h1>
     <p className={styles.context}>Version {item.version}, submitted by {item.submittedBy.displayName}.</p>
     <p className={styles.context}><time dateTime={item.submittedAt}>{formatBangkok(item.submittedAt)}</time></p>
     {isOldVersion && latest && <div className={styles.notice} role="region" aria-label="Older version notice">
       <p>Viewing version {item.version}; the latest version is version {latest.version}.</p>
-      <a href={`/submissions/${latest.id}`}>View latest version</a>
+      <a href={buildSubmissionDetailHref(latest.id, summaryNav.summaryHref)}>View latest version</a>
     </div>}
     <div className={renderFeedback ? styles.withFeedback : styles.content}>
       <section aria-label="Saved work"><h2>Description</h2><p className={styles.description}>{item.description}</p>
@@ -366,7 +379,7 @@ export function SubmissionDetail({ id, userRole, renderFeedback }: { id: string;
           : <p className={styles.notice}>This saved link cannot be opened safely. Contact the submitting team member.</p>}
         <section className={styles.historySection} aria-label="Version history">
           <h2 className={styles.iconHeading}><Icon name="history" />Version history</h2>
-          <VersionHistoryList items={orderedHistory} currentId={item.id} latestId={latest?.id} />
+          <VersionHistoryList items={orderedHistory} currentId={item.id} latestId={latest?.id} summaryHref={summaryNav.summaryHref} />
           {userRole === 'student' && (restriction ? <p className={styles.historyMeta}>{restriction}</p>
             : <a className={`${styles.detailActionLink} ${styles.submitLink}`} href={`/milestones/${milestone.id}/revisions/new`}><Icon name="send" size={18} />Submit new revision</a>)}
         </section>

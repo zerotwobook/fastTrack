@@ -1,3 +1,5 @@
+import { sanitizeSummaryReturnTo } from '../summary/navigation';
+
 export interface User { id: string; displayName: string; role: 'student' | 'supervisor' }
 export interface AuthData { user: User; csrfToken: string }
 export interface Team { id: string; name: string; supervisor: Pick<User, 'id' | 'displayName'>; members: Pick<User, 'id' | 'displayName'>[] }
@@ -10,6 +12,8 @@ export interface DomainRead<T, Meta extends { serverTime: string } = { serverTim
 export class ApiError extends Error { constructor(readonly status: number, message: string, readonly fields: Readonly<Record<string, string>> = {}, readonly code: string | null = null) { super(message); } }
 export class StaleSessionError extends Error {}
 export function safeReturnTo(value: string | null): string {
+  const summary = sanitizeSummaryReturnTo(value);
+  if (summary) return summary;
   if (!value || !value.startsWith('/') || value.startsWith('//') || /[\u0000-\u0020\\]/.test(value)) return '/';
   try {
     const url = new URL(value, 'https://fasttrack.invalid');

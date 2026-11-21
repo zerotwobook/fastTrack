@@ -6,6 +6,12 @@ import { Icon } from '../../design/Icon';
 import { ApiError, sessionStore, StaleSessionError } from '../auth/session';
 import type { Team } from '../auth/session';
 import { describeRevisionRestriction } from '../submissions/history';
+import { SummaryDetailBreadcrumb, SummaryRecoveryLinks } from '../summary/DrilldownList';
+import {
+  buildSubmissionDetailHref,
+  readSummaryReturnTo,
+  resolveDetailSummaryNavigation,
+} from '../summary/navigation';
 import { bangkokInputToIso, codePointLength, isoToBangkokInput, MilestoneInputError, parseMilestoneInput } from '../../../../shared/milestones.mjs';
 import styles from './milestones.module.css';
 import { describeMilestonePlanning, groupStudentMilestones } from './overview';
@@ -211,7 +217,11 @@ function MilestoneEdit({ item, onBack, onReload, onSaved }: MilestoneEditProps) 
   </section>;
 }
 
-export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'student' | 'supervisor' }) {
+export function MilestoneDetail({ id, userRole, returnTo }: { id: string; userRole: 'student' | 'supervisor'; returnTo?: string | null | undefined }) {
+  const rawReturnTo = returnTo !== undefined
+    ? returnTo
+    : (typeof location !== 'undefined' ? readSummaryReturnTo(location.search) : null);
+  const summaryNav = resolveDetailSummaryNavigation(rawReturnTo, userRole);
   const [result, setResult] = useState<{ id: string; item: MilestoneItem; team: Team; serverTime: string } | null>(null);
   const [error, setError] = useState<string | null>(null); const [attempt, setAttempt] = useState(0);
   const [editing, setEditing] = useState(false);
@@ -246,7 +256,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
     if (statusNotice) statusNoticeRef.current?.focus();
   }, [statusNotice]);
 
-  if (error && (!result || result.id !== id)) return <><h1>Milestone unavailable</h1><Failure message={error} retry={() => setAttempt(value => value + 1)} /><a href="/">Back to overview</a></>;
+  if (error && (!result || result.id !== id)) return <><h1>Milestone unavailable</h1><Failure message={error} retry={() => setAttempt(value => value + 1)} /><SummaryRecoveryLinks summaryNav={summaryNav} /></>;
   if (!result || result.id !== id) return <p role="status">Loading milestone…</p>;
 
   const planning = describeMilestonePlanning(result.item, userRole);
@@ -284,7 +294,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
   const revisionRestriction = result.item.latestSubmission
     ? describeRevisionRestriction(result.item, result.serverTime, result.item.latestSubmission.version)
     : null;
-  return <><p className="breadcrumb"><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</p><h1>{result.item.title}</h1>
+  return <><SummaryDetailBreadcrumb summaryNav={summaryNav}><a href={`/teams/${result.team.id}`}>{result.team.name}</a> / Milestone</SummaryDetailBreadcrumb><h1>{result.item.title}</h1>
     {statusNotice && <div ref={statusNoticeRef} tabIndex={-1} role="status" className={styles.statusNotice}><p>{statusNotice}</p></div>}
     {error && <Failure message={error} retry={() => setAttempt(value => value + 1)} />}
     <div className={styles.detail}>
@@ -301,7 +311,7 @@ export function MilestoneDetail({ id, userRole }: { id: string; userRole: 'stude
       : <section><h2>Description</h2><p className={styles.description}>{result.item.description}</p></section>}
       <aside className={styles.rail}><h2>Deadline</h2><time dateTime={result.item.dueAt}>{formatBangkok(result.item.dueAt)}</time><StatusBadge status={milestoneStatus(result.item, result.serverTime)} />
         {result.item.cancelledAt && <p className={styles.meta}>Cancelled on {formatBangkok(result.item.cancelledAt)}.</p>}
-        {result.item.latestSubmission ? <><p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p><a className={styles.primaryLink} href={`/submissions/${result.item.latestSubmission.id}`}>Open saved submission</a>
+        {result.item.latestSubmission ? <><p>Latest submission: version {result.item.latestSubmission.version}, {result.item.latestSubmission.feedbackCount} feedback messages.</p><a className={styles.primaryLink} href={buildSubmissionDetailHref(result.item.latestSubmission.id, summaryNav.summaryHref)}>Open saved submission</a>
           {userRole === 'student' && (revisionRestriction ? <p>{revisionRestriction}</p>
             : <a className={`${styles.detailLink} ${styles.submitLink}`} href={`/milestones/${id}/revisions/new`}><Icon name="send" size={18} />Submit revision</a>)}</>
           : userRole === 'student' && (result.item.cancelledAt ? <p>This milestone was cancelled and cannot receive work.</p>
