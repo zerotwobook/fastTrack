@@ -46,6 +46,24 @@ The out-of-range page keeps the requested page number in the pager label and can
 
 The clean-clone socket stage built the production runner and jobs targets from 84c4a31 and passed all 17 checks. It verified the local image source labels, real migration and repeat migration, secure cookies, the compiled Sprint 1 business flow, stable record IDs and a valid session after container restart and repeat seed, and independent health and readiness behavior during database failure. The [local container results](R3-J01-socket-results.json) record the exact image IDs and cleanup.
 
-## Candidate and peer follow-up
+## Peer verification and hosted D2 release
 
-Use 84c4a31 as the locally tested application source when preparing the D2 release candidate. The team still needs the joint G2 readback on this source. B compares the overview totals with the database and A reviews the drill-down results. The hosted candidate URL, registry image digest, serving revision and traffic, and post-deploy business and persistence checks remain pending. [Issue #30](https://github.com/zerotwobook/fastTrack/issues/30)
+Atip-Infa independently repeated the isolated regression and F-08 UI, API and PostgreSQL checks against 84c4a31. The team accepted the local G2 result. The same application source reached main through reviewed PR #143 at merge commit 7872a739147f7553e16e05a4d40b5d0de0c21f27. Staging CI and main CI each recorded 483 passed, zero failed, zero skipped and 7/7 upgrade scenarios. [Integration Issue #30](https://github.com/zerotwobook/fastTrack/issues/30) · [Release PR #143](https://github.com/zerotwobook/fastTrack/pull/143) · [Main CI](https://github.com/zerotwobook/fastTrack/actions/runs/44885899889)
+
+The protected deployment run 44888588070 succeeded after independent demo environment approval by Atip-Infa. Cloud Run migration execution fasttrack-migrate-4lvx5 succeeded. Revision fasttrack-app-00005-rkz serves 100% of traffic. Both public health and readiness returned HTTP 200 and the exact main SHA. Readiness reported the database connected.
+
+| Artifact | SHA-256 digest |
+| --- | --- |
+| Pushed web OCI index | 7b868cd51b62db518dde4e22601930a9be7b8483bffb9409efd70742faf2c458 |
+| Served linux/amd64 web image within the OCI index | 440b3a4ac8fc41c76e14e5b72defcf264f597c19a272dde2f481a9f5ee82269a |
+| Migration jobs image | b49829f88464cc18f7aa6d2cb9be840e67cf9dd1b867eee18d3bf7e58ec4c718 |
+
+[Deployment logs](https://github.com/zerotwobook/fastTrack/actions/runs/44888588070/job/136800312369) · [Hosted demo](https://fasttrack-app-kpx7au3w2a-as.a.run.app)
+
+### Hosted readback and permissions
+
+B's Chromium run verified Summary at 6/14 (42.9%), retained the team, overdue status, page 2 and page size through milestone detail return, and found the page-one recovery link on an out-of-range page. The student Summary request returned 403. The second supervisor saw only their assigned team and received generic 404 for the foreign Summary filter and milestone. A independently matched Summary totals against the scoped, database-backed milestone list and confirmed disjoint team lists and equivalent foreign and absent errors.
+
+The assigned supervisor and team student read the original Sprint 1 team, milestone, submission and version-specific feedback. Their payloads matched the preserved C04 baseline during A's independent readback. B independently captured the readback and verified the canonical baseline fingerprint. Hosted checks used the application's scoped UI and HTTPS API. The isolated regression above includes direct PostgreSQL verification and a multi-team weighted aggregate. The pager wording remains a follow-up. The D2 tag is tracked in #33.
+
+[Hosted readback JSON](R3-B02-d2-post-deploy-readback.json) · [C04 baseline JSON](R2-J01-C04-baseline.json) · [Reviewed Part E](https://github.com/zerotwobook/fastTrack/pull/142)
