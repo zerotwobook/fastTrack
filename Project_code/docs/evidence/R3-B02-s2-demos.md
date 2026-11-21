@@ -12,9 +12,9 @@ Executed in a detached temporary clone of `f3ff8d9704c6e2a3705805412f538b2b21656
 
 | Check | Command | Observed Result |
 | --- | --- | --- |
-| Targeted `STS-28` & `F-05B` suite | `npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05b.b01.ts --reporter=verbose` | `1` file, `9 passed`, `0 failed` (`Duration 5.53s`) |
-| Full `B01` real-DB milestone/summary suite (`v1.0.0-sprint-2`) | `npm run test:b01` | `48 passed`, `0 failed` |
-| Full `B02` real-DB feedback/revision suite (`v1.0.0-sprint-2`) | `npm run test:b02` | `61 passed`, `0 failed` |
+| Targeted `STS-28` & `F-05B` suite | `npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05b.b01.ts --reporter=verbose` | `1` file, `9 passed`, `0 failed`, `0 skipped` (`Duration 5.53s`) |
+| Full `B01` real-DB milestone/summary suite (`v1.0.0-sprint-2`) | `npm run test:b01` | `48 passed`, `0 failed`, `0 skipped` |
+| Full `B02` real-DB feedback/revision suite (`v1.0.0-sprint-2`) | `npm run test:b02` | `61 passed`, `0 failed`, `0 skipped` |
 
 Exact `STS-28` line observed from the `--reporter=verbose` run:
 

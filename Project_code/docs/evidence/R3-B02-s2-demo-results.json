@@ -9,15 +9,20 @@
       "command": "npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05b.b01.ts --reporter=verbose",
       "passed": 9,
       "failed": 0,
-      "sts28Line": "\u001b[32m✓\u001b[39m server/src/testing/milestones-f05b.b01.ts\u001b[2m > \u001b[22mF-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30)\u001b[2m > \u001b[22mSTS-10 edits an active unsubmitted milestone (including overdue) and retains identity/team/createdAt\u001b[33m 637\u001b[2mms\u001b[22m\u001b[39m"
+      "skipped": 0,
+      "sts28Line": "✓ server/src/testing/milestones-f05b.b01.ts > F-05B Milestone edit and cancel (STS-10..STS-14, STS-28, STS-30) > STS-28 enforces auth, role, CSRF/origin, media type, UUID validation, and equal 404 for foreign/absent milestones 404ms"
     },
     "testB01": {
+      "command": "npm run test:b01",
       "passed": 48,
-      "failed": 0
+      "failed": 0,
+      "skipped": 0
     },
     "testB02": {
+      "command": "npm run test:b02",
       "passed": 61,
-      "failed": 0
+      "failed": 0,
+      "skipped": 0
     }
   },
   "demo1F05B": {

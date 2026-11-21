@@ -17,14 +17,14 @@ All Sprint 2 behavioral boundaries were agreed before implementation in [sprint-
 | **F-05A — Team Creation & Member Management** | A | Team planning API (`STS-01..09`, `STS-28`); UI routes `/teams/new`, `/teams/:id/settings` (`TeamCreate`, `TeamSettings`) | Supervisor-only scoped team creation, rename, student candidate paging, and membership updates; one active team per student (`TeamMember`); membership locks once submission history exists (including cancelled milestones); foreign and absent lookups collapse identically. | Verified in `v1.0.0-sprint-2` `test:auth` (`46` passed, covering `F-05A STS-01..STS-09` & `STS-28`) and `test:g1` (`38` passed) |
 | **F-05B — Milestone Edit & Cancel** | B | `PATCH /api/milestones/:id`, `POST /api/milestones/:id/cancel`, `MilestoneEdit`, `MilestoneDetail` | Assigned supervisor only (`403` for students, uniform `404` for foreign/absent milestones); millisecond-exact DB-clock `dueAt > now` check re-verified under row lock (`STS-13`); editing/cancelling blocked (`409 MILESTONE_HISTORY_LOCKED`) once any submission exists (`STS-11`); cancellation preserves record (`cancelledAt`) and rejects future writes (`409 MILESTONE_CANCELLED`, `STS-12`, `STS-14`). | Verified in `v1.0.0-sprint-2` `ordinary` + `test:b01` (`48` passed, including `STS-10..STS-14`, `STS-28`, `STS-30`) |
 | **F-06 — Submission Revision History & Version-Pinned Feedback** | B | `POST /api/milestones/:id/revisions`, `GET /api/submissions/:id`, `GET /api/submissions/:id/feedback`, `RevisionCreate`, `SubmissionDetail`, `VersionHistoryList` | Requires existing `v1` and future/equal deadline in DB transaction lock (`STS-18`); requires `expectedVersion` matching latest row (`409 VERSION_CONFLICT` on stale/concurrent base, `STS-17`); inserts append-only `version = N + 1` leaving prior submissions and their `feedback.submissionId` links immutable (`STS-15..21`, `STS-28..30`). | Verified in `v1.0.0-sprint-2` `test:b02` (`61` passed, including `STS-15..STS-21`, `STS-28..STS-30`, plus Lab 7 `L7-STS-01..04`) |
-| **F-07 — Team Progress Overview & Calculation** | A | Team progress endpoint (`STS-23..28`, `STS-32`); UI route `/teams/:id/progress` (`TeamProgress`) and shared progress calculation | Active completion excludes `CANCELLED` milestones from denominator; counts any non-cancelled milestone with `>= 1` submission once regardless of revision/feedback count; status precedence checks cancelled -> feedback on latest version -> submitted -> overdue (`asOf > dueAt`) -> pending (`asOf === dueAt`). | Verified in `v1.0.0-sprint-2` `ordinary` (`198` passed) & `test:auth` (`46` passed, including `STS-23..STS-28` & `STS-32`) and reused as F-08's shared reporting contract |
+| **F-07 — Team Progress Overview & Calculation** | A | Team progress endpoint (`STS-23..28`, `STS-32`); UI route `/teams/:id/progress` (`TeamProgress`) and shared progress calculation | Active completion excludes `CANCELLED` milestones from denominator; counts any non-cancelled milestone with `>= 1` submission once regardless of revision/feedback count; status precedence checks cancelled -> feedback on latest version -> submitted -> overdue (`asOf > dueAt`) -> pending (`asOf <= dueAt`). | Verified in `v1.0.0-sprint-2` `ordinary` (`198` passed) & `test:auth` (`46` passed, including `STS-23..STS-28` & `STS-32`) and reused as F-08's shared reporting contract |
 
 #### Verified Automated Test & Build Results (`v1.0.0-sprint-2` @ `f3ff8d9704c6e2a3705805412f538b2b216569ad`)
 
 | Verification Run | Command / Workflow | Scope | Result (`PASS / FAIL / SKIPPED`) |
 | --- | --- | --- | --- |
 | Main CI & Docker Build | [GitHub Actions run 44719877378](https://github.com/zerotwobook/fastTrack/actions/runs/44719877378) (`test-and-docker`) | Clean build, `postgres:16.8` migrations, ordinary + G1 + auth + B01 + A02 + B02 + J03 + runtime suites + legacy upgrade check | **458 passed, 0 failed, 0 skipped** (`198` ordinary, `38` G1, `46` auth, `48` B01, `54` A02, `61` B02, `1` J03, `12` runtime) + **7/7** legacy upgrades passed |
-| Local Clean Checkout `B01` & `B02` Re-verification (B, `2026-11-21`) | `npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05b.b01.ts --reporter=verbose`; `npm run test:b01`; `npm run test:b02` | Clean detached clone of `f3ff8d97` against disposable `postgres:16.8` container | Targeted `milestones-f05b.b01.ts`: **9 passed, 0 failed** (`5.53s`); `test:b01`: **48 passed, 0 failed**; `test:b02`: **61 passed, 0 failed** |
+| Local Clean Checkout `B01` & `B02` Re-verification (B, `2026-11-21`) | `npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05b.b01.ts --reporter=verbose`; `npm run test:b01`; `npm run test:b02` | Clean detached clone of `f3ff8d97` against disposable `postgres:16.8` container | Targeted `milestones-f05b.b01.ts`: **9 passed, 0 failed, 0 skipped** (`5.53s`); `test:b01`: **48 passed, 0 failed, 0 skipped**; `test:b02`: **61 passed, 0 failed, 0 skipped** |
 | Sprint 2 Cloud Run Deployment | [GitHub Actions run 44719877524](https://github.com/zerotwobook/fastTrack/actions/runs/44719877524) | Migration job `fasttrack-migrate-8lncs`; Cloud Run revision `fasttrack-app-00004-jr2` (100% traffic) | Passed (`sha256:26916972...` web, `sha256:a26fb84e...` jobs); Sprint 1 production records preserved ([post-release readback](../../Project_code/docs/evidence/R2-J01-B-post-release-readback.json)) |
 
 ---
@@ -132,7 +132,7 @@ Both demos below were executed live on `2026-11-21` using headless Chromium (`14
   });
 ~~~
 
-- **Executed Command & Actual Output (`2026-11-21` on clean `v1.0.0-sprint-2@f3ff8d9` + disposable PostgreSQL `16.8`):**
+- **Executed Command & Actual Output (`2026-11-21` on clean `v1.0.0-sprint-2@f3ff8d9` + disposable PostgreSQL `16.8`, `9 passed, 0 failed, 0 skipped`):**
 
 ~~~text
 $ npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05b.b01.ts --reporter=verbose
@@ -160,22 +160,21 @@ $ npx vitest run --config vitest.b01.config.ts server/src/testing/milestones-f05
 
 ## Part E — Release Verification, Deployment & Clean Setup (15 points)
 
-**Current Gate Status:** **Pre-Deployment Checklist Prepared (`staging/sprint-3` Candidate Verified Locally & on Staging CI; Hosted D2 `main` Release Pending Authorization).** Per [MAIN_RELEASE_GATE.md](../../workflow/MAIN_RELEASE_GATE.md), no candidate enters `main` without explicit user review and authorization of the exact head/base release candidate.
+**Current Gate Status:** **Authorized `main` Merge & CI Passed (`7872a739`, Run `44885899889`); Cloud Run Deployment Blocked (`waiting` for `demo` Environment Reviewer on Run `44885899928`), Post-Deploy Readback Pending.** Per [MAIN_RELEASE_GATE.md](../../workflow/MAIN_RELEASE_GATE.md), release PR [`#143`](https://github.com/zerotwobook/fastTrack/pull/143) received explicit owner authorization (`2026-11-21T08:35:06Z`), non-author peer approval (`@Atip-Infa`), and merged into `main` on `2026-11-21T08:39:25Z` as `7872a739147f7553e16e05a4d40b5d0de0c21f27`.
 
-### E.1 Pre-Release Staging Integration Baseline (`staging/sprint-3` @ `84c4a31`)
-
-Before requesting `main` deployment authorization, both staging CI and B's independent clean-clone G2 verification (`#30`) exercised candidate commit `84c4a31220898957be96c9a54cff0d6e37832821`:
+### E.1 Pre-Release Staging & `main` Release Verification
 
 | Verification Source | Commit | Environment | Result Summary |
 | --- | --- | --- | --- |
-| Staging CI (`44777769845`) | `84c4a31220898957be96c9a54cff0d6e37832821` | GitHub Actions, `postgres:16.8` (`Debian 16.8-1.pgdg120+1`) | **483 passed, 0 failed, 0 skipped** (`214` ordinary, `38` G1, `46` auth, `57` B01, `54` A02, `61` B02, `1` J03, `12` runtime) + `7/7` upgrades passed (`ci-runtime-report`) |
-| B Independent G2 Verification ([Issue #30](https://github.com/zerotwobook/fastTrack/issues/30)) | `84c4a31220898957be96c9a54cff0d6e37832821` | Separate clean clone (`npm ci`, `npm run test:runtime:isolated`, Docker `postgres:16.8`, compiled Chromium) | **G2 ACCEPTED** with `483/483` automated passes, `1/10 (10.0%)` -> `2/10 (20.0%)` live F-08 readback, filter/page preservation across milestone round-trip, supervisor scope isolation, student HTTP `403`, and reproduced minor `"Page 2 of 1"` label tracked as follow-up (`F08-AC-05/08`) |
+| Staging CI ([Run `44777769845`](https://github.com/zerotwobook/fastTrack/actions/runs/44777769845)) & `PR #143` CI ([`44874070498`](https://github.com/zerotwobook/fastTrack/actions/runs/44874070498), [`44881698859`](https://github.com/zerotwobook/fastTrack/actions/runs/44881698859)) | `84c4a31` -> `6db6a346f32f4d1cce7caa7cc77a1d6db4d872f2` | GitHub Actions, `postgres:16.8` (`Debian 16.8-1.pgdg120+1`) | **483 passed, 0 failed, 0 skipped** (`214` ordinary, `38` G1, `46` auth, `57` B01, `54` A02, `61` B02, `1` J03, `12` runtime) + `7/7` upgrades passed (`ci-runtime-report`); `PR #143` exact-head CI runs completed `success` |
+| B Independent G2 & `PR #143` Review ([Issue #30](https://github.com/zerotwobook/fastTrack/issues/30)) | `84c4a31`, `6db6a34` | Separate clean checkouts (`npm ci`, `npm run test:runtime:isolated`, Docker `postgres:16.8`, Unix-socket images, headless Chromium) | **483 passed, 0 failed, 0 skipped**, **7/7** upgrade cases (`upgrades.passed: true`), **17/17** container/Unix-socket checks, DB/API/UI `1/10 (10.0%)` -> `2/10 (20.0%)` F-08 parity, filter/page `?status=PENDING&page=2&pageSize=8` preserved across milestone round-trip, student `403`, foreign supervisor `404`, `"Page 2 of 1"` label with working `Go to page 1` recovery; `GHSA-7589-6fvf-x4pw` (`effect@3.20.0`, `devOptional: true` via `@prisma/config@7.10.1` -> `prisma@7.10.1`) tracked as non-blocking post-D2 follow-up |
+| Post-merge `main` CI & Docker Build ([Run `44885899889`](https://github.com/zerotwobook/fastTrack/actions/runs/44885899889)) | `7872a739147f7553e16e05a4d40b5d0de0c21f27` (`PR #143` merge) | GitHub Actions, `postgres:16.8` (`Debian 16.8-1.pgdg120+1`) | **483 passed, 0 failed, 0 skipped** (`214` ordinary, `38` G1, `46` auth, `57` B01, `54` A02, `61` B02, `1` J03, `12` runtime) + `7/7` upgrade cases (`upgrades.passed: true`) |
 
 ### E.2 Clean Setup & Verification Reproduction Steps (`NFR-04`)
 
 All application source lives under `Project_code/` with runtime versions pinned in [`Project_code/.node-version`](../../Project_code/.node-version) (`Node 26.13.0`, `npm 11.20.0`) and base images pinned by SHA-256 digest in [`Project_code/Dockerfile`](../../Project_code/Dockerfile) and [`Project_code/compose.yaml`](../../Project_code/compose.yaml).
 
-> **Documentation Sync Note:** [`Project_code/README.md`](../../Project_code/README.md) currently stops at Sprint 1 / partial Sprint 2 layout details (`F-05B`, `F-06`, `F-08`, and `npm run test:runtime:isolated` are not yet documented there) and should be updated cleanly before G3 / D2 final assembly.
+> **Documentation Sync Note:** [`Project_code/README.md`](../../Project_code/README.md) on `staging/sprint-3` / `main` still reflects the pre-sync Sprint 1/2 baseline; Member A updated `Project_code/README.md` (`Clean-container regression`, `Sprint 2 and Sprint 3 workflow checks`, updated layout) in open Draft PR [`#139`](https://github.com/zerotwobook/fastTrack/pull/139), pending merge into `staging/sprint-3`.
 
 1. **Prerequisites & Environment Files (Non-Production Placeholders Only):**
    - Install Node `26.13.0` (`npm 11.20.0`) and Docker Engine / Docker Desktop.
@@ -205,45 +204,46 @@ Seeded synthetic accounts for local evaluation only: `supervisor.a@fasttrack.loc
 
 ---
 
-### E.3 Post-Deploy D2 Release Evidence Checklist (Populate After Authorized `main` Deployment)
+### E.3 Post-Deploy D2 Release Evidence Checklist (Blocked on `44885899928` Environment Review)
 
-This checklist defines the exact evidence items to capture immediately after the team authorizes the D2 release PR to `main` and Cloud Run deployment completes:
+This checklist captures the verified D2 `main` merge and CI baseline alongside the remaining post-deployment items to populate once the blocked `deploy` job in Actions run `44885899928` is coordinated and completed:
 
 #### 1. Release Commit, Tag, CI & Container Artifacts
 
-| Evidence Item | Target / Format | Status | Recorded Value (`Populate Post-Deploy`) |
+| Evidence Item | Target / Format | Status | Recorded Value |
 | --- | --- | --- | --- |
-| Accepted `main` release PR & merge SHA | PR `#...`, 40-char commit SHA | Pending D2 release authorization | `_PENDING_` |
-| Release Git tag | `v1.0.0-d2` (or agreed D2 tag) -> `<sha>` | Pending D2 release authorization | `_PENDING_` |
-| `main` CI & Docker Build run | GitHub Actions run URL + `PASS / FAIL / SKIPPED` totals (`ci-runtime-report`) | Pending D2 release authorization | `_PENDING_` |
-| Container image digests (`web` & `jobs`) | `sha256:...` pushed to Artifact Registry | Pending D2 release authorization | `_PENDING_` |
-| Cloud Run migration job & active service revision | Job execution ID, Cloud Run revision name (`100%` traffic) | Pending D2 release authorization | `_PENDING_` |
-| Public HTTPS URL & readiness endpoints | `https://...` + live HTTP `200` on `/api/health` and `/api/ready` (`RELEASE_SHA` matches tag) | Pending D2 release authorization | `_PENDING_` |
+| Accepted `main` release PR & merge SHA | Release PR, 40-char commit SHA | **Recorded** | [PR `#143`](https://github.com/zerotwobook/fastTrack/pull/143) (`6db6a346f32f4d1cce7caa7cc77a1d6db4d872f2` -> `f3ff8d9704c6e2a3705805412f538b2b216569ad`), merged `2026-11-21T08:39:25Z` as `7872a739147f7553e16e05a4d40b5d0de0c21f27` |
+| Release Git tag | D2 release tag -> `7872a739147f7553e16e05a4d40b5d0de0c21f27` | Pending tag creation | `_PENDING_` |
+| `main` CI & Docker Build run | GitHub Actions run URL + `PASS / FAIL / SKIPPED` totals (`ci-runtime-report`) | **Passed** | [Run `44885899889`](https://github.com/zerotwobook/fastTrack/actions/runs/44885899889): `483 passed, 0 failed, 0 skipped` (`214` ordinary, `38` G1, `46` auth, `57` B01, `54` A02, `61` B02, `1` J03, `12` runtime) + `7/7` upgrade cases (`upgrades.passed: true`) |
+| `Deploy demo` workflow run | GitHub Actions deployment workflow (`demo` environment) | **Blocked** (`waiting`) | [Run `44885899928`](https://github.com/zerotwobook/fastTrack/actions/runs/44885899928): `test / test-and-docker` `completed/success`; `deploy` job `136791795910` `waiting` on `demo` environment approval (`@Atip-Infa` triggered the merge run, is the sole configured `demo` reviewer, and `prevent_self_review: true` is enabled -> `current_user_can_approve: false`; requires coordination with a separate authorized reviewer while keeping the existing approval requirement enabled) |
+| Container image digests (`web` & `jobs`) | `sha256:...` pushed to Artifact Registry | Blocked on deploy `44885899928` | `_PENDING_` |
+| Cloud Run migration job & active service revision | Job execution ID, Cloud Run revision name (`100%` traffic) | Blocked on deploy `44885899928` | `_PENDING_` |
+| Public HTTPS URL & readiness endpoints | `https://...` + live HTTP `200` on `/api/health` and `/api/ready` (`version` matches `7872a739147f7553e16e05a4d40b5d0de0c21f27`) | Blocked on deploy `44885899928` | `_PENDING_` |
 
 #### 2. Original Sprint 1 Production Persistence Readback (Preserved Across Upgrades)
 
 Verify that the original Lab 5 baseline records documented in [`R2-J01-B-post-release-readback.json`](../../Project_code/docs/evidence/R2-J01-B-post-release-readback.json) (`canonicalRecordsSha256: c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e`) remain completely intact in the hosted D2 database without silent mutation or migration data loss:
 
-- [ ] **Team A preserved:** `teamId = 7c600ee0-a595-4c52-a093-f0ed5e08fded` (`GET /api/teams/7c600ee0-a595-4c52-a093-f0ed5e08fded`) -> `_PENDING_`
-- [ ] **Original Sprint 1 Milestone preserved:** `milestoneId = b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d` (`GET /api/milestones/b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d`) -> `_PENDING_`
-- [ ] **Original Sprint 1 Submission preserved:** `submissionId = baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd` (`GET /api/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd`) -> `_PENDING_`
-- [ ] **Original Sprint 1 Feedback preserved:** `feedbackId = b9ebf7f7-a542-4b89-95a8-8f1de22a5357` (`GET /api/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd/feedback`) -> `_PENDING_`
+- [ ] **Team A preserved:** `teamId = 7c600ee0-a595-4c52-a093-f0ed5e08fded` (`GET /api/teams/7c600ee0-a595-4c52-a093-f0ed5e08fded`) -> `_PENDING_` (blocked on `44885899928` deploy)
+- [ ] **Original Sprint 1 Milestone preserved:** `milestoneId = b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d` (`GET /api/milestones/b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d`) -> `_PENDING_` (blocked on `44885899928` deploy)
+- [ ] **Original Sprint 1 Submission preserved:** `submissionId = baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd` (`GET /api/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd`) -> `_PENDING_` (blocked on `44885899928` deploy)
+- [ ] **Original Sprint 1 Feedback preserved:** `feedbackId = b9ebf7f7-a542-4b89-95a8-8f1de22a5357` (`GET /api/submissions/baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd/feedback`) -> `_PENDING_` (blocked on `44885899928` deploy)
 
 #### 3. Post-Deploy Hosted `F-08` Scope & Functional Verification Re-run
 
-- [ ] **Supervisor A `/summary` & `GET /api/summary`:** Weighted completion matches DB totals (active milestones only, excluding cancelled); team filter, status filter, and pagination match live rows; opening a milestone and navigating back preserves query parameters and page state -> `_PENDING_`
-- [ ] **Student role enforcement:** Signed-in student navigation omits **Summary**, `/summary` shows restricted notice, and `GET /api/summary` returns HTTP `403` -> `_PENDING_`
-- [ ] **Cross-supervisor ownership isolation:** Second supervisor sees only assigned teams on `/summary`, receives generic `404` on first supervisor's team/milestone, and never receives first supervisor team/milestone data -> `_PENDING_`
-- [ ] **Page-label follow-up disposition (`F08-AC-05/08`):** Confirm whether `"Page 2 of 1"` on empty over-paged requests was fixed prior to D2 deploy or documented as a known minor non-blocking follow-up per Issue `#30` -> `_PENDING_`
+- [ ] **Supervisor A `/summary` & `GET /api/summary`:** Weighted completion matches API and DB totals (active milestones only, excluding cancelled); team filter, status filter, and pagination match live rows; opening a milestone and navigating back preserves query parameters and page state -> `_PENDING_` (blocked on `44885899928` deploy)
+- [ ] **Student role enforcement:** Signed-in student navigation omits **Summary**, `/summary` shows restricted notice, and `GET /api/summary` returns HTTP `403` -> `_PENDING_` (blocked on `44885899928` deploy)
+- [ ] **Cross-supervisor ownership isolation:** Second supervisor sees only assigned teams on `/summary`, receives generic `404` on first supervisor's team/milestone, and never receives first supervisor team/milestone data -> `_PENDING_` (blocked on `44885899928` deploy)
+- [ ] **Page-label follow-up disposition (`F08-AC-05/08`):** Confirm `"Page 2 of 1"` behavior and working `Go to page 1` recovery on the hosted deployment (retained cleanly as post-D2 follow-up per PR `#143` review) -> `_PENDING_` (blocked on `44885899928` deploy)
 
 #### 4. Final Timeline, AI & Human Accountability Statement
 
 | Milestone | Target Date (`Asia/Bangkok`) | Owner / Gate |
 | --- | --- | --- |
-| Closeout of PR `#139` + B's D2 PR + `"Page 2 of 1"` / `README.md` decision + Lab 7 final sync (`#141`) | Before `2026-11-29` | A & B (`G3` staging integration) |
-| User review & explicit authorization of D2 `main` release -> cloud deployment -> Part E live readback | Before `2026-11-29` | Human release gate (`MAIN_RELEASE_GATE.md`) + B/A readback |
-| Final D2 PDF (`#33`) & Lab 7 submission | `2026-11-29 23:59` | B compiles & checks; team reviews & submits |
-| Course final project maintenance / closeout window | `2026-12-01` – `2026-12-13 23:59` | A & B per [03_SPRINT3_D2_FINAL.md](../../workflow/03_SPRINT3_D2_FINAL.md) |
+| Coordinate separate authorized reviewer for `demo` deployment ([Run `44885899928`](https://github.com/zerotwobook/fastTrack/actions/runs/44885899928)) with approval rule intact -> D2 Cloud Run rollout -> `#30` / Part E live readback | `2026-11-21` – `2026-11-27` | Owner (`@zerotwobook`) + B (`@Atip-Infa`) deployment coordination & post-deploy verification |
+| Closeout of PR `#138`, PR `#139`, and B's PR `#142` (`#141` Lab 7 archive merged `6db6a34`) | Before `2026-11-29` | A & B (`G3` staging integration) |
+| Final D2 PDF (`#33`) & Lab 7 submission | `2026-11-29 23:59` | A submits Lab 7; B/A assemble D2 PDF and submit with receipts |
+| Course final project maintenance / closeout window (`"Page 2 of 1"` fix, `GHSA-7589-6fvf-x4pw` follow-up, final UAT) | `2026-12-01` – `2026-12-13 23:59` | A & B per [03_SPRINT3_D2_FINAL.md](../../workflow/03_SPRINT3_D2_FINAL.md) |
 
 - **Human & AI Usage Disclosure:** Member A authored Sprint 1 core fixes (`#23`), F-05A, F-07, F-08A, and D2 Parts A/C/D; Member B authored Sprint 1 DB schema/seed, F-05B, F-06, F-08B, D2 Parts B/E, and release verification. AI coding assistants helped draft test harnesses, Playwright verification scripts, and English documentation under direct human/tool verification; every SHA, CI count, DB row UUID, timestamp, and screenshot cited above was inspected against executed tool output and live database/browser state rather than unverified memory.
-- **Known Scope Limits Recorded Honestly:** As of this pre-release draft (`docs/s3-b-d2-release-evidence`), the hosted D2 cloud deployment has **not yet occurred**, so Section `E.3` cloud artifacts and post-deploy persistence readbacks remain explicitly marked `_PENDING_` until user authorization and deployment complete.
+- **Known Scope Limits Recorded Honestly:** As of this draft update (`docs/s3-b-d2-release-evidence`), PR `#143` has merged into `main` (`7872a739147f7553e16e05a4d40b5d0de0c21f27`) and passed `main` CI (`44885899889`), while the Cloud Run deployment ([Run `44885899928`](https://github.com/zerotwobook/fastTrack/actions/runs/44885899928)) is blocked awaiting coordination with a separate authorized reviewer on the `demo` environment (`@Atip-Infa` triggered the merge run, is the sole configured reviewer, and `prevent_self_review: true` is enabled) before `E.3` cloud artifacts, `/api/health` + `/api/ready` version checks, Sprint 1 production readbacks, and hosted F-08 re-checks can be populated. Non-blocking follow-ups tracked for post-D2 work (`1–13 Dec`): the `"Page 2 of 1"` empty-page label (`F08-AC-05/08`) and upgrading `effect@3.20.0` (`GHSA-7589-6fvf-x4pw`, `devOptional: true` under `@prisma/config@7.10.1` -> `prisma@7.10.1`).
