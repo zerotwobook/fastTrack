@@ -4,9 +4,11 @@
 
 The React client and API implement login/me/logout, DB-backed eight-hour sessions, source/CSRF protection, authorized team list/detail, milestone create/list/detail, first-submission create/list/detail and append-only exact-version feedback create/list. Students see actionable work before separate overdue/submitted groups, with a direct action for eligible submissions. Assigned supervisors save exact-version feedback with an immutable UUID/body intent and checked recovery after unknown outcomes. Older feedback reads merge with confirmed writes. Visibility verification masks private content and preserves drafts only for the same verified user/role/session; logout, expiry or session changes discard them. The interface includes role-aware navigation, mobile menu, locally bundled typography, shared monochrome controls and loading/empty/error/retry states. PostgreSQL/Prisma schema/migrations/seed/fixtures, safe errors/request correlation, validated configuration and TypeScript builds are present.
 
+Sprint 2 adds team planning, milestone editing and cancellation, revisions with version history, and team progress. Sprint 3 adds scoped supervisor Summary with team and status filters, weighted completion, pagination and milestone return navigation. The [Sprint 2–3 workflow checks](#sprint-2-and-sprint-3-workflow-checks) explain how to exercise these features.
+
 Historical Sprint 1 verification at `17f4398`: **144 ordinary tests, 42 feedback cases, 48 first-submission cases, 39 milestone DB cases, 28 auth cases, 38 G1 cases and one compiled cross-feature system case: 340 automated cases plus seven separate migration scenarios**, all passed with owned cleanup. Generation/typecheck/build pass. [Current runner](docs/evidence/R1-J04-REFRESH-system.json) and [compiled-browser results](docs/evidence/R1-J04-REFRESH-browser.json) record the new run, including 108 role/viewport combinations. This run used the existing workspace with fresh disposable databases. The earlier accepted correction reproduced a clean clone with 316 packages; [its evidence](docs/evidence/R1-A-REVIEW-FIX.md), [earlier feedback verification](docs/evidence/R1-B02-A-review.md) and [historical integrated verification](docs/evidence/R1-J03-system-verification.md) retain their actual sources, 310-case history and manual-zoom provenance. B accepted the corrections in #71 and UI in #73; the subsequent S1 release was merged through #67. New Lab 5 author checks and peer acceptance are recorded separately.
 
-`GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness. The Lab 5 runtime adds real bounded `/api/ready` DB checks (200/503), a bounded PostgreSQL pool and shared PostgreSQL login throttling with compatible 401/429 errors. No test identity bypass is exposed. See [the runtime/container guide](../docs/labs/lab-05/deployment.md) for exact configuration, explicit jobs, local Compose and the separate unverified cloud handoff.
+`GET /api/health` returns `200 {"status":"ok","version":"<RELEASE_SHA>"}` for process liveness. The Lab 5 runtime adds real bounded `/api/ready` DB checks (200/503), a bounded PostgreSQL pool and shared PostgreSQL login throttling with compatible 401/429 errors. No test identity bypass is exposed. See [the runtime/container guide](../docs/labs/lab-05/deployment.md) for exact configuration, explicit jobs, local Compose and the release procedure.
 
 Lab 5 author verification passed **374 automated cases plus seven migration scenarios**, with 13 clean-clone final-image checks. [Actual runtime results](docs/evidence/R2-A01-runtime.md) identify RED/GREEN history, exact tested source/image identities and the initial verifier-port correction. From this directory, use `npm run test:runtime:isolated` for the complete guarded suite and `npm run verify:container` for committed-source image/job/business/restart verification. These establish local behavior, not a public GCP/TLS release.
 
@@ -85,10 +87,21 @@ npm run build
 ```
 
 - Generate the Prisma client before standalone typecheck on a fresh clone.
-- Ordinary Vitest/Supertest/client-state checks: 8 files / 144 tests pass; no database reset occurs.
+- Ordinary Vitest, Supertest and client-state checks run without a database reset. Use the isolated suite below for real database cases.
 - Build writes client/dist and server/dist. The server build generates Prisma, compiles TypeScript and copies its generated runtime assets. No running DB is needed for generation/build.
 - Test files, G1 cases and auth DB cases are excluded from the server build; generated source/build files remain ignored in Git.
 - npm run test:watch is available for ordinary local unit tests.
+
+## Clean-container regression
+
+From a fresh clone with Docker Engine running, use the Node and npm versions above and run the following from `Project_code/`:
+
+~~~powershell
+npm ci
+npm run test:runtime:isolated
+~~~
+
+The runner creates a disposable PostgreSQL 16.8 container on a loopback port with separate development and test databases. It generates the Prisma client, runs fresh and repeat migrations, checks types, builds the app, runs all eight test groups, and checks seven historical schema upgrades. It writes a redacted JSON report and cleans up the temporary resources it creates. Use `npm run verify:container` for the production images and `npm run verify:socket` for the Unix-socket setup. Those checks exercise the local image, jobs, readiness and persistence. Record the serving version and readiness separately after a deployment.
 
 ## Independent G1 checks
 
@@ -142,11 +155,11 @@ For F-05A, a signed-in supervisor opens **Create team** from the overview or **T
 npm run test:b01:isolated
 ```
 
-This runs all ordinary/build/auth/G1/upgrade checks plus 39 milestone DB cases: seven retained service cases with explicit test actors and 32 real-session regressions, including six invalid-Unicode/no-write checks. Expected exit 0. For only those DB cases, `npm run test:b01` requires a prepared reserved test database and the usual guards. Ordinary `npm test` remains DB-independent.
+This runs the inherited foundation, build and authentication checks plus milestone creation, edit/cancel, deadline, authorization and Summary DB cases. For only those DB cases, `npm run test:b01` requires a prepared reserved test database and the usual guards. Ordinary `npm test` remains DB-independent.
 
 For the compiled milestone app, set a synthetic AUTH_REVIEW_PASSWORD as above and run `npm run review:b01`. Stop with `npm run review:auth:stop` in the same clone. Supervisor A can create a milestone in Team A, open its saved detail and reload it; Student A1 can read but cannot create; Supervisor B cannot read/write Team A. Dates entered in the labeled Asia/Bangkok field use seconds 00 and convert correctly even if the browser host zone differs. Title/description use shared Unicode code-point validation; errors preserve the draft. Unconfirmed mutation results direct the user to check the list before creating again.
 
-[Independent B01 review/results](docs/evidence/R1-B01-A-review.md) and [the integration contract](docs/contracts/sprint-1-milestones.md) identify actual coverage and subsequent milestone acceptance. No inert submission/revision/feedback actions are exposed in this increment.
+[Independent B01 review/results](docs/evidence/R1-B01-A-review.md) and [the integration contract](docs/contracts/sprint-1-milestones.md) identify historical Sprint 1 coverage and acceptance. The workflow sections below cover the later planning and revision behavior.
 
 ## Team progress
 
@@ -160,7 +173,7 @@ Students and supervisors can open **View progress** in a team workspace. The pag
 npm run test:b02:isolated
 ```
 
-This adds **42 F-04 PostgreSQL cases** to the full inherited foundation/auth/milestone/submission pipeline. It creates its own protected disposable database, runs real-session/source/CSRF, scope, Unicode, exact-version, replay/conflict, concurrent HTTP and forced unique-conflict/lock-wait checks, then removes its own container. Expected exit 0. `npm run test:b02` runs only the feedback DB files against an explicitly prepared reserved test database. Ordinary npm test does not load those fixtures.
+This adds feedback and revision PostgreSQL cases to the inherited foundation, authentication, milestone and submission checks. It creates its own protected disposable database, runs real-session/source/CSRF, scope, Unicode, exact-version, replay/conflict, concurrent HTTP and forced unique-conflict/lock-wait checks, then removes its own container. Expected exit 0. `npm run test:b02` runs the feedback and revision DB files against an explicitly prepared reserved test database. Ordinary npm test does not load those fixtures.
 
 For a compiled app, set a synthetic AUTH_REVIEW_PASSWORD as described above and run `npm run review:b02`; stop with `npm run review:auth:stop` from the same clone. Supervisor A can open a submitted version, write feedback and reload it; Student A1 reads without a write form; Supervisor B cannot read it. The save UI checks persisted feedback after an unknown result and blocks further saves while that recovery read fails. A successful read with no matching row permits a manual retry of the same frozen UUID/body. [Contract](docs/contracts/sprint-1-feedback.md), [review](docs/evidence/R1-B02-A-review.md) and [actual results](docs/evidence/R1-B02-A-results.json) distinguish real DB behavior from controlled browser faults.
 
@@ -199,6 +212,18 @@ For the compiled app, set a synthetic AUTH_REVIEW_PASSWORD and run `npm run revi
 
 After a lost response, the form checks saved submissions and shows the actual author/time. A teammate's work is attributed to that teammate. If the outcome remains unknown, check saved work before an explicit retry; POST is never retried automatically. Validation/domain/network failures retain the draft. [Actual RED/GREEN/API/DB/browser results](docs/evidence/R1-A02-submissions.md) and [B's integration seam](docs/contracts/sprint-1-submissions.md) record technical verification and subsequent peer acceptance of the submission increment.
 
+## Sprint 2 and Sprint 3 workflow checks
+
+For a disposable compiled app, set a synthetic `AUTH_REVIEW_PASSWORD` and use `npm run review:auth` as described under [authentication and browser review](#authentication-checks-and-disposable-browser-review). Stop it with `npm run review:auth:stop` from the same clone.
+
+| Workflow | Browser check | Isolated automated coverage |
+| --- | --- | --- |
+| F-05B milestone planning | As an assigned supervisor, edit a future milestone with no submissions and reload to verify the saved fields. Cancel another unsubmitted milestone and verify the state after reload. After a student submits to the edited milestone, edit and cancel are locked. | `npm run test:b01:isolated`. [Sprint 2 contract, milestone planning](docs/contracts/sprint-2-feature-interfaces.md#6-milestone-planning-f-05b) |
+| F-06 revisions | Submit the first version as a member of the team, add supervisor feedback, then use **Submit revision** as a student while the milestone is open. Reopen v1 from version history and verify it retains its feedback. v2 starts with its own empty feedback list. | `npm run test:b02:isolated`. [Sprint 2 contract, revisions](docs/contracts/sprint-2-feature-interfaces.md#7-revisions-and-exact-version-feedback-f-06) |
+| F-08 supervisor Summary | Sign in as a supervisor and open **Summary**. Apply a team or status filter, change pages when the fixture has enough rows, open a result and use **Back to summary**. Compare totals and matching items with `GET /api/summary`. A second supervisor sees only assigned teams. The student API request receives 403. | `npm run test:b01:isolated`. [F-08 contract](docs/contracts/sprint-3-f08-summary.md) |
+
+Team progress is available separately to authorized students and supervisors. See [the F-07 walkthrough](#team-progress) for the shared completion rules.
+
 ## Source layout
 
 ```text
@@ -206,9 +231,9 @@ Project_code/
   package.json, package-lock.json, .npmrc, .node-version
   prisma.config.ts, prisma.g1-history.config.ts
   vitest.config.ts, vitest.g1.config.ts, vitest.auth.config.ts, vitest.b01.config.ts, vitest.a02.config.ts
-  shared/                  Pure milestone/submission/feedback validation used by client and API
-  scripts/                 Isolated G1/auth/milestone/submission/feedback checks, compiled restart/browser review
-  client/                  Real login/team/milestone/submission/feedback UI, Vite and shared primitives
+  shared/                  Shared validation and Summary query input
+  scripts/                 Isolated suites, build and container checks, compiled browser review
+  client/                  React workflows, Vite and shared controls
   server/
     .env.example
     prisma/                Schema, ordered migrations and explicit seed
@@ -217,12 +242,12 @@ Project_code/
     src/config.ts          Runtime validation
     src/http/              Safe errors, per-route JSON parsing, request IDs/logs
     src/db/                Prisma singleton, generated client and test guard
-    src/testing/           Guarded fixtures and G1/auth/milestone/submission/feedback regression
-    src/modules/           Real auth/teams/milestones/submissions/feedback
+    src/testing/           Guarded fixtures and cross-feature database regression
+    src/modules/           Identity, teams, milestones, submissions, feedback, progress and Summary
   e2e/                     Later repeatable browser automation; actual local journeys recorded in evidence
   docs/contracts/          Accepted seams and pending candidate contracts
   docs/decisions/          Source/ownership decisions
   docs/evidence/           Actual verification and unresolved findings
 ```
 
-Login, team settings, milestone, submission and feedback screens are implemented. Inter and Noto Sans Thai are bundled locally with their [licenses, pinned provenance and hashes](client/src/design/fonts/README.md); the app no longer imports Google Fonts at runtime. Preserve the Project_code workspace layout when running the compiled API. The server imports the tracked modules in `shared/`, which the browser build bundles separately. Return to the [application overview](../README.md). Team and branch instructions are in [the development guide](../DEVELOPMENT_README.md).
+Inter and Noto Sans Thai are bundled locally with their [licenses, pinned provenance and hashes](client/src/design/fonts/README.md); the app no longer imports Google Fonts at runtime. Preserve the Project_code workspace layout when running the compiled API. The server imports the tracked modules in `shared/`, which the browser build bundles separately. Return to the [application overview](../README.md). Team and branch instructions are in [the development guide](../DEVELOPMENT_README.md).
