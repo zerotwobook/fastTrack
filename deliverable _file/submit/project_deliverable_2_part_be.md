@@ -33,9 +33,9 @@ All Sprint 2 behavioral boundaries were agreed before implementation in [sprint-
 
 Both demos below were executed live on `2026-11-21` using headless Chromium (`1440x900`) against the compiled `client/dist` + `server/dist` build of **`v1.0.0-sprint-2`** (`f3ff8d9704c6e2a3705805412f538b2b216569ad`) backed by disposable `postgres:16.8`. Every step was cross-checked directly against PostgreSQL rows via Prisma (see [R3-B02-s2-demos.md](../../Project_code/docs/evidence/R3-B02-s2-demos.md) and [R3-B02-s2-demo-results.json](../../Project_code/docs/evidence/R3-B02-s2-demo-results.json)).
 
-#### Demo B-1 — `F-05B` Milestone Edit, Cancellation & Post-Submission Locking (`S2-AC-03`, `S2-AC-04`)
+#### Demo B-1 — `F-05B` Milestone Edit, Cancellation & Post-Submission Locking (`S2-AC-03`)
 
-- **Feature / AC:** `F-05B` (`S2-AC-03`, `S2-AC-04`, `STS-10..STS-14`).
+- **Feature / AC:** `F-05B` (`S2-AC-03`, `STS-10..STS-14`).
 - **Actor / Role:** Supervisor A (`supervisor.a@fasttrack.local`, `userId: 0c4b06e5-a4d3-49e7-a263-4abe23b92ad4`) for Team A (`dc5ae7bd-26c3-4dd4-9737-175b54c0c608`, `2` team members).
 - **Preconditions:** Two future unsubmitted milestones created on Team A (`M1` `Demo M1 Initial`, `62d2794f-4abc-4a41-9f8e-65ff0510f5db`, due `2030-06-15T11:00:00.000Z`; `M2` `Demo M2 Sibling`, `e75f8527-c4e5-4340-ae56-2623ac3c0ae2`, due `2030-06-20T11:00:00.000Z`).
 - **Steps Executed:**
@@ -55,13 +55,13 @@ Both demos below were executed live on `2026-11-21` using headless Chromium (`14
 *Figure B-1 — `F-05B` (`S2-AC-03`, Supervisor A on `v1.0.0-sprint-2@f3ff8d9`): updated milestone `Demo M1 Revised` displaying `"Milestone updated."` banner and `18 Jun 2030, 17:30:00 (Asia/Bangkok)` deadline while retaining identity.*
 
 ![Figure B-2: Supervisor view after cancelling sibling M2 in Demo B-1 on v1.0.0-sprint-2](../../Project_code/docs/evidence/assets/s3-b02/d2-demo1-f05b-cancelled.png)
-*Figure B-2 — `F-05B` (`S2-AC-04`, Supervisor A on `v1.0.0-sprint-2@f3ff8d9`): cancelled sibling milestone `Demo M2 Sibling` displaying `"Milestone cancelled."`, `Cancelled` status badge, timestamp `21 Nov 2026, 10:09:06 (Asia/Bangkok)`, and disabled edit/cancel controls.*
+*Figure B-2 — `F-05B` (`S2-AC-03`, Supervisor A on `v1.0.0-sprint-2@f3ff8d9`): cancelled sibling milestone `Demo M2 Sibling` displaying `"Milestone cancelled."`, `Cancelled` status badge, timestamp `21 Nov 2026, 10:09:06 (Asia/Bangkok)`, and disabled edit/cancel controls.*
 
 ---
 
-#### Demo B-2 — `F-06` Revision History & Exact-Version Feedback Retention (`S2-AC-05`, `S2-AC-06`)
+#### Demo B-2 — `F-06` Revision History & Exact-Version Feedback Retention (`S2-AC-04`, `S2-AC-05`)
 
-- **Feature / AC:** `F-06` (`S2-AC-05`, `S2-AC-06`, `STS-17..STS-19`).
+- **Feature / AC:** `F-06` (`S2-AC-04`, `S2-AC-05`, `STS-15..STS-22`).
 - **Actors / Roles:** Student A1 (`student.a1@fasttrack.local`, `userId: 67e8b3e7-c18a-4046-9f97-c5ce1a3fd19f`) and Supervisor A (`supervisor.a@fasttrack.local`).
 - **Preconditions:** Active future milestone `M1` (`62d2794f-4abc-4a41-9f8e-65ff0510f5db`) on Team A.
 - **Steps Executed:**
@@ -78,10 +78,10 @@ Both demos below were executed live on `2026-11-21` using headless Chromium (`14
 | `submissions` (`v2`) | `id: 7dc92cdb-4c0d-451c-b1dc-f761d66bf901`, `milestoneId: 62d2794f-...`, `submittedById: 67e8b3e7-...` | `version: 2`, title `Sprint 2 Architecture Revised`, `submittedAt: 2026-11-21T03:09:09.734Z` | `feedback` count on `v2.id` = `0` |
 
 ![Figure B-3: Student view of latest revision v2 showing Version history and empty v2 feedback panel](../../Project_code/docs/evidence/assets/s3-b02/d2-demo2-f06-v2-latest.png)
-*Figure B-3 — `F-06` (`S2-AC-05`, `S2-AC-06`, Student A1 on `v1.0.0-sprint-2@f3ff8d9`): newly submitted `Version 2` marked `Latest` + `Current` with an isolated empty `Feedback for version 2` panel and navigation to `Open version 1`.*
+*Figure B-3 — `F-06` (`S2-AC-04`, `S2-AC-05`, Student A1 on `v1.0.0-sprint-2@f3ff8d9`): newly submitted `Version 2` marked `Latest` + `Current` with an isolated empty `Feedback for version 2` panel and navigation to `Open version 1`.*
 
 ![Figure B-4: Student view of version 1 showing old-version banner and retained v1 supervisor feedback](../../Project_code/docs/evidence/assets/s3-b02/d2-demo2-f06-v1-retained.png)
-*Figure B-4 — `F-06` (`S2-AC-05`, `S2-AC-06`, Student A1 on `v1.0.0-sprint-2@f3ff8d9`): navigating back to `Version 1` renders `"Viewing version 1; the latest version is version 2."`, a `View latest version` link, unmodified `v1` payload, and retained feedback bound to version 1.*
+*Figure B-4 — `F-06` (`S2-AC-04`, `S2-AC-05`, Student A1 on `v1.0.0-sprint-2@f3ff8d9`): navigating back to `Version 1` renders `"Viewing version 1; the latest version is version 2."`, a `View latest version` link, unmodified `v1` payload, and retained feedback bound to version 1.*
 
 ---
 
