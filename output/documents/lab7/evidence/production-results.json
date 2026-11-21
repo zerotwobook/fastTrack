@@ -1,0 +1,61 @@
+{
+  "release": "f3ff8d9704c6e2a3705805412f538b2b216569ad",
+  "revision": "fasttrack-app-00004-jr2",
+  "deployment": 44719877524,
+  "startedAt": "2026-11-20T11:16:50.808Z",
+  "executor": "AI-assisted Playwright and API checks",
+  "status": "PASS",
+  "cases": {
+    "releaseBefore": "PASS",
+    "historicalC04": {
+      "status": "PASS",
+      "submissionId": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "feedbackId": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357",
+      "scopeDeniedHttp": 404
+    },
+    "feedback5999": {
+      "status": "PASS",
+      "browserHttp": 201,
+      "trimmedCodePoints": 5999,
+      "feedbackId": "e451752c-219b-44cc-9578-a8f15f343ff9"
+    },
+    "feedback6000": {
+      "status": "PASS",
+      "browserHttp": 201,
+      "trimmedCodePoints": 6000,
+      "feedbackId": "902c0f84-346a-45b3-946b-3d8a8d8f141e"
+    },
+    "feedback6001": {
+      "status": "PASS",
+      "browserPostBlocked": true,
+      "apiStatus": 400,
+      "apiError": "INVALID_INPUT",
+      "savedBefore": 2,
+      "savedAfter": 2
+    },
+    "versionIsolation": {
+      "status": "PASS",
+      "studentV1Feedback": 2,
+      "studentV2Feedback": 0,
+      "studentFeedbackEditor": false
+    },
+    "releaseAfter": "PASS"
+  },
+  "fixture": {
+    "title": "Lab 7 L7-STS-05 2026-11-20T11:16:53Z",
+    "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+    "milestoneId": "79678a8c-4184-4ddf-8171-b4f1dbe3eef2",
+    "dueAt": "2026-11-21T11:16:53.081Z",
+    "submissionV1": "27f93258-d71a-4577-a2dd-6e840e3d1d68",
+    "submissionV2": "51cac510-435e-4066-baba-2fd8256dd95a"
+  },
+  "screenshots": [
+    "c04-production-preserved.png",
+    "feedback-5999-saved.png",
+    "feedback-6000-saved.png",
+    "feedback-6001-rejected.png",
+    "student-version-2-no-feedback.png",
+    "student-version-1-feedback.png"
+  ],
+  "finishedAt": "2026-11-20T11:16:57.605Z"
+}
