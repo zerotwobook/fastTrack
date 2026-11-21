@@ -12,15 +12,15 @@
 | Accepted Sprint 1 | [v1.0.0-sprint-1](https://github.com/zerotwobook/fastTrack/tree/v1.0.0-sprint-1) at `ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8` |
 | Accepted Sprint 2 | [v1.0.0-sprint-2](https://github.com/zerotwobook/fastTrack/tree/v1.0.0-sprint-2) at `f3ff8d9704c6e2a3705805412f538b2b216569ad` |
 | Locally tested D2 application source | [Staging 84c4a31](https://github.com/zerotwobook/fastTrack/tree/84c4a31220898957be96c9a54cff0d6e37832821), verified with real sessions and PostgreSQL. |
-| Submitted D2 tag/commit and deployed URL/version | Pending exact release authorization, deploy verification and package acceptance. |
+| Hosted D2 release | Main commit `7872a739147f7553e16e05a4d40b5d0de0c21f27`, revision `fasttrack-app-00005-rkz`, and [public demo](https://fasttrack-app-kpx7au3w2a-as.a.run.app). D2 tag and submission receipt are pending [#33](https://github.com/zerotwobook/fastTrack/issues/33). |
 
 | Rubric | Report location | Assessment pages |
 | --- | --- | --- |
 | A - Sprint 1 continuity and change status (5) | [Part A](#part-a---sprint-1-continuity-and-change-status) | Assign during assembly |
-| B - Sprint 2 contracts and working increment (25) | Pending B's contribution under [#32](https://github.com/zerotwobook/fastTrack/issues/32) | Assign during assembly |
+| B - Sprint 2 contracts and working increment (25) | [Part B](project_deliverable_2_part_be.md#part-b--sprint-2-feature-increment-f-05-to-f-07-demos--engineering-quality-25-points) | Assign during assembly |
 | C - Sprint 3 contracts and working progress (15) | [Part C](#part-c---sprint-3-contracts-and-working-progress) | Assign during assembly |
 | D - Updated requirements and test traceability (10) | [Part D](#part-d---updated-requirements-and-test-traceability) | Assign during assembly |
-| E - Integrated release candidate (15) | B's contribution under [#32](https://github.com/zerotwobook/fastTrack/issues/32) | Assign during assembly |
+| E - Integrated release candidate (15) | [Part E](project_deliverable_2_part_be.md#part-e--release-verification-deployment--clean-setup-15-points) | Assign during assembly |
 
 ## Part A - Sprint 1 continuity and change status
 
@@ -30,7 +30,9 @@ The accepted Sprint 1 increment established one course context with seeded super
 
 **A-01. Supervisor creates a milestone, a student submits, and the team retrieves feedback after restart.** F-01 through F-04, S1-AC-EXT-02/03 and tests T-21/22/25/31. Roles are an assigned supervisor, a student and teammate, and a supervisor assigned to another team. The compiled server starts with a seeded, disposable PostgreSQL database. The supervisor creates a future milestone, the student retrieves it and submits version 1, and the supervisor appends two messages with distinct request keys. The teammate retrieves the messages and confirms each references the saved submission. The test repeats seed, restarts the compiled app, and retrieves the same work and feedback. It expects durable records, a safe repeat seed, scoped access and one version 1.
 
-**Observed at `84c4a31`.** The compiled HTTP journey passed. Responses preserved the same submission and feedback after restart and the database fingerprint stayed stable. A foreign supervisor received HTTP 404, a student feedback write received 403, and a duplicate first submission received 409 `ALREADY_SUBMITTED`. The guarded production-image socket run separately passed 17 checks, including the compiled business flow, restart, repeated seed and database outage readiness. [Test source](../../Project_code/server/src/testing/integrated-s1.j03.ts) · [Candidate run and results](https://github.com/zerotwobook/fastTrack/blob/70f0d6401ed4c701354242aa23405a84c75df053/Project_code/docs/evidence/R3-J01-f08-integration.md)
+**Observed at `84c4a31`.** The compiled HTTP journey passed. Responses preserved the same submission and feedback after restart and the database fingerprint stayed stable. A foreign supervisor received HTTP 404, a student feedback write received 403, and a duplicate first submission received 409 `ALREADY_SUBMITTED`. The guarded production-image socket run separately passed 17 checks, including the compiled business flow, restart, repeated seed and database outage readiness. [Test source](../../Project_code/server/src/testing/integrated-s1.j03.ts) · [Candidate run and results](../../Project_code/docs/evidence/R3-J01-f08-integration.md)
+
+**Hosted persistence at `7872a739`.** After migration `fasttrack-migrate-4lvx5`, the assigned supervisor and team student retrieved the original Sprint 1 team, milestone, version 1 submission and its exact-version feedback. All four payloads matched the C04 baseline. The foreign supervisor received HTTP 404 for the submission and feedback. Part E records the deployed identity and hosted capture. [Hosted readback](../../Project_code/docs/evidence/R3-B02-d2-post-deploy-readback.json) · [C04 baseline](../../Project_code/docs/evidence/R2-J01-C04-baseline.json)
 
 ### A.2 Deadline and ownership continuity
 
@@ -59,22 +61,22 @@ A wrote the approved contract at `b46b7de` and added the new boundary assertions
 
 ![Historical student view showing the persisted original submission and its feedback](../../docs/labs/lab-05/evidence/C04-native-student.png)
 
-*Figure A-1. Historical F-03/F-04 readback (AC-03.6, AC-04.4, C-04), source `8e637e5`. The student signs in to the team that already submitted and opens the saved version. The expected version and supervisor feedback are visible. A-01 supplies the exact D2 local API/restart result. Capture the same student view after D2 deployment and add the public version/readback to Part E. [Capture provenance](../../docs/labs/lab-05/evidence/C04-native-readback.md)*
+*Figure A-1. Historical F-03/F-04 readback (AC-03.6, AC-04.4, C-04), source `8e637e5`. The student signs in to the team that already submitted and opens the saved version. The expected version and supervisor feedback are visible. A-01 supplies the exact D2 local API/restart result. Part E, Figure E-1, records the production readback after D2 deployment. [Capture provenance](../../docs/labs/lab-05/evidence/C04-native-readback.md)*
 
 ## Part C - Sprint 3 contracts and working progress
 
 ### C.1 Accepted contract and implementation
 
-F-08 is the remaining Sprint 3 baseline feature. The team froze the [F-08 contract](../../Project_code/docs/contracts/sprint-3-f08-summary.md) through [#27](https://github.com/zerotwobook/fastTrack/issues/27) and [PR #133](https://github.com/zerotwobook/fastTrack/pull/133) before implementing the two slices. A owns F-08A overview, filters and weighted totals. B owns F-08B results, pagination and detail return. Their reviewed implementations are in the local D2 source.
+F-08 completes the Sprint 3 baseline feature set. The team froze the [F-08 contract](../../Project_code/docs/contracts/sprint-3-f08-summary.md) through [#27](https://github.com/zerotwobook/fastTrack/issues/27) and [PR #133](https://github.com/zerotwobook/fastTrack/pull/133) before implementing the two slices. A owns F-08A overview, filters and weighted totals. B owns F-08B results, pagination and detail return. Their reviewed implementations are in local source `84c4a31` and hosted release `7872a739`.
 
 - **Workflow and interface.** A supervisor opens `/summary`, selects a team/status, pages through the results, and opens an existing scoped milestone detail. Filters and page live in the URL. Filter or page-size changes reset to page 1. The detail return permits only the local `/summary` path and validated query fields. Sign-out or role/account changes discard previous data and pending responses. Loading, no teams, no matches, empty page, invalid filters and retryable errors each have a UI state.
 - **API.** `GET /api/summary` accepts optional `teamId`, `status`, `page` and `pageSize`. Defaults are page 1 and size 20, maximum size 50. Valid statuses are `CANCELLED`, `FEEDBACK_AVAILABLE`, `SUBMITTED`, `OVERDUE` and `PENDING`. Auth precedes query validation: 401 without a session, 403 for a student, 400 for invalid/unknown/repeated filters, and equivalent scoped 404 responses for a missing or foreign team. The no-store response carries `asOf`, normalized filters, completion totals, team rows, `matchedCount`, paged items and `meta.serverTime`. Item fields are milestone/team IDs, team name, title, deadline, status and latest version.
 - **Data and rules.** One read-only repeatable-read PostgreSQL snapshot derives team scope from the session and captures database time once. No migration was required for F-08. Completion includes all selected teams' active milestones and counts each milestone with any submission once. The percentage is rounded to one decimal from combined submitted and active counts, with zero when the denominator is zero. A status filter changes the result count and rows. Results sort by `dueAt ASC, id ASC` before paging. A valid out-of-range page returns empty items and retains the filtered count. Status precedence is cancelled, latest-version feedback, submitted, overdue after the deadline, then pending. The unfiltered list includes cancelled rows.
-- **Definition of done.** Peer-accept both slices, exercise scoped UI/API/DB together, verify F-07 parity and earlier Sprint 1/2 regression, record the exact candidate source, then match its deployment with the serving revision and rerun critical checks. The hosted steps remain open.
+- **Definition of done.** Both slices passed peer review, scoped UI/API/PostgreSQL integration, F-07 parity, and Sprint 1/2 regression. The team matched the deployed source to the serving revision and repeated the critical hosted UI/API checks. [Accepted integration evidence](../../Project_code/docs/evidence/R3-J01-f08-integration.md)
 
 ### C.2 Acceptance and software test specifications
 
-Each criterion below is implemented at `84c4a31`. Automated checks ran through `npm run test:runtime:isolated`, with the F-08 API cases in `test:b01`. Browser checks used the compiled candidate, real sessions and disposable PostgreSQL. [Local execution record and machine output](https://github.com/zerotwobook/fastTrack/blob/70f0d6401ed4c701354242aa23405a84c75df053/Project_code/docs/evidence/R3-J01-f08-integration.md)
+Each criterion below is implemented at `84c4a31`. Automated checks ran through `npm run test:runtime:isolated`, with the F-08 API cases in `test:b01`. Browser checks used the compiled candidate, real sessions and disposable PostgreSQL. [Local execution record and machine output](../../Project_code/docs/evidence/R3-J01-f08-integration.md)
 
 | AC / planned STS | Expected verification | Executed evidence and result |
 | --- | --- | --- |
@@ -95,15 +97,17 @@ Each criterion below is implemented at `84c4a31`. Automated checks ran through `
 2. The student submits work. After HTTP 201, the supervisor refreshes with the same filter. Expected: the saved submission changes the completion and match count and the second page offers recovery. Actual: PostgreSQL and API agree on 2/10 submitted, eight pending, zero rows on page 2 and a later `asOf`. The UI shows 20.0%, explains the empty page and links to page 1 with the Pending filter and size 8 retained.
 3. A student requests Summary directly and a foreign supervisor opens the same milestone address. Expected and actual: backend 403 and generic 404 respectively. Neither response exposes the other team's records.
 
-![Weighted completion and nine matching pending milestones on page two](https://raw.githubusercontent.com/zerotwobook/fastTrack/70f0d6401ed4c701354242aa23405a84c75df053/Project_code/docs/evidence/assets/s3-j01/weighted-overview-1280.png)
+![Weighted completion and nine matching pending milestones on page two](../../Project_code/docs/evidence/assets/s3-j01/weighted-overview-1280.png)
 
 *Figure C-1. C-01 steps 1 and 2 precondition. Supervisor, Pending filter, size 8 and page 2. Expected and actual are 10.0% completion, nine matches and one visible row. Source `84c4a31`.*
 
-![Refreshed summary shows twenty percent, eight pending matches and empty second-page recovery](https://raw.githubusercontent.com/zerotwobook/fastTrack/70f0d6401ed4c701354242aa23405a84c75df053/Project_code/docs/evidence/assets/s3-j01/refreshed-empty-page-1280.png)
+![Refreshed summary shows twenty percent, eight pending matches and empty second-page recovery](../../Project_code/docs/evidence/assets/s3-j01/refreshed-empty-page-1280.png)
 
 *Figure C-2. C-01 step 2 after a real student write. Expected and actual are 20.0% completion, eight matches and a working link back to page 1. Source `84c4a31`. The pager also displays “Page 2 of 1.”*
 
-Atip-Infa independently repeated the complete runtime suite and the Summary UI/API/SQL comparison on the exact source and recorded local G2 acceptance in [#30](https://github.com/zerotwobook/fastTrack/issues/30) on 21 November Asia/Bangkok. The report includes 483 passed Vitest cases, zero failed, zero skipped, 7/7 historical migration scenarios, eight browser groups and 17/17 production-image/socket checks. Both runs exposed the pager wording. B recommended deferring it because the empty-page message, returning to page 1 and the totals all work. The staging source check [44777769845](https://github.com/zerotwobook/fastTrack/actions/runs/44777769845) passed. Public verification and the full #30 checkpoint remain open.
+Atip-Infa independently repeated the complete runtime suite and the Summary UI/API/SQL comparison on the exact source and recorded local G2 acceptance in [#30](https://github.com/zerotwobook/fastTrack/issues/30) on 21 November Asia/Bangkok. The report includes 483 passed Vitest cases, zero failed, zero skipped, 7/7 historical migration scenarios, eight browser groups and 17/17 production-image/socket checks. Both runs exposed the pager wording. B recommended deferring it because the empty-page message, returning to page 1 and the totals all work. The staging source check [44777769845](https://github.com/zerotwobook/fastTrack/actions/runs/44777769845) passed. The hosted readback below passed, and the peer-approved evidence merged in #138. [Review of #138](https://github.com/zerotwobook/fastTrack/pull/138#pullrequestreview-6004566927)
+
+**C-02 · F08-AC-01/04/05/06/07 · hosted `7872a739`.** An assigned supervisor, a team student and a second supervisor with a disjoint team used the Cloud Run service. Summary showed 6 submitted out of 14 active milestones (42.9%), eight overdue and zero pending. The scoped milestone list and team-progress endpoint independently matched the totals. With the team and overdue filters set, opening a milestone on page 2 and returning preserved the team, status, page and page size. Page-one recovery preserved the filters. The student received HTTP 403, and the foreign supervisor's team filter and milestone each returned HTTP 404. The hosted checks used scoped UI and database-backed HTTPS responses. C-01 provides the direct multi-team PostgreSQL evidence. [Hosted checks](../../Project_code/docs/evidence/R3-B02-d2-post-deploy-readback.json)
 
 ### C.4 Domain test excerpt - weighted completion versus result count
 
@@ -125,7 +129,7 @@ The criterion passed in the 57-case `test:b01` portion of the actual `npm run te
 
 ### C.5 Selected A Issue and PR chain
 
-A implemented #28 on `feature/s3-a-summary-overview`. Atip-Infa [reviewed exact head `9070561`](https://github.com/zerotwobook/fastTrack/pull/135#pullrequestreview-5996002975) on 20 November at 16:31 UTC. The review checked the scoped read-only snapshot, 10% weighted fixture, independent result count, preserved URL and mobile table behavior. [PR #135](https://github.com/zerotwobook/fastTrack/pull/135) merged at 16:32 UTC as `416a830`. The merged source is part of `84c4a31` and was locally exercised with F-08B. The main release and hosted evidence will be recorded in Part E.
+A implemented #28 on `feature/s3-a-summary-overview`. Atip-Infa [reviewed exact head `9070561`](https://github.com/zerotwobook/fastTrack/pull/135#pullrequestreview-5996002975) on 20 November at 16:31 UTC. The review checked the scoped read-only snapshot, 10% weighted fixture, independent result count, preserved URL and mobile table behavior. [PR #135](https://github.com/zerotwobook/fastTrack/pull/135) merged at 16:32 UTC as `416a830`. The merged source is part of `84c4a31` and was locally exercised with F-08B. Part E records the main release and hosted evidence.
 
 ### C.6 Remaining work and acceptance
 
@@ -133,8 +137,8 @@ Dates below are internal targets. The 1-11 December examination period is reserv
 
 | Record / impact | Owner and target | Dependency and acceptance |
 | --- | --- | --- |
-| #32, D2 Parts B/E and B's evidence | B · Part B first draft by 24 Nov, combined evidence by 28 Nov | Use accepted S2 source and reviewed contracts. Include two persisted S2 demonstrations, a real access-test excerpt and B's review chain. Add Part E deployment evidence after the release below. |
-| #30, hosted F-08 and continuity | A/B · by 27 Nov | After exact user release authorization and non-author review, match new main SHA, immutable tag, build, registry digest, GCP serving revision and public health/readiness. Re-run C-01 and A-01 post-deploy, with original submission/feedback IDs, expected denied requests and independent review. |
+| #32, D2 Parts B/E and B's evidence | B + A review · staging integration completed 21 Nov | Parts B/E merged in [#142](https://github.com/zerotwobook/fastTrack/pull/142). They cover two persisted S2 demonstrations, a real access-test excerpt, B's review chain and hosted D2 evidence. Package closeout remains in #33. |
+| #30, hosted F-08 and continuity | A/B · accepted 21 Nov | Verified the main SHA, CI, registry digests, Cloud Run revision and health/readiness. Hosted Sprint 1 readback and C-02 passed. Peer-approved evidence merged in [#138](https://github.com/zerotwobook/fastTrack/pull/138). |
 | #33, D2 and Lab 7 packages | A/B · by 28 Nov | After #30, #31 and #32 acceptance. Cross-check A-E, rubric navigation, submitted tag/URL, setup, contribution/AI disclosures and each separate package. Record course receipts after actual submissions due 29 Nov at 23:59 Asia/Bangkok. |
 | #30 finding, F08-AC-05/08 | B with A review · target 30 Nov | Fix the documented `Page 2 of 1` label after D2. Preserve the URL, filters and working page-1 recovery. Retest refresh, pagination/filters, focus and narrow layout on the fix. |
 | #34/#35, final domain and delivery retests | A/B · bounded retests during 1-11 Dec, freeze target 12 Dec | Close findings from D2 and UAT; confirm browser/access, durable data, regression and versioned rollout on the final candidate. Update setup and walkthrough. |
@@ -162,7 +166,7 @@ The requirements register in D.4 is the current Functional Requirements (FR), Bu
 | F-07 / 2 | Team progress and derived statuses for scoped team members or supervisors | F-05/06. Implemented and accepted in S2; regression executed on D2 local. |
 | F-08A / 3 | Supervisor overview, scoped filters, weighted completion and response coordinator | F-07, shared F-08 contract. Implemented, peer-accepted in staging and locally verified. |
 | F-08B / 3 | Filtered milestones, deterministic paging and detail return | F-02/07 and F-08 shared snapshot/URL. Implemented, peer-accepted in staging and locally verified. |
-| Delivery / cross-cutting | Versioned build, migration, readiness, protected rollout and persistence checks | Historical S2 rollout verified. Exact hosted D2 version and evidence are pending. |
+| Delivery / cross-cutting | Versioned build, migration, readiness, protected rollout and persistence checks | S2 and D2 rollouts verified. Part E records deployed identity, migration and persistence. |
 
 ### D.3 Current System-Level SDS
 
@@ -180,7 +184,7 @@ The requirements register in D.4 is the current Functional Requirements (FR), Bu
 
 ### D.4 Requirements-to-verification matrix
 
-**Version key.** S1 = accepted tag `ae7a60a6`. S2 = accepted tag `f3ff8d9`. D2-local = `84c4a31`. A PASS in the last column refers to executed coverage on D2-local unless another version is explicitly shown. Planned test IDs identify the designed verification. Historical UI, human UAT and release results retain their original version. Coverage labels in each row distinguish implemented behavior, executed evidence and remaining checks.
+**Version key.** S1 = accepted tag `ae7a60a6`. S2 = accepted tag `f3ff8d9`. D2-local = `84c4a31`. D2-hosted = `7872a739`. A PASS in the last column refers to executed coverage on D2-local unless another version is explicitly shown. Planned test IDs identify the designed verification. Historical UI, human UAT and release results retain their original version. Coverage labels in each row distinguish implemented behavior, executed evidence and remaining checks.
 
 | Requirement | Feature / sprint and planned verification | Actual evidence and result |
 | --- | --- | --- |
@@ -193,9 +197,9 @@ The requirements register in D.4 is the current Functional Requirements (FR), Bu
 | FR-07 · Edit or cancel a milestone before any submission | F-05B / 2 · S2-AC-03, STS-10-14 | Implemented · PASS: `milestones-f05b.b01.ts` checks lock, timing and terminal cancellation. |
 | FR-08 · Append revisions and preserve history and feedback | F-06 / 2 · S2-AC-04/05, STS-15-22; T-29 | Implemented · PASS: `revisions-f06.b02.ts` and `integrated-s2.auth.ts` cover conflicting writers, exact versions and feedback retention. |
 | FR-09 · Read the scoped progress board, statuses and completion | F-07 / 2 · S2-AC-06, STS-23-27; T-30 | Implemented · PASS: `progress.auth.ts` and `calculation.test.ts` match stored records and expected percentages. |
-| FR-10 · Supervisor views, filters and drills into assigned-team Summary | F-08 / 3 · F08-AC/STS-01-08 | Implemented · PASS locally: both summary suites and C-01. Hosted deployment and readback: pending. |
+| FR-10 · Supervisor views, filters and drills into assigned-team Summary | F-08 / 3 · F08-AC/STS-01-08 | Implemented · PASS locally: both summary suites and C-01. PASS hosted: weighted completion, filters, detail return and pager recovery (C-02). |
 | BR-01 · One role per account, at most one team per student, one supervisor per team | F-01/05A / 1-2 · AC-01.5, T-05; S2-AC-01/02, STS-01/07/08 | Implemented · PASS: `foundation.g1.ts`, `sessions.auth.ts` and `team-planning.auth.ts` retain ownership and assignment uniqueness. |
-| BR-02 · Database membership/assignment gates every protected read and write | F-01-08 / 1-3 · T-05/07/14/18/25/27; STS-03/21/27/28; F08-STS-04/07 | Implemented · PASS: scoped real-session suites and C-01 deny foreign/student access. Repeat hosted negative checks. |
+| BR-02 · Database membership/assignment gates every protected read and write | F-01-08 / 1-3 · T-05/07/14/18/25/27; STS-03/21/27/28; F08-STS-04/07 | Implemented · PASS: scoped real-session suites and C-01 deny foreign/student access. Hosted student 403 and foreign-team/milestone 404 passed (C-02). |
 | BR-03 · Supervisors create milestones/feedback; student team members submit/revise | F-02/03/04/06 / 1-2 · AC-02.2, AC-03.5, AC-04.2, T-07/14/18; S2-AC-04/07, STS-15/28 | Implemented · PASS: milestone, submission, feedback and revision API suites, with A-01 student feedback write denied. |
 | BR-04 · Accept up to and including database time at dueAt, store UTC and display Bangkok time | F-03/05B/06/07 / 1-2 · AC-03.2/03.3, EXT-04, T-10-13/26; STS-13/18/25 | Implemented · PASS: `submissions.a02.ts`, `deadline-lab6.a02.ts` and `revisions-f06.b02.ts` cover equal time, late rejection and lock crossing. Historical S1 UI and Lab 6 check display. |
 | BR-05 · First submission creates unique immutable v1; duplicates add nothing | F-03/06 / 1-2 · AC-03.3, T-13/26; STS-15/17 | Implemented · PASS: `submissions.a02.ts`, J03 and revision suite; duplicate 409 and one committed v1. |
@@ -205,11 +209,11 @@ The requirements register in D.4 is the current Functional Requirements (FR), Bu
 | BR-09 · Lock milestone plan and team membership once work exists; preserve history and supervisor assignment | F-05A/05B / 2 · S2-AC-02/03, STS-09/11/14, T-28 | Implemented · PASS: team planning and milestone planning API/DB suites check both operation orders and saved rows. |
 | BR-10 · Count non-cancelled milestones; one completion per submitted milestone; weight by combined counts | F-07/08 / 2-3 · S2-AC-06, STS-23-27, T-30; F08-STS-01-03 | Implemented · PASS: calculation and progress API suites, C-01 UI/API/SQL 10.0% then 20.0%. |
 | NFR-01 · Hash passwords, protect tokens, enforce expiry/revocation and limit CSRF disclosures | F-01 / 1-3 · EXT-01/05, T-01-04/23/27; STS-28 | Implemented · PASS: `sessions.auth.ts`, `runtime.a01.ts` and cookie/socket checks. Hosted configuration/observability to confirm on D2. |
-| NFR-02 · Server enforces role and ownership for private lists, records and mutations | F-01-08 / 1-3 · T-05/07/14/18/25/27; STS-28; F08-STS-04/07 | Implemented · PASS: scope suites and C-01. Hosted check pending for D2. |
-| NFR-03 · Durable submissions and feedback through restart and release | Persistence / 1-3 · T-16/20/31, STS-29/30 | Implemented · PASS: J03 and 17/17 local socket checks. Historical Lab 5 restart and redeploy PASS plus S2 original C-04 readback. D2 hosted redeploy evidence pending. |
+| NFR-02 · Server enforces role and ownership for private lists, records and mutations | F-01-08 / 1-3 · T-05/07/14/18/25/27; STS-28; F08-STS-04/07 | Implemented · PASS: scope suites and C-01. PASS hosted: student 403 and foreign 404 (C-02). |
+| NFR-03 · Durable submissions and feedback through restart and release | Persistence / 1-3 · T-16/20/31, STS-29/30 | Implemented · PASS: J03 and 17/17 local socket checks. Historical Lab 5 restart and redeploy PASS plus S2 original C-04 readback. PASS hosted: original Sprint 1 submission and feedback retained after migration (A.1). |
 | NFR-04 · Reproduce install, migration, seed, build, run and tests from the tracked setup | Build / 1-3 · T-22/31, STS-29/31 | Implemented · PASS: clean D2-local clone, npm install, fresh/repeat migration, seven upgrades and compiled plus production-image checks. Reviewer handoff and final clean setup readback pending. |
-| NFR-05 · Render usable loading, errors, success and empty states without internals | All UI / 1-3 · T-21/27, STS-31, F08-STS-06/08 | Implemented · PASS for selected local Summary states, focus and supported widths. Historical S1/S2 UI evidence remains versioned. Pager wording and actual D2 hosted walkthrough remain open. |
-| NFR-06 · Block release on failed required CI; match main, artifacts and serving release with smoke | Delivery / 2-3 · Lab 5 C-01-06, T-31; #30 hosted check | Implemented. Historical blocking proof and S2-hosted source identity PASS. D2 staging CI PASS and local health/readiness PASS; D2 main/digest/revision/traffic/smoke verification pending. |
+| NFR-05 · Render usable loading, errors, success and empty states without internals | All UI / 1-3 · T-21/27, STS-31, F08-STS-06/08 | Implemented · PASS for selected local Summary states, focus and supported widths. Historical S1/S2 UI evidence remains versioned. Hosted detail return and page-one recovery passed (C-02). Pager wording remains open. |
+| NFR-06 · Block release on failed required CI; match main, artifacts and serving release with smoke | Delivery / 2-3 · Lab 5 C-01-06, T-31; #30 hosted check | Implemented. Historical blocking proof and S2-hosted source identity PASS. D2 staging CI and local health/readiness passed. PASS hosted: main SHA, image digests, revision, traffic and smoke checks matched (Part E). |
 
 **Acceptance reference.** The original Sprint 1 map covers all 18 numbered ACs and five extensions at its recorded verification source. The eight Sprint 2 ACs group STS-01-32. F-05A covers S2-AC-01/02 and F-05B covers 03. F-06 covers 04/05, F-07 covers 06, and the integration suites cover 07/08. The S2 G6 decision records the accepted release. D.4 maps representative executed results on the D2-local candidate, and Part B carries the detailed S2 completion and demonstration evidence. C.2 records every F-08 AC separately. [Sprint 1 coverage map](../../Project_code/docs/evidence/R1-J03-coverage.md) · [Sprint 2 planned and executed mappings](../../Project_code/docs/contracts/sprint-2-feature-interfaces.md) · [Accepted Sprint 2 G6](https://github.com/zerotwobook/fastTrack/issues/26)
 
@@ -225,12 +229,12 @@ Every Sprint 1 and Sprint 2 AC below is implemented in D2-local. The original S1
 | AC-03.4, AC-03.5, AC-03.6 | T-15; T-14; T-16/31 local | PASS, `test:a02` and J03: content boundaries, denial and durable saved readback. |
 | AC-04.1, AC-04.2, AC-04.3, AC-04.4 | T-17/20; T-18/19/20; T-17/19; T-20/31 local | PASS, `test:b02` and J03: append, scope, validation and durable exact-version readback. |
 | S1-AC-EXT-01, S1-AC-EXT-02, S1-AC-EXT-03, S1-AC-EXT-04 | T-23, T-24, T-25, T-26 respectively | PASS, `test:auth`, `test:b02`, J03 and `test:a02`: auth bootstrap/CSRF, exact intent replay, scoped DTO and deadline lock wait. |
-| S1-AC-EXT-05 | T-27 | PASS for historical S1 browser acceptance and D2-local selected account-switch checks. D2 hosted original-journey browser retest pending. |
+| S1-AC-EXT-05 | T-27 | PASS for historical S1 browser acceptance and D2-local selected account-switch checks. Hosted saved Sprint 1 work and feedback were read in A.1. A broader account-switch retest remains. |
 | S2-AC-01, S2-AC-02 | STS-01-04, STS-05-09 respectively | PASS, `test:auth`, `team-planning.auth.ts`: team edit, eligible member and lock behaviors. |
 | S2-AC-03 | STS-10-14 | PASS, `test:b01`, `milestones-f05b.b01.ts`: edit/cancel, saved history and deadline race. |
 | S2-AC-04, S2-AC-05 | STS-15-19, STS-20-22 respectively | PASS, `test:b02`: atomic version and saved history. Historical S2 browser evidence covers draft retention. Hosted replay pending. |
 | S2-AC-06 | STS-23-27 | PASS, `test:auth`, `progress.auth.ts` and the calculation suite: persisted status and percentages. |
-| S2-AC-07 | STS-28-31 | PASS on documented local auth, migrations, S1 regression and selected UI. Hosted release identity and broader final UI retests pending. |
+| S2-AC-07 | STS-28-31 | PASS on documented local auth, migrations, S1 regression and selected UI. Hosted release identity passed. Broader final UI retests remain. |
 | S2-AC-08 | STS-32 | PASS on integrated S2 API/DB test and independently accepted staging integration in #21. |
 | L7-AC-01 to 04 | L7-STS-01 to 04 | PASS on `test:b02` and the guarded schema upgrade suite. A.4 preserves the expected pre-fix failures. |
 | L7-AC-05 | L7-STS-05 | PASS on deployed S2, as recorded in A.3. D2 hosted repeat pending. |
@@ -240,11 +244,11 @@ Every Sprint 1 and Sprint 2 AC below is implemented in D2-local. The original S1
 
 | Evidence | Where to find it |
 | --- | --- |
-| Original journey, deadline and ownership | A-01, A-02, Figure A-1 and post-deploy capture to be added in Part E |
+| Original journey, deadline and ownership | A-01, A-02, Figure A-1 and the post-deploy capture in [Part E](project_deliverable_2_part_be.md#part-e--release-verification-deployment--clean-setup-15-points) |
 | Approved maintenance and RED/GREEN evidence | A.3-A.4, CR-L7-01, commits and machine outputs |
 | Sprint 3 operational workflow, test excerpt and peer history | C-01, Figures C-1/C-2, C.4 and PR #135 |
 | Requirements, feature inventory and system design | D.1-D.4 |
-| Two Sprint 2 demos, B's access-test excerpt and review chain | Pending Part B contribution under #32 |
-| D2 deployed identity, S1/S2/S3 readbacks and setup | Pending Part E contribution after release |
+| Two Sprint 2 demos, B's access-test excerpt and review chain | [Part B](project_deliverable_2_part_be.md#part-b--sprint-2-feature-increment-f-05-to-f-07-demos--engineering-quality-25-points) |
+| D2 deployed identity, S1/S2/S3 readbacks and setup | [Part E](project_deliverable_2_part_be.md#part-e--release-verification-deployment--clean-setup-15-points) |
 
-A compiled the Sprint 1 continuity, domain evidence, F-08A and traceability. B implemented the F-08B slice, reviewed A's Summary, independently repeated local candidate verification, and owns the Sprint 2/release report sections. Codex assisted A with this draft and source reconciliation and with the recorded browser/API automation. Human review, user release authorization and CoursePMS acceptance retain their recorded attribution. Public D2 execution and final human/package acceptance remain pending.
+A compiled the Sprint 1 continuity, domain evidence, F-08A and traceability. B implemented the F-08B slice, reviewed A's Summary, independently repeated local candidate verification, and owns the Sprint 2/release report sections. Codex assisted A with this draft and source reconciliation and with the recorded browser/API automation. Human review, user release authorization and CoursePMS acceptance retain their recorded attribution. The team verified the public D2 deployment. Final package acceptance and submission remain pending.
