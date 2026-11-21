@@ -1,0 +1,129 @@
+{
+  "verifiedAt": "2026-11-21T09:30:18.559Z",
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "expectedSha": "7872a739147f7553e16e05a4d40b5d0de0c21f27",
+  "deployRun": "https://github.com/zerotwobook/fastTrack/actions/runs/44888588070",
+  "servingRevision": "fasttrack-app-00005-rkz",
+  "trafficPercent": 100,
+  "migrationJobExecution": "fasttrack-migrate-4lvx5",
+  "webImageDigest": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-app@sha256:7b868cd51b62db518dde4e22601930a9be7b8483bffb9409efd70742faf2c458",
+  "jobsImageDigest": "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-jobs@sha256:b49829f88464cc18f7aa6d2cb9be840e67cf9dd1b867eee18d3bf7e58ec4c718",
+  "health": {
+    "status": 200,
+    "body": {
+      "status": "ok",
+      "version": "7872a739147f7553e16e05a4d40b5d0de0c21f27"
+    }
+  },
+  "ready": {
+    "status": 200,
+    "body": {
+      "status": "ready",
+      "database": "connected",
+      "version": "7872a739147f7553e16e05a4d40b5d0de0c21f27"
+    }
+  },
+  "sprint1Persistence": {
+    "supervisorA": {
+      "teamStatus": 200,
+      "milestoneStatus": 200,
+      "submissionStatus": 200,
+      "feedbackStatus": 200,
+      "submissionTitle": "C04 initial submission",
+      "originalFeedbackIdPresent": true,
+      "originalFeedbackContentMatches": true,
+      "canonicalRecordsSha256": "c5396255105bfccd8f13ec0b8469aae6d1ab2a3a7923a13a55253e582bbe0f4e",
+      "exactCanonicalBaselineMatch": true,
+      "teamAMemberCount": 2,
+      "note": "Exact canonical SHA-256 match with C04 baseline."
+    },
+    "studentA1": {
+      "submissionStatus": 200,
+      "feedbackStatus": 200,
+      "submissionTitle": "C04 initial submission",
+      "originalFeedbackIdPresent": true
+    }
+  },
+  "f08SupervisorA": {
+    "asOf": "2026-11-21T09:30:22.331Z",
+    "scopedTeamCount": 1,
+    "totals": {
+      "total": 14,
+      "submitted": 6,
+      "pending": 0,
+      "overdue": 8,
+      "progressPercent": 42.9
+    },
+    "reconciledAgainstTeamsProgress": {
+      "expectedTotal": 14,
+      "expectedSubmitted": 6,
+      "expectedWeightedPercent": 42.9,
+      "perTeamProgress": [
+        {
+          "teamId": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+          "teamName": "Team A",
+          "total": 14,
+          "submitted": 6,
+          "progressPercent": 42.9
+        }
+      ],
+      "exactMatch": true
+    },
+    "uiShowsWeightedPercent": true,
+    "filterPreservation": {
+      "testedQuery": "?teamId=7c600ee0-a595-4c52-a093-f0ed5e08fded&status=OVERDUE&page=2&pageSize=1",
+      "clickedMilestoneHref": "/milestones/b001b3df-25cf-4073-b418-d8fabf9b0c8c?returnTo=%2Fsummary%3FteamId%3D7c600ee0-a595-4c52-a093-f0ed5e08fded%26status%3DOVERDUE%26page%3D2%26pageSize%3D1",
+      "backToSummaryHref": "/summary?teamId=7c600ee0-a595-4c52-a093-f0ed5e08fded&status=OVERDUE&page=2&pageSize=1",
+      "urlAfterReturnLink": "?teamId=7c600ee0-a595-4c52-a093-f0ed5e08fded&status=OVERDUE&page=2&pageSize=1",
+      "urlAfterBrowserBack": "?teamId=7c600ee0-a595-4c52-a093-f0ed5e08fded&status=OVERDUE&page=2&pageSize=1",
+      "preserved": true
+    },
+    "overPagedEmptyPageRecovery": {
+      "matchedCount": 8,
+      "overPagedTextSnippet": "Overview / Summary\n\nSummary\nRefresh summary\nTeam\nAll supervised teams\nTeam A\nMilestone status\nAll statuses\nPending\nOverdue\nSubmitted\nFeedback available\nCancelled\nTeam completion\n\nEach active milestone with a saved submission counts once. The milestone status filter applies to the matching results below.\n\nSubmission progress\n42.9%\nSubmitted\n6\nActive milestones\n14\nPending\n0\nOverdue\n8\nTeam\tSubmitted\t",
+      "goToPage1Visible": true
+    }
+  },
+  "f08StudentRestriction": {
+    "summaryNavLinksCount": 0,
+    "summaryUiTextSnippet": "Summary is restricted to supervisors\n\nBack to overview",
+    "summaryApiStatus": 403,
+    "summaryApiErrorCode": "FORBIDDEN"
+  },
+  "f08ForeignSupervisorIsolation": {
+    "supBScopedTeamCount": 1,
+    "supBSummaryContainsTeamA": false,
+    "foreignTeamSummaryStatus": 404,
+    "foreignTeamSummaryCode": "NOT_FOUND",
+    "foreignMilestoneApiStatus": 404,
+    "foreignMilestoneApiCode": "NOT_FOUND",
+    "foreignSubmissionApiStatus": 404,
+    "foreignMilestoneUiHeading": "Milestone unavailable",
+    "leaksTeamATitle": false
+  },
+  "blockedChecks": [
+    {
+      "check": "Direct Cloud SQL database readback on production fasttrack_prod",
+      "reason": "No gcloud CLI, active GCP credential, Cloud SQL Proxy, or production DATABASE_URL is available in Member B workspace environment; verified totals and persistence strictly through authorized live HTTPS UI + REST API endpoints (/api/summary, /api/teams/:id/progress, /api/teams/:id/milestones, /api/submissions/:id, /api/submissions/:id/feedback)."
+    }
+  ],
+  "screenshots": [
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b02/d2-prod-s1-preserved.png",
+      "sha256": "cacae9cbd94424f4ec72fa57d31e4cb1abcfc5c06bc85d3990658b6af9f15c55"
+    },
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b02/d2-prod-f08-summary.png",
+      "sha256": "61189eba51ca92572469d5a67f378de8faa6d542d70847cb46eda963b301f3ba"
+    },
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b02/d2-prod-f08-student-403.png",
+      "sha256": "c64fe5bc1aae321bec1c27f6ffc46ea6bd3c8f2875fd0818e167e8e0c7f9dbb7"
+    },
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b02/d2-prod-f08-foreign-404.png",
+      "sha256": "8be0ac51036831153cfa6930b3622f44bed496b0e59f49d2a5cd9fce74786366"
+    }
+  ],
+  "finishedAt": "2026-11-21T09:30:37.051Z"
+}
