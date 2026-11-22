@@ -1,0 +1,47 @@
+# Final engineering and team evidence (Part B draft)
+
+Working draft prepared by B (`@Atip-Infa`) for [Issue #38 (`R3-B04`)](https://github.com/zerotwobook/fastTrack/issues/38) in alignment with A's traceability and student demo drafts ([PR #148](https://github.com/zerotwobook/fastTrack/pull/148)). Final integration review, final assessed release links, and final PDF export remain pending `#146`, `#147`, `#36`, `#37`, and `#39`.
+
+## Sprint 1–3 delivery and release history
+
+| Milestone / Sprint | Key Issues & PRs | Release / Integration Target | Observed Verification Scope |
+| --- | --- | --- | --- |
+| Sprint 1 working baseline (`F-01`–`F-04`) | Contract & scaffold `#44`–`#48`, features `#50`–`#65`, D1 prep `#66`–`#75`, release `PR #67`, D1 upload `PR #78` / `#82` | Tag `v1.0.0-sprint-1` (`ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8`, merged `2026-11-07T16:15:10Z`) | Initial auth, milestone, submission, and exact-version feedback flows (`340` tests, `7` migration scenarios at release PR `#67`). |
+| Lab 5 cloud, CI/CD & runtime hardening (`C-01`–`C-06`) | Foundation & CI gates (`#14`, `#15`, `#16`), release `PR #93` (`16ec6d26`), visible sign-in `PR #99` / `PR #100` (`8e637e53`, merged `2026-11-12T08:46:15Z`) | `main` (`8e637e537cd037d630a5fffc1b5672d1b44371a8`) | Non-root runner/jobs images, `postgres:16.8` isolation, `/api/health` & `/api/ready`, DB-backed `LOGIN` limiter (`429`), Cloud Run + Cloud SQL socket topology. |
+| Sprint 2 baseline & Lab 7 change (`F-05`–`F-07`, `CR-L7-01`) | `F-05A` `PR #117`, `F-05B` `PR #118`, `F-07` `PR #119`, `F-06` `PR #120`, Lab 6 `PR #115`, Lab 7 `PR #128`, release `PR #129` | Tag `v1.0.0-sprint-2` (`f3ff8d9704c6e2a3705805412f538b2b216569ad`, merged `2026-11-20T10:30:51Z`) | `458` passed, `0` failed, `0` skipped + `7/7` legacy upgrades (`CI 44719877378`), deployed to `fasttrack-app-00004-jr2` (`Deploy 44719877524`) with `6,000`-code-point feedback limit verified in production. |
+| Sprint 3 `F-08` & Deliverable 2 (`F-08A`/`F-08B`, D2) | Contract `PR #133` (`#27`), `F-08B` `PR #134` (`#29`), `F-08A` `PR #135` (`#28`), integration `PR #138` (`#30`), D2 draft `PR #139` / `#142`, release `PR #143`, D2 archive `PR #145` | Tag `v1.0.0-d2` (`7872a739147f7553e16e05a4d40b5d0de0c21f27`, merged `2026-11-21T08:39:25Z`); `staging/sprint-3` archive tip `6074f98e` (`2026-11-22T11:23:37Z`) | `483` passed, `0` failed, `0` skipped + `7/7` upgrades + `17/17` socket checks (`CI 44885899889`), Cloud Run `fasttrack-app-00005-rkz` (`Deploy 44888588070`), hosted `6/14 (42.9%)` Summary and Sprint 1 baseline preserved; G3 closed in `#33`. |
+| Final QA regressions & package assembly (`R3-A03`..`R3-J04`) | `PR #146` (`#34`, approved `@Atip-Infa` `2026-11-22T13:49:30Z`), `PR #147` (`#35`, Ready for `@zerotwobook`), Draft `PR #148` (`#37`), this `R3-B04` draft (`#38`); gated `#36` & `#39` | `staging/sprint-3` -> Final `main` release (**Pending**) | A regression `CI 45022169276` & B regression + Summary pager wording fix `d3b07ba` `CI 45027976730` both passed on staging branches; merges, `#36` independent UAT, final freeze (`G5`), and final tag remain **Pending**. |
+
+## Two cross-sprint Issue -> PR -> review -> release chains
+
+Both chains below come from separate sprints, link directly to merged PRs and commits, and demonstrate non-author peer review catching concrete defects prior to merge and production release.
+
+### Chain 1 (Sprint 2): `F-05B` Milestone edit and cancel (`Issue #18` -> `PR #118` -> `v1.0.0-sprint-2`)
+
+| Stage | Artifact / Identity | Date (`UTC`) | Observed Outcome |
+| --- | --- | --- | --- |
+| 1. Contract & Issue | [`sprint-2-feature-interfaces.md`](../../../Project_code/docs/contracts/sprint-2-feature-interfaces.md) (`S2-AC-03`, `STS-10..14/28/30`) · [Issue #18 (`R2-B02`)](https://github.com/zerotwobook/fastTrack/issues/18) | Closed `2026-11-19T17:00:10Z` | Froze supervisor-only milestone edit/cancel rules, DB-clock future deadline invariant, and `409 MILESTONE_HISTORY_LOCKED` / `MILESTONE_CANCELLED` conflicts. |
+| 2. Branch & PR | `feat/s2-b-f05b-milestones` -> [PR #118](https://github.com/zerotwobook/fastTrack/pull/118) (`@Atip-Infa`) | Opened `2026-11-19T15:54:48Z` | Implemented `PATCH /api/milestones/:id`, `POST /api/milestones/:id/cancel`, `MilestoneEdit` / modal controls, and PostgreSQL integration tests. |
+| 3. Substantive Peer Review | Review (`COMMENTED`) by `@zerotwobook` on `ea480fb` | `2026-11-19T16:23:07Z` | Caught a **P2 millisecond truncation defect** in `MilestoneEdit` (`2030-05-10T11:30:59.501Z -> 11:30:00.000Z`, risking deadline drift when editing only text) and flagged shared `session.ts` sync with `a130a9f`. |
+| 4. Fix & Approval | Commits `369b27b`, `fd045f5` -> Review (`APPROVED`) by `@zerotwobook` on `fd045f5` | `2026-11-19T16:51:42Z` | Preserved sub-second deadline precision (`step={0.001}` / input parsing) and synced `session.ts` before approval. |
+| 5. Staging Merge & Main Release | Merged to `staging/sprint-2` (`09cdf9f5`) -> `G3 #21` (`63e81d1a`) -> [Release PR #129](https://github.com/zerotwobook/fastTrack/pull/129) -> tag **`v1.0.0-sprint-2`** (`f3ff8d97`) | Staging `2026-11-19T16:56:25Z`; Main `2026-11-20T10:30:51Z` | Verified in main CI [`44719877378`](https://github.com/zerotwobook/fastTrack/actions/runs/44719877378) (`458` passed) and deployed via [`44719877524`](https://github.com/zerotwobook/fastTrack/actions/runs/44719877524) (`fasttrack-app-00004-jr2`). |
+
+### Chain 2 (Sprint 3): `F-08B` Summary drill-down and return navigation (`Issue #29` -> `PR #134` -> `v1.0.0-d2`)
+
+| Stage | Artifact / Identity | Date (`UTC`) | Observed Outcome |
+| --- | --- | --- | --- |
+| 1. Contract & Issue | [`sprint-3-f08-summary.md`](../../../Project_code/docs/contracts/sprint-3-f08-summary.md) (`PR #133` -> `113b9976`, `R3-J00 #27`) · [Issue #29 (`R3-B01`)](https://github.com/zerotwobook/fastTrack/issues/29) | Contract merged `2026-11-20T12:29:37Z`; `#29` closed `2026-11-20T16:56:46Z` | Froze `F-08B` scope: filtered item queries under repeatable-read snapshot, `dueAt ASC, id ASC` paging, and validated `/summary` `returnTo` navigation. |
+| 2. Branch & PR | `feature/s3-b-summary-drilldown` (`a9f053d5`) -> [PR #134](https://github.com/zerotwobook/fastTrack/pull/134) (`@Atip-Infa`) | Opened `2026-11-20T15:18:23Z` | Implemented `readSummaryItems`, `DrilldownList`, `navigation.ts`, and `F08-STS-03/04/05/06` suites. |
+| 3. Substantive Peer Review | [Review comment](https://github.com/zerotwobook/fastTrack/pull/134#issuecomment-7043568295) by `@zerotwobook` on `a9f053d5` | `2026-11-20T15:34:45Z` | Identified missing `returnTo` propagation in `SubmissionDetail`: switching versions via **Version history** or **View latest version** dropped `/summary` filters and page state. |
+| 4. Fix & Approval | Commit `83ad8109` ([comment](https://github.com/zerotwobook/fastTrack/pull/134#issuecomment-7043766729)) + CI [`44765435736`](https://github.com/zerotwobook/fastTrack/actions/runs/44765435736) -> Review (`APPROVED`) by `@zerotwobook` | `2026-11-20T16:01:15Z` | Preserved validated `/summary` query across version-history navigation (`53` B01 tests, `212` unit/contract tests, real-session Chromium checks). |
+| 5. Staging Merge & Main Release | Merged to `staging/sprint-3` (`06f5e8d1`) -> integrated with `#135` (`416a8300`) & `#138` (`7cebc2da`) -> [Release PR #143](https://github.com/zerotwobook/fastTrack/pull/143) -> tag **`v1.0.0-d2`** (`7872a739`) | Staging `2026-11-20T16:01:41Z`; Main `2026-11-21T08:39:25Z` | Shipped to Cloud Run `fasttrack-app-00005-rkz` (`Deploy 44888588070`); post-D2 out-of-range `"Page 2 (1 page total)"` wording improvement subsequently opened in `PR #147` (`d3b07ba`, pending review/merge for Final). |
+
+## Team contributions and AI-use accounting
+
+- **Member A (`@zerotwobook`):** Repository/Project ownership, Sprint 1 auth/first-submissions/reviews (`F-01`/`F-03` & S1 fixes), Lab 6 UAT & Section 3.5 simulation lead, Sprint 2 `F-05A` team planning & `F-07` progress calculation, Lab 7 RED analysis & revision assembly, Sprint 3 `F-08A` overview/totals, `R3-A03` domain regression (`PR #146`), D2 Parts A/C/D, and Final Parts A/C/traceability & Student demo (`PR #148`).
+- **Member B (`@Atip-Infa`):** Prisma schema/migrations/seed & UI design tokens (`R1-B00`), Sprint 1 milestones & feedback (`F-02`/`F-04`), Lab 5 CI/CD, WIF & Cloud Run/Cloud SQL deployment workflows (`R2-B01`), Lab 6 defect fix & independent retest, Sprint 2 `F-05B` & `F-06` + Lab 7 GREEN/migration implementation, Sprint 3 `F-08B` drill-down/navigation (`PR #134`) + post-D2 summary pager wording fix (`PR #147`), `R3-B03` access/UI/ops regression, D2 Parts B/E, and Final Parts B/D/E assembly prep (this draft).
+- **Truthful AI-use disclosure:** AI coding assistants helped draft test harnesses, Playwright/accessibility check runners, code-review triage summaries, and English Markdown drafts. Every commit SHA, GitHub review ID, CI run number, PostgreSQL count, screenshot, and live deployment probe was independently executed and verified against live GitHub, Docker, PostgreSQL, and Cloud Run outputs by the team.
+
+## Pending final updates before G5/G6
+
+- Record actual merge commits for `PR #146` (`R3-A03`) and `PR #147` (`R3-B03`, delivering `d3b07ba`), completed `#36` (`R3-J03`) independent UAT outcomes, and the Final Release PR -> **`main`** commit / tag before assembling the course PDF.
