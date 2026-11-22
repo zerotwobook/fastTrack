@@ -1,0 +1,56 @@
+{
+  "startedAt": "2026-11-22T12:18:24.355319+00:00",
+  "candidate": "6074f98eed54448237a65ee194ae4487a758ad52",
+  "environment": "Disposable PostgreSQL with synthetic, tag-migrated fixtures",
+  "image": "postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae",
+  "cases": [
+    {
+      "tag": "v1.0.0-sprint-1",
+      "tagCommit": "ae7a60a6e3ed0a363dcee920ac1774a02f4f4ab8",
+      "priorMigrationCount": 4,
+      "newMigrations": [
+        "20261110070000_auth_rate_limits",
+        "20261120042000_lab7_feedback_content_6000"
+      ],
+      "historyAndPasswordHashesPreserved": true,
+      "priorMigrationChecksumsPreserved": true,
+      "repeatMigrationUnchanged": true,
+      "beforeFingerprint": "03ab3283d5f8587e6664b5e4f17580bda58ca7ce8ea307fb3d954236402439a1",
+      "afterFingerprint": "03ab3283d5f8587e6664b5e4f17580bda58ca7ce8ea307fb3d954236402439a1",
+      "repeatFingerprint": "03ab3283d5f8587e6664b5e4f17580bda58ca7ce8ea307fb3d954236402439a1",
+      "recordCounts": {
+        "users": 2,
+        "teams": 1,
+        "team_members": 1,
+        "milestones": 1,
+        "submissions": 1,
+        "feedback": 1
+      },
+      "passed": true
+    },
+    {
+      "tag": "v1.0.0-sprint-2",
+      "tagCommit": "f3ff8d9704c6e2a3705805412f538b2b216569ad",
+      "priorMigrationCount": 6,
+      "newMigrations": [],
+      "historyAndPasswordHashesPreserved": true,
+      "priorMigrationChecksumsPreserved": true,
+      "repeatMigrationUnchanged": true,
+      "beforeFingerprint": "4fd119821459ba14f139d1f400e8c28f09de86b00973b64af9ae7b392e0d0a5c",
+      "afterFingerprint": "4fd119821459ba14f139d1f400e8c28f09de86b00973b64af9ae7b392e0d0a5c",
+      "repeatFingerprint": "4fd119821459ba14f139d1f400e8c28f09de86b00973b64af9ae7b392e0d0a5c",
+      "recordCounts": {
+        "users": 2,
+        "teams": 1,
+        "team_members": 1,
+        "milestones": 1,
+        "submissions": 2,
+        "feedback": 2
+      },
+      "passed": true
+    }
+  ],
+  "passed": true,
+  "cleanup": true,
+  "finishedAt": "2026-11-22T12:18:43.610392+00:00"
+}
