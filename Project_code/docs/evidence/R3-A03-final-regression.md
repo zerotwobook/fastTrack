@@ -8,6 +8,11 @@ A (@zerotwobook) ran the regression for [Issue #34](https://github.com/zerotwobo
 The isolated A worktree used Node 26.13.0, npm 11.20.0, Docker Engine 29.9.2 and the runner's pinned PostgreSQL 16.8 image. Run these commands from `Project_code/` in a clean checkout.
 
 ```powershell
+
+$results = Join-Path ([IO.Path]::GetTempPath()) ('fasttrack-r3-a03-' + [guid]::NewGuid())
+New-Item -ItemType Directory -Path $results | Out-Null
+$env:G1_REPORT_PATH = Join-Path $results 'runtime-results.json'
+$env:A01_CONTAINER_REPORT = Join-Path $results 'runtime-socket-results.json'
 npm ci --prefer-offline
 npm run test:runtime:isolated
 ```
@@ -41,7 +46,7 @@ For each tag, use git archive with Project_code/server/prisma/migrations to extr
 
 ## Built image and persistence
 
-Ran npm run verify:socket from Project_code on the same source on 22 November 2026. The clean clone built the production runner and jobs images. All 17 [recorded checks](R3-A03-socket-results.json) passed, including the business journey, fresh and repeat migration and seed, and retrieval of the same submission, feedback and still-valid database session after restarting the web container. The verifier removed the disposable containers and socket volume.
+Ran npm run verify:socket from Project_code on the same source on 22 November 2026. For a separate socket run, set A01_CONTAINER_REPORT to a separate file in the results directory. The clean clone built the production runner and jobs images. All 17 [recorded checks](R3-A03-socket-results.json) passed, including the business journey, fresh and repeat migration and seed, and retrieval of the same submission, feedback and still-valid database session after restarting the web container. The verifier removed the disposable containers and socket volume.
 
 The hosted health and readiness readbacks for this run both returned HTTP 200 at D2 source 7872a739147f7553e16e05a4d40b5d0de0c21f27. Readiness reported the database connected. [The accepted D2 integration record](R3-J01-f08-integration.md) supplies the previously reviewed hosted F-08 and original-record readback for that source. The fresh test results cover isolated runtime and restart behavior. The release record covers the existing deployment. Rollback and roll-forward remain part of Final release readiness if the release uses them.
 
