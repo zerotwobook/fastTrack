@@ -62,9 +62,25 @@ describe('F-08B DrilldownList states, semantics, and recovery navigation', () =>
 
     expect(html).toContain('No milestones on page 4');
     expect(html).toContain('9 matching milestones across 2 pages. Active filters are preserved.');
+    expect(html).toContain('Page 4 (2 pages total)');
+    expect(html).not.toContain('Page 4 of 2');
     expect(html).toContain(`href="/summary?teamId=${TEAM_ID}&amp;status=PENDING&amp;page=2&amp;pageSize=8"`);
     expect(html).toContain('Go to page 2');
     expect(html).toContain('Go to page 1');
+
+    const singlePageOverflowHtml = renderToStaticMarkup(
+      createElement(DrilldownList, {
+        asOf: AS_OF,
+        filters: { ...baseFilters, page: 2 },
+        matchedCount: 4,
+        items: [],
+      }),
+    );
+    expect(singlePageOverflowHtml).toContain('No milestones on page 2');
+    expect(singlePageOverflowHtml).toContain('4 matching milestones across 1 page. Active filters are preserved.');
+    expect(singlePageOverflowHtml).toContain('Page 2 (1 page total)');
+    expect(singlePageOverflowHtml).not.toContain('Page 2 of 1');
+    expect(singlePageOverflowHtml).toContain('Go to page 1');
   });
 
   it('distinguishes loading, invalid filters, error retry, no teams, and zero matches', () => {
