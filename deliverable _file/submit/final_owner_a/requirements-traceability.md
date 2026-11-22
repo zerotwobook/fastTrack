@@ -1,0 +1,63 @@
+
+# Final requirements and verification traceability
+
+Working draft for the Final Delivery report, Part C. A owns the requirement and domain evidence and B reviews it. The requirement IDs follow the [project requirements register](../../../Project_doc/project_detail.md) and the [D2 traceability baseline](../project_deliverable_2.md#d4-requirements-to-verification-matrix).
+
+## Evidence and versions
+
+| Evidence | Version and observed result |
+| --- | --- |
+| A-side regression | The tested staging source is **6074f98eed54448237a65ee194ae4487a758ad52**. The isolated run recorded **483 passed, 0 failed, 0 skipped**, seven legacy upgrade scenarios, two synthetic database replays from the accepted Sprint 1 and 2 migration sets, and 17 local image and socket checks. [A-side evidence](https://github.com/zerotwobook/fastTrack/blob/017811c7805201e322a5dfc063f4d5fb545e37a3/Project_code/docs/evidence/R3-A03-final-regression.md) · [Raw test results](https://github.com/zerotwobook/fastTrack/blob/017811c7805201e322a5dfc063f4d5fb545e37a3/Project_code/docs/evidence/R3-A03-runtime-results.json) · [Peer review PR](https://github.com/zerotwobook/fastTrack/pull/146) |
+| Hosted D2 baseline | The previously accepted deployed source is **7872a739147f7553e16e05a4d40b5d0de0c21f27**. Hosted Sprint 1 continuity, the scoped Summary workflow and readiness evidence belong to this release. [D2 integration record](../../../Project_code/docs/evidence/R3-J01-f08-integration.md) · [G3 acceptance](https://github.com/zerotwobook/fastTrack/issues/33) |
+| Lab 7 hosted baseline | The approved feedback-limit behavior was verified on **f3ff8d9704c6e2a3705805412f538b2b216569ad**. [Accepted release and hosted boundary results](https://github.com/zerotwobook/fastTrack/issues/26) · [Lab 7 change contract](../../../Project_code/docs/contracts/lab-7-feedback-limit.md) |
+| Final assessed release | Pending the reviewed B contribution, independent UAT and release freeze. Add final commit/tag, exact CI run, migration execution, image digests, serving revision and hosted test links. [B regression](https://github.com/zerotwobook/fastTrack/issues/35) · [Joint UAT and readiness](https://github.com/zerotwobook/fastTrack/issues/36) |
+
+The A-side result cells refer to the local staging source above. Suite counts are run totals and can span several requirements. Final-assessed results are pending in every row until evidence is linked to the exact assessed version.
+
+## Functional requirements
+
+| ID and delivered behavior | Feature / sprint | Acceptance or test ID | Executed A-side evidence on 6074f98 | Final assessed check |
+| --- | --- | --- | --- | --- |
+| FR-01 Sign in, read current identity and sign out | F-01 / 1 | AC-01.1–01.4, T-01–04, T-23 | PASS in sessions.auth.ts. Real sessions and current identity, expiry and revocation checks ran in the 46-case auth group. | B verifies the browser logout, expiry and account switch. |
+| FR-02 Read scoped teams, members and milestones | F-01 and F-02 / 1 | AC-01.5, AC-02.2, T-05, T-07, T-25 | PASS in sessions.auth.ts and milestones-review.b01.ts. Authorized roles read their own scope. Missing and foreign lookups agree. | B adds the final direct-link and role matrix. |
+| FR-03 Create and retrieve a milestone | F-02 / 1 | AC-02.1–02.3, T-06–08 | PASS in milestones-review.b01.ts and integrated-s1.j03.ts. Assigned supervisor creates a future deadline and retrieves the saved milestone. | Independent tester repeats the supervisor-to-student readback. |
+| FR-04 Submit and retrieve a work link | F-03 / 1 | AC-03.1–03.6, T-09–16, T-26 | PASS in submissions.a02.ts and integrated-s1.j03.ts. The persisted version 1 retains its inputs. Deadline, duplicate and out-of-scope writes are denied. | Independent tester records the saved version and late rejection. |
+| FR-05 Add private feedback to an exact version | F-04 / 1, Lab 7 / 2 | AC-04.1–04.4, T-17–20, T-24, L7-AC-01–05 | PASS in feedback-review.b02.ts and integrated-s1.j03.ts. Appends and retries preserve the exact submission association. Local Lab 7 tests cover the new boundary. | Capture final hosted feedback boundaries and readback. |
+| FR-06 Create and rename teams and manage membership | F-05A / 2 | S2-AC-01/02, STS-01–09 | PASS in team-planning.auth.ts. Membership operations preserve scope and uniqueness, including simultaneous claims and the first-submission race. | B verifies the final planning workflow and access. |
+| FR-07 Edit or cancel a milestone before submission history exists | F-05B / 2 | S2-AC-03, STS-10–14 | PASS in milestones-f05b.b01.ts. Edits retain identity. Cancellation preserves the row. Edit/cancel races serialize with first submission. | Independent tester checks the visible planning or locked edit outcome. |
+| FR-08 Append revisions while preserving older versions and feedback | F-06 / 2 | S2-AC-04/05, STS-15–22, T-29, STS-32 | PASS in revisions-f06.b02.ts and integrated-s2.auth.ts. Latest version, previous feedback and progress remain correct after a revision race. | Independent tester shows v1 and v2 and reopens the v1 feedback. |
+| FR-09 Read team progress and derived statuses | F-07 / 2 | S2-AC-06, STS-23–27, T-30 | PASS in progress.auth.ts. One snapshot drives derived statuses, counts and exact-latest-version feedback. Empty and cancelled teams return zero. | Link the final Progress readback for the same fixture used in Summary. |
+| FR-10 Read, filter and drill into the scoped supervisor Summary | F-08 / 3 | F08-AC-01–08, F08-STS-01–08 | PASS for the API/DB tests in summary-overview.b01.ts and summary-drilldown.b01.ts. Weighted totals, scoped filters, stable paging and concurrent snapshot consistency passed. | Add B's browser navigation, account switching, layout and zoom evidence on the final candidate. |
+
+## Business rules
+
+| ID and rule | Feature / sprint | Acceptance or test ID | Executed A-side evidence on 6074f98 | Final assessed check |
+| --- | --- | --- | --- | --- |
+| BR-01 One role per user, one team per student and one supervisor per team | F-01 and F-05A / 1–2 | AC-01.5, T-05, S2-AC-01/02, STS-07/08 | PASS in foundation.g1.ts and team-planning.auth.ts. Concurrent claims preserve a single membership. | Include the final role and membership check. |
+| BR-02 Check team or supervisor scope for protected reads and writes | F-01–F-08 / 1–3 | T-05/07/14/18/25, STS-21/27/28, F08-STS-04/07 | PASS for representative local session and ownership checks. F08-STS-04 verifies generic cross-team denial. | Attach B's complete final endpoint and browser scope matrix. |
+| BR-03 Supervisors create milestones and feedback. Assigned students submit or revise | F-02/03/04/06 / 1–2 | T-07/14/18, STS-15/28 | PASS in milestone, submission, feedback and revision groups. A student milestone creation was denied and no unauthorized write was recorded. | Match B's final role checks and the UAT role case. |
+| BR-04 Accept work at or before the post-lock DB deadline. Store UTC and display Bangkok time | F-03/05B/06/07 / 1–2 | T-10–12/26, STS-13/18/25 | PASS in submissions.a02.ts, deadline-lab6.a02.ts and revisions-f06.b02.ts for the deadline boundary and lock crossing. | Record the final UI deadline and late no-write readback. |
+| BR-05 Create one version 1 and preserve it after duplicates | F-03 and F-06 / 1–2 | AC-03.3, T-13/26, STS-15/17 | PASS in submissions.a02.ts. Duplicate precedence remains correct after the deadline. The saved work is preserved. | Capture the final existing submission and single version 1. |
+| BR-06 Append revisions atomically and preserve prior work and feedback | F-04 and F-06 / 1–2 | T-20/29, STS-16/17/20/21/32 | PASS in revisions-f06.b02.ts and integrated-s2.auth.ts. The revision race and exact-version history passed. | Link final version history and independent feedback association. |
+| BR-07 Keep feedback private, append-only and specific to its version | F-04 / 1 | T-17–20/24, S1-AC-EXT-02 | PASS in feedback-review.b02.ts. An identical retry produces one row. Changed intent conflicts and earlier feedback stays attached to its version. | Add the final append and scoped readback. |
+| BR-08 Trim and validate title, description, feedback and work URL | F-02/03/04/05/06 / 1–2 | T-08/15/19, STS-04/10/19, L7-STS-01–05 | PASS for exact Unicode maxima and URL validation in submissions.a02.ts. PASS for 5,999 and 6,000 accepted and 6,001 rejected in the Lab 7 suite. The approved feedback bound is 6,000 code points. | Retain title 120, description 4,000 and HTTP(S) URL 2,048 limits. Link final L7-STS-05. |
+| BR-09 Lock milestone edits/cancellation and team membership after submission history | F-05 / 2 | T-28, STS-09/11/14 | PASS in membership and milestone suites. Concurrent edit/cancel and first-submit outcomes respect lock order and preserve history. | Link one final visible locked operation and preserved data. |
+| BR-10 Count submitted active milestones, excluding cancelled ones | F-07 and F-08 / 2–3 | T-30, STS-23–26, F08-STS-01–03 | PASS in progress and summary suites. One completed out of ten active milestones gives 10%. Filtered matches do not change the total. | Compare Progress and Summary against the final fixture and revision. |
+
+## Non-functional requirements
+
+| ID and required observation | Feature or system scope / sprint | Verification target and method | Executed A-side evidence on 6074f98 | Final assessed check |
+| --- | --- | --- | --- | --- |
+| NFR-01 Credentials and sessions remain private and bounded | F-01 and runtime / 1–3 | Auth contract session scope and safe responses, T-01–04/23 | PASS in session and foundation groups. The local socket report checked the built app and safe readiness on a failed database login. | Attach B's response, image and log checks on the final candidate. |
+| NFR-02 Protected endpoints deny unauthorized scope | F-01–F-08 / 1–3 | T-05/07/14/18/27, STS-28, F08-STS-04/07 | PASS for the representative local access cases linked under BR-02. | Attach the full B endpoint matrix and independent scope check. |
+| NFR-03 Committed work and feedback remain readable across runtime changes | F-03/04/06 and runtime / 1–3 | T-21/22/25/31, T-29, image and deployed readback | PASS in the compiled journey and 17 socket checks. The same committed IDs persisted through restart. Independent tagged fixtures preserved migration data and history. | Record final hosted before/after IDs and deployment revision. |
+| NFR-04 Clean setup, migration, seed, build and test | Build and data setup / 1–3 | Clean checkout and guarded PostgreSQL suite, STS-29/30 | PASS for lockfile install, typecheck, build, migrations and repeat seed in A's isolated worktree. Both accepted-tag upgrade cases preserved data. | Record B's independent clean checkout on the final commit. |
+| NFR-05 Clear feedback, keyboard access and responsive recovery | Forms, dashboards and Summary / 1–3 | T-27, STS-31, F08-STS-06–08 | PASS for automated state and URL helpers. The full browser matrix belongs to B's final evidence. | Capture actual keyboard, required widths, 200% zoom and status states. |
+| NFR-06 Required CI, deployment identity and smoke checks | Delivery pipeline / 2–3 | Required checks, immutable source/image identity, migration order and readiness | PASS for the A PR's required CI and clean local image check. Earlier production D2 health/ready evidence is linked above. [CI run](https://github.com/zerotwobook/fastTrack/actions/runs/45022169276) | Add the final required check, main SHA, image digests, migration, serving revision and smoke readback. |
+
+## Contract and excerpt sources
+
+- Sprint 1 [identity](../../../Project_code/docs/contracts/sprint-1-auth.md), [milestones](../../../Project_code/docs/contracts/sprint-1-milestones.md), [first submission](../../../Project_code/docs/contracts/sprint-1-submissions.md) and [feedback](../../../Project_code/docs/contracts/sprint-1-feedback.md).
+- [Sprint 2 feature contracts and STS](../../../Project_code/docs/contracts/sprint-2-feature-interfaces.md) and [Sprint 3 F-08 contract and STS](../../../Project_code/docs/contracts/sprint-3-f08-summary.md).
+- A's domain excerpt candidate is T-26 in [submissions.a02.ts](https://github.com/zerotwobook/fastTrack/blob/6074f98eed54448237a65ee194ae4487a758ad52/Project_code/server/src/testing/submissions.a02.ts). A real lock holds the request until database time is past the deadline. The test checks the rejection and unchanged submission rows. Use the exact scenario and execution record when assembling Part C.
+- B supplies the second access excerpt. Link the tested source, setup, assertions and execution record after B's handoff.
