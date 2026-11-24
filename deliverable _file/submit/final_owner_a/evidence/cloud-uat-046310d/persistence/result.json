@@ -1,0 +1,32 @@
+﻿{
+    "caseId":  "UAT-FINAL-08",
+    "runType":  "Automated browser and API check",
+    "status":  "PASS",
+    "timestampUtc":  "2026-11-23T15:08:19.703Z",
+    "timeZone":  "Asia/Bangkok",
+    "source":  "046310d288859ee42745a043369498d5d646d6c9",
+    "revision":  "fasttrack-uat-046310d-candidate",
+    "preview":  "https://fasttrack-uat-046310d-970128017651.asia-southeast1.run.app",
+    "observations":  {
+                         "afterRevision":  "fasttrack-uat-046310d-persist-20261123",
+                         "sameWorkAndFeedbackForBothRoles":  true,
+                         "deploymentCreatedUtc":  "2026-11-23T15:07:17.867793Z",
+                         "afterUrl":  "https://uat-persistence---fasttrack-uat-046310d-970128017651.asia-southeast1.run.app",
+                         "defaultTrafficPercent":  100,
+                         "roles":  [
+                                       "SA",
+                                       "A1"
+                                   ],
+                         "beforeUtc":  "2026-11-23T15:06:37.599Z",
+                         "afterUtc":  "2026-11-23T15:08:19.703Z",
+                         "sameImage":  "asia-southeast1-docker.pkg.dev/fasttrack-se-002/fasttrack-docker/fasttrack-uat-web@sha256:b00e45a19b8072647ae8aac34644ab56d74ba2140a6c2c1c250d1d40ccc78b2b",
+                         "milestoneId":  "4da5ad8d-c6a4-485c-b60b-0856c21f9bcf",
+                         "beforeRevision":  "fasttrack-uat-046310d-candidate"
+                     },
+    "screenshots":  [
+                        "before-a1-v1.png",
+                        "before-sa-v1.png",
+                        "after-a1-v1.png",
+                        "after-sa-v1.png"
+                    ]
+}

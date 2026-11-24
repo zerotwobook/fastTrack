@@ -44,6 +44,8 @@ Use a fresh synthetic data set in the agreed test environment. Confirm GET /api/
 
 ## Result and defect record
 
+See the [A-side Cloud UAT result and supporting evidence](cloud-uat-results.md) and the [B-side Local UAT return](https://github.com/zerotwobook/fastTrack/issues/36#issuecomment-7127873421) for the recorded sessions on `046310d`. The table below is the blank record for future execution or retests.
+
 Use one row per executed case. Record **PASS**, **FAIL**, **SKIPPED** or **INCOMPLETE** with the actual observation and its source. A retest records its own tested commit, tester and timestamp.
 
 | Case | Tester and run time | Tested SHA or tag | Actual behavior and status | Evidence or defect link | Retest owner and result |
