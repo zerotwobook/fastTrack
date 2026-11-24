@@ -309,7 +309,9 @@ export function DrilldownList({
               ))}
 
               <span className={styles.pageStatus}>
-                Page {filters.page} of {totalPages}
+                {filters.page > totalPages
+                  ? `Page ${filters.page} (${totalPages} ${totalPages === 1 ? 'page' : 'pages'} total)`
+                  : `Page ${filters.page} of ${totalPages}`}
               </span>
 
               {filters.page < totalPages ? (

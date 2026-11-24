@@ -1,0 +1,1287 @@
+{
+  "taskId": "R3-B03",
+  "issue": 35,
+  "baseCommit": "6074f98eed54448237a65ee194ae4487a758ad52",
+  "testedAppCommit": "d3b07ba2eeefeb33596d37d4099c601e99f7de68",
+  "cleanWorkingTreeBeforeRun": true,
+  "candidateTarget": {
+    "tag": "v1.0.0-d2",
+    "mainCommit": "7872a739147f7553e16e05a4d40b5d0de0c21f27",
+    "deployRunUrl": "https://github.com/zerotwobook/fastTrack/actions/runs/44888588070",
+    "ciRunUrl": "https://github.com/zerotwobook/fastTrack/actions/runs/44885899889",
+    "migrationExecution": "fasttrack-migrate-4lvx5",
+    "servingRevision": "fasttrack-app-00005-rkz",
+    "trafficPercent": 100,
+    "webOciIndexDigest": "sha256:7b868cd51b62db518dde4e22601930a9be7b8483bffb9409efd70742faf2c458",
+    "webAmd64Digest": "sha256:440b3a4ac8fc41c76e14e5b72defcf264f597c19a272dde2f481a9f5ee82269a",
+    "jobsDigest": "sha256:b49829f88464cc18f7aa6d2cb9be840e67cf9dd1b867eee18d3bf7e58ec4c718",
+    "liveHealthStatus": 200,
+    "liveReadyStatus": 200,
+    "liveAssetsChecked": [
+      {
+        "path": "/assets/index-CjfMLH9_.js",
+        "status": 200,
+        "contentType": "text/javascript; charset=utf-8",
+        "bytes": 315192,
+        "leaksSecret": false,
+        "externalFontCdn": false
+      },
+      {
+        "path": "/assets/index-CkpIPRkx.css",
+        "status": 200,
+        "contentType": "text/css; charset=utf-8",
+        "bytes": 40292,
+        "leaksSecret": false,
+        "externalFontCdn": false
+      }
+    ]
+  },
+  "defectFixVerification": {
+    "defect": "F-08B Summary out-of-range pagination status rendered contradictory label (\"Page 2 of 1\")",
+    "reproducedAtCommit": "2e2ed2710ea7a6fa4cd61d97544b6b40e1b7872e",
+    "reproducedPagerText": "Previous 1 Page 2 of 1 Next",
+    "fixedAtCommit": "d3b07ba2eeefeb33596d37d4099c601e99f7de68",
+    "postFixPagerText": "Previous 1 Page 2 (1 page total) Next",
+    "postFixStatus": "PASS"
+  },
+  "isolatedRuntimeSummary": {
+    "passed": true,
+    "postgresVersion": "postgres (PostgreSQL) 16.8 (Debian 16.8-1.pgdg120+1)",
+    "postgresImage": "postgres:16.8@sha256:301bcb60b8a3ee4ab7e147932723e3abd1cef53516ce5210b39fd9fe5e3602ae",
+    "stages": [
+      {
+        "name": "client generation",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "fresh dev migrations",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "fresh test migrations",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "repeat migration deploy",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "typecheck",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "ordinary unit/API tests",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "production build",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "G1 database, seed and compiled-client checks",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "F-01 sessions, source protection and scoped team checks",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "B01 real-session milestone regression",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "F-03 first-submission regression",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "F-04 feedback real-session and retry regression",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "S1 compiled cross-feature journey, seed and restart",
+        "passed": true,
+        "exitCode": 0
+      },
+      {
+        "name": "Lab 5 real-DB limiter, timeout, proxy and cleanup",
+        "passed": true,
+        "exitCode": 0
+      }
+    ],
+    "testCounts": {
+      "ordinaryTests": {
+        "passed": 214,
+        "failed": 0
+      },
+      "g1Tests": {
+        "passed": 38,
+        "failed": 0
+      },
+      "authTests": {
+        "passed": 46,
+        "failed": 0
+      },
+      "b01Tests": {
+        "passed": 57,
+        "failed": 0
+      },
+      "a02Tests": {
+        "passed": 54,
+        "failed": 0
+      },
+      "b02Tests": {
+        "passed": 61,
+        "failed": 0
+      },
+      "j03Tests": {
+        "passed": 1,
+        "failed": 0
+      },
+      "runtimeTests": {
+        "passed": 12,
+        "failed": 0
+      },
+      "totalPassed": 483
+    },
+    "upgradesPassed": true,
+    "upgradeScenarios": []
+  },
+  "containerVerification": {
+    "sourceCommit": "d3b07ba2eeefeb33596d37d4099c601e99f7de68",
+    "passed": true,
+    "checksCount": 13,
+    "failedChecks": [],
+    "webImageId": "sha256:d369ac539f409b84ee85cf1a38b2d247384d82e795c945e61f5b3f8ce8da11a5",
+    "jobsImageId": "sha256:c144a50162ef1d383347b7f3dfd2a6eb22dc6344284648216c765867dc37a252"
+  },
+  "socketVerification": {
+    "sourceCommit": "d3b07ba2eeefeb33596d37d4099c601e99f7de68",
+    "passed": true,
+    "checksCount": 17,
+    "failedChecks": []
+  },
+  "offlineDeployChecks": {
+    "syntax": "PASS (deploy/release.sh, deploy/deploy.sh, deploy/teardown.sh)",
+    "testReleaseStub": "PASS (9/9 scenarios incl. migration failure, image/jobs digest failure, rollback, non-main ref, split traffic)",
+    "testDeployStub": "PASS (10/10 scenarios incl. idempotent rerun, job-fail rollout block, DRY_RUN=1 zero gcloud calls, secret redaction)",
+    "testTeardownStub": "PASS (16/16 scenarios)",
+    "testSmokePy": "PASS (10/10 unittest cases)"
+  },
+  "endpointAuthorizationMatrix": [
+    {
+      "name": "POST /api/auth/login (guards, 415, 403 origin/X-req, 401 bad creds, HttpOnly/SameSite cookie)",
+      "status": "PASS",
+      "pass": true,
+      "noHdr": 403,
+      "badOrg": 403,
+      "badCt": 415,
+      "badCred": 401
+    },
+    {
+      "name": "GET /api/auth/me (401 anon/expired/revoked, 200 no-store, no secret hashes)",
+      "status": "PASS",
+      "pass": true,
+      "anon": 401,
+      "expired": 401,
+      "outBadCsrf": 403,
+      "outOk": 204,
+      "afterOut": 401
+    },
+    {
+      "name": "GET /api/teams (401 anon, 200 scoped lists incl. unassigned empty [])",
+      "status": "PASS",
+      "pass": true,
+      "anon": 401,
+      "supACount": 2,
+      "supBCount": 2,
+      "freeCount": 0
+    },
+    {
+      "name": "GET /api/teams/:id (401 anon, generic 404 foreign vs absent, 200 owner)",
+      "status": "PASS",
+      "pass": true,
+      "anon": 401,
+      "supBForeign": 404,
+      "supBAbsent": 404,
+      "stuAForeign": 404,
+      "okOwn": 200
+    },
+    {
+      "name": "POST /api/teams & PATCH /api/teams/:id (401/403/415/404/201/200)",
+      "status": "PASS",
+      "pass": true,
+      "anon": 401,
+      "stu403": 403,
+      "csrf403": 403,
+      "ct415": 415,
+      "created": 201,
+      "patchStu403": 403,
+      "patchForeign404": 404,
+      "patchOk": 200
+    },
+    {
+      "name": "GET /api/students/available & POST/DELETE team members (401/403/404/200/empty-DELETE)",
+      "status": "PASS",
+      "pass": true,
+      "anonAvail": 401,
+      "stuAvail": 403,
+      "supAvail": 200,
+      "addOk": 200,
+      "delBadCtBody": 400,
+      "delEmptyOk": 204,
+      "delForeign404": 404
+    },
+    {
+      "name": "Milestones 5 endpoints (POST/PATCH/cancel/GET list/GET detail)",
+      "status": "PASS",
+      "pass": true,
+      "mAnon": 401,
+      "mCreateOk": 201,
+      "mPatchOk": 200,
+      "mCancelOk": 200,
+      "mGetFor": 404
+    },
+    {
+      "name": "Submissions & Revisions 4 endpoints (401/403/404/201/409)",
+      "status": "PASS",
+      "pass": true,
+      "sCreateOk": 201,
+      "sDup": 409,
+      "rConflict": 409,
+      "rCreateOk": 201,
+      "v": 2,
+      "dFor": 404
+    },
+    {
+      "name": "Feedback 2 endpoints (POST/GET 401/403/404/201/idempotent 200)",
+      "status": "PASS",
+      "pass": true,
+      "fPostStu": 403,
+      "fPostFor": 404,
+      "fPostOk": 201,
+      "fPostIdem": 200,
+      "fGetFor": 404
+    },
+    {
+      "name": "GET /api/teams/:teamId/progress (401/404 foreign vs absent/200 owner)",
+      "status": "PASS",
+      "pass": true,
+      "pFor": 404,
+      "pOwn": 200,
+      "submitted": 4,
+      "total": 8
+    },
+    {
+      "name": "GET /api/summary F-08 (401 anon, 403 student, 400 invalid, 404 foreign teamId vs absent, 6/14 42.9% multi-team totals)",
+      "status": "PASS",
+      "pass": true,
+      "stu403": 403,
+      "badStatus": 400,
+      "badPageSize": 400,
+      "foreignTeam": 404,
+      "absentEq": true,
+      "matchedAll": 15,
+      "matchedCancelled": 1,
+      "itemsLen": 8,
+      "totals": {
+        "total": 14,
+        "submitted": 6,
+        "pending": 6,
+        "overdue": 2,
+        "progressPercent": 42.9
+      },
+      "pendingAlphaCount": 4,
+      "outRangeLen": 0,
+      "outRangeMatched": 4,
+      "sumBFilteredOut": true
+    }
+  ],
+  "rateLimitAndCleanupChecks": [
+    {
+      "name": "Real HTTP TRUST_PROXY_HOPS=1 triggers 429 LOGIN_RATE_LIMITED + Retry-After on 5th bad attempt without blocking other XFF client",
+      "status": "PASS",
+      "statuses429": [
+        401,
+        401,
+        401,
+        401,
+        429
+      ],
+      "retryAfter": "900",
+      "rateCode": "LOGIN_RATE_LIMITED",
+      "otherIpStatus": 200
+    },
+    {
+      "name": "cleanExpiredLoginKeys cleans expired auth_rate_limits rows in bounded batch",
+      "status": "PASS",
+      "cleaned": 3
+    }
+  ],
+  "readinessChecks": [
+    {
+      "name": "GET /api/health returns 200 with release SHA, no-store, nosniff, server-generated x-request-id",
+      "status": "PASS",
+      "body": {
+        "status": "ok",
+        "version": "7872a739147f7553e16e05a4d40b5d0de0c21f27"
+      },
+      "httpStatus": 200
+    },
+    {
+      "name": "GET /api/ready connected returns 200",
+      "status": "PASS",
+      "body": {
+        "status": "ready",
+        "database": "connected",
+        "version": "7872a739147f7553e16e05a4d40b5d0de0c21f27"
+      },
+      "httpStatus": 200
+    },
+    {
+      "name": "GET /api/ready disconnected DB returns 503 without secret/DB URL leak",
+      "status": "PASS",
+      "body": "{\"status\":\"unavailable\",\"database\":\"disconnected\",\"version\":\"7872a739147f7553e16e05a4d40b5d0de0c21f27\"}",
+      "httpStatus": 503
+    }
+  ],
+  "browserChecks": [
+    {
+      "name": "Deep link preservation after login",
+      "status": "PASS",
+      "landedDeep": "http://127.0.0.1:56552/summary?teamId=f8d88152-dcbd-4a83-b359-58a78551841c&status=PENDING&page=1&pageSize=8"
+    },
+    {
+      "name": "No token/session in localStorage/sessionStorage/document.cookie & local fonts loaded",
+      "status": "PASS",
+      "localStorageLen": 0,
+      "sessionStorageLen": 0,
+      "docCookie": "",
+      "fonts": [
+        {
+          "family": "Inter",
+          "status": "loaded"
+        },
+        {
+          "family": "Noto Sans Thai",
+          "status": "loaded"
+        }
+      ]
+    },
+    {
+      "name": "Out-of-range summary page label does not read \"Page 2 of 1\"",
+      "status": "PASS",
+      "renderedPagerText": "Previous 1 Page 2 (1 page total) Next"
+    },
+    {
+      "name": "Account switch SupA -> Sign out (in-flight delay race) -> SupB clears all SupA cache",
+      "status": "PASS",
+      "stillAtLogin": true,
+      "noSupALeak": true
+    },
+    {
+      "name": "Open redirect returnTo=https://evil.example falls back internally & Student /summary blocked",
+      "status": "PASS",
+      "landedUrl": "http://127.0.0.1:56552/summary"
+    },
+    {
+      "name": "Client bundle contains zero DB URLs/passwords & zero external CDN requests",
+      "status": "PASS",
+      "externalReqs": 0,
+      "pageErrors": 0,
+      "consoleErrors": [
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)",
+        "Failed to load resource: the server responded with a status of 401 (Unauthorized)"
+      ]
+    },
+    {
+      "name": "Summary loading -> 500 alert -> Try again recovery state",
+      "status": "PASS",
+      "sawLoading": true
+    },
+    {
+      "name": "Unknown browser route renders English recovery screen",
+      "status": "PASS"
+    },
+    {
+      "name": "Cancel milestone dialog places initial focus on safe Go back button and closes on Escape",
+      "status": "PASS",
+      "initialFocusedText": "Go back",
+      "dialogClosedOnEsc": true
+    },
+    {
+      "name": "Skip-to-main-content keyboard navigation moves focus to #main-content",
+      "status": "PASS",
+      "skipFocused": true,
+      "mainFocused": true
+    },
+    {
+      "name": "Mobile menu <dialog> focus trap, Escape focus restoration, and >=1200px resize close",
+      "status": "PASS",
+      "dialogOpen390": true,
+      "focusInsideDialog": true,
+      "closedEsc": true,
+      "restoredMenuFocus": true,
+      "closedOnResize": true
+    },
+    {
+      "name": "Server structured JSON logs redact passwords/cookies/DB credentials",
+      "status": "PASS",
+      "logCount": 597
+    }
+  ],
+  "layoutAndZoomMatrix": [
+    {
+      "name": "320px login",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 158,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/login"
+    },
+    {
+      "name": "320px home",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 320,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/"
+    },
+    {
+      "name": "320px teams-new",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 191,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/new"
+    },
+    {
+      "name": "320px team-settings",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 293,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/settings"
+    },
+    {
+      "name": "320px milestone-new",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 395,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/milestones/new"
+    },
+    {
+      "name": "320px summary",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 2748,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": {
+        "clientW": 286,
+        "scrollW": 972
+      },
+      "path": "/summary"
+    },
+    {
+      "name": "320px progress",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 1107,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/progress"
+    },
+    {
+      "name": "320px milestone",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 440,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/milestones/deb1d739-2334-46d8-9d05-4e24786be414"
+    },
+    {
+      "name": "320px submission",
+      "status": "PASS",
+      "docScroll": 320,
+      "innerW": 320,
+      "overflow": false,
+      "textLen": 740,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/submissions/a500b7ad-a372-4031-b1b2-dc102a5ffdc6"
+    },
+    {
+      "name": "390px login",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 158,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/login"
+    },
+    {
+      "name": "390px home",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 320,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/"
+    },
+    {
+      "name": "390px teams-new",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 191,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/new"
+    },
+    {
+      "name": "390px team-settings",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 293,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/settings"
+    },
+    {
+      "name": "390px milestone-new",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 395,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/milestones/new"
+    },
+    {
+      "name": "390px summary",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 2748,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": {
+        "clientW": 356,
+        "scrollW": 972
+      },
+      "path": "/summary"
+    },
+    {
+      "name": "390px progress",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 1107,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/progress"
+    },
+    {
+      "name": "390px milestone",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 440,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/milestones/deb1d739-2334-46d8-9d05-4e24786be414"
+    },
+    {
+      "name": "390px submission",
+      "status": "PASS",
+      "docScroll": 390,
+      "innerW": 390,
+      "overflow": false,
+      "textLen": 740,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/submissions/a500b7ad-a372-4031-b1b2-dc102a5ffdc6"
+    },
+    {
+      "name": "768px login",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 158,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/login"
+    },
+    {
+      "name": "768px home",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 321,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/"
+    },
+    {
+      "name": "768px teams-new",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 192,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/new"
+    },
+    {
+      "name": "768px team-settings",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 294,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/settings"
+    },
+    {
+      "name": "768px milestone-new",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 396,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/milestones/new"
+    },
+    {
+      "name": "768px summary",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 2674,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": {
+        "clientW": 714,
+        "scrollW": 972
+      },
+      "path": "/summary"
+    },
+    {
+      "name": "768px progress",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 1108,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/progress"
+    },
+    {
+      "name": "768px milestone",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 441,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/milestones/deb1d739-2334-46d8-9d05-4e24786be414"
+    },
+    {
+      "name": "768px submission",
+      "status": "PASS",
+      "docScroll": 768,
+      "innerW": 768,
+      "overflow": false,
+      "textLen": 741,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/submissions/a500b7ad-a372-4031-b1b2-dc102a5ffdc6"
+    },
+    {
+      "name": "1280px login",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 158,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/login"
+    },
+    {
+      "name": "1280px home",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 355,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/"
+    },
+    {
+      "name": "1280px teams-new",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 226,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/new"
+    },
+    {
+      "name": "1280px team-settings",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 328,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/settings"
+    },
+    {
+      "name": "1280px milestone-new",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 430,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/milestones/new"
+    },
+    {
+      "name": "1280px summary",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 2634,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": {
+        "clientW": 966,
+        "scrollW": 972
+      },
+      "path": "/summary"
+    },
+    {
+      "name": "1280px progress",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 1142,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/progress"
+    },
+    {
+      "name": "1280px milestone",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 475,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/milestones/deb1d739-2334-46d8-9d05-4e24786be414"
+    },
+    {
+      "name": "1280px submission",
+      "status": "PASS",
+      "docScroll": 1280,
+      "innerW": 1280,
+      "overflow": false,
+      "textLen": 775,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/submissions/a500b7ad-a372-4031-b1b2-dc102a5ffdc6"
+    },
+    {
+      "name": "1440px login",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 158,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/login"
+    },
+    {
+      "name": "1440px home",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 355,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/"
+    },
+    {
+      "name": "1440px teams-new",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 226,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/new"
+    },
+    {
+      "name": "1440px team-settings",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 328,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/settings"
+    },
+    {
+      "name": "1440px milestone-new",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 430,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/milestones/new"
+    },
+    {
+      "name": "1440px summary",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 2634,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": {
+        "clientW": 1126,
+        "scrollW": 1126
+      },
+      "path": "/summary"
+    },
+    {
+      "name": "1440px progress",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 1142,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/progress"
+    },
+    {
+      "name": "1440px milestone",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 475,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/milestones/deb1d739-2334-46d8-9d05-4e24786be414"
+    },
+    {
+      "name": "1440px submission",
+      "status": "PASS",
+      "docScroll": 1440,
+      "innerW": 1440,
+      "overflow": false,
+      "textLen": 775,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/submissions/a500b7ad-a372-4031-b1b2-dc102a5ffdc6"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) login",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 158,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/login"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) home",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 321,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) teams-new",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 192,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/new"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) team-settings",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 294,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/settings"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) milestone-new",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 396,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/milestones/new"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) summary",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 2749,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": {
+        "clientW": 606,
+        "scrollW": 972
+      },
+      "path": "/summary"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) progress",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 1108,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/teams/f8d88152-dcbd-4a83-b359-58a78551841c/progress"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) milestone",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 441,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/milestones/deb1d739-2334-46d8-9d05-4e24786be414"
+    },
+    {
+      "name": "200%-zoom (640x400@2x) submission",
+      "status": "PASS",
+      "docScroll": 640,
+      "innerW": 640,
+      "overflow": false,
+      "textLen": 741,
+      "hasThaiText": false,
+      "tooShortButtons": [],
+      "tcClipped": null,
+      "path": "/submissions/a500b7ad-a372-4031-b1b2-dc102a5ffdc6"
+    }
+  ],
+  "contrastChecks": [
+    {
+      "name": "login <h1> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "h1",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "login <p> text contrast (14.5:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "p",
+      "ratio": 14.5,
+      "minReq": 4.5
+    },
+    {
+      "name": "login <label> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "label",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "login <button> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "button",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "login <button> border contrast (15.96:1 >= 3:1)",
+      "status": "PASS",
+      "kind": "border",
+      "selector": "button",
+      "ratio": 15.96,
+      "minReq": 3
+    },
+    {
+      "name": "login <input> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "input",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "login <input> border contrast (4.83:1 >= 3:1)",
+      "status": "PASS",
+      "kind": "border",
+      "selector": "input",
+      "ratio": 4.83,
+      "minReq": 3
+    },
+    {
+      "name": "login <a> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "a",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <h1> text contrast (15.29:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "h1",
+      "ratio": 15.29,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <p> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "p",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <label> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "label",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <th> text contrast (14.5:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "th",
+      "ratio": 14.5,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <td> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "td",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <button> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "button",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <button> border contrast (4.83:1 >= 3:1)",
+      "status": "PASS",
+      "kind": "border",
+      "selector": "button",
+      "ratio": 4.83,
+      "minReq": 3
+    },
+    {
+      "name": "summary <a> text contrast (15.96:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "a",
+      "ratio": 15.96,
+      "minReq": 4.5
+    },
+    {
+      "name": "summary <[class*=\"status\"]> text contrast (6.35:1 >= 4.5:1)",
+      "status": "PASS",
+      "kind": "text",
+      "selector": "[class*=\"status\"]",
+      "ratio": 6.35,
+      "minReq": 4.5
+    }
+  ],
+  "npmAuditSummary": {
+    "info": 0,
+    "low": 0,
+    "moderate": 0,
+    "high": 3,
+    "critical": 0,
+    "total": 3
+  },
+  "screenshots": [
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b03/summary-out-of-range-page.png",
+      "bytes": 106844,
+      "sha256": "127088807a5f1876c654c05818b08f0e75135465eee065d0db5faa12a9d5f091"
+    },
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b03/320px-summary.png",
+      "bytes": 176672,
+      "sha256": "b3880296f797ebc96b113c9b08268cf0d56ff2618fddb423a0ebf5f6ef79c6e1"
+    },
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b03/390px-home.png",
+      "bytes": 55009,
+      "sha256": "0b3c605b67d38c4a920afd4fb14f5cc83f3dfbc8d48f45721dec4449eeb25de7"
+    },
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b03/1280px-summary.png",
+      "bytes": 370326,
+      "sha256": "d1ee14d1b08c79642dc944e850d476ee52fced141284879bcb3fa4b8cb9d8066"
+    },
+    {
+      "path": "Project_code/docs/evidence/assets/s3-b03/200_-zoom_640x400_2x_-summary.png",
+      "bytes": 701469,
+      "sha256": "128b4dca285d20a06349aae97e09875c8626c72c2e4b2081decffadae2bc53ea"
+    }
+  ],
+  "failures": []
+}

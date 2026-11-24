@@ -1,0 +1,119 @@
+{
+  "startedAt": "2026-11-20T17:03:33.166Z",
+  "checks": [
+    {
+      "name": "fresh clone has the exact committed source",
+      "passed": true
+    },
+    {
+      "name": "clean runner image build",
+      "passed": true
+    },
+    {
+      "name": "clean jobs image build",
+      "passed": true
+    },
+    {
+      "name": "final runner has runtime modules, no env files and no test fixtures",
+      "passed": true
+    },
+    {
+      "name": "compiled maintenance requires explicit confirmation before any DB access",
+      "passed": true
+    },
+    {
+      "name": "production image rejects an HTTP origin before startup",
+      "passed": true
+    },
+    {
+      "name": "new socket volume has this verification identity only",
+      "passed": true
+    },
+    {
+      "name": "socket fixture disables database TCP and requires local password authentication",
+      "passed": true
+    },
+    {
+      "name": "real migration CLI rejects the wrong socket password",
+      "passed": true
+    },
+    {
+      "name": "actual runtime adapter rejects wrong socket password with safe readiness 503 and health 200",
+      "passed": true
+    },
+    {
+      "name": "actual jobs image migrates a fresh DB and repeats without reset",
+      "passed": true
+    },
+    {
+      "name": "explicit image seed preserves existing users and credentials",
+      "passed": true
+    },
+    {
+      "name": "built hashed assets/fonts, no-cache SPA deep link and JSON API 404",
+      "passed": true
+    },
+    {
+      "name": "compiled production UI/API/DB business flow and secure cookie",
+      "passed": true
+    },
+    {
+      "name": "graceful actual web stop retains external DB",
+      "passed": true
+    },
+    {
+      "name": "same original IDs and still-valid DB session survive actual container restart and repeat seed",
+      "passed": true
+    },
+    {
+      "name": "actual final image returns sanitized disconnected DB 503 and independent health 200",
+      "passed": true
+    }
+  ],
+  "cleanup": [
+    {
+      "container": "c639701f019012eca239fb043ee2caaf508882f2c05d00fbb9e45507a096c772",
+      "removed": true
+    },
+    {
+      "container": "676b21e895672897f5d74970340474ddb960bad64b9351c047fb23e1db6d4d20",
+      "removed": true
+    },
+    {
+      "container": "44340f5530e080c5f537596ec818e43fef5f03d193dc1f440a407f7779b0e77f",
+      "removed": true
+    },
+    {
+      "container": "dead8570f15b8de59e141f85588952db745347151fc997510fda141bd7d68fe4",
+      "removed": true
+    },
+    {
+      "volume": "fasttrack-a01-19fb14b13d-socket",
+      "removed": true
+    }
+  ],
+  "transport": "unix-socket",
+  "scope": "local clean-clone container verification; no Cloud SQL proxy, cloud IAM or public TLS claim",
+  "sourceCommit": "84c4a31220898957be96c9a54cff0d6e37832821",
+  "images": {
+    "web": {
+      "id": "sha256:606d9ab303b1cc07284179d836dcfe700c48d8438151c9b7b2ff5a32066bb6e1",
+      "sourceCommit": "84c4a31220898957be96c9a54cff0d6e37832821",
+      "user": "node"
+    },
+    "jobs": {
+      "id": "sha256:3e42bba26f1b0e491a928cbd34f1ad86dcbb2de6b51ddf0b697b22e4864e4533",
+      "sourceCommit": "84c4a31220898957be96c9a54cff0d6e37832821",
+      "user": "node"
+    }
+  },
+  "socketDirectory": "/cloudsql/fasttrack-socket-check:asia-southeast1:test-db",
+  "databaseTcpDisabled": true,
+  "records": {
+    "milestone": "02a2f602-8d5f-4c9b-a261-0b33fed94080",
+    "submission": "8bae3d85-b49b-4594-a74d-24088d37779b",
+    "feedback": "45178f3c-eaa7-4bc5-9ae0-3f60d1f05895"
+  },
+  "passed": true,
+  "finishedAt": "2026-11-20T17:04:38.503Z"
+}
