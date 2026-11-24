@@ -18,7 +18,7 @@ Working draft prepared by B (`@Atip-Infa`) for [Issue #38 (`R3-B04`)](https://gi
 
 ## PDF, video & G6 verification checklist (Markdown assembly gate)
 
-Do **not** generate or export the final course PDF or upload video until **G4 (`#36`)** and **G5 (`main` release freeze)** close. Complete every check below during assembly under `#38` and joint sign-off under `#39`:
+Do **not** generate or export the final course PDF or upload video until **G5 (`main` release freeze)** closes (Joint **G4 (`#36`)** is closed & accepted). Complete every check below during assembly under `#38` and joint sign-off under `#39`:
 
 - [ ] **Duration rule clarified:** Verify official Final video time limit (`4 min` vs `10 min`) in course announcements before finalizing edit (`<= 4:00` current provisional cut).
 - [ ] **Joint presenter presence:** Confirm both Member A and Member B appear/present together cleanly in the final video as required by the Final handout.

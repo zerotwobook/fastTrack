@@ -1,6 +1,6 @@
 # Final Delivery Assembly Skeleton & One-Page Release Summary (Markdown Draft)
 
-Assembly scaffold prepared by B (`@Atip-Infa`) under [Issue #38 (`R3-B04`)](https://github.com/zerotwobook/fastTrack/issues/38) in Markdown (`.md`) format per repository policy. **Do NOT generate or export PDFs (`G6`) until G4 (`#36`), G5 (`main` release freeze), and joint video recording (`Part E`) finish.** This file defines the master front matter, one-page release summary (`G p.13`), rubric navigation map (`Parts A–E = 100 points`), and G6 assembly verification checklist without modifying A's parallel drafts in [PR #148](https://github.com/zerotwobook/fastTrack/pull/148).
+Assembly scaffold prepared by B (`@Atip-Infa`) under [Issue #38 (`R3-B04`)](https://github.com/zerotwobook/fastTrack/issues/38) in Markdown (`.md`) format per repository policy. **Do NOT generate or export PDFs (`G6`) until G5 (`main` release freeze) and joint video recording (`Part E`) finish (Joint G4/#36 is closed).** This file defines the master front matter, one-page release summary (`G p.13`), rubric navigation map (`Parts A–E = 100 points`), and G6 assembly verification checklist without modifying A's parallel drafts in [PR #148](https://github.com/zerotwobook/fastTrack/pull/148).
 
 ---
 
@@ -27,7 +27,7 @@ Assembly scaffold prepared by B (`@Atip-Infa`) under [Issue #38 (`R3-B04`)](http
 | **Team & Ownership** | `@zerotwobook` (`Supapanya Yathip`, `67070503443`) & `@Atip-Infa` (`Atip Infa-udom`, `67070503446`) — see [Part B contributions](engineering-and-chains.md#team-contributions-and-ai-use-accounting). |
 | **Final Version & Tag** | `[PENDING G5 Final tag & 40-char main SHA]` · Serving Cloud Run revision `[PENDING G5]` |
 | **Core Links** | Repository: <https://github.com/zerotwobook/fastTrack> · Deployed App: `[PENDING G5]` · Demo Video (YouTube): `[PENDING G5/Part E]` |
-| **Completion & Verification State** | Staging pre-UAT regressions (`#34` `R3-A03`, `#35` `R3-B03`) complete (`483/483` isolated + `7/7` upgrades + `17/17` socket + `54/54` viewport/zoom). **`[PENDING]`:** `#36` independent UAT outcomes, `main` release CI/deploy readback, and Final PDF/video checks. |
+| **Completion & Verification State** | Staging regressions (`#34` `R3-A03`, `#35` `R3-B03`, `483/483` isolated + `7/7` upgrades + `17/17` socket + `54/54` viewport/zoom) & Joint `#36` G4 UAT (`Cloud 8/8 PASS` Pawarit Wongdaeng, `Local 8/8 PASS` Tatchakorn Thamnimitr, `G4 ACCEPTED`) complete on `046310d2`. **`[PENDING G5/G6]`:** Final `main` release CI/deploy readback, joint Part E video & Final PDF verification. |
 | **Known Limitations & Clarifications** | See [Defect, Limitation & Debt Register](qa-dod-readiness-draft.md#known-defects-limitations-and-technical-debt-register) (including provisional `<= 4:00` vs `10:00` course video-duration conflict pending instructor clarification, and CLI-only `effect@3.20.0` devOptional advisory `GHSA-7589-6fvf-x4pw`). |
 
 ---
@@ -41,13 +41,13 @@ Assembly scaffold prepared by B (`@Atip-Infa`) under [Issue #38 (`R3-B04`)](http
 | **Part C — Final requirements & verification traceability** | **20** | **A** (`@zerotwobook`) | `deliverable _file/submit/final_owner_a/requirements-traceability.md` ([Draft PR #148](https://github.com/zerotwobook/fastTrack/pull/148)) | Appendices: [`project_detail.md`](../../../Project_doc/project_detail.md) (English), all Sprint 1–3 contracts + `lab-7-feedback-limit.md`, Domain excerpt (`T-26`), Access excerpt (`F08-STS-04` in [Part D](qa-dod-readiness-draft.md)) | `[Assign at PDF export]` |
 | **Part D — Final QA & Product DoD** | **20** | **B** (aggregates A + B + `#36`) | [`qa-dod-readiness-draft.md`](qa-dod-readiness-draft.md) | [`R3-A03-final-regression.md`](../../../Project_code/docs/evidence/R3-A03-final-regression.md), [`R3-B03-final-regression.md`](../../../Project_code/docs/evidence/R3-B03-final-regression.md), [`Project_code/README.md`](../../../Project_code/README.md), [`deployment.md`](../../../docs/labs/lab-05/deployment.md), `#36` UAT worksheet | `[Assign at PDF export]` |
 | **Part E — Demonstration video** | **10** | **B** (edit/assembly) + **A & B** (joint presenters) | `student-demo-script.md` ([PR #148](https://github.com/zerotwobook/fastTrack/pull/148)) + [`supervisor-demo-and-video-plan.md`](supervisor-demo-and-video-plan.md) | Joint YouTube URL (anyone with link), timestamp index, assessed `main` release identity (`[PENDING G5 recording]`) | `[Assign at PDF export]` |
-| **Total** | **100** | **A + B** | Master `deliverable _file/submit/project_final_delivery.md` (to assemble cleanly once G4/G5 close) | Embedded self-contained engineering appendices (no external private links required to grade) | `[Assign at PDF export]` |
+| **Total** | **100** | **A + B** | Master `deliverable _file/submit/project_final_delivery.md` (to assemble cleanly once G5 closes; G4/#36 closed) | Embedded self-contained engineering appendices (no external private links required to grade) | `[Assign at PDF export]` |
 
 ---
 
 ## Pre-export assembly checklist (`#38` -> `#39` `G6` gate)
 
-- [ ] Merge A's `final_owner_a/` sections (`PR #148`) and B's `final_owner_b/` sections (`PR #149`) cleanly after `#36` (`G4`) & `main` freeze (`G5`).
+- [ ] Merge A's `final_owner_a/` sections (`PR #148`) and B's `final_owner_b/` sections (`PR #149`) cleanly after `main` freeze (`G5`; `#36` G4 closed).
 - [ ] Populate final `main` commit SHA, immutable tag, CI run counts (`PASS/FAIL/SKIPPED`), `Deploy demo` IDs, image digests, serving revision, live `/api/health` + `/api/ready`, and independent UAT outcomes consistently across Cover, One-Page Summary, Parts A–E, and Part E video title/description.
 - [ ] Assemble one self-contained English `deliverable _file/submit/project_final_delivery.md` containing embedded appendices (`project_detail.md` / contracts / test excerpts) with internal PDF page references populated after layout/export.
 - [ ] Only upon user-authorized Final export, render the final PDF, visually inspect every single page (readable diagrams/screenshots, zero clipping, working links, zero secrets/passwords/tokens), verify YouTube playback in an incognito browser, and record the actual LEB2 submission receipt in [`Issue #39`](https://github.com/zerotwobook/fastTrack/issues/39).
