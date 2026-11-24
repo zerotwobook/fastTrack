@@ -1,7 +1,7 @@
 
 # Student demonstration script
 
-A presents the fastTrack goal, student submission, revision history and a deadline rejection. B provides the supervisor setup and feedback handoff. The assessed release, deployed URL and recording date are decisions for the joint Final release and video. The timing below allocates about 75 seconds of A's narration inside the team's provisional four-minute plan.
+A presents the fastTrack goal, student submission, revision history and a deadline rejection. B provides the supervisor setup and feedback handoff. Record from the [verified Final deployment](production-release.md). The recording date remains to be agreed. The timing below allocates about 75 seconds of A's narration inside the team's provisional four-minute plan.
 
 ## Fixture and recording setup
 
@@ -23,7 +23,7 @@ A presents the fastTrack goal, student submission, revision history and a deadli
 
 | Field | Value |
 | --- | --- |
-| Assessed tag, full SHA and serving revision | Pending release freeze |
+| Assessed tag, full SHA and serving revision | `v1.0.0-final`, `d0f3f9f8455e5e9c3d2047a2b1b41920d1af`, `fasttrack-app-00006-wzh`. [Production identity](production-release.md) |
 | Synthetic milestone and saved version IDs | Pending rehearsal |
 | Actual behavior and timestamps of the retained clips | Pending recording |
 | Video URL and verified viewer access | Pending assembly |

@@ -2,7 +2,7 @@
 
 fastTrack lets supervisors plan team milestones and lets students submit versioned work links against a deadline. Supervisors can leave feedback on individual versions and review completion across their assigned teams.
 
-The feature evidence below is tied to the G4 candidate `046310d288859ee42745a043369498d5d646d6c9`. Independent Cloud and Local UAT each passed eight cases. The final release identity and production observations will be recorded after G5. [Joint acceptance](https://github.com/zerotwobook/fastTrack/issues/36#issuecomment-7130293441) · [Cloud cases and captures](cloud-uat-results.md) · [Candidate CI](https://github.com/zerotwobook/fastTrack/actions/runs/45039631042)
+The assessed release is `v1.0.0-final` at `d0f3f9f8455e5e9c3d2047a2b1e1d1b41920d1af`. Its Git tree matches G4 candidate `046310d288859ee42745a043369498d5d646d6c9`, on which independent Cloud and Local UAT each passed eight cases. The [production readback](production-release.md) records the deployment identity, Summary recovery and persisted data observed on the assessed release. [Joint G4 acceptance](https://github.com/zerotwobook/fastTrack/issues/36#issuecomment-7130293441) · [Cloud cases and captures](cloud-uat-results.md) · [Candidate CI](https://github.com/zerotwobook/fastTrack/actions/runs/45039631042)
 
 ## Implemented features and candidate evidence
 
@@ -17,9 +17,7 @@ The feature evidence below is tied to the G4 candidate `046310d288859ee42745a043
 | F-07 Progress | The supervisor can see per-team completion and derived milestone status. Submitted active milestones count toward completion. Cancelled milestones are excluded. | UAT-FINAL-06 and the [domain regression](../../../Project_code/docs/evidence/R3-A03-final-regression.md). |
 | F-08 Supervisor Summary | Scoped totals use the weighted denominator, such as one submission across ten active milestones. Filters and page size survive drill-down and out-of-range page recovery. | UAT-FINAL-05 and 06 and the [browser and responsive regression](../../../Project_code/docs/evidence/R3-B03-final-regression.md). |
 
-## Production evidence to capture after G5
+## Production evidence and remaining demo captures
 
-1. Record the Final tag, full source SHA, production URL, image digest and serving revision. Save health and readiness readbacks from that source.
-2. On synthetic fixtures, capture the supervisor milestone, student first submission and revision, exact-version feedback and the late-write rejection. Record visible outcomes, IDs and Bangkok date and time so the deployed observations can be traced to the candidate cases.
-3. Capture cross-team denial, the supervisor's authorized control, Progress and weighted Summary recovery. Read preserved submission IDs and feedback after deployment to verify continuity.
-4. Use the deployed observations in Part A and the joint video. The [Student script](student-demo-script.md) supplies A's section, and the [Part C matrix](requirements-traceability.md) maps each observation to a requirement and check.
+- The [production release record](production-release.md) contains the tag, deployment identifiers, health and readiness, retained work and feedback, and the Summary recovery screenshots.
+- Capture the supervisor milestone, student first submission and revision, exact-version feedback, late-write rejection, and authorized and denied access for the assessed demo. Use synthetic fixtures and the [Student script](student-demo-script.md). The [Part C matrix](requirements-traceability.md) links the observations to their requirements and checks.
