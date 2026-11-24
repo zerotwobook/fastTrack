@@ -1,16 +1,16 @@
 
 # Independent Final UAT worksheet
 
-Prepared by A for the joint [R3-J03 checkpoint](https://github.com/zerotwobook/fastTrack/issues/36). Use this worksheet once A and B accept the prerequisite regressions, agree on the candidate and provide synthetic test accounts to an independent tester. The cases reuse the relevant [Lab 6 UAT scenarios](../../../docs/labs/lab-06/uat-cases.md) and add the Sprint 2, Sprint 3 and Lab 7 journeys. The older Lab 6 results retain their original version.
+Prepared by A for the joint [R3-J03 checkpoint](https://github.com/zerotwobook/fastTrack/issues/36). G4 accepted `046310d288859ee42745a043369498d5d646d6c9` after Cloud and Local each passed all eight cases. The [recorded results](#result-and-defect-record) are linked below. Use the blank fields and scenarios to plan a new run or retest. The cases reuse the relevant [Lab 6 UAT scenarios](../../../docs/labs/lab-06/uat-cases.md) and add the Sprint 2, Sprint 3 and Lab 7 journeys. The older Lab 6 results retain their original version.
 
 ## Run details
 
 | Field | To record before the run |
 | --- | --- |
-| Independent tester name or handle and organization/team | Pending assignment |
-| Date, time zone, browser and viewport | Pending run |
-| Candidate source | Proposed by A: staging/sprint-3 at 046310d288859ee42745a043369498d5d646d6c9. [Staging CI passed](https://github.com/zerotwobook/fastTrack/actions/runs/45039631042). B confirmation is pending. |
-| Test URL and running version | Pending environment setup. Record the URL, the version returned by GET /api/health and the health and readiness responses. Record the serving revision if the environment exposes one. |
+| Independent tester name or handle and organization/team | Record the assigned independent tester for the new run. |
+| Date, time zone, browser and viewport | Record the execution context for the new run. |
+| Candidate source | Record the new run's full commit SHA and CI result. |
+| Test URL and running version | Record the URL, the version returned by GET /api/health and the health and readiness responses. Record the serving revision if the environment exposes one. |
 | Case data marker and account roles | Use an isolated synthetic run prefix. Record role aliases and scope. Share account credentials through the team's approved private handoff. |
 | Fixture setup and readback | A prepares the domain data plan below. B supplies the isolated runtime and synthetic accounts. Record the fixture prefix and the actual setup and readback before handoff. |
 | Developer responsible for defect intake and retest | A for domain/data, B for authorization/UI/operations |
@@ -31,7 +31,7 @@ Use a fresh synthetic data set in the agreed test environment. Confirm GET /api/
 
 ## Scenarios
 
-| Case and requirement | Preconditions and steps | Expected result and evidence | Actual result |
+| Case and requirement | Preconditions and steps | Expected result and evidence | Result for a new run |
 | --- | --- | --- | --- |
 | UAT-FINAL-01 Scoped milestone creation and readback. FR-01/02/03, F-01/02. Extends Lab 6 UAT-01. | Supervisor A creates a future milestone for Team A with the run marker. Student A signs in and opens the saved milestone. Reload once. | The title, description and displayed deadline agree for both authorized users. Capture the milestone ID and both readbacks. | Pending |
 | UAT-FINAL-02 Work, revision and exact-version feedback. FR-04/05/08, BR-06/07. Extends UAT-02/03/08. | Student A submits work before the deadline and returns to the milestone. Confirm there is one saved v1 and the next work action is a revision. Supervisor A posts a distinct note on v1. Student A submits a revision with different content, then reopens v1 from Version history after a reload. | There are two ordered saved versions. The original link and note stay on v1 and the note is absent from v2. Record the two IDs and feedback counts. | Pending |
