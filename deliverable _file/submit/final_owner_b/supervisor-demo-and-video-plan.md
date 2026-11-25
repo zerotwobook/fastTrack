@@ -1,0 +1,28 @@
+# Supervisor demonstration script and video/PDF assembly plan (Part E draft)
+
+Working draft prepared by B (`@Atip-Infa`) for [Issue #38 (`R3-B04`)](https://github.com/zerotwobook/fastTrack/issues/38) to pair cleanly with A's Student demonstration script in [PR #148](https://github.com/zerotwobook/fastTrack/pull/148). **Provisional timing plan (`<= 4:00` total):** per `workflow/03_SPRINT3_D2_FINAL.md` section 10, original course sources conflict between four and ten minutes — verify official course clarification before recording or exporting.
+
+## Joint narration timeline & B walkthrough script
+
+- **Assessed target:** Must be recorded live against the **frozen Final assessed deployment** matching the exact Final Git tag, commit SHA, and Cloud Run serving revision (use synthetic accounts/URLs only; keep credentials, cookies, tokens, and internal secrets out of frame).
+- **Preconditions:** Disjoint synthetic teams on the deployed Final instance — **Team A** (with Student A, Supervisor A, one active milestone for live `F-05B` / `F-06` walkthrough, and completed vs overdue work) plus **Team B** (for cross-supervisor `404` demonstration). Wait states during deadline expiry are rehearsed off-camera.
+
+| Segment & Timing | Presenter | On-Screen Actions (Deployed Final App) | Narration / Evidence Point |
+| --- | --- | --- | --- |
+| `0:00–0:20` Intro | A + B | Show deployed landing/header & verified Final version/URL (or release slide referencing exact SHA & tag). | Introduce **fastTrack** (Theme 6 Course Project Management System), team (`@zerotwobook` & `@Atip-Infa`), goal, and exact Final assessed release identity. |
+| `0:20–1:30` Student submit & Supervisor `v1` feedback | A + B handoff | A creates/shows Student work `v1`; **B switches to Supervisor A profile**, opens `v1`, saves version-specific feedback, then hands back to A for `v2` revision & `Version history` proof (`v1` feedback stays on `v1`, `v2` starts clean). | B demonstrates `F-04` / Lab 7 `6,000`-code-point feedback attachment tied strictly to `submission.version = 1` rather than mutating across revisions. |
+| `1:30–2:25` Planning, lock & multi-team `F-08` Summary | B -> A | B opens Team A's unsubmitted milestone, edits details (`F-05B`), shows submitted milestone lock (no edit/cancel on `M` with history), then opens **`/summary`**: reads weighted completion (`X/Y`, e.g. `1/10 = 10.0%`), filters by **Overdue** + team, clicks a milestone, clicks **Back to summary** (filters/page preserved), and verifies out-of-range page recovery (`Go to page 1` / `"Page 2 (1 page total)"`). | Highlight single repeatable-read snapshot parity between `F-07` team progress and `F-08` multi-team summary, URL filter/page persistence, and `CANCELLED` denominator exclusion. |
+| `2:25–3:10` Rule/access rejection & persistence | A + B | A shows Student deadline rejection (`F-03` no write on refresh); **B shows access isolation**: Student signed in sees no `Summary` nav & gets `Summary is restricted to supervisors` (`403`), and disjoint Supervisor B requesting Team A's milestone gets generic `Milestone unavailable` (`404`) without foreign disclosure; optionally confirm persisted records across deployed `/api/ready`. | Prove `BR-02`, `NFR-01/02`, and `NFR-03`: role guards, uniform foreign `404` non-disclosure, and PostgreSQL durability without data leaks. |
+| `3:10–3:45` Engineering QA, CI & traceability wrap | B | Show concise summary visual: clean `Project_code/` modular layout, CI `test-and-docker` pass counts, `F08-STS-04` & `T-26` excerpts, two cross-sprint Issue/PR/review/release chains (S2 `#118` + S3 `#134`), and Final UAT status (`#36`). | Connect automated regressions (`unit`, `postgres:16.8` runtime, legacy tag upgrades, Unix-socket images, browser/accessibility widths `320–1440px` + `200%` zoom) directly to Final release readiness. |
+| `3:45–4:00` Closeout | A + B | Recap completion status, honest known limitations/remaining scope, and immutable release tag/URL reference. | Joint sign-off on Final assessed delivery boundaries. |
+
+## PDF, video & G6 verification checklist (Markdown assembly gate)
+
+Do **not** generate or export the final course PDF until joint **Part E** video recording against `v1.0.0-final` (`d0f3f9f8`) finishes (Joint **G4 (`#36`)** and Joint **G5 (`#152`)** are closed & accepted). Complete every check below during assembly under `#38` and joint sign-off under `#39`:
+
+- [ ] **Duration rule clarified:** Verify official Final video time limit (`4 min` vs `10 min`) in course announcements before finalizing edit (`<= 4:00` current provisional cut).
+- [ ] **Joint presenter presence:** Confirm both Member A and Member B appear/present together cleanly in the final video as required by the Final handout.
+- [ ] **Version & URL consistency:** Cover page, one-page release summary, Parts A–E, release manifest, video title/description, and timestamps all match the exact Final `main` commit SHA, tag, serving revision, and public URL.
+- [ ] **Full PDF visual QA (`G6`):** Assemble one self-contained English Markdown source, export PDF, inspect **every single rendered page** for clipping, readable screenshots, accurate Table of Contents / page numbers / captions, clickable links, truthful AI/contribution statement, and zero secrets (`PASSWORD`, cookies, CSRF tokens, DB URLs).
+- [ ] **Video playback & public access check:** Verify YouTube visibility (`Unlisted` or `Public` per submission rules), clear audio/captions, working timestamps in description, and incognito reviewer accessibility.
+- [ ] **Authorized submission receipt:** Follow exact official course filename and channel before **13 December 2026, 23:59 Asia/Bangkok**; record submission time/receipt only after user-authorized upload/submission.
