@@ -17,7 +17,7 @@ The assessed release is `v1.0.0-final` at `d0f3f9f8455e5e9c3d2047a2b1e1d1b41920d
 | F-07 Progress | The supervisor can see per-team completion and derived milestone status. Submitted active milestones count toward completion. Cancelled milestones are excluded. | UAT-FINAL-06 and the [domain regression](../../../Project_code/docs/evidence/R3-A03-final-regression.md). |
 | F-08 Supervisor Summary | Scoped totals use the weighted denominator, such as one submission across ten active milestones. Filters and page size survive drill-down and out-of-range page recovery. | UAT-FINAL-05 and 06 and the [browser and responsive regression](../../../Project_code/docs/evidence/R3-B03-final-regression.md). |
 
-## Production evidence and remaining demo captures
+## Production evidence and demonstration
 
 - The [production release record](production-release.md) contains the tag, deployment identifiers, health and readiness, retained work and feedback, and the Summary recovery screenshots.
-- Capture the supervisor milestone, student first submission and revision, exact-version feedback, late-write rejection, and authorized and denied access for the assessed demo. Use synthetic fixtures and the [Student script](student-demo-script.md). The [Part C matrix](requirements-traceability.md) links the observations to their requirements and checks.
+- The uploaded demonstration shows milestone creation, the first submission, exact-version feedback, revision history, progress, Supervisor Summary, a late-write rejection and a cross-team access denial. The [Part E timestamp index](demonstration-video.md#timestamp-index) locates the scenes, and the [Part C matrix](requirements-traceability.md) links the requirements and checks.

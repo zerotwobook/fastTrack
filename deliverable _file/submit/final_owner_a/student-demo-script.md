@@ -1,7 +1,7 @@
 
 # Student demonstration script
 
-A presents the fastTrack goal, student submission, revision history and a deadline rejection. B provides the supervisor setup and feedback handoff. Record from the [verified Final deployment](production-release.md). The recording date remains to be agreed. The timing below allocates about 75 seconds of A's narration inside the team's provisional four-minute plan.
+A presents the fastTrack goal, student submission, revision history and a deadline rejection. B provides the supervisor setup and feedback handoff. The script below documents the recording plan for the [verified Final deployment](production-release.md). The [Part E video record](demonstration-video.md) identifies the uploaded cut and its reviewed timestamps.
 
 ## Fixture and recording setup
 
@@ -19,14 +19,14 @@ A presents the fastTrack goal, student submission, revision history and a deadli
 | Late rejection, 0:20 | Open the second milestone's **Submit work** form before its due time. After the deadline passes, submit from the still-open form and capture the rejection. Reload and verify that the milestone still has no saved submission. If the page already reflects the new time, show its disabled action and deadline notice, and pair the clip with the actual tested late rejection evidence. | “The deadline is checked by the server. Once this milestone is overdue, the team cannot create a submission. Refreshing confirms that the late attempt saved nothing.” |
 | Transition, 0:08 | Return to the student team. Hand off to B for supervisor Summary and release evidence. | “The team can still read its existing work and version history. B will show how a supervisor follows progress across teams.” |
 
-## Capture log to complete with B
+## Capture log
 
 | Field | Value |
 | --- | --- |
 | Assessed tag, full SHA and serving revision | `v1.0.0-final`, `d0f3f9f8455e5e9c3d2047a2b1b41920d1af`, `fasttrack-app-00006-wzh`. [Production identity](production-release.md) |
-| Synthetic milestone and saved version IDs | Pending rehearsal |
-| Actual behavior and timestamps of the retained clips | Pending recording |
-| Video URL and verified viewer access | Pending assembly |
+| Milestone and saved versions shown | Design Review \| Final Demo, versions 1 and 2. |
+| Actual behavior and timestamps of the retained clips | [Part E timestamp index](demonstration-video.md#timestamp-index). |
+| Video URL and viewer access | [YouTube demonstration](https://youtu.be/yTT1OpPIbqo). The signed-out player started, and full playback review remains open. |
 | Official duration clarification | Pending course confirmation |
 
 The [traceability draft](requirements-traceability.md) maps the scenes to FR-02/04/05/08, BR-04/05/06 and T-26. The [independent worksheet](independent-uat-worksheet.md) supplies a separate verification record for the same domain behavior.
