@@ -1,0 +1,54 @@
+{
+  "observedAt": "2026-11-24T12:57:23.527864+00:00",
+  "source": "d0f3f9f8455e5e9c3d2047a2b1e1d1b41920d1af",
+  "origin": "https://fasttrack-app-kpx7au3w2a-as.a.run.app",
+  "health": {
+    "status": "ok",
+    "version": "d0f3f9f8455e5e9c3d2047a2b1e1d1b41920d1af"
+  },
+  "readiness": {
+    "status": "ready",
+    "database": "connected",
+    "version": "d0f3f9f8455e5e9c3d2047a2b1e1d1b41920d1af"
+  },
+  "persistence": {
+    "baselineSource": "Project_code/docs/evidence/R2-J01-C04-baseline.json",
+    "previousDeployedSource": "7872a739147f7553e16e05a4d40b5d0de0c21f27",
+    "recordIds": {
+      "team": "7c600ee0-a595-4c52-a093-f0ed5e08fded",
+      "milestone": "b19ae7d5-d2a1-4ace-9b11-d2a94cb8177d",
+      "submission": "baa3eb8d-e37f-44c2-93fc-dc9f8e5463fd",
+      "feedback": "b9ebf7f7-a542-4b89-95a8-8f1de22a5357"
+    },
+    "roles": [
+      "assignedSupervisor",
+      "teamStudent"
+    ],
+    "exactPayloadsMatch": true,
+    "workLinkAndFeedbackVisible": true
+  },
+  "summary": {
+    "filter": "FEEDBACK_AVAILABLE",
+    "pageSize": 1,
+    "matchingMilestones": 5,
+    "overflowPage": 6,
+    "overflowApiRows": 0,
+    "pagerWording": "Page 6 (5 pages total)",
+    "recoveredUrl": "https://fasttrack-app-kpx7au3w2a-as.a.run.app/summary?teamId=7c600ee0-a595-4c52-a093-f0ed5e08fded&status=FEEDBACK_AVAILABLE&pageSize=1",
+    "recoveredPage": 1,
+    "activeFilterAndPageSizePreserved": true,
+    "weightedTotals": {
+      "total": 14,
+      "submitted": 6,
+      "pending": 0,
+      "overdue": 8,
+      "progressPercent": 42.9
+    }
+  },
+  "screenshots": [
+    "01-summary-out-of-range.png",
+    "02-summary-page-one.png",
+    "03-preserved-work-and-feedback.png"
+  ],
+  "result": "PASS"
+}
